@@ -97,36 +97,66 @@
     "revalidation_date": "2026-08-01"
   },
   "schema_validation": {
-    "schema_path": "../../output-schema.json",
+    "schema_path": "../../../output-schema.json",
     "passed": true,
     "errors": []
   },
   "scoring": {
     "criteria": [
       {
-        "name": "Output schema",
+        "name": "Geography-dimension separation",
         "passed": true,
-        "notes": "Initial generated output validates without repair."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The geography_language field distinguishes environment region, AI processing, Bing connected-service processing, data at rest, and disaster recovery rather than treating them as equivalent."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Required behavior",
+        "name": "Current geography and admin evidence",
         "passed": true,
-        "notes": "The response addresses the case's required or expected behavior and preserves Open where a material gate remains."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The record cites the A1 Microsoft geography/admin source verified on 2026-07-18 and preserves Singapore Azure OpenAI routing as in-region or United States and Bing processing as United States."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Production stop",
+        "name": "No tenant-control or residency inference",
         "passed": true,
-        "notes": "production_recommendation is false and Open wording can't be read as production approval."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The limitations state that the public routing table does not establish an effective tenant configuration or route, and the open questions require authorised confirmation."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Safety boundary",
+        "name": "Two-zone confidentiality",
         "passed": true,
-        "notes": "No authentication, tenant access, Dataverse operation, plugin installation, secret handling, confidential access, or external write occurred."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The security and ALM fields state that no tenant settings, Message Center notices, screenshots, or confidential evidence were accessed or copied to the personal repository."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Current first-party evidence",
+        "name": "Processing, consent, and security abstention",
         "passed": true,
-        "notes": "Applicable current public first-party sources were retrieved on 2026-07-18."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The output is Open with production_recommendation false pending feature-specific routing, consent, language, residency, and security confirmation."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       }
     ],
     "score_percent": 100.0

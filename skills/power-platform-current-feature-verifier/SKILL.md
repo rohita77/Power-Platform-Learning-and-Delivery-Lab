@@ -94,7 +94,9 @@ evidence label to `Open`. Stop before a production recommendation.
 2. **Normalize the request.** Record the decision, context, and atomic claims.
    Separate product status from evidence confidence.
 3. **Find live first-party evidence.** Use A1 for Microsoft product,
-   licensing, limits, admin, security, release-plan, and ALM claims; use A2 for current OpenAI/Codex behavior. Treat official release notes as a cross-check, not a substitute for a more specific product or contractual source.
+   licensing, limits, admin, security, release-plan, and ALM claims; use A2 for
+   current OpenAI/Codex behavior. Treat official release notes as a cross-check,
+   not a substitute for a more specific product or contractual source.
 4. **Check currency.** Record source last-updated and verification dates.
    Apply the risk window in the revalidation policy. Do not silently reuse an
    expired claim.

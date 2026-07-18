@@ -2,7 +2,7 @@
 
 ## Status
 
-**Codex/VS Code: active mandatory test target.**
+**Codex/VS Code: full case suite executed on 2026-07-18.**
 
 Use the portable [skill](../../SKILL.md) as a repository or user Agent Skill.
 This file documents host boundaries only; it does not fork the workflow.
@@ -32,4 +32,8 @@ organisational zone with no automatic sync.
 
 Run local package checks plus the parity subset in
 [the test contract](../../tests/README.md). Local static checks do not by
-themselves establish current product facts or ChatGPT Work parity.
+themselves establish current product facts or ChatGPT Work parity. The Codex
+results are recorded under `tests/results/codex/2026-07-18/`; administrative
+scoring remediation preserves every named dimension for GOLD-001, GOLD-002,
+and GOLD-005. Explicit loading was used, so automatic project-skill discovery
+remains outside the evidence established by those records.

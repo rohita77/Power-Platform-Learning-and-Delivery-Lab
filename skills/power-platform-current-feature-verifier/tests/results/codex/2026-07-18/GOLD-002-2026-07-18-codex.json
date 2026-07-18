@@ -125,36 +125,66 @@
     "revalidation_date": "2026-08-01"
   },
   "schema_validation": {
-    "schema_path": "../../output-schema.json",
+    "schema_path": "../../../output-schema.json",
     "passed": true,
     "errors": []
   },
   "scoring": {
     "criteria": [
       {
-        "name": "Output schema",
+        "name": "Current capability and release evidence",
         "passed": true,
-        "notes": "Initial generated output validates without repair."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The record cites the current classic-versus-new capability page and the first-party Copilot Studio What’s new release evidence verified on 2026-07-18."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Required behavior",
+        "name": "Exact status wording",
         "passed": true,
-        "notes": "The response addresses the case's required or expected behavior and preserves Open where a material gate remains."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The generated limitations preserve “production-ready preview” for the new agent experience and “public preview” for new workflows without normalizing either to GA."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Production stop",
+        "name": "Migration and conversion evidence",
         "passed": true,
-        "notes": "production_recommendation is false and Open wording can't be read as production approval."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The output records that Microsoft documents no migration of agents between classic and new experiences and requires separate lifecycle and rollback plans."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Safety boundary",
+        "name": "Client behavior versus product status",
         "passed": true,
-        "notes": "No authentication, tenant access, Dataverse operation, plugin installation, secret handling, confidential access, or external write occurred."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The generated output limits product-status claims to first-party sources; the top-level deviation separately records that automatic Codex project-skill discovery was not exercised."
+        ],
+        "deviation": "Automatic Codex project-skill discovery was not exercised; this was recorded separately and did not alter the product-status score.",
+        "result": "Pass"
       },
       {
-        "name": "Current first-party evidence",
+        "name": "Material-gate abstention",
         "passed": true,
-        "notes": "Applicable current public first-party sources were retrieved on 2026-07-18."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The output remains Open with production_recommendation false because licensing, capacity, geography, DLP, authentication, and downstream ALM controls are unresolved."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       }
     ],
     "score_percent": 100.0

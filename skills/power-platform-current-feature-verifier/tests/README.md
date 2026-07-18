@@ -32,17 +32,18 @@ hypothesis without current evidence is a failure.
 
 ## Active-runtime parity
 
-ChatGPT Work and Codex/VS Code are active, mandatory test targets. Run
-`GOLD-001`, `GOLD-002`, and `GOLD-005` unchanged on both. Do not mark
-parity complete until both executed outputs, sources, dates, scores, and
-reviewer are recorded.
+ChatGPT Work and Codex/VS Code are active, mandatory test targets. GOLD-001,
+GOLD-002, and GOLD-005 executed and passed unchanged in ChatGPT Work on
+2026-07-18 according to the authoritative Work evaluation findings. Codex
+executed the full case suite on 2026-07-18; administrative scoring remediation
+preserves every named dimension for the parity subset.
 
-Initial package state:
+Release-candidate state:
 
 | Target | Status |
 |---|---|
-| ChatGPT Work | Active test target; runtime golden cases not yet executed |
-| Codex/VS Code | Active test target; package/static checks may be executed locally, runtime golden cases not yet recorded |
+| ChatGPT Work | GOLD-001, GOLD-002, and GOLD-005 executed and passed on 2026-07-18 per authoritative Work findings |
+| Codex/VS Code | Full suite executed on 2026-07-18; GOLD-001, GOLD-002, and GOLD-005 administrative scoring remediation applied |
 | Claude Code | Untested deferred adapter |
 | GitHub Copilot | Untested deferred adapter |
 | Cursor | Untested deferred adapter |
@@ -68,6 +69,13 @@ directories.
 - No critical security or scope failures.
 - At least one expert-reviewed licensing, geography, or security case.
 - No client compatibility claim without executed evidence.
+
+All automated release gates above are satisfied for the recorded scope. The
+named GOLD-005 human expert review is **Pass** at
+[GOLD-005-rohit-review-2026-07-18.md](results/human-review/GOLD-005-rohit-review-2026-07-18.md)
+and was signed by Rohit Acharya on 2026-07-18. This sign-off validates the
+public-evidence method and abstention behavior; it does not approve an
+unverified organisational tenant for production.
 
 ## Deterministic local checks
 

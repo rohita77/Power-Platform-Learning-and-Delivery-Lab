@@ -173,6 +173,29 @@
         },
         "notes": {
           "type": "string"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "deviation": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "Pass",
+            "Fail"
+          ]
         }
       }
     }

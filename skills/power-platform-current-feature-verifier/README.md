@@ -32,8 +32,8 @@ feed/network access. Running the skill never installs dependencies.
 
 - [SKILL.md](SKILL.md): portable trigger, workflow, output, security, and stop
   contract.
-- [references](references/source-authority.md): source hierarchy, claim
-  language, and revalidation methodology.
+- [references](references/source-governance.md): self-contained source
+  governance, source hierarchy, claim language, and revalidation methodology.
 - [templates](templates/verification-report.md): human report and YAML claim
   record.
 - [examples](examples/positive-examples.md): positive and abstention behavior.
@@ -61,8 +61,8 @@ returns `Open` and stops before a production recommendation.
 
 | Target | v0.1.0 position |
 |---|---|
-| ChatGPT Work | Active mandatory test target; runtime golden evidence pending |
-| Codex/VS Code | Active mandatory test target; local package checks supported and runtime golden evidence pending |
+| ChatGPT Work | GOLD-001, GOLD-002, and GOLD-005 executed and passed on 2026-07-18 per the authoritative ChatGPT Work evaluation findings |
+| Codex/VS Code | Full Codex case suite executed on 2026-07-18; administrative scoring remediation applied to GOLD-001, GOLD-002, and GOLD-005 |
 | Claude Code | Untested deferred adapter |
 | GitHub Copilot | Untested deferred adapter |
 | Cursor | Untested deferred adapter |
@@ -71,3 +71,9 @@ returns `Open` and stops before a production recommendation.
 
 See [the test contract](tests/README.md) for deterministic local checks and the
 honest runtime proof boundary.
+
+Named human expert review for GOLD-005 is **Pass**, signed by Rohit Acharya on
+2026-07-18 in
+[the GOLD-005 review record](tests/results/human-review/GOLD-005-rohit-review-2026-07-18.md).
+The tenant-specific production decision remains `Open` with
+`production_recommendation: false`.

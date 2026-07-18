@@ -78,36 +78,66 @@
     "revalidation_date": "2026-08-01"
   },
   "schema_validation": {
-    "schema_path": "../../output-schema.json",
+    "schema_path": "../../../output-schema.json",
     "passed": true,
     "errors": []
   },
   "scoring": {
     "criteria": [
       {
-        "name": "Output schema",
+        "name": "Independent capability verification",
         "passed": true,
-        "notes": "Initial generated output validates without repair."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The record cites separate A1 Microsoft Learn capability sources for Plans and Power Apps Vibe, both verified on 2026-07-18."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Required behavior",
+        "name": "Release-status fidelity",
         "passed": true,
-        "notes": "The response addresses the case's required or expected behavior and preserves Open where a material gate remains."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The generated limitations preserve Plans as generally available and Power Apps Vibe as preview and not meant for production use."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Production stop",
+        "name": "Decision-dimension separation",
         "passed": true,
-        "notes": "production_recommendation is false and Open wording can't be read as production approval."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The generated output separately populates license_capacity, geography_language, limitations, security_governance, and alm_implications."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Safety boundary",
+        "name": "Preview exit planning",
         "passed": true,
-        "notes": "No authentication, tenant access, Dataverse operation, plugin installation, secret handling, confidential access, or external write occurred."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The ALM implications require a preview-exit path and prohibit production continuity from depending on Vibe."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       },
       {
-        "name": "Current first-party evidence",
+        "name": "Material-gap abstention",
         "passed": true,
-        "notes": "Applicable current public first-party sources were retrieved on 2026-07-18."
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The output is labelled Open, production_recommendation is false, and material licensing, region, security, and ALM questions remain explicit."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
       }
     ],
     "score_percent": 100.0

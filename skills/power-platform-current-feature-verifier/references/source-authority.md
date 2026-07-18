@@ -33,10 +33,10 @@ For each atomic claim:
 6. Record what the source does not establish. Absence is not support.
 7. Apply [the revalidation policy](revalidation-policy.md).
 
-Useful starting points are the live Microsoft Learn and official OpenAI
-documentation indexes referenced by the lab's
-[source governance](../../../canonical-pack/2026-07-18/02_SOURCE_GOVERNANCE.md).
-Treat those pointers as discovery aids and verify the current page at runtime.
+Use the self-contained [packaged source-governance baseline](source-governance.md)
+for the stable governance rules. It retains provenance to the canonical
+Learning Lab source without requiring a repository-relative host path. Treat
+all source pointers as discovery aids and verify the current page at runtime.
 
 ## Conflict resolution
 

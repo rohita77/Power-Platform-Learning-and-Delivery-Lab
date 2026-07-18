@@ -2,11 +2,13 @@
 
 ## Status
 
-**ChatGPT Work: active mandatory test target.**
+**ChatGPT Work: GOLD-001, GOLD-002, and GOLD-005 executed and passed on
+2026-07-18.**
 
 This adapter is a thin client note for the portable
-[skill](../../SKILL.md). It does not add product facts, weaken stop conditions,
-or imply that runtime golden tests have passed.
+[skill](../../SKILL.md). It does not add product facts or weaken stop
+conditions. The pass status is based on the authoritative ChatGPT Work
+evaluation findings supplied for release-candidate remediation.
 
 ## Adaptation
 
@@ -33,6 +35,7 @@ belong to separately approved organisational-zone implementations.
 
 ## Required evaluation
 
-Execute the parity subset in [the test contract](../../tests/README.md).
-Until recorded, status remains **active target, not yet runtime-tested for
-v0.1.0**.
+The parity subset in [the test contract](../../tests/README.md) executed and
+passed. Re-run it unchanged after material skill, source-governance, client, or
+model changes. The named GOLD-005 human expert review passed on 2026-07-18;
+tenant-specific production readiness remains `Open`.

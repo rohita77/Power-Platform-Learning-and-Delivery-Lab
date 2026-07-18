@@ -4,6 +4,23 @@
 
 ## 0.1.0 — 2026-07-18
 
+### Release-candidate remediation
+
+- Corrected the SKILL.md OpenAI/Codex workflow sentence.
+- Replaced the package-breaking canonical repository link with a concise,
+  self-contained source-governance reference that retains canonical Learning
+  Lab provenance.
+- Corrected all 21 applicable Codex result-record schema paths to resolve the
+  packaged output schema from the dated result directory.
+- Added dimension-complete Codex scoring for GOLD-001, GOLD-002, and GOLD-005,
+  including each named dimension, score, evidence, deviation, and result.
+- Reconciled execution status: ChatGPT Work GOLD-001, GOLD-002, and GOLD-005
+  executed and passed; the full Codex suite executed with administrative
+  scoring remediation applied.
+- Retained Claude Code, GitHub Copilot, and Cursor as runtime-untested.
+- Recorded Rohit Acharya's signed GOLD-005 named human expert review as Pass on
+  2026-07-18 while preserving the tenant-specific `Open` production gate.
+
 ### Pre-release corrections
 
 - Declared package owner and version outside portable SKILL.md front matter.
@@ -37,6 +54,6 @@
 - Migration/rollback: initial version; remove the package to roll back.
 - Next revalidation: 2026-08-17 or earlier after a material Agent Skills,
   client, source-governance, security, or product-documentation change.
-- Remaining release evidence: execute and record golden parity on ChatGPT Work
-  and Codex/VS Code plus expert review; local static checks are not runtime
-  proof.
+- Named expert evidence: GOLD-005 human review passed and was signed on
+  2026-07-18. The review does not establish tenant-specific production
+  readiness or change `production_recommendation: false`.

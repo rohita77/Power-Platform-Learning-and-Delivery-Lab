@@ -33,7 +33,7 @@
     "revalidation_date": "2026-07-18"
   },
   "schema_validation": {
-    "schema_path": "../../output-schema.json",
+    "schema_path": "../../../output-schema.json",
     "passed": true,
     "errors": []
   },

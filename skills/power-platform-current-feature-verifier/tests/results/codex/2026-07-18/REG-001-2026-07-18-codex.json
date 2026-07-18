@@ -1,0 +1,70 @@
+{
+  "case_id": "REG-001",
+  "skill_version": "0.1.0",
+  "runtime_client": "Codex/VS Code",
+  "model": "GPT-5",
+  "reasoning_setting": null,
+  "execution_date": "2026-07-18",
+  "exact_test_input": "{\n  \"recommendation\": \"Open - no production recommendation.\",\n  \"production_recommendation\": true,\n  \"evidence_label\": \"Open\",\n  \"release_status\": \"UNKNOWN\",\n  \"verified_date\": \"2026-07-18\",\n  \"license_capacity\": [],\n  \"geography_language\": [],\n  \"limitations\": [\n    \"Material evidence remains unresolved.\"\n  ],\n  \"security_governance\": [\n    \"No tenant access was performed.\"\n  ],\n  \"alm_implications\": [\n    \"Do not deploy until the open evidence is resolved.\"\n  ],\n  \"sources\": [],\n  \"open_questions\": [\n    \"Which current first-party source resolves the material claim?\"\n  ],\n  \"revalidation_date\": \"2026-07-18\"\n}",
+  "sources": [],
+  "generated_output": {
+    "recommendation": "Open - no production recommendation.",
+    "production_recommendation": true,
+    "evidence_label": "Open",
+    "release_status": "UNKNOWN",
+    "verified_date": "2026-07-18",
+    "license_capacity": [],
+    "geography_language": [],
+    "limitations": [
+      "Material evidence remains unresolved."
+    ],
+    "security_governance": [
+      "No tenant access was performed."
+    ],
+    "alm_implications": [
+      "Do not deploy until the open evidence is resolved."
+    ],
+    "sources": [],
+    "open_questions": [
+      "Which current first-party source resolves the material claim?"
+    ],
+    "revalidation_date": "2026-07-18"
+  },
+  "schema_validation": {
+    "schema_path": "../../output-schema.json",
+    "passed": false,
+    "errors": [
+      "production_recommendation: True is not one of [False] (validator=const); Open evidence requires false."
+    ]
+  },
+  "scoring": {
+    "criteria": [
+      {
+        "name": "Defect prevented",
+        "passed": true,
+        "notes": "An unresolved Open claim could be emitted with production_recommendation set to true, allowing downstream consumers to treat an abstention as production approval."
+      },
+      {
+        "name": "Valid fixture accepted",
+        "passed": true,
+        "notes": "The companion Open/false fixture validates."
+      },
+      {
+        "name": "Invalid fixture rejected",
+        "passed": true,
+        "notes": "The unchanged Open/true fixture fails the production_recommendation const assertion."
+      },
+      {
+        "name": "Schema assertion",
+        "passed": true,
+        "notes": "Failure occurs at production_recommendation with validator keyword const and expected value false."
+      }
+    ],
+    "score_percent": 100.0
+  },
+  "deviations": [
+    "This is an intentional invalid schema fixture, not a generated skill response; its schema failure is the expected passing outcome."
+  ],
+  "reviewer": "Codex automated evaluation; human expert review pending",
+  "final_result": "Pass"
+}

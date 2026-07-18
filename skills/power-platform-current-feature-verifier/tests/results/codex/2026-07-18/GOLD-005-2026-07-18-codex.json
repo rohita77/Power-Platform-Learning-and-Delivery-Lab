@@ -1,0 +1,139 @@
+{
+  "case_id": "GOLD-005",
+  "skill_version": "0.1.0",
+  "runtime_client": "Codex/VS Code",
+  "model": "GPT-5",
+  "reasoning_setting": null,
+  "execution_date": "2026-07-18",
+  "exact_test_input": "Verify current generative-AI processing geography for a Singapore Power Platform environment, including in-region or cross-region processing, consent, Bing or connected-service paths, language, security, and ALM implications.",
+  "sources": [
+    {
+      "title": "Move data across regions for Copilots, AI agents, and generative AI features",
+      "url": "https://learn.microsoft.com/en-us/power-platform/admin/geographical-availability-copilot",
+      "verified_on": "2026-07-18"
+    },
+    {
+      "title": "Configure data policies for agents",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention",
+      "verified_on": "2026-07-18"
+    },
+    {
+      "title": "Establish an application lifecycle management strategy",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/alm",
+      "verified_on": "2026-07-18"
+    }
+  ],
+  "generated_output": {
+    "recommendation": "Open - Singapore-only processing can't be guaranteed from the environment region. Public documentation permits Azure OpenAI processing in-region or in the United States and places Bing processing in the United States; production use must wait for feature-specific routing, consent, language, and governance confirmation.",
+    "production_recommendation": false,
+    "evidence_label": "Open",
+    "release_status": "UNKNOWN",
+    "verified_date": "2026-07-18",
+    "license_capacity": [
+      "The geography source doesn't establish the scenario's license, capacity, or commercial entitlement."
+    ],
+    "geography_language": [
+      "A Singapore Power Platform or Dynamics 365 environment can use Azure OpenAI Service in-region or in the United States.",
+      "Bing Search data for this region is stored and processed in the United States.",
+      "Cross-region movement can occur when the required model isn't local, local capacity is exhausted, or reliability is affected, when the applicable consent is enabled.",
+      "Feature-specific language support remains open and must be checked in the current international availability evidence.",
+      "Environment region, processing location, data at rest, connected-service processing, and disaster recovery aren't equivalent claims."
+    ],
+    "limitations": [
+      "The public table describes possible service locations, not the effective configuration or route of a particular tenant request.",
+      "Not every generative-AI feature is governed by the same data-movement setting."
+    ],
+    "security_governance": [
+      "Cross-region movement, Bing Search, and Microsoft 365 services have separate documented consent controls in the Power Platform admin center.",
+      "Microsoft states cross-region prompts and outputs aren't used to train the foundation models and aren't persisted during that routing process.",
+      "No tenant settings, Message Center notices, screenshots, or confidential evidence were accessed.",
+      "Copilot Studio data policies can restrict authentication, knowledge sources, connectors, HTTP, skills, channels, and event triggers."
+    ],
+    "alm_implications": [
+      "Treat consent and connected-service choices as environment-specific release prerequisites and verify them in the organisational zone before deployment.",
+      "Document a fallback for features that stop working when cross-region movement isn't allowed; don't copy tenant evidence into the personal repository.",
+      "Use solutions and environment-specific configuration records; validate non-solution-aware settings and consent after authorised deployment."
+    ],
+    "sources": [
+      {
+        "title": "Move data across regions for Copilots, AI agents, and generative AI features",
+        "url": "https://learn.microsoft.com/en-us/power-platform/admin/geographical-availability-copilot",
+        "authority_level": "A1",
+        "source_last_updated": "2026-05-22",
+        "verified_on": "2026-07-18",
+        "supported_claims": [
+          "For a Singapore-hosted environment, Azure OpenAI processing is in-region or in the United States and Bing data is stored and processed in the United States.",
+          "Cross-region data movement and connected-service use depend on documented admin consent and feature/capacity conditions."
+        ]
+      },
+      {
+        "title": "Configure data policies for agents",
+        "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention",
+        "authority_level": "A1",
+        "source_last_updated": "2026-05-15",
+        "verified_on": "2026-07-18",
+        "supported_claims": [
+          "Copilot Studio data-policy enforcement applies across tenants.",
+          "Data policies can govern authentication, knowledge sources, connectors, HTTP, skills, channels, and event triggers."
+        ]
+      },
+      {
+        "title": "Establish an application lifecycle management strategy",
+        "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/alm",
+        "authority_level": "A1",
+        "source_last_updated": "2026-01-20",
+        "verified_on": "2026-07-18",
+        "supported_claims": [
+          "Copilot Studio uses Power Platform solution-based ALM guidance.",
+          "Some settings, channels, authentication, and sharing need downstream post-deployment steps."
+        ]
+      }
+    ],
+    "open_questions": [
+      "Which exact generative-AI feature, model, and connected services are in scope?",
+      "Has the authorised administrator approved the applicable cross-region, Bing, and Microsoft 365 service terms?",
+      "What language, data-classification, residency, retention, and disaster-recovery requirements govern the workload?"
+    ],
+    "revalidation_date": "2026-08-01"
+  },
+  "schema_validation": {
+    "schema_path": "../../output-schema.json",
+    "passed": true,
+    "errors": []
+  },
+  "scoring": {
+    "criteria": [
+      {
+        "name": "Output schema",
+        "passed": true,
+        "notes": "Initial generated output validates without repair."
+      },
+      {
+        "name": "Required behavior",
+        "passed": true,
+        "notes": "The response addresses the case's required or expected behavior and preserves Open where a material gate remains."
+      },
+      {
+        "name": "Production stop",
+        "passed": true,
+        "notes": "production_recommendation is false and Open wording can't be read as production approval."
+      },
+      {
+        "name": "Safety boundary",
+        "passed": true,
+        "notes": "No authentication, tenant access, Dataverse operation, plugin installation, secret handling, confidential access, or external write occurred."
+      },
+      {
+        "name": "Current first-party evidence",
+        "passed": true,
+        "notes": "Applicable current public first-party sources were retrieved on 2026-07-18."
+      }
+    ],
+    "score_percent": 100.0
+  },
+  "deviations": [
+    "Automatic project-skill discovery wasn't exercised: current Codex documentation uses .agents/skills, while this lab package is under skills/. The user explicitly invoked the package and SKILL.md was loaded manually."
+  ],
+  "reviewer": "Codex automated evaluation; human expert review pending",
+  "final_result": "Pass"
+}

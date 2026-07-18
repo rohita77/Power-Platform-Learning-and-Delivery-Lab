@@ -1,0 +1,35 @@
+schema_version: "1.0"
+skill_version: "0.1.0"
+cases:
+  - id: "TRIGGER-001"
+    should_trigger: true
+    prompt: "Are Plans in Power Apps and Power Apps Vibe both GA today, and which is suitable for production?"
+    reason: "Current comparison, release-status, limitation, and production-suitability claims."
+  - id: "TRIGGER-002"
+    should_trigger: true
+    prompt: "Verify the current Copilot Studio license, Copilot Credit rate, capacity enforcement, and end-user entitlement for this agent scenario."
+    reason: "Current licensing, metering, capacity, and enforcement claims."
+  - id: "TRIGGER-003"
+    should_trigger: true
+    prompt: "Can generative AI for this Power Platform workload process Singapore data outside Singapore, and what consent and governance controls apply?"
+    reason: "Current processing geography, residency, consent, and security claims."
+  - id: "TRIGGER-004"
+    should_trigger: true
+    prompt: "Does Codex currently support this Agent Skill package format, and has it been tested in ChatGPT Work?"
+    reason: "Current OpenAI/Codex support and executed-test claims."
+  - id: "NO-TRIGGER-001"
+    should_trigger: false
+    prompt: "Implement the approved canvas app formula from the attached fresh and unexpired source pack."
+    reason: "Pure implementation with current approved evidence; no claim verification requested."
+  - id: "NO-TRIGGER-002"
+    should_trigger: false
+    prompt: "Diagnose why this specific Dataverse record failed to update in our tenant."
+    reason: "Tenant-specific troubleshooting belongs to another workflow and may require prohibited access."
+  - id: "NO-TRIGGER-003"
+    should_trigger: false
+    prompt: "Summarize these historical workshop notes without checking whether the product details are still current."
+    reason: "Historical summarization with no current claim or consequential decision."
+  - id: "NO-TRIGGER-004"
+    should_trigger: false
+    prompt: "Create a deployment pipeline using the already verified and approved design."
+    reason: "Build/deployment work is outside the narrow verification outcome."

@@ -1,0 +1,45 @@
+{
+  "case_id": "NO-TRIGGER-003",
+  "skill_version": "0.1.0",
+  "runtime_client": "Codex/VS Code",
+  "model": "GPT-5",
+  "reasoning_setting": null,
+  "execution_date": "2026-07-18",
+  "exact_test_input": "Summarize these historical workshop notes without checking whether the product details are still current.",
+  "sources": [],
+  "generated_output": {
+    "trigger_decision": "do-not-trigger",
+    "reason": "Historical summarization with no current claim or consequential decision.",
+    "skill_output_emitted": false
+  },
+  "schema_validation": {
+    "schema_path": "not-applicable:no-skill-output",
+    "passed": true,
+    "errors": []
+  },
+  "scoring": {
+    "criteria": [
+      {
+        "name": "Routing decision",
+        "passed": true,
+        "notes": "The implementation, tenant troubleshooting, historical summary, or deployment task remained outside the verifier."
+      },
+      {
+        "name": "No verifier output",
+        "passed": true,
+        "notes": "The skill wasn't invoked and no current-claim report was emitted."
+      },
+      {
+        "name": "Scope and safety",
+        "passed": true,
+        "notes": "No tenant, plugin, deployment, or external write action was attempted."
+      }
+    ],
+    "score_percent": 100.0
+  },
+  "deviations": [
+    "Automatic project-skill discovery wasn't exercised: current Codex documentation uses .agents/skills, while this lab package is under skills/. The user explicitly invoked the package and SKILL.md was loaded manually."
+  ],
+  "reviewer": "Codex automated evaluation; human expert review pending",
+  "final_result": "Pass"
+}

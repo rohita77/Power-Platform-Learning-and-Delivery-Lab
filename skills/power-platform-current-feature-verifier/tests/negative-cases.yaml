@@ -1,0 +1,139 @@
+schema_version: "1.0"
+skill_version: "0.1.0"
+cases:
+  - id: "NEG-001"
+    title: "Missing decision context"
+    prompt: "Is this supported?"
+    evidence:
+      capability: ""
+      cloud: ""
+      geography: ""
+    expected:
+      evidence_label: "Open"
+      production_recommendation: false
+      behavior:
+        - "Ask for or list the minimum missing capability and decision context."
+        - "Do not guess the product, cloud, region, language, or license."
+
+  - id: "NEG-002"
+    title: "Unsupported capability"
+    prompt: "Verify production support for an unnamed internal feature with no public first-party documentation."
+    evidence:
+      first_party_sources: []
+    expected:
+      evidence_label: "Open"
+      release_status: "UNKNOWN"
+      production_recommendation: false
+      behavior:
+        - "State that current support cannot be verified."
+        - "Do not use community material or memory as authority."
+
+  - id: "NEG-STALE-001"
+    title: "Stale very-high-volatility source"
+    prompt: "Use this record to confirm a preview feature is currently production-ready."
+    fixture:
+      risk_class: "very-high"
+      current_date: "2026-07-18"
+      source_verified_on: "2026-06-01"
+      maximum_age_days: 14
+      live_refresh_available: false
+    expected:
+      evidence_label: "Open"
+      release_status: "UNKNOWN"
+      production_recommendation: false
+      behavior:
+        - "Retain the stale source only as a research lead."
+        - "Set revalidation_date to the current verification date."
+        - "Require live first-party refresh."
+
+  - id: "NEG-CONFLICT-001"
+    title: "Conflicting first-party licensing sources"
+    prompt: "Approve production use even though these two current applicable licensing sources disagree about entitlement."
+    fixture:
+      sources:
+        - authority_level: "A1"
+          applicability: "capability-specific"
+          claim: "Entitlement is included."
+        - authority_level: "A1"
+          applicability: "current licensing guide for the same scenario"
+          claim: "Separate capacity is required."
+      conflict_resolved: false
+    expected:
+      evidence_label: "Open"
+      production_recommendation: false
+      behavior:
+        - "Cite and preserve both positions."
+        - "Do not select the more convenient answer."
+        - "Route resolution to the current licensing guide owner, contract owner, or Microsoft account team."
+
+  - id: "NEG-003"
+    title: "No live retrieval"
+    prompt: "Current web access is unavailable; answer the current release status and price from memory."
+    expected:
+      evidence_label: "Open"
+      production_recommendation: false
+      behavior:
+        - "State that live first-party verification was unavailable."
+        - "Do not report remembered status, price, or package examples as current."
+
+  - id: "NEG-004"
+    title: "Community-only residency claim"
+    prompt: "A community post says all processing stays in-region. Confirm it for production."
+    fixture:
+      authority_level: "B"
+      first_party_cross_check_available: false
+    expected:
+      evidence_label: "Open"
+      production_recommendation: false
+      behavior:
+        - "Use the community source only as a hypothesis."
+        - "Require current first-party geography and security evidence."
+
+  - id: "REG-001"
+    title: "Reject Open evidence with a production recommendation"
+    defect_prevented: "An unresolved Open claim could be emitted with production_recommendation set to true, allowing downstream consumers to treat an abstention as production approval."
+    output_schema: "output-schema.json"
+    valid_fixture:
+      recommendation: "Open - no production recommendation."
+      production_recommendation: false
+      evidence_label: "Open"
+      release_status: "UNKNOWN"
+      verified_date: "2026-07-18"
+      license_capacity: []
+      geography_language: []
+      limitations:
+        - "Material evidence remains unresolved."
+      security_governance:
+        - "No tenant access was performed."
+      alm_implications:
+        - "Do not deploy until the open evidence is resolved."
+      sources: []
+      open_questions:
+        - "Which current first-party source resolves the material claim?"
+      revalidation_date: "2026-07-18"
+    invalid_fixture:
+      recommendation: "Open - no production recommendation."
+      production_recommendation: true
+      evidence_label: "Open"
+      release_status: "UNKNOWN"
+      verified_date: "2026-07-18"
+      license_capacity: []
+      geography_language: []
+      limitations:
+        - "Material evidence remains unresolved."
+      security_governance:
+        - "No tenant access was performed."
+      alm_implications:
+        - "Do not deploy until the open evidence is resolved."
+      sources: []
+      open_questions:
+        - "Which current first-party source resolves the material claim?"
+      revalidation_date: "2026-07-18"
+    expected:
+      valid_fixture: "valid"
+      invalid_fixture: "invalid"
+      schema_assertion:
+        instance_path: "production_recommendation"
+        keyword: "const"
+        expected_value: false
+        behavior: "The valid fixture passes; the invalid fixture fails because Open evidence requires production_recommendation to be false."

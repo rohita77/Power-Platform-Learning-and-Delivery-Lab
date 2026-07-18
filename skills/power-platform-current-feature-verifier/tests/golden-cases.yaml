@@ -1,0 +1,156 @@
+schema_version: "1.0"
+skill_version: "0.1.0"
+fact_policy: "Scenario hypotheses are test inputs, not permanent truth; every run must retrieve live first-party evidence."
+active_targets:
+  - "chatgpt-work"
+  - "codex"
+parity_release_subset:
+  - "GOLD-001"
+  - "GOLD-002"
+  - "GOLD-005"
+cases:
+  - id: "GOLD-001"
+    title: "Plans in Power Apps versus Power Apps Vibe"
+    prompt: "Verify the current status and production fit of Plans in Power Apps compared with Power Apps Vibe."
+    input_hypothesis:
+      - "Plans may be GA."
+      - "Power Apps Vibe may be preview."
+    required_behavior:
+      - "Verify both capabilities independently from live capability-specific Microsoft sources."
+      - "Preserve each current source status label and do not infer parity from related naming."
+      - "Separate license/capacity, geography/language, limitations, security/governance, and ALM."
+      - "Require a preview exit plan when current evidence identifies a preview dependency."
+      - "Return Open if any material production claim cannot be refreshed or conflicts."
+    required_source_classes: ["A1", "A3-if-rollout-is-material"]
+    forbidden_behavior:
+      - "Treat the input hypothesis or canonical pack as current evidence."
+      - "Call preview output production-ready because a prototype works."
+    target_status:
+      chatgpt_work: "active-test-target-not-yet-executed"
+      codex: "active-test-target-not-yet-executed"
+
+  - id: "GOLD-002"
+    title: "Copilot Studio classic versus new agent experience"
+    prompt: "Compare the current release status, migration path, limitations, licensing, security, and ALM fit of Copilot Studio classic and the new agent experience."
+    input_hypothesis:
+      - "The classic experience may be the current mature baseline."
+      - "The new experience may carry a specific preview label and format limitations."
+    required_behavior:
+      - "Retrieve the live classic-versus-new capability page and applicable release evidence."
+      - "Quote the exact current preview or GA wording rather than normalize it upward."
+      - "Verify migration or conversion claims explicitly."
+      - "Separate demonstrated client behavior from documented product status."
+      - "Return Open before production advice if status, migration, licensing, or security evidence conflicts."
+    required_source_classes: ["A1", "A3"]
+    forbidden_behavior:
+      - "Infer GA from availability in a tenant."
+      - "Assume format migration exists without current evidence."
+    target_status:
+      chatgpt_work: "active-test-target-not-yet-executed"
+      codex: "active-test-target-not-yet-executed"
+
+  - id: "GOLD-003"
+    title: "Agent flow versus new Workflows terminology"
+    prompt: "Verify whether agent flow and the new Workflows experience are the same current capability, and compare their status, conversion, capacity, and ALM implications."
+    input_hypothesis:
+      - "Agent flow and Workflows may be different formats with different lifecycle status."
+    required_behavior:
+      - "Treat terminology as a claim and verify each named capability separately."
+      - "Use live first-party sources for status, conversion direction, metering, enforcement, and solution awareness."
+      - "Do not silently map old terminology onto a new preview experience."
+      - "Provide distinct ALM, migration, rollback, and preview-exit implications."
+      - "Return Open if conversion or capacity evidence is absent or conflicting."
+    required_source_classes: ["A1", "A3-if-rollout-is-material"]
+    forbidden_behavior:
+      - "Use remembered naming as product authority."
+      - "Recommend a production-critical dependency on an unresolved preview format."
+    target_status:
+      chatgpt_work: "active-test-target-not-yet-executed"
+      codex: "active-test-target-not-yet-executed"
+
+  - id: "GOLD-004"
+    title: "AI Builder credit transition"
+    prompt: "Verify the current AI Builder credit transition, effective date, protected-contract exceptions, Copilot Credit relationship, enforcement, and production capacity action."
+    input_hypothesis:
+      - "Seeded AI Builder credits may have an announced end date."
+      - "They may not automatically convert to Copilot Credits."
+    required_behavior:
+      - "Use a current licensing/transition source and applicable licensing guide."
+      - "Distinguish announced transition, current entitlement, contract protection, consumption order, conversion, and enforcement."
+      - "Label public prices or rates verify-before-purchase."
+      - "Route contract-specific resolution to the contract owner or Microsoft account team."
+      - "Return Open if the applicable contract or current transition evidence is material and unavailable."
+    required_source_classes: ["A1"]
+    forbidden_behavior:
+      - "Treat a public summary as the tenant's contract."
+      - "Infer automatic credit conversion."
+    target_status:
+      chatgpt_work: "active-test-target-not-yet-executed"
+      codex: "active-test-target-not-yet-executed"
+
+  - id: "GOLD-005"
+    title: "Singapore generative-AI processing geography"
+    prompt: "Verify current generative-AI processing geography for a Singapore Power Platform environment, including in-region or cross-region processing, consent, Bing or connected-service paths, language, security, and ALM implications."
+    input_hypothesis:
+      - "Processing location may depend on feature, capacity, and configuration."
+      - "Cross-region processing or consent may be relevant."
+    required_behavior:
+      - "Distinguish tenant home, environment region, data at rest, AI processing, disaster recovery, and connected-service locations."
+      - "Use current first-party geography/admin evidence and capture its applicability."
+      - "Do not infer exact tenant controls or residency without authorised in-zone evidence."
+      - "Keep confidential tenant evidence in the organisational zone."
+      - "Return Open before production advice when processing, consent, or security evidence is unresolved."
+    required_source_classes: ["A1"]
+    forbidden_behavior:
+      - "Equate Singapore environment region with guaranteed Singapore-only processing."
+      - "Authenticate or invoke the Dataverse plugin to inspect tenant settings."
+    target_status:
+      chatgpt_work: "active-test-target-not-yet-executed"
+      codex: "active-test-target-not-yet-executed"
+
+output_schema_test:
+  id: "OUT-SCHEMA-001"
+  schema: "output-schema.json"
+  valid_fixture:
+    recommendation: "Use only for the verified synthetic-data experiment under the listed controls."
+    production_recommendation: false
+    evidence_label: "Confirmed"
+    release_status: "GA"
+    verified_date: "2026-07-18"
+    license_capacity:
+      - "Applicable experiment entitlement verified from a current first-party source."
+    geography_language:
+      - "Applicable region and language verified for the bounded experiment."
+    limitations:
+      - "Production contract and tenant controls were not evaluated."
+    security_governance:
+      - "Public and synthetic information only; no tenant access."
+    alm_implications:
+      - "Use source control and a documented rollback for any later implementation."
+    sources:
+      - title: "Illustrative current first-party source"
+        url: "https://learn.microsoft.com/en-us/power-platform/admin/pricing-billing-skus"
+        authority_level: "A1"
+        source_last_updated: "unknown"
+        verified_on: "2026-07-18"
+        supported_claims:
+          - "Illustrative schema fixture only; not a golden product assertion."
+    open_questions: []
+    revalidation_date: "2026-08-17"
+  invalid_fixture:
+    recommendation: "Approve for production despite missing evidence."
+    production_recommendation: true
+    evidence_label: "Open"
+    release_status: "UNKNOWN"
+    verified_date: "2026-07-18"
+    license_capacity: []
+    geography_language: []
+    limitations: []
+    security_governance: []
+    alm_implications: []
+    sources: []
+    open_questions: []
+    revalidation_date: "2026-07-18"
+  expected:
+    valid_fixture: "valid"
+    invalid_fixture: "invalid"

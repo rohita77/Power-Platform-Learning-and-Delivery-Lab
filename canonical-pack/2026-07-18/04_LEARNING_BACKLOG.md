@@ -1,6 +1,6 @@
 # Learning Backlog
 
-**Pack version:** 1.0  
+**Pack version:** 1.1
 **Baseline verified:** 2026-07-18  
 **Planning horizon:** 12 weeks for Wave 1; rolling quarterly thereafter
 
@@ -11,7 +11,7 @@
 | 1 | Establish source governance, tenant guardrails, evaluation harness, and three comparison labs | P0 |
 | 2 | Build one governed SDLC workbench slice using a declarative agent, Copilot Studio, and deterministic automation | P0 |
 | 3 | Test Plans/Vibe productionisation, AI Builder credit transition, and Power Apps MCP supervision | P1 |
-| 4 | Package proven practices into cross-platform skills and adapters | P1 |
+| 4 | Package proven practices for ChatGPT Work and Codex, then maintain untested reference adapters for other clients | P1 |
 
 ## Definition of done for a learning item
 
@@ -35,6 +35,8 @@ An item is done only when it has:
 | LAB-FND-03 | Create common agent evaluation set | 30 cases: answer quality, abstention, source authority, permission trimming, prompt injection, tool selection, write approval | Versioned test set with deterministic + LLM + human scoring |
 | LAB-FND-04 | Establish cost telemetry | Copilot Credits, Power Automate requests, AI Builder/Copilot fallback, external model cost | Dashboard/export and alert thresholds demonstrated |
 | LAB-FND-05 | Establish ALM baseline | Solution boundaries, env vars, connection refs, managed deployment, rollback | Dev→Test deployment and rollback evidence |
+| LAB-FND-06 | Enforce the two-zone data boundary | Map personal ChatGPT Pro/Work/Codex artifacts against confidential M365/Power Platform artifacts and transfer paths | No automatic cross-zone synchronization; exception process includes owner, approval, minimization, retention, and audit |
+| LAB-FND-07 | Govern Microsoft upstream skills | Populate and revalidate `10_UPSTREAM_SKILLS_REGISTER.md`; inspect supported clients, telemetry, permissions, tools, and pins | Every upstream is pinned, classified, owned, and marked installed/tested/static-review/untested accurately |
 
 ---
 
@@ -207,21 +209,22 @@ Sources: [Dataverse overview](https://learn.microsoft.com/en-us/power-apps/maker
 
 ### Current baseline
 
-**Confirmed:** OpenAI Codex/ChatGPT Work distribution, Claude Code, and GitHub Copilot support Agent Skills-style packages containing instructions/resources/scripts. Each platform adds its own paths, invocation, sandbox, admin, and distribution behavior.
+**Confirmed active baseline:** ChatGPT Work and Codex/VS Code are the only mandatory OpenAI runtime and test targets. OpenAI documents skills as reusable workflows and plugins as installable bundles that can include skills and MCP-backed connectors. Claude Code, GitHub Copilot, and Cursor are not subscribed and remain structurally compatible or reference-only, explicitly **untested** until executed on those products.
 
 **Preview:** Copilot Studio skills in the new agent experience are preview and require an adapter; a `SKILL.md` package must not be assumed to import unchanged. M365 declarative agents use manifests/instructions/knowledge/actions rather than an Agent Skills folder as the runtime unit.
 
 | ID | Priority | Learning item | Hands-on experiment | Output/evaluation |
 |---|---:|---|---|---|
-| SKL-01 | P0 | Portable core | Implement `power-platform-current-feature-verifier` in Agent Skills format | Runs in Codex, Claude Code, and GitHub Copilot with same golden tests |
-| SKL-02 | P0 | Adapter contract | Map core instruction, references, templates, scripts, tests, and tools to five targets | Adapter matrix and unsupported-feature rules |
+| SKL-01 | P0 | Portable core | Implement `power-platform-current-feature-verifier` in Agent Skills format | Same golden cases pass in ChatGPT Work and Codex/VS Code |
+| SKL-02 | P0 | Adapter contract | Map core instructions, references, templates, scripts, tests, and tools to active targets; document other adapters without claiming execution | Adapter matrix includes supported, installed, tested, static-review-only, reference-only, and untested states |
 | SKL-03 | P0 | Security review | Scan skill scripts/dependencies, network/tool permissions, secret handling, and prompt injection | Install approval checklist and threat model |
 | SKL-04 | P1 | Copilot Studio adapter | Recreate one skill in preview Copilot Studio skills or supported tools/instructions | Functional parity and gap report |
 | SKL-05 | P1 | M365 declarative adapter | Convert read-only skill knowledge/instructions into declarative-agent assets | Manifest/instruction/evaluation package |
-| SKL-06 | P1 | Regression/evaluation harness | Run golden cases across platforms and compare output contracts | Cross-platform scorecard and changelog rule |
-| SKL-07 | P1 | Distribution/versioning | Package OpenAI plugin, Claude plugin/skill, GitHub repository skill, and docs adapters | Version matrix, install/update/rollback instructions |
+| SKL-06 | P1 | Regression/evaluation harness | Run golden cases in ChatGPT Work and Codex; retain deferred cases for unsubscribed clients | Active-runtime scorecard, deferred-adapter register, and changelog rule |
+| SKL-07 | P1 | Distribution/versioning | Package the OpenAI skill/plugin; retain Claude/GitHub/Cursor adapter designs without making them release gates | Version matrix, install/update/rollback instructions, and explicit untested labels |
+| SKL-08 | P0 | Microsoft upstream evaluation | Review the four repositories in `10_UPSTREAM_SKILLS_REGISTER.md` and select narrow specialists for experiments | Pinned source, prerequisite/tool/telemetry/permission assessment, local adaptation, and active-client test decision |
 
-Sources: [OpenAI build skills](https://developers.openai.com/codex/build-skills), [Claude Code skills](https://docs.anthropic.com/en/docs/claude-code/skills), [GitHub Copilot Agent Skills](https://docs.github.com/copilot/concepts/agents/about-agent-skills), [Copilot Studio skills preview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview).
+Sources: [OpenAI skills and plugins](https://learn.chatgpt.com/docs/skills-and-plugins), [OpenAI build skills](https://learn.chatgpt.com/docs/build-skills), [OpenAI plugins](https://learn.chatgpt.com/docs/plugins), [Microsoft Dataverse skills](https://github.com/microsoft/Dataverse-skills), [Microsoft Power Platform skills](https://github.com/microsoft/power-platform-skills), [Microsoft Power CAT skills](https://github.com/microsoft/power-cat-skills), [Microsoft skills for Copilot Studio](https://github.com/microsoft/skills-for-copilot-studio), [Copilot Studio skills preview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview). Claude/GitHub documentation is retained only as reference evidence for untested adapters.
 
 ## Wave 1 exit criteria
 
@@ -230,5 +233,6 @@ Sources: [OpenAI build skills](https://developers.openai.com/codex/build-skills)
 - Common 30-case evaluation set runs against at least one declarative agent and one Copilot Studio agent.
 - Agent flow vs Power Automate and Plans vs Vibe comparison labs are complete.
 - AI Builder November 2026 workload inventory and capacity forecast is complete.
-- First portable skill passes golden tests on at least two supported Agent Skills platforms.
-
+- First portable skill passes the same golden cases in ChatGPT Work and Codex/VS Code; all other adapters are labelled untested until executed.
+- Two-zone controls prohibit automatic synchronization between personal OpenAI and confidential organisational Microsoft environments.
+- All four Microsoft upstream repositories have an owner, pin, boundary classification, and revalidation date.

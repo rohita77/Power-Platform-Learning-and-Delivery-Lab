@@ -1,6 +1,6 @@
 # Skill Design Standard
 
-**Pack version:** 1.0  
+**Pack version:** 1.1
 **Verified:** 2026-07-18  
 **Applies to:** Reusable Power Platform/M365 Copilot expertise and its platform adapters
 
@@ -12,7 +12,7 @@
 | Live product facts | Versioned references/source register, not frozen prose | Reverify before consequential decisions |
 | Tool/data access | MCP or supported platform tool/connector | Explicit auth, allow-list, schemas, least privilege, approvals |
 | Platform behavior | Thin adapter | Do not fork the domain workflow unless the target cannot support it |
-| Quality | Golden cases + platform-specific integration/security tests | A skill is not reusable until tests pass |
+| Quality | Golden cases on active clients + platform-specific integration/security tests | Mandatory release evidence comes from ChatGPT Work and Codex/VS Code; other clients remain untested until executed |
 | Distribution | Versioned package/plugin/repository | Include changelog, compatibility, update, and rollback |
 
 ## 1. When to create a skill
@@ -41,6 +41,7 @@ skill-name/
     openai/
     claude/
     github-copilot/
+    cursor/
     m365-declarative-agent/
     copilot-studio/
   changelog.md
@@ -157,7 +158,8 @@ Every skill needs:
 | Negative | Missing/ambiguous input, unsupported capability, stale source, conflicting evidence |
 | Security | Prompt injection, tool poisoning, unauthorized source/action, secret request |
 | Output contract | Schema/required-section validation |
-| Cross-platform | Same three golden cases on every claimed adapter |
+| Active-runtime parity | Same three golden cases in ChatGPT Work and Codex/VS Code |
+| Deferred adapter | Static structure/contract review for Claude Code, GitHub Copilot, and Cursor; status must remain untested until executed there |
 | Regression | Previously fixed failure retained as a test |
 | Human review | At least one expert-reviewed case for architecture/licensing/security skills |
 
@@ -173,17 +175,29 @@ Suggested release gates:
 
 ## 8. Adapter standard
 
-| Target | Adapter approach | Current caution |
-|---|---|---|
-| ChatGPT Work / Codex | Agent Skill; plugin when distributing skills/connectors | Admin enablement, sandbox, approvals, plan/surface availability |
-| Claude Code | Agent Skill plus Claude-specific invocation/subagent/context controls if needed | Keep extensions out of portable core |
-| GitHub Copilot / VS Code | Repository or user Agent Skill; add repo instructions only for repo-wide conventions | Availability differs by surface; test cloud and IDE paths separately |
-| M365 declarative agent | Translate workflow into instructions, knowledge, actions, manifest, and evals | It is not a `SKILL.md` runtime; honor M365 permissions/admin controls |
-| Copilot Studio | Translate into agent instructions, tools, prompts, flows/workflows, or preview skill assets | New experience/skills are preview; ALM and feature gaps require testing |
+| Target | Adapter approach | Lab status | Current caution |
+|---|---|---|---|
+| ChatGPT Work | OpenAI skill/plugin distribution | Active and mandatory test target | Plan/workspace availability, plugin permissions, connected-source controls |
+| Codex/VS Code | Repository/user Agent Skill; plugin when distributing skills/connectors | Active and mandatory test target | Sandbox, approvals, MCP permissions, repo state, host availability |
+| Claude Code | Structurally compatible reference adapter | Untested; no subscription | Keep extensions out of portable core; do not make it a release gate |
+| GitHub Copilot | Structurally compatible reference adapter | Untested; no subscription | Do not infer support from folder compatibility; do not make it a release gate |
+| Cursor | Reference-only adapter where an upstream explicitly supports it | Untested; no subscription | Client-specific plugin behavior and permissions not evaluated |
+| M365 declarative agent | Translate workflow into instructions, knowledge, actions, manifest, and evals | Organisational-zone implementation only | It is not a `SKILL.md` runtime; honor M365 permissions/admin controls and the no-sync boundary |
+| Copilot Studio | Translate into agent instructions, tools, prompts, flows/workflows, or preview skill assets | Organisational-zone implementation only | New experience/skills are preview; ALM and feature gaps require tenant testing |
 
 An adapter must document unsupported semantics and must not silently omit approval, security, or evidence rules.
 
-## 9. Versioning and change management
+## 9. Upstream skill and plugin dependencies
+
+- Track Microsoft upstream repositories only through `10_UPSTREAM_SKILLS_REGISTER.md`.
+- Pin an exact released version or commit before evaluation; never assume `main` is a stable dependency.
+- Record supported clients separately from this lab’s installed and tested clients.
+- Inspect prerequisites, scripts, MCP/tool access, telemetry, permissions, network behavior, authentication, and destructive operations before installation or upgrade.
+- Prefer the upstream specialist for its narrow capability and keep local changes in an adapter or wrapper; do not silently fork upstream content.
+- A meta-skill may delegate to upstream plugins but must enforce the project’s source, approval, test, and two-zone boundary rules before delegation.
+- Public upstream source may be reviewed in the personal zone. Authentication or synchronization with the organisational Microsoft zone remains prohibited unless separately approved.
+
+## 10. Versioning and change management
 
 Use semantic versioning:
 
@@ -205,7 +219,7 @@ Next revalidation:
 
 Deprecate rather than delete when consumers may still depend on a skill. State replacement, end date, and migration tests.
 
-## 10. Review checklist
+## 11. Review checklist
 
 - [ ] Narrow outcome and exclusions.
 - [ ] Clear trigger description.
@@ -216,15 +230,21 @@ Deprecate rather than delete when consumers may still depend on a skill. State r
 - [ ] Safe failure/abstention path.
 - [ ] Tool/MCP permissions and approval boundary.
 - [ ] Golden, negative, security, and regression tests.
-- [ ] Each adapter tested and gaps documented.
+- [ ] ChatGPT Work and Codex/VS Code adapters tested; all other adapters explicitly marked untested until execution evidence exists.
+- [ ] Upstream dependencies pinned and reconciled with `10_UPSTREAM_SKILLS_REGISTER.md`.
+- [ ] Personal/organisational data boundary and no-sync rule tested.
 - [ ] Owner, version, changelog, rollback, revalidation.
 
 ## Official sources
 
-- [OpenAI: Build skills](https://developers.openai.com/codex/build-skills)
-- [OpenAI: Skills in ChatGPT](https://help.openai.com/en/articles/20001066-skills-in-chatgpt)
+- [OpenAI: Skills and plugins](https://learn.chatgpt.com/docs/skills-and-plugins)
+- [OpenAI: Build skills](https://learn.chatgpt.com/docs/build-skills)
+- [OpenAI: Plugins](https://learn.chatgpt.com/docs/plugins)
+- [Microsoft Dataverse skills](https://github.com/microsoft/Dataverse-skills)
+- [Microsoft Power Platform skills](https://github.com/microsoft/power-platform-skills)
+- [Microsoft Power CAT skills](https://github.com/microsoft/power-cat-skills)
+- [Microsoft skills for Copilot Studio](https://github.com/microsoft/skills-for-copilot-studio)
 - [Claude Code skills](https://docs.anthropic.com/en/docs/claude-code/skills)
 - [GitHub Copilot Agent Skills](https://docs.github.com/copilot/concepts/agents/about-agent-skills)
 - [Copilot Studio skills overview (preview)](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview)
 - [Copilot Studio MCP](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp)
-

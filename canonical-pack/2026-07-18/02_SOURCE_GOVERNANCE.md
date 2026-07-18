@@ -1,6 +1,6 @@
 # Source Governance
 
-**Pack version:** 1.0  
+**Pack version:** 1.1
 **Verified:** 2026-07-18  
 **Purpose:** Keep the lab current without turning old answers into product authority
 
@@ -21,7 +21,7 @@
 | Level | Source | Permitted use |
 |---|---|---|
 | A1 | Microsoft Learn limits, licensing/admin/security docs, licensing guides, release plans | Product behavior, status, prerequisites, limits, governance, capacity |
-| A2 | Official OpenAI/GitHub/VS Code/Anthropic/Agent Skills docs | Behavior of those platforms and portability adapters |
+| A2 | Official OpenAI skills/plugins/Codex docs and official client documentation | Behavior of the active OpenAI runtimes and explicitly scoped adapter claims |
 | A3 | Official product release notes, “What’s new,” Message Center, product blogs/repos | Rollout, change detection, direction, examples; validate material behavior against A1/A2 where possible |
 | B | Microsoft MVP or recognized community material | Practical technique or test hypothesis only after first-party validation |
 | C | Lab experiment evidence | Confirmed behavior for the recorded tenant, region, license, build, and date; not universal product proof |
@@ -38,6 +38,10 @@ evidence_label: Confirmed | Preview | Announced | Inference | Recommendation | A
 authority_level: A1 | A2 | A3 | B | C | D
 product: ""
 capability: ""
+runtime_client: ""
+installed_or_evaluated: ""
+test_status: tested | installation-only | static-review-only | untested | not-applicable
+data_boundary: personal-openai | organisational-microsoft | public-upstream | prohibited-cross-zone
 release_status: GA | production-ready preview | public preview | experimental | planned | deprecated | unknown
 cloud: Commercial | GCC | GCC High | DoD | Sovereign | all-confirmed
 geography: ""
@@ -64,9 +68,11 @@ notes: ""
 5. For licensing, distinguish list-price examples, entitlement rules, capacity rates, tenant contract terms, and zero-rated scenarios.
 6. For geography, distinguish tenant location, environment region, data at rest, inference/processing location, disaster recovery, and connected-service location.
 7. Record known limitations and what was not confirmed.
-8. Where risk warrants, run a tenant experiment and record the full context.
-9. Assign a validity window and owner.
-10. Update dependent patterns, skills, experiments, and backlog items if the claim changes.
+8. Record the exact client/runtime and distinguish installation, static review, and executed test evidence.
+9. Classify the data boundary before invoking any connector, MCP server, plugin, or tenant tool.
+10. Where risk warrants and the boundary permits it, run an experiment and record the full context.
+11. Assign a validity window and owner.
+12. Update dependent patterns, skills, experiments, and backlog items if the claim changes.
 
 ## 4. Conflict resolution
 
@@ -124,7 +130,18 @@ For Singapore and other regulated deployments, record:
 
 Microsoft currently documents Singapore-hosted Power Platform environments as using Azure OpenAI in-region or in the United States, depending on capacity and configuration. Treat this as a design input and confirm the tenant’s exact controls before using sensitive data.
 
-## 9. Minimum evidence for production recommendations
+## 9. Two-zone evidence and data handling
+
+| Zone | Evidence allowed in the lab | Rule |
+|---|---|---|
+| Personal OpenAI: ChatGPT Pro, ChatGPT Work, Codex/VS Code | Public sources, public upstream code, synthetic cases, and approved non-confidential repository artifacts | Do not authenticate personal-zone tools to the organisational Microsoft environment or copy confidential tenant content into this zone |
+| Organisational Microsoft: M365 Copilot and Power Platform tenant | Confidential tenant evidence handled under organisational controls | Keep records, exports, prompts, logs, credentials, Message Center notices, and test evidence inside the organisational boundary unless a formal transfer is approved |
+
+There is no automatic synchronization between zones. A claim verified in one zone may be recorded in the other only as a sanitized conclusion with a public citation or an explicitly approved evidence reference. Do not copy confidential source material merely to reproduce the test. The installed Dataverse plugin v1.6.0 is **installation-only** in the personal zone; it is not authorized to run `dv-connect` or access the organisational tenant under this baseline.
+
+For upstream skills/plugins, record the source commit/version, client support, install/evaluation status, prerequisites, tools/MCP, telemetry, permissions, local adaptations, test status, owner, boundary classification, and revalidation date in `10_UPSTREAM_SKILLS_REGISTER.md`.
+
+## 10. Minimum evidence for production recommendations
 
 A production recommendation is incomplete without:
 
@@ -136,7 +153,7 @@ A production recommendation is incomplete without:
 - representative functional, security, reliability, and AI evaluation evidence;
 - operational owner, monitoring, capacity alerts, and revalidation date.
 
-## 10. Seed authoritative sources
+## 11. Seed authoritative sources
 
 - [M365 Copilot extensibility release notes](https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes)
 - [M365 Copilot extensibility — what’s new](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/whats-new)
@@ -146,8 +163,12 @@ A production recommendation is incomplete without:
 - [Power Platform licensing overview](https://learn.microsoft.com/en-us/power-platform/admin/pricing-billing-skus)
 - [Power Automate limits](https://learn.microsoft.com/en-us/power-automate/limits-and-config)
 - [Power Platform generative AI geography](https://learn.microsoft.com/en-us/power-platform/admin/geographical-availability-copilot)
-- [OpenAI Work mode admin FAQ](https://developers.openai.com/codex/enterprise/work-admin-faq)
-- [OpenAI build skills](https://developers.openai.com/codex/build-skills)
+- [OpenAI skills and plugins](https://learn.chatgpt.com/docs/skills-and-plugins)
+- [OpenAI build skills](https://learn.chatgpt.com/docs/build-skills)
+- [OpenAI plugins](https://learn.chatgpt.com/docs/plugins)
+- [Microsoft Dataverse skills](https://github.com/microsoft/Dataverse-skills)
+- [Microsoft Power Platform skills](https://github.com/microsoft/power-platform-skills)
+- [Microsoft Power CAT skills](https://github.com/microsoft/power-cat-skills)
+- [Microsoft skills for Copilot Studio](https://github.com/microsoft/skills-for-copilot-studio)
 - [GitHub Copilot Agent Skills](https://docs.github.com/copilot/concepts/agents/about-agent-skills)
 - [Claude Code skills](https://docs.anthropic.com/en/docs/claude-code/skills)
-

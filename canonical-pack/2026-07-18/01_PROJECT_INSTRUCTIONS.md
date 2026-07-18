@@ -1,6 +1,6 @@
 # Power Platform Learning and Delivery Lab — Project Instructions
 
-**Pack version:** 1.0  
+**Pack version:** 1.1
 **Verified:** 2026-07-18  
 **Review cadence:** Monthly and after material Microsoft/OpenAI release changes  
 **Authority:** Canonical operating instruction for this project
@@ -17,6 +17,14 @@ This project is authoritative for **how the lab works**. It is not the runtime s
 - Git is the source of truth for reusable documentation, code, skill packages, templates, tests, and deployment automation.
 - This pack records the current agreed position, evidence, decisions, and learning backlog.
 
+### Active runtime and environment baseline
+
+- **Personal OpenAI zone:** Personal ChatGPT Pro, ChatGPT Work, and Codex/VS Code are the active OpenAI runtimes for research, authoring, repository work, and tests.
+- **Organisational Microsoft zone:** Microsoft 365 Copilot and the organisational Power Platform tenant are a separate confidential environment governed by organisational identity, DLP, security, compliance, audit, residency, and ALM controls.
+- **No automatic bridge:** There is no direct data sharing or synchronization between the two zones. Do not configure a connector, MCP server, plugin, script, scheduled task, repository action, or manual workflow to copy confidential organisational content into the personal OpenAI zone.
+- **Installed tooling:** Microsoft Dataverse plugin v1.6.0 is installed in Codex. Installation is not authorization to authenticate to, inspect, or change an organisational environment. No `dv-connect`, tenant authentication, environment modification, or confidential-data test is part of this baseline.
+- **Unavailable clients:** Claude Code, GitHub Copilot, and Cursor are not subscribed runtimes. Their adapters may remain structurally compatible or reference-only, but must be labelled **untested** until executed on those products.
+
 ## 2. Priority areas
 
 Give strongest priority, in order, to:
@@ -27,7 +35,7 @@ Give strongest priority, in order, to:
 4. AI Builder, AI prompts, process intelligence, and Copilot Credit consumption.
 5. Plans in Power Apps, Plan Designer, Power Apps Vibe, and maker copilots.
 6. Dataverse, security, governance, MCP, and enterprise integration.
-7. Reusable Agent Skills for ChatGPT/Codex, Claude Code, GitHub Copilot, and VS Code.
+7. Reusable skills and plugins for ChatGPT Work and Codex/VS Code, with explicitly untested reference adapters for Claude Code, GitHub Copilot, and Cursor.
 8. Dynamics 365 Sales and Customer Service where they provide useful business scenarios.
 
 ## 3. Current operating model
@@ -76,7 +84,7 @@ The following decisions from the reviewed D365 Solution Workflow and M365 Copilo
 - Store requirements, decisions, assumptions, evidence, and traceability structurally; generated documents are views of that state.
 - Keep approvals and consequential actions human-controlled unless a formally approved control design says otherwise.
 - Use small, deployable MVP increments with explicit exclusions and acceptance criteria.
-- Treat ChatGPT/Work as architect, researcher, artifact producer, and reviewer; use repository-aware coding tools for implementation; treat Power Platform as the low-code runtime source of truth.
+- Treat ChatGPT/Work as architect, researcher, artifact producer, and reviewer in the personal zone; use Codex/VS Code for repository-aware implementation; treat the organisational Power Platform environment as a separate low-code runtime source of truth.
 - Establish environments, solution boundaries, publisher/naming rules, connection references, environment variables, deployment, rollback, and tests from the first slice.
 
 The SDLC workbench topology is a reusable pattern, not the master architecture for every learning topic.
@@ -87,7 +95,7 @@ For product behavior that can change, use this order:
 
 1. Microsoft Learn product documentation, current licensing guides, limits, and admin documentation.
 2. Microsoft release plans, product release notes, “What’s new,” and Microsoft 365 Message Center evidence.
-3. Official OpenAI, GitHub, VS Code, Anthropic, and Agent Skills documentation for their respective platforms.
+3. Current official OpenAI skills/plugins/Codex documentation for active personal runtimes, plus official GitHub, VS Code, Anthropic, and Agent Skills documentation only for their respective adapter claims.
 4. Official product blogs, repositories, samples, conference material, and product-team guidance.
 5. Recognized community material only when validated against first-party evidence.
 6. Project chats, old GPT outputs, screenshots, decks, and chat exports as context or historical evidence only.
@@ -178,11 +186,22 @@ skill-name/
   changelog.md
 ```
 
-Create adapters for ChatGPT/Codex, Claude Code, GitHub Copilot/VS Code, Microsoft 365 declarative agents, and Copilot Studio only where each target is supported. Do not claim automatic portability: Copilot Studio’s current skill concept is a separate preview experience, so adaptation and retesting are required.
+Implement and test the active adapters on ChatGPT Work and Codex/VS Code. Keep Claude Code, GitHub Copilot, and Cursor adapters structurally compatible or reference-only and label them **untested** until an actual run occurs on the named client. Microsoft 365 declarative-agent and Copilot Studio adaptations belong to the organisational Microsoft zone and require separate tenant-controlled implementation and testing. Do not claim automatic portability: Copilot Studio’s current skill concept is a separate preview experience, so adaptation and retesting are required.
+
+Register Microsoft upstream skill/plugin sources, pins, prerequisites, telemetry, permissions, local adaptations, and test status in `10_UPSTREAM_SKILLS_REGISTER.md`. Prefer a narrow upstream specialist over duplicating its workflow. Local meta-skills may orchestrate upstream specialists but must preserve approval, data-boundary, and evidence rules.
 
 Use MCP when it supplies a supported, secure tool/data boundary. Apply explicit authentication, least privilege, tool allow-lists, input/output schemas, endpoint controls, approvals for consequential actions, auditability, and third-party server evaluation.
 
-## 11. Instruction reconciliation and corrections
+## 11. Two-zone data boundary
+
+| Zone | Permitted content and work | Prohibited behavior |
+|---|---|---|
+| Personal OpenAI — ChatGPT Pro, ChatGPT Work, Codex/VS Code | Public documentation, public upstream repositories, synthetic examples, locally authored non-confidential patterns, sanitized schemas, and repository artifacts approved for this zone | Organisational tenant records, credentials, customer data, restricted documents, Message Center content, solution exports, logs, or screenshots unless separately declassified and approved |
+| Organisational Microsoft — M365 Copilot and Power Platform tenant | Confidential tenant work under organisational identity, DLP, retention, audit, residency, environment, and ALM controls | Automatic export or synchronization to personal ChatGPT, personal Codex, personal repositories, or personal storage |
+
+Movement between zones is **deny by default**. Any exceptional transfer requires a named owner, explicit organizational approval, data classification and minimization, an approved transfer method, destination controls, retention/deletion rules, and audit evidence. A shared skill definition or public upstream repository may be reviewed in both zones only as separately installed copies; that is not data synchronization.
+
+## 12. Instruction reconciliation and corrections
 
 | Issue found | Canonical resolution |
 |---|---|
@@ -195,8 +214,10 @@ Use MCP when it supplies a supported, secure tool/data boundary. Apply explicit 
 | “Dataverse MCP” was used as a broad product label | Use the documented **Power Apps MCP Server** name for the preview model-driven-app agent feed/supervision capability. Do not infer a general-purpose Dataverse MCP endpoint. |
 | Portable Agent Skills and Copilot Studio skills were treated as directly interchangeable | Keep an Agent Skills-compatible core where supported; build a separate Copilot Studio adapter and test it. |
 | Static license/credit numbers risk rapid staleness | Put rates in the source register/release radar with verification dates; recheck before estimates or production decisions. |
+| Claude Code and GitHub Copilot were treated as mandatory test runtimes | Active acceptance tests now run on ChatGPT Work and Codex/VS Code. Claude Code, GitHub Copilot, and Cursor remain untested reference adapters until actually executed. |
+| Personal OpenAI and organisational Microsoft services could be read as one connected workspace | Split them into two zones and prohibit automatic cross-environment sharing or synchronization. |
 
-## 12. Current baseline cautions (verified 2026-07-18)
+## 13. Current baseline cautions (verified 2026-07-18)
 
 - Plans in Power Apps are GA; Power Apps Vibe is preview and not a production baseline.
 - Copilot Studio’s new agent experience is a production-ready preview; the new Workflows experience is public preview and has no migration path to/from the classic formats.
@@ -215,6 +236,7 @@ Use MCP when it supplies a supported, secure tool/data boundary. Apply explicit 
 - [Power Apps MCP Server](https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/power-apps-mcp-server)
 - [AI Builder credit transition](https://learn.microsoft.com/en-us/ai-builder/endofaibcredits)
 - [Power Platform cross-region generative AI processing](https://learn.microsoft.com/en-us/power-platform/admin/geographical-availability-copilot)
-- [OpenAI Work mode guidance](https://openai.com/academy/what-is-codex/)
+- [OpenAI skills and plugins](https://learn.chatgpt.com/docs/skills-and-plugins)
+- [OpenAI build skills](https://learn.chatgpt.com/docs/build-skills)
+- [OpenAI plugins](https://learn.chatgpt.com/docs/plugins)
 - [OpenAI Workspace Agents cookbook](https://developers.openai.com/cookbook/articles/chatgpt-agents-sales-meeting-prep)
-

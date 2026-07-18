@@ -1,6 +1,6 @@
 # Chat vs Work Decision Guide
 
-**Pack version:** 1.0  
+**Pack version:** 1.1
 **Verified:** 2026-07-18  
 **Default:** Chat + Medium
 
@@ -21,11 +21,13 @@
 
 ## Selection rule
 
+This guide assumes Personal ChatGPT Pro, ChatGPT Work, and Codex/VS Code are the active OpenAI runtimes. Claude Code, GitHub Copilot, and Cursor are not mandatory or available test dependencies.
+
 Use **Chat** when the user primarily needs thought, explanation, comparison, or a short draft.
 
 Use **Work** when the user needs a clear, reviewable outcome that requires multiple sources/tools/steps, file creation, implementation, recurring execution, or longer autonomous progress.
 
-Complexity alone does not require Work. A difficult architecture discussion can remain in Chat; a modest nine-file pack belongs in Work because it produces a reusable outcome.
+Complexity alone does not require Work. A difficult architecture discussion can remain in Chat; a modest ten-file pack belongs in Work because it produces a reusable outcome.
 
 ## Reasoning rule
 
@@ -80,9 +82,22 @@ Use repository-aware coding tools for:
 
 Use Chat/Work to frame architecture, produce briefs, research current behavior, and review evidence. Do not copy a chat’s proposed implementation into production without reconciling it with the actual repository and solution state.
 
+The Microsoft Dataverse plugin v1.6.0 is installed in Codex, but this guide does not authorize `dv-connect`, tenant authentication, or environment changes. Use installation/static inspection only until a separate approved boundary and tenant test plan exists.
+
+## Personal vs organisational work
+
+| Work/content | Use | Boundary rule |
+|---|---|---|
+| Public research, synthetic labs, reusable non-confidential methods, repository documentation | Personal ChatGPT/Work and Codex/VS Code | Keep sources public or explicitly approved for the personal zone |
+| Confidential tenant records, solution exports, M365 documents, Message Center evidence, environment logs, credentials | Organisational M365 Copilot/Power Platform tools | Keep inside organisational controls; do not paste, upload, connect, or sync to the personal OpenAI zone |
+| A reusable method needed in both zones | Separately install/recreate the sanitized skill or template in each zone | Share only the non-confidential definition; never synchronize runtime data or state automatically |
+
+If a task requires evidence from both zones, split it into two independently executed steps. Carry across only an approved, minimized, non-confidential result with an owner and audit trail.
+
 ## Governance for Work and agents
 
 - Connected systems keep their own permissions; Work does not grant new source-system access.
+- No connector, MCP server, plugin, script, or schedule may automatically synchronize the personal OpenAI and organisational Microsoft zones.
 - Keep write actions, external messages, deployments, financial/customer decisions, privilege changes, and destructive operations behind explicit approvals or approved controls.
 - Use least privilege, per-tool action controls, scoped sources, and audit/telemetry.
 - Treat generated deliverables as drafts until their acceptance criteria pass.
@@ -90,9 +105,8 @@ Use Chat/Work to frame architecture, produce briefs, research current behavior, 
 
 ## Current official sources
 
-- [Get started with Work mode](https://openai.com/academy/what-is-codex/)
-- [Prompting in Work mode](https://openai.com/academy/prompting/)
-- [Work mode admin FAQ](https://developers.openai.com/codex/enterprise/work-admin-faq)
-- [GPT-5.6 reasoning choices in ChatGPT](https://help.openai.com/en/articles/20001354-gpt-56-in-chatgpt)
+- [OpenAI pricing and surfaces](https://learn.chatgpt.com/docs/pricing)
+- [OpenAI skills and plugins](https://learn.chatgpt.com/docs/skills-and-plugins)
+- [OpenAI build skills](https://learn.chatgpt.com/docs/build-skills)
+- [OpenAI plugins](https://learn.chatgpt.com/docs/plugins)
 - [Workspace Agents cookbook](https://developers.openai.com/cookbook/articles/chatgpt-agents-sales-meeting-prep)
-

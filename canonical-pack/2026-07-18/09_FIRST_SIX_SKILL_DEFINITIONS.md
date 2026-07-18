@@ -1,6 +1,6 @@
 # First Six Reusable Skill Definitions
 
-**Pack version:** 1.0  
+**Pack version:** 1.1
 **Defined:** 2026-07-18  
 **Status:** Design definitions; implement one at a time after source/tenant prerequisites are available
 
@@ -13,9 +13,9 @@
 | 3 | `copilot-studio-design-review` | Production/readiness review with findings | P0 |
 | 4 | `agentic-automation-selector` | Choose Agent flow, preview Workflow, Power Automate, prompt/tool, or code | P0 |
 | 5 | `power-apps-ai-productioniser` | Turn Plans/Vibe output into a supported production slice | P1 |
-| 6 | `power-platform-incremental-delivery` | Shape and deliver the next vertical Power Platform/D365 slice | P0 |
+| 6 | `power-platform-incremental-delivery` | Orchestrate the next vertical slice by delegating to narrower lab skills and approved Microsoft upstream specialists | P0 |
 
-The six skills are composable. Skill 1 verifies volatile product facts; skills 2–5 apply domain workflows; skill 6 manages the delivery increment.
+The six skills are composable. Skill 1 verifies volatile product facts; skills 2–5 own narrower domain workflows; skill 6 is an orchestrator/meta-skill that manages the delivery increment and delegates rather than duplicating specialist work.
 
 ---
 
@@ -75,7 +75,8 @@ No production recommendation when license, residency, status, or a critical cont
 
 ### Adapters
 
-- **OpenAI/Codex, Claude, GitHub Copilot:** Portable Agent Skill with web/docs retrieval instructions and structured output validator.
+- **ChatGPT Work and Codex/VS Code:** Active portable skill targets with web/docs retrieval instructions and a structured output validator; run the same golden cases on both.
+- **Claude Code, GitHub Copilot, Cursor:** Structurally compatible or reference-only adapters; **untested** because these products are not subscribed.
 - **M365 declarative agent:** Read-only research assistant; actions limited to approved sources; output to structured register through a controlled tool.
 - **Copilot Studio:** Instructions + approved knowledge/tools/agent flow; DLP and source allow-list; evaluation cases mirror portable tests.
 
@@ -136,7 +137,8 @@ Trigger for an agent that should run in Microsoft 365 Copilot and primarily use 
 - **Portable core:** Design/review methodology and templates.
 - **M365 adapter:** Manifest/instructions/knowledge/actions/evaluation package.
 - **Copilot Studio adapter:** Low-code declarative publishing when supported; solution/pipeline/DLP artifacts.
-- **OpenAI/Claude/GitHub:** Use as architect/reviewer; they do not replace the M365 runtime manifest or admin controls.
+- **ChatGPT Work and Codex/VS Code:** Active architect/reviewer targets; they do not replace the M365 runtime manifest or admin controls.
+- **Claude Code/GitHub Copilot/Cursor:** Reference-only, untested adapters; not runtime or release dependencies.
 
 ---
 
@@ -195,7 +197,8 @@ Trigger for architecture/readiness review, production gate, or remediation prior
 
 ### Adapters
 
-- **OpenAI/Claude/GitHub:** Review skill consumes exported/configuration artifacts and emits findings schema.
+- **ChatGPT Work and Codex/VS Code:** Active review adapters consume approved exported/configuration artifacts and emit the findings schema.
+- **Claude Code/GitHub Copilot/Cursor:** Structurally compatible or reference-only; untested and not release dependencies.
 - **Copilot Studio:** Optional read-only review agent/tooling; never self-approve deployment.
 - **M365 declarative agent:** Surface approved review summaries only; it is not the design authority.
 
@@ -252,7 +255,7 @@ Trigger when the question is “what should execute this work?” or when agent 
 
 ### Adapters
 
-Portable decision skill for OpenAI/Claude/GitHub; Copilot Studio adapter can generate a build brief but not deploy; M365 agent adapter provides read-only design guidance and routes builds to governed tools.
+Active decision skill for ChatGPT Work and Codex/VS Code. Claude Code, GitHub Copilot, and Cursor adapters are reference-only and untested. The Copilot Studio adapter can generate a build brief but not deploy; the M365 agent adapter provides read-only design guidance and routes builds to governed organisational tools.
 
 ---
 
@@ -309,7 +312,7 @@ Trigger after AI-generated plans/data/apps/flows/agents or for a production-read
 
 ### Adapters
 
-OpenAI/Claude/GitHub portable review core; VS Code adapter inspects source/unpacked solution and runs validators; Copilot Studio/M365 adapters cover generated agent components only and defer app/solution source truth to Power Platform.
+ChatGPT Work and Codex/VS Code are the active review targets; the Codex/VS Code adapter inspects source/unpacked solutions and runs validators. Claude Code, GitHub Copilot, and Cursor adapters are reference-only and untested. Copilot Studio/M365 adapters cover generated agent components only and defer app/solution source truth to Power Platform.
 
 ---
 
@@ -317,11 +320,11 @@ OpenAI/Claude/GitHub portable review core; VS Code adapter inspects source/unpac
 
 ### Scope
 
-Shape, design, brief, build/review, and carry forward the next deployable Power Platform or Dynamics 365 feature slice while preserving decisions, constraints, evidence, and prior review findings.
+Act as the orchestrator/meta-skill for the next deployable Power Platform or Dynamics 365 feature slice. Preserve decisions, constraints, evidence, and prior review findings; select and delegate to the narrower skills in this pack and to approved Microsoft upstream plugins in `10_UPSTREAM_SKILLS_REGISTER.md`. Do not duplicate a specialist workflow when an approved, pinned specialist already owns it.
 
 ### Trigger / exclusions
 
-Trigger for a new solution, continuation, MVP increment, build brief, or iteration after testing. Do not reopen settled decisions without new evidence. Do not build when the request is diagnosis/review only.
+Trigger for a new solution, continuation, MVP increment, build brief, or iteration after testing. Do not reopen settled decisions without new evidence. Do not build when the request is diagnosis/review only. Do not delegate across the personal/organisational boundary or invoke a tenant tool unless that execution is explicitly authorized in the correct zone.
 
 ### Inputs
 
@@ -329,19 +332,24 @@ Trigger for a new solution, continuation, MVP increment, build brief, or iterati
 - business outcome, users, journeys, scope/exclusions, decisions/open questions;
 - schema/components/interfaces and established conventions;
 - license/capacity/region/security/compliance/ALM constraints;
+- current zone, data classification, permitted transfer path, and cross-zone exclusions;
+- relevant upstream registry entries, pins, installed/tested status, and permitted tools;
 - review/test evidence and unresolved defects.
 
 ### Workflow
 
 1. Reconstruct `Confirmed`, `Assumed`, `Open`, `Rejected`, and `Superseded` state.
-2. Verify material current product claims through skill 1.
-3. Compare component options before selecting.
-4. Define the solution spine: experience, data, integration, AI, security, operations, ALM.
-5. Slice the smallest vertical increment: trigger/entry through telemetry and evidence.
-6. Produce a self-contained build brief with contracts and exact non-goals.
-7. When authorized, implement solution-aware changes and tests only for that slice.
-8. Review outcome, traceability, platform fit, data, security, reliability, AI, UX, operations, and ALM gates.
-9. Update agreed position, decision log, evidence, backlog, and next slice.
+2. Classify the task and every artifact into the personal OpenAI or organisational Microsoft zone; stop any unapproved cross-zone transfer or synchronization.
+3. Delegate volatile product verification to skill 1.
+4. Delegate domain design/review to skills 2–5 where their trigger matches.
+5. Consult `10_UPSTREAM_SKILLS_REGISTER.md`; delegate only to an approved, pinned specialist whose client, prerequisites, permissions, telemetry, boundary, and test status fit the task.
+6. Compare component options before selecting.
+7. Define the solution spine: experience, data, integration, AI, security, operations, ALM.
+8. Slice the smallest vertical increment: trigger/entry through telemetry and evidence.
+9. Produce a self-contained build brief with contracts, delegated responsibilities, and exact non-goals.
+10. When authorized, implement solution-aware changes and tests only for that slice.
+11. Review outcome, traceability, platform fit, data, security, reliability, AI, UX, operations, and ALM gates.
+12. Update agreed position, decision log, evidence, upstream pins/test status, backlog, and next slice.
 
 ### Outputs
 
@@ -351,10 +359,11 @@ Trigger for a new solution, continuation, MVP increment, build brief, or iterati
 - implementation/review findings when authorized;
 - deployment/post-deploy/rollback notes;
 - concise carry-forward summary.
+- delegation record naming each invoked lab/upstream skill, version/commit, tool permissions, evidence, and outcome.
 
 ### Sources
 
-Use capability-specific first-party sources, [Power Platform ALM](https://learn.microsoft.com/en-us/power-platform/alm/), [environment strategy](https://learn.microsoft.com/en-us/power-platform/guidance/adoption/environment-strategy), and relevant D365 documentation. Source dates belong in the build brief.
+Use capability-specific first-party sources, [Power Platform ALM](https://learn.microsoft.com/en-us/power-platform/alm/), [environment strategy](https://learn.microsoft.com/en-us/power-platform/guidance/adoption/environment-strategy), relevant D365 documentation, and the exact pins in `10_UPSTREAM_SKILLS_REGISTER.md`. Source dates and delegated skill versions belong in the build brief.
 
 ### Tests
 
@@ -365,12 +374,16 @@ Use capability-specific first-party sources, [Power Platform ALM](https://learn.
 - AI output feeding automation uses a validated contract and exception path;
 - review-only request does not modify implementation;
 - next session can continue from the carry-forward summary without rereading all chats.
+- same orchestration case produces consistent delegation and output contracts in ChatGPT Work and Codex/VS Code;
+- unavailable Claude Code/GitHub Copilot/Cursor clients are never required and remain labelled untested;
+- installed Dataverse v1.6.0 is not authenticated or invoked against the organisational tenant under the no-sync baseline;
+- a matching upstream specialist is delegated to rather than copied into the meta-skill.
 
 ### Adapters
 
 - **ChatGPT Work:** Multi-source project pack/build brief/review and reusable artifact creation.
 - **Codex/VS Code:** Repository-aware implementation, tests, solution tooling, CI/CD, controlled diffs.
-- **Claude Code/GitHub Copilot:** Same portable delivery workflow with platform-native repo controls.
+- **Claude Code/GitHub Copilot/Cursor:** Structurally compatible or reference-only adapters; untested and not mandatory runtime/test dependencies.
 - **M365 declarative agent:** Read-only project orientation/status assistant; not the deployment authority.
 - **Copilot Studio:** Agent-specific solution components, tests, and pipeline artifacts; Power Platform solution remains source of truth.
 
@@ -379,10 +392,10 @@ Use capability-specific first-party sources, [Power Platform ALM](https://learn.
 ## Shared implementation sequence
 
 1. Implement skill 1 first; all other skills depend on current-source discipline.
-2. Implement skill 6 second as the delivery spine.
+2. Implement skill 6 second as the orchestration spine; keep specialist logic in skills 1–5 or registered Microsoft upstream plugins.
 3. Implement skills 2–4 for the first SDLC workbench experiment.
 4. Implement skill 5 when the first Plans/Vibe prototype is available.
-5. Run the same three golden cases in Codex, Claude Code, and GitHub Copilot before claiming portability.
+5. Run the same three golden cases in ChatGPT Work and Codex/VS Code before release; do not block release on unsubscribed clients.
 6. Add M365/Copilot Studio adapters only after the portable core passes and tenant controls are known.
 
 ## Shared release gate
@@ -393,5 +406,7 @@ Use capability-specific first-party sources, [Power Platform ALM](https://learn.
 - [ ] Deterministic output contract passes.
 - [ ] Negative, abstention, injection, permission, and consequential-action tests pass.
 - [ ] Adapter gaps documented; no unsupported portability claim.
+- [ ] ChatGPT Work and Codex/VS Code tests pass; Claude/GitHub/Cursor adapters remain untested until executed.
+- [ ] Upstream delegations use approved pins from `10_UPSTREAM_SKILLS_REGISTER.md`.
+- [ ] Two-zone boundary passes; no automatic cross-environment synchronization or unauthorized tenant access.
 - [ ] Owner, version, changelog, rollback, and next revalidation set.
-

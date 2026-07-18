@@ -1,14 +1,14 @@
 # Source Register Template
 
-**Pack version:** 1.0  
+**Pack version:** 1.1
 **Verified:** 2026-07-18  
 **Use:** One row per material claim/source combination; split a row when status, geography, or licensing differs
 
 ## Blank register
 
-| ID | Product/capability | Claim supported | Authority | Source URL | Source updated | Verified | Status | Cloud/geo/language | License/capacity | Limitations | Security/governance | Owner | Valid until | Supersedes/notes |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| SRC-0001 |  |  | A1/A2/A3/B/C/D |  |  |  |  |  |  |  |  |  |  |  |
+| ID | Product/capability | Claim supported | Authority | Source URL | Source updated | Verified | Status | Runtime/install/test status | Data boundary | Cloud/geo/language | License/capacity | Limitations | Security/governance | Owner | Valid until | Supersedes/notes |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| SRC-0001 |  |  | A1/A2/A3/B/C/D |  |  |  |  |  |  |  |  |  |  |  |  |  |
 
 ## Seed register — verified baseline
 
@@ -30,10 +30,12 @@
 | SRC-MCP-001 | Power Apps MCP Server supports preview agent-feed/supervision patterns in model-driven apps through Copilot Studio. | [Power Apps MCP Server](https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/power-apps-mcp-server), [agent feed](https://learn.microsoft.com/en-us/power-apps/user/supervise-agents-with-agent-feed) | Preview scenario | Copilot Studio/Power Apps/Dataverse rights and capacity apply | English; gradual rollout; model-driven only; currently all users with Agent Task table access can see feed items | Do not target confidential per-user tasks in feed; tightly scope roles and maker-provided credentials | 2026-08-01 |
 | SRC-ALM-001 | Power Platform pipelines require managed target environments and premium use rights; automatic enablement began in 2026 for pipeline targets. | [Pipelines overview](https://learn.microsoft.com/en-us/power-platform/alm/pipelines) | GA | Premium use rights required for users in managed environments | Host/target requirements apply | Use managed solutions downstream, deployment settings, approvals, and rollback | 2026-08-17 |
 | SRC-GEO-001 | Power Platform generative AI can require cross-region processing consent; Singapore can use in-region or US Azure OpenAI capacity. | [Generative AI geography](https://learn.microsoft.com/en-us/power-platform/admin/geographical-availability-copilot) | Current admin behavior | No standalone license claim; feature license/capacity still applies | Processing location is feature/capacity-dependent; Bing is US in the documented table | Record consent, data classification, inference path, Bing/M365/external-model toggles | 2026-08-17 |
-| SRC-SKL-001 | Codex, Claude Code, and GitHub Copilot support Agent Skills-compatible packages; platform extensions differ. | [OpenAI skills](https://developers.openai.com/codex/build-skills), [Claude skills](https://docs.anthropic.com/en/docs/claude-code/skills), [GitHub skills](https://docs.github.com/copilot/concepts/agents/about-agent-skills) | Current on listed products | Product-plan and admin enablement differ | Paths, invocation controls, scripts/sandbox, and distribution differ | Review scripts, dependencies, network/tool use, and least privilege before installation | 2026-08-17 |
+| SRC-SKL-001 | ChatGPT Work and Codex are the active skill test clients. OpenAI skills are reusable workflows; plugins are installable bundles that can include skills and MCP-backed connectors. Claude Code, GitHub Copilot, and Cursor adapters are reference-only and untested in this lab. | [OpenAI skills and plugins](https://learn.chatgpt.com/docs/skills-and-plugins), [build skills](https://learn.chatgpt.com/docs/build-skills), [plugins](https://learn.chatgpt.com/docs/plugins) | Current active-runtime baseline | Personal ChatGPT Pro/Work and Codex usage applies; external client subscriptions are absent | Client paths, invocation, sandbox, distribution, and connector availability differ | Test on ChatGPT Work and Codex; label all other adapters untested; review scripts, dependencies, network/tool use, and least privilege | 2026-08-17 |
 | SRC-SKL-002 | Copilot Studio skills in the new agent experience are preview and are not assumed to consume the same package unchanged. | [Copilot Studio skills](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview) | Preview | Copilot Studio capacity/license rules apply | New agent experience dependency | Build and evaluate a target-specific adapter | 2026-08-01 |
-| SRC-OAI-001 | Work mode is for clear, multi-step outcomes and reviewable deliverables; Chat is for answers, explanations, brainstorming, or short drafts. | [OpenAI Work mode](https://openai.com/academy/what-is-codex/) | Launched 2026-07-09; plan/workspace controls apply | Work and Codex share usage/credits in documented contexts | Availability and controls vary by plan/surface | Connected-system permissions and approvals remain separate controls | 2026-08-01 |
+| SRC-OAI-001 | Work mode is for clear, multi-step outcomes and reviewable deliverables; Chat is for answers, explanations, brainstorming, or short drafts. | [OpenAI pricing and surfaces](https://learn.chatgpt.com/docs/pricing), [skills and plugins](https://learn.chatgpt.com/docs/skills-and-plugins) | Current; plan/workspace controls apply | Work and Codex share usage in documented contexts | Availability and controls vary by plan/surface | Connected-system permissions and approvals remain separate controls | 2026-08-01 |
 | SRC-OAI-002 | Workspace Agents remain documented as research preview for Business, Enterprise, and Edu. | [Workspace Agents cookbook](https://developers.openai.com/cookbook/articles/chatgpt-agents-sales-meeting-prep) | Research preview | Plan/workspace eligibility required | Access depends on admin rollout and enabled apps | RBAC, connector action controls, per-agent permissions, testing, and approval needed | 2026-08-01 |
+| SRC-UP-001 | Four Microsoft upstream skill/plugin repositories are tracked by exact version or commit and must not be treated as installed, supported, or tested merely because their source is public. | [`10_UPSTREAM_SKILLS_REGISTER.md`](10_UPSTREAM_SKILLS_REGISTER.md) and linked Microsoft repositories | Current register baseline | Dataverse v1.6.0 installed in Codex; other upstreams not installed | Official supported clients differ by repository; active-client support must be verified | Pin versions, inspect telemetry/permissions, apply the two-zone boundary, and test only on authorized clients | 2026-08-17 |
+| SRC-BND-001 | Personal ChatGPT Pro/Work and Codex/VS Code are separate from the confidential organisational M365 Copilot/Power Platform tenant; automatic cross-zone synchronization is prohibited. | [`01_PROJECT_INSTRUCTIONS.md`](01_PROJECT_INSTRUCTIONS.md), section 11 | Confirmed operating constraint | No separate license claim | Applies to every connector, plugin, MCP, repository, export, prompt, and test-evidence path | Deny cross-zone movement by default; require explicit organizational approval for any exception | 2026-08-17 |
 
 ## Change log entry template
 
@@ -47,4 +49,3 @@ Affected backlog/patterns/skills/solutions:
 Owner and due date:
 Evidence links:
 ```
-

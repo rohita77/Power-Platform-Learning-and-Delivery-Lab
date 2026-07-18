@@ -1,6 +1,6 @@
 # Existing Source Migration Table
 
-**Pack version:** 1.0  
+**Pack version:** 1.1
 **Reviewed:** 2026-07-18  
 **Scope note:** Based on the supplied audit and available project context. Exact duplicate-file hashes and Library inventory were not provided, so destructive removal requires a separate identity/content check.
 
@@ -9,7 +9,7 @@
 | Source/artifact | Decision | Destination/use | Reason and safeguards |
 |---|---|---|---|
 | Current revised project instructions | **Retain and replace with canonical file** | `01_PROJECT_INSTRUCTIONS.md` | Most required policy was already present. This pack removes duplication and adds current corrections. Preserve project settings until the canonical file is adopted. |
-| Four uploads named `D365 Solution Workflow.txt` | **Merge, then archive duplicates** | Architectural decisions in `01_PROJECT_INSTRUCTIONS.md`; delivery detail in skill definition 6 | Retain incremental delivery, explicit scope/acceptance, solution-aware ALM, deployment/rollback, and ChatGPT-as-architect/reviewer. Do not delete until exact content and identity are confirmed. |
+| Three currently retained `D365 Solution Workflow` extracts; four uploads were originally observed | **Merge, then archive confirmed duplicates** | Architectural decisions in `01_PROJECT_INSTRUCTIONS.md`; orchestration detail in skill definition 6 | Retain incremental delivery, explicit scope/acceptance, solution-aware ALM, deployment/rollback, and ChatGPT-as-architect/reviewer. The current inventory is three retained extracts; preserve the historical note that four uploads were originally observed. Do not delete until exact content and identity are confirmed. |
 | M365 Copilot Agent Topology material | **Retain as dated pattern** | Future `patterns/sdlc-workbench/` | Strong governed-orchestration and artifact-lifecycle decisions; too narrow to be the master project architecture. Product claims must be reverified. |
 | Supplied audit (`Pasted markdown.md`) | **Retain as migration evidence, then archive** | Historical source supporting this pack | Useful inventory and intent, but several current-product statements required correction. It is not product authority. |
 | Raw project chats | **Retain as context/history** | Decision rationale, examples, test cases, unresolved-question mining | Do not use as current status/licensing authority. Avoid bulk retrieval conflicts by consolidating durable decisions. |
@@ -19,7 +19,10 @@
 | Screenshots, course decks, old copied documentation | **Demote/archive** | Examples or UI history only | UI, limits, licensing, region, and preview status age quickly. Record original date and never cite as current authority. |
 | Microsoft Learn product docs and licensing guides | **Retain as live authority links** | Source register and release radar | Primary current product evidence; revalidate on the defined cadence. |
 | Microsoft release plans, release notes, What’s new, Message Center | **Retain as change-detection authority** | Weekly radar | Best rollout/status-change signals; reconcile planned dates with actual docs/tenant availability. |
-| Official OpenAI/GitHub/VS Code/Anthropic docs | **Retain for their platforms** | Chat/Work guide and skill adapters | Required for current modes, skills, plugins, agents, and editor behavior. |
+| Official OpenAI skills/plugins/Codex docs | **Retain as active-runtime authority** | Chat/Work guide and active skill/plugin adapters | Current authority for Personal ChatGPT Pro, ChatGPT Work, and Codex/VS Code behavior. |
+| Official GitHub/VS Code/Anthropic/Cursor docs | **Retain as reference-only where applicable** | Deferred adapter notes | Claude Code, GitHub Copilot, and Cursor are not subscribed; do not treat their documentation as runtime test evidence. |
+| Four Microsoft upstream skill/plugin repositories | **Register and pin** | `10_UPSTREAM_SKILLS_REGISTER.md` | Track client support, install/evaluation status, update path, prerequisites, tools/MCP, telemetry, permissions, boundary, adaptations, tests, owner, and revalidation. |
+| Personal OpenAI and organisational Microsoft content | **Separate into two zones** | `01_PROJECT_INSTRUCTIONS.md`, section 11 | No automatic sharing or synchronization. Any exceptional transfer requires explicit organisational approval, minimization, ownership, retention, and audit evidence. |
 | MVP/community articles and samples | **Selective retain** | Experiment ideas and implementation notes | Must be validated against current first-party docs; label community evidence. |
 
 ## Preserved decisions and where they moved
@@ -36,6 +39,7 @@
 | Structured requirements/decisions rather than documents only | `04_LEARNING_BACKLOG.md` item DV-01; skill definition 6 |
 | Human approval for consequential decisions/actions | All security sections and skill definitions |
 | Security, evaluations, and ALM in the first production pilot | Project definition of done, shared foundation, and skill gates |
+| Use a delivery spine to coordinate specialist work | `power-platform-incremental-delivery` is now an orchestrator/meta-skill that delegates to skills 1–5 and registered Microsoft upstream specialists |
 
 ## Corrected or superseded claims
 
@@ -70,24 +74,25 @@ Power-Platform-Learning-and-Delivery-Lab/
   archive/                 # dated chats/audits/old extracts, clearly non-authoritative
 ```
 
-The current nine-file pack remains flat for easy adoption. Create the fuller tree only when the first patterns/skills/experiments are implemented.
+The current ten-file pack remains flat for easy adoption. Create the fuller tree only when the first patterns/skills/experiments are implemented.
 
 ## Safe migration procedure
 
 1. Adopt `01_PROJECT_INSTRUCTIONS.md` as the only canonical project instruction.
 2. Register this pack and its source dates.
-3. Materialize/inspect the four D365 workflow uploads and calculate exact duplicates before any archive/removal.
+3. Materialize/inspect the three currently retained D365 workflow extracts and calculate exact duplicates before any archive/removal; retain the historical record that four uploads were originally observed.
 4. Extract unique durable decisions and unresolved questions; map them to the table above.
 5. Store the topology as a dated `sdlc-workbench` pattern and label product claims for revalidation.
 6. Extract pinned-GPT instructions into candidate skills; create tests before retiring any GPT.
 7. Mark old chats/decks/screenshots `historical-context` and exclude them from product-authority retrieval.
 8. Run the release radar once; update any already-expired claims.
 9. Archive duplicates only after an owner confirms the canonical replacement covers unique content.
+10. Reconcile every upstream install/update against `10_UPSTREAM_SKILLS_REGISTER.md` and test active adapters in ChatGPT Work and Codex/VS Code; keep Claude/GitHub/Cursor adapters marked untested.
 
 ## Explicit exclusions
 
 - No uploaded file was deleted, renamed, or moved by this pack.
 - No pinned GPT was changed.
 - No tenant/environment configuration was changed.
+- No cross-zone connector, authentication, or synchronization was configured.
 - No old source was asserted to be an exact duplicate without byte/content verification.
-

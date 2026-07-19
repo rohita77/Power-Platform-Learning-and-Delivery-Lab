@@ -1,0 +1,133 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "NO-TRIGGER-002",
+  "suite": "should-not-trigger",
+  "invocation": {
+    "index": 25,
+    "thread_id": "019f77f6-7fa4-7232-aa0f-38f319895e7a",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:21:10.218441Z",
+    "completed_at": "2026-07-19T01:21:19.135864Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77f6-7fa4-7232-aa0f-38f319895e7a",
+        "started_at": "2026-07-19T01:21:10.218441Z",
+        "completed_at": "2026-07-19T01:21:19.135864Z",
+        "exit_code": 0,
+        "first_output": "This controlled experiment only supports synthetic Dataverse query construction; it cannot import CSV data, authenticate, modify records, or resolve foreign keys in a live environment.\n\nUse a Dataverse data-import workflow outside this experiment—such as the Dataverse data-management tooling—with the CSV, target environment, column mappings, and lookup-key mappings explicitly confirmed.",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:21:10.676263Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T01:21:11.241650Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:11.242460Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:11.243235Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:11.243861Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:11.244644Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:11.247696Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:11.254153Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:11.255857Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:11.257073Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:11.258596Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:18.944805Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "Import this CSV into the Dataverse contact table and resolve its foreign keys.",
+  "first_output": "This controlled experiment only supports synthetic Dataverse query construction; it cannot import CSV data, authenticate, modify records, or resolve foreign keys in a live environment.\n\nUse a Dataverse data-import workflow outside this experiment—such as the Dataverse data-management tooling—with the CSV, target environment, column mappings, and lookup-key mappings explicitly confirmed.",
+  "answer_validation": {
+    "applicable": false,
+    "valid": null,
+    "errors": []
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:21:10.676263Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T01:21:11.241650Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:11.242460Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:11.243235Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:11.243861Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:11.244644Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:11.247696Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:11.254153Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:11.255857Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:11.257073Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:11.258596Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:18.944805Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The operational request was correctly routed outside this query skill."
+      },
+      "schema_assumptions": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "No query schema was constructed."
+      },
+      "host_context_selection": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "No query host was selected."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, mutation, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response abstained from the operational action."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The should-not-trigger boundary was preserved."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

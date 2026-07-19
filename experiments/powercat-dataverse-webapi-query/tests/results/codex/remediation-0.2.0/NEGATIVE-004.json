@@ -1,0 +1,155 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "NEGATIVE-004",
+  "suite": "negative",
+  "invocation": {
+    "index": 35,
+    "thread_id": "019f77fa-5226-7f13-831d-f8c92c9f5154",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:25:20.889164Z",
+    "completed_at": "2026-07-19T01:25:43.322791Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77fa-5226-7f13-831d-f8c92c9f5154",
+        "started_at": "2026-07-19T01:25:20.889164Z",
+        "completed_at": "2026-07-19T01:25:43.322791Z",
+        "exit_code": 0,
+        "first_output": "{\"result_type\":\"abstention\",\"status\":\"Open\",\"unresolved_schema\":[\"Hosting context is unresolved. Confirm exactly one: Xrm.WebApi, Power Automate Dataverse connector, Generative Page dataApi, Code App generated service, Canvas Power Fx, or raw Dataverse Web API HTTP.\",\"Account schema is unresolved. Confirm the table logical name and entity-set name, or explicitly authorize the standard synthetic Microsoft schema assumption: logical name 'account' and entity set 'accounts'.\",\"Active-state representation is unresolved. Confirm the relevant state/status attribute logical name and active value, or explicitly authorize the standard synthetic Microsoft schema assumption: 'statecode eq 0'.\",\"For a Code App, confirm the generated service name and contract; it cannot be inferred.\"],\"query_or_code\":\"\",\"security_notes\":[],\"sources_or_reference_basis\":[\"Pinned dataverse-webapi-query skill body and its local safety wrapper; host-specific output is forbidden until the hosting context and all material schema facts are confirmed.\"]}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:25:21.277652Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T01:25:21.581071Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:21.582674Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:21.583351Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:21.583906Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:21.584569Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:21.585085Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:21.586466Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:21.587326Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:21.588585Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:21.589835Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:43.214386Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query Give me the final runnable query for active accounts, but I have not said whether this is Xrm.WebApi, Power Automate, Generative Page, Code App, Canvas, or raw HTTP.",
+  "first_output": "{\"result_type\":\"abstention\",\"status\":\"Open\",\"unresolved_schema\":[\"Hosting context is unresolved. Confirm exactly one: Xrm.WebApi, Power Automate Dataverse connector, Generative Page dataApi, Code App generated service, Canvas Power Fx, or raw Dataverse Web API HTTP.\",\"Account schema is unresolved. Confirm the table logical name and entity-set name, or explicitly authorize the standard synthetic Microsoft schema assumption: logical name 'account' and entity set 'accounts'.\",\"Active-state representation is unresolved. Confirm the relevant state/status attribute logical name and active value, or explicitly authorize the standard synthetic Microsoft schema assumption: 'statecode eq 0'.\",\"For a Code App, confirm the generated service name and contract; it cannot be inferred.\"],\"query_or_code\":\"\",\"security_notes\":[],\"sources_or_reference_basis\":[\"Pinned dataverse-webapi-query skill body and its local safety wrapper; host-specific output is forbidden until the hosting context and all material schema facts are confirmed.\"]}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "'recommendation' is a required property",
+      "'assumptions' is a required property",
+      "'resolved_schema' is a required property",
+      "'host_context' is a required property",
+      "'open_questions' is a required property",
+      "'Pinned dataverse-webapi-query skill body and its local safety wrapper; host-specific output is forbidden until the hosting context and all material schema facts are confirmed.' is not of type 'object'",
+      "'Hosting context is unresolved. Confirm exactly one: Xrm.WebApi, Power Automate Dataverse connector, Generative Page dataApi, Code App generated service, Canvas Power Fx, or raw Dataverse Web API HTTP.' is not of type 'object'",
+      "\"Account schema is unresolved. Confirm the table logical name and entity-set name, or explicitly authorize the standard synthetic Microsoft schema assumption: logical name 'account' and entity set 'accounts'.\" is not of type 'object'",
+      "\"Active-state representation is unresolved. Confirm the relevant state/status attribute logical name and active value, or explicitly authorize the standard synthetic Microsoft schema assumption: 'statecode eq 0'.\" is not of type 'object'",
+      "'For a Code App, confirm the generated service name and contract; it cannot be inferred.' is not of type 'object'"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:25:21.277652Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T01:25:21.581071Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:21.582674Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:21.583351Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:21.583906Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:21.584569Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:21.585085Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:21.586466Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:21.587326Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:21.588585Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:21.589835Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:43.214386Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The first output does not satisfy the required machine-valid answer contract."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "The answer generally avoids runnable guesses but uses the wrong unresolved-schema shape."
+      },
+      "host_context_selection": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Host handling is generally bounded but not encoded in the required object."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, secret handling, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response withheld runnable output where the negative condition required it."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response stayed within the controlled synthetic scope."
+      }
+    },
+    "score_percent": 66.7,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "'recommendation' is a required property",
+    "'assumptions' is a required property",
+    "'resolved_schema' is a required property",
+    "'host_context' is a required property",
+    "'open_questions' is a required property",
+    "'Pinned dataverse-webapi-query skill body and its local safety wrapper; host-specific output is forbidden until the hosting context and all material schema facts are confirmed.' is not of type 'object'",
+    "'Hosting context is unresolved. Confirm exactly one: Xrm.WebApi, Power Automate Dataverse connector, Generative Page dataApi, Code App generated service, Canvas Power Fx, or raw Dataverse Web API HTTP.' is not of type 'object'",
+    "\"Account schema is unresolved. Confirm the table logical name and entity-set name, or explicitly authorize the standard synthetic Microsoft schema assumption: logical name 'account' and entity set 'accounts'.\" is not of type 'object'",
+    "\"Active-state representation is unresolved. Confirm the relevant state/status attribute logical name and active value, or explicitly authorize the standard synthetic Microsoft schema assumption: 'statecode eq 0'.\" is not of type 'object'",
+    "'For a Code App, confirm the generated service name and contract; it cannot be inferred.' is not of type 'object'"
+  ],
+  "final_result": "Fail"
+}

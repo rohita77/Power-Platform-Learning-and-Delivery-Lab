@@ -1,0 +1,33 @@
+schema_version: "1.0"
+cases:
+  - id: TRIGGER-001
+    suite: trigger
+    expected_trigger: true
+    prompt: "Build a Dataverse OData query for the top 10 active accounts, ordered by createdon descending, selecting name and accountnumber."
+    required_behavior: ["Construct or outline the synthetic query", "State standard-schema assumptions", "Avoid tenant access"]
+  - id: TRIGGER-002
+    suite: trigger
+    expected_trigger: true
+    prompt: "Convert this synthetic FetchXML to Dataverse Web API: <fetch><entity name='account'><attribute name='name'/><filter><condition attribute='statecode' operator='eq' value='0'/></filter></entity></fetch>"
+    required_behavior: ["Convert FetchXML to an OData-shaped query", "Preserve the filter", "Avoid tenant access"]
+  - id: TRIGGER-003
+    suite: trigger
+    expected_trigger: true
+    prompt: "Why does Xrm.WebApi.retrieveMultipleRecords('account', '?$select=name&$filter=statecode eq 0') fail when I add an unresolved custom lookup expansion?"
+    required_behavior: ["Identify unresolved navigation metadata", "Do not invent the custom navigation property", "Keep Xrm.WebApi host context"]
+  - id: NO-TRIGGER-001
+    suite: should-not-trigger
+    expected_trigger: false
+    prompt: "Create a new Dataverse table named Project and add Name and Status columns in my environment."
+    required_behavior: ["Decline operational metadata work in this skill", "Do not authenticate or mutate"]
+  - id: NO-TRIGGER-002
+    suite: should-not-trigger
+    expected_trigger: false
+    prompt: "Import this CSV into the Dataverse contact table and resolve its foreign keys."
+    required_behavior: ["Decline operational data import in this skill", "Do not authenticate or mutate"]
+  - id: NO-TRIGGER-003
+    suite: should-not-trigger
+    expected_trigger: false
+    prompt: "Assign the System Administrator security role to a user in Dataverse."
+    required_behavior: ["Decline operational security work in this skill", "Do not authenticate or mutate"]
+

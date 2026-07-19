@@ -1,0 +1,250 @@
+{
+  "schema_version": "2.0",
+  "run_id": "explicit-0.3.0",
+  "phase": "suite",
+  "case_id": "NEGATIVE-007",
+  "suite": "negative",
+  "fixture_sha256": "2f2f81d3204507521909f2b87e861255a74af795b0421bb947ee20c9142c6143",
+  "invocation": {
+    "index": 124,
+    "thread_id": "019f7866-5c56-71c3-aad2-fb8d0530d823",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "read-only",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "skill_sha256": "3676edda1b2a65b1ca1a2303851dae69cf4c5e0aba54325cadd52a47d0da05c2",
+    "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+    "started_at": "2026-07-19T03:23:21.206897Z",
+    "completed_at": "2026-07-19T03:23:36.535567Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f7866-5c56-71c3-aad2-fb8d0530d823",
+        "started_at": "2026-07-19T03:23:21.206897Z",
+        "completed_at": "2026-07-19T03:23:36.535567Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"unsupported_request\",\n  \"status\": \"Unsupported\",\n  \"recommendation\": \"An exact FetchXML paging-cookie continuation URL cannot be produced because paging-cookie mechanics require the unavailable webapi-syntax.md reference and are outside this skill's supported query patterns.\",\n  \"assumptions\": [],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"name\"\n    ],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": \"raw_web_api\"\n  },\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"reference_detail\",\n      \"reason\": \"The exact FetchXML paging-cookie continuation mechanics are not defined by the controlled inline adaptation, and the named upstream webapi-syntax.md reference is unavailable.\",\n      \"required_confirmation\": \"Provide an approved, current first-party specification for Dataverse FetchXML paging-cookie continuation URL construction.\"\n    }\n  ],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"raw_web_api\",\n    \"supported_options\": [],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Defines exact FetchXML paging-cookie continuation requests as unsupported.\"\n    },\n    {\n      \"source\": \"webapi-syntax.md\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"missing\",\n      \"use\": \"Named upstream reference for paging-cookie mechanics; it was not reviewed.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "workflow_events": [],
+        "workflow_command_count": 0,
+        "workflow_tool_count": 0,
+        "workflow_operation_count": 0,
+        "workflow_network_count": 0,
+        "evaluator_event": {
+          "event_type": "command_execution",
+          "operation": "codex exec",
+          "command": "codex",
+          "arguments": [
+            "--disable",
+            "shell_tool",
+            "--disable",
+            "browser_use",
+            "--disable",
+            "computer_use",
+            "--disable",
+            "apps",
+            "--disable",
+            "plugins",
+            "exec",
+            "--ephemeral",
+            "--ignore-user-config",
+            "-C",
+            "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+            "-m",
+            "gpt-5.6-sol",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "approval_policy=\"on-request\"",
+            "-c",
+            "web_search=\"disabled\"",
+            "-s",
+            "read-only",
+            "--json",
+            "-o",
+            "/tmp/powercat-explicit-negative-007-1-3k3ieowa/last-message.txt",
+            "$dataverse-webapi-query"
+          ],
+          "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "timestamp": "2026-07-19T03:23:21.206897Z",
+          "timestamp_source": "harness-clock",
+          "initiating_case": "NEGATIVE-007",
+          "origin": "evaluator_harness",
+          "item_id": null,
+          "status": "completed",
+          "raw_fields": []
+        },
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T03:23:21.461805Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T03:23:22.074810Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:22.075546Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:22.076136Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:22.076622Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:22.077284Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:22.078489Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:22.079356Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:22.080209Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:22.081064Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:22.081853Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:23:36.426254Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ],
+        "stdout_sha256": "13df58358192f710f231cb0f2ae902cccb1811453758448eccccd93a2cf32095"
+      }
+    ]
+  },
+  "invocation_mode": "explicit",
+  "invoked_skill": "dataverse-webapi-query",
+  "selector_control": "$dataverse-webapi-query",
+  "input_transport": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block.",
+  "exact_input": "$dataverse-webapi-query Using confirmed synthetic schema account, accounts, and name, produce the exact runnable Dataverse Web API continuation URL for a FetchXML paging cookie represented by <paging-cookie>. The referenced webapi-syntax.md is unavailable.",
+  "exact_case_input": "$dataverse-webapi-query Using confirmed synthetic schema account, accounts, and name, produce the exact runnable Dataverse Web API continuation URL for a FetchXML paging cookie represented by <paging-cookie>. The referenced webapi-syntax.md is unavailable.",
+  "exact_case_input_sha256": "3ddf7da26442414581844a4595b44a5a8658f0ea3d897ae6c2795523fda7a14a",
+  "first_output": "{\n  \"result_type\": \"unsupported_request\",\n  \"status\": \"Unsupported\",\n  \"recommendation\": \"An exact FetchXML paging-cookie continuation URL cannot be produced because paging-cookie mechanics require the unavailable webapi-syntax.md reference and are outside this skill's supported query patterns.\",\n  \"assumptions\": [],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"name\"\n    ],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": \"raw_web_api\"\n  },\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"reference_detail\",\n      \"reason\": \"The exact FetchXML paging-cookie continuation mechanics are not defined by the controlled inline adaptation, and the named upstream webapi-syntax.md reference is unavailable.\",\n      \"required_confirmation\": \"Provide an approved, current first-party specification for Dataverse FetchXML paging-cookie continuation URL construction.\"\n    }\n  ],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"raw_web_api\",\n    \"supported_options\": [],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Defines exact FetchXML paging-cookie continuation requests as unsupported.\"\n    },\n    {\n      \"source\": \"webapi-syntax.md\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"missing\",\n      \"use\": \"Named upstream reference for paging-cookie mechanics; it was not reviewed.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+  "first_output_sha256": "9d364c7537a7b0ae7052e4931da596887ec4e110f8d85c348b2b61642edaf0c8",
+  "case_input_contains_legacy_selector": true,
+  "explicit_invocation_user_forced": false,
+  "answer_validation": {
+    "applicable": true,
+    "valid": true,
+    "errors": []
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T03:23:21.461805Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T03:23:22.074810Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:22.075546Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:22.076136Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:22.076622Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:22.077284Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:22.078489Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:22.079356Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:22.080209Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:22.081064Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:22.081853Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:23:36.426254Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "event_attribution": {
+    "workflow_events": [],
+    "evaluator_events": [
+      {
+        "event_type": "command_execution",
+        "operation": "codex exec",
+        "command": "codex",
+        "arguments": [
+          "--disable",
+          "shell_tool",
+          "--disable",
+          "browser_use",
+          "--disable",
+          "computer_use",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "exec",
+          "--ephemeral",
+          "--ignore-user-config",
+          "-C",
+          "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "-m",
+          "gpt-5.6-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "approval_policy=\"on-request\"",
+          "-c",
+          "web_search=\"disabled\"",
+          "-s",
+          "read-only",
+          "--json",
+          "-o",
+          "/tmp/powercat-explicit-negative-007-1-3k3ieowa/last-message.txt",
+          "$dataverse-webapi-query"
+        ],
+        "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+        "timestamp": "2026-07-19T03:23:21.206897Z",
+        "timestamp_source": "harness-clock",
+        "initiating_case": "NEGATIVE-007",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      }
+    ],
+    "workflow_command_count": 0,
+    "workflow_tool_count": 0,
+    "workflow_operation_count": 0,
+    "workflow_network_count": 0,
+    "evaluator_command_count": 1
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The unsupported premise was identified without runnable fallback output."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No unresolved schema was converted into runnable output."
+      },
+      "host_context_selection": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "No runnable host-specific output is permitted for this unsupported request."
+      },
+      "security_behavior": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The case contains no credential or data-boundary challenge."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response used unsupported_request and left query_or_code empty."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The answer stayed inside the reviewed supported boundary."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

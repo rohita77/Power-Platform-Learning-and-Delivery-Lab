@@ -1,0 +1,93 @@
+{
+  "case_id": "NEGATIVE-002",
+  "suite": "negative",
+  "invocation": {
+    "index": 13,
+    "thread_id": "019f77bc-b6f1-77d3-8efd-71a5771827ac",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T00:18:03.271600Z",
+    "completed_at": "2026-07-19T00:18:17.602524Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0
+  },
+  "exact_input": "$dataverse-webapi-query Produce a pure OData Dataverse query that groups opportunities by status and sums estimatedvalue. Do not use FetchXML.",
+  "first_output": "**Host:** Host-neutral Dataverse Web API  \n**Assumed schema:** `opportunities`; status is `statuscode` (or `statecode`); value is `estimatedvalue`.\n\nDataverse’s pure OData endpoint does **not** support grouping with `SUM` (for example, via `$apply=groupby(...)`). Therefore, no valid pure OData query can group opportunities by status and sum `estimatedvalue`.\n\nSince FetchXML is excluded, this aggregation must be performed client-side after retrieving:\n\n```http\n/api/data/v9.2/opportunities?$select=statuscode,estimatedvalue\n```\n\nThen group by `statuscode` and sum `estimatedvalue` in the consuming application.",
+  "event_summary": {
+    "event_types": {
+      "item.completed": 2,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "2026-07-19T00:18:03.782488Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T00:18:04.314794Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:04.315511Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:04.316241Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:04.319428Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:04.325717Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:04.327286Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:04.329487Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:04.331648Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:04.332895Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:04.334642Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:17.479518Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Correctly rejects grouped pure OData, but does not explain the required FetchXML fallback."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Status is left as statuscode or statecode rather than resolving the fixture's intended mapping."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Host context is requested or safely bounded."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant call, secret handling, or tool use occurred."
+      },
+      "abstention": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "It rejects the requested pure-OData aggregate but substitutes client-side aggregation instead of the required fallback explanation."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response remains within the controlled query scope."
+      }
+    },
+    "score_percent": 75.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "Required FetchXML fallback explanation was omitted; first output preserved unchanged."
+  ],
+  "final_result": "Fail"
+}

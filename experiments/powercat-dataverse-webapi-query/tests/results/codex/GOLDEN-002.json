@@ -1,0 +1,91 @@
+{
+  "case_id": "GOLDEN-002",
+  "suite": "golden",
+  "invocation": {
+    "index": 8,
+    "thread_id": "019f77bb-6a34-7062-bc2c-57cef2e10d26",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T00:16:38.231753Z",
+    "completed_at": "2026-07-19T00:16:55.222401Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0
+  },
+  "exact_input": "$dataverse-webapi-query Convert this synthetic FetchXML with one link-entity to a Dataverse Web API query and explain any assumption: <fetch top='5'><entity name='account'><attribute name='name'/><link-entity name='contact' from='contactid' to='primarycontactid' alias='pc'><attribute name='fullname'/><attribute name='emailaddress1'/></link-entity><order attribute='createdon' descending='true'/></entity></fetch>",
+  "first_output": "Host-neutral Dataverse Web API query:\n\n```http\n<environment-url>/api/data/v9.2/accounts?$select=name&$filter=_primarycontactid_value ne null&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=5\n```\n\nAssumptions:\n\n- Standard Dataverse schema: entity set `accounts`, account navigation property `primarycontactid`, and contact columns `fullname` and `emailaddress1`.\n- FetchXML `link-entity` defaults to an inner join. The `_primarycontactid_value ne null` filter preserves that behavior; without it, `$expand` would also return accounts lacking a primary contact.\n- The FetchXML alias `pc` is not preserved. Expanded contact data appears under the `primarycontactid` property.\n- This is host-neutral OData; the exact calling wrapper depends on whether it runs through raw HTTP, `Xrm.WebApi`, Power Automate, or another host.",
+  "event_summary": {
+    "event_types": {
+      "item.completed": 2,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "2026-07-19T00:16:38.637491Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T00:16:38.971593Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.972350Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.973105Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.977351Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.979130Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.980229Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.986348Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.987153Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.989486Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.990406Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:55.067188Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Required query shape and mappings are present."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Standard synthetic schema assumptions are explicit."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The requested host is selected and reflected in the output."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant call, secret handling, or tool use occurred."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The fixture supplied enough standard synthetic context."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The answer remains instruction-only and query-focused."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

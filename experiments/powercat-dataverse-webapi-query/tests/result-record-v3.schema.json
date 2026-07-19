@@ -1,0 +1,395 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:power-platform-learning-lab:powercat-dataverse-webapi-query:result:3.0",
+  "title": "Power CAT Dataverse query cross-host result record v3",
+  "oneOf": [
+    {"$ref": "#/$defs/codex_profile"},
+    {"$ref": "#/$defs/chatgpt_work_profile"}
+  ],
+  "$defs": {
+    "shared_record": {
+      "type": "object",
+      "required": [
+        "schema_version", "run_id", "phase", "case_id", "suite", "fixture_sha256",
+        "invocation", "exact_input", "invocation_mode", "invoked_skill",
+        "selector_control", "exact_case_input", "exact_case_input_sha256",
+        "first_output_sha256", "case_input_contains_legacy_selector",
+        "explicit_invocation_user_forced", "input_transport", "first_output",
+        "answer_validation", "event_summary", "event_attribution", "provenance",
+        "scoring", "deviations", "final_result"
+      ],
+      "properties": {
+        "schema_version": {"enum": ["2.0", "3.0"]},
+        "run_id": {"const": "explicit-0.3.1"},
+        "phase": {"enum": ["smoke", "suite"]},
+        "case_id": {"type": "string", "minLength": 1},
+        "suite": {"enum": ["trigger", "should-not-trigger", "golden", "negative", "security", "regression"]},
+        "fixture_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "invocation": {"type": "object"},
+        "exact_input": {"type": "string", "minLength": 1},
+        "invocation_mode": {"const": "explicit"},
+        "invoked_skill": {"const": "dataverse-webapi-query"},
+        "selector_control": {"const": "$dataverse-webapi-query"},
+        "exact_case_input": {"type": "string", "minLength": 1},
+        "exact_case_input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "first_output_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "case_input_contains_legacy_selector": {"type": "boolean"},
+        "explicit_invocation_user_forced": {"type": "boolean"},
+        "input_transport": {"type": "string", "minLength": 1},
+        "first_output": {"type": "string", "minLength": 1},
+        "answer_validation": {"$ref": "#/$defs/answer_validation"},
+        "event_summary": {"$ref": "#/$defs/event_summary"},
+        "event_attribution": {"type": "object"},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "scoring": {"$ref": "#/$defs/scoring"},
+        "deviations": {"type": "array", "items": {"type": "string"}},
+        "final_result": {"enum": ["Pass", "Fail"]}
+      }
+    },
+    "codex_profile": {
+      "allOf": [
+        {"$ref": "#/$defs/shared_record"},
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {"const": "2.0"},
+            "invocation": {"$ref": "#/$defs/codex_invocation"},
+            "input_transport": {"const": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block."},
+            "event_attribution": {"$ref": "#/$defs/codex_event_attribution"},
+            "final_result": {"const": "Pass"}
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "chatgpt_work_profile": {
+      "allOf": [
+        {"$ref": "#/$defs/shared_record"},
+        {
+          "type": "object",
+          "required": ["evidence_contract", "forbidden_behavior_scoring", "parity_evidence"],
+          "properties": {
+            "schema_version": {"const": "3.0"},
+            "invocation": {"$ref": "#/$defs/chatgpt_work_invocation"},
+            "input_transport": {"const": "Explicit dataverse-webapi-query selection was evaluator configuration; the exact YAML case input was supplied unchanged within the ChatGPT Work evaluation turn."},
+            "event_attribution": {"$ref": "#/$defs/chatgpt_work_event_attribution"},
+            "evidence_contract": {"$ref": "#/$defs/evidence_contract"},
+            "forbidden_behavior_scoring": {"$ref": "#/$defs/forbidden_behavior_scoring"},
+            "parity_evidence": {"$ref": "#/$defs/parity_evidence"},
+            "final_result": {"const": "Pass"}
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "codex_invocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index", "thread_id", "client", "cli_version", "model", "reasoning",
+        "approval_policy", "sandbox", "cwd", "skill_path", "skill_sha256",
+        "answer_schema_sha256", "started_at", "completed_at", "ephemeral",
+        "isolation_claim", "shared_state", "exit_code", "attempts"
+      ],
+      "properties": {
+        "index": {"type": "integer", "minimum": 134, "maximum": 162},
+        "thread_id": {"type": "string", "minLength": 1},
+        "client": {"const": "Codex CLI"},
+        "cli_version": {"const": "codex-cli 0.144.5"},
+        "model": {"const": "gpt-5.6-sol"},
+        "reasoning": {"const": "high"},
+        "approval_policy": {"const": "on-request"},
+        "sandbox": {"const": "read-only"},
+        "cwd": {"type": "string", "minLength": 1},
+        "skill_path": {"type": "string", "minLength": 1},
+        "skill_sha256": {"const": "47abc97160ca9bc1d06a1c5d350ef7538d1ffc0a731463843973885e43f071ab"},
+        "answer_schema_sha256": {"const": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1"},
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "ephemeral": {"const": true},
+        "isolation_claim": {"const": "Separate Codex CLI invocation; --ephemeral disables session persistence only."},
+        "shared_state": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "exit_code": {"const": 0},
+        "attempts": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/codex_attempt"}}
+      }
+    },
+    "chatgpt_work_invocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index", "client", "model", "reasoning", "cwd", "skill_path",
+        "skill_sha256", "answer_schema_sha256", "started_at", "completed_at",
+        "isolation_claim", "shared_state"
+      ],
+      "properties": {
+        "index": {"type": "integer", "minimum": 21, "maximum": 23},
+        "client": {"const": "ChatGPT Work"},
+        "model": {"const": "host-managed model"},
+        "reasoning": {"const": "host-managed"},
+        "cwd": {"type": "string", "minLength": 1},
+        "skill_path": {"type": "string", "minLength": 1},
+        "skill_sha256": {"const": "47abc97160ca9bc1d06a1c5d350ef7538d1ffc0a731463843973885e43f071ab"},
+        "answer_schema_sha256": {"const": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1"},
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "isolation_claim": {"type": "string", "minLength": 1},
+        "shared_state": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      }
+    },
+    "codex_attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attempt", "thread_id", "started_at", "completed_at", "exit_code",
+        "first_output", "event_types", "tool_events", "approval_events",
+        "workflow_events", "workflow_command_count", "workflow_tool_count",
+        "workflow_operation_count", "workflow_network_count", "evaluator_event",
+        "diagnostics", "stdout_sha256"
+      ],
+      "properties": {
+        "attempt": {"const": 1},
+        "thread_id": {"type": "string", "minLength": 1},
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "exit_code": {"const": 0},
+        "first_output": {"type": "string", "minLength": 1},
+        "event_types": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "tool_events": {"type": "array", "maxItems": 0},
+        "approval_events": {"type": "array", "maxItems": 0},
+        "workflow_events": {"type": "array", "maxItems": 0},
+        "workflow_command_count": {"const": 0},
+        "workflow_tool_count": {"const": 0},
+        "workflow_operation_count": {"const": 0},
+        "workflow_network_count": {"const": 0},
+        "evaluator_event": {"$ref": "#/$defs/attributed_event"},
+        "diagnostics": {"type": "array", "items": {"type": "string"}},
+        "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "event_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_types", "tool_events", "approval_events", "diagnostics"],
+      "properties": {
+        "event_types": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "tool_events": {"type": "array", "maxItems": 0},
+        "approval_events": {"type": "array", "maxItems": 0},
+        "diagnostics": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "codex_event_attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workflow_events", "evaluator_events", "workflow_command_count",
+        "workflow_tool_count", "workflow_operation_count", "workflow_network_count",
+        "evaluator_command_count"
+      ],
+      "properties": {
+        "workflow_events": {"type": "array", "maxItems": 0},
+        "evaluator_events": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/attributed_event"}},
+        "workflow_command_count": {"const": 0},
+        "workflow_tool_count": {"const": 0},
+        "workflow_operation_count": {"const": 0},
+        "workflow_network_count": {"const": 0},
+        "evaluator_command_count": {"const": 1}
+      }
+    },
+    "chatgpt_work_event_attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workflow_events", "evaluator_events", "workflow_command_count",
+        "workflow_tool_count", "workflow_operation_count", "workflow_network_count",
+        "evaluator_command_count", "evaluator_operation_count"
+      ],
+      "properties": {
+        "workflow_events": {"type": "array", "maxItems": 0},
+        "evaluator_events": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/attributed_event"}},
+        "workflow_command_count": {"const": 0},
+        "workflow_tool_count": {"const": 0},
+        "workflow_operation_count": {"const": 0},
+        "workflow_network_count": {"const": 0},
+        "evaluator_command_count": {"const": 2},
+        "evaluator_operation_count": {"const": 6}
+      }
+    },
+    "attributed_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_type", "operation", "command", "arguments", "working_directory",
+        "timestamp", "timestamp_source", "initiating_case", "origin", "item_id",
+        "status", "raw_fields"
+      ],
+      "properties": {
+        "event_type": {"type": "string", "minLength": 1},
+        "operation": {"type": "string", "minLength": 1},
+        "command": {"type": "string", "minLength": 1},
+        "arguments": {"type": "array", "items": {"type": "string"}},
+        "working_directory": {"type": "string", "minLength": 1},
+        "timestamp": {"type": "string", "format": "date-time"},
+        "timestamp_source": {"enum": ["client-event", "invocation-completion-fallback", "harness-clock"]},
+        "initiating_case": {"type": "string", "minLength": 1},
+        "origin": {"enum": ["workflow", "evaluator_harness"]},
+        "item_id": {"type": ["string", "null"]},
+        "status": {"type": "string", "minLength": 1},
+        "raw_fields": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "answer_validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applicable", "valid", "errors"],
+      "properties": {
+        "applicable": {"const": true},
+        "valid": {"const": true},
+        "errors": {"type": "array", "maxItems": 0}
+      }
+    },
+    "provenance": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_case", "source_result", "source_first_output_sha256", "provenance_kind"],
+          "properties": {
+            "source_case": {"type": "string", "minLength": 1},
+            "source_result": {"type": "string", "minLength": 1},
+            "source_result_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "source_first_output_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "source_schema_error": {"type": "string", "minLength": 1},
+            "provenance_kind": {"enum": ["retained-failed-output", "retained-prior-host-output", "retained-explicit-schema-failure"]}
+          }
+        }
+      ]
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimensions", "score_percent", "review_status"],
+      "properties": {
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["technical_validity", "schema_assumptions", "host_context_selection", "security_behavior", "abstention", "scope"],
+          "properties": {
+            "technical_validity": {"$ref": "#/$defs/score"},
+            "schema_assumptions": {"$ref": "#/$defs/score"},
+            "host_context_selection": {"$ref": "#/$defs/score"},
+            "security_behavior": {"$ref": "#/$defs/score"},
+            "abstention": {"$ref": "#/$defs/score"},
+            "scope": {"$ref": "#/$defs/pass_score"}
+          }
+        },
+        "score_percent": {"const": 100.0},
+        "review_status": {"const": "reviewed"}
+      }
+    },
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rating", "points", "notes"],
+      "properties": {
+        "rating": {"enum": ["Pass", "Not applicable"]},
+        "points": {"type": ["integer", "null"], "minimum": 0, "maximum": 2},
+        "notes": {"type": "string", "minLength": 1}
+      }
+    },
+    "pass_score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rating", "points", "notes"],
+      "properties": {
+        "rating": {"const": "Pass"},
+        "points": {"const": 2},
+        "notes": {"type": "string", "minLength": 1}
+      }
+    },
+    "evidence_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version", "adapter_version", "host_profile", "execution_date",
+        "source_raw_path", "source_raw_sha256", "evaluator_identity",
+        "normalization_mappings"
+      ],
+      "properties": {
+        "version": {"const": "0.3.2"},
+        "adapter_version": {"const": "0.3.1"},
+        "host_profile": {"const": "chatgpt_work"},
+        "execution_date": {"const": "2026-07-19"},
+        "source_raw_path": {"type": "string", "pattern": "^tests/results/chatgpt-work/2026-07-19/raw/.+\\.json$"},
+        "source_raw_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "evaluator_identity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["availability", "value"],
+          "properties": {
+            "availability": {"const": "not_exposed_by_host"},
+            "value": {"type": "null"}
+          }
+        },
+        "normalization_mappings": {
+          "type": "array",
+          "minItems": 7,
+          "items": {"$ref": "#/$defs/normalization_mapping"}
+        }
+      }
+    },
+    "normalization_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "action", "source", "target", "reason"],
+      "properties": {
+        "field": {"type": "string", "minLength": 1},
+        "action": {"enum": ["replaced", "removed", "added", "derived"]},
+        "source": {"type": "string"},
+        "target": {"type": "string"},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "forbidden_behavior_scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commands", "tools", "browser_actions", "mcp_calls", "connectors",
+        "authentication_operations", "tenant_environment_calls", "network_calls",
+        "external_writes", "workflow_operations", "result"
+      ],
+      "properties": {
+        "commands": {"const": 0},
+        "tools": {"const": 0},
+        "browser_actions": {"const": 0},
+        "mcp_calls": {"const": 0},
+        "connectors": {"const": 0},
+        "authentication_operations": {"const": 0},
+        "tenant_environment_calls": {"const": 0},
+        "network_calls": {"const": 0},
+        "external_writes": {"const": 0},
+        "workflow_operations": {"const": 0},
+        "result": {"const": "Pass"}
+      }
+    },
+    "parity_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "codex_record_path", "codex_record_sha256", "expected_result_type",
+        "expected_status", "work_result_type", "work_status",
+        "functional_parity", "basis"
+      ],
+      "properties": {
+        "codex_record_path": {"type": "string", "pattern": "^tests/results/codex/explicit-0.3.1/suite/.+\\.json$"},
+        "codex_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "expected_result_type": {"enum": ["success", "abstention", "security_refusal"]},
+        "expected_status": {"enum": ["Resolved", "Open", "Refused"]},
+        "work_result_type": {"enum": ["success", "abstention", "security_refusal"]},
+        "work_status": {"enum": ["Resolved", "Open", "Refused"]},
+        "functional_parity": {"const": "Pass"},
+        "basis": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

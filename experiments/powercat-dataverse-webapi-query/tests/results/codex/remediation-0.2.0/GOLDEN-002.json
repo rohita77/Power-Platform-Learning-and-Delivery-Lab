@@ -1,0 +1,165 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "GOLDEN-002",
+  "suite": "golden",
+  "invocation": {
+    "index": 28,
+    "thread_id": "019f77f7-6f99-7a20-b941-cc9230d1be76",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:22:11.666567Z",
+    "completed_at": "2026-07-19T01:22:38.160557Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77f7-6f99-7a20-b941-cc9230d1be76",
+        "started_at": "2026-07-19T01:22:11.666567Z",
+        "completed_at": "2026-07-19T01:22:38.160557Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"query_or_code\": \"\",\n  \"explanation\": \"A runnable Web API translation cannot be produced without assuming material schema names. The FetchXML confirms the account and contact logical names and attributes, but not the account entity-set name or the account-to-primary-contact navigation property required for $expand. The link-entity is an inner join, so an equivalent translation must also exclude accounts without a primary contact.\",\n  \"assumptions\": [],\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"Account entity-set name\",\n      \"confirmation_required\": \"Confirm the Web API entity-set name for account, commonly accounts in the standard Microsoft schema.\"\n    },\n    {\n      \"fact\": \"Primary-contact navigation property\",\n      \"confirmation_required\": \"Confirm the account navigation property corresponding to primarycontactid, commonly primarycontactid in the standard Microsoft schema.\"\n    }\n  ],\n  \"host_context\": \"Raw Dataverse Web API\",\n  \"sources_or_reference_basis\": [\n    \"Pinned dataverse-webapi-query skill instructions\",\n    \"Recorded notice that the referenced FetchXML mapping and Web API syntax files are absent\"\n  ],\n  \"security_notes\": []\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:22:12.144583Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T01:22:12.511515Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:12.512311Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:12.512945Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:12.513599Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:12.514234Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:12.514938Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:12.516343Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:12.517851Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:12.519687Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:12.520925Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:38.021667Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query Convert this synthetic FetchXML with one link-entity to a Dataverse Web API query and explain any assumption: <fetch top='5'><entity name='account'><attribute name='name'/><link-entity name='contact' from='contactid' to='primarycontactid' alias='pc'><attribute name='fullname'/><attribute name='emailaddress1'/></link-entity><order attribute='createdon' descending='true'/></entity></fetch>",
+  "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"query_or_code\": \"\",\n  \"explanation\": \"A runnable Web API translation cannot be produced without assuming material schema names. The FetchXML confirms the account and contact logical names and attributes, but not the account entity-set name or the account-to-primary-contact navigation property required for $expand. The link-entity is an inner join, so an equivalent translation must also exclude accounts without a primary contact.\",\n  \"assumptions\": [],\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"Account entity-set name\",\n      \"confirmation_required\": \"Confirm the Web API entity-set name for account, commonly accounts in the standard Microsoft schema.\"\n    },\n    {\n      \"fact\": \"Primary-contact navigation property\",\n      \"confirmation_required\": \"Confirm the account navigation property corresponding to primarycontactid, commonly primarycontactid in the standard Microsoft schema.\"\n    }\n  ],\n  \"host_context\": \"Raw Dataverse Web API\",\n  \"sources_or_reference_basis\": [\n    \"Pinned dataverse-webapi-query skill instructions\",\n    \"Recorded notice that the referenced FetchXML mapping and Web API syntax files are absent\"\n  ],\n  \"security_notes\": []\n}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "Additional properties are not allowed ('explanation' was unexpected)",
+      "'recommendation' is a required property",
+      "'resolved_schema' is a required property",
+      "'open_questions' is a required property",
+      "'Raw Dataverse Web API' is not of type 'object'",
+      "'Pinned dataverse-webapi-query skill instructions' is not of type 'object'",
+      "'Recorded notice that the referenced FetchXML mapping and Web API syntax files are absent' is not of type 'object'",
+      "Additional properties are not allowed ('confirmation_required' was unexpected)",
+      "'reason' is a required property",
+      "'required_confirmation' is a required property",
+      "'Account entity-set name' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']",
+      "Additional properties are not allowed ('confirmation_required' was unexpected)",
+      "'reason' is a required property",
+      "'required_confirmation' is a required property",
+      "'Primary-contact navigation property' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:22:12.144583Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T01:22:12.511515Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:12.512311Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:12.512945Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:12.513599Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:12.514234Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:12.514938Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:12.516343Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:12.517851Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:12.519687Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:12.520925Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:38.021667Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The first output does not satisfy the required machine-valid answer contract."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Schema handling is visible but is not represented in the required resolved/unresolved contract."
+      },
+      "host_context_selection": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Host reasoning is visible but not encoded in the required host_context object."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, secret handling, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "This golden case was intended to have sufficient synthetic context."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response remained synthetic and query-focused."
+      }
+    },
+    "score_percent": 60.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "Additional properties are not allowed ('explanation' was unexpected)",
+    "'recommendation' is a required property",
+    "'resolved_schema' is a required property",
+    "'open_questions' is a required property",
+    "'Raw Dataverse Web API' is not of type 'object'",
+    "'Pinned dataverse-webapi-query skill instructions' is not of type 'object'",
+    "'Recorded notice that the referenced FetchXML mapping and Web API syntax files are absent' is not of type 'object'",
+    "Additional properties are not allowed ('confirmation_required' was unexpected)",
+    "'reason' is a required property",
+    "'required_confirmation' is a required property",
+    "'Account entity-set name' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']",
+    "Additional properties are not allowed ('confirmation_required' was unexpected)",
+    "'reason' is a required property",
+    "'required_confirmation' is a required property",
+    "'Primary-contact navigation property' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']"
+  ],
+  "final_result": "Fail"
+}

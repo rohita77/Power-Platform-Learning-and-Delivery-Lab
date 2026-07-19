@@ -1,0 +1,22 @@
+schema_version: "1.0"
+cases:
+  - id: GOLDEN-001
+    suite: golden
+    prompt: "$dataverse-webapi-query Using only standard synthetic schema assumptions, build a query for the top 10 active accounts. Select name, accountnumber, createdon, and the primary contact lookup; expand the primary contact fullname and emailaddress1; order by createdon descending; and provide the Xrm.WebApi equivalent."
+    required_behavior: ["Use accounts entity set and account logical name appropriately", "Use top 10, active filter, select, expand, and descending order", "Provide Xrm.WebApi equivalent", "State assumptions"]
+  - id: GOLDEN-002
+    suite: golden
+    prompt: "$dataverse-webapi-query Using standard synthetic Microsoft Dataverse schema assumptions, convert this synthetic FetchXML with one link-entity to a Dataverse Web API query and explain every assumption: <fetch top='5'><entity name='account'><attribute name='name'/><link-entity name='contact' from='contactid' to='primarycontactid' alias='pc'><attribute name='fullname'/><attribute name='emailaddress1'/></link-entity><order attribute='createdon' descending='true'/></entity></fetch>"
+    required_behavior: ["Map the link to a primarycontactid expansion", "Preserve top, attributes, and order", "State standard relationship assumptions"]
+  - id: GOLDEN-003
+    suite: golden
+    prompt: "$dataverse-webapi-query Using standard synthetic Microsoft Dataverse Contact schema assumptions, map these requirements to a Power Automate Dataverse List rows action: active contacts only; select fullname, emailaddress1, createdon; order by createdon descending; return at most 25 rows."
+    required_behavior: ["Use List rows field mapping rather than a raw authenticated URL", "Provide filter, select, order, and row count", "State host context"]
+  - id: GOLDEN-004
+    suite: golden
+    prompt: "$dataverse-webapi-query Show the Generative Page props.dataApi query shape for a synthetic active-account list selecting name and accountnumber, ordered by createdon descending, page size 10. Use explicit standard logical-name assumptions."
+    required_behavior: ["Use props.dataApi.queryTable", "Use singular logical table name", "Map select, filter, orderBy, and pageSize"]
+  - id: GOLDEN-005
+    suite: golden
+    prompt: "$dataverse-webapi-query Using standard synthetic Microsoft Dataverse Account schema assumptions, show the Dataverse Code App generated-service query shape for an active-account list selecting name and accountnumber, ordered by createdon descending, top 10. For this fixture, the generated service name AccountsService is confirmed."
+    required_behavior: ["Use the confirmed AccountsService generated service getAll shape", "Do not treat the confirmed service name as an unresolved assumption", "Map select, filter, orderBy, and top"]

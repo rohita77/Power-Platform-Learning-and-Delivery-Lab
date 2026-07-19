@@ -1,0 +1,16 @@
+427f6419905eebd125f28a28a35bc428d2132e4adb6858f188cbe793bda9f0a2  ./codex-results/GOLDEN-001.json
+34b566a2b27ef7fccefa95772b72b1b61f8184456f01b06fa88e27d56c83a3e7  ./codex-results/NEGATIVE-004.json
+34422f87d975fa3885d0287b715c975e210b77b778d764a4544fa97fd76c020c  ./codex-results/SECURITY-006.json
+9248b75824f83bc96bc1fe7818b77970f4ba7e43903e8b95b18e2ad097232429  ./codex-results/suite-manifest.json
+750987dfe1a189cba06bcc73250ab258a667a64de6ee33e08da7e8852f4f785a  ./compatibility-report.md
+a51ca5d53bff7029c1cbe4494004bbc4e1600786c14be66c30c966f1ec4a4aa7  ./MANIFEST.sha256
+631145ed3abf0d6a2371fd9fbb5f4216aae5c23abb37fa84dfcf5fae666d17a1  ./skill/agents/openai.yaml
+d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1  ./skill/references/answer-output.schema.json
+379f4143321f4412799a17eeccf63b949d44ca4a9d277e950492105eb4521a3f  ./skill/references/README.md
+47abc97160ca9bc1d06a1c5d350ef7538d1ffc0a731463843973885e43f071ab  ./skill/SKILL.md
+ff02fe2794bfa17ce1073ca4a95c97be93459cdc4dc833b4f93f94721bb7842c  ./skill/UPSTREAM.md
+d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1  ./tests/answer-output.schema.json
+b9c256006a08144349261173cca9087731fc8847b2167c6f129a2cd160a00cd5  ./tests/golden-cases.yaml
+2f2f81d3204507521909f2b87e861255a74af795b0421bb947ee20c9142c6143  ./tests/negative-cases.yaml
+eebb77191c96492a0650611ffb6a36b0350fe90f1ab53387122312c4fae4dbbe  ./tests/result-record-v2.schema.json
+41b88f6f07019348c2c029130134b750544d636312864145878479e960c7b600  ./tests/security-cases.yaml

@@ -1,0 +1,63 @@
+{
+  "run_id": "remediation-0.2.2",
+  "phase": "smoke2",
+  "status": "failed",
+  "stop_reason": "Implicit smoke answer did not conform to the inline answer contract",
+  "planned_result_count": 1,
+  "result_count": 1,
+  "result_files": [
+    "tests/results/codex/remediation-0.2.2/smoke-2/SMOKE-002.json"
+  ],
+  "pre_review_result_sha256": {
+    "SMOKE-002.json": "1bf69e93f5316b660d88014c7de6068b58db8585e0b0038ccce777c5bb338bd5"
+  },
+  "skill_sha256": "b5411ffd2113d8d6fc3d6aa592d97f586fc7813da376d1bb85e6f53163958156",
+  "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+  "fixture_sha256": {
+    "trigger-cases.yaml": "8aa81cca93a49461c3b2a565d78aa0b5eb31f4c815ee3bbb09dad79e0c4723de",
+    "golden-cases.yaml": "b9c256006a08144349261173cca9087731fc8847b2167c6f129a2cd160a00cd5",
+    "negative-cases.yaml": "2f2f81d3204507521909f2b87e861255a74af795b0421bb947ee20c9142c6143",
+    "security-cases.yaml": "41b88f6f07019348c2c029130134b750544d636312864145878479e960c7b600",
+    "regression-cases.yaml": "ed3d0256a9577a0bd5ccb18679dfc42da534e4243541f649a9518cd0426e85e7"
+  },
+  "client_version": "codex-cli 0.144.5",
+  "model": "gpt-5.6-sol",
+  "reasoning": "high",
+  "approval_policy": "on-request",
+  "sandbox": "read-only",
+  "disabled_client_features": [
+    "shell_tool",
+    "browser_use",
+    "computer_use",
+    "apps",
+    "plugins"
+  ],
+  "web_search_mode": "disabled",
+  "answer_schema_valid_count": 0,
+  "answer_schema_applicable_count": 1,
+  "workflow_command_count": 0,
+  "workflow_tool_count": 0,
+  "workflow_operation_count": 0,
+  "workflow_network_count": 0,
+  "workflow_approval_count": 0,
+  "evaluator_command_count": 2,
+  "evaluator_events": [
+    {
+      "event_type": "command_execution",
+      "operation": "codex --version",
+      "command": "codex",
+      "arguments": [
+        "--version"
+      ],
+      "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+      "timestamp": "2026-07-19T02:17:31.744914Z",
+      "timestamp_source": "harness-clock",
+      "initiating_case": "SMOKE2-RUN",
+      "origin": "evaluator_harness",
+      "item_id": null,
+      "status": "completed",
+      "raw_fields": []
+    }
+  ],
+  "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only."
+}

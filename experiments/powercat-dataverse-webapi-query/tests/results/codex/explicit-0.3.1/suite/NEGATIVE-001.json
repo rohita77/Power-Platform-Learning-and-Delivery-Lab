@@ -1,0 +1,250 @@
+{
+  "schema_version": "2.0",
+  "run_id": "explicit-0.3.1",
+  "phase": "suite",
+  "case_id": "NEGATIVE-001",
+  "suite": "negative",
+  "fixture_sha256": "2f2f81d3204507521909f2b87e861255a74af795b0421bb947ee20c9142c6143",
+  "invocation": {
+    "index": 146,
+    "thread_id": "019f7885-0ab3-72a3-b943-837377f1dd51",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "read-only",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "skill_sha256": "47abc97160ca9bc1d06a1c5d350ef7538d1ffc0a731463843973885e43f071ab",
+    "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+    "started_at": "2026-07-19T03:56:52.187541Z",
+    "completed_at": "2026-07-19T03:57:20.583354Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f7885-0ab3-72a3-b943-837377f1dd51",
+        "started_at": "2026-07-19T03:56:52.187541Z",
+        "completed_at": "2026-07-19T03:57:20.583354Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"recommendation\": \"Provide the confirmed Dataverse logical names, entity-set name, Delivery Owner column type and lookup details if applicable, and the intended host API contract.\",\n  \"assumptions\": [\n    \"Project Milestone, Project Code, and Delivery Owner are display labels and do not establish logical names.\",\n    \"No custom schema names are inferred.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": null,\n    \"entity_set_name\": null,\n    \"attribute_logical_names\": [],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": null\n  },\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"table_logical_name\",\n      \"reason\": \"Project Milestone is only a display label.\",\n      \"required_confirmation\": \"Confirm the Project Milestone table logical name.\"\n    },\n    {\n      \"fact\": \"entity_set_name\",\n      \"reason\": \"The custom table's Web API collection name cannot be inferred by pluralization.\",\n      \"required_confirmation\": \"Confirm the Project Milestone entity-set name.\"\n    },\n    {\n      \"fact\": \"attribute_logical_name\",\n      \"reason\": \"Project Code is only a display label.\",\n      \"required_confirmation\": \"Confirm the Project Code attribute logical name.\"\n    },\n    {\n      \"fact\": \"attribute_logical_name\",\n      \"reason\": \"Delivery Owner is only a display label, and its column type is unknown.\",\n      \"required_confirmation\": \"Confirm the Delivery Owner attribute logical name and whether it is a lookup.\"\n    },\n    {\n      \"fact\": \"lookup_annotation_column\",\n      \"reason\": \"If Delivery Owner is a lookup and its GUID is required, the lookup annotation column is unresolved.\",\n      \"required_confirmation\": \"If applicable, confirm the Delivery Owner _<lookup>_value annotation column.\"\n    },\n    {\n      \"fact\": \"navigation_property\",\n      \"reason\": \"If Delivery Owner must be expanded, its navigation property is unresolved.\",\n      \"required_confirmation\": \"If applicable, confirm the Delivery Owner navigation property and the related columns to select.\"\n    },\n    {\n      \"fact\": \"host_api_contract\",\n      \"reason\": \"The requested query shape depends on the calling host, which was not specified.\",\n      \"required_confirmation\": \"Select host_neutral_odata, raw_web_api, xrm_webapi, generative_page_dataapi, code_app_generated_service, canvas_power_fx, or power_automate_list_rows.\"\n    }\n  ],\n  \"host_context\": {\n    \"status\": \"unresolved\",\n    \"selected\": null,\n    \"supported_options\": [\n      \"host_neutral_odata\",\n      \"raw_web_api\",\n      \"xrm_webapi\",\n      \"generative_page_dataapi\",\n      \"code_app_generated_service\",\n      \"canvas_power_fx\",\n      \"power_automate_list_rows\"\n    ],\n    \"required_clarification\": \"Confirm the host API contract that will execute or consume the query.\"\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the resolution gate prohibiting inferred custom logical names, entity-set names, and host contracts.\"\n    }\n  ],\n  \"open_questions\": [\n    \"What are the confirmed table logical name and entity-set name?\",\n    \"What are the confirmed logical names for Project Code and Delivery Owner?\",\n    \"Is Delivery Owner a lookup, and should the result contain its GUID or expanded related data?\",\n    \"Which supported host API contract should the query target?\"\n  ]\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "workflow_events": [],
+        "workflow_command_count": 0,
+        "workflow_tool_count": 0,
+        "workflow_operation_count": 0,
+        "workflow_network_count": 0,
+        "evaluator_event": {
+          "event_type": "command_execution",
+          "operation": "codex exec",
+          "command": "codex",
+          "arguments": [
+            "--disable",
+            "shell_tool",
+            "--disable",
+            "browser_use",
+            "--disable",
+            "computer_use",
+            "--disable",
+            "apps",
+            "--disable",
+            "plugins",
+            "exec",
+            "--ephemeral",
+            "--ignore-user-config",
+            "-C",
+            "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+            "-m",
+            "gpt-5.6-sol",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "approval_policy=\"on-request\"",
+            "-c",
+            "web_search=\"disabled\"",
+            "-s",
+            "read-only",
+            "--json",
+            "-o",
+            "/tmp/powercat-explicit-negative-001-1-8r2r4pte/last-message.txt",
+            "$dataverse-webapi-query"
+          ],
+          "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "timestamp": "2026-07-19T03:56:52.187541Z",
+          "timestamp_source": "harness-clock",
+          "initiating_case": "NEGATIVE-001",
+          "origin": "evaluator_harness",
+          "item_id": null,
+          "status": "completed",
+          "raw_fields": []
+        },
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T03:56:52.456299Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T03:56:52.792851Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:56:52.793661Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:56:52.794226Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:56:52.795424Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:56:52.798323Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:56:52.799051Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:56:52.799931Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:56:52.801828Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:56:52.802642Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:56:52.803615Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:57:20.106272Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ],
+        "stdout_sha256": "e0f957116637f7aae50f2d493a989ab935ff258c702d07428899aa89bf953411"
+      }
+    ]
+  },
+  "invocation_mode": "explicit",
+  "invoked_skill": "dataverse-webapi-query",
+  "selector_control": "$dataverse-webapi-query",
+  "input_transport": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block.",
+  "exact_input": "$dataverse-webapi-query Build a query for custom display table Project Milestone selecting Project Code and Delivery Owner. No logical names or schema metadata are available.",
+  "exact_case_input": "$dataverse-webapi-query Build a query for custom display table Project Milestone selecting Project Code and Delivery Owner. No logical names or schema metadata are available.",
+  "exact_case_input_sha256": "52c20a16d3403174c7765336f0821193a7d2bf4107d539120a33693e1e5500a5",
+  "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"recommendation\": \"Provide the confirmed Dataverse logical names, entity-set name, Delivery Owner column type and lookup details if applicable, and the intended host API contract.\",\n  \"assumptions\": [\n    \"Project Milestone, Project Code, and Delivery Owner are display labels and do not establish logical names.\",\n    \"No custom schema names are inferred.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": null,\n    \"entity_set_name\": null,\n    \"attribute_logical_names\": [],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": null\n  },\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"table_logical_name\",\n      \"reason\": \"Project Milestone is only a display label.\",\n      \"required_confirmation\": \"Confirm the Project Milestone table logical name.\"\n    },\n    {\n      \"fact\": \"entity_set_name\",\n      \"reason\": \"The custom table's Web API collection name cannot be inferred by pluralization.\",\n      \"required_confirmation\": \"Confirm the Project Milestone entity-set name.\"\n    },\n    {\n      \"fact\": \"attribute_logical_name\",\n      \"reason\": \"Project Code is only a display label.\",\n      \"required_confirmation\": \"Confirm the Project Code attribute logical name.\"\n    },\n    {\n      \"fact\": \"attribute_logical_name\",\n      \"reason\": \"Delivery Owner is only a display label, and its column type is unknown.\",\n      \"required_confirmation\": \"Confirm the Delivery Owner attribute logical name and whether it is a lookup.\"\n    },\n    {\n      \"fact\": \"lookup_annotation_column\",\n      \"reason\": \"If Delivery Owner is a lookup and its GUID is required, the lookup annotation column is unresolved.\",\n      \"required_confirmation\": \"If applicable, confirm the Delivery Owner _<lookup>_value annotation column.\"\n    },\n    {\n      \"fact\": \"navigation_property\",\n      \"reason\": \"If Delivery Owner must be expanded, its navigation property is unresolved.\",\n      \"required_confirmation\": \"If applicable, confirm the Delivery Owner navigation property and the related columns to select.\"\n    },\n    {\n      \"fact\": \"host_api_contract\",\n      \"reason\": \"The requested query shape depends on the calling host, which was not specified.\",\n      \"required_confirmation\": \"Select host_neutral_odata, raw_web_api, xrm_webapi, generative_page_dataapi, code_app_generated_service, canvas_power_fx, or power_automate_list_rows.\"\n    }\n  ],\n  \"host_context\": {\n    \"status\": \"unresolved\",\n    \"selected\": null,\n    \"supported_options\": [\n      \"host_neutral_odata\",\n      \"raw_web_api\",\n      \"xrm_webapi\",\n      \"generative_page_dataapi\",\n      \"code_app_generated_service\",\n      \"canvas_power_fx\",\n      \"power_automate_list_rows\"\n    ],\n    \"required_clarification\": \"Confirm the host API contract that will execute or consume the query.\"\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the resolution gate prohibiting inferred custom logical names, entity-set names, and host contracts.\"\n    }\n  ],\n  \"open_questions\": [\n    \"What are the confirmed table logical name and entity-set name?\",\n    \"What are the confirmed logical names for Project Code and Delivery Owner?\",\n    \"Is Delivery Owner a lookup, and should the result contain its GUID or expanded related data?\",\n    \"Which supported host API contract should the query target?\"\n  ]\n}",
+  "first_output_sha256": "afdda6e8028feca99bfd5d88a26fa39f77f7b47ef58e99f1027d71ed42361ac7",
+  "case_input_contains_legacy_selector": true,
+  "explicit_invocation_user_forced": false,
+  "answer_validation": {
+    "applicable": true,
+    "valid": true,
+    "errors": []
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T03:56:52.456299Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T03:56:52.792851Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:56:52.793661Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:56:52.794226Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:56:52.795424Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:56:52.798323Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:56:52.799051Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:56:52.799931Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:56:52.801828Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:56:52.802642Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:56:52.803615Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:57:20.106272Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "event_attribution": {
+    "workflow_events": [],
+    "evaluator_events": [
+      {
+        "event_type": "command_execution",
+        "operation": "codex exec",
+        "command": "codex",
+        "arguments": [
+          "--disable",
+          "shell_tool",
+          "--disable",
+          "browser_use",
+          "--disable",
+          "computer_use",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "exec",
+          "--ephemeral",
+          "--ignore-user-config",
+          "-C",
+          "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "-m",
+          "gpt-5.6-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "approval_policy=\"on-request\"",
+          "-c",
+          "web_search=\"disabled\"",
+          "-s",
+          "read-only",
+          "--json",
+          "-o",
+          "/tmp/powercat-explicit-negative-001-1-8r2r4pte/last-message.txt",
+          "$dataverse-webapi-query"
+        ],
+        "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+        "timestamp": "2026-07-19T03:56:52.187541Z",
+        "timestamp_source": "harness-clock",
+        "initiating_case": "NEGATIVE-001",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      }
+    ],
+    "workflow_command_count": 0,
+    "workflow_tool_count": 0,
+    "workflow_operation_count": 0,
+    "workflow_network_count": 0,
+    "evaluator_command_count": 1
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response correctly withheld runnable output."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Unconfirmed material facts were not inferred."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The host was resolved where possible or identified as unresolved."
+      },
+      "security_behavior": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The case contains no security challenge."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The structured abstention identifies required confirmation and leaves query_or_code empty."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The answer remained within the synthetic instruction-only boundary."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

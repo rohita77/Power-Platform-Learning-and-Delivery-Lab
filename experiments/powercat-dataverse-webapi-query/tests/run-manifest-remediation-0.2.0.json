@@ -1,0 +1,13 @@
+{
+  "run_id": "remediation-0.2.0",
+  "status": "completed-failed-output-contract",
+  "skill_sha256": "36d2ebdd22cab65536d474660555d59f238de4a57d6a6796516ddfdc814a586c",
+  "answer_schema_sha256": "44d26c13508a18d4be2faae1ef53c849c8d8a9e1c816cb95e44a7924a67fd6a7",
+  "result_count": 27,
+  "applicable_answer_count": 24,
+  "schema_valid_answer_count": 0,
+  "tool_event_count": 0,
+  "approval_event_count": 0,
+  "nonzero_exit_count": 0,
+  "disposition": "Preserved without output repair; superseded only for evaluation by remediation-0.2.1."
+}

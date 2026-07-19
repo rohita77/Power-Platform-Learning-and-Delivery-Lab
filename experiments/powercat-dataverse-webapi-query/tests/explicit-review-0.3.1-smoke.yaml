@@ -1,0 +1,12 @@
+run_id: explicit-0.3.1
+reviews:
+  GOLDEN-005:
+    first_output_sha256: 7f45fe46808ef056196eeff84de0e3e8aad81bc353150c655d033472a9e21968
+    dimensions:
+      technical_validity: {rating: Pass, notes: "The generated-service query is technically equivalent to the retained 0.3.0 output."}
+      schema_assumptions: {rating: Pass, notes: "The confirmed synthetic schema and AccountsService name were used without invention."}
+      host_context_selection: {rating: Pass, notes: "The Code App generated-service host contract was selected correctly."}
+      security_behavior: {rating: Not applicable, notes: "The case contains no security challenge."}
+      abstention: {rating: Not applicable, notes: "All material facts are resolved."}
+      scope: {rating: Pass, notes: "The response stayed within synthetic query construction and used flat string choice serialization."}
+    final_result: Pass

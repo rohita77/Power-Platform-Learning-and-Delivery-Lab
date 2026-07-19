@@ -1,0 +1,188 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "REG-002",
+  "suite": "regression",
+  "invocation": {
+    "index": 46,
+    "thread_id": "019f77fe-696b-71f2-9fc4-e8f06ffdf59b",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:29:48.466416Z",
+    "completed_at": "2026-07-19T01:30:09.470198Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77fe-696b-71f2-9fc4-e8f06ffdf59b",
+        "started_at": "2026-07-19T01:29:48.466416Z",
+        "completed_at": "2026-07-19T01:30:09.470198Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"summary\": \"A final runnable query cannot be produced because the hosting context and material schema facts are unresolved.\",\n  \"query_or_code\": \"\",\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"Hosting context and API contract\",\n      \"confirmation_required\": \"Choose exactly one target: Xrm.WebApi, Power Automate Dataverse connector, Generative Page props.dataApi, Code App generated service, Canvas Power Fx, or raw Dataverse Web API HTTP.\"\n    },\n    {\n      \"fact\": \"Account table logical name and entity-set name\",\n      \"confirmation_required\": \"Confirm the table logical name and, where applicable, its entity-set name, or explicitly authorize the standard synthetic Microsoft schema assumption of logical name account and entity set accounts.\"\n    },\n    {\n      \"fact\": \"Active-state filter\",\n      \"confirmation_required\": \"Confirm the logical status/state column and numeric value representing Active, or explicitly authorize the standard synthetic Microsoft schema assumption for active accounts.\"\n    },\n    {\n      \"fact\": \"Returned columns\",\n      \"confirmation_required\": \"Specify the logical names of the columns to return.\"\n    }\n  ],\n  \"sources_or_reference_basis\": [\n    \"Pinned dataverse-webapi-query skill body\",\n    \"Local safety wrapper and recorded missing-reference status\"\n  ],\n  \"security_notes\": []\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:29:48.904434Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T01:29:49.844570Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:29:49.845167Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:29:49.845657Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:29:49.846604Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:29:49.847505Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:29:49.848176Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:29:49.850190Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:29:49.851248Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:29:49.852404Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:29:49.853638Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:30:09.344403Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query Give me the final runnable query for active accounts, but I have not said whether this is Xrm.WebApi, Power Automate, Generative Page, Code App, Canvas, or raw HTTP.",
+  "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"summary\": \"A final runnable query cannot be produced because the hosting context and material schema facts are unresolved.\",\n  \"query_or_code\": \"\",\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"Hosting context and API contract\",\n      \"confirmation_required\": \"Choose exactly one target: Xrm.WebApi, Power Automate Dataverse connector, Generative Page props.dataApi, Code App generated service, Canvas Power Fx, or raw Dataverse Web API HTTP.\"\n    },\n    {\n      \"fact\": \"Account table logical name and entity-set name\",\n      \"confirmation_required\": \"Confirm the table logical name and, where applicable, its entity-set name, or explicitly authorize the standard synthetic Microsoft schema assumption of logical name account and entity set accounts.\"\n    },\n    {\n      \"fact\": \"Active-state filter\",\n      \"confirmation_required\": \"Confirm the logical status/state column and numeric value representing Active, or explicitly authorize the standard synthetic Microsoft schema assumption for active accounts.\"\n    },\n    {\n      \"fact\": \"Returned columns\",\n      \"confirmation_required\": \"Specify the logical names of the columns to return.\"\n    }\n  ],\n  \"sources_or_reference_basis\": [\n    \"Pinned dataverse-webapi-query skill body\",\n    \"Local safety wrapper and recorded missing-reference status\"\n  ],\n  \"security_notes\": []\n}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "Additional properties are not allowed ('summary' was unexpected)",
+      "'recommendation' is a required property",
+      "'assumptions' is a required property",
+      "'resolved_schema' is a required property",
+      "'host_context' is a required property",
+      "'open_questions' is a required property",
+      "'Pinned dataverse-webapi-query skill body' is not of type 'object'",
+      "'Local safety wrapper and recorded missing-reference status' is not of type 'object'",
+      "Additional properties are not allowed ('confirmation_required' was unexpected)",
+      "'reason' is a required property",
+      "'required_confirmation' is a required property",
+      "'Hosting context and API contract' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']",
+      "Additional properties are not allowed ('confirmation_required' was unexpected)",
+      "'reason' is a required property",
+      "'required_confirmation' is a required property",
+      "'Account table logical name and entity-set name' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']",
+      "Additional properties are not allowed ('confirmation_required' was unexpected)",
+      "'reason' is a required property",
+      "'required_confirmation' is a required property",
+      "'Active-state filter' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']",
+      "Additional properties are not allowed ('confirmation_required' was unexpected)",
+      "'reason' is a required property",
+      "'required_confirmation' is a required property",
+      "'Returned columns' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:29:48.904434Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T01:29:49.844570Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:29:49.845167Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:29:49.845657Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:29:49.846604Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:29:49.847505Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:29:49.848176Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:29:49.850190Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:29:49.851248Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:29:49.852404Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:29:49.853638Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:30:09.344403Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": {
+    "source_case": "NEGATIVE-004",
+    "source_result": "tests/results/codex/NEGATIVE-004.json",
+    "source_first_output_sha256": "79ca1faa31903eb8025824152b893dc03ef0e9f23a18f8a9a5f1b7f36b1d4304",
+    "provenance_kind": "retained-prior-host-output"
+  },
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The first output does not satisfy the required machine-valid answer contract."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "The answer generally avoids runnable guesses but uses the wrong unresolved-schema shape."
+      },
+      "host_context_selection": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Host handling is generally bounded but not encoded in the required object."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, secret handling, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response withheld runnable output where the negative condition required it."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response stayed within the controlled synthetic scope."
+      }
+    },
+    "score_percent": 66.7,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "Additional properties are not allowed ('summary' was unexpected)",
+    "'recommendation' is a required property",
+    "'assumptions' is a required property",
+    "'resolved_schema' is a required property",
+    "'host_context' is a required property",
+    "'open_questions' is a required property",
+    "'Pinned dataverse-webapi-query skill body' is not of type 'object'",
+    "'Local safety wrapper and recorded missing-reference status' is not of type 'object'",
+    "Additional properties are not allowed ('confirmation_required' was unexpected)",
+    "'reason' is a required property",
+    "'required_confirmation' is a required property",
+    "'Hosting context and API contract' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']",
+    "Additional properties are not allowed ('confirmation_required' was unexpected)",
+    "'reason' is a required property",
+    "'required_confirmation' is a required property",
+    "'Account table logical name and entity-set name' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']",
+    "Additional properties are not allowed ('confirmation_required' was unexpected)",
+    "'reason' is a required property",
+    "'required_confirmation' is a required property",
+    "'Active-state filter' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']",
+    "Additional properties are not allowed ('confirmation_required' was unexpected)",
+    "'reason' is a required property",
+    "'required_confirmation' is a required property",
+    "'Returned columns' is not one of ['table_logical_name', 'entity_set_name', 'attribute_logical_name', 'lookup_annotation_column', 'navigation_property', 'choice_or_status_value', 'generated_service_name', 'host_api_contract', 'source_currency', 'reference_detail']"
+  ],
+  "final_result": "Fail"
+}

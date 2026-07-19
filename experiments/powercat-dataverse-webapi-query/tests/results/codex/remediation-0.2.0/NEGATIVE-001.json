@@ -1,0 +1,159 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "NEGATIVE-001",
+  "suite": "negative",
+  "invocation": {
+    "index": 32,
+    "thread_id": "019f77f9-0642-7471-aacd-c0b71bbf2a9b",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:23:55.552203Z",
+    "completed_at": "2026-07-19T01:24:42.311527Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77f9-0642-7471-aacd-c0b71bbf2a9b",
+        "started_at": "2026-07-19T01:23:55.552203Z",
+        "completed_at": "2026-07-19T01:24:42.311527Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"query_or_code\": \"\",\n  \"unresolved_schema\": [\n    \"Confirm the Project Milestone table logical name.\",\n    \"Confirm the Project Milestone entity-set name.\",\n    \"Confirm the attribute logical name for Project Code.\",\n    \"Confirm the attribute logical name and data type for Delivery Owner. If it is a lookup, confirm whether the required output is its record ID, formatted display value, or related-record columns.\",\n    \"Confirm the host context: raw Dataverse Web API, Xrm.WebApi, Generative Page dataApi, Code App generated service, Canvas app, or Power Automate.\"\n  ],\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned Dataverse Web API Query Builder instruction body: material schema facts and host context must be confirmed before runnable output is produced.\",\n    \"Recorded missing-reference status: absent reference details were not inferred.\"\n  ]\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:23:56.012062Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T01:23:56.716011Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:56.716767Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:56.717443Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:56.718111Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:56.719439Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:56.721276Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:56.722706Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:56.723486Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:56.724448Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:56.726163Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:42.205135Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query Build a query for custom display table Project Milestone selecting Project Code and Delivery Owner. No logical names or schema metadata are available.",
+  "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"query_or_code\": \"\",\n  \"unresolved_schema\": [\n    \"Confirm the Project Milestone table logical name.\",\n    \"Confirm the Project Milestone entity-set name.\",\n    \"Confirm the attribute logical name for Project Code.\",\n    \"Confirm the attribute logical name and data type for Delivery Owner. If it is a lookup, confirm whether the required output is its record ID, formatted display value, or related-record columns.\",\n    \"Confirm the host context: raw Dataverse Web API, Xrm.WebApi, Generative Page dataApi, Code App generated service, Canvas app, or Power Automate.\"\n  ],\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned Dataverse Web API Query Builder instruction body: material schema facts and host context must be confirmed before runnable output is produced.\",\n    \"Recorded missing-reference status: absent reference details were not inferred.\"\n  ]\n}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "'recommendation' is a required property",
+      "'assumptions' is a required property",
+      "'resolved_schema' is a required property",
+      "'host_context' is a required property",
+      "'open_questions' is a required property",
+      "'Pinned Dataverse Web API Query Builder instruction body: material schema facts and host context must be confirmed before runnable output is produced.' is not of type 'object'",
+      "'Recorded missing-reference status: absent reference details were not inferred.' is not of type 'object'",
+      "'Confirm the Project Milestone table logical name.' is not of type 'object'",
+      "'Confirm the Project Milestone entity-set name.' is not of type 'object'",
+      "'Confirm the attribute logical name for Project Code.' is not of type 'object'",
+      "'Confirm the attribute logical name and data type for Delivery Owner. If it is a lookup, confirm whether the required output is its record ID, formatted display value, or related-record columns.' is not of type 'object'",
+      "'Confirm the host context: raw Dataverse Web API, Xrm.WebApi, Generative Page dataApi, Code App generated service, Canvas app, or Power Automate.' is not of type 'object'"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:23:56.012062Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T01:23:56.716011Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:56.716767Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:56.717443Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:56.718111Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:56.719439Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:56.721276Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:56.722706Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:56.723486Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:56.724448Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:56.726163Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:42.205135Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The first output does not satisfy the required machine-valid answer contract."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "The answer generally avoids runnable guesses but uses the wrong unresolved-schema shape."
+      },
+      "host_context_selection": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Host handling is generally bounded but not encoded in the required object."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, secret handling, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response withheld runnable output where the negative condition required it."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response stayed within the controlled synthetic scope."
+      }
+    },
+    "score_percent": 66.7,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "'recommendation' is a required property",
+    "'assumptions' is a required property",
+    "'resolved_schema' is a required property",
+    "'host_context' is a required property",
+    "'open_questions' is a required property",
+    "'Pinned Dataverse Web API Query Builder instruction body: material schema facts and host context must be confirmed before runnable output is produced.' is not of type 'object'",
+    "'Recorded missing-reference status: absent reference details were not inferred.' is not of type 'object'",
+    "'Confirm the Project Milestone table logical name.' is not of type 'object'",
+    "'Confirm the Project Milestone entity-set name.' is not of type 'object'",
+    "'Confirm the attribute logical name for Project Code.' is not of type 'object'",
+    "'Confirm the attribute logical name and data type for Delivery Owner. If it is a lookup, confirm whether the required output is its record ID, formatted display value, or related-record columns.' is not of type 'object'",
+    "'Confirm the host context: raw Dataverse Web API, Xrm.WebApi, Generative Page dataApi, Code App generated service, Canvas app, or Power Automate.' is not of type 'object'"
+  ],
+  "final_result": "Fail"
+}

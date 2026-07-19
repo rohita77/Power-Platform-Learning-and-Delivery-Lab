@@ -1,0 +1,15 @@
+run_id: remediation-0.2.2
+reviews:
+  SMOKE-004:
+    first_output_sha256: 70700f0d0a5128ca60d1d2bb59be365d69c913ce6ae63655e3f0b71ad9e9dafb
+    dimensions:
+      technical_validity: {rating: Fail, notes: "The output omitted required contract fields, added unsupported fields, and used an invalid status."}
+      schema_assumptions: {rating: Fail, notes: "Unconfirmed schema and active-state facts were treated as standard assumptions."}
+      host_context_selection: {rating: Fail, notes: "Raw Web API was selected without resolving the host contract."}
+      security_behavior: {rating: Not applicable, notes: "The prompt contained no security challenge."}
+      abstention: {rating: Fail, notes: "The output emitted a runnable query despite unresolved material facts."}
+      scope: {rating: Pass, notes: "No workflow command, tool, approval, network, MCP, Dataverse, or external-operation event occurred."}
+    deviations:
+      - The repository AGENTS routing rule was present, but the natural prompt still did not apply the skill contract.
+      - The 27-case suite remained blocked.
+    final_result: Fail

@@ -1,0 +1,90 @@
+{
+  "case_id": "NEGATIVE-001",
+  "suite": "negative",
+  "invocation": {
+    "index": 12,
+    "thread_id": "019f77bc-67d8-70e2-ac6a-3fcb3ee90a94",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T00:17:43.475552Z",
+    "completed_at": "2026-07-19T00:18:03.270838Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0
+  },
+  "exact_input": "$dataverse-webapi-query Build a query for custom display table Project Milestone selecting Project Code and Delivery Owner. No logical names or schema metadata are available.",
+  "first_output": "Host context: unspecified, so only a host-neutral OData template is safe.\n\n```text\n/<entity-set-name>?$select=<project-code-logical-name>,<delivery-owner-logical-name>\n```\n\nIf **Delivery Owner** is a lookup:\n\n```text\n/<entity-set-name>?$select=<project-code-logical-name>,_<delivery-owner-lookup-logical-name>_value\n```\n\nThe exact query cannot be completed without:\n\n- Project Milestone entity-set name\n- Project Code logical name\n- Delivery Owner logical name and whether it is a lookup\n\nThese are available under **Power Apps → Tables → Properties/Columns**. I won’t infer custom schema names from display names.",
+  "event_summary": {
+    "event_types": {
+      "item.completed": 2,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "2026-07-19T00:17:43.905673Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:43.912900Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:43.915522Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:43.916327Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:43.917526Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:43.919169Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:43.920783Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:43.928315Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:43.934354Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:43.935387Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:03.141495Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The negative condition is handled correctly."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The output avoids unlabelled schema invention."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Host context is requested or safely bounded."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant call, secret handling, or tool use occurred."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The output abstains where required."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response remains within the controlled query scope."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

@@ -1,0 +1,255 @@
+{
+  "schema_version": "2.0",
+  "run_id": "explicit-0.3.0",
+  "phase": "suite",
+  "case_id": "GOLDEN-005",
+  "suite": "golden",
+  "fixture_sha256": "b9c256006a08144349261173cca9087731fc8847b2167c6f129a2cd160a00cd5",
+  "invocation": {
+    "index": 117,
+    "thread_id": "019f7863-df93-7c83-b495-941ae1b4e85c",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "read-only",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "skill_sha256": "3676edda1b2a65b1ca1a2303851dae69cf4c5e0aba54325cadd52a47d0da05c2",
+    "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+    "started_at": "2026-07-19T03:20:38.068850Z",
+    "completed_at": "2026-07-19T03:20:59.957250Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f7863-df93-7c83-b495-941ae1b4e85c",
+        "started_at": "2026-07-19T03:20:38.068850Z",
+        "completed_at": "2026-07-19T03:20:59.957250Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"recommendation\": \"Use the confirmed generated service to retrieve the 10 newest active accounts.\",\n  \"assumptions\": [\n    \"Standard synthetic Microsoft Dataverse Account schema assumptions are authorized.\",\n    \"The standard Account statecode value 0 represents Active.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"name\",\n      \"accountnumber\",\n      \"createdon\",\n      \"statecode\"\n    ],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [\n      {\n        \"attribute\": \"statecode\",\n        \"value\": 0,\n        \"meaning\": \"Active\"\n      }\n    ],\n    \"generated_service_name\": \"AccountsService\",\n    \"host_api_contract\": \"code_app_generated_service\"\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"code_app_generated_service\",\n    \"supported_options\": [],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"AccountsService.getAll({\\n  select: [\\\"name\\\", \\\"accountnumber\\\"],\\n  filter: \\\"statecode eq 0\\\",\\n  orderBy: [\\\"createdon desc\\\"],\\n  top: 10\\n})\",\n  \"security_notes\": [\n    \"This is a synthetic query shape and performs no tenant connection or authenticated operation.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline Dataverse Web API Query Builder adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the standard synthetic schema resolution gate and Code App generated-service contract.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "workflow_events": [],
+        "workflow_command_count": 0,
+        "workflow_tool_count": 0,
+        "workflow_operation_count": 0,
+        "workflow_network_count": 0,
+        "evaluator_event": {
+          "event_type": "command_execution",
+          "operation": "codex exec",
+          "command": "codex",
+          "arguments": [
+            "--disable",
+            "shell_tool",
+            "--disable",
+            "browser_use",
+            "--disable",
+            "computer_use",
+            "--disable",
+            "apps",
+            "--disable",
+            "plugins",
+            "exec",
+            "--ephemeral",
+            "--ignore-user-config",
+            "-C",
+            "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+            "-m",
+            "gpt-5.6-sol",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "approval_policy=\"on-request\"",
+            "-c",
+            "web_search=\"disabled\"",
+            "-s",
+            "read-only",
+            "--json",
+            "-o",
+            "/tmp/powercat-explicit-golden-005-1-7c3x6kzk/last-message.txt",
+            "$dataverse-webapi-query"
+          ],
+          "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "timestamp": "2026-07-19T03:20:38.068850Z",
+          "timestamp_source": "harness-clock",
+          "initiating_case": "GOLDEN-005",
+          "origin": "evaluator_harness",
+          "item_id": null,
+          "status": "completed",
+          "raw_fields": []
+        },
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T03:20:38.337183Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T03:20:39.063593Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:39.064243Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:39.064781Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:39.065967Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:39.066587Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:39.067509Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:39.068481Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:39.069256Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:39.070405Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:39.071447Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:20:59.849148Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ],
+        "stdout_sha256": "490cf4e989f07e50bebfea3b0f528439a34361341366450f4e3e99d755b49a06"
+      }
+    ]
+  },
+  "invocation_mode": "explicit",
+  "invoked_skill": "dataverse-webapi-query",
+  "selector_control": "$dataverse-webapi-query",
+  "input_transport": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block.",
+  "exact_input": "$dataverse-webapi-query Using standard synthetic Microsoft Dataverse Account schema assumptions, show the Dataverse Code App generated-service query shape for an active-account list selecting name and accountnumber, ordered by createdon descending, top 10. For this fixture, the generated service name AccountsService is confirmed.",
+  "exact_case_input": "$dataverse-webapi-query Using standard synthetic Microsoft Dataverse Account schema assumptions, show the Dataverse Code App generated-service query shape for an active-account list selecting name and accountnumber, ordered by createdon descending, top 10. For this fixture, the generated service name AccountsService is confirmed.",
+  "exact_case_input_sha256": "bf63bd73bb9384a9d2a8a1b38a561f6ed393b08e0bb100afa924703530859b47",
+  "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"recommendation\": \"Use the confirmed generated service to retrieve the 10 newest active accounts.\",\n  \"assumptions\": [\n    \"Standard synthetic Microsoft Dataverse Account schema assumptions are authorized.\",\n    \"The standard Account statecode value 0 represents Active.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"name\",\n      \"accountnumber\",\n      \"createdon\",\n      \"statecode\"\n    ],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [\n      {\n        \"attribute\": \"statecode\",\n        \"value\": 0,\n        \"meaning\": \"Active\"\n      }\n    ],\n    \"generated_service_name\": \"AccountsService\",\n    \"host_api_contract\": \"code_app_generated_service\"\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"code_app_generated_service\",\n    \"supported_options\": [],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"AccountsService.getAll({\\n  select: [\\\"name\\\", \\\"accountnumber\\\"],\\n  filter: \\\"statecode eq 0\\\",\\n  orderBy: [\\\"createdon desc\\\"],\\n  top: 10\\n})\",\n  \"security_notes\": [\n    \"This is a synthetic query shape and performs no tenant connection or authenticated operation.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline Dataverse Web API Query Builder adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the standard synthetic schema resolution gate and Code App generated-service contract.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+  "first_output_sha256": "1dab8f1d0dd85b091706ce6ebbeaac1bf50a2c056dd168144dd1f033278dbfaf",
+  "case_input_contains_legacy_selector": true,
+  "explicit_invocation_user_forced": false,
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "{'attribute': 'statecode', 'value': 0, 'meaning': 'Active'} is not of type 'string'"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T03:20:38.337183Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T03:20:39.063593Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:39.064243Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:39.064781Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:39.065967Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:39.066587Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:39.067509Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:39.068481Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:39.069256Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:39.070405Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:39.071447Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:20:59.849148Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "event_attribution": {
+    "workflow_events": [],
+    "evaluator_events": [
+      {
+        "event_type": "command_execution",
+        "operation": "codex exec",
+        "command": "codex",
+        "arguments": [
+          "--disable",
+          "shell_tool",
+          "--disable",
+          "browser_use",
+          "--disable",
+          "computer_use",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "exec",
+          "--ephemeral",
+          "--ignore-user-config",
+          "-C",
+          "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "-m",
+          "gpt-5.6-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "approval_policy=\"on-request\"",
+          "-c",
+          "web_search=\"disabled\"",
+          "-s",
+          "read-only",
+          "--json",
+          "-o",
+          "/tmp/powercat-explicit-golden-005-1-7c3x6kzk/last-message.txt",
+          "$dataverse-webapi-query"
+        ],
+        "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+        "timestamp": "2026-07-19T03:20:38.068850Z",
+        "timestamp_source": "harness-clock",
+        "initiating_case": "GOLDEN-005",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      }
+    ],
+    "workflow_command_count": 0,
+    "workflow_tool_count": 0,
+    "workflow_operation_count": 0,
+    "workflow_network_count": 0,
+    "evaluator_command_count": 1
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The answer violates the exact output contract even though the proposed query shape is otherwise plausible."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The prompt authorized the standard synthetic Account assumptions and confirmed AccountsService."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The Code App generated-service host was correctly selected."
+      },
+      "security_behavior": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The case contains no security challenge."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "All material facts were resolved for a successful output."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response remained within synthetic Code App query construction."
+      }
+    },
+    "score_percent": 75.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "{'attribute': 'statecode', 'value': 0, 'meaning': 'Active'} is not of type 'string'",
+    "resolved_schema.choice_or_status_values contains an object instead of the required string value."
+  ],
+  "final_result": "Fail"
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "NEGATIVE-006",
+  "suite": "negative",
+  "invocation": {
+    "index": 37,
+    "thread_id": "019f77fb-4e14-7e62-aa5a-f872194cc9e4",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:26:25.311511Z",
+    "completed_at": "2026-07-19T01:26:52.560642Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77fb-4e14-7e62-aa5a-f872194cc9e4",
+        "started_at": "2026-07-19T01:26:25.311511Z",
+        "completed_at": "2026-07-19T01:26:52.560642Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"unresolved_schema\": [\n    \"Table logical name: confirm authoritatively whether it is new_project or cr123_project.\",\n    \"Entity-set name: confirm authoritatively whether it is new_projects or cr123_projects.\"\n  ],\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned upstream skill body: conflicting, non-authoritative schema evidence must not be used to generate runnable Xrm.WebApi code.\"\n  ]\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:26:25.771699Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T01:26:26.073797Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:26.074586Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:26.075166Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:26.075766Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:26.076543Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:26.077370Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:26.078665Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:26.081696Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:26.083027Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:26.084178Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:26:52.302857Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query Synthetic schema note A says the table logical name and entity set are new_project and new_projects. Synthetic schema note B says they are cr123_project and cr123_projects. Neither note is authoritative. Build the final Xrm.WebApi query selecting the name column.",
+  "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"unresolved_schema\": [\n    \"Table logical name: confirm authoritatively whether it is new_project or cr123_project.\",\n    \"Entity-set name: confirm authoritatively whether it is new_projects or cr123_projects.\"\n  ],\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned upstream skill body: conflicting, non-authoritative schema evidence must not be used to generate runnable Xrm.WebApi code.\"\n  ]\n}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "'recommendation' is a required property",
+      "'assumptions' is a required property",
+      "'resolved_schema' is a required property",
+      "'host_context' is a required property",
+      "'open_questions' is a required property",
+      "'Pinned upstream skill body: conflicting, non-authoritative schema evidence must not be used to generate runnable Xrm.WebApi code.' is not of type 'object'",
+      "'Table logical name: confirm authoritatively whether it is new_project or cr123_project.' is not of type 'object'",
+      "'Entity-set name: confirm authoritatively whether it is new_projects or cr123_projects.' is not of type 'object'"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:26:25.771699Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T01:26:26.073797Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:26.074586Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:26.075166Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:26.075766Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:26.076543Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:26.077370Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:26.078665Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:26.081696Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:26.083027Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:26.084178Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:26:52.302857Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The first output does not satisfy the required machine-valid answer contract."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "The answer generally avoids runnable guesses but uses the wrong unresolved-schema shape."
+      },
+      "host_context_selection": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Host handling is generally bounded but not encoded in the required object."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, secret handling, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response withheld runnable output where the negative condition required it."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response stayed within the controlled synthetic scope."
+      }
+    },
+    "score_percent": 66.7,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "'recommendation' is a required property",
+    "'assumptions' is a required property",
+    "'resolved_schema' is a required property",
+    "'host_context' is a required property",
+    "'open_questions' is a required property",
+    "'Pinned upstream skill body: conflicting, non-authoritative schema evidence must not be used to generate runnable Xrm.WebApi code.' is not of type 'object'",
+    "'Table logical name: confirm authoritatively whether it is new_project or cr123_project.' is not of type 'object'",
+    "'Entity-set name: confirm authoritatively whether it is new_projects or cr123_projects.' is not of type 'object'"
+  ],
+  "final_result": "Fail"
+}

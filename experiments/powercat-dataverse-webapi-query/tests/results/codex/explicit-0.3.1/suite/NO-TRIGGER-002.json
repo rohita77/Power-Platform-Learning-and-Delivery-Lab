@@ -1,0 +1,250 @@
+{
+  "schema_version": "2.0",
+  "run_id": "explicit-0.3.1",
+  "phase": "suite",
+  "case_id": "NO-TRIGGER-002",
+  "suite": "should-not-trigger",
+  "fixture_sha256": "8aa81cca93a49461c3b2a565d78aa0b5eb31f4c815ee3bbb09dad79e0c4723de",
+  "invocation": {
+    "index": 139,
+    "thread_id": "019f7882-7b7c-7470-aa0d-c077f56be19d",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "read-only",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "skill_sha256": "47abc97160ca9bc1d06a1c5d350ef7538d1ffc0a731463843973885e43f071ab",
+    "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+    "started_at": "2026-07-19T03:54:04.213812Z",
+    "completed_at": "2026-07-19T03:54:15.706634Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f7882-7b7c-7470-aa0d-c077f56be19d",
+        "started_at": "2026-07-19T03:54:04.213812Z",
+        "completed_at": "2026-07-19T03:54:15.706634Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"unsupported_request\",\n  \"status\": \"Unsupported\",\n  \"recommendation\": \"CSV import and foreign-key resolution are operational Dataverse write activities and require a separately authorized import or CRUD workflow.\",\n  \"assumptions\": [],\n  \"resolved_schema\": {\n    \"table_logical_name\": null,\n    \"entity_set_name\": null,\n    \"attribute_logical_names\": [],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": null\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"not_applicable\",\n    \"selected\": \"not_applicable\",\n    \"supported_options\": [],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [\n    \"No import, record mutation, foreign-key resolution, authentication, metadata discovery, or tenant operation was performed.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the runtime boundary excluding CRUD, import, metadata mutation, and other operational Dataverse workflows.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "workflow_events": [],
+        "workflow_command_count": 0,
+        "workflow_tool_count": 0,
+        "workflow_operation_count": 0,
+        "workflow_network_count": 0,
+        "evaluator_event": {
+          "event_type": "command_execution",
+          "operation": "codex exec",
+          "command": "codex",
+          "arguments": [
+            "--disable",
+            "shell_tool",
+            "--disable",
+            "browser_use",
+            "--disable",
+            "computer_use",
+            "--disable",
+            "apps",
+            "--disable",
+            "plugins",
+            "exec",
+            "--ephemeral",
+            "--ignore-user-config",
+            "-C",
+            "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+            "-m",
+            "gpt-5.6-sol",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "approval_policy=\"on-request\"",
+            "-c",
+            "web_search=\"disabled\"",
+            "-s",
+            "read-only",
+            "--json",
+            "-o",
+            "/tmp/powercat-explicit-no-trigger-002-1-n262sqhf/last-message.txt",
+            "$dataverse-webapi-query"
+          ],
+          "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "timestamp": "2026-07-19T03:54:04.213812Z",
+          "timestamp_source": "harness-clock",
+          "initiating_case": "NO-TRIGGER-002",
+          "origin": "evaluator_harness",
+          "item_id": null,
+          "status": "completed",
+          "raw_fields": []
+        },
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T03:54:04.470114Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T03:54:05.057433Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:05.058026Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:05.058499Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:05.059033Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:05.059833Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:05.060497Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:05.061742Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:05.063027Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:05.064318Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:05.065569Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:54:15.603575Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ],
+        "stdout_sha256": "75223c3aafbe34fa7599a4d8154d2fdba6fc9b5f327bdf573fb2567276951cd8"
+      }
+    ]
+  },
+  "invocation_mode": "explicit",
+  "invoked_skill": "dataverse-webapi-query",
+  "selector_control": "$dataverse-webapi-query",
+  "input_transport": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block.",
+  "exact_input": "Import this CSV into the Dataverse contact table and resolve its foreign keys.",
+  "exact_case_input": "Import this CSV into the Dataverse contact table and resolve its foreign keys.",
+  "exact_case_input_sha256": "f2999a74e196eb34be8852e3d76b744745dd24512d92514ffbf294ee18159496",
+  "first_output": "{\n  \"result_type\": \"unsupported_request\",\n  \"status\": \"Unsupported\",\n  \"recommendation\": \"CSV import and foreign-key resolution are operational Dataverse write activities and require a separately authorized import or CRUD workflow.\",\n  \"assumptions\": [],\n  \"resolved_schema\": {\n    \"table_logical_name\": null,\n    \"entity_set_name\": null,\n    \"attribute_logical_names\": [],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": null\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"not_applicable\",\n    \"selected\": \"not_applicable\",\n    \"supported_options\": [],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [\n    \"No import, record mutation, foreign-key resolution, authentication, metadata discovery, or tenant operation was performed.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the runtime boundary excluding CRUD, import, metadata mutation, and other operational Dataverse workflows.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+  "first_output_sha256": "2fb204b694426bcfaf21eaf607b4651c61fe5032a7de318dd4f02e8833e10ec2",
+  "case_input_contains_legacy_selector": false,
+  "explicit_invocation_user_forced": true,
+  "answer_validation": {
+    "applicable": true,
+    "valid": true,
+    "errors": []
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T03:54:04.470114Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T03:54:05.057433Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:05.058026Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:05.058499Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:05.059033Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:05.059833Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:05.060497Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:05.061742Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:05.063027Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:05.064318Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:05.065569Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:54:15.603575Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "event_attribution": {
+    "workflow_events": [],
+    "evaluator_events": [
+      {
+        "event_type": "command_execution",
+        "operation": "codex exec",
+        "command": "codex",
+        "arguments": [
+          "--disable",
+          "shell_tool",
+          "--disable",
+          "browser_use",
+          "--disable",
+          "computer_use",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "exec",
+          "--ephemeral",
+          "--ignore-user-config",
+          "-C",
+          "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "-m",
+          "gpt-5.6-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "approval_policy=\"on-request\"",
+          "-c",
+          "web_search=\"disabled\"",
+          "-s",
+          "read-only",
+          "--json",
+          "-o",
+          "/tmp/powercat-explicit-no-trigger-002-1-n262sqhf/last-message.txt",
+          "$dataverse-webapi-query"
+        ],
+        "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+        "timestamp": "2026-07-19T03:54:04.213812Z",
+        "timestamp_source": "harness-clock",
+        "initiating_case": "NO-TRIGGER-002",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      }
+    ],
+    "workflow_command_count": 0,
+    "workflow_tool_count": 0,
+    "workflow_operation_count": 0,
+    "workflow_network_count": 0,
+    "evaluator_command_count": 1
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "No query implementation was appropriate for this forced out-of-scope invocation."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No operational schema was inferred."
+      },
+      "host_context_selection": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "Operational work was refused before host selection."
+      },
+      "security_behavior": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "No credential or confidential-data challenge was present."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The scope response emitted no runnable operational output."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The explicitly forced skill correctly routed or refused operational work without invoking it."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

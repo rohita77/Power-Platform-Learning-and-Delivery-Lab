@@ -1,0 +1,255 @@
+{
+  "schema_version": "2.0",
+  "run_id": "explicit-0.3.1",
+  "phase": "suite",
+  "case_id": "NEGATIVE-004",
+  "suite": "negative",
+  "fixture_sha256": "2f2f81d3204507521909f2b87e861255a74af795b0421bb947ee20c9142c6143",
+  "invocation": {
+    "index": 22,
+    "thread_id": null,
+    "client": "ChatGPT Work",
+    "cli_version": "not_applicable",
+    "model": "host-managed model",
+    "reasoning": "host-managed",
+    "approval_policy": "managed host policy",
+    "sandbox": "workspace-write",
+    "cwd": "/workspace/scratch/7bbea042f964",
+    "skill_path": "/workspace/scratch/7bbea042f964/evaluation/powercat-dataverse-work-parity-0.3.1/skill/SKILL.md",
+    "skill_sha256": "47abc97160ca9bc1d06a1c5d350ef7538d1ffc0a731463843973885e43f071ab",
+    "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+    "started_at": "2026-07-19T10:19:44Z",
+    "completed_at": "2026-07-19T10:19:44Z",
+    "ephemeral": false,
+    "isolation_claim": "Single ChatGPT Work evaluation turn; explicit skill selection was evaluator configuration and no separate process or isolated thread was exposed by the host.",
+    "shared_state": [
+      "Conversation context",
+      "Extracted package files",
+      "Host-managed model state"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": null,
+        "started_at": "2026-07-19T10:19:44Z",
+        "completed_at": "2026-07-19T10:19:44Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"recommendation\": \"Select one host API contract and confirm the minimum account schema facts before requesting a runnable query.\",\n  \"assumptions\": [],\n  \"resolved_schema\": {\n    \"table_logical_name\": null,\n    \"entity_set_name\": null,\n    \"attribute_logical_names\": [],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": null\n  },\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"table_logical_name\",\n      \"reason\": \"The display wording accounts does not confirm the singular table logical name, and the prompt does not authorize a standard synthetic schema assumption.\",\n      \"required_confirmation\": \"Confirm the table logical name or explicitly authorize the standard synthetic Microsoft Dataverse Account schema assumption.\"\n    },\n    {\n      \"fact\": \"entity_set_name\",\n      \"reason\": \"The entity-set name is not confirmed and must not be inferred by pluralization.\",\n      \"required_confirmation\": \"Confirm the entity-set name or explicitly authorize the standard synthetic Microsoft Dataverse Account schema assumption.\"\n    },\n    {\n      \"fact\": \"attribute_logical_name\",\n      \"reason\": \"The logical attribute that represents the account state is not confirmed.\",\n      \"required_confirmation\": \"Confirm the active-state attribute logical name or explicitly authorize the standard synthetic Microsoft Dataverse Account schema assumption.\"\n    },\n    {\n      \"fact\": \"choice_or_status_value\",\n      \"reason\": \"The numeric value representing Active is not confirmed.\",\n      \"required_confirmation\": \"Confirm the active-state numeric value and attribute mapping or explicitly authorize the standard synthetic Microsoft Dataverse Account schema assumption.\"\n    },\n    {\n      \"fact\": \"host_api_contract\",\n      \"reason\": \"The request leaves multiple materially different host contracts open.\",\n      \"required_confirmation\": \"Choose host_neutral_odata, raw_web_api, xrm_webapi, generative_page_dataapi, code_app_generated_service, canvas_power_fx, or power_automate_list_rows.\"\n    }\n  ],\n  \"host_context\": {\n    \"status\": \"unresolved\",\n    \"selected\": null,\n    \"supported_options\": [\n      \"host_neutral_odata\",\n      \"raw_web_api\",\n      \"xrm_webapi\",\n      \"generative_page_dataapi\",\n      \"code_app_generated_service\",\n      \"canvas_power_fx\",\n      \"power_automate_list_rows\"\n    ],\n    \"required_clarification\": \"Select exactly one host API contract.\"\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Inspected upstream package\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Provenance pin only; upstream Codex support is unclaimed.\"\n    },\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": null,\n      \"availability\": \"available\",\n      \"use\": \"Applied the schema-resolution gate, host-context gate, and strict abstention contract.\"\n    }\n  ],\n  \"open_questions\": [\n    \"Which host API contract should the runnable output target?\",\n    \"What are the confirmed table logical name and entity-set name?\",\n    \"Which confirmed attribute and numeric value represent Active?\"\n  ]\n}",
+        "event_types": {
+          "work_answer_generated": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "The host did not expose a per-case thread identifier or per-case execution timestamp; result-creation time is used as an invocation-completion fallback.",
+          "Explicit skill selection was evaluator configuration separate from the unchanged YAML case input."
+        ],
+        "workflow_events": [],
+        "workflow_command_count": 0,
+        "workflow_tool_count": 0,
+        "workflow_operation_count": 0,
+        "workflow_network_count": 0,
+        "evaluator_event": {
+          "event_type": "evaluator_operation",
+          "operation": "explicit workflow execution",
+          "command": "ChatGPT Work host invocation",
+          "arguments": [
+            "invoked_skill=dataverse-webapi-query",
+            "invocation_mode=explicit",
+            "case input supplied unchanged"
+          ],
+          "working_directory": "/workspace/scratch/7bbea042f964",
+          "timestamp": "2026-07-19T10:19:44Z",
+          "timestamp_source": "invocation-completion-fallback",
+          "initiating_case": "NEGATIVE-004",
+          "origin": "evaluator_harness",
+          "item_id": null,
+          "status": "completed",
+          "raw_fields": []
+        },
+        "stdout_sha256": "4d0e82d6d1a4ae8bcae8d1d72e65cde8aefecb0c90ce699f644e372f371a2093"
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query Give me the final runnable query for active accounts, but I have not said whether this is Xrm.WebApi, Power Automate, Generative Page, Code App, Canvas, or raw HTTP.",
+  "invocation_mode": "explicit",
+  "invoked_skill": "dataverse-webapi-query",
+  "selector_control": "$dataverse-webapi-query",
+  "exact_case_input": "$dataverse-webapi-query Give me the final runnable query for active accounts, but I have not said whether this is Xrm.WebApi, Power Automate, Generative Page, Code App, Canvas, or raw HTTP.",
+  "exact_case_input_sha256": "414d9fa126eb410d5d5912359fdc6eb6e7506fb7dfe557f02b5a2ddc70af20d7",
+  "first_output_sha256": "4d0e82d6d1a4ae8bcae8d1d72e65cde8aefecb0c90ce699f644e372f371a2093",
+  "case_input_contains_legacy_selector": true,
+  "explicit_invocation_user_forced": true,
+  "input_transport": "Explicit dataverse-webapi-query selection was evaluator configuration; the exact YAML case input was supplied unchanged within the ChatGPT Work evaluation turn.",
+  "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"recommendation\": \"Select one host API contract and confirm the minimum account schema facts before requesting a runnable query.\",\n  \"assumptions\": [],\n  \"resolved_schema\": {\n    \"table_logical_name\": null,\n    \"entity_set_name\": null,\n    \"attribute_logical_names\": [],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": null\n  },\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"table_logical_name\",\n      \"reason\": \"The display wording accounts does not confirm the singular table logical name, and the prompt does not authorize a standard synthetic schema assumption.\",\n      \"required_confirmation\": \"Confirm the table logical name or explicitly authorize the standard synthetic Microsoft Dataverse Account schema assumption.\"\n    },\n    {\n      \"fact\": \"entity_set_name\",\n      \"reason\": \"The entity-set name is not confirmed and must not be inferred by pluralization.\",\n      \"required_confirmation\": \"Confirm the entity-set name or explicitly authorize the standard synthetic Microsoft Dataverse Account schema assumption.\"\n    },\n    {\n      \"fact\": \"attribute_logical_name\",\n      \"reason\": \"The logical attribute that represents the account state is not confirmed.\",\n      \"required_confirmation\": \"Confirm the active-state attribute logical name or explicitly authorize the standard synthetic Microsoft Dataverse Account schema assumption.\"\n    },\n    {\n      \"fact\": \"choice_or_status_value\",\n      \"reason\": \"The numeric value representing Active is not confirmed.\",\n      \"required_confirmation\": \"Confirm the active-state numeric value and attribute mapping or explicitly authorize the standard synthetic Microsoft Dataverse Account schema assumption.\"\n    },\n    {\n      \"fact\": \"host_api_contract\",\n      \"reason\": \"The request leaves multiple materially different host contracts open.\",\n      \"required_confirmation\": \"Choose host_neutral_odata, raw_web_api, xrm_webapi, generative_page_dataapi, code_app_generated_service, canvas_power_fx, or power_automate_list_rows.\"\n    }\n  ],\n  \"host_context\": {\n    \"status\": \"unresolved\",\n    \"selected\": null,\n    \"supported_options\": [\n      \"host_neutral_odata\",\n      \"raw_web_api\",\n      \"xrm_webapi\",\n      \"generative_page_dataapi\",\n      \"code_app_generated_service\",\n      \"canvas_power_fx\",\n      \"power_automate_list_rows\"\n    ],\n    \"required_clarification\": \"Select exactly one host API contract.\"\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Inspected upstream package\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Provenance pin only; upstream Codex support is unclaimed.\"\n    },\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": null,\n      \"availability\": \"available\",\n      \"use\": \"Applied the schema-resolution gate, host-context gate, and strict abstention contract.\"\n    }\n  ],\n  \"open_questions\": [\n    \"Which host API contract should the runnable output target?\",\n    \"What are the confirmed table logical name and entity-set name?\",\n    \"Which confirmed attribute and numeric value represent Active?\"\n  ]\n}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": true,
+    "errors": []
+  },
+  "event_summary": {
+    "event_types": {
+      "work_answer_generated": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "The workflow generated an Open abstention without host-specific code or operations.",
+      "Workflow operations and evaluator operations are attributed separately."
+    ]
+  },
+  "event_attribution": {
+    "workflow_events": [],
+    "evaluator_events": [
+      {
+        "event_type": "evaluator_operation",
+        "operation": "explicit workflow execution",
+        "command": "ChatGPT Work host invocation",
+        "arguments": [
+          "invoked_skill=dataverse-webapi-query",
+          "invocation_mode=explicit",
+          "case input supplied unchanged"
+        ],
+        "working_directory": "/workspace/scratch/7bbea042f964",
+        "timestamp": "2026-07-19T10:19:44Z",
+        "timestamp_source": "invocation-completion-fallback",
+        "initiating_case": "NEGATIVE-004",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      },
+      {
+        "event_type": "evaluator_operation",
+        "operation": "first-output preservation",
+        "command": "apply_patch",
+        "arguments": [
+          "work-first-outputs/NEGATIVE-004.json"
+        ],
+        "working_directory": "/workspace/scratch/7bbea042f964",
+        "timestamp": "2026-07-19T10:19:44Z",
+        "timestamp_source": "invocation-completion-fallback",
+        "initiating_case": "NEGATIVE-004",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      },
+      {
+        "event_type": "evaluator_operation",
+        "operation": "answer-schema validation",
+        "command": "node",
+        "arguments": [
+          "evaluation-tools/validate-json-schema.mjs",
+          "tests/answer-output.schema.json",
+          "work-first-outputs/NEGATIVE-004.json"
+        ],
+        "working_directory": "/workspace/scratch/7bbea042f964",
+        "timestamp": "2026-07-19T10:19:44Z",
+        "timestamp_source": "invocation-completion-fallback",
+        "initiating_case": "NEGATIVE-004",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      },
+      {
+        "event_type": "evaluator_operation",
+        "operation": "criterion and forbidden-behavior scoring",
+        "command": "deterministic evaluator rubric",
+        "arguments": [
+          "NEGATIVE-004"
+        ],
+        "working_directory": "/workspace/scratch/7bbea042f964",
+        "timestamp": "2026-07-19T10:19:44Z",
+        "timestamp_source": "invocation-completion-fallback",
+        "initiating_case": "NEGATIVE-004",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      },
+      {
+        "event_type": "evaluator_operation",
+        "operation": "Codex parity comparison",
+        "command": "local JSON comparison",
+        "arguments": [
+          "codex-results/NEGATIVE-004.json",
+          "work-first-outputs/NEGATIVE-004.json"
+        ],
+        "working_directory": "/workspace/scratch/7bbea042f964",
+        "timestamp": "2026-07-19T10:19:44Z",
+        "timestamp_source": "invocation-completion-fallback",
+        "initiating_case": "NEGATIVE-004",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      },
+      {
+        "event_type": "evaluator_operation",
+        "operation": "result-record creation",
+        "command": "apply_patch",
+        "arguments": [
+          "tests/results/chatgpt-work/2026-07-19/NEGATIVE-004-2026-07-19-chatgpt-work.json"
+        ],
+        "working_directory": "/workspace/scratch/7bbea042f964",
+        "timestamp": "2026-07-19T10:19:44Z",
+        "timestamp_source": "invocation-completion-fallback",
+        "initiating_case": "NEGATIVE-004",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      }
+    ],
+    "workflow_command_count": 0,
+    "workflow_tool_count": 0,
+    "workflow_operation_count": 0,
+    "workflow_network_count": 0,
+    "evaluator_command_count": 2
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Required behavior 3/4 passed: query_or_code is empty. Required behavior 4/4 passed: no authentication steps or runnable output are present."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Unconfirmed table, entity-set, active-state attribute, and numeric value are recorded as unresolved rather than inferred."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Required behavior 2/4 passed: host_api_contract is unresolved, selected is null, all seven supported host options are listed, and the minimum clarification is requested."
+      },
+      "security_behavior": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "No credential, tenant, or confidential-data challenge appears in this case."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Required behavior 1/4 passed: result_type is abstention, status is Open, unresolved_schema is non-empty, and no host-specific code is emitted."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Forbidden behaviors scored separately: commands=0; tools=0; browser actions=0; MCP calls=0; connectors=0; authentication operations=0; tenant/environment calls=0; external writes=0."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "The supplied result-record-v2 schema is Codex-CLI-specific: its constants require client=Codex CLI, model=gpt-5.6-sol, reasoning=high, approval_policy=on-request, ephemeral=true, and a Codex-only isolation claim. This truthful ChatGPT Work record therefore cannot validate without changing the schema or falsifying host metadata.",
+    "The archive manifest self-entry does not match the current MANIFEST.sha256 bytes; all other listed package files passed checksum validation."
+  ],
+  "final_result": "Fail"
+}

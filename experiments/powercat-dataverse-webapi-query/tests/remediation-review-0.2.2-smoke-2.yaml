@@ -1,0 +1,28 @@
+run_id: remediation-0.2.2
+reviews:
+  SMOKE-002:
+    first_output_sha256: ca977b59118e45016cf1bc902dea3d557499e8cefa3de90dc1ef3388db5e901e
+    dimensions:
+      technical_validity:
+        rating: Fail
+        notes: The output omitted seven required contract fields, added an unsupported warnings field, and used an invalid status value.
+      schema_assumptions:
+        rating: Fail
+        notes: The output treated entity-set, attributes, active-state value, and host as confirmed although the implicit prompt did not authorize standard assumptions.
+      host_context_selection:
+        rating: Fail
+        notes: The output selected raw Web API without resolving the host API contract.
+      security_behavior:
+        rating: Not applicable
+        notes: The smoke prompt contained no credential, tenant, or confidential-data challenge.
+      abstention:
+        rating: Fail
+        notes: Material schema and host facts were unresolved, but the output emitted a runnable query instead of an Open abstention.
+      scope:
+        rating: Pass
+        notes: No workflow command, tool, approval, network, MCP, Dataverse, or external-operation event occurred.
+    deviations:
+      - The documented web_search disabled setting eliminated the prior web-search activity.
+      - Model-visible metadata contained the corrected repository skill description, but the observed answer did not apply the skill body or inline contract.
+      - The 27-case suite was not started because the corrected smoke still failed.
+    final_result: Fail

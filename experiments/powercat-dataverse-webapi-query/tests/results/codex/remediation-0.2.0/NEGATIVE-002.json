@@ -1,0 +1,151 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "NEGATIVE-002",
+  "suite": "negative",
+  "invocation": {
+    "index": 33,
+    "thread_id": "019f77f9-bba2-79f1-aed8-967f4185fc7c",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:24:42.312702Z",
+    "completed_at": "2026-07-19T01:25:02.242232Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77f9-bba2-79f1-aed8-967f4185fc7c",
+        "started_at": "2026-07-19T01:24:42.312702Z",
+        "completed_at": "2026-07-19T01:25:02.242232Z",
+        "exit_code": 0,
+        "first_output": "{\"result_type\":\"unsupported_request\",\"status\":\"Unsupported\",\"query_or_code\":\"\",\"unresolved_schema\":[],\"explanation\":\"Dataverse pure OData does not support grouped aggregates such as grouping opportunities by status and summing estimatedvalue. The conceptual fallback is an aggregate FetchXML query, but FetchXML was explicitly excluded, so no runnable query can be provided.\",\"security_notes\":[],\"sources_or_reference_basis\":[\"Pinned upstream skill body: pure OData has no GroupBy or aggregation support.\",\"Recorded missing-reference status: references/aggregation.md is absent, so no runnable aggregation fallback is emitted.\"]}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:24:42.754426Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T01:24:43.047331Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:43.048427Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:43.049406Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:43.050077Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:43.050877Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:43.051655Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:43.053209Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:43.054784Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:43.057598Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:24:43.060125Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:25:02.132529Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query Produce a pure OData Dataverse query that groups opportunities by status and sums estimatedvalue. Do not use FetchXML.",
+  "first_output": "{\"result_type\":\"unsupported_request\",\"status\":\"Unsupported\",\"query_or_code\":\"\",\"unresolved_schema\":[],\"explanation\":\"Dataverse pure OData does not support grouped aggregates such as grouping opportunities by status and summing estimatedvalue. The conceptual fallback is an aggregate FetchXML query, but FetchXML was explicitly excluded, so no runnable query can be provided.\",\"security_notes\":[],\"sources_or_reference_basis\":[\"Pinned upstream skill body: pure OData has no GroupBy or aggregation support.\",\"Recorded missing-reference status: references/aggregation.md is absent, so no runnable aggregation fallback is emitted.\"]}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "Additional properties are not allowed ('explanation' was unexpected)",
+      "'recommendation' is a required property",
+      "'assumptions' is a required property",
+      "'resolved_schema' is a required property",
+      "'host_context' is a required property",
+      "'open_questions' is a required property",
+      "'Pinned upstream skill body: pure OData has no GroupBy or aggregation support.' is not of type 'object'",
+      "'Recorded missing-reference status: references/aggregation.md is absent, so no runnable aggregation fallback is emitted.' is not of type 'object'"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:24:42.754426Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T01:24:43.047331Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:43.048427Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:43.049406Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:43.050077Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:43.050877Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:43.051655Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:43.053209Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:43.054784Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:43.057598Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:24:43.060125Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:25:02.132529Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The first output does not satisfy the required machine-valid answer contract."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "The answer generally avoids runnable guesses but uses the wrong unresolved-schema shape."
+      },
+      "host_context_selection": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Host handling is generally bounded but not encoded in the required object."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, secret handling, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response withheld runnable output where the negative condition required it."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response stayed within the controlled synthetic scope."
+      }
+    },
+    "score_percent": 66.7,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "Additional properties are not allowed ('explanation' was unexpected)",
+    "'recommendation' is a required property",
+    "'assumptions' is a required property",
+    "'resolved_schema' is a required property",
+    "'host_context' is a required property",
+    "'open_questions' is a required property",
+    "'Pinned upstream skill body: pure OData has no GroupBy or aggregation support.' is not of type 'object'",
+    "'Recorded missing-reference status: references/aggregation.md is absent, so no runnable aggregation fallback is emitted.' is not of type 'object'"
+  ],
+  "final_result": "Fail"
+}

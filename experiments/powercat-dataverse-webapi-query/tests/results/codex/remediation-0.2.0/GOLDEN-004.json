@@ -1,0 +1,147 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "GOLDEN-004",
+  "suite": "golden",
+  "invocation": {
+    "index": 30,
+    "thread_id": "019f77f8-6dbb-75b0-a007-03403d9660d9",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:23:16.436658Z",
+    "completed_at": "2026-07-19T01:23:35.402535Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77f8-6dbb-75b0-a007-03403d9660d9",
+        "started_at": "2026-07-19T01:23:16.436658Z",
+        "completed_at": "2026-07-19T01:23:35.402535Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"request_summary\": \"Generative Page props.dataApi query for the first 10 active synthetic accounts, selecting name and accountnumber and ordering by createdon descending.\",\n  \"host_context\": \"Power Apps model-driven Generative Page using props.dataApi.queryTable.\",\n  \"assumptions\": [\n    \"The standard account table logical name is account.\",\n    \"The selected attribute logical names are name and accountnumber.\",\n    \"The ordering attribute logical name is createdon.\",\n    \"The standard active-state filter is statecode eq 0.\"\n  ],\n  \"resolved_schema\": [\n    \"table logical name: account\",\n    \"attribute logical name: name\",\n    \"attribute logical name: accountnumber\",\n    \"attribute logical name: createdon\",\n    \"state attribute logical name: statecode\",\n    \"active state value: 0\"\n  ],\n  \"unresolved_schema\": [],\n  \"query_or_code\": \"props.dataApi.queryTable(\\\"account\\\", {\\n  select: [\\\"name\\\", \\\"accountnumber\\\"],\\n  filter: \\\"statecode eq 0\\\",\\n  orderBy: \\\"createdon desc\\\",\\n  pageSize: 10\\n});\",\n  \"explanation\": [\n    \"queryTable uses the singular table logical name.\",\n    \"pageSize limits the requested page to 10 rows.\"\n  ],\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned upstream instruction body: Generative Page props.dataApi.queryTable host pattern and standard Dataverse logical-name conventions.\"\n  ]\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:23:16.809966Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T01:23:17.704072Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:17.704894Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:17.706081Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:17.706813Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:17.707437Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:17.708165Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:17.709718Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:17.711793Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:17.712801Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:17.714772Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:35.269047Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query Show the Generative Page props.dataApi query shape for a synthetic active-account list selecting name and accountnumber, ordered by createdon descending, page size 10. Use explicit standard logical-name assumptions.",
+  "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"request_summary\": \"Generative Page props.dataApi query for the first 10 active synthetic accounts, selecting name and accountnumber and ordering by createdon descending.\",\n  \"host_context\": \"Power Apps model-driven Generative Page using props.dataApi.queryTable.\",\n  \"assumptions\": [\n    \"The standard account table logical name is account.\",\n    \"The selected attribute logical names are name and accountnumber.\",\n    \"The ordering attribute logical name is createdon.\",\n    \"The standard active-state filter is statecode eq 0.\"\n  ],\n  \"resolved_schema\": [\n    \"table logical name: account\",\n    \"attribute logical name: name\",\n    \"attribute logical name: accountnumber\",\n    \"attribute logical name: createdon\",\n    \"state attribute logical name: statecode\",\n    \"active state value: 0\"\n  ],\n  \"unresolved_schema\": [],\n  \"query_or_code\": \"props.dataApi.queryTable(\\\"account\\\", {\\n  select: [\\\"name\\\", \\\"accountnumber\\\"],\\n  filter: \\\"statecode eq 0\\\",\\n  orderBy: \\\"createdon desc\\\",\\n  pageSize: 10\\n});\",\n  \"explanation\": [\n    \"queryTable uses the singular table logical name.\",\n    \"pageSize limits the requested page to 10 rows.\"\n  ],\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned upstream instruction body: Generative Page props.dataApi.queryTable host pattern and standard Dataverse logical-name conventions.\"\n  ]\n}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "Additional properties are not allowed ('explanation', 'request_summary' were unexpected)",
+      "'recommendation' is a required property",
+      "'open_questions' is a required property",
+      "'Power Apps model-driven Generative Page using props.dataApi.queryTable.' is not of type 'object'",
+      "['table logical name: account', 'attribute logical name: name', 'attribute logical name: accountnumber', 'attribute logical name: createdon', 'state attribute logical name: statecode', 'active state value: 0'] is not of type 'object'",
+      "'Pinned upstream instruction body: Generative Page props.dataApi.queryTable host pattern and standard Dataverse logical-name conventions.' is not of type 'object'"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:23:16.809966Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T01:23:17.704072Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:17.704894Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:17.706081Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:17.706813Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:17.707437Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:17.708165Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:17.709718Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:17.711793Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:17.712801Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:17.714772Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:35.269047Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The first output does not satisfy the required machine-valid answer contract."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Schema handling is visible but is not represented in the required resolved/unresolved contract."
+      },
+      "host_context_selection": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Host reasoning is visible but not encoded in the required host_context object."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, secret handling, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "This golden case was intended to have sufficient synthetic context."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response remained synthetic and query-focused."
+      }
+    },
+    "score_percent": 60.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "Additional properties are not allowed ('explanation', 'request_summary' were unexpected)",
+    "'recommendation' is a required property",
+    "'open_questions' is a required property",
+    "'Power Apps model-driven Generative Page using props.dataApi.queryTable.' is not of type 'object'",
+    "['table logical name: account', 'attribute logical name: name', 'attribute logical name: accountnumber', 'attribute logical name: createdon', 'state attribute logical name: statecode', 'active state value: 0'] is not of type 'object'",
+    "'Pinned upstream instruction body: Generative Page props.dataApi.queryTable host pattern and standard Dataverse logical-name conventions.' is not of type 'object'"
+  ],
+  "final_result": "Fail"
+}

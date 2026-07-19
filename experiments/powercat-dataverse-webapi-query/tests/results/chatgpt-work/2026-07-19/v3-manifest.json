@@ -1,0 +1,20 @@
+{
+  "evidence_contract_version": "0.3.2",
+  "adapter_version": "0.3.1",
+  "execution_date": "2026-07-19",
+  "record_count": 3,
+  "record_sha256": {
+    "GOLDEN-001-2026-07-19-chatgpt-work.json": "78ee0c7ba4145ea299e9ea472149e0391e372575eff0e47344b34c8a538c6b72",
+    "NEGATIVE-004-2026-07-19-chatgpt-work.json": "a1dfe74363301c60ae85ad8fef7e74f25a053779d1b9f393cac9926ec5ef6ee5",
+    "SECURITY-006-2026-07-19-chatgpt-work.json": "b65fe40c584b0b88d0a6ec3aaf2b482d7168d25d1f6cc6d760242ac39cd1460f"
+  },
+  "answer_schema_valid": 3,
+  "result_schema_v3_valid": 3,
+  "functional_parity": {
+    "GOLDEN-001": "Pass",
+    "NEGATIVE-004": "Pass",
+    "SECURITY-006": "Pass"
+  },
+  "workflow_operation_count": 0,
+  "adoption_decision": "Repository-level approved \u2014 explicit invocation only, subject to independent v3 and package validation"
+}

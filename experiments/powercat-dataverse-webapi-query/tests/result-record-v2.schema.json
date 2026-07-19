@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:power-platform-learning-lab:powercat-dataverse-webapi-query:result:2.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "case_id",
+    "suite",
+    "invocation",
+    "exact_input",
+    "first_output",
+    "answer_validation",
+    "event_summary",
+    "provenance",
+    "scoring",
+    "deviations",
+    "final_result"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "run_id": {"enum": ["remediation-0.2.0", "remediation-0.2.1", "remediation-0.2.2", "explicit-0.3.0", "explicit-0.3.1"]},
+    "phase": {"enum": ["smoke", "smoke2", "smoke3", "smoke4", "diagnostic", "suite"]},
+    "case_id": {"type": "string", "minLength": 1},
+    "suite": {"enum": ["smoke", "diagnostic", "trigger", "should-not-trigger", "golden", "negative", "security", "regression"]},
+    "fixture_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "invocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index", "thread_id", "client", "cli_version", "model", "reasoning",
+        "approval_policy", "sandbox", "cwd", "skill_path", "started_at",
+        "completed_at", "ephemeral", "isolation_claim", "shared_state",
+        "exit_code", "attempts"
+      ],
+      "properties": {
+        "index": {"type": "integer", "minimum": 21, "maximum": 200},
+        "thread_id": {"type": ["string", "null"]},
+        "client": {"const": "Codex CLI"},
+        "cli_version": {"type": "string", "minLength": 1},
+        "model": {"const": "gpt-5.6-sol"},
+        "reasoning": {"const": "high"},
+        "approval_policy": {"const": "on-request"},
+        "sandbox": {"enum": ["workspace-write", "read-only"]},
+        "cwd": {"type": "string", "minLength": 1},
+        "skill_path": {"type": "string", "minLength": 1},
+        "skill_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "answer_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "ephemeral": {"const": true},
+        "isolation_claim": {"const": "Separate Codex CLI invocation; --ephemeral disables session persistence only."},
+        "shared_state": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "exit_code": {"type": "integer"},
+        "attempts": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {"$ref": "#/$defs/attempt"}
+        }
+      }
+    },
+    "exact_input": {"type": "string", "minLength": 1},
+    "invocation_mode": {"const": "explicit"},
+    "invoked_skill": {"const": "dataverse-webapi-query"},
+    "selector_control": {"const": "$dataverse-webapi-query"},
+    "exact_case_input": {"type": "string", "minLength": 1},
+    "exact_case_input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "first_output_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "case_input_contains_legacy_selector": {"type": "boolean"},
+    "explicit_invocation_user_forced": {"type": "boolean"},
+    "input_transport": {
+      "const": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block."
+    },
+    "first_output": {"type": "string"},
+    "answer_validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applicable", "valid", "errors"],
+      "properties": {
+        "applicable": {"type": "boolean"},
+        "valid": {"type": ["boolean", "null"]},
+        "errors": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "event_summary": {"$ref": "#/$defs/events"},
+    "event_attribution": {"$ref": "#/$defs/event_attribution"},
+    "discovery_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository_skill_path", "implicit_prompt", "client_skill_load_event_exposed", "basis"],
+      "properties": {
+        "repository_skill_path": {"type": "string", "minLength": 1},
+        "implicit_prompt": {"type": "boolean"},
+        "client_skill_load_event_exposed": {"const": false},
+        "basis": {"type": "string", "minLength": 1}
+      }
+    },
+    "provenance": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_case", "source_result", "source_first_output_sha256", "provenance_kind"],
+          "properties": {
+            "source_case": {"type": "string", "minLength": 1},
+            "source_result": {"type": "string", "minLength": 1},
+            "source_result_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "source_first_output_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "source_schema_error": {"type": "string", "minLength": 1},
+            "provenance_kind": {"enum": ["retained-failed-output", "retained-prior-host-output", "retained-explicit-schema-failure"]}
+          }
+        }
+      ]
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimensions", "score_percent", "review_status"],
+      "properties": {
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["technical_validity", "schema_assumptions", "host_context_selection", "security_behavior", "abstention", "scope"],
+          "properties": {
+            "technical_validity": {"$ref": "#/$defs/score"},
+            "schema_assumptions": {"$ref": "#/$defs/score"},
+            "host_context_selection": {"$ref": "#/$defs/score"},
+            "security_behavior": {"$ref": "#/$defs/score"},
+            "abstention": {"$ref": "#/$defs/score"},
+            "scope": {"$ref": "#/$defs/score"}
+          }
+        },
+        "score_percent": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "review_status": {"enum": ["pending", "reviewed"]}
+      }
+    },
+    "deviations": {"type": "array", "items": {"type": "string"}},
+    "final_result": {"enum": ["Pending", "Pass", "Fail"]}
+  },
+  "allOf": [
+    {
+      "if": {"required": ["run_id"], "properties": {"run_id": {"const": "remediation-0.2.2"}}},
+      "then": {"required": ["phase", "fixture_sha256", "event_attribution", "discovery_evidence"]}
+    },
+    {
+      "if": {"required": ["run_id"], "properties": {"run_id": {"const": "explicit-0.3.0"}}},
+      "then": {
+        "required": [
+          "phase", "fixture_sha256", "event_attribution", "invocation_mode",
+          "invoked_skill", "selector_control", "exact_case_input",
+          "exact_case_input_sha256", "first_output_sha256",
+          "case_input_contains_legacy_selector", "explicit_invocation_user_forced",
+          "input_transport"
+        ]
+      }
+    },
+    {
+      "if": {"required": ["run_id"], "properties": {"run_id": {"const": "explicit-0.3.1"}}},
+      "then": {
+        "required": [
+          "phase", "fixture_sha256", "event_attribution", "invocation_mode",
+          "invoked_skill", "selector_control", "exact_case_input",
+          "exact_case_input_sha256", "first_output_sha256",
+          "case_input_contains_legacy_selector", "explicit_invocation_user_forced",
+          "input_transport"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt", "thread_id", "started_at", "completed_at", "exit_code", "first_output", "event_types", "tool_events", "approval_events", "diagnostics"],
+      "properties": {
+        "attempt": {"type": "integer", "minimum": 1, "maximum": 2},
+        "thread_id": {"type": ["string", "null"]},
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "exit_code": {"type": "integer"},
+        "first_output": {"type": "string"},
+        "event_types": {"type": "object", "additionalProperties": {"type": "integer"}},
+        "tool_events": {"type": "array", "items": {"type": "string"}},
+        "approval_events": {"type": "array", "items": {"type": "string"}},
+        "diagnostics": {"type": "array", "items": {"type": "string"}},
+        "workflow_events": {"type": "array", "items": {"$ref": "#/$defs/attributed_event"}},
+        "workflow_command_count": {"type": "integer", "minimum": 0},
+        "workflow_tool_count": {"type": "integer", "minimum": 0},
+        "workflow_operation_count": {"type": "integer", "minimum": 0},
+        "workflow_network_count": {"type": "integer", "minimum": 0},
+        "evaluator_event": {"$ref": "#/$defs/attributed_event"},
+        "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "events": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_types", "tool_events", "approval_events", "diagnostics"],
+      "properties": {
+        "event_types": {"type": "object", "additionalProperties": {"type": "integer"}},
+        "tool_events": {"type": "array", "items": {"type": "string"}},
+        "approval_events": {"type": "array", "items": {"type": "string"}},
+        "diagnostics": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "event_attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workflow_events", "evaluator_events", "workflow_command_count", "workflow_tool_count", "workflow_network_count", "evaluator_command_count"],
+      "properties": {
+        "workflow_events": {"type": "array", "items": {"$ref": "#/$defs/attributed_event"}},
+        "evaluator_events": {"type": "array", "items": {"$ref": "#/$defs/attributed_event"}},
+        "workflow_command_count": {"type": "integer", "minimum": 0},
+        "workflow_tool_count": {"type": "integer", "minimum": 0},
+        "workflow_operation_count": {"type": "integer", "minimum": 0},
+        "workflow_network_count": {"type": "integer", "minimum": 0},
+        "evaluator_command_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "attributed_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_type", "operation", "command", "arguments", "working_directory", "timestamp", "timestamp_source", "initiating_case", "origin", "item_id", "status", "raw_fields"],
+      "properties": {
+        "event_type": {"type": "string", "minLength": 1},
+        "operation": {"type": "string", "minLength": 1},
+        "command": {"type": "string", "minLength": 1},
+        "arguments": {"type": "array", "items": {"type": "string"}},
+        "working_directory": {"type": "string", "minLength": 1},
+        "timestamp": {"type": "string", "format": "date-time"},
+        "timestamp_source": {"enum": ["client-event", "invocation-completion-fallback", "harness-clock"]},
+        "initiating_case": {"type": "string", "minLength": 1},
+        "origin": {"enum": ["workflow", "evaluator_harness"]},
+        "item_id": {"type": ["string", "null"]},
+        "status": {"type": "string", "minLength": 1},
+        "raw_fields": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rating", "points", "notes"],
+      "properties": {
+        "rating": {"enum": ["Pass", "Partial", "Fail", "Not applicable", "Not assessed"]},
+        "points": {"type": ["integer", "null"], "minimum": 0, "maximum": 2},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

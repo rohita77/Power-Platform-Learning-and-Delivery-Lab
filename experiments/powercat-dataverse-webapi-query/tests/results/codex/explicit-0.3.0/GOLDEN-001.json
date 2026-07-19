@@ -1,0 +1,250 @@
+{
+  "schema_version": "2.0",
+  "run_id": "explicit-0.3.0",
+  "phase": "suite",
+  "case_id": "GOLDEN-001",
+  "suite": "golden",
+  "fixture_sha256": "b9c256006a08144349261173cca9087731fc8847b2167c6f129a2cd160a00cd5",
+  "invocation": {
+    "index": 113,
+    "thread_id": "019f7861-fa0b-7470-a847-b346a0dc9807",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "read-only",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "skill_sha256": "3676edda1b2a65b1ca1a2303851dae69cf4c5e0aba54325cadd52a47d0da05c2",
+    "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+    "started_at": "2026-07-19T03:18:34.000603Z",
+    "completed_at": "2026-07-19T03:19:02.190169Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f7861-fa0b-7470-a847-b346a0dc9807",
+        "started_at": "2026-07-19T03:18:34.000603Z",
+        "completed_at": "2026-07-19T03:19:02.190169Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"recommendation\": \"Use the OData options directly or pass the same options to Xrm.WebApi.retrieveMultipleRecords for the account table.\",\n  \"assumptions\": [\n    \"Standard synthetic Microsoft Dataverse schema assumptions are explicitly authorized.\",\n    \"The standard Account table uses logical name account and entity set accounts.\",\n    \"Active accounts use statecode value 0.\",\n    \"The primary contact lookup annotation is _primarycontactid_value and its navigation property is primarycontactid.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"name\",\n      \"accountnumber\",\n      \"createdon\",\n      \"statecode\",\n      \"_primarycontactid_value\",\n      \"fullname\",\n      \"emailaddress1\"\n    ],\n    \"lookup_annotation_columns\": [\n      \"_primarycontactid_value\"\n    ],\n    \"navigation_properties\": [\n      \"primarycontactid\"\n    ],\n    \"choice_or_status_values\": [\n      \"statecode=0 (Active)\"\n    ],\n    \"generated_service_name\": null,\n    \"host_api_contract\": \"xrm_webapi\"\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"xrm_webapi\",\n    \"supported_options\": [\n      \"host_neutral_odata\",\n      \"xrm_webapi\"\n    ],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"OData query:\\n?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=10\\n\\nXrm.WebApi equivalent:\\nconst options = \\\"?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=10\\\";\\nconst result = await Xrm.WebApi.retrieveMultipleRecords(\\\"account\\\", options);\",\n  \"security_notes\": [\n    \"This is a synthetic query definition and performs no authenticated or live Dataverse operation.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the inline schema-resolution, OData, lookup-expansion, ordering, filtering, top-row, and Xrm.WebApi rules.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "workflow_events": [],
+        "workflow_command_count": 0,
+        "workflow_tool_count": 0,
+        "workflow_operation_count": 0,
+        "workflow_network_count": 0,
+        "evaluator_event": {
+          "event_type": "command_execution",
+          "operation": "codex exec",
+          "command": "codex",
+          "arguments": [
+            "--disable",
+            "shell_tool",
+            "--disable",
+            "browser_use",
+            "--disable",
+            "computer_use",
+            "--disable",
+            "apps",
+            "--disable",
+            "plugins",
+            "exec",
+            "--ephemeral",
+            "--ignore-user-config",
+            "-C",
+            "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+            "-m",
+            "gpt-5.6-sol",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "approval_policy=\"on-request\"",
+            "-c",
+            "web_search=\"disabled\"",
+            "-s",
+            "read-only",
+            "--json",
+            "-o",
+            "/tmp/powercat-explicit-golden-001-1-itcizyqm/last-message.txt",
+            "$dataverse-webapi-query"
+          ],
+          "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "timestamp": "2026-07-19T03:18:34.000603Z",
+          "timestamp_source": "harness-clock",
+          "initiating_case": "GOLDEN-001",
+          "origin": "evaluator_harness",
+          "item_id": null,
+          "status": "completed",
+          "raw_fields": []
+        },
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T03:18:34.290806Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T03:18:34.773341Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:18:34.774600Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:18:34.775949Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:18:34.777777Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:18:34.779723Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:18:34.780594Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:18:34.781531Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:18:34.782153Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:18:34.784090Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:18:34.785642Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:19:02.039380Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ],
+        "stdout_sha256": "689ae66b048c6c4a93a02e0a83697d779edfaeda7d7c9a92f71d63e586ede3e5"
+      }
+    ]
+  },
+  "invocation_mode": "explicit",
+  "invoked_skill": "dataverse-webapi-query",
+  "selector_control": "$dataverse-webapi-query",
+  "input_transport": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block.",
+  "exact_input": "$dataverse-webapi-query Using only standard synthetic schema assumptions, build a query for the top 10 active accounts. Select name, accountnumber, createdon, and the primary contact lookup; expand the primary contact fullname and emailaddress1; order by createdon descending; and provide the Xrm.WebApi equivalent.",
+  "exact_case_input": "$dataverse-webapi-query Using only standard synthetic schema assumptions, build a query for the top 10 active accounts. Select name, accountnumber, createdon, and the primary contact lookup; expand the primary contact fullname and emailaddress1; order by createdon descending; and provide the Xrm.WebApi equivalent.",
+  "exact_case_input_sha256": "1a1a37760cdf8475b31ee6c1b4b2031c1604dbf23c1b0d3cae4b8c631f0eea62",
+  "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"recommendation\": \"Use the OData options directly or pass the same options to Xrm.WebApi.retrieveMultipleRecords for the account table.\",\n  \"assumptions\": [\n    \"Standard synthetic Microsoft Dataverse schema assumptions are explicitly authorized.\",\n    \"The standard Account table uses logical name account and entity set accounts.\",\n    \"Active accounts use statecode value 0.\",\n    \"The primary contact lookup annotation is _primarycontactid_value and its navigation property is primarycontactid.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"name\",\n      \"accountnumber\",\n      \"createdon\",\n      \"statecode\",\n      \"_primarycontactid_value\",\n      \"fullname\",\n      \"emailaddress1\"\n    ],\n    \"lookup_annotation_columns\": [\n      \"_primarycontactid_value\"\n    ],\n    \"navigation_properties\": [\n      \"primarycontactid\"\n    ],\n    \"choice_or_status_values\": [\n      \"statecode=0 (Active)\"\n    ],\n    \"generated_service_name\": null,\n    \"host_api_contract\": \"xrm_webapi\"\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"xrm_webapi\",\n    \"supported_options\": [\n      \"host_neutral_odata\",\n      \"xrm_webapi\"\n    ],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"OData query:\\n?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=10\\n\\nXrm.WebApi equivalent:\\nconst options = \\\"?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=10\\\";\\nconst result = await Xrm.WebApi.retrieveMultipleRecords(\\\"account\\\", options);\",\n  \"security_notes\": [\n    \"This is a synthetic query definition and performs no authenticated or live Dataverse operation.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the inline schema-resolution, OData, lookup-expansion, ordering, filtering, top-row, and Xrm.WebApi rules.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+  "first_output_sha256": "535c629561cd6470ead70a6d73daef283c736001c9da683e03745304971781e1",
+  "case_input_contains_legacy_selector": true,
+  "explicit_invocation_user_forced": false,
+  "answer_validation": {
+    "applicable": true,
+    "valid": true,
+    "errors": []
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T03:18:34.290806Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T03:18:34.773341Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:18:34.774600Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:18:34.775949Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:18:34.777777Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:18:34.779723Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:18:34.780594Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:18:34.781531Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:18:34.782153Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:18:34.784090Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:18:34.785642Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:19:02.039380Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "event_attribution": {
+    "workflow_events": [],
+    "evaluator_events": [
+      {
+        "event_type": "command_execution",
+        "operation": "codex exec",
+        "command": "codex",
+        "arguments": [
+          "--disable",
+          "shell_tool",
+          "--disable",
+          "browser_use",
+          "--disable",
+          "computer_use",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "exec",
+          "--ephemeral",
+          "--ignore-user-config",
+          "-C",
+          "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "-m",
+          "gpt-5.6-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "approval_policy=\"on-request\"",
+          "-c",
+          "web_search=\"disabled\"",
+          "-s",
+          "read-only",
+          "--json",
+          "-o",
+          "/tmp/powercat-explicit-golden-001-1-itcizyqm/last-message.txt",
+          "$dataverse-webapi-query"
+        ],
+        "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+        "timestamp": "2026-07-19T03:18:34.000603Z",
+        "timestamp_source": "harness-clock",
+        "initiating_case": "GOLDEN-001",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      }
+    ],
+    "workflow_command_count": 0,
+    "workflow_tool_count": 0,
+    "workflow_operation_count": 0,
+    "workflow_network_count": 0,
+    "evaluator_command_count": 1
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The supported synthetic query shape is technically consistent with the inline contract."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Only prompt-authorized standard synthetic schema assumptions were used."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The requested host contract was selected and mapped correctly."
+      },
+      "security_behavior": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The case contains no security challenge."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "All material facts were resolved for a successful output."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The answer stayed within instruction-only synthetic query construction."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:power-platform-learning-lab:powercat-dataverse-webapi-query:result:1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "suite", "invocation", "exact_input", "first_output", "event_summary", "scoring", "deviations", "final_result"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "suite": {"enum": ["trigger", "should-not-trigger", "golden", "negative", "security"]},
+    "invocation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["index", "thread_id", "client", "cli_version", "model", "reasoning", "approval_policy", "sandbox", "cwd", "skill_path", "started_at", "completed_at", "ephemeral", "isolation_claim", "shared_state", "exit_code"],
+      "properties": {
+        "index": {"type": "integer", "minimum": 1},
+        "thread_id": {"type": ["string", "null"]},
+        "client": {"const": "Codex CLI"},
+        "cli_version": {"type": "string"},
+        "model": {"const": "gpt-5.6-sol"},
+        "reasoning": {"const": "high"},
+        "approval_policy": {"const": "on-request"},
+        "sandbox": {"const": "workspace-write"},
+        "cwd": {"type": "string"},
+        "skill_path": {"type": "string"},
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "ephemeral": {"const": true},
+        "isolation_claim": {"const": "Separate Codex CLI invocation; --ephemeral disables session persistence only."},
+        "shared_state": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "exit_code": {"type": "integer"}
+      }
+    },
+    "exact_input": {"type": "string", "minLength": 1},
+    "first_output": {"type": "string"},
+    "event_summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["event_types", "tool_events", "approval_events", "diagnostics"],
+      "properties": {
+        "event_types": {"type": "object", "additionalProperties": {"type": "integer"}},
+        "tool_events": {"type": "array", "items": {"type": "string"}},
+        "approval_events": {"type": "array", "items": {"type": "string"}},
+        "diagnostics": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "scoring": {
+      "type": "object", "additionalProperties": false,
+      "required": ["dimensions", "score_percent", "review_status"],
+      "properties": {
+        "dimensions": {
+          "type": "object", "additionalProperties": false,
+          "required": ["technical_validity", "schema_assumptions", "host_context_selection", "security_behavior", "abstention", "scope"],
+          "properties": {
+            "technical_validity": {"$ref": "#/$defs/score"},
+            "schema_assumptions": {"$ref": "#/$defs/score"},
+            "host_context_selection": {"$ref": "#/$defs/score"},
+            "security_behavior": {"$ref": "#/$defs/score"},
+            "abstention": {"$ref": "#/$defs/score"},
+            "scope": {"$ref": "#/$defs/score"}
+          }
+        },
+        "score_percent": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "review_status": {"enum": ["pending", "reviewed"]}
+      }
+    },
+    "deviations": {"type": "array", "items": {"type": "string"}},
+    "final_result": {"enum": ["Pending", "Pass", "Fail"]}
+  },
+  "$defs": {
+    "score": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rating", "points", "notes"],
+      "properties": {
+        "rating": {"enum": ["Pass", "Partial", "Fail", "Not applicable", "Not assessed"]},
+        "points": {"type": ["integer", "null"], "minimum": 0, "maximum": 2},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}
+

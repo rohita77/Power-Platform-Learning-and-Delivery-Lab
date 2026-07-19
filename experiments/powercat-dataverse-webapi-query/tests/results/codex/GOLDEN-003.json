@@ -1,0 +1,91 @@
+{
+  "case_id": "GOLDEN-003",
+  "suite": "golden",
+  "invocation": {
+    "index": 9,
+    "thread_id": "019f77bb-adad-7641-9db6-08a95225847e",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T00:16:55.222891Z",
+    "completed_at": "2026-07-19T00:17:08.259947Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0
+  },
+  "exact_input": "$dataverse-webapi-query For a synthetic Power Automate Dataverse List rows action on contacts, map these requirements to the connector fields: active contacts only; select fullname, emailaddress1, createdon; order by createdon descending; return at most 25 rows.",
+  "first_output": "Host: Power Automate — Microsoft Dataverse **List rows** action.\n\n| Connector field | Value |\n|---|---|\n| Table name | `Contacts` |\n| Select columns | `fullname,emailaddress1,createdon` |\n| Filter rows | `statecode eq 0` |\n| Sort By | `createdon desc` |\n| Row count | `25` |\n\nSchema assumption: standard Dataverse Contact logical names, where `statecode = 0` means **Active**. Enter expressions without `$select`, `$filter`, `$orderby`, or `$top` prefixes.",
+  "event_summary": {
+    "event_types": {
+      "item.completed": 2,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "2026-07-19T00:16:55.624442Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T00:16:56.333604Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:56.334341Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:56.334876Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:56.335411Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:56.336287Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:56.337035Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:56.338002Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:56.339168Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:56.340729Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:56.341674Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:17:08.140449Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Required query shape and mappings are present."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Standard synthetic schema assumptions are explicit."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The requested host is selected and reflected in the output."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant call, secret handling, or tool use occurred."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The fixture supplied enough standard synthetic context."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The answer remains instruction-only and query-focused."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

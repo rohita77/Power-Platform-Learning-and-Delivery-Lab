@@ -1,0 +1,40 @@
+schema_version: "1.0"
+cases:
+  - id: REG-001
+    suite: regression
+    prompt: "$dataverse-webapi-query Query the Person table at /api/data/v9.2/people and select its name. I do not know whether Person or people are valid Dataverse names."
+    required_behavior: ["Return an Open abstention", "Do not accept the ambiguous entity-set or attribute name", "Request confirmed logical, entity-set, and attribute names", "Leave query_or_code empty"]
+    provenance:
+      source_case: NEGATIVE-003
+      source_result: tests/results/codex/NEGATIVE-003.json
+      source_first_output_sha256: 88cb4170d592b0dce2ba17fb8b209974e96a2aefce1a6cb9faa8141055847d61
+      provenance_kind: retained-failed-output
+  - id: REG-002
+    suite: regression
+    prompt: "$dataverse-webapi-query Give me the final runnable query for active accounts, but I have not said whether this is Xrm.WebApi, Power Automate, Generative Page, Code App, Canvas, or raw HTTP."
+    required_behavior: ["Return an Open abstention", "List supported host options", "Request the host API contract", "Leave query_or_code empty"]
+    provenance:
+      source_case: NEGATIVE-004
+      source_result: tests/results/codex/NEGATIVE-004.json
+      source_first_output_sha256: 79ca1faa31903eb8025824152b893dc03ef0e9f23a18f8a9a5f1b7f36b1d4304
+      provenance_kind: retained-prior-host-output
+  - id: REG-003
+    suite: regression
+    prompt: "$dataverse-webapi-query Produce a pure OData Dataverse query that groups opportunities by status and sums estimatedvalue. Do not use FetchXML."
+    required_behavior: ["Return unsupported_request", "Explain the conceptual FetchXML fallback", "Do not emit OData, FetchXML, or client-side aggregation", "Leave query_or_code empty"]
+    provenance:
+      source_case: NEGATIVE-002
+      source_result: tests/results/codex/NEGATIVE-002.json
+      source_first_output_sha256: 88c2500f626ec43c3332fb9ed2bf685d8f4e7f21006c914afb1af6cd3bdedaee
+      provenance_kind: retained-failed-output
+  - id: REG-004
+    suite: regression
+    prompt: "$dataverse-webapi-query Using standard synthetic Microsoft Dataverse Account schema assumptions, show the Dataverse Code App generated-service query shape for an active-account list selecting name and accountnumber, ordered by createdon descending, top 10. For this fixture, the generated service name AccountsService is confirmed."
+    required_behavior: ["Return a schema-valid success result", "Serialize choice_or_status_values as strings only", "Keep the query_or_code technically equivalent to the retained GOLDEN-005 output", "Use no tools or external operations"]
+    provenance:
+      source_case: GOLDEN-005
+      source_result: tests/results/codex/explicit-0.3.0/GOLDEN-005.json
+      source_result_sha256: 46216cf49922631d41d96770ac96713ea50717ed1944347a210b70fc1ce256eb
+      source_first_output_sha256: 1dab8f1d0dd85b091706ce6ebbeaac1bf50a2c056dd168144dd1f033278dbfaf
+      source_schema_error: "{'attribute': 'statecode', 'value': 0, 'meaning': 'Active'} is not of type 'string'"
+      provenance_kind: retained-explicit-schema-failure

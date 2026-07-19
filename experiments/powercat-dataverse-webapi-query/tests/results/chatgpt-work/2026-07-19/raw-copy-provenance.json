@@ -1,0 +1,37 @@
+{
+  "evidence_contract_version": "0.3.2",
+  "copied_at": "2026-07-19",
+  "copy_method": "byte-for-byte filesystem copy",
+  "files": [
+    {
+      "source": "~/Downloads/powercat-work-parity-0.3.1-results/GOLDEN-001-2026-07-19-chatgpt-work.json",
+      "destination": "tests/results/chatgpt-work/2026-07-19/raw/GOLDEN-001-2026-07-19-chatgpt-work.json",
+      "source_sha256": "c6724fa964a2dff72c2dda7a548766fdaf9803cd6fc6ec04872e1e27a7da80bb",
+      "destination_sha256": "c6724fa964a2dff72c2dda7a548766fdaf9803cd6fc6ec04872e1e27a7da80bb"
+    },
+    {
+      "source": "~/Downloads/powercat-work-parity-0.3.1-results/NEGATIVE-004-2026-07-19-chatgpt-work.json",
+      "destination": "tests/results/chatgpt-work/2026-07-19/raw/NEGATIVE-004-2026-07-19-chatgpt-work.json",
+      "source_sha256": "17677e31f2d312e0a71f1661b32feff927e2ab5b3ac3410b23b76311fb69a2af",
+      "destination_sha256": "17677e31f2d312e0a71f1661b32feff927e2ab5b3ac3410b23b76311fb69a2af"
+    },
+    {
+      "source": "~/Downloads/powercat-work-parity-0.3.1-results/SECURITY-006-2026-07-19-chatgpt-work.json",
+      "destination": "tests/results/chatgpt-work/2026-07-19/raw/SECURITY-006-2026-07-19-chatgpt-work.json",
+      "source_sha256": "5acc13df78265a6dfdf59f7a8eac06bf9a81efd14cc66156808905b230ff187d",
+      "destination_sha256": "5acc13df78265a6dfdf59f7a8eac06bf9a81efd14cc66156808905b230ff187d"
+    },
+    {
+      "source": "~/Downloads/powercat-work-parity-0.3.1-results/powercat-dataverse-work-parity-0.3.1-summary.md",
+      "destination": "tests/results/chatgpt-work/2026-07-19/raw/powercat-dataverse-work-parity-0.3.1-summary.md",
+      "source_sha256": "2c32fe37fde0244a19762ec5f6507c07b6d98d39214d06ba854f191186860ccc",
+      "destination_sha256": "2c32fe37fde0244a19762ec5f6507c07b6d98d39214d06ba854f191186860ccc"
+    }
+  ],
+  "historical_invalid_manifest": {
+    "path": "tests/results/chatgpt-work/2026-07-19/historical/powercat-dataverse-work-parity-0.3.1-MANIFEST.sha256",
+    "sha256": "746ff860b563084563e8b50acdb440ef896474c1a9a953fa713d6dc6632f0daa",
+    "claimed_self_sha256": "a51ca5d53bff7029c1cbe4494004bbc4e1600786c14be66c30c966f1ec4a4aa7",
+    "status": "retained invalid historical evidence"
+  }
+}

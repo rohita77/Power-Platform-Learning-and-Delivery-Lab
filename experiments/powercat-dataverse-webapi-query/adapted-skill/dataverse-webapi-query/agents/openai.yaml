@@ -1,0 +1,6 @@
+interface:
+  display_name: "Dataverse Web API Query"
+  short_description: "Build safe synthetic Dataverse query shapes"
+  default_prompt: "Use $dataverse-webapi-query to build a synthetic Dataverse query with strict schema and host checks."
+policy:
+  allow_implicit_invocation: true

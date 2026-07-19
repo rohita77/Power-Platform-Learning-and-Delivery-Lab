@@ -31,7 +31,7 @@
 |---|---|---|---|---|---|---|
 | [`microsoft/Dataverse-skills`](https://github.com/microsoft/Dataverse-skills) | GitHub Copilot, Claude Code, Codex app/CLI, Cursor | **Installed** in Codex; installation-only | Installed plugin **v1.6.0**; upstream `main` commit [`2e651c7226dbe57a7c364e475f1849a99576e99a`](https://github.com/microsoft/Dataverse-skills/commit/2e651c7226dbe57a7c364e475f1849a99576e99a) | Codex marketplace upgrade; re-pin and review before accepting | Codex installation/version confirmed; no `dv-connect`, auth, MCP registration, tenant query, write, admin, or security test | Public upstream source allowed in personal zone; organisational Dataverse connection is **prohibited under current baseline** |
 | [`microsoft/power-platform-skills`](https://github.com/microsoft/power-platform-skills) | Claude Code and GitHub Copilot CLI in the upstream README | Not installed; static-review-only | `main` commit [`54dbb6c6f903f4987440828a6548d72117813697`](https://github.com/microsoft/power-platform-skills/commit/54dbb6c6f903f4987440828a6548d72117813697); no repository release published | Upstream installer can enable auto-update for its supported clients; manual marketplace install/update also documented | Not executed on ChatGPT Work or Codex; Claude/GitHub paths untested and unavailable | Public source review allowed; tenant-connected tools and solution content stay in organisational zone |
-| [`microsoft/power-cat-skills`](https://github.com/microsoft/power-cat-skills) | Microsoft Scout and GitHub Copilot CLI | Not installed; static-review-only | `main` commit [`f4bb4ad5bf55e2d50076292bd6301f6337d38083`](https://github.com/microsoft/power-cat-skills/commit/f4bb4ad5bf55e2d50076292bd6301f6337d38083); no repository release published | Add/update the upstream marketplace on a supported client; re-pin after review | Not executed; Microsoft Scout/GitHub Copilot unavailable; Codex compatibility not claimed by upstream | Public source review allowed; admin, Dataverse, Canvas, solution, and tenant evidence remain organisational-zone only |
+| [`microsoft/power-cat-skills`](https://github.com/microsoft/power-cat-skills) | Microsoft Scout and GitHub Copilot CLI; upstream Codex support unclaimed | Marketplace not installed; isolated repository adapter `dataverse-webapi-query` is **repository-level approved — explicit invocation only** | Registered pin [`f4bb4ad5bf55e2d50076292bd6301f6337d38083`](https://github.com/microsoft/power-cat-skills/commit/f4bb4ad5bf55e2d50076292bd6301f6337d38083); adapter tested at [`33bc38456abb83f27daad968b748c8085f2a78ef`](https://github.com/microsoft/power-cat-skills/commit/33bc38456abb83f27daad968b748c8085f2a78ef); selected blob `8791590eeca8b1c697856c8a5cca9fbab3ef12b6` is identical at both pins | Upstream marketplace updates remain unsupported locally; re-pin and rerun the isolated adapter evidence before accepting a material change | Codex `explicit-0.3.1` full suite 28/28; ChatGPT Work parity 3/3; strict v3 Codex and Work profiles passed; implicit invocation unproved and unsupported | Public/synthetic query construction only; authentication, tenant access, tokens, live metadata, MCP, confidential data, and operational Dataverse changes prohibited |
 | [`microsoft/skills-for-copilot-studio`](https://github.com/microsoft/skills-for-copilot-studio) | Claude Code, GitHub Copilot CLI, and VS Code with the Copilot Studio extension | Not installed; static-review-only | `main` commit [`d68d1a25cd3e6bdd80f8e046913a055c98a005fd`](https://github.com/microsoft/skills-for-copilot-studio/commit/d68d1a25cd3e6bdd80f8e046913a055c98a005fd) | Marketplace auto-update for Claude; manual GitHub Copilot update; VS Code extension auto-update when enabled | Not executed; supported AI clients are unavailable/unsubscribed; VS Code presence alone is not a test | Public YAML/templates may be reviewed; clone/pull/push/sync against organisational Copilot Studio is **prohibited from the personal zone** |
 
 Supported-client statements describe what each upstream repository documents; they do not expand this lab’s subscriptions, permissions, or test matrix.
@@ -102,7 +102,18 @@ Marketplace of Power Pages, model-apps, MCP-apps, code-apps-preview, mobile-app,
 
 ### Scope and local status
 
-Power CAT-curated plugins cover adoption/storytelling, Canvas analysis and migration, code apps, Dataverse Web API queries, developer-environment governance, pro-code evaluation, admin digest, Power Automate solution review, and Power Pages review. Upstream support is stated for Microsoft Scout and GitHub Copilot CLI, neither an active runtime for this lab.
+Power CAT-curated plugins cover adoption/storytelling, Canvas analysis and migration, code apps, Dataverse Web API queries, developer-environment governance, pro-code evaluation, admin digest, Power Automate solution review, and Power Pages review. Upstream support is stated for Microsoft Scout and GitHub Copilot CLI; upstream Codex support remains unclaimed. The marketplace remains uninstalled and reference-only except for the isolated specialist recorded below.
+
+### Approved local specialist: `dataverse-webapi-query`
+
+- **Status:** Repository-level approved — explicit invocation only.
+- **Invocation:** `$dataverse-webapi-query` must be selected explicitly. Implicit invocation is unproved, unsupported, and not relied upon.
+- **Upstream provenance:** Registered pin `f4bb4ad5bf55e2d50076292bd6301f6337d38083`; inspected and adapter-tested pin `33bc38456abb83f27daad968b748c8085f2a78ef`; selected blob `8791590eeca8b1c697856c8a5cca9fbab3ef12b6` at both pins; selected plugin subtree materially unchanged.
+- **Codex evidence:** `explicit-0.3.1` full suite 28/28; 29/29 strict v3-profile records including the gated smoke.
+- **ChatGPT Work evidence:** `GOLDEN-001`, `NEGATIVE-004`, and `SECURITY-006` functional parity 3/3; 3/3 strict v3-profile records.
+- **Permitted:** Public/synthetic OData, narrow supported FetchXML conversion, and supported host-specific query construction.
+- **Prohibited:** Authentication, tenant access, tokens, live metadata, MCP, confidential data, plugin installation, and operational Dataverse changes.
+- **Operational routing:** Authenticated reads, data changes, metadata, solutions, security, administration, and other tenant work route separately to explicitly authorized Microsoft Dataverse `dv-*` skills under their own environment and approval controls.
 
 ### Prerequisites and tools/MCP
 
@@ -116,16 +127,16 @@ Power CAT-curated plugins cover adoption/storytelling, Canvas analysis and migra
 - Upstream warns that plugins can edit files, run shell commands, and invoke MCP, and recommends narrow approvals rather than allow-all modes.
 - Governance/admin skills can create environments or inspect operational information; those actions require organisational-zone authorization.
 
-### Local adaptation and test plan
+### Remaining marketplace adaptation and test plan
 
-- Retain as a reference catalog until a narrow capability is selected.
+- Retain every specialist other than `dataverse-webapi-query` as a reference catalog until separately selected and evaluated.
 - Do not install a companion plugin implicitly; register and approve every transitive dependency first.
 - Prefer static analysis of synthetic solution packages for an initial active-client experiment; exclude admin digest and tenant-management operations under the current boundary.
 
-**Test status:** Static-review-only; supported clients unavailable; Codex path unclaimed and untested.
+**Test status:** `dataverse-webapi-query` repository adapter approved for explicit Codex/Work use; all other Power CAT specialists remain static-review-only. Upstream Codex support remains unclaimed.
 
 **Local owner:** Rohit.
-**Revalidate:** 2026-08-01.
+**Revalidate:** 2026-08-01 and before any install, upgrade, authentication, MCP registration, tenant-connected test, material upstream change, or adapter promotion.
 
 ## 7. `microsoft/skills-for-copilot-studio`
 

@@ -1,0 +1,93 @@
+{
+  "case_id": "NEGATIVE-003",
+  "suite": "negative",
+  "invocation": {
+    "index": 14,
+    "thread_id": "019f77bc-eff2-7a02-b4cb-3fcad2736315",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T00:18:17.603181Z",
+    "completed_at": "2026-07-19T00:18:31.168994Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0
+  },
+  "exact_input": "$dataverse-webapi-query Query the Person table at /api/data/v9.2/people and select its name. I do not know whether Person or people are valid Dataverse names.",
+  "first_output": "Host: raw Dataverse Web API.\n\nAssuming the entity-set name is `people` and the column logical name is `name`, the query is:\n\n```http\nGET <environment-url>/api/data/v9.2/people?$select=name\n```\n\nThese names are unverified. `Person` may only be a display name, and `people` may not be its entity-set name. Confirm the table’s **Logical name** and **Entity set name** under Power Apps → Tables → Person → Properties, and confirm the name column’s logical name under Columns. Then replace `people` and `name` accordingly.",
+  "event_summary": {
+    "event_types": {
+      "item.completed": 2,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "2026-07-19T00:18:18.163811Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T00:18:18.831443Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:18.832043Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:18.832642Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:18.833341Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:18.834097Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:18.834630Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:18.835582Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:18.836797Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:18.838826Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:18.840937Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:18:31.049399Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "It warns that names are unverified but still emits a runnable-looking assumed query."
+      },
+      "schema_assumptions": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "It accepts people and name as assumptions despite the fixture explicitly marking them unresolved."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Host context is requested or safely bounded."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant call, secret handling, or tool use occurred."
+      },
+      "abstention": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "It should have returned placeholders and requested confirmation before emitting a query."
+      },
+      "scope": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "The later warning is in scope, but the assumed path violates the strict schema boundary."
+      }
+    },
+    "score_percent": 50.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "Ambiguous entity-set and column names were used before confirmation; first output preserved unchanged."
+  ],
+  "final_result": "Fail"
+}

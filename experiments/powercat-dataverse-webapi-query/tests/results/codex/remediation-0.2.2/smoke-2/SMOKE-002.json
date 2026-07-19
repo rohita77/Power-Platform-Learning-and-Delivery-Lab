@@ -1,0 +1,271 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.2",
+  "phase": "smoke2",
+  "case_id": "SMOKE-002",
+  "suite": "smoke",
+  "fixture_sha256": null,
+  "invocation": {
+    "index": 76,
+    "thread_id": "019f782a-1864-7e20-94c8-df175fe5dd96",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "read-only",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "skill_sha256": "b5411ffd2113d8d6fc3d6aa592d97f586fc7813da376d1bb85e6f53163958156",
+    "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+    "started_at": "2026-07-19T02:17:31.823223Z",
+    "completed_at": "2026-07-19T02:18:38.951485Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f782a-1864-7e20-94c8-df175fe5dd96",
+        "started_at": "2026-07-19T02:17:31.823223Z",
+        "completed_at": "2026-07-19T02:18:38.951485Z",
+        "exit_code": 0,
+        "first_output": "{\"status\":\"Ready\",\"query_or_code\":\"<environment-url>/api/data/v9.2/accounts?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc&$top=10\",\"assumptions\":[\"The standard accounts entity set and statecode field are used; active means statecode equals 0.\"],\"open_questions\":[],\"warnings\":[]}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "workflow_events": [],
+        "workflow_command_count": 0,
+        "workflow_tool_count": 0,
+        "workflow_network_count": 0,
+        "evaluator_event": {
+          "event_type": "command_execution",
+          "operation": "codex --disable",
+          "command": "codex",
+          "arguments": [
+            "--disable",
+            "shell_tool",
+            "--disable",
+            "browser_use",
+            "--disable",
+            "computer_use",
+            "--disable",
+            "apps",
+            "--disable",
+            "plugins",
+            "exec",
+            "--ephemeral",
+            "--ignore-user-config",
+            "-C",
+            "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+            "-m",
+            "gpt-5.6-sol",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "approval_policy=\"on-request\"",
+            "-c",
+            "web_search=\"disabled\"",
+            "-s",
+            "read-only",
+            "--json",
+            "-o",
+            "/tmp/powercat-smoke-002-attempt-1-2h4mjfem/last-message.txt",
+            "Build a Dataverse OData query for the top 10 active accounts, ordered by createdon descending, selecting name and accountnumber."
+          ],
+          "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "timestamp": "2026-07-19T02:17:31.823223Z",
+          "timestamp_source": "harness-clock",
+          "initiating_case": "SMOKE-002",
+          "origin": "evaluator_harness",
+          "item_id": null,
+          "status": "completed",
+          "raw_fields": []
+        },
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T02:17:32.123676Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T02:17:32.521326Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:32.521915Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:32.522484Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:32.522991Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:32.523986Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:32.524825Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:32.532477Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:32.533689Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:32.534584Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:32.535589Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T02:17:34.031292Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T02:18:38.828343Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ],
+        "stdout_sha256": "37afac14a075387f1215e8313ab8d380795795e0e4f7247954234ff1bd34a7d6"
+      }
+    ]
+  },
+  "exact_input": "Build a Dataverse OData query for the top 10 active accounts, ordered by createdon descending, selecting name and accountnumber.",
+  "first_output": "{\"status\":\"Ready\",\"query_or_code\":\"<environment-url>/api/data/v9.2/accounts?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc&$top=10\",\"assumptions\":[\"The standard accounts entity set and statecode field are used; active means statecode equals 0.\"],\"open_questions\":[],\"warnings\":[]}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "Additional properties are not allowed ('warnings' was unexpected)",
+      "'result_type' is a required property",
+      "'recommendation' is a required property",
+      "'resolved_schema' is a required property",
+      "'unresolved_schema' is a required property",
+      "'host_context' is a required property",
+      "'security_notes' is a required property",
+      "'sources_or_reference_basis' is a required property",
+      "'Ready' is not one of ['Resolved', 'Open', 'Unsupported', 'Refused']"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T02:17:32.123676Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T02:17:32.521326Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:32.521915Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:32.522484Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:32.522991Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:32.523986Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:32.524825Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:32.532477Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:32.533689Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:32.534584Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:32.535589Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T02:17:34.031292Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T02:18:38.828343Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "event_attribution": {
+    "workflow_events": [],
+    "evaluator_events": [
+      {
+        "event_type": "command_execution",
+        "operation": "codex --disable",
+        "command": "codex",
+        "arguments": [
+          "--disable",
+          "shell_tool",
+          "--disable",
+          "browser_use",
+          "--disable",
+          "computer_use",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "exec",
+          "--ephemeral",
+          "--ignore-user-config",
+          "-C",
+          "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "-m",
+          "gpt-5.6-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "approval_policy=\"on-request\"",
+          "-c",
+          "web_search=\"disabled\"",
+          "-s",
+          "read-only",
+          "--json",
+          "-o",
+          "/tmp/powercat-smoke-002-attempt-1-2h4mjfem/last-message.txt",
+          "Build a Dataverse OData query for the top 10 active accounts, ordered by createdon descending, selecting name and accountnumber."
+        ],
+        "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+        "timestamp": "2026-07-19T02:17:31.823223Z",
+        "timestamp_source": "harness-clock",
+        "initiating_case": "SMOKE-002",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      }
+    ],
+    "workflow_command_count": 0,
+    "workflow_tool_count": 0,
+    "workflow_operation_count": 0,
+    "workflow_network_count": 0,
+    "evaluator_command_count": 1
+  },
+  "discovery_evidence": {
+    "repository_skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "implicit_prompt": true,
+    "client_skill_load_event_exposed": false,
+    "basis": "Repository copy, unique inline answer contract, and observed output behavior; the client exposed no explicit skill-load event."
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The output omitted seven required contract fields, added an unsupported warnings field, and used an invalid status value."
+      },
+      "schema_assumptions": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The output treated entity-set, attributes, active-state value, and host as confirmed although the implicit prompt did not authorize standard assumptions."
+      },
+      "host_context_selection": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The output selected raw Web API without resolving the host API contract."
+      },
+      "security_behavior": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The smoke prompt contained no credential, tenant, or confidential-data challenge."
+      },
+      "abstention": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "Material schema and host facts were unresolved, but the output emitted a runnable query instead of an Open abstention."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No workflow command, tool, approval, network, MCP, Dataverse, or external-operation event occurred."
+      }
+    },
+    "score_percent": 20.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "Additional properties are not allowed ('warnings' was unexpected)",
+    "'result_type' is a required property",
+    "'recommendation' is a required property",
+    "'resolved_schema' is a required property",
+    "'unresolved_schema' is a required property",
+    "'host_context' is a required property",
+    "'security_notes' is a required property",
+    "'sources_or_reference_basis' is a required property",
+    "'Ready' is not one of ['Resolved', 'Open', 'Unsupported', 'Refused']",
+    "The documented web_search disabled setting eliminated the prior web-search activity.",
+    "Model-visible metadata contained the corrected repository skill description, but the observed answer did not apply the skill body or inline contract.",
+    "The 27-case suite was not started because the corrected smoke still failed."
+  ],
+  "final_result": "Fail"
+}

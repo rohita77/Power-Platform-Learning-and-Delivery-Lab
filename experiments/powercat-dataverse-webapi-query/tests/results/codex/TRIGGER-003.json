@@ -1,0 +1,90 @@
+{
+  "case_id": "TRIGGER-003",
+  "suite": "trigger",
+  "invocation": {
+    "index": 3,
+    "thread_id": "019f77ba-240c-7be1-9313-471c4b6a1e77",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T00:15:15.006957Z",
+    "completed_at": "2026-07-19T00:15:42.808101Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0
+  },
+  "exact_input": "Why does Xrm.WebApi.retrieveMultipleRecords('account', '?$select=name&$filter=statecode eq 0') fail when I add an unresolved custom lookup expansion?",
+  "first_output": "Assuming a model-driven app using Dataverse online: the base query is valid. It fails because `$expand` must reference an exact, case-sensitive **navigation property defined in Dataverse metadata**.\n\nFor custom lookups, these are different:\n\n- Lookup column logical name\n- Lookup value property, such as `_<lookup-logical-name>_value`\n- Related table entity-set name\n- Lookup navigation property required by `$expand`\n\nUsing any but the navigation property causes Dataverse to reject the entire request—typically with “property not found” or “untyped value” errors—before executing the valid filter.\n\nThe shape should be:\n\n```javascript\nXrm.WebApi.retrieveMultipleRecords(\n  \"account\",\n  \"?$select=name&$filter=statecode eq 0\" +\n  \"&$expand=<lookup-navigation-property>($select=<related-column>)\"\n);\n```\n\nConfirm both names from the environment’s table/relationship metadata. Don’t infer the navigation property from the custom lookup’s display name or use `_<lookup>_value`; custom and polymorphic lookups often have navigation names that differ from their column logical names.",
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "2026-07-19T00:15:15.481162Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:15.484674Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:15.485603Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:15.487350Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:15.488700Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:15.489876Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:15.492258Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:15.494391Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:15.501188Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:15.505056Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:15:42.649965Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The natural-language query task received the expected query guidance."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Standard or unresolved schema assumptions are identified."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Host context is stated or preserved."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant call, secret handling, or tool use occurred."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response withheld the unresolved navigation property."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response matches the query-construction scope."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

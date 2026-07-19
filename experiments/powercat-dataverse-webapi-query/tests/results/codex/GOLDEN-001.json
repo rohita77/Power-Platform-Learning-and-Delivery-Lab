@@ -1,0 +1,91 @@
+{
+  "case_id": "GOLDEN-001",
+  "suite": "golden",
+  "invocation": {
+    "index": 7,
+    "thread_id": "019f77bb-2ceb-71c1-ba8a-5941fd5ae9f7",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T00:16:21.581495Z",
+    "completed_at": "2026-07-19T00:16:38.231251Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0
+  },
+  "exact_input": "$dataverse-webapi-query Using only standard synthetic schema assumptions, build a query for the top 10 active accounts. Select name, accountnumber, createdon, and the primary contact lookup; expand the primary contact fullname and emailaddress1; order by createdon descending; and provide the Xrm.WebApi equivalent.",
+  "first_output": "Host contexts: Dataverse Web API v9.2 and model-driven app JavaScript (`Xrm.WebApi`).\n\nStandard synthetic schema assumptions:\n\n- Account entity set/logical name: `accounts` / `account`\n- Active account: `statecode eq 0`\n- Primary-contact lookup value: `_primarycontactid_value`\n- Navigation property: `primarycontactid`\n\n### Web API\n\n```http\nGET <environment-url>/api/data/v9.2/accounts?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=10\n```\n\n### Xrm.WebApi\n\n```javascript\nconst options =\n  \"?$select=name,accountnumber,createdon,_primarycontactid_value\" +\n  \"&$filter=statecode eq 0\" +\n  \"&$expand=primarycontactid($select=fullname,emailaddress1)\" +\n  \"&$orderby=createdon desc\" +\n  \"&$top=10\";\n\nconst result = await Xrm.WebApi.retrieveMultipleRecords(\n  \"account\",\n  options,\n  10\n);\n\nconsole.log(result.entities);\n```\n\nEach returned account contains the lookup GUID in `_primarycontactid_value`; the expanded contact is available under `primarycontactid`.",
+  "event_summary": {
+    "event_types": {
+      "item.completed": 2,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "2026-07-19T00:16:22.660555Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T00:16:23.280596Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:23.282117Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:23.284379Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:23.285716Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:23.286925Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:23.287910Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:23.289448Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:23.291419Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:23.292794Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:23.295703Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T00:16:38.105912Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Required query shape and mappings are present."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Standard synthetic schema assumptions are explicit."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The requested host is selected and reflected in the output."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant call, secret handling, or tool use occurred."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The fixture supplied enough standard synthetic context."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The answer remains instruction-only and query-focused."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

@@ -1,0 +1,30 @@
+schema_version: "1.0"
+cases:
+  - id: NEGATIVE-001
+    suite: negative
+    prompt: "$dataverse-webapi-query Build a query for custom display table Project Milestone selecting Project Code and Delivery Owner. No logical names or schema metadata are available."
+    required_behavior: ["Abstain from inventing logical and entity-set names", "Request only the minimum non-confidential schema names"]
+  - id: NEGATIVE-002
+    suite: negative
+    prompt: "$dataverse-webapi-query Produce a pure OData Dataverse query that groups opportunities by status and sums estimatedvalue. Do not use FetchXML."
+    required_behavior: ["Reject the unsupported pure-OData grouping premise", "Explain the FetchXML fallback without tenant execution"]
+  - id: NEGATIVE-003
+    suite: negative
+    prompt: "$dataverse-webapi-query Query the Person table at /api/data/v9.2/people and select its name. I do not know whether Person or people are valid Dataverse names."
+    required_behavior: ["Do not accept the ambiguous entity-set name", "Request confirmed logical and entity-set names"]
+  - id: NEGATIVE-004
+    suite: negative
+    prompt: "$dataverse-webapi-query Give me the final runnable query for active accounts, but I have not said whether this is Xrm.WebApi, Power Automate, Generative Page, Code App, Canvas, or raw HTTP."
+    required_behavior: ["Return an Open abstention", "Identify the unresolved host API contract and supported host options", "Leave query_or_code empty", "Do not provide authentication steps"]
+  - id: NEGATIVE-005
+    suite: negative
+    prompt: "$dataverse-webapi-query The only basis for this requested production query pattern is a copied note last verified on 2024-01-01, its revalidation has expired, and no current source is available. Produce a final runnable query anyway."
+    required_behavior: ["Return an Open abstention", "Mark source_currency unresolved", "Request current authoritative or pinned source evidence", "Leave query_or_code empty"]
+  - id: NEGATIVE-006
+    suite: negative
+    prompt: "$dataverse-webapi-query Synthetic schema note A says the table logical name and entity set are new_project and new_projects. Synthetic schema note B says they are cr123_project and cr123_projects. Neither note is authoritative. Build the final Xrm.WebApi query selecting the name column."
+    required_behavior: ["Return an Open abstention", "Record the conflicting table and entity-set evidence", "Request authoritative confirmation", "Leave query_or_code empty"]
+  - id: NEGATIVE-007
+    suite: negative
+    prompt: "$dataverse-webapi-query Using confirmed synthetic schema account, accounts, and name, produce the exact runnable Dataverse Web API continuation URL for a FetchXML paging cookie represented by <paging-cookie>. The referenced webapi-syntax.md is unavailable."
+    required_behavior: ["Return unsupported_request", "Record the missing reference_detail", "Explain that exact paging-cookie mechanics are outside the reviewed material", "Leave query_or_code empty"]

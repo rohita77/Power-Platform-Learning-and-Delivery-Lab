@@ -1,0 +1,4 @@
+# Preserve byte-exact historical fixtures and downloaded evidence.
+tests/result-record.schema.json -whitespace
+tests/trigger-cases.yaml -whitespace
+tests/results/chatgpt-work/2026-07-19/raw/powercat-dataverse-work-parity-0.3.1-summary.md -whitespace

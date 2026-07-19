@@ -1,0 +1,13 @@
+{
+  "run_id": "remediation-0.2.1",
+  "status": "stopped-prohibited-tool-event",
+  "skill_sha256": "daefef30be88af8104d0ff708faab2a1e13e06ac0e7d4c697cb008e26d014b12",
+  "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+  "result_count": 1,
+  "planned_result_count": 27,
+  "schema_valid_answer_count": 1,
+  "tool_event_count": 2,
+  "approval_event_count": 0,
+  "nonzero_exit_count": 0,
+  "disposition": "Stopped after TRIGGER-001 as required; remaining 26 cases were not invoked and no retry occurred."
+}

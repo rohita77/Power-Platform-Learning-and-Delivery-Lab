@@ -1,0 +1,155 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "GOLDEN-003",
+  "suite": "golden",
+  "invocation": {
+    "index": 29,
+    "thread_id": "019f77f7-d7d3-7290-adfc-24dca44d9c4d",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:22:38.162143Z",
+    "completed_at": "2026-07-19T01:23:16.434712Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77f7-d7d3-7290-adfc-24dca44d9c4d",
+        "started_at": "2026-07-19T01:22:38.162143Z",
+        "completed_at": "2026-07-19T01:23:16.434712Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"summary\": \"The Power Automate List rows host, selected columns, descending created-date ordering, and 25-row limit are resolved. The active-contact filter cannot be generated until its choice column and numeric value are confirmed.\",\n  \"host_context\": \"Power Automate Dataverse connector — List rows\",\n  \"query_or_code\": \"\",\n  \"unresolved_schema\": [\n    \"Logical column representing the contact active/inactive state\",\n    \"Integer choice value representing Active\"\n  ],\n  \"confirmation_needed\": [\n    \"Confirm that the synthetic standard Dataverse assumption is authorized: the contact state column is statecode and Active has integer value 0.\"\n  ],\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned upstream instruction body: Power Automate List rows field mapping and schema-resolution requirements\",\n    \"Recorded missing-reference status: host-specific reference files are unavailable\"\n  ]\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:22:38.647638Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T01:22:39.302799Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:39.303582Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:39.304193Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:39.304856Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:39.305653Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:39.306450Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:39.308160Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:39.309865Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:39.311255Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:39.312886Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:23:16.296819Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query For a synthetic Power Automate Dataverse List rows action on contacts, map these requirements to the connector fields: active contacts only; select fullname, emailaddress1, createdon; order by createdon descending; return at most 25 rows.",
+  "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"summary\": \"The Power Automate List rows host, selected columns, descending created-date ordering, and 25-row limit are resolved. The active-contact filter cannot be generated until its choice column and numeric value are confirmed.\",\n  \"host_context\": \"Power Automate Dataverse connector — List rows\",\n  \"query_or_code\": \"\",\n  \"unresolved_schema\": [\n    \"Logical column representing the contact active/inactive state\",\n    \"Integer choice value representing Active\"\n  ],\n  \"confirmation_needed\": [\n    \"Confirm that the synthetic standard Dataverse assumption is authorized: the contact state column is statecode and Active has integer value 0.\"\n  ],\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned upstream instruction body: Power Automate List rows field mapping and schema-resolution requirements\",\n    \"Recorded missing-reference status: host-specific reference files are unavailable\"\n  ]\n}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "Additional properties are not allowed ('confirmation_needed', 'summary' were unexpected)",
+      "'recommendation' is a required property",
+      "'assumptions' is a required property",
+      "'resolved_schema' is a required property",
+      "'open_questions' is a required property",
+      "'Power Automate Dataverse connector — List rows' is not of type 'object'",
+      "'Pinned upstream instruction body: Power Automate List rows field mapping and schema-resolution requirements' is not of type 'object'",
+      "'Recorded missing-reference status: host-specific reference files are unavailable' is not of type 'object'",
+      "'Logical column representing the contact active/inactive state' is not of type 'object'",
+      "'Integer choice value representing Active' is not of type 'object'"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:22:38.647638Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T01:22:39.302799Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:39.303582Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:39.304193Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:39.304856Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:39.305653Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:39.306450Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:39.308160Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:39.309865Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:39.311255Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:39.312886Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:23:16.296819Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The first output does not satisfy the required machine-valid answer contract."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Schema handling is visible but is not represented in the required resolved/unresolved contract."
+      },
+      "host_context_selection": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Host reasoning is visible but not encoded in the required host_context object."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, secret handling, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "This golden case was intended to have sufficient synthetic context."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response remained synthetic and query-focused."
+      }
+    },
+    "score_percent": 60.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "Additional properties are not allowed ('confirmation_needed', 'summary' were unexpected)",
+    "'recommendation' is a required property",
+    "'assumptions' is a required property",
+    "'resolved_schema' is a required property",
+    "'open_questions' is a required property",
+    "'Power Automate Dataverse connector — List rows' is not of type 'object'",
+    "'Pinned upstream instruction body: Power Automate List rows field mapping and schema-resolution requirements' is not of type 'object'",
+    "'Recorded missing-reference status: host-specific reference files are unavailable' is not of type 'object'",
+    "'Logical column representing the contact active/inactive state' is not of type 'object'",
+    "'Integer choice value representing Active' is not of type 'object'"
+  ],
+  "final_result": "Fail"
+}

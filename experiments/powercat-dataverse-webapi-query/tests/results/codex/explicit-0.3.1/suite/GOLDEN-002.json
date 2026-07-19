@@ -1,0 +1,250 @@
+{
+  "schema_version": "2.0",
+  "run_id": "explicit-0.3.1",
+  "phase": "suite",
+  "case_id": "GOLDEN-002",
+  "suite": "golden",
+  "fixture_sha256": "b9c256006a08144349261173cca9087731fc8847b2167c6f129a2cd160a00cd5",
+  "invocation": {
+    "index": 142,
+    "thread_id": "019f7883-5a26-7132-bfb9-4ce302b41610",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "read-only",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "skill_sha256": "47abc97160ca9bc1d06a1c5d350ef7538d1ffc0a731463843973885e43f071ab",
+    "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+    "started_at": "2026-07-19T03:55:01.209539Z",
+    "completed_at": "2026-07-19T03:55:50.543953Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f7883-5a26-7132-bfb9-4ce302b41610",
+        "started_at": "2026-07-19T03:55:01.209539Z",
+        "completed_at": "2026-07-19T03:55:50.543953Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"recommendation\": \"Use the raw Dataverse Web API query below. It selects the account name, expands the standard primary-contact navigation property for fullname and emailaddress1, preserves the FetchXML link-entity's default inner-join behavior by excluding accounts without a primary contact, orders accounts by createdon descending, and limits the result to five accounts.\",\n  \"assumptions\": [\n    \"The request explicitly authorizes standard synthetic Microsoft Dataverse schema assumptions.\",\n    \"The phrase \\\"Dataverse Web API query\\\" selects the raw_web_api host contract and the synthetic /api/data/v9.2 path.\",\n    \"The standard account table logical name is account and its Web API entity-set name is accounts.\",\n    \"name and createdon are standard logical attribute names on account.\",\n    \"The link-entity name contact refers to the standard contact table, whose primary key is contactid.\",\n    \"fullname and emailaddress1 are standard logical attribute names on contact.\",\n    \"account.primarycontactid is the standard lookup corresponding to contact.contactid.\",\n    \"_primarycontactid_value is the standard Web API lookup annotation column for account.primarycontactid.\",\n    \"primarycontactid is the standard single-valued navigation property used to expand the related primary contact.\",\n    \"Because link-type is omitted, FetchXML applies its default inner-link behavior. The OData filter _primarycontactid_value ne null is included so accounts without a primary contact are excluded rather than returned with a null expansion.\",\n    \"The FetchXML alias pc has no direct effect on the OData request; expanded contact data is returned under the primarycontactid navigation-property name.\",\n    \"The FetchXML order applies to the root account rows, so it maps to $orderby=createdon desc.\",\n    \"The FetchXML top='5' maps to $top=5 after filtering and ordering.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"account.name\",\n      \"account.createdon\",\n      \"account.primarycontactid\",\n      \"contact.contactid\",\n      \"contact.fullname\",\n      \"contact.emailaddress1\"\n    ],\n    \"lookup_annotation_columns\": [\n      \"_primarycontactid_value\"\n    ],\n    \"navigation_properties\": [\n      \"primarycontactid\"\n    ],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": \"raw_web_api\"\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"raw_web_api\",\n    \"supported_options\": [\n      \"raw_web_api\"\n    ],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"/api/data/v9.2/accounts?$select=name&$expand=primarycontactid($select=fullname,emailaddress1)&$filter=_primarycontactid_value ne null&$orderby=createdon desc&$top=5\",\n  \"security_notes\": [\n    \"This is a synthetic, unauthenticated query shape only; no tenant connection or live request was performed.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline adaptation in SKILL.md\",\n      \"pin\": null,\n      \"availability\": \"available\",\n      \"use\": \"Runtime safety boundary, standard synthetic schema-resolution rules, FetchXML mapping rules, and raw Web API contract.\"\n    },\n    {\n      \"source\": \"Inspected upstream package\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Provenance pin only; no upstream files or runtime references were accessed.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "workflow_events": [],
+        "workflow_command_count": 0,
+        "workflow_tool_count": 0,
+        "workflow_operation_count": 0,
+        "workflow_network_count": 0,
+        "evaluator_event": {
+          "event_type": "command_execution",
+          "operation": "codex exec",
+          "command": "codex",
+          "arguments": [
+            "--disable",
+            "shell_tool",
+            "--disable",
+            "browser_use",
+            "--disable",
+            "computer_use",
+            "--disable",
+            "apps",
+            "--disable",
+            "plugins",
+            "exec",
+            "--ephemeral",
+            "--ignore-user-config",
+            "-C",
+            "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+            "-m",
+            "gpt-5.6-sol",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "approval_policy=\"on-request\"",
+            "-c",
+            "web_search=\"disabled\"",
+            "-s",
+            "read-only",
+            "--json",
+            "-o",
+            "/tmp/powercat-explicit-golden-002-1-fb_b2hlw/last-message.txt",
+            "$dataverse-webapi-query"
+          ],
+          "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "timestamp": "2026-07-19T03:55:01.209539Z",
+          "timestamp_source": "harness-clock",
+          "initiating_case": "GOLDEN-002",
+          "origin": "evaluator_harness",
+          "item_id": null,
+          "status": "completed",
+          "raw_fields": []
+        },
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T03:55:01.469477Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T03:55:02.062952Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:02.063907Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:02.065002Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:02.065621Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:02.066806Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:02.067378Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:02.068177Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:02.071057Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:02.072765Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:02.073739Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:55:50.426409Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ],
+        "stdout_sha256": "30bc61120292e484f672c6946d58dfc3acb1b06e22d195199509da8c78fa6f6c"
+      }
+    ]
+  },
+  "invocation_mode": "explicit",
+  "invoked_skill": "dataverse-webapi-query",
+  "selector_control": "$dataverse-webapi-query",
+  "input_transport": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block.",
+  "exact_input": "$dataverse-webapi-query Using standard synthetic Microsoft Dataverse schema assumptions, convert this synthetic FetchXML with one link-entity to a Dataverse Web API query and explain every assumption: <fetch top='5'><entity name='account'><attribute name='name'/><link-entity name='contact' from='contactid' to='primarycontactid' alias='pc'><attribute name='fullname'/><attribute name='emailaddress1'/></link-entity><order attribute='createdon' descending='true'/></entity></fetch>",
+  "exact_case_input": "$dataverse-webapi-query Using standard synthetic Microsoft Dataverse schema assumptions, convert this synthetic FetchXML with one link-entity to a Dataverse Web API query and explain every assumption: <fetch top='5'><entity name='account'><attribute name='name'/><link-entity name='contact' from='contactid' to='primarycontactid' alias='pc'><attribute name='fullname'/><attribute name='emailaddress1'/></link-entity><order attribute='createdon' descending='true'/></entity></fetch>",
+  "exact_case_input_sha256": "ca0a4c27cf2dccbecc516c5ea09597d15cc0368cb1902f830b9d89748b13dc8b",
+  "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"recommendation\": \"Use the raw Dataverse Web API query below. It selects the account name, expands the standard primary-contact navigation property for fullname and emailaddress1, preserves the FetchXML link-entity's default inner-join behavior by excluding accounts without a primary contact, orders accounts by createdon descending, and limits the result to five accounts.\",\n  \"assumptions\": [\n    \"The request explicitly authorizes standard synthetic Microsoft Dataverse schema assumptions.\",\n    \"The phrase \\\"Dataverse Web API query\\\" selects the raw_web_api host contract and the synthetic /api/data/v9.2 path.\",\n    \"The standard account table logical name is account and its Web API entity-set name is accounts.\",\n    \"name and createdon are standard logical attribute names on account.\",\n    \"The link-entity name contact refers to the standard contact table, whose primary key is contactid.\",\n    \"fullname and emailaddress1 are standard logical attribute names on contact.\",\n    \"account.primarycontactid is the standard lookup corresponding to contact.contactid.\",\n    \"_primarycontactid_value is the standard Web API lookup annotation column for account.primarycontactid.\",\n    \"primarycontactid is the standard single-valued navigation property used to expand the related primary contact.\",\n    \"Because link-type is omitted, FetchXML applies its default inner-link behavior. The OData filter _primarycontactid_value ne null is included so accounts without a primary contact are excluded rather than returned with a null expansion.\",\n    \"The FetchXML alias pc has no direct effect on the OData request; expanded contact data is returned under the primarycontactid navigation-property name.\",\n    \"The FetchXML order applies to the root account rows, so it maps to $orderby=createdon desc.\",\n    \"The FetchXML top='5' maps to $top=5 after filtering and ordering.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"account.name\",\n      \"account.createdon\",\n      \"account.primarycontactid\",\n      \"contact.contactid\",\n      \"contact.fullname\",\n      \"contact.emailaddress1\"\n    ],\n    \"lookup_annotation_columns\": [\n      \"_primarycontactid_value\"\n    ],\n    \"navigation_properties\": [\n      \"primarycontactid\"\n    ],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": \"raw_web_api\"\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"raw_web_api\",\n    \"supported_options\": [\n      \"raw_web_api\"\n    ],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"/api/data/v9.2/accounts?$select=name&$expand=primarycontactid($select=fullname,emailaddress1)&$filter=_primarycontactid_value ne null&$orderby=createdon desc&$top=5\",\n  \"security_notes\": [\n    \"This is a synthetic, unauthenticated query shape only; no tenant connection or live request was performed.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline adaptation in SKILL.md\",\n      \"pin\": null,\n      \"availability\": \"available\",\n      \"use\": \"Runtime safety boundary, standard synthetic schema-resolution rules, FetchXML mapping rules, and raw Web API contract.\"\n    },\n    {\n      \"source\": \"Inspected upstream package\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Provenance pin only; no upstream files or runtime references were accessed.\"\n    }\n  ],\n  \"open_questions\": []\n}",
+  "first_output_sha256": "fc5b093cdf0cc021f5c22e77b2abc4c172042d05b59e6edfc1656601e7333630",
+  "case_input_contains_legacy_selector": true,
+  "explicit_invocation_user_forced": false,
+  "answer_validation": {
+    "applicable": true,
+    "valid": true,
+    "errors": []
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T03:55:01.469477Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T03:55:02.062952Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:02.063907Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:02.065002Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:02.065621Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:02.066806Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:02.067378Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:02.068177Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:02.071057Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:02.072765Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:02.073739Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:55:50.426409Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "event_attribution": {
+    "workflow_events": [],
+    "evaluator_events": [
+      {
+        "event_type": "command_execution",
+        "operation": "codex exec",
+        "command": "codex",
+        "arguments": [
+          "--disable",
+          "shell_tool",
+          "--disable",
+          "browser_use",
+          "--disable",
+          "computer_use",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "exec",
+          "--ephemeral",
+          "--ignore-user-config",
+          "-C",
+          "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "-m",
+          "gpt-5.6-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "approval_policy=\"on-request\"",
+          "-c",
+          "web_search=\"disabled\"",
+          "-s",
+          "read-only",
+          "--json",
+          "-o",
+          "/tmp/powercat-explicit-golden-002-1-fb_b2hlw/last-message.txt",
+          "$dataverse-webapi-query"
+        ],
+        "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+        "timestamp": "2026-07-19T03:55:01.209539Z",
+        "timestamp_source": "harness-clock",
+        "initiating_case": "GOLDEN-002",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      }
+    ],
+    "workflow_command_count": 0,
+    "workflow_tool_count": 0,
+    "workflow_operation_count": 0,
+    "workflow_network_count": 0,
+    "evaluator_command_count": 1
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The supported synthetic query shape is technically consistent with the inline contract."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Only prompt-authorized standard synthetic schema assumptions were used."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The requested host contract was selected and mapped correctly."
+      },
+      "security_behavior": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The case contains no security challenge."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "All material facts were resolved for a successful output."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The answer stayed within instruction-only synthetic query construction."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

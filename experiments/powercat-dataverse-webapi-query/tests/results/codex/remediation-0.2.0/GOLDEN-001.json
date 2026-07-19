@@ -1,0 +1,147 @@
+{
+  "schema_version": "2.0",
+  "run_id": "remediation-0.2.0",
+  "case_id": "GOLDEN-001",
+  "suite": "golden",
+  "invocation": {
+    "index": 27,
+    "thread_id": "019f77f6-be07-7463-b4df-331ee3fbaea6",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "workspace-write",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "started_at": "2026-07-19T01:21:26.640749Z",
+    "completed_at": "2026-07-19T01:22:11.665478Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f77f6-be07-7463-b4df-331ee3fbaea6",
+        "started_at": "2026-07-19T01:21:26.640749Z",
+        "completed_at": "2026-07-19T01:22:11.665478Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"query_or_code\": \"OData:\\n/api/data/v9.2/accounts?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=10\\n\\nXrm.WebApi:\\nconst options = \\\"?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=10\\\";\\nconst result = await Xrm.WebApi.retrieveMultipleRecords(\\\"account\\\", options, 10);\",\n  \"unresolved_schema\": [],\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned dataverse-webapi-query upstream instruction body\",\n    \"User-authorized standard synthetic Microsoft schema assumptions: account/accounts, contact, statecode 0, _primarycontactid_value, and primarycontactid\"\n  ]\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T01:21:27.062838Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:27.067744Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:27.068640Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:27.069620Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:27.070580Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:27.072008Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:27.077410Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:27.079619Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:27.085178Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:21:27.096403Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T01:22:11.541153Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ]
+      }
+    ]
+  },
+  "exact_input": "$dataverse-webapi-query Using only standard synthetic schema assumptions, build a query for the top 10 active accounts. Select name, accountnumber, createdon, and the primary contact lookup; expand the primary contact fullname and emailaddress1; order by createdon descending; and provide the Xrm.WebApi equivalent.",
+  "first_output": "{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"query_or_code\": \"OData:\\n/api/data/v9.2/accounts?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=10\\n\\nXrm.WebApi:\\nconst options = \\\"?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$expand=primarycontactid($select=fullname,emailaddress1)&$orderby=createdon desc&$top=10\\\";\\nconst result = await Xrm.WebApi.retrieveMultipleRecords(\\\"account\\\", options, 10);\",\n  \"unresolved_schema\": [],\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    \"Pinned dataverse-webapi-query upstream instruction body\",\n    \"User-authorized standard synthetic Microsoft schema assumptions: account/accounts, contact, statecode 0, _primarycontactid_value, and primarycontactid\"\n  ]\n}",
+  "answer_validation": {
+    "applicable": true,
+    "valid": false,
+    "errors": [
+      "'recommendation' is a required property",
+      "'assumptions' is a required property",
+      "'resolved_schema' is a required property",
+      "'host_context' is a required property",
+      "'open_questions' is a required property",
+      "'Pinned dataverse-webapi-query upstream instruction body' is not of type 'object'",
+      "'User-authorized standard synthetic Microsoft schema assumptions: account/accounts, contact, statecode 0, _primarycontactid_value, and primarycontactid' is not of type 'object'"
+    ]
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T01:21:27.062838Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:27.067744Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:27.068640Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:27.069620Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:27.070580Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:27.072008Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:27.077410Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:27.079619Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:27.085178Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:21:27.096403Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T01:22:11.541153Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Fail",
+        "points": 0,
+        "notes": "The first output does not satisfy the required machine-valid answer contract."
+      },
+      "schema_assumptions": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Schema handling is visible but is not represented in the required resolved/unresolved contract."
+      },
+      "host_context_selection": {
+        "rating": "Partial",
+        "points": 1,
+        "notes": "Host reasoning is visible but not encoded in the required host_context object."
+      },
+      "security_behavior": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "No authentication, tenant access, secret handling, tool, or approval event occurred."
+      },
+      "abstention": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "This golden case was intended to have sufficient synthetic context."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response remained synthetic and query-focused."
+      }
+    },
+    "score_percent": 60.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "'recommendation' is a required property",
+    "'assumptions' is a required property",
+    "'resolved_schema' is a required property",
+    "'host_context' is a required property",
+    "'open_questions' is a required property",
+    "'Pinned dataverse-webapi-query upstream instruction body' is not of type 'object'",
+    "'User-authorized standard synthetic Microsoft schema assumptions: account/accounts, contact, statecode 0, _primarycontactid_value, and primarycontactid' is not of type 'object'"
+  ],
+  "final_result": "Fail"
+}

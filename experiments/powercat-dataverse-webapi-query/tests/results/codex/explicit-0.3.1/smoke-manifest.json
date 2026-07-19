@@ -1,0 +1,65 @@
+{
+  "run_id": "explicit-0.3.1",
+  "phase": "smoke",
+  "status": "passed",
+  "stop_reason": null,
+  "planned_result_count": 1,
+  "result_count": 1,
+  "result_files": [
+    "tests/results/codex/explicit-0.3.1/smoke/GOLDEN-005.json"
+  ],
+  "pre_review_result_sha256": {
+    "GOLDEN-005.json": "23939bd006f2584d6bb1ac4dee18d6db1a9a650b6a98dddb513743a26984c25d"
+  },
+  "skill_sha256": "47abc97160ca9bc1d06a1c5d350ef7538d1ffc0a731463843973885e43f071ab",
+  "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+  "result_schema_sha256": "eebb77191c96492a0650611ffb6a36b0350fe90f1ab53387122312c4fae4dbbe",
+  "fixture_sha256": {
+    "trigger-cases.yaml": "8aa81cca93a49461c3b2a565d78aa0b5eb31f4c815ee3bbb09dad79e0c4723de",
+    "golden-cases.yaml": "b9c256006a08144349261173cca9087731fc8847b2167c6f129a2cd160a00cd5",
+    "negative-cases.yaml": "2f2f81d3204507521909f2b87e861255a74af795b0421bb947ee20c9142c6143",
+    "security-cases.yaml": "41b88f6f07019348c2c029130134b750544d636312864145878479e960c7b600",
+    "regression-cases.yaml": "01b0ce4fad619e3b01df88a9332798626bcaad251cd0b67b3d0cb667855f03ab"
+  },
+  "client_version": "codex-cli 0.144.5",
+  "model": "gpt-5.6-sol",
+  "reasoning": "high",
+  "approval_policy": "on-request",
+  "sandbox": "read-only",
+  "invocation_mode": "explicit",
+  "invoked_skill": "dataverse-webapi-query",
+  "selector_control": "$dataverse-webapi-query",
+  "input_transport": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block.",
+  "answer_schema_valid_count": 1,
+  "answer_schema_applicable_count": 1,
+  "result_schema_valid_count": 1,
+  "workflow_command_count": 0,
+  "workflow_tool_count": 0,
+  "workflow_operation_count": 0,
+  "workflow_network_count": 0,
+  "workflow_approval_count": 0,
+  "evaluator_command_count": 2,
+  "post_review_record_digest": "aa4e77daa2b2c2cd3e7810dbbd78ecc6db5f17e8458e2536654845b68bfc19d5",
+  "reviewed_pass_count": 1,
+  "reviewed_fail_count": 0,
+  "gate_decision": "passed",
+  "evaluator_events": [
+    {
+      "event_type": "command_execution",
+      "operation": "codex --version",
+      "command": "codex",
+      "arguments": [
+        "--version"
+      ],
+      "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+      "timestamp": "2026-07-19T03:52:08.953250Z",
+      "timestamp_source": "harness-clock",
+      "initiating_case": "SMOKE-0.3.1-RUN",
+      "origin": "evaluator_harness",
+      "item_id": null,
+      "status": "completed",
+      "raw_fields": []
+    }
+  ],
+  "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only."
+}

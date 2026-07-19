@@ -1,0 +1,250 @@
+{
+  "schema_version": "2.0",
+  "run_id": "explicit-0.3.1",
+  "phase": "suite",
+  "case_id": "TRIGGER-001",
+  "suite": "trigger",
+  "fixture_sha256": "8aa81cca93a49461c3b2a565d78aa0b5eb31f4c815ee3bbb09dad79e0c4723de",
+  "invocation": {
+    "index": 135,
+    "thread_id": "019f7881-66ee-7093-bba2-ed56fc934914",
+    "client": "Codex CLI",
+    "cli_version": "codex-cli 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "approval_policy": "on-request",
+    "sandbox": "read-only",
+    "cwd": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+    "skill_path": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query/.agents/skills/dataverse-webapi-query/SKILL.md",
+    "skill_sha256": "47abc97160ca9bc1d06a1c5d350ef7538d1ffc0a731463843973885e43f071ab",
+    "answer_schema_sha256": "d889c80f0c7635ba006e4ca98ca717bbd7ccf5c20a89db2b92d356936ea84ad1",
+    "started_at": "2026-07-19T03:52:53.301805Z",
+    "completed_at": "2026-07-19T03:53:16.923575Z",
+    "ephemeral": true,
+    "isolation_claim": "Separate Codex CLI invocation; --ephemeral disables session persistence only.",
+    "shared_state": [
+      "Repository files",
+      "Machine-level Codex state",
+      "Installed system skills",
+      "Process environment and caches"
+    ],
+    "exit_code": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "thread_id": "019f7881-66ee-7093-bba2-ed56fc934914",
+        "started_at": "2026-07-19T03:52:53.301805Z",
+        "completed_at": "2026-07-19T03:53:16.923575Z",
+        "exit_code": 0,
+        "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"recommendation\": \"Confirm the Account table logical and entity-set names, the numeric value representing Active, and whether the output should be host-neutral OData or a raw Web API path.\",\n  \"assumptions\": [\n    \"The lowercase field identifiers name, accountnumber, and createdon are treated as prompt-confirmed attribute logical names.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": null,\n    \"entity_set_name\": null,\n    \"attribute_logical_names\": [\n      \"name\",\n      \"accountnumber\",\n      \"createdon\"\n    ],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": null\n  },\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"table_logical_name\",\n      \"reason\": \"The prompt names accounts but does not confirm the singular table logical name.\",\n      \"required_confirmation\": \"Confirm the table logical name, such as account under an explicitly authorized standard synthetic schema assumption.\"\n    },\n    {\n      \"fact\": \"entity_set_name\",\n      \"reason\": \"The Web API entity-set name cannot be inferred from a table label.\",\n      \"required_confirmation\": \"Confirm the entity-set name, such as accounts under an explicitly authorized standard synthetic schema assumption.\"\n    },\n    {\n      \"fact\": \"choice_or_status_value\",\n      \"reason\": \"Active requires a confirmed choice or state numeric value.\",\n      \"required_confirmation\": \"Confirm the logical status field and numeric value representing Active, such as statecode=0 under an explicitly authorized standard synthetic schema assumption.\"\n    },\n    {\n      \"fact\": \"host_api_contract\",\n      \"reason\": \"An OData request could mean a host-neutral query expression or a raw Dataverse Web API path.\",\n      \"required_confirmation\": \"Select host_neutral_odata or raw_web_api.\"\n    }\n  ],\n  \"host_context\": {\n    \"status\": \"unresolved\",\n    \"selected\": null,\n    \"supported_options\": [\n      \"host_neutral_odata\",\n      \"raw_web_api\"\n    ],\n    \"required_clarification\": \"Specify whether to return only an OData query expression or /api/data/v9.2/<entity-set>?<query>.\"\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the schema-resolution, host-resolution, and abstention rules.\"\n    }\n  ],\n  \"open_questions\": [\n    \"May the standard synthetic Account schema be assumed: table logical name account, entity set accounts, and Active represented by statecode=0?\",\n    \"Should the result use host_neutral_odata or raw_web_api?\"\n  ]\n}",
+        "event_types": {
+          "item.completed": 1,
+          "thread.started": 1,
+          "turn.completed": 1,
+          "turn.started": 1
+        },
+        "tool_events": [],
+        "approval_events": [],
+        "workflow_events": [],
+        "workflow_command_count": 0,
+        "workflow_tool_count": 0,
+        "workflow_operation_count": 0,
+        "workflow_network_count": 0,
+        "evaluator_event": {
+          "event_type": "command_execution",
+          "operation": "codex exec",
+          "command": "codex",
+          "arguments": [
+            "--disable",
+            "shell_tool",
+            "--disable",
+            "browser_use",
+            "--disable",
+            "computer_use",
+            "--disable",
+            "apps",
+            "--disable",
+            "plugins",
+            "exec",
+            "--ephemeral",
+            "--ignore-user-config",
+            "-C",
+            "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+            "-m",
+            "gpt-5.6-sol",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "approval_policy=\"on-request\"",
+            "-c",
+            "web_search=\"disabled\"",
+            "-s",
+            "read-only",
+            "--json",
+            "-o",
+            "/tmp/powercat-explicit-trigger-001-1-wt62d0a5/last-message.txt",
+            "$dataverse-webapi-query"
+          ],
+          "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "timestamp": "2026-07-19T03:52:53.301805Z",
+          "timestamp_source": "harness-clock",
+          "initiating_case": "TRIGGER-001",
+          "origin": "evaluator_harness",
+          "item_id": null,
+          "status": "completed",
+          "raw_fields": []
+        },
+        "diagnostics": [
+          "Reading additional input from stdin...",
+          "2026-07-19T03:52:53.612337Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+          "2026-07-19T03:52:54.262565Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:52:54.264260Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:52:54.265344Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:52:54.266889Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:52:54.270152Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:52:54.270889Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:52:54.271836Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:52:54.272883Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:52:54.274240Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:52:54.277170Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+          "2026-07-19T03:53:16.823888Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+        ],
+        "stdout_sha256": "a323e7012b7491ef1d3b78945187620d3c03a390fe6e049c03896e02652b5b29"
+      }
+    ]
+  },
+  "invocation_mode": "explicit",
+  "invoked_skill": "dataverse-webapi-query",
+  "selector_control": "$dataverse-webapi-query",
+  "input_transport": "Selector is the positional prompt; exact case input is stdin; Codex appends stdin as a <stdin> block.",
+  "exact_input": "Build a Dataverse OData query for the top 10 active accounts, ordered by createdon descending, selecting name and accountnumber.",
+  "exact_case_input": "Build a Dataverse OData query for the top 10 active accounts, ordered by createdon descending, selecting name and accountnumber.",
+  "exact_case_input_sha256": "6425374fcd487ad0f76e87f1670736827dd401b1bd43e6db34cf64600048664c",
+  "first_output": "{\n  \"result_type\": \"abstention\",\n  \"status\": \"Open\",\n  \"recommendation\": \"Confirm the Account table logical and entity-set names, the numeric value representing Active, and whether the output should be host-neutral OData or a raw Web API path.\",\n  \"assumptions\": [\n    \"The lowercase field identifiers name, accountnumber, and createdon are treated as prompt-confirmed attribute logical names.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": null,\n    \"entity_set_name\": null,\n    \"attribute_logical_names\": [\n      \"name\",\n      \"accountnumber\",\n      \"createdon\"\n    ],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [],\n    \"generated_service_name\": null,\n    \"host_api_contract\": null\n  },\n  \"unresolved_schema\": [\n    {\n      \"fact\": \"table_logical_name\",\n      \"reason\": \"The prompt names accounts but does not confirm the singular table logical name.\",\n      \"required_confirmation\": \"Confirm the table logical name, such as account under an explicitly authorized standard synthetic schema assumption.\"\n    },\n    {\n      \"fact\": \"entity_set_name\",\n      \"reason\": \"The Web API entity-set name cannot be inferred from a table label.\",\n      \"required_confirmation\": \"Confirm the entity-set name, such as accounts under an explicitly authorized standard synthetic schema assumption.\"\n    },\n    {\n      \"fact\": \"choice_or_status_value\",\n      \"reason\": \"Active requires a confirmed choice or state numeric value.\",\n      \"required_confirmation\": \"Confirm the logical status field and numeric value representing Active, such as statecode=0 under an explicitly authorized standard synthetic schema assumption.\"\n    },\n    {\n      \"fact\": \"host_api_contract\",\n      \"reason\": \"An OData request could mean a host-neutral query expression or a raw Dataverse Web API path.\",\n      \"required_confirmation\": \"Select host_neutral_odata or raw_web_api.\"\n    }\n  ],\n  \"host_context\": {\n    \"status\": \"unresolved\",\n    \"selected\": null,\n    \"supported_options\": [\n      \"host_neutral_odata\",\n      \"raw_web_api\"\n    ],\n    \"required_clarification\": \"Specify whether to return only an OData query expression or /api/data/v9.2/<entity-set>?<query>.\"\n  },\n  \"query_or_code\": \"\",\n  \"security_notes\": [],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Applied the schema-resolution, host-resolution, and abstention rules.\"\n    }\n  ],\n  \"open_questions\": [\n    \"May the standard synthetic Account schema be assumed: table logical name account, entity set accounts, and Active represented by statecode=0?\",\n    \"Should the result use host_neutral_odata or raw_web_api?\"\n  ]\n}",
+  "first_output_sha256": "210fb4e2b3320a9e0b4818738e4e97e5be3d068831feb18835456ad5bb3ccd8a",
+  "case_input_contains_legacy_selector": false,
+  "explicit_invocation_user_forced": false,
+  "answer_validation": {
+    "applicable": true,
+    "valid": true,
+    "errors": []
+  },
+  "event_summary": {
+    "event_types": {
+      "item.completed": 1,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "tool_events": [],
+    "approval_events": [],
+    "diagnostics": [
+      "Reading additional input from stdin...",
+      "2026-07-19T03:52:53.612337Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5",
+      "2026-07-19T03:52:54.262565Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:52:54.264260Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:52:54.265344Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:52:54.266889Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:52:54.270152Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:52:54.270889Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:52:54.271836Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:52:54.272883Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:52:54.274240Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:52:54.277170Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back",
+      "2026-07-19T03:53:16.823888Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about [\"/home/rohit/.codex/skills/.system\"]"
+    ]
+  },
+  "event_attribution": {
+    "workflow_events": [],
+    "evaluator_events": [
+      {
+        "event_type": "command_execution",
+        "operation": "codex exec",
+        "command": "codex",
+        "arguments": [
+          "--disable",
+          "shell_tool",
+          "--disable",
+          "browser_use",
+          "--disable",
+          "computer_use",
+          "--disable",
+          "apps",
+          "--disable",
+          "plugins",
+          "exec",
+          "--ephemeral",
+          "--ignore-user-config",
+          "-C",
+          "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+          "-m",
+          "gpt-5.6-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "approval_policy=\"on-request\"",
+          "-c",
+          "web_search=\"disabled\"",
+          "-s",
+          "read-only",
+          "--json",
+          "-o",
+          "/tmp/powercat-explicit-trigger-001-1-wt62d0a5/last-message.txt",
+          "$dataverse-webapi-query"
+        ],
+        "working_directory": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab/experiments/powercat-dataverse-webapi-query",
+        "timestamp": "2026-07-19T03:52:53.301805Z",
+        "timestamp_source": "harness-clock",
+        "initiating_case": "TRIGGER-001",
+        "origin": "evaluator_harness",
+        "item_id": null,
+        "status": "completed",
+        "raw_fields": []
+      }
+    ],
+    "workflow_command_count": 0,
+    "workflow_tool_count": 0,
+    "workflow_operation_count": 0,
+    "workflow_network_count": 0,
+    "evaluator_command_count": 1
+  },
+  "provenance": null,
+  "scoring": {
+    "dimensions": {
+      "technical_validity": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The response correctly withheld runnable output."
+      },
+      "schema_assumptions": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "Unconfirmed material facts were not inferred."
+      },
+      "host_context_selection": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The host was resolved where possible or identified as unresolved."
+      },
+      "security_behavior": {
+        "rating": "Not applicable",
+        "points": null,
+        "notes": "The case contains no security challenge."
+      },
+      "abstention": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The structured abstention identifies required confirmation and leaves query_or_code empty."
+      },
+      "scope": {
+        "rating": "Pass",
+        "points": 2,
+        "notes": "The answer remained within the synthetic instruction-only boundary."
+      }
+    },
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "final_result": "Pass"
+}

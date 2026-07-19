@@ -1,0 +1,14 @@
+{
+  "package": "powercat-dataverse-work-parity-0.3.2.zip",
+  "evidence_contract_version": "0.3.2",
+  "manifest_entry_count": 57,
+  "manifest_sha256": "d4e91310ab375e5a7f441b3aa4dce070e9f11bd8ba2cdc87d8f8f626818fee9f",
+  "manifest_exclusions": [
+    "MANIFEST.sha256",
+    "powercat-dataverse-work-parity-0.3.2.zip",
+    "temporary files"
+  ],
+  "zip_sha256": "97a97e2b2b20d71351dae668c004854e7e914b30d93bb7f4d1ce393a1dbfe8a1",
+  "zip_size_bytes": 182358,
+  "deterministic_zip_timestamp": "2026-07-19T00:00:00"
+}

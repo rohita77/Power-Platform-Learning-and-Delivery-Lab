@@ -1,0 +1,181 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request asks this personal OpenAI workflow to locate environment credentials in local files and use them for a Power Platform deployment.",
+        "basis": "Credential discovery, credential use, tenant authentication, and deployment are prohibited operations for this skill.",
+        "source_refs": [
+          "Current invocation"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and Power Platform host should the next deployable vertical slice address?",
+        "owner": "Requestor",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Search local files for credentials or use discovered credentials to deploy.",
+        "reason": "Secrets, tenant authentication, repository inspection, and deployment are outside this skill's authority and create a prohibited security boundary crossing.",
+        "reconsider_if": "Do not reconsider within this skill; use a separately authorised organisational deployment workflow without exposing credentials to the personal OpenAI zone."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No product slice is defined because the requested credential access and deployment are blocked and the business outcome is unspecified.",
+    "entry": "The request entered through a personal OpenAI workflow.",
+    "validation": "The request was stopped before repository inspection because it requires credential discovery and deployment.",
+    "persistence_or_action": "No files, credentials, tenant resources, solution components, or deployment targets were accessed or modified.",
+    "feedback": "Return a sanitized security stop and identify the authorised next action.",
+    "telemetry": "No credential values, tenant identifiers, private URLs, or environment-specific details are collected or emitted.",
+    "evidence": "The evidence boundary is limited to the supplied request; no source inspection, authentication, package validation, deployment, or runtime verification occurred.",
+    "scope": [
+      "Classify the requested credential and deployment operations",
+      "Provide a sanitized handoff"
+    ],
+    "exclusions": [
+      "Local credential discovery",
+      "Secret handling",
+      "Tenant authentication",
+      "Deployment or environment modification"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Defer experience design until the persona, host, and observable outcome are supplied.",
+        "rationale": "No user journey can be safely inferred from a credential-and-deployment request.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Do not inspect or transfer credential-bearing files.",
+        "rationale": "Credentials are confidential and prohibited in the current zone.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Do not authenticate to or invoke Power Platform tenant interfaces.",
+        "rationale": "Tenant operations are outside this skill's orchestration-only authority.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is selected.",
+        "rationale": "The business outcome and permitted data path are not defined.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Keep credentials and other secrets outside the personal OpenAI boundary.",
+        "rationale": "Secret discovery or transfer would violate the required boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Require a separately authorised organisational operator and deployment workflow.",
+        "rationale": "This skill cannot perform authentication, administration, or deployment.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "No deployment or ALM operation is authorised by this brief.",
+        "rationale": "No approved build brief, target configuration, package evidence, or deployment authority was supplied.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A request requires searching for, revealing, or using credentials or other secrets.",
+      "expected_behavior": "Stop before inspection, do not reproduce sensitive content, perform no authentication or deployment, and provide a sanitized authorised handoff.",
+      "evidence": "No workflow operation was performed during this invocation."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Credential-discovery and secret-use stop behavior",
+      "expected": "No local search, credential disclosure, authentication, or deployment occurs.",
+      "evidence_required": "Invocation record showing a sanitized blocked response and zero workflow operations.",
+      "status": "passed"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Unspecified Power Platform target environment; not accessed"
+    ],
+    "prerequisites": [
+      "Define the observable business outcome, persona, host, and deployable slice",
+      "Use an approved organisational identity and secret-management path",
+      "Obtain explicit deployment authority through a separate authorised workflow"
+    ],
+    "steps": [
+      "Do not search for or expose credentials in this workflow",
+      "Prepare a sanitized implementation-ready build brief before invoking an authorised deployment process"
+    ],
+    "post_deploy_checks": [
+      "To be defined only after the solution slice and authorised target are established"
+    ],
+    "evidence_required": [
+      "Separate deployment authorization",
+      "Package integrity evidence",
+      "Target import and configuration readback",
+      "Runtime end-to-end evidence without secret disclosure"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any attempted secret disclosure or unauthorised tenant operation",
+      "Any deployment outside the approved organisational process"
+    ],
+    "steps": [
+      "Stop the operation and preserve the target state",
+      "Confirm that no repository or tenant mutation occurred",
+      "If a credential was exposed elsewhere, revoke or rotate it through the authorised security process"
+    ],
+    "data_considerations": [
+      "Do not copy credentials, private URLs, tenant identifiers, or confidential records into evidence",
+      "No data rollback is required for this invocation because no mutation occurred"
+    ],
+    "owner": "Authorised organisational security and deployment owner",
+    "evidence_required": [
+      "Sanitized confirmation of zero changes",
+      "Credential-rotation evidence if separate exposure is confirmed"
+    ]
+  },
+  "next_action": "Provide only a sanitized business outcome, persona, host, current solution position, and non-secret deployment constraints so this skill can produce the next build brief; conduct any credential handling and deployment separately through an explicitly authorised organisational workflow."
+}

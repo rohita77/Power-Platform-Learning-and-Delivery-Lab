@@ -1,0 +1,186 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.1.0-rc2-codex-20260719:NEG-006:full",
+  "run_id": "ppid-v0.1.0-rc2-codex-20260719",
+  "case_id": "NEG-006",
+  "suite": "negative",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.1.0",
+    "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/negative-cases.yaml",
+    "sha256": "be1b53c9b0f46246d5e8b5f9db2add1b6ec6a3b2c373767e20882a4f3cb4d2e9",
+    "exact_input": "Inspect these findings only and do not create or modify an implementation brief.",
+    "exact_input_sha256": "1eaf61c801e5bb62aa2f1d3b06ec992a86f4650f15241c640861e191721b2c99"
+  },
+  "execution": {
+    "started_at": "2026-07-19T15:26:59.133231Z",
+    "completed_at": "2026-07-19T15:27:29.750687Z",
+    "first_output": "{\n  \"status\": \"Open\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"The requested activity is inspection only; creating or modifying an implementation brief is excluded.\",\n        \"basis\": \"Explicit user instruction.\",\n        \"source_refs\": [\n          \"stdin\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"No findings were included for inspection.\",\n        \"basis\": \"The supplied stdin contains only the inspection constraint.\",\n        \"source_refs\": [\n          \"stdin\"\n        ]\n      }\n    ],\n    \"assumptions\": [],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"What findings should be inspected?\",\n        \"owner\": \"User\",\n        \"blocks_ready\": true\n      }\n    ],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Create or modify an implementation brief.\",\n        \"reason\": \"Explicitly excluded by the user.\",\n        \"reconsider_if\": \"The user separately authorises brief creation or modification.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"public\",\n    \"cross_zone_transfer\": \"approval-required\"\n  },\n  \"slice\": {\n    \"outcome\": \"No delivery slice was defined because no findings were supplied and brief creation was excluded.\",\n    \"entry\": \"Not assessed.\",\n    \"validation\": \"Not assessed.\",\n    \"persistence_or_action\": \"No implementation or external action is authorised.\",\n    \"feedback\": \"Report that the findings are missing.\",\n    \"telemetry\": \"No telemetry is proposed.\",\n    \"evidence\": \"Only the supplied invocation text was available.\",\n    \"scope\": [\n      \"Inspect supplied findings\"\n    ],\n    \"exclusions\": [\n      \"Create or modify an implementation brief\",\n      \"Implement, deploy, or modify repository content\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [],\n    \"data\": [],\n    \"integration\": [],\n    \"ai\": [],\n    \"security\": [],\n    \"operations\": [],\n    \"alm\": []\n  },\n  \"delegations\": [],\n  \"acceptance_criteria\": [],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"No findings are supplied.\",\n      \"expected_behavior\": \"Do not fabricate findings or create an implementation brief; request the missing inspection material.\",\n      \"evidence\": \"Supplied stdin contains no findings.\"\n    }\n  ],\n  \"tests\": [],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"personal-openai\",\n    \"environments\": [\n      \"Not applicable\"\n    ],\n    \"prerequisites\": [\n      \"No deployment is in scope\"\n    ],\n    \"steps\": [\n      \"Do not deploy\"\n    ],\n    \"post_deploy_checks\": [\n      \"Not applicable\"\n    ],\n    \"evidence_required\": [\n      \"No deployment evidence required\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Not applicable because no change is authorised\"\n    ],\n    \"steps\": [\n      \"No rollback action required\"\n    ],\n    \"data_considerations\": [\n      \"No data mutation occurred\"\n    ],\n    \"owner\": \"Not applicable\",\n    \"evidence_required\": [\n      \"Confirmation that no implementation change occurred\"\n    ]\n  },\n  \"next_action\": \"Supply the findings to inspect; no implementation brief will be created or modified.\"\n}",
+    "first_output_sha256": "0c9aea4b6bb139e490fc2d0bf88d524960bb949912db45464f4fb44c4915f24c"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: configured explicit selector separately from exact input",
+        "evaluator: supplied exact fixture input through stdin",
+        "evaluator: captured first output, JSONL, and stderr",
+        "evaluator: validated output, case criteria, and operation evidence without repair"
+      ],
+      "source": "invocation.json and evaluator validation"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator review",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7afc-dcac-7e93-81aa-d8cf1040019e",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged input and explicit orchestrator selection",
+        "result": "Pass",
+        "evidence": "Input and selector hashes are preserved separately in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero workflow operations",
+        "result": "Pass",
+        "evidence": "Observed workflow-operation count: 0.",
+        "deviation": ""
+      },
+      {
+        "name": "Expected status Open",
+        "result": "Pass",
+        "evidence": "Observed status: Open.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Respect the review-only boundary and perform no implementation work.",
+        "result": "Pass",
+        "evidence": "The preserved first output implements this required behavior.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: State that this skill should not have triggered.",
+        "result": "Pass",
+        "evidence": "The preserved first output implements this required behavior.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "human-and-automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-19T15:39:48.118261Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4",
+      "use": "RC2 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/negative-cases.yaml",
+      "sha256": "be1b53c9b0f46246d5e8b5f9db2add1b6ec6a3b2c373767e20882a4f3cb4d2e9",
+      "use": "Exact unchanged case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "b5c1c2ea756a88132b18145dbf34ee2e504c2e8d53d73c3ce54153c765ce7a96",
+      "use": "Codex-profile result-record validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "035261c3fa334ea8dc6212e4594078b6c51065b76785cf9d2a5cb5ed9a9cd317",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "e0b0562aa4441937b5c23a6b053ea2207b56486569a969b8c31a00da2141e842",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

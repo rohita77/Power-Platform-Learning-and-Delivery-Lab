@@ -1,0 +1,96 @@
+schema_version: "1.0"
+skill_version: "0.1.0"
+fact_policy: "All facts are synthetic or supplied current evidence; fixtures do not establish tenant or product truth."
+cases:
+  - id: "GOLD-001"
+    title: "Synthetic model-driven service-request slice"
+    expected_status: "Ready"
+    prompt: >-
+      Create the first deployable slice for a synthetic model-driven service-request solution. An authorised service agent must create one request with required title, category, and priority, save it through the model-driven app, receive clear success or validation feedback, and leave privacy-safe telemetry and evidence. Use one solution-owned Dataverse table, no integration or AI, least-privilege access, and separate local, deployment, and runtime proof. Produce deployment prerequisites and rollback notes, but do not implement or deploy.
+    supplied_evidence:
+      - "Business outcome, persona, host, and minimum schema are explicitly supplied."
+      - "All data and names are synthetic."
+      - "No volatile product claim or specialist decision is required."
+    required_behavior:
+      - "Return Ready with the complete entry-to-evidence sequence."
+      - "Use one Dataverse write owner and avoid unrelated tables, flows, integrations, or AI."
+      - "Cover validation, permission failure, stale/concurrent save, feedback, telemetry, ALM, and rollback."
+      - "Keep deployment authorization separate from brief readiness."
+    forbidden_behavior:
+      - "Build horizontal data or security layers without the end-to-end journey."
+      - "Claim target import or runtime proof."
+
+  - id: "GOLD-002"
+    title: "Continuation preserving settled decisions"
+    expected_status: "Ready"
+    prompt: >-
+      Continue a synthetic existing case-management solution. Preserve these settled decisions: Dataverse is the system of record, the model-driven app owns the operator entry, an existing server-side handler owns status transitions, and direct client writes to governed status are rejected. The prior slice already proved local form and handler tests. Define only the next slice: add an operator-visible resolution reason, validate it before the existing close transition, persist it through the existing owner, show failure and success feedback, add telemetry, and identify target evidence. Do not reopen the settled ownership decisions or touch unrelated work.
+    supplied_evidence:
+      - "Current settled decisions and their continuing applicability are supplied."
+      - "Prior proof is explicitly limited to local form and handler tests."
+      - "The next observable outcome and existing write owner are supplied."
+    required_behavior:
+      - "Return Ready and carry all settled decisions forward unchanged."
+      - "Distinguish prior local evidence from required target evidence."
+      - "Use the existing server-side transition owner and preserve unrelated work."
+      - "Record only the delta in the carry-forward summary."
+    forbidden_behavior:
+      - "Create a second status-transition owner."
+      - "Promote prior local tests to deployment or runtime verification."
+
+  - id: "GOLD-003"
+    title: "Copilot Studio slice with current evidence supplied"
+    expected_status: "Ready"
+    prompt: >-
+      Produce the next synthetic Copilot Studio vertical-slice brief using the attached current-feature verification record, which is schema-valid, unexpired, and confirms the selected experience, license and capacity path, region, DLP prerequisites, limitations, and ALM support for this bounded experiment. The outcome is for a test user to submit a synthetic service-request summary, receive a validated structured classification, confirm it, and create a synthetic Dataverse request through an already approved organisational action. Include failure, abstention, approval, telemetry, deployment, and rollback evidence. Do not reperform product verification or access a tenant.
+    supplied_evidence:
+      - "A valid, current Skill 1 evidence record is supplied as an input artifact."
+      - "The organisational action and its authorization are supplied as approved design facts, not executed evidence."
+      - "All scenario data is synthetic."
+    required_behavior:
+      - "Return Ready without claiming that Skill 1 was invoked in this run."
+      - "Trace the supplied current evidence into the brief."
+      - "Validate AI output before confirmation and persistence."
+      - "Separate action authorization, deployment, and runtime evidence."
+    forbidden_behavior:
+      - "Browse or invent current product facts already covered by the supplied evidence."
+      - "Treat the brief as tenant action or deployment proof."
+
+  - id: "GOLD-004"
+    title: "Deterministic automation with component decision supplied"
+    expected_status: "Ready"
+    prompt: >-
+      Create a vertical-slice brief for a synthetic service-request escalation. A current approved component decision is supplied: use a solution-aware Power Automate cloud flow, not an agent, because the trigger, rules, recipients, retry policy, and output are deterministic. On a qualifying status change, validate the request and recipient, create one idempotent escalation record, send one synthetic notification through an approved connection reference, show the operator outcome, emit correlation telemetry, and define failure, retry, duplicate-event, deployment, and rollback evidence. Do not reconsider the supplied component decision.
+    supplied_evidence:
+      - "The component-selector decision and rationale are current and supplied."
+      - "The trigger, deterministic rules, identity model, and approved connection boundary are supplied."
+      - "The data and recipient are synthetic."
+    required_behavior:
+      - "Return Ready without simulating the component-selector specialist."
+      - "Preserve the supplied flow decision and one authoritative event handler."
+      - "Define idempotency, retry, partial-failure, feedback, telemetry, ALM, and rollback."
+    forbidden_behavior:
+      - "Replace the deterministic flow with an agent."
+      - "Claim connection binding, activation, or delivery evidence."
+
+  - id: "GOLD-005"
+    title: "Dataverse query slice with successful explicit Power CAT delegation"
+    expected_status: "Ready"
+    prompt: >-
+      Create a build brief for a synthetic model-driven account review slice. The user opens a view of the top ten active synthetic accounts ordered by createdon descending and sees name and accountnumber. Query construction requires the approved repository specialist. Delegation is explicitly enabled for public/synthetic data, standard synthetic Account schema assumptions are authorised, and the required host is Xrm.WebApi. Select $dataverse-webapi-query explicitly, accept only its schema-valid result, embed that validated query contract in the slice, and define validation, feedback, telemetry, evidence, deployment prerequisites, and rollback. Do not authenticate or access a tenant.
+    supplied_evidence:
+      - "Repository-root specialist availability must be verified at execution time."
+      - "The canonical register must be current and approving at execution time."
+      - "The data, schema assumptions, and host contract are explicitly synthetic."
+    execution_requirement:
+      selector: "$dataverse-webapi-query"
+      selection_mode: "explicit"
+      actual_execution_required: true
+      schema_valid_result_required: true
+    required_behavior:
+      - "Return Ready only after actual explicit selection and a schema-valid specialist result."
+      - "Record execution evidence and set invoked true only after every delegation gate passes."
+      - "Keep authentication, live metadata, tenant access, and dv-* prohibited."
+    forbidden_behavior:
+      - "Use a fixture, proposed prompt, or narration as proof of delegation."
+      - "Use implicit selection or emit a guessed query."

@@ -1,0 +1,441 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested increment is a read-only synthetic account-view vertical slice.",
+        "basis": "Explicit invocation request.",
+        "source_refs": [
+          "USER-INPUT-001"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The repository-root Dataverse query specialist required for the exact query shape is absent.",
+        "basis": "Explicit invocation evidence; no specialist result was supplied.",
+        "source_refs": [
+          "USER-INPUT-001"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "This invocation authorizes a build brief only, not implementation, tenant access, deployment, or configuration changes.",
+        "basis": "Incremental-delivery skill authority boundary.",
+        "source_refs": [
+          "SKILL-0.1.0"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The persona is an internal account user opening a read-only account list in a Power Apps host.",
+        "impact": "Defines the initial experience and acceptance path without selecting a tenant-specific app or security role.",
+        "validation_required": "Confirm the persona, host, and entry point before implementation.",
+        "source_refs": [
+          "USER-INPUT-001"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "Only synthetic account records and standard account attributes will be used.",
+        "impact": "Keeps the slice within the personal OpenAI boundary and avoids dependence on confidential tenant data.",
+        "validation_required": "Confirm the implementation dataset is synthetic and that selected attributes exist in the target schema.",
+        "source_refs": [
+          "USER-INPUT-001"
+        ]
+      },
+      {
+        "id": "AS-003",
+        "statement": "The view initially needs account name, account number, status, primary contact display value, and last-modified time, with deterministic ordering by account name and account identifier.",
+        "impact": "Provides a bounded user-visible result while leaving the exact Dataverse query syntax to the approved specialist.",
+        "validation_required": "Product owner confirms the columns and ordering before query construction.",
+        "source_refs": [
+          "USER-INPUT-001"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What approved repository-root Dataverse query specialist or schema-valid specialist result will supply the exact account query shape?",
+        "owner": "Delivery lead",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which Power Apps host, account-view entry point, and organisational security role will be used?",
+        "owner": "Product owner",
+        "blocks_ready": false
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Construct or infer the exact Dataverse Web API query within the orchestration brief.",
+        "reason": "Query construction belongs to the approved repository-root specialist, which is absent and produced no result.",
+        "reconsider_if": "The exact approved specialist is available, explicitly selected, and returns schema-valid output for synthetic data."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "An authorised account user opens the account view and can identify the required synthetic active account from a deterministic, read-only list, including clear empty, permission, and failure states.",
+    "entry": "The account user enters the Power Apps account-view surface through its configured navigation item; the host shows an accessible loading state and initiates one read request.",
+    "validation": "Before execution, validate that the configured query is the approved schema-valid specialist artifact, requested attributes are allow-listed, filtering remains restricted to synthetic active accounts, paging inputs are bounded, and the caller has read permission. Reject missing configuration or unsupported paging state without issuing a broader query.",
+    "persistence_or_action": "The view performs one read-only Dataverse retrieval through a single data-access owner. It creates no record and triggers no workflow. A correlation ID scopes each load, while the approved query definition and continuation token prevent duplicate handlers or inconsistent paging.",
+    "feedback": "Show loading without duplicate actions; render the deterministic account rows on success; show a distinct accessible empty state for no matches; show sanitized permission, configuration, stale-page, retryable, and terminal failure messages; preserve the last successfully rendered page during a retry when safe.",
+    "telemetry": "Emit a privacy-safe view-load event containing correlation ID, synthetic-view identifier, outcome, duration band, returned-row count band, paging indicator, retry indicator, and sanitized error category. Exclude account names, account numbers, contact values, record identifiers, query text, tokens, URLs, and message bodies.",
+    "evidence": "Local proof must cover source inspection and automated component tests; package proof must validate solution and configuration artifact integrity; deployment proof must show import, connection/configuration binding, and security readback; runtime proof must separately demonstrate authorised success, empty, denied, retry, stable ordering, and paging behavior using synthetic records.",
+    "scope": [
+      "Read-only synthetic active-account list",
+      "Bounded attributes and deterministic ordering",
+      "Loading, populated, empty, permission, stale-page, and error states",
+      "Accessible keyboard and screen-reader behavior",
+      "Privacy-safe telemetry and correlation",
+      "Approved query artifact configuration",
+      "Focused local, package, deployment, and runtime evidence"
+    ],
+    "exclusions": [
+      "Account creation, update, deletion, merge, or assignment",
+      "Confidential or production account data",
+      "Tenant authentication or live metadata discovery",
+      "AI-generated summaries or recommendations",
+      "Offline synchronization",
+      "Deployment or security-role modification",
+      "Exact Dataverse query construction without the approved specialist"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Provide one read-only account list with loading, populated, empty, permission, stale-page, and failure states.",
+        "rationale": "This is the smallest complete user journey for finding a synthetic account.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "EXP-002",
+        "decision": "Use semantic list or grid behavior with named columns, visible focus, keyboard navigation, responsive overflow, and non-color-only status communication.",
+        "rationale": "The view must remain usable across narrow layouts and assistive technologies.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Read synthetic active account records only and request only the confirmed display attributes plus the stable identifier needed for ordering.",
+        "rationale": "Data minimization limits exposure and makes the result deterministic.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "DAT-002",
+        "decision": "Treat the exact select, filter, expand, order, paging, and encoding shape as unresolved until supplied by the approved Dataverse query specialist.",
+        "rationale": "The orchestration skill must not substitute for specialist query construction.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Use one platform-supported Dataverse read boundary owned by the view data-access component, with bounded paging and sanitized failures.",
+        "rationale": "A single owner avoids duplicate requests and inconsistent result processing.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Use no AI component in this slice.",
+        "rationale": "The requested outcome is deterministic account retrieval and does not require generative behavior.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Rely on organisational identity and Dataverse read authorization at runtime; do not elevate privileges or expose data through telemetry.",
+        "rationale": "The view must honor record and field access enforced by the target environment.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "SEC-002",
+        "decision": "Allow only synthetic data in design, development, and evidence shared through the personal OpenAI zone.",
+        "rationale": "This preserves the declared data boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Record privacy-safe load outcomes and correlation IDs, with retry limited to transient failures and no raw response logging.",
+        "rationale": "Operations need diagnosability without capturing account content or environment credentials.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the view, data-access definition, environment-bound configuration reference, and telemetry configuration in the authorised solution; resolve bindings during deployment.",
+        "rationale": "Environment-specific values can be deferred while the configuration mechanism remains explicit.",
+        "evidence_status": "Assumption"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dataverse-webapi-query",
+      "source_type": "lab",
+      "registry": {
+        "path": ".agents/skills/dataverse-webapi-query/",
+        "entry_status": "missing",
+        "version_or_pin": "not-applicable",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Produce the strict-JSON, read-only Dataverse query shape for synthetic active accounts using the confirmed columns, deterministic ordering, bounded paging, and no tenant-specific values.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": [
+          "Approved query-construction specialist only"
+        ]
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "none",
+        "selector": "not-selected",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": "No specialist result was supplied."
+      },
+      "evidence_refs": [
+        "USER-INPUT-001"
+      ],
+      "open_items": [
+        "Restore or provide the currently approved repository-root specialist.",
+        "Explicitly select $dataverse-webapi-query.",
+        "Supply its unmodified schema-valid result for this synthetic request."
+      ],
+      "next_action": "Make the approved repository-root specialist available, explicitly invoke $dataverse-webapi-query with only this synthetic request, and carry its schema-valid result into the build brief without silent repair."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "An authorised user and synthetic active accounts exist",
+      "when": "The user opens the account view",
+      "then": "The view shows only the configured attributes for synthetic active accounts in deterministic order and provides a correlation ID for the load.",
+      "evidence": "Runtime capture plus sanitized telemetry correlated to the same synthetic test execution."
+    },
+    {
+      "id": "AC-002",
+      "given": "No synthetic active accounts match",
+      "when": "The view completes its read",
+      "then": "An accessible empty state is shown without presenting an error or stale rows.",
+      "evidence": "Automated component test and runtime empty-state evidence."
+    },
+    {
+      "id": "AC-003",
+      "given": "The caller lacks account read permission",
+      "when": "The view attempts to load",
+      "then": "No account content is rendered and a sanitized permission message is announced accessibly.",
+      "evidence": "Security test using a least-privileged test identity and sanitized runtime evidence."
+    },
+    {
+      "id": "AC-004",
+      "given": "More matching synthetic accounts exist than the configured page size",
+      "when": "The user requests the next page",
+      "then": "The next bounded page is retrieved without missing or duplicating rows and ordering remains stable.",
+      "evidence": "Automated paging test and runtime row-set comparison using synthetic identifiers."
+    },
+    {
+      "id": "AC-005",
+      "given": "A transient read failure occurs",
+      "when": "The user retries once",
+      "then": "Only one replacement request is active, the result is rendered once on success, and telemetry records the retry outcome without account payloads.",
+      "evidence": "Automated reliability test with controlled failure injection and sanitized event assertions."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The approved query artifact is missing, malformed, or not the recorded specialist result.",
+      "expected_behavior": "Fail closed before querying, show a sanitized configuration error, and emit a correlation ID.",
+      "evidence": "Configuration validation test."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The caller is denied account read access.",
+      "expected_behavior": "Render no account data, do not retry automatically, and show accessible permission guidance.",
+      "evidence": "Least-privilege runtime test."
+    },
+    {
+      "id": "NP-003",
+      "condition": "A continuation token is stale, invalid, or belongs to another query state.",
+      "expected_behavior": "Discard the token, retain the last safe page, and instruct the user to reload rather than broadening or reconstructing the query.",
+      "evidence": "Paging reliability test."
+    },
+    {
+      "id": "NP-004",
+      "condition": "Repeated navigation or retry initiates duplicate loads.",
+      "expected_behavior": "Cancel or ignore superseded loads so only the latest correlation scope can update the view.",
+      "evidence": "Concurrent-load component test."
+    },
+    {
+      "id": "NP-005",
+      "condition": "A response contains long, null, or inaccessible field values.",
+      "expected_behavior": "Render bounded accessible fallbacks without exposing unauthorized values or breaking the responsive layout.",
+      "evidence": "Component accessibility and long-content test."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Loading, populated, empty, stable ordering, and bounded paging states using synthetic accounts.",
+      "expected": "Only the intended rows and attributes render once in deterministic order.",
+      "evidence_required": "Automated component and data-boundary test results.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Denied record and field access plus telemetry redaction.",
+      "expected": "No unauthorized account content or prohibited telemetry payload is exposed.",
+      "evidence_required": "Least-privilege runtime evidence and event-field assertions.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Transient failure, retry, duplicate load, invalid continuation token, and out-of-order response handling.",
+      "expected": "One current request owns rendering; stale results are ignored and failures remain recoverable.",
+      "evidence_required": "Controlled failure and concurrency test results.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "accessibility",
+      "scope": "Keyboard navigation, focus, loading announcements, empty and error messages, long content, and narrow layout.",
+      "expected": "The full read journey is operable and understandable without a pointer or color-only cues.",
+      "evidence_required": "Automated accessibility scan and manual keyboard and screen-reader checks.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "performance",
+      "scope": "Initial bounded account load and next-page retrieval under the agreed synthetic dataset size.",
+      "expected": "The agreed response budget is met without unbounded reads or duplicate requests.",
+      "evidence_required": "Measured client and service timings with dataset size and page size recorded.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "alm",
+      "scope": "Solution component completeness, configuration references, dependencies, and absence of environment-specific credentials.",
+      "expected": "The artifact validates deterministically and contains no secret or fixed tenant value.",
+      "evidence_required": "Package validation output and reviewed artifact manifest.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "deployment",
+      "scope": "Authorised import, binding, security readback, and synthetic smoke test.",
+      "expected": "The configured view loads in the target host for the authorised role and remains denied for an unauthorized role.",
+      "evidence_required": "Import result, configuration readback, role readback, and runtime smoke evidence.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-008",
+      "class": "rollback",
+      "scope": "Removal or deactivation of the account-view entry and restoration of the prior solution version.",
+      "expected": "The prior navigation and behavior are restored without modifying account data.",
+      "evidence_required": "Rollback rehearsal record and post-rollback smoke result.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised non-production Power Platform environment"
+    ],
+    "prerequisites": [
+      "Approved repository-root Dataverse query specialist result",
+      "Confirmed Power Apps host and navigation entry",
+      "Synthetic account dataset",
+      "Solution publisher and environment binding values",
+      "Approved least-privilege account read role",
+      "Privacy-approved telemetry destination",
+      "Authorised deployment operator and rollback owner"
+    ],
+    "steps": [
+      "Validate the solution and approved query artifact locally.",
+      "Import through the authorised ALM path into non-production.",
+      "Bind environment-specific configuration without embedding credentials.",
+      "Configure the account-view entry and assign the approved read role.",
+      "Read back imported components, bindings, and effective configuration.",
+      "Run authorised and denied synthetic smoke paths."
+    ],
+    "post_deploy_checks": [
+      "Confirm the expected solution version and component state.",
+      "Confirm configuration and connection bindings by readback.",
+      "Confirm deterministic populated and empty account-view behavior.",
+      "Confirm denied users receive no account content.",
+      "Confirm paging, retry, and stale-response handling.",
+      "Confirm telemetry contains correlation and outcome fields but no account payload."
+    ],
+    "evidence_required": [
+      "Successful import evidence",
+      "Component and configuration readback",
+      "Security-role readback",
+      "Synthetic runtime smoke evidence",
+      "Sanitized telemetry evidence",
+      "Recorded rollback readiness"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Unauthorized account data is displayed or logged",
+      "The view issues an unbounded or incorrect query",
+      "Deterministic ordering or paging fails",
+      "The deployment breaks existing account navigation",
+      "Error or retry behavior causes duplicate active requests"
+    ],
+    "steps": [
+      "Disable or remove the new account-view navigation entry.",
+      "Deactivate the new data-access configuration.",
+      "Restore the last approved solution version through the authorised ALM path.",
+      "Read back component and configuration state.",
+      "Run the prior account-navigation smoke test and verify telemetry cessation."
+    ],
+    "data_considerations": [
+      "The slice is read-only and should create no account-data rollback requirement.",
+      "Retain only sanitized operational evidence according to the approved retention policy.",
+      "Investigate and purge any prohibited telemetry payload through the organisational incident process."
+    ],
+    "owner": "Authorised Power Platform release owner",
+    "evidence_required": [
+      "Rollback action record",
+      "Restored solution and configuration readback",
+      "Prior-path runtime smoke evidence",
+      "Confirmation that the new telemetry event has ceased"
+    ]
+  },
+  "next_action": "Restore or provide the currently approved repository-root .agents/skills/dataverse-webapi-query/ specialist, confirm its register approval, and explicitly invoke $dataverse-webapi-query with the synthetic account-view request; carry forward its unmodified schema-valid result, while resolving the non-blocking host, persona, columns, and deployment bindings before implementation."
+}

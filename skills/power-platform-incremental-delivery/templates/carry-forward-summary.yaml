@@ -1,0 +1,39 @@
+schema_version: "1.0"
+skill_version: "0.1.0"
+generated_on: "YYYY-MM-DD"
+status: "Ready|Open|Blocked"
+scope:
+  outcome: ""
+  persona: ""
+  host_surface: ""
+  included: []
+  excluded: []
+boundary:
+  zone: "personal-openai|organisational-microsoft"
+  data_classification: "public|synthetic|approved-non-confidential|confidential"
+  cross_zone_transfer: "permitted|prohibited|approval-required"
+current_position:
+  confirmed: []
+  assumptions: []
+  open_questions: []
+  rejected: []
+  superseded: []
+slice:
+  entry: ""
+  validation: ""
+  persistence_or_action: ""
+  feedback: ""
+  telemetry: ""
+  evidence: ""
+delegations: []
+evidence_refs: []
+delta:
+  added: []
+  changed: []
+  closed: []
+  rejected: []
+  superseded: []
+next_action: ""
+
+# Carry only sanitized conclusions and references. Do not embed confidential
+# evidence, credentials, tenant identifiers, environment URLs, or chat history.

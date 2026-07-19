@@ -1,0 +1,127 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested outcome is architecture-review findings only; build-brief creation is explicitly excluded.",
+        "basis": "Explicit user instruction.",
+        "source_refs": [
+          "stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No solution architecture content or artifact was supplied for review.",
+        "basis": "The invocation contains only the review request.",
+        "source_refs": [
+          "stdin"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "The selected incremental-delivery skill excludes review-only diagnosis and cannot represent architecture findings without producing a build-brief-shaped response.",
+        "basis": "Skill trigger, non-goal, and output-contract rules.",
+        "source_refs": [
+          "SKILL.md sections 1, 2, and 7"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What sanitized solution architecture text or artifact should be reviewed?",
+        "owner": "User",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Create an incremental-delivery build brief from the request.",
+        "reason": "The user explicitly prohibited build-brief creation.",
+        "reconsider_if": "The user later requests a deployable vertical-slice build brief."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Not defined because build-brief generation is out of scope.",
+    "entry": "Not assessed because no architecture evidence was supplied.",
+    "validation": "Not assessed because no architecture evidence was supplied.",
+    "persistence_or_action": "No implementation action is authorised or requested.",
+    "feedback": "The review cannot proceed until architecture evidence is supplied through an appropriate review workflow.",
+    "telemetry": "No telemetry design is assessed.",
+    "evidence": "Only the request and selected skill contract were available; no architecture, source, package, deployment, or runtime evidence was supplied.",
+    "scope": [
+      "Architecture-review findings only"
+    ],
+    "exclusions": [
+      "Build-brief generation",
+      "Implementation",
+      "Deployment",
+      "Tenant inspection"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A review is attempted without architecture evidence.",
+      "expected_behavior": "Abstain from inventing findings and request the missing sanitized architecture.",
+      "evidence": "Invocation content"
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No target environment is in scope"
+    ],
+    "prerequisites": [
+      "No deployment prerequisites apply"
+    ],
+    "steps": [
+      "Perform no deployment"
+    ],
+    "post_deploy_checks": [
+      "No post-deployment checks apply"
+    ],
+    "evidence_required": [
+      "No deployment evidence is required"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "No rollback trigger applies because no change is authorised"
+    ],
+    "steps": [
+      "No rollback action is required"
+    ],
+    "data_considerations": [
+      "No data changes are in scope"
+    ],
+    "owner": "Not applicable",
+    "evidence_required": [
+      "Confirmation that no implementation or deployment occurred"
+    ]
+  },
+  "next_action": "Provide the sanitized solution architecture in a review-oriented invocation without selecting this incremental-delivery skill; the only carry-forward delta is that build-brief creation remains excluded."
+}

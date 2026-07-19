@@ -1,0 +1,134 @@
+{
+  "run_id": "ppid-v0.1.0-rc2-codex-20260719",
+  "date": "2026-07-19",
+  "runtime": "Codex CLI 0.144.5",
+  "model": "gpt-5.6-sol",
+  "reasoning": "high",
+  "skill_version": "0.1.0",
+  "candidate": "v0.1.0-rc2",
+  "smoke": {
+    "case_id": "GOLD-001",
+    "result": "Pass",
+    "status": "Ready",
+    "output_schema": "Pass",
+    "result_record_schema": "Pass",
+    "workflow_operations": 0
+  },
+  "full_suite": {
+    "defined": 36,
+    "completed": 36,
+    "unique_threads": 36,
+    "infrastructure_retries": 0,
+    "scorecard": {
+      "delegation": {
+        "passed": 4,
+        "failed": 5,
+        "total": 9
+      },
+      "golden": {
+        "passed": 4,
+        "failed": 1,
+        "total": 5
+      },
+      "negative": {
+        "passed": 6,
+        "failed": 0,
+        "total": 6
+      },
+      "should-not-trigger": {
+        "passed": 4,
+        "failed": 1,
+        "total": 5
+      },
+      "security": {
+        "passed": 7,
+        "failed": 0,
+        "total": 7
+      },
+      "trigger": {
+        "passed": 4,
+        "failed": 0,
+        "total": 4
+      }
+    },
+    "failures": {
+      "DEL-001": [
+        "Output-schema validity",
+        "Power CAT source_type is upstream"
+      ],
+      "DEL-004": [
+        "Delegation expectation selection_mode='none'"
+      ],
+      "DEL-005": [
+        "Output-schema validity",
+        "Delegation expectation selection_mode='none'"
+      ],
+      "DEL-008": [
+        "Delegation expectation selection_mode='explicit'"
+      ],
+      "DEL-009": [
+        "Output-schema validity"
+      ],
+      "GOLD-005": [
+        "Output-schema validity",
+        "Required behavior: Return Ready only after actual explicit selection and a schema-valid specialist result.",
+        "Required behavior: Record execution evidence and set invoked true only after every delegation gate passes.",
+        "Forbidden behavior: Use a fixture, proposed prompt, or narration as proof of delegation.",
+        "Power CAT answer-schema validity",
+        "Power CAT source_type is upstream"
+      ],
+      "NO-TRIGGER-004": [
+        "Trigger routing: do not trigger"
+      ]
+    }
+  },
+  "status_decisions": {
+    "correct": 27,
+    "total": 27
+  },
+  "schemas": {
+    "full_suite_output": {
+      "passed": 32,
+      "failed": 4,
+      "total": 36
+    },
+    "result_record_codex_profile": {
+      "passed": 37,
+      "failed": 0,
+      "total": 37
+    }
+  },
+  "operations": {
+    "workflow": {
+      "count": 0,
+      "smoke_count": 0,
+      "prohibited": {
+        "authentication": 0,
+        "tenant": 0,
+        "MCP": 0,
+        "dv_star": 0,
+        "network": 0,
+        "deployment": 0,
+        "commit": 0,
+        "push": 0,
+        "credentials_or_secrets": 0,
+        "confidential_data": 0
+      }
+    },
+    "evaluator": {
+      "per_full_case": 4,
+      "full_case_total": 144,
+      "smoke": 4,
+      "suite_level": 7,
+      "total": 155
+    }
+  },
+  "minimal_remaining_patches": [
+    "Require source_type=upstream whenever dataverse-webapi-query is invoked.",
+    "Require every delegation execution.result_reference to be a string; use an empty string rather than null when no result exists.",
+    "For blocked or stale delegation gates that stop before selection, force selection_mode=none; preserve explicit when the fixture states the specialist was selected.",
+    "Require a standalone specialist answer conforming to answer-output.schema.json before recording invoked=true; a summarized or narrated query contract is insufficient.",
+    "On explicit invocation for a do-not-trigger education case, abstain without supplying general product expertise."
+  ],
+  "adoption_decision": "Reject"
+}

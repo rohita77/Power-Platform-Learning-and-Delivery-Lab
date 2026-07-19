@@ -1,0 +1,330 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The supplied carry-forward summary depends on a material licensing claim whose validity period has expired.",
+        "basis": "Explicit invocation input.",
+        "source_refs": [
+          "invocation:stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No current licensing verification result was supplied for this invocation.",
+        "basis": "The invocation contains no dated first-party evidence or schema-valid specialist result.",
+        "source_refs": [
+          "invocation:stdin"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The supplied statement is public, non-tenant-specific information and contains no confidential organisational data.",
+        "impact": "It may remain in the personal OpenAI zone while a public-source verification handoff is prepared.",
+        "validation_required": "Confirm the eventual specialist request contains no tenant identifiers, customer data, credentials, private URLs, or confidential licensing records.",
+        "source_refs": [
+          "invocation:stdin"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, host surface, and primary journey should the next deployable slice deliver?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What exact licensing proposition, product or capability, license plan, geography, and effective date must be verified?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Can the power-platform-current-feature-verifier be explicitly enabled and invoked with public or synthetic inputs, with its current first-party-source result supplied to this orchestration?",
+        "owner": "Delivery lead",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Treat the expired licensing claim as current or sufficient for a production-credible build decision.",
+        "reason": "Licensing is volatile and material; expired evidence cannot support the carry-forward position.",
+        "reconsider_if": "A current, dated, first-party-supported verification result establishes the claim and its applicability."
+      }
+    ],
+    "superseded": [
+      {
+        "id": "SS-001",
+        "statement": "The prior licensing claim was suitable carry-forward evidence.",
+        "replaced_by": "OQ-002 and delegation DEL-001 require current verification before the claim can inform the build brief.",
+        "reason": "The material evidence has expired.",
+        "source_refs": [
+          "invocation:stdin"
+        ]
+      }
+    ]
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no deployable outcome can be selected until the observable business result is supplied and the material licensing dependency is currently verified.",
+    "entry": "Open: persona, host, entry point, initial state, and initiating event have not been supplied.",
+    "validation": "Before implementation, validate the requested outcome, boundary, exact licensing proposition, applicability conditions, and freshness of supporting first-party evidence.",
+    "persistence_or_action": "No write or operational action is authorised; the eventual slice must identify one authoritative action owner and an idempotency boundary.",
+    "feedback": "The build workflow must report that readiness is open because material licensing evidence is expired, without presenting the prior claim as current.",
+    "telemetry": "No runtime telemetry is defined yet; the eventual slice must use privacy-safe events, a correlation ID, outcome signals, and exclude business payloads and credentials.",
+    "evidence": "Current proof is limited to supplied narrative inspection. No automated, package, deployment, configuration-readback, or runtime evidence exists.",
+    "scope": [
+      "Revalidate the material licensing dependency through the approved current-feature specialist.",
+      "Reconstruct the build position after a measurable outcome and current verification result are supplied."
+    ],
+    "exclusions": [
+      "Assuming the expired licensing claim remains valid.",
+      "Tenant access, authentication, implementation, deployment, administration, commit, or push.",
+      "A build decision based on unverified licensing applicability."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Persona, host, entry point, and end-to-end experience remain open.",
+        "rationale": "No user-visible or operational outcome was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "No application data model is selected.",
+        "rationale": "The deployable outcome and journey are not yet defined.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No runtime integration is selected.",
+        "rationale": "Only a public-source licensing-verification handoff is currently identifiable.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is selected for the deployable slice.",
+        "rationale": "The business outcome and host journey are missing.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Keep verification inputs public or synthetic and exclude tenant-specific or confidential content.",
+        "rationale": "The current workflow is in the personal OpenAI zone.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Prevent release planning from relying on the expired licensing claim.",
+        "rationale": "A material volatile dependency requires current evidence before operational commitments are made.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "No implementation or deployment proceeds from this open brief.",
+        "rationale": "The outcome is undefined and required licensing verification is absent.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "power-platform-current-feature-verifier",
+      "source_type": "lab",
+      "registry": {
+        "path": "skills/power-platform-current-feature-verifier",
+        "entry_status": "missing",
+        "version_or_pin": "not-supplied",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Verify the exact material licensing proposition, applicability conditions, release status, geography, and effective date using current first-party sources.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": [
+          "Approved first-party-source verification tools declared by the specialist"
+        ]
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "none",
+        "selector": "$power-platform-current-feature-verifier",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "evidence_refs": [
+        "invocation:stdin"
+      ],
+      "open_items": [
+        "Supply the exact claim, product or capability, license plan, geography, and decision date.",
+        "Explicitly enable and select the specialist.",
+        "Supply its dated, schema-valid result and first-party evidence references."
+      ],
+      "next_action": "Explicitly invoke $power-platform-current-feature-verifier with sanitized public inputs, then provide its actual result to this orchestration."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "A carry-forward position contains a material licensing dependency with expired evidence",
+      "when": "Readiness for the next deployable slice is assessed",
+      "then": "The expired claim is not treated as confirmed and the position remains Open pending current verification.",
+      "evidence": "JSON position classification and a dated specialist result when completed."
+    },
+    {
+      "id": "AC-002",
+      "given": "The exact licensing proposition and applicability context are supplied",
+      "when": "The approved current-feature specialist is explicitly invoked",
+      "then": "Its actual result identifies current first-party evidence, effective date, applicability conditions, and unresolved uncertainty.",
+      "evidence": "Schema-valid specialist output with non-empty first-party evidence references."
+    },
+    {
+      "id": "AC-003",
+      "given": "A measurable outcome, persona, host journey, boundary, and current licensing result are available",
+      "when": "The build position is reconstructed",
+      "then": "The smallest complete deployable vertical slice can be defined without relying on expired evidence.",
+      "evidence": "A subsequent self-contained build brief with complete vertical sequence and material controls."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Current licensing verification is unavailable, stale, malformed, or not explicitly invoked.",
+      "expected_behavior": "Keep the material licensing decision Open and do not infer specialist success.",
+      "evidence": "Delegation record shows invoked false and outcome open."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Verification would require credentials, tenant access, private URLs, or confidential organisational data in the personal OpenAI zone.",
+      "expected_behavior": "Stop the transfer, sanitize the handoff, and obtain an approved organisational workflow.",
+      "evidence": "Boundary review and a sanitized stop record."
+    },
+    {
+      "id": "NP-003",
+      "condition": "Implementation or deployment is requested before the outcome and licensing dependency are resolved.",
+      "expected_behavior": "Do not implement or deploy; retain Open status.",
+      "evidence": "Authorization and execution records show no consequential action."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Expired-evidence reconstruction",
+      "expected": "The prior licensing position is classified as superseded and readiness remains Open.",
+      "evidence_required": "Schema-valid output containing SS-001, OQ-002, and DEL-001.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Verification handoff boundary",
+      "expected": "Only public or synthetic inputs are permitted and confidential tenant content is excluded.",
+      "evidence_required": "Reviewed sanitized specialist request and boundary classification.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "alm",
+      "scope": "Release gate for material licensing evidence",
+      "expected": "No implementation release decision relies on expired or unverified licensing evidence.",
+      "evidence_required": "Current specialist result linked to the subsequent build brief.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "deployment",
+      "scope": "Authorization boundary",
+      "expected": "No deployment occurs from this orchestration brief.",
+      "evidence_required": "Deployment authorization remains not-requested.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment to be identified after the deployable outcome is defined"
+    ],
+    "prerequisites": [
+      "Current licensing verification for the exact material proposition and applicability context",
+      "Defined measurable outcome, persona, host, entry point, and primary journey",
+      "Approved organisational environment, security, DLP, identity, and ALM configuration"
+    ],
+    "steps": [
+      "Do not deploy from this brief.",
+      "Resolve the blocking outcome and licensing questions.",
+      "Produce and authorize a subsequent Ready implementation brief before deployment."
+    ],
+    "post_deploy_checks": [
+      "Confirm target licensing and configuration readback against the approved current evidence.",
+      "Execute the eventual slice acceptance, negative-path, security, and replay tests."
+    ],
+    "evidence_required": [
+      "Explicit deployment authorization",
+      "Target configuration readback",
+      "Runtime end-to-end evidence",
+      "Failure and replay evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "The current verification contradicts a material assumption used by the eventual implementation.",
+      "Target configuration or entitlement does not match the verified applicability conditions.",
+      "Runtime acceptance or security checks fail."
+    ],
+    "steps": [
+      "Stop release progression and preserve diagnostic evidence.",
+      "Disable or revert only the affected solution increment through the authorised ALM path.",
+      "Restore the last verified package and configuration.",
+      "Reconstruct the position using the new evidence before retrying."
+    ],
+    "data_considerations": [
+      "Preserve durable records created before rollback.",
+      "Avoid destructive cleanup until ownership, replay, and reconciliation are defined.",
+      "Exclude confidential payloads and credentials from rollback evidence."
+    ],
+    "owner": "Authorised organisational release owner",
+    "evidence_required": [
+      "Rollback authorization",
+      "Package and configuration version records",
+      "Post-rollback configuration readback",
+      "Reconciliation and replay results"
+    ]
+  },
+  "next_action": "Replace the expired carry-forward basis by supplying the measurable outcome, persona, host, exact licensing proposition and applicability context, then explicitly invoke $power-platform-current-feature-verifier with public inputs and return its dated schema-valid result; until then, retain the licensing decision and build brief as Open."
+}

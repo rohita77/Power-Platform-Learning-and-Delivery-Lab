@@ -1,0 +1,78 @@
+{
+  "case_id": "GOLD-005",
+  "specialist": "dataverse-webapi-query",
+  "specialist_version": "remediation-0.2.2",
+  "upstream_registered_pin": "f4bb4ad5bf55e2d50076292bd6301f6337d38083",
+  "adapter_tested_pin": "33bc38456abb83f27daad968b748c8085f2a78ef",
+  "selected_blob": "8791590eeca8b1c697856c8a5cca9fbab3ef12b6",
+  "register_status": "repository-level approved; explicit invocation only",
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "tools_allowed": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-07-19T15:57:21.528069Z",
+      "completed_at": "2026-07-19T22:06:56.412791Z",
+      "exit_code": 0,
+      "command_argv": [
+        "codex",
+        "--disable",
+        "shell_tool",
+        "--disable",
+        "browser_use",
+        "--disable",
+        "computer_use",
+        "--disable",
+        "apps",
+        "--disable",
+        "plugins",
+        "exec",
+        "--ephemeral",
+        "--ignore-user-config",
+        "-C",
+        "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+        "-m",
+        "gpt-5.6-sol",
+        "-c",
+        "model_reasoning_effort=\"high\"",
+        "-c",
+        "approval_policy=\"on-request\"",
+        "-c",
+        "web_search=\"disabled\"",
+        "-s",
+        "read-only",
+        "--json",
+        "-o",
+        "/tmp/power-platform-incremental-delivery-v0.1.0-rc3/specialists/GOLD-005/first-output.txt",
+        "$dataverse-webapi-query"
+      ],
+      "explicit_invocation_configuration": "$dataverse-webapi-query",
+      "exact_input": "Create a build brief for a synthetic model-driven account review slice. The user opens a view of the top ten active synthetic accounts ordered by createdon descending and sees name and accountnumber. Query construction requires the approved repository specialist. Delegation is explicitly enabled for public/synthetic data, standard synthetic Account schema assumptions are authorised, and the required host is Xrm.WebApi. Select $dataverse-webapi-query explicitly, accept only its schema-valid result, embed that validated query contract in the slice, and define validation, feedback, telemetry, evidence, deployment prerequisites, and rollback. Do not authenticate or access a tenant.",
+      "exact_input_sha256": "d3b75bbb4bcb6322a7981124145adeefb6a8fe47c4296d985bf57e201afd8b14",
+      "first_output": "# Synthetic Account Review — build brief\n\n## Outcome and acceptance\n\nDeliver a read-only “Account Review” page inside the model-driven app. An authorized user can open it and:\n\n- See at most ten active synthetic Accounts.\n- See only Name and Account Number.\n- Receive rows ordered by `createdon` descending, with `accountid` ascending as a deterministic tie-breaker.\n- See clear loading, empty, error, permission-denied, and refresh states.\n- Retry safely without duplicate or stale results.\n- Use the page by keyboard and at narrow viewport widths.\n\nNo authentication, tenant access, CRUD, import, or deployment is included in this brief.\n\n## Smallest production-credible implementation\n\nUse a solution-aware HTML/JavaScript web resource exposed through the model-driven app sitemap.\n\n- One page controller owns initial load, refresh, rendering, and request state.\n- One gateway owns the validated `Xrm.WebApi` call.\n- Render returned values with `textContent`; never inject record values through HTML.\n- Permit only one active request. Disable Refresh while loading and ignore late responses using a request-generation counter.\n- Display Account Number as an em dash when null.\n- Show “Updated at” time and a Refresh action to make data freshness explicit.\n- Do not add flows, plug-ins, writes, queues, or additional query handlers.\n\n## Accepted specialist query contract\n\nThe explicitly delegated specialist result passed the required JSON structure and success invariants: resolved schema and host, empty `unresolved_schema`, flat choice values, and non-empty Xrm.WebApi code.\n\n```json\n{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"recommendation\": \"Retrieve the 10 most recently created active Account rows, returning name and account number, with accountid providing deterministic ordering when createdon values are equal.\",\n  \"assumptions\": [\n    \"Synthetic Account data is in scope.\",\n    \"Standard Microsoft Dataverse Account schema is authorized.\",\n    \"Active Account state is represented by statecode value 0.\",\n    \"The standard Account primary key accountid is authorized as a deterministic tie-breaker.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"accountid\",\n      \"name\",\n      \"accountnumber\",\n      \"createdon\",\n      \"statecode\"\n    ],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [\n      \"statecode=0 (Active)\"\n    ],\n    \"generated_service_name\": null,\n    \"host_api_contract\": \"Xrm.WebApi.retrieveMultipleRecords(entityLogicalName, options)\"\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"xrm_webapi\",\n    \"supported_options\": [\n      \"xrm_webapi\"\n    ],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"Xrm.WebApi.retrieveMultipleRecords(\\\"account\\\", \\\"?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc,accountid asc&$top=10\\\")\",\n  \"security_notes\": [\n    \"No authentication, tenant access, confidential records, or runtime execution was performed.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline adaptation\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Resolved the standard Account schema and constructed the deterministic Xrm.WebApi query.\"\n    }\n  ],\n  \"open_questions\": []\n}\n```\n\nThe implementation must preserve that table name and options string exactly unless a replacement specialist result is validated.\n\n## User states and feedback\n\n- **Loading:** progress indicator, `aria-busy=\"true\"`, and disabled Refresh.\n- **Success:** zero to ten rows, row count, and last-updated time.\n- **Empty:** “No active accounts found,” without presenting an error.\n- **Failure:** concise message and keyboard-accessible Retry action.\n- **Permission failure:** explain that Account read access is required; do not expose raw platform details.\n- **Stale or concurrent response:** discard results from any superseded request.\n- **Long content:** wrap or truncate visually without losing accessible text.\n- **Narrow layout:** allow horizontal scrolling or switch to labelled row cards.\n- **Focus:** move focus to the result summary after refresh and to the error summary after failure.\n\n## Validation\n\nFocused automated checks:\n\n- Assert `retrieveMultipleRecords` receives `account` and the exact validated options string.\n- Confirm inactive rows cannot be requested by the client contract.\n- Confirm at most ten returned rows are rendered.\n- Test loading, empty, success, nullable account number, permission error, general error, and retry.\n- Test double-refresh suppression and late-response rejection.\n- Verify values resembling markup are rendered as text.\n- Run linting, unit tests, accessibility checks, and the repository’s normal build/package validation.\n\nAuthorized post-deployment checks should use synthetic data covering more than ten active rows, a newer inactive row, equal `createdon` values, and a missing Account Number.\n\n## Telemetry\n\nEmit through the app’s existing approved telemetry provider:\n\n- `account_review_load_started`\n- `account_review_load_succeeded`: duration and row count\n- `account_review_load_failed`: duration and sanitized category\n- `account_review_retry`\n\nDo not capture names, account numbers, record IDs, query strings, raw error messages, user identifiers, environment URLs, or credentials. If no approved telemetry provider exists, telemetry integration is a deployment blocker rather than justification for embedding a new endpoint or secret.\n\n## Deployment prerequisites\n\n- A solution and publisher for the web resources and app navigation change.\n- Confirmed target model-driven app and sitemap location.\n- Security roles granting intended users Account read access, including relevant field-level access.\n- Confirmation that the chosen web-resource host exposes `Xrm.WebApi`.\n- An approved telemetry provider and non-secret environment configuration.\n- Synthetic test records and authorized deployment/import access.\n- A retained prior managed solution version for rollback.\n\nDeploy to a development/test environment first, publish, run the focused checks, then promote the same artifact through the normal solution pipeline.\n\n## Rollback\n\nReimport the prior managed solution version or deploy a patch that removes the sitemap entry and restores the previous web resources. Disable the page’s telemetry registration with the same rollback. The slice performs no writes, so no Account-data rollback is required.\n\n## Evidence boundary\n\nCurrent proof is limited to the schema-valid specialist query contract and build-design review. No source implementation, automated test, package, import, configuration readback, or runtime behavior was observed.",
+      "first_output_sha256": "7bbae998938c4001d4aa71d5203fd3af71e26e4a178c86f935f6e7625602c3ec",
+      "answer_schema_valid": false,
+      "answer_schema_errors": [
+        "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+      ],
+      "workflow_operations": [
+        {
+          "event_type": "stderr",
+          "item_type": "rejected-tool-attempt"
+        }
+      ],
+      "approval_events": [],
+      "network_operations": [],
+      "event_count": 28,
+      "events_file": "run.events.jsonl",
+      "stderr_file": "run.stderr.txt"
+    }
+  ],
+  "selected_attempt": 1,
+  "relative_result_reference": "tests/results/codex/v0.1.0-rc3/targeted/GOLD-005/specialist/first-output.txt",
+  "deviations": []
+}

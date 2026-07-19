@@ -1,0 +1,245 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.1.0-rc3-codex-20260719:DEL-001:targeted",
+  "run_id": "ppid-v0.1.0-rc3-codex-20260719",
+  "case_id": "DEL-001",
+  "suite": "delegation",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.1.0",
+    "sha256": "b0321d15dfef0c9250daa1732e5c5fd074b0140d777c5cce17b78d54dfa1173d"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/delegation-cases.yaml",
+    "sha256": "e592d5cd0db129c50f1a39d1e2dd92de86b909c5dfe5252dfc07f01bf526bddc",
+    "exact_input": "Create a build brief for a synthetic model-driven account review slice. The user opens a view of the top ten active synthetic accounts ordered by createdon descending and sees name and accountnumber. Query construction requires the approved repository specialist. Delegation is explicitly enabled for public/synthetic data, standard synthetic Account schema assumptions are authorised, and the required host is Xrm.WebApi. Select $dataverse-webapi-query explicitly, accept only its schema-valid result, embed that validated query contract in the slice, and define validation, feedback, telemetry, evidence, deployment prerequisites, and rollback. Do not authenticate or access a tenant.",
+    "exact_input_sha256": "d3b75bbb4bcb6322a7981124145adeefb6a8fe47c4296d985bf57e201afd8b14"
+  },
+  "execution": {
+    "started_at": "2026-07-19T22:12:15.586165Z",
+    "completed_at": "2026-07-19T22:14:33.483810Z",
+    "first_output": "{\n  \"status\": \"Open\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"The account reviewer must see at most ten active synthetic accounts, ordered by createdon descending, displaying only name and accountnumber.\",\n        \"basis\": \"Explicit case outcome and field requirements.\",\n        \"source_refs\": [\n          \"case-input\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"The host contract is Xrm.WebApi in a supported model-driven app surface.\",\n        \"basis\": \"Explicit case constraint.\",\n        \"source_refs\": [\n          \"case-input\"\n        ]\n      },\n      {\n        \"id\": \"CP-003\",\n        \"statement\": \"Standard synthetic Microsoft Dataverse Account schema assumptions are authorised, and no authentication or tenant access is permitted.\",\n        \"basis\": \"Explicit boundary and schema-assumption authorization.\",\n        \"source_refs\": [\n          \"case-input\"\n        ]\n      },\n      {\n        \"id\": \"CP-004\",\n        \"statement\": \"The dataverse-webapi-query specialist was explicitly selected and execution was observed, but its preserved standalone first output failed independent answer-schema validation.\",\n        \"basis\": \"The evaluator reports JSONDecodeError at line 1 column 1 and result_schema_valid=false.\",\n        \"source_refs\": [\n          \"tests/results/codex/v0.1.0-rc3/targeted/DEL-001/specialist/first-output.txt\",\n          \"sha256:8d35e8924fc0f0efe5ff37a76378d3313fb4e253505499390b687534aadbfa96\"\n        ]\n      }\n    ],\n    \"assumptions\": [\n      {\n        \"id\": \"AS-001\",\n        \"statement\": \"The final component will be solution-contained and added to an existing model-driven application.\",\n        \"impact\": \"The precise component type and navigation location can be selected during authorised implementation without changing the read-only journey.\",\n        \"validation_required\": \"Confirm the target solution, publisher, application, supported component surface, and component owner before implementation.\",\n        \"source_refs\": [\n          \"case-input\"\n        ]\n      },\n      {\n        \"id\": \"AS-002\",\n        \"statement\": \"Users will rely on existing least-privilege Account read privileges; this slice will not create or alter security roles.\",\n        \"impact\": \"Users lacking read access receive safe permission feedback and no data.\",\n        \"validation_required\": \"Confirm the intended reviewer persona and existing Account read privilege before deployment.\",\n        \"source_refs\": [\n          \"case-input\"\n        ]\n      }\n    ],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"Can the approved dataverse-webapi-query specialist be rerun with its raw standalone response independently validated as exactly one schema-valid JSON object?\",\n        \"owner\": \"Evaluator or authorised specialist runner\",\n        \"blocks_ready\": true\n      }\n    ],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Accept or repair the query object embedded inside the malformed specialist output.\",\n        \"reason\": \"The independent schema verdict is false. The delegation contract prohibits extracting, repairing, reconstructing, or silently substituting content from malformed specialist output.\",\n        \"reconsider_if\": \"A separately preserved standalone specialist response passes independent validation against the specialist answer schema.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"synthetic\",\n    \"cross_zone_transfer\": \"permitted\"\n  },\n  \"slice\": {\n    \"outcome\": \"A model-driven Account Review experience lets an account reviewer load at most ten active synthetic accounts in newest-first order and see only name and account number; readiness remains open until a schema-valid specialist query contract is available.\",\n    \"entry\": \"The reviewer opens Account Review from a confirmed model-driven app entry point. The component starts in an accessible loading state and initiates one read through the confirmed Xrm.WebApi host contract.\",\n    \"validation\": \"Before implementation, require an independently schema-valid dataverse-webapi-query result, verify the selected model-driven surface exposes Xrm.WebApi, and preserve the specialist query contract exactly. At runtime, prevent concurrent reads, reject late responses using a request generation token, and expose permission or safe generic failures without returned data or raw error bodies.\",\n    \"persistence_or_action\": \"The slice is read-only and performs no persistence. One controller owns initial load, retry, refresh, the single in-flight request, and response generation. Query construction remains unresolved and no runnable query is embedded because the required specialist result is invalid.\",\n    \"feedback\": \"Provide labelled loading progress, an accessible two-column success table, an empty-state message, safe permission and general error messages, Retry, disabled Refresh while loading, and stale-state feedback that retains existing rows and shows the last successful refresh time.\",\n    \"telemetry\": \"Emit privacy-safe load-started, load-succeeded, load-failed, and retry-requested events with a generated correlation ID, duration, returned count, retry count, component version, and sanitized outcome or error category. Exclude account fields, record identifiers, tenant identifiers, environment URLs, credentials, and complete error bodies.\",\n    \"evidence\": \"Keep proof levels separate: source inspection and exact query-contract assertions; automated lint, build, unit, accessibility, and telemetry tests; solution-package integrity and generated-artifact diff; authorised deployment/import and configuration readback; then runtime evidence for ordering, filtering, limit, permissions, empty, failure, retry, stale response, and reload behavior. No implementation, package, deployment, or runtime proof currently exists.\",\n    \"scope\": [\n      \"Read-only model-driven Account Review journey\",\n      \"Top-ten active synthetic Account retrieval through Xrm.WebApi after specialist validation\",\n      \"Display of name and accountnumber only\",\n      \"Loading, success, empty, permission, failure, retry, stale, and narrow-layout states\",\n      \"Privacy-safe operational telemetry and focused validation\"\n    ],\n    \"exclusions\": [\n      \"Dataverse writes, imports, metadata changes, or security-role changes\",\n      \"Authentication, tokens, tenant access, environment discovery, or live metadata inspection\",\n      \"Canvas, Generative Page, Code App, raw Web API, or Power Automate host substitutions\",\n      \"Continuation-link processing beyond the requested ten rows\",\n      \"Implementation, deployment, commit, push, or target-runtime verification\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [\n      {\n        \"id\": \"EXP-001\",\n        \"decision\": \"Use an accessible model-driven Account Review component with a two-column table and explicit loading, empty, error, permission, stale, and retry states.\",\n        \"rationale\": \"This directly supports the reviewer journey and required operational states.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"data\": [\n      {\n        \"id\": \"DAT-001\",\n        \"decision\": \"Read active synthetic Account rows and render only name and accountnumber, with createdon and accountid permitted only for ordering if confirmed by the validated specialist contract.\",\n        \"rationale\": \"The visible data scope is settled, but the exact runnable query cannot be accepted from the malformed specialist output.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"integration\": [\n      {\n        \"id\": \"INT-001\",\n        \"decision\": \"Use Xrm.WebApi as the sole host integration contract and preserve the future schema-valid specialist query without modification.\",\n        \"rationale\": \"The host is explicit and query ownership belongs to the approved specialist.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"ai\": [\n      {\n        \"id\": \"AI-001\",\n        \"decision\": \"Use no AI component in the runtime slice.\",\n        \"rationale\": \"The journey is deterministic read and rendering behavior.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"security\": [\n      {\n        \"id\": \"SEC-001\",\n        \"decision\": \"Rely on existing least-privilege Dataverse Account read authorization and return sanitized permission feedback without changing privileges.\",\n        \"rationale\": \"The slice is read-only and has no authority to administer security.\",\n        \"evidence_status\": \"Assumption\"\n      },\n      {\n        \"id\": \"SEC-002\",\n        \"decision\": \"Do not log returned fields, record identifiers, environment details, credentials, or complete service errors.\",\n        \"rationale\": \"Operational telemetry does not require business-row content.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"operations\": [\n      {\n        \"id\": \"OPS-001\",\n        \"decision\": \"One controller owns reads, enforces one in-flight request, uses a request generation token, and retains prior rows after refresh failure.\",\n        \"rationale\": \"This prevents duplicate reads and late-response replacement while preserving usable stale data.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"alm\": [\n      {\n        \"id\": \"ALM-001\",\n        \"decision\": \"Package the component in the confirmed solution, validate generated artifacts, and deploy through the existing authorised pipeline with previous-version rollback.\",\n        \"rationale\": \"Solution-contained delivery provides reviewable dependencies and a recoverable release path.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ]\n  },\n  \"delegations\": [\n    {\n      \"id\": \"DEL-001\",\n      \"specialist\": \"dataverse-webapi-query\",\n      \"source_type\": \"upstream\",\n      \"registry\": {\n        \"path\": \".agents/skills/dataverse-webapi-query/\",\n        \"entry_status\": \"current-approved\",\n        \"version_or_pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n        \"verified_on\": \"2026-07-20\"\n      },\n      \"request\": {\n        \"scope\": \"Construct a strict Xrm.WebApi query contract for the top ten active synthetic Accounts ordered by createdon descending, returning name and accountnumber under authorised standard synthetic Account schema assumptions.\",\n        \"data_classification\": \"synthetic\",\n        \"zone\": \"personal-openai\",\n        \"permitted_tools\": []\n      },\n      \"control\": {\n        \"enabled\": true,\n        \"selection_mode\": \"explicit\",\n        \"selector\": \"$dataverse-webapi-query\",\n        \"client_compatible\": true,\n        \"prerequisites_satisfied\": true,\n        \"boundary_permitted\": true,\n        \"permissions_approved\": true\n      },\n      \"execution\": {\n        \"execution_observed\": true,\n        \"result_schema_valid\": false,\n        \"invoked\": false,\n        \"outcome_status\": \"open\",\n        \"result_reference\": \"tests/results/codex/v0.1.0-rc3/targeted/DEL-001/specialist/first-output.txt\"\n      },\n      \"evidence_refs\": [\n        \"tests/results/codex/v0.1.0-rc3/targeted/DEL-001/specialist/first-output.txt\",\n        \"sha256:8d35e8924fc0f0efe5ff37a76378d3313fb4e253505499390b687534aadbfa96\",\n        \".agents/skills/dataverse-webapi-query/\"\n      ],\n      \"open_items\": [\n        \"The preserved standalone first output is Markdown rather than exactly one specialist-schema JSON object.\",\n        \"Independent validation failed with JSONDecodeError at line 1 column 1.\",\n        \"A rejected tool attempt was observed during the specialist workflow and must not be represented as successful invocation.\"\n      ],\n      \"next_action\": \"Rerun the explicitly selected specialist in its instruction-only boundary, preserve its complete raw standalone first output, independently validate it without repair, and accept it only if the schema verdict is true.\"\n    }\n  ],\n  \"acceptance_criteria\": [\n    {\n      \"id\": \"AC-001\",\n      \"given\": \"A schema-valid specialist contract and authorised synthetic active and inactive Account fixtures\",\n      \"when\": \"The reviewer opens Account Review\",\n      \"then\": \"At most ten active rows are shown in createdon-descending order with deterministic tie ordering defined by the validated contract.\",\n      \"evidence\": \"Exact query-contract assertion, fixture-based automated test, and authorised runtime observation.\"\n    },\n    {\n      \"id\": \"AC-002\",\n      \"given\": \"Rows are returned successfully\",\n      \"when\": \"The component renders the result\",\n      \"then\": \"Only name and accountnumber are visible, and a null or blank account number is rendered as an em dash.\",\n      \"evidence\": \"Renderer unit test and accessibility inspection.\"\n    },\n    {\n      \"id\": \"AC-003\",\n      \"given\": \"A request is already in flight\",\n      \"when\": \"The reviewer activates Refresh or Retry again\",\n      \"then\": \"No second read begins and the triggering control remains disabled until the current request settles.\",\n      \"evidence\": \"Controller concurrency test with request-count assertion.\"\n    },\n    {\n      \"id\": \"AC-004\",\n      \"given\": \"An older response completes after a newer request generation\",\n      \"when\": \"The controller receives that older response\",\n      \"then\": \"The response does not replace newer results or status.\",\n      \"evidence\": \"Deterministic stale-response unit test.\"\n    },\n    {\n      \"id\": \"AC-005\",\n      \"given\": \"The refresh fails after a prior successful load\",\n      \"when\": \"The failure is handled\",\n      \"then\": \"Existing rows remain visible with a stale indicator, last-successful refresh time, safe failure message, and Retry action.\",\n      \"evidence\": \"Controller and renderer stale-state test.\"\n    },\n    {\n      \"id\": \"AC-006\",\n      \"given\": \"The component emits operational telemetry\",\n      \"when\": \"A load succeeds, fails, or is retried\",\n      \"then\": \"The event contains only approved operational dimensions and a privacy-safe correlation ID.\",\n      \"evidence\": \"Telemetry allow-list and forbidden-payload automated assertions.\"\n    }\n  ],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"The specialist output is malformed or independently schema-invalid.\",\n      \"expected_behavior\": \"Do not extract, repair, reconstruct, or embed its apparent query; keep the build brief Open.\",\n      \"evidence\": \"Independent schema verdict and delegation record.\"\n    },\n    {\n      \"id\": \"NP-002\",\n      \"condition\": \"Dataverse returns no active rows.\",\n      \"expected_behavior\": \"Show the accessible empty message 'No active accounts found.' without rendering an empty table.\",\n      \"evidence\": \"Empty-fixture renderer test.\"\n    },\n    {\n      \"id\": \"NP-003\",\n      \"condition\": \"The reviewer lacks Account read permission.\",\n      \"expected_behavior\": \"Show a generic permission message and Retry action without exposing raw service errors or requesting privilege escalation.\",\n      \"evidence\": \"Permission-failure unit test and authorised denied-read runtime test.\"\n    },\n    {\n      \"id\": \"NP-004\",\n      \"condition\": \"A general read failure occurs.\",\n      \"expected_behavior\": \"Show sanitized failure feedback, preserve prior rows when available, and emit only an approved error category.\",\n      \"evidence\": \"Failure and stale-state tests plus telemetry payload inspection.\"\n    },\n    {\n      \"id\": \"NP-005\",\n      \"condition\": \"A user attempts repeated refresh while a read is running.\",\n      \"expected_behavior\": \"Ignore the duplicate action and start no additional request.\",\n      \"evidence\": \"Concurrent-action test.\"\n    },\n    {\n      \"id\": \"NP-006\",\n      \"condition\": \"Long values or a narrow viewport would otherwise hide content.\",\n      \"expected_behavior\": \"Wrap content or provide accessible horizontal scrolling without truncating the only available values.\",\n      \"evidence\": \"Responsive visual and keyboard accessibility checks.\"\n    }\n  ],\n  \"tests\": [\n    {\n      \"id\": \"TEST-001\",\n      \"class\": \"functional\",\n      \"scope\": \"Assert the table name and complete query string exactly equal the future independently validated specialist contract.\",\n      \"expected\": \"No locally reconstructed or modified query is accepted.\",\n      \"evidence_required\": \"Automated exact-string assertion referencing the preserved valid contract.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-002\",\n      \"class\": \"functional\",\n      \"scope\": \"Render successful, empty, null-accountnumber, permission, general-failure, retry, and stale states.\",\n      \"expected\": \"Each state produces the specified feedback and only approved display fields.\",\n      \"evidence_required\": \"Focused controller and renderer test results.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-003\",\n      \"class\": \"reliability\",\n      \"scope\": \"Exercise duplicate refresh and out-of-order response completion.\",\n      \"expected\": \"Only one request is in flight and late responses cannot replace newer state.\",\n      \"evidence_required\": \"Deterministic request-count and generation-token assertions.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-004\",\n      \"class\": \"security\",\n      \"scope\": \"Inspect UI and telemetry for returned row content, identifiers, environment details, credentials, and raw errors.\",\n      \"expected\": \"Forbidden values are absent and permission failures remain sanitized.\",\n      \"evidence_required\": \"Telemetry allow-list tests and reviewed captured events using synthetic fixtures.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-005\",\n      \"class\": \"accessibility\",\n      \"scope\": \"Check table semantics, labelled progress, live-region announcements, keyboard order, visible focus, retry controls, long content, and narrow layout.\",\n      \"expected\": \"The complete journey is operable and understandable without pointer-only interaction.\",\n      \"evidence_required\": \"Automated accessibility results and focused manual keyboard evidence.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-006\",\n      \"class\": \"alm\",\n      \"scope\": \"Run repository lint, build, focused tests, solution integrity validation, and generated-artifact diff review.\",\n      \"expected\": \"The solution package is deterministic and contains only intended dependencies and changes.\",\n      \"evidence_required\": \"Command results, package validation output, and reviewed artifact diff.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-007\",\n      \"class\": \"deployment\",\n      \"scope\": \"In an authorised target, verify active filtering, ordering including equal timestamps, ten-row maximum, empty, denied-read, retry, stale, and reload behavior.\",\n      \"expected\": \"Target behavior matches the accepted query contract and user-visible criteria.\",\n      \"evidence_required\": \"Import/configuration readback and sanitized runtime observations.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-008\",\n      \"class\": \"rollback\",\n      \"scope\": \"Restore the previous known-good solution version or disable the Account Review navigation entry.\",\n      \"expected\": \"The prior experience is restored without data repair because the slice performs no writes.\",\n      \"evidence_required\": \"Rollback execution record and post-rollback smoke evidence.\",\n      \"status\": \"planned\"\n    }\n  ],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Authorised organisational Microsoft development environment with synthetic test data\",\n      \"Authorised validation environment with a denied-read test persona\"\n    ],\n    \"prerequisites\": [\n      \"A separately preserved and independently schema-valid dataverse-webapi-query result\",\n      \"Confirmed target solution, publisher, model-driven app, navigation location, and component owner\",\n      \"Verified model-driven component surface exposing Xrm.WebApi\",\n      \"Existing least-privilege Account read access for the reviewer persona\",\n      \"Synthetic active and inactive fixtures including equal createdon timestamps\",\n      \"Operational build, solution-checking, deployment, monitoring, and rollback pipelines\"\n    ],\n    \"steps\": [\n      \"Implement the solution-contained component using the exact accepted specialist contract\",\n      \"Run focused tests, repository checks, and solution artifact validation\",\n      \"Review generated changes and dependencies\",\n      \"Obtain explicit deployment authorization\",\n      \"Import through the approved pipeline and read back configuration\",\n      \"Execute the runtime acceptance suite with synthetic data\"\n    ],\n    \"post_deploy_checks\": [\n      \"Confirm inactive rows never appear\",\n      \"Confirm descending creation order and deterministic equal-timestamp ordering\",\n      \"Confirm no more than ten rows appear\",\n      \"Confirm only name and accountnumber are visible\",\n      \"Exercise empty, denied-read, failure, retry, stale, and reload states\",\n      \"Inspect sanitized telemetry and correlation behavior\"\n    ],\n    \"evidence_required\": [\n      \"Schema-valid preserved specialist contract and independent validation verdict\",\n      \"Automated build, test, accessibility, security, and solution-check results\",\n      \"Reviewed package and generated-artifact diff\",\n      \"Deployment/import record and configuration readback\",\n      \"Sanitized runtime acceptance evidence\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Incorrect filtering, ordering, row limit, or displayed fields\",\n      \"Permission or error details are exposed\",\n      \"Duplicate reads or stale-response replacement occurs\",\n      \"Accessibility regression blocks the reviewer journey\",\n      \"Unexpected solution dependency or deployment failure\"\n    ],\n    \"steps\": [\n      \"Disable or remove the Account Review navigation entry if immediate containment is required\",\n      \"Redeploy the previous known-good solution version through the approved pipeline\",\n      \"Read back the restored configuration and run the prior smoke test\",\n      \"Verify failure telemetry is sanitized and normal operation has recovered\"\n    ],\n    \"data_considerations\": [\n      \"The slice performs no writes or schema changes\",\n      \"No data restoration or migration rollback is expected\",\n      \"Retain only sanitized operational evidence required to confirm recovery\"\n    ],\n    \"owner\": \"Authorised solution release owner\",\n    \"evidence_required\": [\n      \"Rollback authorization and pipeline execution record\",\n      \"Restored solution-version and configuration readback\",\n      \"Sanitized post-rollback smoke evidence\"\n    ]\n  },\n  \"next_action\": \"Do not implement from the preserved malformed output. Rerun the explicitly selected $dataverse-webapi-query specialist without tenant access or tools, preserve its complete raw standalone first output, independently validate it as exactly one schema-valid JSON object, and then regenerate this brief with that contract embedded unchanged.\"\n}",
+    "first_output_sha256": "797f0bde9ea13af903aefab6ab7287779ad0dff26fea4057f35e2b8adf811e71"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [
+    {
+      "specialist": "dataverse-webapi-query",
+      "selector": "$dataverse-webapi-query",
+      "selection_mode": "explicit",
+      "execution_observed": true,
+      "result_schema_valid": false,
+      "invoked": false,
+      "evidence_refs": [
+        "tests/results/codex/v0.1.0-rc3/targeted/DEL-001/specialist/first-output.txt",
+        "sha256:8d35e8924fc0f0efe5ff37a76378d3313fb4e253505499390b687534aadbfa96",
+        ".agents/skills/dataverse-webapi-query/"
+      ]
+    }
+  ],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: recorded selector configuration separately",
+        "evaluator: supplied exact fixture input unchanged",
+        "evaluator: preserved first output and runtime events",
+        "evaluator: validated without repair"
+      ],
+      "source": "invocation.json and evaluator validation"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator validation",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7c6f-e9b9-7d81-8b47-eef08c0191d0",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged input",
+        "result": "Pass",
+        "evidence": "The fixture value and SHA-256 are preserved in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Explicit selector configuration kept separate",
+        "result": "Pass",
+        "evidence": "Selectors are recorded in evaluator configuration; the exact fixture input was supplied unchanged through stdin.",
+        "deviation": ""
+      },
+      {
+        "name": "Skill 6 output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero Skill 6 workflow operations",
+        "result": "Pass",
+        "evidence": "Observed 0 Skill 6 workflow operations.",
+        "deviation": ""
+      },
+      {
+        "name": "Expected status Ready",
+        "result": "Fail",
+        "evidence": "Observed status Open.",
+        "deviation": "Status differs because successful specialist evidence was not obtained."
+      },
+      {
+        "name": "Required behavior: Verify the repository-root skill and current approving register entry.",
+        "result": "Pass",
+        "evidence": "Confirmed in the preserved first output and operation evidence.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Select exactly $dataverse-webapi-query with synthetic input.",
+        "result": "Pass",
+        "evidence": "Confirmed in the preserved first output and operation evidence.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Require observed execution and schema-valid output before invoked is true.",
+        "result": "Pass",
+        "evidence": "Confirmed in the preserved first output and operation evidence.",
+        "deviation": ""
+      },
+      {
+        "name": "result_reference is a string",
+        "result": "Pass",
+        "evidence": "Observed type str.",
+        "deviation": ""
+      },
+      {
+        "name": "Power CAT source_type is upstream",
+        "result": "Pass",
+        "evidence": "Observed source_type='upstream'.",
+        "deviation": ""
+      },
+      {
+        "name": "Standalone Power CAT answer-schema validity",
+        "result": "Fail",
+        "evidence": "Independent validation failed: JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+        "deviation": "The standalone first output is not one schema-valid specialist JSON object."
+      },
+      {
+        "name": "Zero Power CAT workflow operations",
+        "result": "Fail",
+        "evidence": "Observed 1 specialist workflow operations.",
+        "deviation": "The specialist made a rejected tool attempt."
+      },
+      {
+        "name": "Truthful failed-delegation state",
+        "result": "Pass",
+        "evidence": "Skill 6 recorded explicit selection and observed execution but invoked=false for malformed evidence.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 76.92,
+    "review_status": "reviewed"
+  },
+  "deviations": [
+    "The explicitly selected standalone Power CAT first output was non-JSON and failed its answer schema.",
+    "The explicitly selected Power CAT run made one rejected tool attempt; no operational action completed."
+  ],
+  "reviewer": {
+    "type": "human-and-automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-19T22:22:54.005065Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "b0321d15dfef0c9250daa1732e5c5fd074b0140d777c5cce17b78d54dfa1173d",
+      "use": "RC3 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/delegation-cases.yaml",
+      "sha256": "e592d5cd0db129c50f1a39d1e2dd92de86b909c5dfe5252dfc07f01bf526bddc",
+      "use": "Exact unchanged case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "b5c1c2ea756a88132b18145dbf34ee2e504c2e8d53d73c3ce54153c765ce7a96",
+      "use": "Codex-profile result-record validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "7accbd2c0346eb17be5b62ceed706b87e1a48fe32b3e35d2a5cfba2834cee773",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "89d909cada1a0eb49fb8ef41882f8e4d8b37ad0c700a33fdff43637d35701c6c",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Fail"
+}

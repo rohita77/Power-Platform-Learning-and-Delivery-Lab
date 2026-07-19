@@ -1,0 +1,484 @@
+{
+  "status": "Ready",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The slice provides a model-driven account-review page showing at most ten active synthetic accounts, ordered by createdon descending, with name and accountnumber visible.",
+        "basis": "Observable outcome, host, columns, filter, ordering, and limit were supplied explicitly.",
+        "source_refs": [
+          "user-request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Query execution uses Xrm.WebApi.retrieveMultipleRecords and performs no Dataverse write.",
+        "basis": "The required host contract is xrm_webapi.",
+        "source_refs": [
+          "user-request",
+          "DQV-001"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "The explicitly selected Dataverse query specialist returned a schema-valid success result under authorised standard synthetic Account schema assumptions.",
+        "basis": "Selection, enablement, synthetic-data boundary, schema assumptions, host contract, and valid specialist output are present in this invocation.",
+        "source_refs": [
+          "DQV-001"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The model-driven app can expose the account-review experience through an approved client component that has supported access to Xrm.WebApi.",
+        "impact": "The exact page or client-component packaging pattern can follow the repository's established model-driven convention without changing the validated query.",
+        "validation_required": "Confirm the component host and Xrm.WebApi availability during implementation and package validation.",
+        "source_refs": [
+          "user-authorised-host"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "Standard synthetic Account schema mappings are account, accounts, name, accountnumber, createdon, and statecode=0 for Active.",
+        "impact": "These mappings form the complete query contract and must not be silently replaced with labels or custom names.",
+        "validation_required": "Verify component metadata and solution dependencies before deployment; do not perform live metadata discovery through this brief.",
+        "source_refs": [
+          "user-authorised-standard-synthetic-schema",
+          "DQV-001"
+        ]
+      },
+      {
+        "id": "AS-003",
+        "statement": "Publisher, solution name, target environment, security-role assignment, and telemetry destination are implementation-time configuration values.",
+        "impact": "They do not alter the slice architecture but must be resolved before deployment.",
+        "validation_required": "Record approved values in deployment configuration and verify them by target readback.",
+        "source_refs": [
+          "incremental-delivery-bounded-configuration-rule"
+        ]
+      }
+    ],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Authenticate, inspect live metadata, or query a tenant while preparing this brief.",
+        "reason": "The request and both selected skill boundaries prohibit tenant access and authentication.",
+        "reconsider_if": "A separately authorised organisational workflow is initiated with appropriate operational controls."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Use a guessed custom schema, generated service, raw Web API URL, FetchXML, or direct Dataverse write.",
+        "reason": "The authorised contract is the standard synthetic Account schema with Xrm.WebApi and a read-only query.",
+        "reconsider_if": "The product outcome or confirmed host contract changes through an approved design decision."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "A model-driven app user opens Account Review and sees zero to ten active synthetic accounts, newest by createdon first, with only name and accountnumber displayed.",
+    "entry": "Persona: authorised account reviewer. Host: model-driven app client with supported Xrm.WebApi access. Entry point: Account Review navigation item or equivalent repository-standard page. Initial state: accessible heading and loading indicator with the result region marked busy. Initiating event: page open; manual Retry or Refresh may initiate a replacement request.",
+    "validation": "There are no user-entered fields. Before rendering, require a successful Xrm.WebApi result containing an entities array; accept at most ten rows; validate name and accountnumber as null or strings; treat missing optional values as an em dash; reject malformed payloads safely. Dataverse applies table, row, and column permissions. The query enforces statecode eq 0 and server-side ordering. Give each request a correlation ID and monotonically increasing request sequence so a late response cannot overwrite a newer refresh.",
+    "persistence_or_action": "The client component is the single owner of each read request and performs no persistence. Its idempotency boundary is one active load per page instance: repeated opens or retries are read-only, and stale responses are discarded using the request sequence. Validated query contract DQV-001: {\"result_type\":\"success\",\"status\":\"Resolved\",\"recommendation\":\"Use Xrm.WebApi.retrieveMultipleRecords with the singular account logical name and the resolved query string.\",\"assumptions\":[\"The prompt explicitly authorizes standard synthetic Microsoft Dataverse Account schema assumptions.\",\"Active accounts use statecode=0 under the authorised standard synthetic schema assumption.\"],\"resolved_schema\":{\"table_logical_name\":\"account\",\"entity_set_name\":\"accounts\",\"attribute_logical_names\":[\"name\",\"accountnumber\",\"createdon\",\"statecode\"],\"lookup_annotation_columns\":[],\"navigation_properties\":[],\"choice_or_status_values\":[\"statecode=0 (Active)\"],\"generated_service_name\":null,\"host_api_contract\":\"xrm_webapi\"},\"unresolved_schema\":[],\"host_context\":{\"status\":\"resolved\",\"selected\":\"xrm_webapi\",\"supported_options\":[\"xrm_webapi\"],\"required_clarification\":null},\"query_or_code\":\"Xrm.WebApi.retrieveMultipleRecords(\\\"account\\\", \\\"?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc&$top=10\\\")\",\"security_notes\":[\"Synthetic data only; no authentication, tenant access, metadata discovery, or write operation is included.\"],\"sources_or_reference_basis\":[{\"source\":\"Controlled inline Dataverse Web API Query Builder adaptation\",\"pin\":\"33bc38456abb83f27daad968b748c8085f2a78ef\",\"availability\":\"available\",\"use\":\"Resolved the supported Xrm.WebApi query from prompt-authorised synthetic schema facts.\"}],\"open_questions\":[]}. Implement this contract exactly; render only name and accountnumber even though createdon and statecode control selection and ordering.",
+    "feedback": "Show loading without retaining an outdated success message. On success, render the list and a nonintrusive last-refreshed indication; show a clear empty state when no active accounts are returned. For malformed results, permission denial, network failure, throttling, or service failure, preserve no partial unvalidated rows, present a concise sanitised message and correlation ID, and offer Retry where safe. Disable duplicate Retry while its request is current. If an older response loses the request-sequence race, discard it silently while retaining the newer state. Support narrow layouts, long names and account numbers, keyboard operation, visible focus, screen-reader status announcements, and focus placement on the result heading after a successful manual refresh.",
+    "telemetry": "Emit privacy-safe account_review_load events for initial load and retry with correlation_id, request_kind, duration_ms, outcome, result_count from 0 to 10, stale_response_discarded, retry_count, and sanitised error_category. Do not record names, account numbers, record identifiers, response bodies, environment URLs, credentials, tenant identifiers, raw exception text, or confidential payloads. Configure the approved organisational telemetry destination before deployment.",
+    "evidence": "Level 1: source review proves the component uses DQV-001, renders only the approved columns, handles all UI states, and excludes sensitive telemetry. Level 2: automated unit, accessibility, stale-response, error, and contract tests plus a successful build. Level 3: solution/package inspection proves component inclusion, dependencies, configuration, and absence of environment-specific credentials. Level 4: authorised import and configuration readback prove installation, navigation, role configuration, and telemetry binding in the target. Level 5: runtime end-to-end evidence proves ordering, active filtering, ten-row cap, empty/error/permission/retry behavior, responsive and keyboard behavior, telemetry emission, and rollback rehearsal. No lower level may be reported as target runtime proof.",
+    "scope": [
+      "One model-driven Account Review entry point",
+      "Read-only Xrm.WebApi query DQV-001",
+      "Top ten active synthetic accounts ordered by createdon descending",
+      "Visible name and accountnumber columns",
+      "Loading, empty, success, permission, malformed-result, retry, stale-response, and service-failure states",
+      "Accessible responsive presentation",
+      "Privacy-safe operational telemetry",
+      "Focused automated, package, deployment, runtime, and rollback evidence"
+    ],
+    "exclusions": [
+      "Account creation, update, deletion, activation, or deactivation",
+      "Authentication, tenant access, live metadata discovery, deployment execution, or role administration",
+      "Custom schema inference or custom Account fields",
+      "Paging beyond the first ten matching accounts",
+      "Search, filtering controls, sorting controls, export, bulk action, or record editing",
+      "AI, Copilot, external integration, or confidential data processing"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Use one model-driven Account Review page or repository-standard client component with a two-column accessible list and explicit loading, empty, success, permission, retry, stale-response, and failure states.",
+        "rationale": "This is the smallest usable experience satisfying the review journey while preserving host compatibility.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "EXP-002",
+        "decision": "Provide responsive reflow, keyboard-accessible Retry and Refresh, visible focus, semantic headings, announced status changes, and safe wrapping for long values.",
+        "rationale": "The slice must remain operable under narrow, keyboard, assistive-technology, and long-content conditions.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Read standard synthetic Account data using account with name, accountnumber, createdon, and statecode; display only name and accountnumber.",
+        "rationale": "These are the specialist-resolved schema facts required for projection, filtering, and ordering.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-002",
+        "decision": "Perform no write, cache, export, or secondary persistence.",
+        "rationale": "The slice is a read-only review journey and therefore introduces no duplicate-write owner or data rollback requirement.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Use only the model-driven client Xrm.WebApi boundary; introduce no connector, flow, webhook, external API, or additional query handler.",
+        "rationale": "A single platform-native read boundary is sufficient and avoids duplicate processing paths.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Include no AI or Copilot component.",
+        "rationale": "The deterministic account-list outcome requires no generative capability.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Rely on Dataverse table, row, and column security and surface sanitised permission feedback without attempting privilege elevation.",
+        "rationale": "The client must not bypass organisational access controls or infer inaccessible data.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SEC-002",
+        "decision": "Exclude record values, identifiers, credentials, tenant details, environment URLs, and raw response or exception content from telemetry and logs.",
+        "rationale": "Operational evidence can be produced without transferring business data or security-sensitive context.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Correlate each request and telemetry event, categorise outcomes, measure duration and result count, and suppress late responses using a request sequence.",
+        "rationale": "This provides diagnosability and deterministic refresh behavior without capturing payload content.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OPS-002",
+        "decision": "Resolve the approved organisational telemetry destination and retention policy through deployment configuration.",
+        "rationale": "The destination is environment-specific and can be deferred without changing the event contract.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the page or client component, navigation, configuration, and dependencies in the repository's managed solution path with environment-specific bindings externalised.",
+        "rationale": "This supports deterministic promotion and avoids embedded target details.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "ALM-002",
+        "decision": "Require source, automated build, package integrity, authorised import readback, runtime, and rollback evidence as distinct proof levels.",
+        "rationale": "Local success must not be promoted to deployment or runtime verification.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dataverse-webapi-query",
+      "source_type": "lab",
+      "registry": {
+        "path": ".agents/skills/dataverse-webapi-query/",
+        "entry_status": "current-approved",
+        "version_or_pin": "33bc38456abb83f27daad968b748c8085f2a78ef",
+        "verified_on": "2026-07-19"
+      },
+      "request": {
+        "scope": "Construct a read-only Xrm.WebApi query for the top ten active synthetic Account rows, ordered by createdon descending, selecting name and accountnumber.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": [
+          "reasoning-only specialist instructions"
+        ]
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "explicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": true,
+        "prerequisites_satisfied": true,
+        "boundary_permitted": true,
+        "permissions_approved": true
+      },
+      "execution": {
+        "execution_observed": true,
+        "result_schema_valid": true,
+        "invoked": true,
+        "outcome_status": "completed",
+        "result_reference": "DQV-001 embedded verbatim in slice.persistence_or_action"
+      },
+      "evidence_refs": [
+        "user-explicit-selector",
+        "user-delegation-enablement",
+        "user-authorised-standard-synthetic-account-assumptions",
+        "DQV-001"
+      ],
+      "open_items": [],
+      "next_action": "Preserve DQV-001 exactly during implementation and fail the build if the table name, selected attributes, active-state value, ordering, row limit, or Xrm.WebApi host contract diverges."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "More than ten active synthetic accounts exist with distinct createdon values",
+      "when": "An authorised reviewer opens Account Review",
+      "then": "Exactly ten rows are shown in createdon descending order, and each row displays only name and accountnumber.",
+      "evidence": "Automated query-contract test plus authorised runtime capture using synthetic records."
+    },
+    {
+      "id": "AC-002",
+      "given": "Active and inactive synthetic accounts exist",
+      "when": "The page loads successfully",
+      "then": "Only rows satisfying statecode=0 are displayed.",
+      "evidence": "Fixture-based functional test and authorised runtime result comparison."
+    },
+    {
+      "id": "AC-003",
+      "given": "No accessible active synthetic accounts exist",
+      "when": "The query completes successfully",
+      "then": "The user receives an accessible empty-state message and no error or stale rows remain.",
+      "evidence": "Empty-result automated test and runtime accessibility evidence."
+    },
+    {
+      "id": "AC-004",
+      "given": "The user lacks required Account access",
+      "when": "The page attempts to load",
+      "then": "No account values are rendered, a sanitised permission message and correlation ID are shown, and no privilege elevation is attempted.",
+      "evidence": "Security test under an authorised least-privilege synthetic test persona."
+    },
+    {
+      "id": "AC-005",
+      "given": "A refresh starts before an earlier request completes",
+      "when": "The earlier request returns after the newer request",
+      "then": "The earlier response is discarded and cannot overwrite the newer UI state.",
+      "evidence": "Deterministic deferred-promise concurrency test and stale_response_discarded telemetry assertion."
+    },
+    {
+      "id": "AC-006",
+      "given": "The page is used with keyboard navigation, screen-reader output, narrow width, or long field values",
+      "when": "Loading, empty, success, and error states are exercised",
+      "then": "Content remains perceivable and operable, focus is visible and predictable, status changes are announced, and values wrap without obscuring controls.",
+      "evidence": "Automated accessibility checks plus manual keyboard, screen-reader, zoom, and narrow-layout evidence."
+    },
+    {
+      "id": "AC-007",
+      "given": "Any load attempt completes",
+      "when": "Telemetry is emitted",
+      "then": "The event contains only the approved operational fields and contains no account values, record identifiers, tenant details, environment URL, credential, raw payload, or raw exception.",
+      "evidence": "Telemetry schema test and authorised destination readback with sanitised sample evidence."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Xrm.WebApi returns a permission error.",
+      "expected_behavior": "Render no rows, show sanitised permission guidance and correlation ID, emit permission_denied, and do not retry automatically.",
+      "evidence": "Least-privilege security test."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The service is unavailable, throttled, or a transient network failure occurs.",
+      "expected_behavior": "Clear busy state, retain no unvalidated partial results, show sanitised retryable feedback, prevent duplicate concurrent Retry actions, and record a safe error category.",
+      "evidence": "Mocked failure and retry tests plus runtime failure exercise where authorised."
+    },
+    {
+      "id": "NP-003",
+      "condition": "The response is missing entities, contains more than ten rows, or includes invalid field types.",
+      "expected_behavior": "Reject the malformed result, display a generic failure with correlation ID, render no rows, and emit malformed_response without payload content.",
+      "evidence": "Contract-boundary unit tests."
+    },
+    {
+      "id": "NP-004",
+      "condition": "An older request completes after a later refresh.",
+      "expected_behavior": "Discard the stale response, preserve the latest state, and emit the stale-response signal without displaying a false error.",
+      "evidence": "Concurrent request-sequencing test."
+    },
+    {
+      "id": "NP-005",
+      "condition": "A name or accountnumber is null, empty, or unusually long.",
+      "expected_behavior": "Render an accessible fallback for missing values and safely wrap long text without changing query semantics or emitting field content to telemetry.",
+      "evidence": "Rendering, narrow-layout, and telemetry tests."
+    },
+    {
+      "id": "NP-006",
+      "condition": "The implementation query differs from DQV-001.",
+      "expected_behavior": "The contract test fails before packaging; no silently altered schema, host, filter, sort, projection, or row limit is accepted.",
+      "evidence": "Exact query-contract assertion in the automated build."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Exact DQV-001 invocation, active filter, selected columns, descending ordering, ten-row cap, null rendering, and empty state.",
+      "expected": "All deterministic query and presentation assertions pass.",
+      "evidence_required": "Automated test report with synthetic fixtures and exact query-string assertion.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "reliability",
+      "scope": "Concurrent open, Refresh, duplicate Retry, late response, malformed response, throttle, network failure, and service failure.",
+      "expected": "Only the newest valid response controls the UI; retries remain bounded and no partial invalid data is shown.",
+      "evidence_required": "Automated deferred-response and failure-injection results with telemetry assertions.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "security",
+      "scope": "Permission denial, least-privilege behavior, sanitised errors, and telemetry payload exclusion.",
+      "expected": "No inaccessible account value or prohibited operational detail is rendered or emitted.",
+      "evidence_required": "Automated telemetry-schema tests and authorised least-privilege runtime evidence.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "accessibility",
+      "scope": "Keyboard order, visible focus, status announcements, heading semantics, busy state, zoom, narrow layout, and long content.",
+      "expected": "The full journey remains perceivable, operable, understandable, and robust.",
+      "evidence_required": "Automated accessibility report and documented manual checks.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "performance",
+      "scope": "Initial page load and Retry with the server-side top-ten query under an agreed synthetic test profile.",
+      "expected": "No over-fetching occurs and the agreed response-time threshold is met without blocking interaction.",
+      "evidence_required": "Network trace showing DQV-001 once per initiated request and approved timing results.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "alm",
+      "scope": "Solution contents, dependency declarations, configuration externalisation, source maps, and absence of environment-specific credentials.",
+      "expected": "The package is deterministic, complete, and portable through the approved ALM path.",
+      "evidence_required": "Build output and solution/package inspection report.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "deployment",
+      "scope": "Authorised import, component activation, navigation visibility, security-role behavior, telemetry binding, and configuration readback.",
+      "expected": "The target contains the intended package and configuration without manual drift.",
+      "evidence_required": "Import result, dependency check, configuration readback, and sanitised target screenshots or logs.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-008",
+      "class": "functional",
+      "scope": "Target runtime journey for populated, empty, refresh, and failure states using synthetic records.",
+      "expected": "All acceptance criteria are observed end to end in the authorised target.",
+      "evidence_required": "Runtime evidence set tied to package version and synthetic fixture identifiers.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-009",
+      "class": "rollback",
+      "scope": "Remove the navigation entry and revert or uninstall the slice package according to dependency-safe ALM procedure.",
+      "expected": "The prior app experience is restored without deleting or changing Account data.",
+      "evidence_required": "Rollback rehearsal record and post-rollback configuration readback.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised organisational development environment",
+      "Authorised organisational test environment before production promotion"
+    ],
+    "prerequisites": [
+      "Approved publisher and solution identity",
+      "Repository-standard model-driven client component and navigation pattern confirmed",
+      "Supported Xrm.WebApi availability confirmed for the selected component host",
+      "Account table dependency and standard schema contract recorded in the solution",
+      "Approved security-role access for the reviewer persona",
+      "Approved organisational telemetry destination, retention policy, and configuration binding",
+      "Synthetic test records covering active, inactive, empty, null, long-content, and more-than-ten cases",
+      "Successful automated build, contract, accessibility, security, reliability, performance, and package-integrity checks",
+      "Named deployment and rollback owners",
+      "Explicit deployment authorisation through the organisational ALM workflow"
+    ],
+    "steps": [
+      "Build the managed solution artifact through the approved repository pipeline.",
+      "Inspect the artifact, dependency manifest, navigation component, configuration bindings, and credential-exclusion checks.",
+      "Import into the authorised development or test environment using the organisational ALM workflow.",
+      "Bind approved telemetry configuration and assign the approved reviewer role through authorised administration.",
+      "Read back package version, component activation, navigation, dependencies, role configuration, and telemetry binding.",
+      "Execute the synthetic runtime acceptance, negative-path, accessibility, performance, and telemetry checks.",
+      "Promote only the identical verified artifact under separate explicit production authorisation."
+    ],
+    "post_deploy_checks": [
+      "Account Review navigation is visible only to the intended persona.",
+      "DQV-001 is issued once per initial load or accepted retry and returns no more than ten active rows.",
+      "Visible rows contain only name and accountnumber in descending createdon order.",
+      "Loading, empty, permission, malformed-result, retry, stale-response, and service-failure states behave as specified.",
+      "Keyboard, focus, screen-reader, zoom, narrow-layout, null, and long-content checks pass.",
+      "Privacy-safe telemetry arrives with correlation and outcome fields and without prohibited payload fields.",
+      "No Account record is created, updated, deleted, activated, or deactivated."
+    ],
+    "evidence_required": [
+      "Immutable solution artifact identifier and package-integrity report",
+      "Authorised import result and dependency validation",
+      "Post-import configuration and component readback",
+      "Synthetic runtime acceptance and negative-path results",
+      "Accessibility and performance evidence",
+      "Sanitised telemetry event-schema and destination readback",
+      "Approval record for any production promotion"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "The page exposes inactive or unauthorised account data",
+      "The implementation diverges from DQV-001",
+      "Telemetry contains prohibited record or environment data",
+      "Navigation or component activation materially disrupts the model-driven app",
+      "Critical accessibility, reliability, or performance acceptance criteria fail",
+      "Package dependencies prevent a safe supported runtime"
+    ],
+    "steps": [
+      "Disable or remove the Account Review navigation entry through the approved solution rollback path.",
+      "Revert to the previously approved managed solution version or uninstall the isolated slice only after dependency validation.",
+      "Remove or disable the slice-specific telemetry binding without deleting retained evidence required by policy.",
+      "Read back navigation, component, package, role, and telemetry configuration after rollback.",
+      "Run a smoke test of the restored model-driven app experience and record the rollback outcome."
+    ],
+    "data_considerations": [
+      "The slice performs no Dataverse writes, so rollback must not modify or delete Account records.",
+      "Retain only privacy-safe operational evidence according to the approved retention policy.",
+      "Do not attempt data restoration because the slice creates no owned business data."
+    ],
+    "owner": "Named organisational solution deployment owner, with the model-driven app owner approving user-facing restoration.",
+    "evidence_required": [
+      "Rollback authorisation and trigger record",
+      "Previous and restored solution version evidence",
+      "Post-rollback configuration readback",
+      "Restored app smoke-test result",
+      "Confirmation that no Account data operation occurred"
+    ]
+  },
+  "next_action": "Hand this Ready brief and embedded DQV-001 contract to the authorised implementation workflow; first confirm the repository-standard Xrm.WebApi-capable model-driven component pattern and deployment-time configuration owners, then implement and validate locally without authenticating, accessing a tenant, or deploying under this brief."
+}

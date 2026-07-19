@@ -1,0 +1,409 @@
+# First deployable slice: Synthetic Service Request
+
+**Overall status: `Open`**
+
+The vertical slice is fully bounded, but implementation readiness depends on three target-specific decisions: publisher/schema conventions, environment/security controls, and the approved privacy-safe telemetry mechanism. The skill’s linked repository templates and JSON Schema were not readable in this session, so exact output-contract validation is also unproved.
+
+No implementation, tenant access, deployment, or external state change was performed.
+
+## 1. Outcome
+
+An authorised service agent uses a model-driven app to create exactly one synthetic service request containing:
+
+- Title
+- Category
+- Priority
+
+The app must block incomplete submissions, identify missing fields clearly, persist a valid request through the native form save path, show observable success feedback, and support privacy-safe operational evidence.
+
+### Acceptance criteria
+
+1. An authorised agent can open the app and select **New Service Request**.
+2. Saving with any required field blank is blocked, each missing control is identified, and no row is created.
+3. Valid synthetic values followed by one Save create exactly one Dataverse row.
+4. The agent receives an observed native success indication and the form is no longer dirty.
+5. Refreshing or reopening the row shows the submitted title, category, and priority.
+6. An unauthorised user cannot open the app or create/read the table.
+7. An agent cannot delete, assign, share, or read another agent’s request.
+8. Captured telemetry and evidence contain no field payload, personal identity, tenant URL, or raw record identifier.
+
+## 2. Agreed position
+
+| ID | Classification | Position | Basis |
+|---|---|---|---|
+| C-001 | Confirmed | One create-and-save journey in a model-driven app | User requirement |
+| C-002 | Confirmed | One solution-owned Dataverse table; no integration or AI | User constraints |
+| C-003 | Confirmed | Implementation and deployment are not authorised | User constraint |
+| A-001 | Assumption | All test input is synthetic and non-identifying | Synthetic-solution boundary |
+| A-002 | Assumption | The table is user/team-owned to permit user-depth security | Least-privilege design |
+| O-001 | Open | Publisher, schema prefix, unique names, labels, and base language | Target conventions absent |
+| O-002 | Open | Licensing, environment readiness, DLP, retention, security baseline, and role assignment process | Target facts absent |
+| O-003 | Open | Approve a tenant-native, no-payload telemetry mechanism or explicitly accept evidence-only observability | Telemetry configuration absent |
+| R-001 | Rejected | Flow, plug-in, custom API, integration, AI, or secondary write path | Out of scope; risks duplicate ownership |
+| S-001 | Superseded | None | Initial slice |
+
+## 3. Solution design
+
+### Components
+
+Use one solution containing:
+
+- One user/team-owned Dataverse table
+- One main form
+- One active-requests view
+- One model-driven app
+- One custom least-privilege security role
+- Choice definitions owned by the table
+- No flows, plug-ins, custom APIs, JavaScript, connection references, environment variables, AI components, or external telemetry exporters
+
+The native model-driven form is the sole write owner.
+
+### Table
+
+Placeholder logical name: `<prefix>_servicerequest`. The prefix must be resolved through O-001.
+
+| Column | Definition |
+|---|---|
+| Title | Primary text column, required, maximum 200 characters |
+| Category | Required local choice, no default: General, Access, Technical |
+| Priority | Required local choice, no default: Low, Normal, High |
+| Standard columns | Record ID, Owner, Created On, Modified On, State, Status Reason |
+
+Requiredness must be configured in table metadata and reflected on the form. Form-only requiredness is insufficient because another write path could bypass it later.
+
+### App experience
+
+- App area: **Service Requests**
+- Navigation: **Service Requests**
+- Default view: **My Active Service Requests**
+- Primary action: native **New**
+- Save path: native model-driven form save
+- Main form order: Title, Category, Priority
+- No dashboard, business process flow, quick-create form, custom command, or custom notification in this slice
+
+The build must verify that the target host’s native save indication is sufficiently clear. If it is not, success feedback becomes a separate scoped component decision rather than an assumed behavior.
+
+## 4. Journey and states
+
+1. The organisation authenticates the agent and evaluates app/role access.
+2. The app opens the agent’s active-request view.
+3. The agent selects **New**.
+4. The form loads with all three business fields empty.
+5. Save with missing data is blocked; focus and accessible error identification lead the agent to the missing controls.
+6. The agent enters synthetic values and saves once.
+7. Dataverse creates one row and returns the saved record.
+8. The app displays observable success and clears the dirty state.
+9. Refresh/reopen confirms persistence.
+
+Focused validation must also cover:
+
+- Empty view before the first request
+- Loading and save-in-progress states
+- Platform/server save error without false success
+- A 200-character title and rejection of excess content
+- Narrow viewport/reflow
+- Keyboard-only completion and visible focus
+- Rapid repeated Save producing no second row
+- Refresh/reopen behavior
+- Disabled or missing permissions
+- Cross-owner isolation
+
+## 5. Security
+
+Create a role named **Synthetic Service Request Agent**.
+
+| Privilege | Depth |
+|---|---|
+| Create | User |
+| Read | User |
+| Write | User |
+| Delete | None |
+| Append / Append To | None |
+| Assign | None |
+| Share | None |
+
+Share the model-driven app only with this role. Retain only the target organisation’s approved minimum platform privileges needed to open a model-driven app; do not broaden custom-table privileges to compensate for configuration errors.
+
+The deployment identity and service agent must be separate. Deployment/maker privileges must never be assigned to the agent role.
+
+## 6. Telemetry and evidence
+
+No custom logger or secondary write path is included.
+
+Before implementation, O-003 must resolve one of these outcomes:
+
+1. Approve and verify an existing tenant-native operational event source that can attest to the create operation without recording form payloads; or
+2. Explicitly accept sanitized validation evidence without persistent application telemetry; or
+3. Authorise a separately designed telemetry component, which would expand this slice.
+
+The allowlisted evidence fields are:
+
+- Scenario ID
+- Pass/fail outcome
+- UTC timestamp
+- Solution version
+- Non-identifying environment alias
+- One-way-hashed synthetic run token, if needed
+
+Exclude:
+
+- Title, category, and priority values
+- User names, emails, or directory identifiers
+- Tenant/environment URLs
+- Raw Dataverse GUIDs
+- Screenshots containing identity chrome
+- Request bodies, headers, or authentication material
+
+A screenshot may support visible feedback only. It does not prove persistence, permissions, telemetry safety, or duplicate prevention.
+
+## 7. Validation and proof separation
+
+### Local proof
+
+Planned checks:
+
+- Inspect unpacked solution definitions.
+- Verify table ownership, required columns, choice values, form/view/app references, and privilege depth.
+- Verify absence of flows, integrations, AI, scripts, unexpected relationships, or dependencies.
+- Validate solution/package generation deterministically.
+
+This proves source structure only.
+
+### Deployment proof
+
+After an authorised managed import into non-production:
+
+- Capture sanitized import result.
+- Read back component presence and published state.
+- Confirm the app is shared only with the intended role.
+- Confirm role assignments and privilege depths.
+- Confirm there are no missing dependencies or unintended environment bindings.
+
+This proves target configuration, not user behavior.
+
+### Runtime proof
+
+Using dedicated synthetic test identities:
+
+- Required-field negative test with before/after row count.
+- Successful create/save/reopen test.
+- Rapid repeat-save test proving one row.
+- Unauthorised-user denial.
+- Cross-owner read isolation.
+- Delete, assign, and share denial.
+- Telemetry allowlist inspection.
+- Sanitized evidence-pack review.
+
+This is the first level that can establish the requested outcome.
+
+**Evidence actually observed now:** design artifact plus JSON syntax and position-ID uniqueness checks. No solution source, build, package, import, configuration readback, or runtime behavior was observed.
+
+## 8. Deployment prerequisites
+
+- Approved development and non-production Dataverse environments
+- Authorised deployment identity
+- Confirmed publisher, prefix, unique names, labels, base language, and versioning convention
+- Confirmed applicable licensing/entitlements from an authorised current source
+- Approved DLP, security baseline, data classification, retention, auditing, and telemetry controls
+- Approved app-sharing group and role-assignment process
+- Resolution of O-003 and approval of the evidence allowlist
+- Managed artifact with no connection references, environment variables, integrations, or AI dependencies
+- Named deployment owner, runtime tester, evidence reviewer, and rollback approver
+
+## 9. Rollback
+
+Before business data exists:
+
+1. Remove app access.
+2. Unassign the custom role.
+3. Retain only sanitized deployment evidence.
+4. Uninstall the managed solution from the test target.
+
+After rows exist:
+
+1. Disable app access and role assignments first.
+2. Preserve, export, or dispose of rows through the approved retention process.
+3. Obtain explicit approval before uninstalling because removing the table deletes its data.
+4. Revalidate that no residual role assignments or app shares remain.
+
+Rollback triggers include import/dependency failure, excessive privileges, save-path failure, duplicate creation, or telemetry capturing payloads or identities.
+
+## 10. Exact next action
+
+An authorised implementation workflow must resolve O-001 through O-003. It can then build the unmanaged source, execute local checks, produce a managed artifact, and run deployment and runtime evidence gates separately.
+
+## Machine-readable companion
+
+```json
+{
+  "schema_version": "0.1.0",
+  "package_version": "0.1.0",
+  "generated_date": "2026-07-19",
+  "status": "Open",
+  "status_reason": [
+    "The linked repository output schema and templates were unavailable for exact contract validation.",
+    "Publisher/schema conventions, target controls, and an approved privacy-safe telemetry mechanism require confirmation."
+  ],
+  "boundary": {
+    "execution_zone": "personal OpenAI workflow",
+    "data_classification": "public/synthetic only",
+    "permitted_inputs": [
+      "Synthetic requirements",
+      "Non-secret design metadata"
+    ],
+    "prohibited_inputs": [
+      "Tenant credentials",
+      "Tenant URLs",
+      "Live metadata",
+      "Personal or customer data",
+      "Confidential organisational content"
+    ],
+    "transfer": "No tenant access or cross-zone transfer performed"
+  },
+  "outcome": {
+    "persona": "Authorised service agent",
+    "host": "Model-driven app",
+    "entry_point": "Service Requests > New",
+    "result": "Create and persist one synthetic request with required title, category, and priority and receive clear validation or success feedback."
+  },
+  "scope": {
+    "included": [
+      "One solution-owned user/team-owned Dataverse table",
+      "One main form",
+      "One active-requests view",
+      "One model-driven app",
+      "One least-privilege custom role",
+      "Privacy-safe validation evidence procedure"
+    ],
+    "excluded": [
+      "Integration",
+      "AI",
+      "Automation",
+      "Custom API or plug-in",
+      "Custom telemetry exporter",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "data_model": {
+    "table_placeholder": "<prefix>_servicerequest",
+    "ownership": "UserOrTeam",
+    "columns": [
+      {
+        "name": "Title",
+        "type": "Text",
+        "max_length": 200,
+        "required": true,
+        "role": "Primary name"
+      },
+      {
+        "name": "Category",
+        "type": "Local choice",
+        "required": true,
+        "default": null,
+        "options": ["General", "Access", "Technical"]
+      },
+      {
+        "name": "Priority",
+        "type": "Local choice",
+        "required": true,
+        "default": null,
+        "options": ["Low", "Normal", "High"]
+      }
+    ]
+  },
+  "security": {
+    "role": "Synthetic Service Request Agent",
+    "table_privileges": {
+      "create": "User",
+      "read": "User",
+      "write": "User",
+      "delete": "None",
+      "append": "None",
+      "append_to": "None",
+      "assign": "None",
+      "share": "None"
+    },
+    "app_access": "Share only to the custom role, retaining only the approved minimum platform baseline privileges."
+  },
+  "open_questions": [
+    {
+      "id": "O-001",
+      "statement": "Confirm publisher, schema prefix, unique names, labels, and base language."
+    },
+    {
+      "id": "O-002",
+      "statement": "Confirm licensing, target readiness, security baseline, DLP, retention, and role assignment process."
+    },
+    {
+      "id": "O-003",
+      "statement": "Approve tenant-native no-payload telemetry or explicitly accept evidence-only observability."
+    }
+  ],
+  "validation": {
+    "local": "Planned; not executed",
+    "deployment": "Planned; not executed",
+    "runtime": "Planned; not executed",
+    "observed": "JSON syntax and position-ID uniqueness only"
+  },
+  "delegation": {
+    "records": [],
+    "reason": "No query construction or volatile product claim was required. Delegation was not explicitly enabled."
+  },
+  "next_action": "Resolve O-001 through O-003, then begin a separately authorised implementation workflow."
+}
+```
+
+## Delegation record
+
+```yaml
+records: []
+reason: >-
+  No Dataverse query construction or volatile product claim was required.
+  Specialist delegation was not explicitly enabled. Target-specific facts
+  remain Open rather than being inferred.
+```
+
+## Carry-forward summary
+
+```yaml
+skill_version: 0.1.0
+generation_date: "2026-07-19"
+status: Open
+boundary:
+  zone: personal_openai
+  classification: public_or_synthetic
+  tenant_access_performed: false
+selected_slice: >-
+  An authorised service agent creates and saves one synthetic service request
+  with required title, category, and priority through a model-driven app.
+exclusions:
+  - integration
+  - AI
+  - automation
+  - custom_API_or_plugin
+  - custom_telemetry_exporter
+  - implementation
+  - deployment
+delegation_outcomes: []
+evidence:
+  observed:
+    - brief_generated
+    - companion_JSON_syntax_checked
+    - position_ID_uniqueness_checked
+  not_observed:
+    - solution_source
+    - automated_build
+    - package_integrity
+    - deployment_or_import
+    - target_configuration
+    - runtime_behavior
+open_questions:
+  - O-001_publisher_schema_and_language
+  - O-002_target_licensing_security_and_governance
+  - O-003_privacy_safe_telemetry_decision
+next_action: >-
+  Resolve O-001 through O-003, then authorise implementation and keep local,
+  deployment, and runtime validation as separate evidence gates.
+delta_from_prior: Initial slice; no prior carry-forward summary supplied.
+```

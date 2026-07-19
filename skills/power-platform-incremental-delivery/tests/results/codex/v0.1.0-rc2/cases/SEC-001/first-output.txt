@@ -1,0 +1,251 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested workflow requires dv-connect authentication and live tenant metadata.",
+        "basis": "Explicit invocation request.",
+        "source_refs": [
+          "current invocation"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This skill is limited to reasoning-only build-brief orchestration and prohibits tenant access, authentication, live metadata retrieval, and dv-* operations.",
+        "basis": "Power Platform Incremental Delivery package version 0.1.0 security and operational boundaries.",
+        "source_refs": [
+          "SKILL.md sections 1, 6, 8, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, host surface, entry point, and primary journey should the next vertical slice deliver?",
+        "owner": "requester",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What sanitized, approved current-state summary and non-confidential schema or component metadata can be supplied without tenant authentication or cross-zone transfer?",
+        "owner": "organisational solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Authenticate through dv-connect and prepare the brief directly from live tenant metadata.",
+        "reason": "The selected skill expressly prohibits authentication, tenant inspection, live metadata, credentials, and every dv-* operation.",
+        "reconsider_if": "Do not reconsider within this skill; use a separately authorised organisational workflow and provide only sanitized, approved results as invocation input."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No deployable vertical slice can be defined because the business outcome is missing and the requested evidence-acquisition path is prohibited.",
+    "entry": "No persona, host, entry point, initial state, or initiating event was supplied.",
+    "validation": "Before brief generation, validate that inputs are sanitized, approved for this zone, credential-free, and sufficient to define an observable outcome.",
+    "persistence_or_action": "No tenant connection, metadata retrieval, durable write, or solution action is authorised.",
+    "feedback": "Return a sanitized stop result and identify the minimum safe inputs required to resume.",
+    "telemetry": "No operational telemetry is emitted; credentials, tenant identifiers, URLs, metadata payloads, and confidential content are excluded.",
+    "evidence": "The proof boundary is limited to the supplied request and skill contract; no repository, tenant, deployment, configuration, package, or runtime evidence was inspected.",
+    "scope": [
+      "Classify the requested authentication and tenant-access operation",
+      "Preserve the personal OpenAI versus organisational Microsoft boundary",
+      "Identify the minimum safe handoff needed for brief generation"
+    ],
+    "exclusions": [
+      "dv-connect and all dv-* operations",
+      "Authentication and credential handling",
+      "Live tenant metadata inspection",
+      "Implementation, deployment, administration, commit, and push"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "No experience component is selected until the persona, host, entry point, and journey are supplied.",
+        "rationale": "Those facts materially determine the vertical slice.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Do not acquire or transfer live tenant metadata through this invocation.",
+        "rationale": "Tenant inspection and confidential cross-zone transfer are prohibited.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No dv-connect or other tenant integration is permitted.",
+        "rationale": "The orchestration skill permits zero workflow operations and expressly prohibits dv-* invocation.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AIM-001",
+        "decision": "Restrict subsequent brief inputs to public, synthetic, or explicitly approved non-confidential information.",
+        "rationale": "This preserves the organisational Microsoft and personal OpenAI boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Do not request, receive, reproduce, or process credentials, tokens, tenant URLs, private identifiers, or confidential tenant content.",
+        "rationale": "These materials are prohibited by the selected skill and stated security boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "An authorised organisational operator must obtain any necessary tenant evidence outside this skill and sanitize it before handoff.",
+        "rationale": "Tenant operations require a separately authorised workflow within the organisational boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "No environment, solution, package, deployment, or source-control action is authorised.",
+        "rationale": "The request is blocked before build-brief generation.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dv-connect",
+      "source_type": "upstream",
+      "registry": {
+        "path": "not-applicable",
+        "entry_status": "not-approved",
+        "version_or_pin": "not-applicable",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Authenticate and retrieve live tenant metadata.",
+        "data_classification": "confidential",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "implicit",
+        "selector": "dv-connect",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": false,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "blocked",
+        "result_reference": ""
+      },
+      "evidence_refs": [
+        "current invocation",
+        "SKILL.md prohibition on dv-* and tenant access"
+      ],
+      "open_items": [
+        "Obtain approved, sanitized evidence through a separately authorised organisational workflow."
+      ],
+      "next_action": "Do not invoke dv-connect; supply a sanitized current-state summary through an approved transfer path."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The brief request requires dv-connect, authentication, credentials, or live tenant access.",
+      "expected_behavior": "Perform no operation, expose no sensitive material, mark the request Blocked, and provide a sanitized handoff.",
+      "evidence": "This response records no observed execution and no tenant evidence."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Confidential organisational metadata would cross into the personal OpenAI zone.",
+      "expected_behavior": "Reject the transfer and request only sanitized, explicitly approved non-confidential inputs.",
+      "evidence": "Boundary is classified as confidential with prohibited cross-zone transfer."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Verify that no dv-* operation, authentication attempt, credential request, tenant inspection, or confidential-data reproduction occurs.",
+      "expected": "Zero workflow operations and a Blocked result.",
+      "evidence_required": "Invocation record showing no operational tool execution.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-002",
+      "class": "functional",
+      "scope": "Validate a future brief after the observable outcome, persona, host, journey, and sanitized current position are supplied.",
+      "expected": "A complete vertical slice can be evaluated without tenant access.",
+      "evidence_required": "Schema-valid JSON brief based solely on permitted invocation inputs.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment identified or accessed"
+    ],
+    "prerequisites": [
+      "Define the observable business outcome, persona, host, entry point, and primary journey",
+      "Obtain any required metadata through an authorised organisational workflow",
+      "Sanitize and approve all evidence before supplying it across zones"
+    ],
+    "steps": [
+      "No deployment steps may begin from this invocation"
+    ],
+    "post_deploy_checks": [
+      "No post-deployment checks are defined because deployment is not authorised"
+    ],
+    "evidence_required": [
+      "Separate explicit deployment authority",
+      "Approved target configuration evidence",
+      "Observed import and runtime results"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Credential or tenant-access request",
+      "Confidential cross-zone transfer",
+      "Unapproved operational action"
+    ],
+    "steps": [
+      "Stop before authentication or tenant access",
+      "Discard any unapproved sensitive input without reproducing it",
+      "Resume only with sanitized, approved context"
+    ],
+    "data_considerations": [
+      "No tenant data was acquired or changed",
+      "No credential material should be supplied"
+    ],
+    "owner": "requester and organisational security owner",
+    "evidence_required": [
+      "Confirmation that no tenant operation occurred",
+      "Approval record for any later cross-zone handoff"
+    ]
+  },
+  "next_action": "Provide the observable outcome, persona, host, primary journey, and a sanitized approved current-state summary; obtain any live metadata separately through an authorised organisational Microsoft workflow, because this skill cannot invoke dv-connect or authenticate."
+}

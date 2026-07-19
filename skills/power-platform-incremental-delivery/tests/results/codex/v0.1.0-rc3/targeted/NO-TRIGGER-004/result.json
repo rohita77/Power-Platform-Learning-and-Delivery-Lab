@@ -1,0 +1,180 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.1.0-rc3-codex-20260719:NO-TRIGGER-004:targeted",
+  "run_id": "ppid-v0.1.0-rc3-codex-20260719",
+  "case_id": "NO-TRIGGER-004",
+  "suite": "should-not-trigger",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.1.0",
+    "sha256": "b0321d15dfef0c9250daa1732e5c5fd074b0140d777c5cce17b78d54dfa1173d"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/trigger-cases.yaml",
+    "sha256": "8d98c93a17e504cb3e525d07dc4c3feebd40cde026173e4ae616811df4d90c96",
+    "exact_input": "Explain what a model-driven app is.",
+    "exact_input_sha256": "032bea7deda95351cdcd6cb976b523edb38aea3334943ff45bd7bc025296bde0"
+  },
+  "execution": {
+    "started_at": "2026-07-19T22:12:15.581997Z",
+    "completed_at": "2026-07-19T22:12:39.652311Z",
+    "first_output": "{\n  \"status\": \"Open\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"The request asks for general education about model-driven apps, not a deployable delivery slice.\",\n        \"basis\": \"The supplied request contains no implementation or build-brief outcome.\",\n        \"source_refs\": [\n          \"user-request\"\n        ]\n      }\n    ],\n    \"assumptions\": [],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"What observable business outcome, persona, and host should a delivery slice address?\",\n        \"owner\": \"requester\",\n        \"blocks_ready\": true\n      }\n    ],\n    \"rejected\": [],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"public\",\n    \"cross_zone_transfer\": \"permitted\"\n  },\n  \"slice\": {\n    \"outcome\": \"No delivery-slice outcome was requested.\",\n    \"entry\": \"Not defined because the request is educational.\",\n    \"validation\": \"Not defined because no workflow was supplied.\",\n    \"persistence_or_action\": \"No persistence or action is in scope.\",\n    \"feedback\": \"No application feedback behavior is in scope.\",\n    \"telemetry\": \"No telemetry is in scope.\",\n    \"evidence\": \"The user request is the only available evidence.\",\n    \"scope\": [\n      \"Abstention and routing\"\n    ],\n    \"exclusions\": [\n      \"General Power Platform education\",\n      \"Implementation\",\n      \"Deployment\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [],\n    \"data\": [],\n    \"integration\": [],\n    \"ai\": [],\n    \"security\": [],\n    \"operations\": [],\n    \"alm\": []\n  },\n  \"delegations\": [],\n  \"acceptance_criteria\": [],\n  \"negative_paths\": [],\n  \"tests\": [],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"personal-openai\",\n    \"environments\": [\n      \"No target environment identified\"\n    ],\n    \"prerequisites\": [\n      \"A delivery-slice request is required\"\n    ],\n    \"steps\": [\n      \"Do not deploy\"\n    ],\n    \"post_deploy_checks\": [\n      \"Not applicable because deployment is out of scope\"\n    ],\n    \"evidence_required\": [\n      \"No deployment evidence required\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Not applicable because no change is proposed\"\n    ],\n    \"steps\": [\n      \"No rollback action required\"\n    ],\n    \"data_considerations\": [\n      \"No data changes are proposed\"\n    ],\n    \"owner\": \"requester\",\n    \"evidence_required\": [\n      \"No rollback evidence required\"\n    ]\n  },\n  \"next_action\": \"Route this request to a general Power Platform education workflow; if a build brief is wanted, provide the observable outcome, persona, and host.\"\n}",
+    "first_output_sha256": "2535ceb07aa5cce1043222eb9dafbad124c353df70317a060a43b42ecbea8d75"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: recorded selector configuration separately",
+        "evaluator: supplied exact fixture input unchanged",
+        "evaluator: preserved first output and runtime events",
+        "evaluator: validated without repair"
+      ],
+      "source": "invocation.json and evaluator validation"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator validation",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7c6f-e9c7-7043-a857-44359f9ad693",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged input",
+        "result": "Pass",
+        "evidence": "The fixture value and SHA-256 are preserved in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Explicit selector configuration kept separate",
+        "result": "Pass",
+        "evidence": "Selectors are recorded in evaluator configuration; the exact fixture input was supplied unchanged through stdin.",
+        "deviation": ""
+      },
+      {
+        "name": "Skill 6 output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero Skill 6 workflow operations",
+        "result": "Pass",
+        "evidence": "Observed 0 Skill 6 workflow operations.",
+        "deviation": ""
+      },
+      {
+        "name": "Do-not-trigger minimal abstention",
+        "result": "Pass",
+        "evidence": "The output is one schema-valid Open JSON object with no delegation, slice scope, or architecture advice.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "human-and-automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-19T22:22:54.145521Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "b0321d15dfef0c9250daa1732e5c5fd074b0140d777c5cce17b78d54dfa1173d",
+      "use": "RC3 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/trigger-cases.yaml",
+      "sha256": "8d98c93a17e504cb3e525d07dc4c3feebd40cde026173e4ae616811df4d90c96",
+      "use": "Exact unchanged case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "b5c1c2ea756a88132b18145dbf34ee2e504c2e8d53d73c3ce54153c765ce7a96",
+      "use": "Codex-profile result-record validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "081dee7dc4d63aeb0b66b3f64de5d77df7b9e87d7ed19b80e02d6506bb3d3bea",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "922889891ea6d2410d31b7e5d50773bd493c94bb7d5656f5a8cbd9c5045dbabc",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

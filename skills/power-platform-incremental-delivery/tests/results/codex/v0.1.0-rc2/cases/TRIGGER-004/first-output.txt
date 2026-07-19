@@ -1,0 +1,239 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested deliverable is one Power Platform vertical-slice build brief covering entry, validation, persistence or action, feedback, telemetry, evidence, deployment, and rollback.",
+        "basis": "Explicit invocation request.",
+        "source_refs": [
+          "Current user request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This invocation authorizes reasoning and brief generation only; it does not authorize implementation, tenant access, deployment, or configuration changes.",
+        "basis": "Selected skill authority boundary.",
+        "source_refs": [
+          "power-platform-incremental-delivery v0.1.0"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The supplied request contains only public planning information and no confidential organisational data.",
+        "impact": "Reasoning may continue in the personal OpenAI zone, but tenant content must not be introduced.",
+        "validation_required": "Reconfirm classification before supplying repository extracts, schemas, records, screenshots, or environment evidence.",
+        "source_refs": [
+          "Current invocation content"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What single observable business or operational result must the slice deliver?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona performs the primary journey?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which Power Platform host and entry point will the persona use?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Invent a generic business workflow and present it as build-ready.",
+        "reason": "The observable outcome, persona, and host are missing, so persistence, security, acceptance, and runtime evidence requirements cannot be defined safely.",
+        "reconsider_if": "The product owner supplies the missing outcome, persona, and host."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no observable business or operational result was supplied, and none has been inferred.",
+    "entry": "Open pending identification of the persona, Power Platform host, entry point, initial state, and initiating event.",
+    "validation": "Open pending the business outcome and journey needed to define required inputs, authorization checks, business rules, concurrency controls, and safe failures.",
+    "persistence_or_action": "Open pending identification of the durable business action, authoritative write owner, idempotency boundary, and target data owner.",
+    "feedback": "Open pending the host interaction model needed to specify loading, success, validation, permission, conflict, retry, and terminal-failure states.",
+    "telemetry": "Open pending the journey and permitted data classification; the completed design must use privacy-safe events, correlation identifiers, outcomes, and duplicate or conflict signals without business payloads.",
+    "evidence": "The completed brief must distinguish source inspection, automated test or build results, package integrity, deployment and configuration readback, and runtime end-to-end evidence without promoting one proof level into another.",
+    "scope": [
+      "Define one deployable end-to-end Power Platform slice after the observable outcome, persona, and host are supplied.",
+      "Include entry, validation, authoritative persistence or action, user feedback, privacy-safe telemetry, evidence, deployment controls, and rollback."
+    ],
+    "exclusions": [
+      "Tenant authentication, inspection, administration, or live metadata retrieval.",
+      "Implementation, deployment, permission changes, commits, and pushes.",
+      "Unapproved confidential-data transfer into the personal OpenAI zone.",
+      "Product behavior or schema invented without an agreed business outcome."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "The experience surface and complete primary journey remain open until the persona and host are supplied.",
+        "rationale": "Loading, empty, error, permission, conflict, accessibility, responsive, and concurrent-action states depend on the selected host and journey.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "The data owner, schema, lifecycle, concurrency token, and retention requirements remain open.",
+        "rationale": "A safe persistence model cannot be selected before the durable business outcome is known.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component is selected.",
+        "rationale": "External systems and action boundaries have not been identified.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is included unless the agreed outcome demonstrates a necessary AI-assisted step.",
+        "rationale": "The requested delivery controls do not themselves establish an AI requirement.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Authorization, least-privilege roles, field access, DLP, identity, and data-classification controls remain open.",
+        "rationale": "These controls depend on the persona, host, data owner, and business action.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Telemetry ownership, alert thresholds, support routing, replay handling, and operational retention remain open.",
+        "rationale": "Operational signals must be derived from the agreed journey and failure modes.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "The slice will require a solution-owned, environment-variable-driven, connection-reference-aware deployment path with deterministic validation.",
+        "rationale": "This is a bounded Power Platform ALM baseline; exact solution, publisher, environment, and binding values must be resolved before implementation.",
+        "evidence_status": "Assumption"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Implementation begins before the outcome, persona, and host are agreed.",
+      "expected_behavior": "Stop the build and return the brief for product clarification; do not invent schema, permissions, persistence, or acceptance behavior.",
+      "evidence": "Approved brief showing OQ-001, OQ-002, and OQ-003 resolved."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Confidential tenant content or credentials are proposed for transfer into the personal OpenAI zone.",
+      "expected_behavior": "Reject the transfer, do not reproduce the content, and move the work to an approved organisational Microsoft workflow.",
+      "evidence": "Sanitized boundary decision with no confidential payload retained."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "alm",
+      "scope": "Build-readiness gate for the vertical-slice brief.",
+      "expected": "Implementation is prevented until the observable outcome, persona, host, complete vertical sequence, acceptance criteria, negative paths, deployment controls, and rollback are defined.",
+      "evidence_required": "Approved Ready-status brief and recorded resolution of OQ-001 through OQ-003.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Development environment selected by the authorised solution owner.",
+      "Validation environment selected according to the organisation's ALM policy.",
+      "Production target identified only after acceptance and deployment authorization."
+    ],
+    "prerequisites": [
+      "Resolve OQ-001 through OQ-003 and approve a Ready-status build brief.",
+      "Confirm target solution, publisher, environment sequence, connection bindings, security roles, DLP policy, and deployment owner.",
+      "Complete focused automated, package-integrity, security, accessibility, and rollback tests.",
+      "Obtain explicit deployment authorization."
+    ],
+    "steps": [
+      "Build and validate the agreed slice in the authorised development environment.",
+      "Export or package the solution through the approved deterministic ALM path.",
+      "Verify dependencies, environment-variable mappings, connection references, security artifacts, and package integrity.",
+      "Import into the authorised validation environment and perform configuration readback.",
+      "Run acceptance, negative-path, concurrency, duplicate-action, accessibility, telemetry, and rollback checks.",
+      "Promote to production only after evidence review and explicit authorization."
+    ],
+    "post_deploy_checks": [
+      "Confirm solution and component versions by target readback.",
+      "Confirm environment bindings, connection references, permissions, and DLP compatibility.",
+      "Execute the agreed primary journey and material failure paths.",
+      "Verify privacy-safe telemetry, correlation, conflict, and duplicate signals.",
+      "Confirm support ownership and rollback readiness."
+    ],
+    "evidence_required": [
+      "Automated test and build results.",
+      "Package-integrity and dependency report.",
+      "Deployment or import log with configuration readback.",
+      "Runtime acceptance evidence for success and material failure paths.",
+      "Authorization record and rollback checkpoint."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Import or configuration validation fails.",
+      "Authorization or DLP behavior differs from the approved design.",
+      "The authoritative write produces loss, duplication, or unsafe concurrent updates.",
+      "Primary-journey or material negative-path acceptance fails.",
+      "Telemetry exposes prohibited payloads or cannot correlate failures safely."
+    ],
+    "steps": [
+      "Stop further promotion and disable the new entry point or feature using the approved reversible control.",
+      "Restore the previously approved solution version and environment configuration.",
+      "Preserve correlation identifiers and sanitized failure evidence.",
+      "Reconcile writes created during the release window using the agreed data-recovery procedure.",
+      "Re-run configuration readback and the prior-version smoke test."
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite user-created records solely to reverse a solution deployment.",
+      "Define forward-fix, reconciliation, and restore ownership before deployment.",
+      "Preserve both versions when concurrency or stale-write behavior is implicated.",
+      "Retain only privacy-safe diagnostic evidence according to organisational policy."
+    ],
+    "owner": "Open: assign an authorised release and data-recovery owner before implementation.",
+    "evidence_required": [
+      "Pre-deployment solution and configuration checkpoint.",
+      "Rollback authorization and execution record.",
+      "Post-rollback configuration readback.",
+      "Prior-version runtime smoke-test result.",
+      "Data-reconciliation result when writes occurred."
+    ]
+  },
+  "next_action": "Provide three values only: the single observable business or operational result, the persona who performs it, and the Power Platform host and entry point; then regenerate this as a Ready build brief with workflow-specific acceptance criteria, tests, deployment evidence, and rollback."
+}

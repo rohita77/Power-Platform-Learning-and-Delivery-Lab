@@ -1,0 +1,171 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "A build brief for the next Power Platform vertical slice was requested.",
+        "basis": "Explicit invocation request.",
+        "source_refs": [
+          "user-request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No user-visible or operational outcome was supplied.",
+        "basis": "The request explicitly states that no outcome is supplied.",
+        "source_refs": [
+          "user-request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable user or operational result must the next slice deliver?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona will perform the primary journey?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which Power Platform or Dynamics 365 host surface will provide the journey entry point?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no observable user or operational outcome has been supplied.",
+    "entry": "Open pending identification of the persona, host surface, entry point, initial state, and initiating event.",
+    "validation": "Open pending definition of the outcome, business rules, security checks, and concurrency requirements.",
+    "persistence_or_action": "Open pending identification of the required durable action, authoritative owner, and idempotency boundary.",
+    "feedback": "Open pending definition of the primary journey and its loading, success, validation, permission, conflict, retry, and failure states.",
+    "telemetry": "Open pending definition of a privacy-safe event, correlation identifier, outcome signals, and excluded payloads.",
+    "evidence": "No implementation evidence exists; local, package, deployment, configuration, and runtime proof requirements must be defined after the outcome is known.",
+    "scope": [
+      "Define one deployable end-to-end vertical slice after the observable outcome, persona, and host are supplied."
+    ],
+    "exclusions": [
+      "Implementation or deployment.",
+      "Invented tenant configuration, schema, licensing, security roles, or business requirements."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "The experience design remains open until the persona, host, and primary journey are known.",
+        "rationale": "A production-credible entry point and interaction states cannot be selected without these inputs.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "The data model and system of record remain open.",
+        "rationale": "The required records, ownership, lifecycle, and concurrency behavior depend on the missing outcome.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component can yet be selected.",
+        "rationale": "No external action, interface, or authoritative owner has been identified.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is currently justified.",
+        "rationale": "The missing outcome provides no basis for an AI-assisted behavior or evaluation target.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Authorization, data access, and DLP requirements remain open.",
+        "rationale": "They depend on the persona, host, data classification, and action to be performed.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Operational ownership, telemetry, support, and failure handling remain open.",
+        "rationale": "Operational controls must be derived from the selected end-to-end result.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Solution packaging, environment binding, deployment sequencing, and rollback remain open.",
+        "rationale": "No solution components or target environment constraints have been established.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A slice is proposed without an observable user or operational outcome.",
+      "expected_behavior": "Keep the brief Open and do not fabricate components, schema, acceptance criteria, or deployment claims.",
+      "evidence": "Review the brief against the supplied outcome, persona, and host before authorizing implementation."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Open: target Power Platform environments have not been supplied."
+    ],
+    "prerequisites": [
+      "Resolve the observable outcome, persona, and host before selecting deployable components."
+    ],
+    "steps": [
+      "Do not begin deployment until a complete Ready build brief is approved through an authorized implementation workflow."
+    ],
+    "post_deploy_checks": [
+      "Define runtime end-to-end checks after the outcome and acceptance criteria are established."
+    ],
+    "evidence_required": [
+      "Deployment and configuration readback plus runtime evidence must be captured separately from local or package validation."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Define rollback triggers after the slice behavior, components, and failure conditions are known."
+    ],
+    "steps": [
+      "Do not create a rollback procedure until the deployment topology and authoritative data owner are identified."
+    ],
+    "data_considerations": [
+      "Preserve durable records and prevent duplicate or partial actions when rollback requirements are defined."
+    ],
+    "owner": "Open: solution owner to be identified before implementation.",
+    "evidence_required": [
+      "A tested rollback result and confirmation of post-rollback data integrity."
+    ]
+  },
+  "next_action": "Provide three items: the observable user or operational result, the persona who needs it, and the Power Platform or Dynamics 365 host surface where the journey begins."
+}

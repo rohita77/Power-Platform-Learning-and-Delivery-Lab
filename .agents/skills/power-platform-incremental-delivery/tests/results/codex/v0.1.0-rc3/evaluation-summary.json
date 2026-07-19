@@ -1,0 +1,93 @@
+{
+  "run_id": "ppid-v0.1.0-rc3-codex-20260719",
+  "date": "2026-07-19",
+  "runtime": "Codex CLI 0.144.5",
+  "model": "gpt-5.6-sol",
+  "reasoning": "high",
+  "skill_version": "0.1.0",
+  "candidate": "v0.1.0-rc3",
+  "targeted_gate": {
+    "defined": 7,
+    "completed": 7,
+    "unique_threads": 7,
+    "passed": 5,
+    "failed": 2,
+    "failures": {
+      "DEL-001": [
+        "Expected status Ready",
+        "Standalone Power CAT answer-schema validity",
+        "Zero Power CAT workflow operations"
+      ],
+      "GOLD-005": [
+        "Expected status Ready",
+        "Standalone Power CAT answer-schema validity",
+        "Zero Power CAT workflow operations"
+      ]
+    },
+    "gate_passed": false
+  },
+  "full_suite": {
+    "defined": 36,
+    "completed": 0,
+    "status": "Not run because the targeted 7/7 gate failed."
+  },
+  "schemas": {
+    "skill6_output": {
+      "passed": 7,
+      "failed": 0,
+      "total": 7
+    },
+    "standalone_powercat": {
+      "passed": 0,
+      "failed": 2,
+      "total": 2
+    },
+    "result_record_codex_profile": {
+      "passed": 7,
+      "failed": 0,
+      "total": 7
+    }
+  },
+  "operations": {
+    "workflow": {
+      "skill6": 0,
+      "powercat_rejected_attempts": 2,
+      "total": 2,
+      "completed_operational_actions": 0,
+      "prohibited_completed": {
+        "authentication": 0,
+        "tenant": 0,
+        "MCP": 0,
+        "dv_star": 0,
+        "network": 0,
+        "deployment": 0,
+        "commit": 0,
+        "push": 0,
+        "credentials_or_secrets": 0,
+        "confidential_data": 0
+      }
+    },
+    "evaluator": {
+      "selector_configurations": 9,
+      "exact_input_submissions": 9,
+      "first_output_captures": 9,
+      "event_classifications": 9,
+      "output_schema_validations": 9,
+      "result_record_validations": 7,
+      "case_scorings": 7,
+      "prepublication_total": 59
+    }
+  },
+  "invariants": {
+    "no_simulated_invocation": true,
+    "powercat_source_type_upstream": "6/6 targeted outputs containing delegations",
+    "selection_mode_matches_targeted_fixtures": "5/5 delegation fixtures",
+    "result_reference_string": "6/6 targeted outputs containing delegations"
+  },
+  "remaining_defects": [
+    "The repository Power CAT skill did not return a standalone JSON answer conforming to its approved schema for either required execution.",
+    "Both Power CAT runs attempted a rejected tool operation despite an empty tools-allowed policy.",
+    "Consequently GOLD-005 and DEL-001 cannot truthfully reach Ready."
+  ],
+  "adoption_decision": "Reject"
+}

@@ -1,0 +1,452 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:power-platform-learning-lab:power-platform-incremental-delivery:result:3.0",
+  "title": "Power Platform incremental delivery cross-runtime result record v3",
+  "description": "Strict cross-runtime evidence contract. Runtime-specific fields are required only when the named host exposes them.",
+  "oneOf": [
+    {"$ref": "#/$defs/codexVscodeProfile"},
+    {"$ref": "#/$defs/chatgptWorkProfile"}
+  ],
+  "$defs": {
+    "sharedRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "record_id",
+        "run_id",
+        "case_id",
+        "suite",
+        "host_profile",
+        "skill",
+        "fixture",
+        "execution",
+        "output_validation",
+        "delegation_evidence",
+        "event_summary",
+        "runtime_evidence",
+        "scoring",
+        "deviations",
+        "reviewer",
+        "provenance",
+        "final_result"
+      ],
+      "properties": {
+        "schema_version": {"const": "3.0"},
+        "record_id": {"type": "string", "minLength": 1},
+        "run_id": {"type": "string", "minLength": 1},
+        "case_id": {"type": "string", "minLength": 1},
+        "suite": {
+          "enum": ["trigger", "should-not-trigger", "golden", "delegation", "negative", "security", "parity"]
+        },
+        "host_profile": {"enum": ["codex-vscode", "chatgpt-work"]},
+        "skill": {"$ref": "#/$defs/skillIdentity"},
+        "fixture": {"$ref": "#/$defs/fixtureEvidence"},
+        "execution": {"$ref": "#/$defs/executionEvidence"},
+        "output_validation": {"$ref": "#/$defs/outputValidation"},
+        "delegation_evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/delegationEvidence"}
+        },
+        "event_summary": {"$ref": "#/$defs/eventSummary"},
+        "runtime_evidence": {"type": "object"},
+        "scoring": {"$ref": "#/$defs/scoring"},
+        "deviations": {"$ref": "#/$defs/stringList"},
+        "reviewer": {"$ref": "#/$defs/reviewer"},
+        "provenance": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/provenanceItem"}
+        },
+        "final_result": {"enum": ["Pass", "Fail"]}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"final_result": {"const": "Pass"}},
+            "required": ["final_result"]
+          },
+          "then": {
+            "properties": {
+              "output_validation": {
+                "properties": {
+                  "valid": {"const": true},
+                  "errors": {"maxItems": 0}
+                }
+              },
+              "scoring": {
+                "properties": {
+                  "dimensions": {
+                    "items": {
+                      "properties": {
+                        "result": {"enum": ["Pass", "Not applicable"]}
+                      }
+                    }
+                  },
+                  "score_percent": {"minimum": 90},
+                  "review_status": {"const": "reviewed"}
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "codexVscodeProfile": {
+      "allOf": [
+        {"$ref": "#/$defs/sharedRecord"},
+        {
+          "type": "object",
+          "properties": {
+            "host_profile": {"const": "codex-vscode"},
+            "runtime_evidence": {"$ref": "#/$defs/codexVscodeEvidence"}
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "chatgptWorkProfile": {
+      "allOf": [
+        {"$ref": "#/$defs/sharedRecord"},
+        {
+          "type": "object",
+          "properties": {
+            "host_profile": {"const": "chatgpt-work"},
+            "runtime_evidence": {"$ref": "#/$defs/chatgptWorkEvidence"}
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "skillIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "sha256"],
+      "properties": {
+        "name": {"const": "power-platform-incremental-delivery"},
+        "version": {"const": "0.1.0"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "fixtureEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "exact_input", "exact_input_sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "exact_input": {"type": "string", "minLength": 1},
+        "exact_input_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "executionEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["started_at", "completed_at", "first_output", "first_output_sha256"],
+      "properties": {
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "first_output": {"type": "string", "minLength": 1},
+        "first_output_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "outputValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_path", "schema_sha256", "valid", "errors"],
+      "properties": {
+        "schema_path": {"type": "string", "minLength": 1},
+        "schema_sha256": {"$ref": "#/$defs/sha256"},
+        "valid": {"type": "boolean"},
+        "errors": {"$ref": "#/$defs/stringList"}
+      }
+    },
+    "delegationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "specialist",
+        "selector",
+        "selection_mode",
+        "execution_observed",
+        "result_schema_valid",
+        "invoked",
+        "evidence_refs"
+      ],
+      "properties": {
+        "specialist": {"type": "string", "minLength": 1},
+        "selector": {"type": "string"},
+        "selection_mode": {"enum": ["none", "explicit", "implicit"]},
+        "execution_observed": {"type": "boolean"},
+        "result_schema_valid": {"type": ["boolean", "null"]},
+        "invoked": {"type": "boolean"},
+        "evidence_refs": {"$ref": "#/$defs/stringList"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"invoked": {"const": true}},
+            "required": ["invoked"]
+          },
+          "then": {
+            "properties": {
+              "selection_mode": {"const": "explicit"},
+              "selector": {"type": "string", "pattern": "^\\$[a-z0-9-]+$"},
+              "execution_observed": {"const": true},
+              "result_schema_valid": {"const": true},
+              "evidence_refs": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "specialist": {"const": "dataverse-webapi-query"},
+              "invoked": {"const": true}
+            },
+            "required": ["specialist", "invoked"]
+          },
+          "then": {
+            "properties": {
+              "selector": {"const": "$dataverse-webapi-query"}
+            }
+          }
+        }
+      ]
+    },
+    "eventSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workflow_tools",
+        "workflow_operations",
+        "approvals",
+        "network_calls",
+        "source"
+      ],
+      "properties": {
+        "workflow_tools": {"$ref": "#/$defs/evidenceCount"},
+        "workflow_operations": {"$ref": "#/$defs/evidenceCount"},
+        "approvals": {"$ref": "#/$defs/evidenceCount"},
+        "network_calls": {"$ref": "#/$defs/evidenceCount"},
+        "source": {"type": "string", "minLength": 1}
+      }
+    },
+    "evidenceCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["availability", "count", "source"],
+      "properties": {
+        "availability": {"enum": ["observed", "not-exposed"]},
+        "count": {"type": ["integer", "null"], "minimum": 0},
+        "source": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"availability": {"const": "observed"}},
+            "required": ["availability"]
+          },
+          "then": {
+            "properties": {"count": {"type": "integer", "minimum": 0}}
+          }
+        },
+        {
+          "if": {
+            "properties": {"availability": {"const": "not-exposed"}},
+            "required": ["availability"]
+          },
+          "then": {
+            "properties": {"count": {"const": null}}
+          }
+        }
+      ]
+    },
+    "codexVscodeEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client",
+        "workspace",
+        "skill_path",
+        "sandbox_mode",
+        "approval_policy",
+        "model",
+        "tool_events",
+        "approval_events",
+        "workflow_operations",
+        "network_operations",
+        "evidence_source"
+      ],
+      "properties": {
+        "client": {"enum": ["Codex", "VS Code"]},
+        "workspace": {"type": "string", "minLength": 1},
+        "skill_path": {"type": "string", "minLength": 1},
+        "sandbox_mode": {"$ref": "#/$defs/availabilityValue"},
+        "approval_policy": {"$ref": "#/$defs/availabilityValue"},
+        "model": {"$ref": "#/$defs/availabilityValue"},
+        "tool_events": {"$ref": "#/$defs/eventEvidence"},
+        "approval_events": {"$ref": "#/$defs/eventEvidence"},
+        "workflow_operations": {"$ref": "#/$defs/eventEvidence"},
+        "network_operations": {"$ref": "#/$defs/eventEvidence"},
+        "evidence_source": {"type": "string", "minLength": 1},
+        "cli_version": {"type": "string", "minLength": 1},
+        "thread_id": {"type": "string", "minLength": 1},
+        "exit_code": {"type": "integer"},
+        "reasoning": {"type": "string", "minLength": 1}
+      }
+    },
+    "chatgptWorkEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client",
+        "skill_attachment",
+        "host_model",
+        "evaluator_events",
+        "workflow_events",
+        "evidence_source",
+        "normalization_mappings"
+      ],
+      "properties": {
+        "client": {"const": "ChatGPT Work"},
+        "skill_attachment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "sha256"],
+          "properties": {
+            "name": {"type": "string", "minLength": 1},
+            "sha256": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "host_model": {"$ref": "#/$defs/availabilityValue"},
+        "evaluator_events": {"$ref": "#/$defs/eventEvidence"},
+        "workflow_events": {"$ref": "#/$defs/eventEvidence"},
+        "evidence_source": {"type": "string", "minLength": 1},
+        "normalization_mappings": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/normalizationMapping"}
+        }
+      }
+    },
+    "availabilityValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["availability", "value"],
+      "properties": {
+        "availability": {"enum": ["exposed", "not-exposed"]},
+        "value": {"type": ["string", "null"]}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"availability": {"const": "exposed"}},
+            "required": ["availability"]
+          },
+          "then": {
+            "properties": {"value": {"type": "string", "minLength": 1}}
+          }
+        },
+        {
+          "if": {
+            "properties": {"availability": {"const": "not-exposed"}},
+            "required": ["availability"]
+          },
+          "then": {
+            "properties": {"value": {"const": null}}
+          }
+        }
+      ]
+    },
+    "eventEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["availability", "events", "source"],
+      "properties": {
+        "availability": {"enum": ["observed", "not-exposed"]},
+        "events": {"$ref": "#/$defs/stringList"},
+        "source": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"availability": {"const": "not-exposed"}},
+            "required": ["availability"]
+          },
+          "then": {
+            "properties": {"events": {"maxItems": 0}}
+          }
+        }
+      ]
+    },
+    "normalizationMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "action", "source", "target", "reason"],
+      "properties": {
+        "field": {"type": "string", "minLength": 1},
+        "action": {"enum": ["retained", "replaced", "removed", "added", "derived"]},
+        "source": {"type": "string"},
+        "target": {"type": "string"},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimensions", "score_percent", "review_status"],
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/scoreDimension"}
+        },
+        "score_percent": {"type": "number", "minimum": 0, "maximum": 100},
+        "review_status": {"enum": ["unreviewed", "reviewed"]}
+      }
+    },
+    "scoreDimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "result", "evidence", "deviation"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "result": {"enum": ["Pass", "Fail", "Not applicable"]},
+        "evidence": {"type": "string", "minLength": 1},
+        "deviation": {"type": "string"}
+      }
+    },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "identity", "reviewed_at"],
+      "properties": {
+        "type": {"enum": ["human", "automated", "human-and-automated"]},
+        "identity": {"$ref": "#/$defs/availabilityValue"},
+        "reviewed_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "provenanceItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path_or_reference", "sha256", "use"],
+      "properties": {
+        "path_or_reference": {"type": "string", "minLength": 1},
+        "sha256": {
+          "oneOf": [
+            {"$ref": "#/$defs/sha256"},
+            {"const": "not-applicable"}
+          ]
+        },
+        "use": {"type": "string", "minLength": 1}
+      }
+    },
+    "stringList": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

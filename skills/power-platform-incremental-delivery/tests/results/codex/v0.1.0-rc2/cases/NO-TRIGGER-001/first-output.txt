@@ -1,0 +1,157 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request concerns the current general-availability and licensing status of a Copilot Studio feature.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "user-request"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "Only public Microsoft product information is required.",
+        "impact": "No tenant access or organisational data is needed.",
+        "validation_required": "Confirm that the question does not depend on tenant-specific entitlements or configuration.",
+        "source_refs": [
+          "user-request"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which specific Copilot Studio feature should be verified?",
+        "owner": "requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Establish the named Copilot Studio feature's current release status and licensing requirements from live first-party evidence.",
+    "entry": "The requester supplies the exact feature name or an official feature link.",
+    "validation": "Disambiguate the capability and distinguish general availability, preview status, licensing, capacity consumption, and tenant-specific prerequisites.",
+    "persistence_or_action": "No product write or tenant action is required; the authoritative outcome is a cited verification report.",
+    "feedback": "Report the verified status, licensing model, material caveats, evidence date, and unresolved tenant-specific dependencies.",
+    "telemetry": "No telemetry is required because this is a reasoning-only public-information request.",
+    "evidence": "Current Microsoft first-party documentation is required; repository, package, deployment, and runtime evidence are not applicable.",
+    "scope": [
+      "Current Copilot Studio release status",
+      "Current licensing and capacity requirements"
+    ],
+    "exclusions": [
+      "Tenant entitlement inspection",
+      "Purchasing advice based on undisclosed contract terms",
+      "Implementation or deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "power-platform-current-feature-verifier",
+      "source_type": "lab",
+      "registry": {
+        "path": "skills/power-platform-current-feature-verifier",
+        "entry_status": "missing",
+        "version_or_pin": "not-supplied",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Verify the named Copilot Studio feature's current release status and licensing from live first-party sources.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": [
+          "First-party Microsoft documentation lookup"
+        ]
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "none",
+        "selector": "$power-platform-current-feature-verifier",
+        "client_compatible": true,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "evidence_refs": [],
+      "open_items": [
+        "Exact Copilot Studio feature is not identified.",
+        "No current-feature specialist result was supplied to this invocation."
+      ],
+      "next_action": "Provide the exact feature name or official Microsoft link, then explicitly run $power-platform-current-feature-verifier."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The feature remains unidentified or ambiguous.",
+      "expected_behavior": "Do not infer a release or licensing answer for a potentially different capability.",
+      "evidence": "Feature name or official Microsoft link is required."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No deployment environment"
+    ],
+    "prerequisites": [
+      "Exact feature identity",
+      "Current first-party Microsoft evidence"
+    ],
+    "steps": [
+      "No deployment is in scope"
+    ],
+    "post_deploy_checks": [
+      "Not applicable"
+    ],
+    "evidence_required": [
+      "Not applicable"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Published Microsoft guidance changes or the feature was misidentified"
+    ],
+    "steps": [
+      "Withdraw the outdated conclusion and repeat current-feature verification"
+    ],
+    "data_considerations": [
+      "No data mutation occurs"
+    ],
+    "owner": "requester",
+    "evidence_required": [
+      "Updated first-party Microsoft documentation"
+    ]
+  },
+  "next_action": "Name the Copilot Studio feature or provide its official Microsoft link; then explicitly invoke $power-platform-current-feature-verifier to obtain a dated, first-party-supported GA and licensing determination."
+}

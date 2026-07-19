@@ -1,0 +1,223 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.1.0-rc2-codex-20260719:DEL-006:full",
+  "run_id": "ppid-v0.1.0-rc2-codex-20260719",
+  "case_id": "DEL-006",
+  "suite": "delegation",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.1.0",
+    "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/delegation-cases.yaml",
+    "sha256": "e592d5cd0db129c50f1a39d1e2dd92de86b909c5dfe5252dfc07f01bf526bddc",
+    "exact_input": "Use whichever Dataverse query helper seems appropriate without explicitly selecting it.",
+    "exact_input_sha256": "f4c7a10a9268ac0ffbe564d2713fff0f3df961d60616112888e71bc1a134400f"
+  },
+  "execution": {
+    "started_at": "2026-07-19T15:31:42.382196Z",
+    "completed_at": "2026-07-19T15:33:26.627867Z",
+    "first_output": "{\n  \"status\": \"Open\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"The Power Platform incremental-delivery workflow was explicitly selected.\",\n        \"basis\": \"The user selected $power-platform-incremental-delivery and supplied its version 0.1.0 contract.\",\n        \"source_refs\": [\n          \"User invocation\",\n          \"Supplied skill contract v0.1.0\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"No business outcome, persona, host, primary journey, existing solution state, or acceptance result was supplied.\",\n        \"basis\": \"The invocation contains only a delegation preference.\",\n        \"source_refs\": [\n          \"User invocation\"\n        ]\n      },\n      {\n        \"id\": \"CP-003\",\n        \"statement\": \"A Dataverse query helper was requested through implicit rather than exact explicit selection.\",\n        \"basis\": \"The user requested whichever helper seems appropriate without explicitly selecting it.\",\n        \"source_refs\": [\n          \"User stdin\"\n        ]\n      }\n    ],\n    \"assumptions\": [\n      {\n        \"id\": \"AS-001\",\n        \"statement\": \"Only the public invocation text is currently in scope; no tenant data or confidential organisational content has been supplied.\",\n        \"impact\": \"Reasoning may continue in the personal OpenAI zone, but no live schema, record, tenant, or credential material may be introduced.\",\n        \"validation_required\": \"Confirm the classification and permitted transfer path before supplying any solution-specific information.\",\n        \"source_refs\": [\n          \"User invocation\",\n          \"Supplied skill boundary rules\"\n        ]\n      }\n    ],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"What observable business or operational result should the next vertical slice deliver?\",\n        \"owner\": \"Product owner\",\n        \"blocks_ready\": true\n      },\n      {\n        \"id\": \"OQ-002\",\n        \"question\": \"Who is the persona, which Power Platform or Dynamics 365 host will they use, and what initiates the primary journey?\",\n        \"owner\": \"Product owner\",\n        \"blocks_ready\": true\n      },\n      {\n        \"id\": \"OQ-003\",\n        \"question\": \"What Dataverse query-construction outcome is required, using only public or synthetic table, column, filter, relationship, and host-context details?\",\n        \"owner\": \"Solution architect\",\n        \"blocks_ready\": true\n      }\n    ],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Silently choose or simulate execution of a Dataverse query specialist.\",\n        \"reason\": \"The supplied delegation contract requires explicit enablement, exact specialist selection, observed execution, and a schema-valid result.\",\n        \"reconsider_if\": \"The query need is established and the approved specialist is explicitly enabled and selected with permitted public or synthetic input.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"public\",\n    \"cross_zone_transfer\": \"permitted\"\n  },\n  \"slice\": {\n    \"outcome\": \"Open pending an observable business or operational result.\",\n    \"entry\": \"Open pending the persona, host, entry point, initial state, and initiating event.\",\n    \"validation\": \"Open pending the business rules, security checks, input constraints, and concurrency requirements.\",\n    \"persistence_or_action\": \"Open pending identification of the authoritative action owner, durable operation, and idempotency boundary.\",\n    \"feedback\": \"Open pending definition of loading, success, validation, permission, conflict, retry, and failure behavior.\",\n    \"telemetry\": \"Open pending a privacy-safe event model, correlation identifier, outcomes, and excluded payloads.\",\n    \"evidence\": \"No implementation evidence exists; future proof must distinguish source, automated test, package, deployment/configuration, and runtime evidence.\",\n    \"scope\": [\n      \"Reconstruct the agreed position after the observable outcome, persona, and host are supplied.\",\n      \"Produce one smallest deployable vertical-slice build brief.\"\n    ],\n    \"exclusions\": [\n      \"Tenant authentication or inspection\",\n      \"Implementation or deployment\",\n      \"Implicit specialist invocation\",\n      \"Confidential organisational data transfer\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [\n      {\n        \"id\": \"EXP-001\",\n        \"decision\": \"The persona, host, entry point, journey, and interaction states remain undefined.\",\n        \"rationale\": \"No user-visible or operational workflow was supplied.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"data\": [\n      {\n        \"id\": \"DAT-001\",\n        \"decision\": \"Dataverse schema, ownership, classification, validation, concurrency, and persistence requirements remain undefined.\",\n        \"rationale\": \"No solution context or synthetic schema was supplied.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"integration\": [\n      {\n        \"id\": \"INT-001\",\n        \"decision\": \"No integration component or external interface can yet be selected.\",\n        \"rationale\": \"The required end-to-end action is unknown.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"ai\": [\n      {\n        \"id\": \"AI-001\",\n        \"decision\": \"No AI component is selected.\",\n        \"rationale\": \"No outcome establishes a need for AI, and no organisational data transfer has been approved.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"security\": [\n      {\n        \"id\": \"SEC-001\",\n        \"decision\": \"Security roles, identity boundary, DLP constraints, permitted transfer path, and least-privilege access remain to be defined.\",\n        \"rationale\": \"Only public invocation content is available.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"operations\": [\n      {\n        \"id\": \"OPS-001\",\n        \"decision\": \"Operational ownership, telemetry destination, support path, and service expectations remain undefined.\",\n        \"rationale\": \"No target solution or environment was identified.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"alm\": [\n      {\n        \"id\": \"ALM-001\",\n        \"decision\": \"Repository, solution, environment path, publisher conventions, deployment controls, and rollback ownership remain undefined.\",\n        \"rationale\": \"No current implementation or ALM context was supplied.\",\n        \"evidence_status\": \"Open\"\n      }\n    ]\n  },\n  \"delegations\": [\n    {\n      \"id\": \"DEL-001\",\n      \"specialist\": \"dataverse-webapi-query\",\n      \"source_type\": \"lab\",\n      \"registry\": {\n        \"path\": \".agents/skills/dataverse-webapi-query/\",\n        \"entry_status\": \"missing\",\n        \"version_or_pin\": \"not-established\",\n        \"verified_on\": \"not-applicable\"\n      },\n      \"request\": {\n        \"scope\": \"Dataverse query construction requested without a defined query outcome or exact specialist selection.\",\n        \"data_classification\": \"public\",\n        \"zone\": \"personal-openai\",\n        \"permitted_tools\": [\n          \"Reasoning over public or synthetic query requirements only\"\n        ]\n      },\n      \"control\": {\n        \"enabled\": false,\n        \"selection_mode\": \"implicit\",\n        \"selector\": \"unspecified Dataverse query helper\",\n        \"client_compatible\": false,\n        \"prerequisites_satisfied\": false,\n        \"boundary_permitted\": true,\n        \"permissions_approved\": false\n      },\n      \"execution\": {\n        \"execution_observed\": false,\n        \"result_schema_valid\": null,\n        \"invoked\": false,\n        \"outcome_status\": \"open\",\n        \"result_reference\": \"No specialist result was supplied.\"\n      },\n      \"evidence_refs\": [\n        \"User stdin\",\n        \"Supplied incremental-delivery delegation contract\"\n      ],\n      \"open_items\": [\n        \"Define the bounded Dataverse query-construction requirement.\",\n        \"Confirm that all inputs are public or synthetic.\",\n        \"Establish current approval, compatibility, prerequisites, and permission evidence.\",\n        \"Explicitly enable and select the exact approved specialist if delegation is required.\"\n      ],\n      \"next_action\": \"Do not invoke a query helper implicitly; first define the delivery outcome and bounded query need.\"\n    }\n  ],\n  \"acceptance_criteria\": [],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"A Dataverse query specialist is requested through implicit or unspecified selection.\",\n      \"expected_behavior\": \"Keep the delegation open, set invoked to false, and perform no specialist or tenant operation.\",\n      \"evidence\": \"Delegation control and execution record DEL-001.\"\n    },\n    {\n      \"id\": \"NP-002\",\n      \"condition\": \"Confidential data, credentials, tenant URLs, live metadata, or unauthorised access are introduced.\",\n      \"expected_behavior\": \"Stop the workflow without reproducing the sensitive content and return a sanitized blocked record.\",\n      \"evidence\": \"Boundary review before any future brief.\"\n    }\n  ],\n  \"tests\": [\n    {\n      \"id\": \"TEST-001\",\n      \"class\": \"functional\",\n      \"scope\": \"Validate that a supplied outcome defines one observable end-to-end result.\",\n      \"expected\": \"The slice covers entry, validation, authoritative action, feedback, telemetry, and evidence.\",\n      \"evidence_required\": \"Approved build brief and traceable acceptance criteria.\",\n      \"status\": \"not-run\"\n    },\n    {\n      \"id\": \"TEST-002\",\n      \"class\": \"security\",\n      \"scope\": \"Validate boundary classification and specialist delegation controls.\",\n      \"expected\": \"Only permitted public or synthetic inputs are used and implicit specialist selection never counts as invocation.\",\n      \"evidence_required\": \"Boundary decision and schema-valid delegation record.\",\n      \"status\": \"planned\"\n    }\n  ],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Open: no target Power Platform environment has been identified.\"\n    ],\n    \"prerequisites\": [\n      \"Define the observable outcome, persona, host, current solution position, and boundary.\",\n      \"Resolve any required specialist delegation through explicit approved configuration.\",\n      \"Obtain separate implementation and deployment authorization.\"\n    ],\n    \"steps\": [\n      \"Do not implement or deploy until a Ready build brief exists.\",\n      \"After authorization, follow the approved ALM path for the identified solution and environment.\"\n    ],\n    \"post_deploy_checks\": [\n      \"Read back configuration and environment bindings.\",\n      \"Execute the approved end-to-end acceptance and negative-path tests.\",\n      \"Record deployment evidence separately from runtime evidence.\"\n    ],\n    \"evidence_required\": [\n      \"Import or deployment result\",\n      \"Configuration readback\",\n      \"Runtime acceptance evidence\",\n      \"Failure and replay evidence where applicable\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Deployment validation fails.\",\n      \"Security or data-boundary behavior differs from the approved design.\",\n      \"The authoritative write path causes duplicate, stale, or inconsistent actions.\"\n    ],\n    \"steps\": [\n      \"Stop further rollout or processing.\",\n      \"Apply the approved solution-version rollback or disable the introduced entry point.\",\n      \"Preserve diagnostic evidence without confidential payloads.\",\n      \"Reconcile affected durable actions before re-enablement.\"\n    ],\n    \"data_considerations\": [\n      \"Do not delete or overwrite durable records as an unverified rollback shortcut.\",\n      \"Define reconciliation for partial writes, duplicate actions, and concurrent changes before deployment.\"\n    ],\n    \"owner\": \"Open: deployment and operational owners have not been identified.\",\n    \"evidence_required\": [\n      \"Rollback authorization\",\n      \"Restored component and configuration readback\",\n      \"Data reconciliation result\",\n      \"Post-rollback smoke-test evidence\"\n    ]\n  },\n  \"next_action\": \"Provide the minimum observable business outcome, persona, and Power Platform or Dynamics 365 host; also state the bounded public or synthetic Dataverse query need, after which the exact approved specialist-selection requirement can be resolved without performing any tenant, implementation, or deployment action.\"\n}",
+    "first_output_sha256": "c233e0d055d9f52fbb97becedf4b2afc7c3495242518be251c3894438632e64a"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [
+    {
+      "specialist": "dataverse-webapi-query",
+      "selector": "unspecified Dataverse query helper",
+      "selection_mode": "implicit",
+      "execution_observed": false,
+      "result_schema_valid": null,
+      "invoked": false,
+      "evidence_refs": [
+        "User stdin",
+        "Supplied incremental-delivery delegation contract"
+      ]
+    }
+  ],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: configured explicit selector separately from exact input",
+        "evaluator: supplied exact fixture input through stdin",
+        "evaluator: captured first output, JSONL, and stderr",
+        "evaluator: validated output, case criteria, and operation evidence without repair"
+      ],
+      "source": "invocation.json and evaluator validation"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator review",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7b01-41ba-7592-81ea-5d6fabbbfd5b",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged input and explicit orchestrator selection",
+        "result": "Pass",
+        "evidence": "Input and selector hashes are preserved separately in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero workflow operations",
+        "result": "Pass",
+        "evidence": "Observed workflow-operation count: 0.",
+        "deviation": ""
+      },
+      {
+        "name": "Expected status Open",
+        "result": "Pass",
+        "evidence": "Observed status: Open.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Reject implicit selection as unsupported.",
+        "result": "Pass",
+        "evidence": "The preserved first output implements this required behavior.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Require the exact explicit selector and enablement.",
+        "result": "Pass",
+        "evidence": "The preserved first output implements this required behavior.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation selection_mode='implicit'",
+        "result": "Pass",
+        "evidence": "Observed selection_mode='implicit'.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation execution_observed=False",
+        "result": "Pass",
+        "evidence": "Observed execution_observed=False.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation result_schema_valid=None",
+        "result": "Pass",
+        "evidence": "Observed result_schema_valid=None.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation invoked=False",
+        "result": "Pass",
+        "evidence": "Observed invoked=False.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "human-and-automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-19T15:39:47.899154Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4",
+      "use": "RC2 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/delegation-cases.yaml",
+      "sha256": "e592d5cd0db129c50f1a39d1e2dd92de86b909c5dfe5252dfc07f01bf526bddc",
+      "use": "Exact unchanged case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "b5c1c2ea756a88132b18145dbf34ee2e504c2e8d53d73c3ce54153c765ce7a96",
+      "use": "Codex-profile result-record validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "0ab0efd3afec17762f0ed9cc9c486510b27129268e80fc1eee2e507e52fc890f",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "180235676b110d02614cc472ae8a172c794b63e1416030b6514c752ce5230d61",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

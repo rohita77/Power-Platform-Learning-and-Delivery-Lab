@@ -1,0 +1,117 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested activity is inspection only; creating or modifying an implementation brief is excluded.",
+        "basis": "Explicit user instruction.",
+        "source_refs": [
+          "stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No findings were included for inspection.",
+        "basis": "The supplied stdin contains only the inspection constraint.",
+        "source_refs": [
+          "stdin"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What findings should be inspected?",
+        "owner": "User",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Create or modify an implementation brief.",
+        "reason": "Explicitly excluded by the user.",
+        "reconsider_if": "The user separately authorises brief creation or modification."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "No delivery slice was defined because no findings were supplied and brief creation was excluded.",
+    "entry": "Not assessed.",
+    "validation": "Not assessed.",
+    "persistence_or_action": "No implementation or external action is authorised.",
+    "feedback": "Report that the findings are missing.",
+    "telemetry": "No telemetry is proposed.",
+    "evidence": "Only the supplied invocation text was available.",
+    "scope": [
+      "Inspect supplied findings"
+    ],
+    "exclusions": [
+      "Create or modify an implementation brief",
+      "Implement, deploy, or modify repository content"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "No findings are supplied.",
+      "expected_behavior": "Do not fabricate findings or create an implementation brief; request the missing inspection material.",
+      "evidence": "Supplied stdin contains no findings."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "Not applicable"
+    ],
+    "prerequisites": [
+      "No deployment is in scope"
+    ],
+    "steps": [
+      "Do not deploy"
+    ],
+    "post_deploy_checks": [
+      "Not applicable"
+    ],
+    "evidence_required": [
+      "No deployment evidence required"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable because no change is authorised"
+    ],
+    "steps": [
+      "No rollback action required"
+    ],
+    "data_considerations": [
+      "No data mutation occurred"
+    ],
+    "owner": "Not applicable",
+    "evidence_required": [
+      "Confirmation that no implementation change occurred"
+    ]
+  },
+  "next_action": "Supply the findings to inspect; no implementation brief will be created or modified."
+}

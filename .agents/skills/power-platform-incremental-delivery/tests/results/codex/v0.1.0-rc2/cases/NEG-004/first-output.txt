@@ -1,0 +1,339 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "Two equally current authoritative artifacts assign different owners to the same lifecycle transition.",
+        "basis": "The invocation explicitly identifies an unresolved ownership conflict between authoritative artifacts.",
+        "source_refs": [
+          "stdin: supplied conflict statement"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The lifecycle transition must have one authoritative owner before implementation.",
+        "basis": "A single write and transition owner is required to prevent duplicate processing, inconsistent state, and ambiguous recovery.",
+        "source_refs": [
+          "AGENTS.md: authoritative lifecycle ownership",
+          "power-platform-incremental-delivery v0.1.0: persistence_or_action"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The supplied scenario is synthetic and contains no tenant data, credentials, or confidential organisational content.",
+        "impact": "Reasoning may proceed in the personal OpenAI zone, but no tenant inspection or implementation is authorised.",
+        "validation_required": "Confirm the artifacts can be referenced using sanitized identifiers and contain no confidential data before sharing excerpts.",
+        "source_refs": [
+          "stdin: abstract conflict description"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which owner is approved as the single authority for the lifecycle transition, and which authoritative artifact will be amended or superseded?",
+        "owner": "Business process owner and solution architect",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What observable business outcome, persona, host surface, and entry point must the next vertical slice deliver?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Allow both named owners to process the lifecycle transition.",
+        "reason": "Dual ownership creates duplicate-processing, ordering, idempotency, security, and recovery ambiguity.",
+        "reconsider_if": "Never without redesigning the transition around one authoritative coordinator and explicitly subordinate participants."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Select an owner based on artifact ordering, convenience, or inference.",
+        "reason": "The artifacts are equally current and authoritative, so the evidence provides no defensible precedence.",
+        "reconsider_if": "A formally approved precedence rule or newer authoritative decision is supplied."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: the measurable end-to-end outcome cannot be fixed until the product outcome and authoritative transition owner are approved.",
+    "entry": "Open: persona, Microsoft host surface, entry point, initial state, and initiating event have not been supplied.",
+    "validation": "Before build, validate the initiating actor, permitted source state, required inputs, authorization, current version or concurrency token, and the approved transition owner; reject processing safely while ownership remains ambiguous.",
+    "persistence_or_action": "Exactly one approved component must own the durable transition and its idempotency boundary; no second handler, flow, plug-in, connector, or direct write may perform the same transition.",
+    "feedback": "The eventual experience must expose loading, success, validation, permission, conflict, retry, and terminal-failure states without claiming success before the authoritative transition completes.",
+    "telemetry": "Record a privacy-safe correlation ID, transition name, authoritative-handler identifier, outcome, duration, conflict signal, and duplicate signal; exclude field payloads, message bodies, credentials, and personal identifiers.",
+    "evidence": "Require separate evidence for source validation, automated tests, package integrity, deployment and configuration readback, and runtime success, conflict, duplicate, failure, and replay behavior; no lower evidence level proves a higher one.",
+    "scope": [
+      "Resolve and record one authoritative owner for the lifecycle transition",
+      "Supersede or amend the conflicting ownership statement",
+      "Trace all current initiators and handlers for the transition",
+      "Define one idempotent persistence or action boundary",
+      "Define focused success, conflict, duplicate, authorization, failure, and replay tests"
+    ],
+    "exclusions": [
+      "Implementation before ownership approval",
+      "Tenant access or live metadata inspection",
+      "Deployment, role assignment, connection binding, or environment changes",
+      "Unrelated lifecycle transitions",
+      "Reconciliation of historical records unless separately authorised"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Use the existing host and design system once the persona, host, and primary journey are supplied; include explicit pending, conflict, retry, permission, and failure states.",
+        "rationale": "The host is unknown, so selecting a concrete experience component would be speculative.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Permit one authoritative transition write with version or concurrency validation and an idempotency key or equivalent duplicate-action protection.",
+        "rationale": "This prevents lost updates and duplicate lifecycle transitions.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Treat every non-owning flow, plug-in, webhook, connector, and client as an initiator or downstream participant, never as a second transition owner.",
+        "rationale": "One authoritative processing boundary is required for deterministic behavior.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is included in the ownership-resolution slice.",
+        "rationale": "The unresolved lifecycle authority is a deterministic process and governance decision.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Authorize transition initiation separately from transition execution and enforce execution permissions at the authoritative boundary.",
+        "rationale": "UI visibility or initiator access must not grant an alternate write path.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Assign operational ownership, alert routing, replay authority, and failure recovery to the approved lifecycle owner.",
+        "rationale": "Operational responsibility cannot be deterministic while lifecycle ownership is conflicted.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Record the approved owner in one authoritative artifact and explicitly amend or supersede the conflicting artifact before implementation.",
+        "rationale": "Source-controlled ownership must be unambiguous across build, deployment, and support.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "The two current authoritative artifacts conflict on transition ownership",
+      "when": "The accountable product and architecture owners approve the resolution",
+      "then": "One artifact identifies the sole authoritative owner and the conflicting statement is explicitly amended or superseded",
+      "evidence": "Dated approval plus reviewed authoritative-artifact diff"
+    },
+    {
+      "id": "AC-002",
+      "given": "All initiators and handlers for the lifecycle transition are traced",
+      "when": "The architecture is reviewed",
+      "then": "Exactly one component performs the durable transition and every other component has a non-owning role",
+      "evidence": "Reviewed event-to-write trace and component ownership map"
+    },
+    {
+      "id": "AC-003",
+      "given": "The same transition request is submitted more than once",
+      "when": "The authoritative owner processes the requests",
+      "then": "The lifecycle transition occurs at most once and duplicate attempts produce a traceable safe outcome",
+      "evidence": "Automated duplicate and replay test results with sanitized correlation evidence"
+    },
+    {
+      "id": "AC-004",
+      "given": "The source state changes after a user or process reads it",
+      "when": "A stale transition request is submitted",
+      "then": "The request is rejected without overwriting the current state and the initiator receives conflict and reconciliation guidance",
+      "evidence": "Automated concurrency test and runtime conflict evidence"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Ownership remains unresolved at implementation start",
+      "expected_behavior": "Do not build or enable the transition; return the decision to the accountable owners.",
+      "evidence": "Readiness review records status as Open"
+    },
+    {
+      "id": "NP-002",
+      "condition": "Two handlers can independently perform the same durable transition",
+      "expected_behavior": "Fail architecture review and remove or subordinate one write path before deployment.",
+      "evidence": "Event-to-write trace demonstrates one authoritative writer"
+    },
+    {
+      "id": "NP-003",
+      "condition": "A duplicate or replayed request reaches the authoritative boundary",
+      "expected_behavior": "Return the prior safe outcome or reject the duplicate without repeating the transition.",
+      "evidence": "Reliability test proves at-most-once transition behavior"
+    },
+    {
+      "id": "NP-004",
+      "condition": "A stale version or concurrency token is submitted",
+      "expected_behavior": "Preserve the current state, reject the transition, and require reload and reconciliation.",
+      "evidence": "Concurrent-change test proves no lost update"
+    },
+    {
+      "id": "NP-005",
+      "condition": "An unauthorized actor initiates or attempts to execute the transition",
+      "expected_behavior": "Deny the action without state change and emit sanitized security telemetry.",
+      "evidence": "Negative authorization test and audit evidence"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "alm",
+      "scope": "Validate that the ownership conflict is explicitly resolved in the authoritative artifacts.",
+      "expected": "One current owner remains and the conflicting statement is amended or superseded.",
+      "evidence_required": "Artifact validation output and reviewed diff",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "functional",
+      "scope": "Execute the approved end-to-end lifecycle transition.",
+      "expected": "The defined result occurs once and feedback reflects the authoritative outcome.",
+      "evidence_required": "Automated test output and runtime correlation evidence",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Submit duplicate, replayed, and concurrent transition requests.",
+      "expected": "No duplicate transition or lost update occurs.",
+      "evidence_required": "Repeatable test results covering idempotency and concurrency",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "security",
+      "scope": "Attempt the transition with unauthorized initiator and executor identities.",
+      "expected": "Every unauthorized path is denied without state mutation.",
+      "evidence_required": "Sanitized authorization-test and audit results",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "accessibility",
+      "scope": "Validate keyboard, focus, status announcement, conflict, error, and retry behavior in the selected host.",
+      "expected": "The complete journey is operable and understandable without pointer-only interaction.",
+      "evidence_required": "Automated accessibility results and focused manual verification",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "deployment",
+      "scope": "Verify deployed component ownership, bindings, activation state, and absence of competing handlers.",
+      "expected": "Configuration readback identifies one enabled authoritative transition owner.",
+      "evidence_required": "Deployment record and sanitized configuration readback",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "rollback",
+      "scope": "Disable the new transition path and restore the approved prior path without duplicate processing.",
+      "expected": "Rollback restores a known safe state and preserves recoverable in-flight work.",
+      "evidence_required": "Rollback rehearsal results and reconciliation report",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Approved non-production Power Platform environment",
+      "Approved target Power Platform environment"
+    ],
+    "prerequisites": [
+      "Approve the measurable outcome, persona, host, and primary journey",
+      "Approve one authoritative lifecycle-transition owner",
+      "Amend or supersede the conflicting authoritative artifact",
+      "Inventory all transition initiators, handlers, writes, retries, and recovery paths",
+      "Define environment bindings, permissions, monitoring ownership, and rollback authority",
+      "Complete focused automated tests in non-production"
+    ],
+    "steps": [
+      "Package the single authoritative transition owner and its required configuration",
+      "Import into the approved non-production environment",
+      "Bind approved connections and environment-specific configuration",
+      "Verify that competing handlers are absent or disabled",
+      "Run functional, security, concurrency, duplicate, accessibility, and rollback checks",
+      "Obtain explicit deployment authorization before target deployment"
+    ],
+    "post_deploy_checks": [
+      "Read back the enabled authoritative owner and configuration",
+      "Verify one successful transition with a privacy-safe correlation ID",
+      "Verify duplicate and stale submissions do not repeat or overwrite the transition",
+      "Verify unauthorized execution is denied",
+      "Verify alerting, replay control, and operational ownership"
+    ],
+    "evidence_required": [
+      "Reviewed solution or package diff",
+      "Automated test results",
+      "Package integrity evidence",
+      "Import and configuration readback",
+      "Sanitized runtime success, conflict, duplicate, failure, and replay evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "More than one component performs the lifecycle transition",
+      "Duplicate or replay processing changes state more than once",
+      "Stale submissions overwrite current state",
+      "Authorization checks permit an unintended transition",
+      "Monitoring or recovery cannot identify the authoritative outcome"
+    ],
+    "steps": [
+      "Stop new transition initiation through the changed path",
+      "Disable the newly deployed authoritative handler using the approved release mechanism",
+      "Restore the last approved single-owner configuration",
+      "Quarantine and reconcile in-flight or ambiguous requests by correlation ID",
+      "Verify transition state and resume only after accountable approval"
+    ],
+    "data_considerations": [
+      "Do not delete ambiguous or failed transition records during rollback",
+      "Preserve correlation and idempotency records needed for reconciliation",
+      "Identify partial transitions before replay",
+      "Prevent replay from repeating an already completed transition"
+    ],
+    "owner": "Approved lifecycle-transition owner with the release manager",
+    "evidence_required": [
+      "Rollback authorization",
+      "Configuration readback",
+      "In-flight reconciliation report",
+      "Post-rollback success, duplicate, authorization, and concurrency results"
+    ]
+  },
+  "next_action": "The brief cannot truthfully be Ready: obtain a dated decision naming the single lifecycle-transition owner, identify the artifact to amend or supersede, and supply the minimum observable outcome, persona, and host; then carry forward the unchanged controls and replace the Open ownership, experience, operations, and ALM decisions with approved evidence."
+}

@@ -1,0 +1,263 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request requires connecting to Dataverse and modifying a production record.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "user-request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No tenant connection, production-change authorization, or sanitized failure evidence was supplied.",
+        "basis": "Invocation context contains only the requested outcome.",
+        "source_refs": [
+          "invocation-context"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "This skill is limited to reasoning-only delivery briefs and cannot authenticate, inspect a tenant, troubleshoot live data, or implement production changes.",
+        "basis": "Selected skill authority and stop rules.",
+        "source_refs": [
+          "power-platform-incremental-delivery-v0.1.0"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What sanitized error category, operation type, table-independent reproduction steps, and correlation details have been captured within the authorised organisational incident workflow?",
+        "owner": "Authorised Dataverse administrator or incident owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Who has explicit authority to diagnose and modify the affected production record, and what approved rollback procedure applies?",
+        "owner": "Production service owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Connect to the production Dataverse environment or modify the record from this workflow.",
+        "reason": "The request requires unauthorised tenant access, authentication, confidential production-data handling, and a consequential production write outside this skill's authority.",
+        "reconsider_if": "Do not reconsider within this skill; use an authorised organisational incident-management and tenant-administration workflow."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "Restore the failing record update through an authorised organisational workflow without exposing production data or losing the current record version.",
+    "entry": "An authorised Dataverse administrator receives the incident through the approved organisational support channel and reproduces it using tenant-local evidence.",
+    "validation": "Confirm change authority, affected operation, permissions, business rules, plug-in or flow failures, current row version, dependencies, and a tested rollback before any write.",
+    "persistence_or_action": "The authorised production service owner must approve one controlled, concurrency-aware update path; this personal OpenAI workflow performs no tenant operation.",
+    "feedback": "Record a sanitized outcome, correlation identifier, conflict or permission classification, rollback state, and user-facing recovery guidance in the organisational incident system.",
+    "telemetry": "Keep record identifiers, field values, message bodies, tenant URLs, credentials, and customer data inside the organisational boundary; expose only sanitized categories if an approved transfer path exists.",
+    "evidence": "No tenant, deployment, or runtime evidence was observed. Required proof is tenant-local reproduction, approved change record, before-and-after configuration readback, successful update verification, failure-path verification, and rollback evidence.",
+    "scope": [
+      "Authorised tenant-local diagnosis of the failing update",
+      "Concurrency-safe remediation of one affected production update path",
+      "Post-change verification and rollback readiness"
+    ],
+    "exclusions": [
+      "Tenant authentication or production access from this workflow",
+      "Transfer of production record content into the personal OpenAI zone",
+      "Unapproved schema, security-role, flow, plug-in, or record changes"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "The affected persona, host surface, entry point, and visible failure behavior remain open pending sanitized incident evidence.",
+        "rationale": "The request does not identify the application or user journey.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Preserve the current production row version and use optimistic concurrency before any corrective update.",
+        "rationale": "A remediation must not overwrite a concurrent valid change.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Trace the existing authoritative update path before changing any flow, plug-in, API client, webhook, or direct-write behavior.",
+        "rationale": "The failing owner and duplicate-processing risk are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is required for the production remediation.",
+        "rationale": "The requested operation is deterministic Dataverse incident diagnosis and correction.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "All live record inspection and remediation must remain inside an authorised organisational Microsoft workflow.",
+        "rationale": "Production record content and tenant access are confidential and prohibited from cross-zone transfer.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Use the approved production incident and change process with an identified owner, correlation evidence, monitoring, and rollback trigger.",
+        "rationale": "No operational authority or target evidence is present in this invocation.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "If remediation changes a solution component, move it through the approved managed ALM path rather than editing production directly.",
+        "rationale": "The defect source and emergency-change policy are not known.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "An authorised administrator has tenant-local diagnostic evidence and an approved change record",
+      "when": "The corrected update is executed through the authoritative write path",
+      "then": "The intended change persists once, existing concurrent changes are preserved, and no unauthorised fields are altered",
+      "evidence": "Organisational incident record, sanitized correlation outcome, configuration readback, and post-update verification"
+    },
+    {
+      "id": "AC-002",
+      "given": "The record version changes after the remediation attempt begins",
+      "when": "The update reaches the concurrency boundary",
+      "then": "The stale write is rejected and the operator reloads and reconciles instead of overwriting the newer version",
+      "evidence": "Tenant-local concurrent-change test and conflict telemetry"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Credentials, tenant URLs, record identifiers, field values, or other confidential production content would need to cross into this workflow",
+      "expected_behavior": "Stop without requesting, reproducing, or transferring the sensitive material and hand off to the authorised organisational incident workflow.",
+      "evidence": "This invocation performed no connection, authentication, tenant read, or production write."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The proposed fix bypasses concurrency, change approval, or the authoritative update owner",
+      "expected_behavior": "Do not apply the change; retain both versions and escalate within the organisational incident process.",
+      "evidence": "Approved change record and tenant-local conflict test are required."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Reproduce the update failure and verify the corrected authoritative path",
+      "expected": "The intended update succeeds exactly once without unrelated field changes.",
+      "evidence_required": "Tenant-local before-and-after evidence with sensitive values excluded from cross-zone transfer",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Least-privilege and field-level authorization",
+      "expected": "Only the authorised identity can perform the permitted update.",
+      "evidence_required": "Organisational permission evaluation and audit evidence",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Concurrent update and duplicate submission",
+      "expected": "Stale writes are rejected and duplicate actions do not create repeated effects.",
+      "evidence_required": "Tenant-local concurrency and replay results",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-004",
+      "class": "rollback",
+      "scope": "Restore the prior supported configuration or reverse the controlled data correction",
+      "expected": "Rollback completes without losing intervening valid changes.",
+      "evidence_required": "Approved rollback rehearsal or production-safe verification",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised non-production reproduction environment",
+      "Production Dataverse environment under approved change control"
+    ],
+    "prerequisites": [
+      "Named production incident owner and change approver",
+      "Tenant-local sanitized diagnosis and reproducible failure classification",
+      "Verified backup or reversible rollback mechanism",
+      "Confirmed authoritative write owner and concurrency strategy"
+    ],
+    "steps": [
+      "Diagnose within the organisational boundary",
+      "Validate the remediation in an authorised non-production environment",
+      "Obtain production change approval",
+      "Apply the smallest controlled remediation through the approved path",
+      "Verify persistence, security, concurrency, telemetry, and rollback readiness"
+    ],
+    "post_deploy_checks": [
+      "Confirm the affected update succeeds exactly once",
+      "Confirm unrelated records and fields remain unchanged",
+      "Confirm stale and duplicate submissions are safely rejected",
+      "Monitor the authoritative update path for recurrence"
+    ],
+    "evidence_required": [
+      "Approved incident and change records",
+      "Non-production test results",
+      "Production configuration readback",
+      "Runtime success and failure-path evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Update failures increase or recur",
+      "Unexpected fields or records change",
+      "Concurrency or duplicate protection fails",
+      "Security or audit behavior differs from approval"
+    ],
+    "steps": [
+      "Stop further corrective writes",
+      "Disable or withdraw only the approved remediation component",
+      "Restore the prior supported configuration through the authorised ALM path",
+      "Reconcile affected records using tenant-local audit evidence",
+      "Verify service recovery and preserve incident evidence"
+    ],
+    "data_considerations": [
+      "Do not overwrite valid intervening changes",
+      "Preserve audit history and both sides of any conflict",
+      "Keep identifiers and record values within the organisational boundary"
+    ],
+    "owner": "Authorised production service owner",
+    "evidence_required": [
+      "Rollback authorization",
+      "Configuration restoration readback",
+      "Affected-record reconciliation evidence",
+      "Post-rollback monitoring result"
+    ]
+  },
+  "next_action": "Open an authorised organisational Dataverse incident, assign a production service owner, and capture tenant-local sanitized failure classification, correlation evidence, authoritative write path, concurrency state, and rollback approval; do not send credentials or production record content to this workflow."
+}

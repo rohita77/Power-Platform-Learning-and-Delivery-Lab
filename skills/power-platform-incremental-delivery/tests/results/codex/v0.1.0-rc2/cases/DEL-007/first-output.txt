@@ -1,0 +1,215 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "An explicitly selected synthetic Dataverse query specialist executed and returned output that does not conform to its declared schema.",
+        "basis": "Direct invocation-context evidence supplied by the user.",
+        "source_refs": [
+          "stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Schema-invalid specialist output cannot be accepted, repaired, or counted as a successful delegation.",
+        "basis": "Power Platform Incremental Delivery delegation contract.",
+        "source_refs": [
+          "power-platform-incremental-delivery v0.1.0 sections 5-7"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "This reasoning-only invocation is operating in the personal OpenAI zone and contains synthetic data only.",
+        "impact": "No confidential organisational content or prohibited cross-zone transfer may be introduced.",
+        "validation_required": "Confirm the zone and classification if later inputs contain anything other than public or synthetic data.",
+        "source_refs": [
+          "stdin",
+          "invocation context"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and host surface must the next deployable slice support?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Can the query specialist be rerun with the same bounded synthetic request and return an unmodified result that validates against its declared schema?",
+        "owner": "Delegation host",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "What current canonical-register evidence confirms approval and pinning for the selected repository-root query specialist?",
+        "owner": "Skill governance owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Treat the malformed specialist result as a completed invocation.",
+        "reason": "Observed execution with schema-invalid output requires invoked=false and an Open handoff.",
+        "reconsider_if": "The specialist is rerun and its actual, unmodified output validates against the declared schema while every approval and control gate passes."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no measurable product or operational outcome was supplied, so a deployable vertical slice cannot yet be defined.",
+    "entry": "Open pending identification of the persona, host surface, entry point, initial state, and initiating event.",
+    "validation": "Open pending the business outcome; any query artifact must first pass its declared output schema without silent repair.",
+    "persistence_or_action": "Open pending identification of the authoritative action owner, durable operation, and idempotency boundary.",
+    "feedback": "Open pending the host journey and its loading, success, validation, permission, conflict, retry, and failure states.",
+    "telemetry": "Open pending the journey; telemetry must remain privacy-safe and exclude query payloads or confidential data.",
+    "evidence": "Current proof is limited to invocation-context evidence that execution occurred and schema validation failed; no implementation, package, deployment, configuration, or runtime proof exists.",
+    "scope": [
+      "Establish the missing outcome, persona, and host.",
+      "Obtain a schema-valid synthetic query specialist result through an approved explicit delegation."
+    ],
+    "exclusions": [
+      "Silent repair or normalization of malformed specialist output.",
+      "Tenant access, implementation, deployment, authentication, commit, or push."
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dataverse-webapi-query",
+      "source_type": "lab",
+      "registry": {
+        "path": ".agents/skills/dataverse-webapi-query/",
+        "entry_status": "missing",
+        "version_or_pin": "unknown",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Construct a bounded Dataverse query using synthetic data.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "explicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": true,
+        "result_schema_valid": false,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": "stdin statement reporting the schema-invalid specialist result"
+      },
+      "evidence_refs": [
+        "stdin"
+      ],
+      "open_items": [
+        "Supply current canonical-register approval and version or pin evidence.",
+        "Confirm compatible host prerequisites.",
+        "Rerun the exact approved selector and retain the unmodified schema-valid result."
+      ],
+      "next_action": "After approval and compatibility evidence are available, rerun $dataverse-webapi-query with only the bounded synthetic request and validate the returned object against its declared schema without extracting, repairing, or normalizing it."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The selected specialist executes but returns output that fails its declared schema.",
+      "expected_behavior": "Reject the result as untrusted, keep invoked=false, set the delegation outcome to open, and request a compliant rerun without silent repair.",
+      "evidence": "Schema-validation failure linked to the unmodified specialist result."
+    },
+    {
+      "id": "NP-002",
+      "condition": "A later request supplies confidential tenant data, credentials, or live metadata for the personal OpenAI workflow.",
+      "expected_behavior": "Stop before processing or repeating the content and return a sanitized Blocked record.",
+      "evidence": "Boundary classification and sanitized stop record."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Validate the rerun specialist result against its declared output schema.",
+      "expected": "The unmodified result validates successfully before it is consumed.",
+      "evidence_required": "Schema-validator result and a non-sensitive reference to the returned artifact.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Verify that only public or synthetic data enters the delegated query-construction request.",
+      "expected": "No credentials, tenant URLs, live metadata, confidential records, or prohibited tools are present.",
+      "evidence_required": "Sanitized boundary review of the delegated request.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment remains open."
+    ],
+    "prerequisites": [
+      "Define the observable outcome, persona, host, and target environment.",
+      "Resolve the query delegation with a schema-valid approved result.",
+      "Authorise implementation and deployment separately."
+    ],
+    "steps": [
+      "No deployment steps may be defined until the deployable slice is Ready and separately authorised."
+    ],
+    "post_deploy_checks": [
+      "Define runtime checks after the business journey and target environment are known."
+    ],
+    "evidence_required": [
+      "Deployment or import record.",
+      "Configuration readback.",
+      "Runtime end-to-end evidence including failure and replay behavior."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Schema-invalid generated query detected before implementation.",
+      "Post-deployment validation fails after a future authorised release."
+    ],
+    "steps": [
+      "Do not consume the malformed query artifact.",
+      "For a future deployment, restore the last verified solution version using the authorised ALM process."
+    ],
+    "data_considerations": [
+      "Preserve existing records and both versions of any future concurrency conflict.",
+      "Do not use rollback to erase evidence needed for reconciliation."
+    ],
+    "owner": "Authorised solution release owner",
+    "evidence_required": [
+      "Rejected-artifact validation evidence.",
+      "For a future rollback, solution-version and configuration readback evidence."
+    ]
+  },
+  "next_action": "Provide the observable outcome, persona, and host, then supply current approval and compatibility evidence and rerun $dataverse-webapi-query with the bounded synthetic request; carry forward that execution was observed but its schema-invalid result was rejected and invoked remains false."
+}

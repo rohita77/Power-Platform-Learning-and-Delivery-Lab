@@ -1,0 +1,249 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The intended specialist is approved in the applicable register.",
+        "basis": "Explicit invocation context supplied by the user.",
+        "source_refs": [
+          "stdin: approved-register statement"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The active client cannot explicitly select the intended specialist.",
+        "basis": "Explicit invocation context supplied by the user.",
+        "source_refs": [
+          "stdin: active-client limitation"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The supplied statements contain only public, non-confidential delivery metadata.",
+        "impact": "They may be processed in the personal OpenAI zone without transferring organisational records.",
+        "validation_required": "Confirm the future specialist request contains only public or synthetic information before execution.",
+        "source_refs": [
+          "current invocation content"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and host surface must the next vertical slice address?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What is the exact approved specialist selector and which compatible client can explicitly select it?",
+        "owner": "Delivery lead",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Treat register approval or an implicit reference as proof that the specialist ran.",
+        "reason": "A valid delegation requires explicit selection, observed execution, and a schema-valid result.",
+        "reconsider_if": "Never; only actual invocation evidence can establish execution."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no observable business or operational outcome was supplied.",
+    "entry": "Open: persona, host surface, entry point, initial state, and initiating event were not supplied.",
+    "validation": "Validate the business outcome, boundary, specialist identity, explicit selector, compatible client, prerequisites, and permitted data before producing the build brief.",
+    "persistence_or_action": "No solution write or action is defined or authorised.",
+    "feedback": "Report the delegation as open and do not represent the specialist as invoked.",
+    "telemetry": "No runtime telemetry is defined; any later delegation record must exclude payload content and identify only the selector, control outcome, and sanitized evidence reference.",
+    "evidence": "Current proof is limited to the supplied register-approval statement and client-selection limitation; there is no specialist execution, solution artifact, deployment, configuration, or runtime evidence.",
+    "scope": [
+      "Capture the blocked delegation state truthfully",
+      "Define the minimum handoff needed for a compatible explicit invocation"
+    ],
+    "exclusions": [
+      "Simulating specialist execution",
+      "Constructing a solution slice without a business outcome",
+      "Implementation, tenant access, deployment, commit, or push"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Persona, host, journey, and user-visible result remain open.",
+        "rationale": "No business outcome or experience context was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "No solution data model or persistence owner is selected.",
+        "rationale": "Schema and slice requirements are absent.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Specialist delegation must occur through a compatible client using the exact approved selector.",
+        "rationale": "The active client cannot provide the required explicit-selection evidence.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AID-001",
+        "decision": "No AI component is selected.",
+        "rationale": "No outcome establishes a need for AI.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Only public or synthetic information may be included in the specialist handoff unless a separately approved organisational path is established.",
+        "rationale": "The current execution zone is personal OpenAI.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Retain sanitized evidence of explicit selection, execution, and result validation.",
+        "rationale": "Register approval alone does not establish invocation.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "No implementation, packaging, deployment, or rollback operation is authorised.",
+        "rationale": "This invocation is limited to reasoning-only brief orchestration.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "intended approved specialist; exact name not supplied",
+      "source_type": "lab",
+      "registry": {
+        "path": "not-supplied",
+        "entry_status": "current-approved",
+        "version_or_pin": "not-supplied",
+        "verified_on": "2026-07-19"
+      },
+      "request": {
+        "scope": "Obtain the specialist-owned decision required by the future vertical slice after the business outcome is supplied.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": [
+          "explicit approved specialist selection in a compatible client"
+        ]
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "none",
+        "selector": "not-supplied",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": true
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": null
+      },
+      "evidence_refs": [
+        "stdin: specialist approved but explicit selection unavailable"
+      ],
+      "open_items": [
+        "Exact registered specialist name and selector",
+        "Compatible client with explicit-selection support",
+        "Explicit delegation enablement and satisfied prerequisites",
+        "Observed schema-valid specialist result"
+      ],
+      "next_action": "Use a compatible client to explicitly select the exact approved specialist, pass only permitted public or synthetic context, and retain its unmodified schema-valid result and execution evidence."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The active client cannot explicitly select the approved specialist.",
+      "expected_behavior": "Keep the delegation open with invoked set to false; do not simulate, infer, or substitute a result.",
+      "evidence": "Delegation control record showing selection_mode none, client_compatible false, and execution_observed false."
+    },
+    {
+      "id": "NP-002",
+      "condition": "A future handoff contains confidential organisational content.",
+      "expected_behavior": "Stop the cross-zone transfer and return a sanitized blocked result without reproducing the content.",
+      "evidence": "Boundary-control record containing classification and stop outcome only."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "alm",
+      "scope": "Delegation truthfulness when an approved specialist cannot be explicitly selected.",
+      "expected": "Status is Open, execution_observed and invoked are false, and a compatible-client handoff is supplied.",
+      "evidence_required": "Schema-valid output containing the delegation control and execution fields.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment to be identified before implementation"
+    ],
+    "prerequisites": [
+      "Approved implementation brief",
+      "Authorised target environment and connection bindings",
+      "Resolved security, DLP, identity, licensing, and ALM constraints"
+    ],
+    "steps": [
+      "No deployment steps may begin until the brief is Ready and deployment is separately authorised"
+    ],
+    "post_deploy_checks": [
+      "No post-deploy checks are defined until the vertical slice is specified"
+    ],
+    "evidence_required": [
+      "Separate deployment authorization",
+      "Import and configuration readback",
+      "Runtime end-to-end evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "No rollback trigger can be finalized until the vertical slice and deployment design are defined"
+    ],
+    "steps": [
+      "Do not deploy while the brief remains Open"
+    ],
+    "data_considerations": [
+      "No solution data changes are authorised or defined"
+    ],
+    "owner": "Delivery lead",
+    "evidence_required": [
+      "Approved slice-specific rollback plan before deployment"
+    ]
+  },
+  "next_action": "Supply the observable outcome, persona, and host, then use a compatible client to explicitly select the exact register-approved specialist and return its unmodified schema-valid result; carry forward that register approval is known but no execution was observed."
+}

@@ -1,0 +1,126 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested action is direct implementation of an already approved current build brief.",
+        "basis": "The invocation explicitly requests implementation.",
+        "source_refs": [
+          "user invocation"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This skill is authorised to produce build briefs only and prohibits implementation or operational workflow actions.",
+        "basis": "Power Platform Incremental Delivery package version 0.1.0 outcome, workflow, and stop contracts.",
+        "source_refs": [
+          "power-platform-incremental-delivery/SKILL.md sections 1, 2, 5, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Implement the approved build brief within this skill invocation.",
+        "reason": "Direct implementation is outside this skill's authority and is a prohibited action.",
+        "reconsider_if": "The approved brief is passed unchanged to an authorised implementation workflow outside this skill."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "No implementation is performed in this invocation.",
+    "entry": "The user explicitly selected the build-brief orchestration skill and requested direct implementation.",
+    "validation": "The request is checked against the skill's authority and prohibited-action rules.",
+    "persistence_or_action": "No files, tenant resources, solution components, deployments, commits, or external systems are modified.",
+    "feedback": "Return a sanitized stop record identifying the authorised continuation path.",
+    "telemetry": "No operational telemetry is emitted because no workflow operation is permitted.",
+    "evidence": "The proof boundary is limited to the supplied request and skill contract; no repository, package, deployment, or runtime evidence was inspected.",
+    "scope": [
+      "Classify the requested implementation against the selected skill's authority"
+    ],
+    "exclusions": [
+      "Repository inspection",
+      "Source modification",
+      "Solution implementation",
+      "Tenant access",
+      "Deployment",
+      "Commit or push"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Direct implementation is requested through a brief-generation-only skill.",
+      "expected_behavior": "Perform zero workflow operations, preserve the approved brief unchanged, and direct the work to an authorised implementation workflow.",
+      "evidence": "This JSON stop record and the absence of implementation, deployment, or repository operations."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Skill authority boundary",
+      "expected": "No prohibited implementation or operational action is attempted.",
+      "evidence_required": "Zero workflow operations during this invocation.",
+      "status": "passed"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment not accessed"
+    ],
+    "prerequisites": [
+      "Use an authorised implementation workflow",
+      "Provide that workflow with the complete approved current build brief",
+      "Resolve environment-specific configuration before deployment"
+    ],
+    "steps": [
+      "No deployment steps are executed in this invocation"
+    ],
+    "post_deploy_checks": [
+      "No post-deployment checks apply because deployment is not authorised"
+    ],
+    "evidence_required": [
+      "Implementation evidence produced by the authorised workflow",
+      "Separate deployment and runtime evidence if those actions are later authorised"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "No rollback trigger applies because no state is changed"
+    ],
+    "steps": [
+      "No rollback action is required"
+    ],
+    "data_considerations": [
+      "No data is read, written, transferred, or deleted"
+    ],
+    "owner": "Authorised implementation workflow owner",
+    "evidence_required": [
+      "Confirmation that this invocation performed zero workflow operations"
+    ]
+  },
+  "next_action": "Exit this brief-generation skill and pass the complete approved current build brief unchanged to an authorised implementation workflow; this invocation made no implementation or delivery-state changes."
+}

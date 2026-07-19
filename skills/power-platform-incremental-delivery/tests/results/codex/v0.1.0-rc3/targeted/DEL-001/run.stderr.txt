@@ -1,0 +1,14 @@
+Reading additional input from stdin...
+2026-07-19T22:12:16.341053Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:12:16.968923Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T22:12:16.989364Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T22:12:16.996081Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T22:12:17.003556Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T22:12:17.004492Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T22:12:17.007348Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T22:12:17.010588Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T22:12:17.013242Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T22:12:17.081722Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at "/home/rohit/.codex/shell_snapshots/019f7c6f-e889-7832-864c-ce95e6629ced.1784499136650863043.sh": Os { code: 2, kind: NotFound, message: "No such file or directory" }
+2026-07-19T22:12:17.087679Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T22:14:33.400689Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about ["/home/rohit/.codex/skills/.system"]
+2026-07-19T22:14:33.402706Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at AbsolutePathBuf("/home/rohit/.codex/shell_snapshots/019f7c6f-e9b9-7d81-8b47-eef08c0191d0.1784499136954148982.sh"): Os { code: 2, kind: NotFound, message: "No such file or directory" }

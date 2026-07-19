@@ -1,0 +1,347 @@
+{
+  "status": "Ready",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The supplied slice was Ready before this continuation request.",
+        "basis": "The user explicitly identified it as a ready slice and supplied no changed constraint or contrary evidence.",
+        "source_refs": [
+          "User continuation request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The server-side component remains the sole authoritative owner of validation and durable writes.",
+        "basis": "Write ownership was settled in the carried-forward slice and cannot be replaced without material new evidence.",
+        "source_refs": [
+          "Supplied Ready slice",
+          "User statement that no new evidence or changed constraint exists"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "The client may initiate the operation and display its result but must not perform the authoritative durable write.",
+        "basis": "This preserves the established ownership and idempotency boundary.",
+        "source_refs": [
+          "Supplied Ready slice"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Replace the settled server-side write owner with a client write.",
+        "reason": "No material evidence or changed constraint was supplied to reopen the settled ownership decision; changing it could bypass server validation, weaken idempotency and concurrency controls, or create competing write paths.",
+        "reconsider_if": "New evidence demonstrates that the server-side owner cannot meet the agreed outcome and an architecture review establishes equivalent security, concurrency, idempotency, telemetry, and failure controls for a client-owned write."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "A requester can submit the synthetic service request and receive a deterministic success, validation, conflict, or failure result while the server-side component performs exactly one authoritative durable write.",
+    "entry": "The requester opens the supplied host experience, enters through its existing service-request entry point, reviews the current state, and initiates Submit or Acknowledge.",
+    "validation": "The client performs usability validation only. The server-side owner revalidates required values, authorization, business rules, the current version or concurrency token, and the idempotency key before any write. Invalid, unauthorized, stale, or duplicate operations fail safely without an unintended overwrite.",
+    "persistence_or_action": "The client sends one command to the existing server-side owner. That owner alone validates and performs the durable write. Submission or acknowledgement carries a stable idempotency key; updates carry the last-read concurrency token. Replays return the recorded outcome or a duplicate result without a second write.",
+    "feedback": "Disable repeated submission while the command is pending and show accessible loading feedback. Show field validation, permission denial, success, retryable server failure, and non-retryable failure distinctly. On conflict, preserve user input and instruct the requester to reload and reconcile the competing version before retrying.",
+    "telemetry": "Emit privacy-safe initiation and completion events with a correlation ID, operation type, outcome, latency category, conflict indicator, and duplicate indicator. Exclude request descriptions, personal data, credentials, tokens, and record payloads.",
+    "evidence": "Local proof covers source inspection and focused automated tests; package proof covers artifact composition and dependency integrity; deployment proof requires authorised import, configuration readback, and connection binding evidence; runtime proof requires observed success, validation, permission, conflict, duplicate, failure, and replay behavior in the target. No lower evidence level proves a higher one.",
+    "scope": [
+      "Existing requester entry point and primary submission or acknowledgement journey",
+      "Server-owned validation and durable write",
+      "Concurrency-token enforcement",
+      "Idempotent duplicate-action protection",
+      "Accessible outcome feedback",
+      "Privacy-safe correlated telemetry",
+      "Focused tests, deployment prerequisites, and rollback controls"
+    ],
+    "exclusions": [
+      "Client-owned direct durable writes",
+      "A second write handler or parallel persistence path",
+      "Tenant access, deployment, role assignment, or connection creation",
+      "Production-readiness claims without target runtime evidence",
+      "Transfer of confidential organisational data into the personal OpenAI zone"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Retain the existing client journey as the command initiator and feedback surface only.",
+        "rationale": "This preserves the ready user experience without moving authoritative validation or persistence into presentation code.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Retain the server-side component as the sole durable-write owner.",
+        "rationale": "A single owner prevents competing writes and preserves established validation, concurrency, and lifecycle rules.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-002",
+        "decision": "Require the current concurrency token for updates and a stable idempotency key for submission or acknowledgement.",
+        "rationale": "These controls prevent stale overwrites and duplicate processing.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "The client invokes one existing server-side command boundary and does not call the data write interface directly.",
+        "rationale": "This maintains one authoritative integration and write path.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AIC-001",
+        "decision": "No AI component participates in validation, persistence, authorization, or acknowledgement processing for this slice.",
+        "rationale": "AI is unnecessary for the deterministic operational outcome.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Enforce authorization and business validation at the server-side write boundary even when the client has already validated input.",
+        "rationale": "Client checks cannot establish trust or protect the durable boundary.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SEC-002",
+        "decision": "Exclude payload content and identifiers that could expose personal or confidential data from telemetry.",
+        "rationale": "Operational evidence requires outcomes and correlation, not sensitive record content.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Correlate each client command with its server outcome and record conflict and duplicate signals.",
+        "rationale": "This supports failure diagnosis and replay verification without logging sensitive payloads.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Promote the client and server components through the existing managed delivery path with environment-specific bindings resolved before deployment.",
+        "rationale": "The implementation-time environment values do not change the settled architecture but require readback evidence.",
+        "evidence_status": "Assumption"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "An authorized requester has entered valid values and holds the current record version",
+      "when": "the requester submits the operation once",
+      "then": "the server-side owner validates and performs exactly one durable write, and the client shows an accessible success result with the correlation ID",
+      "evidence": "Focused automated test plus authorised target runtime trace correlating one client command to one server write"
+    },
+    {
+      "id": "AC-002",
+      "given": "Another actor changes the record after the requester loaded it",
+      "when": "the requester submits using the stale concurrency token",
+      "then": "the server rejects the overwrite, preserves both versions, emits a conflict outcome, and the client instructs the requester to reload and reconcile",
+      "evidence": "Concurrent-change automated test and target runtime conflict evidence"
+    },
+    {
+      "id": "AC-003",
+      "given": "A submission or acknowledgement has already completed",
+      "when": "the same idempotency key is replayed",
+      "then": "the server returns the prior or duplicate outcome without performing another durable action",
+      "evidence": "Replay test demonstrating one durable action and a duplicate telemetry signal"
+    },
+    {
+      "id": "AC-004",
+      "given": "The requester lacks write permission",
+      "when": "the client sends the command",
+      "then": "the server denies the operation without a write or sensitive disclosure and the client presents accessible permission feedback",
+      "evidence": "Security test and authorised target runtime evidence using an approved restricted test persona"
+    },
+    {
+      "id": "AC-005",
+      "given": "The server command fails before a durable write completes",
+      "when": "the failure response reaches the client",
+      "then": "the client preserves entered values, provides safe retry guidance, and does not imply success",
+      "evidence": "Failure-injection test with correlated client and server outcomes"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The client attempts a direct durable write.",
+      "expected_behavior": "The implementation contains no supported direct-write path; the operation must pass through the server-side owner.",
+      "evidence": "Source inspection and focused boundary test"
+    },
+    {
+      "id": "NP-002",
+      "condition": "The concurrency token is stale or absent for an existing-record update.",
+      "expected_behavior": "Reject the overwrite without losing either version and require reload and reconciliation.",
+      "evidence": "Concurrent-change test and conflict telemetry"
+    },
+    {
+      "id": "NP-003",
+      "condition": "The same idempotency key is submitted more than once.",
+      "expected_behavior": "Do not repeat the durable action; return a stable prior or duplicate outcome.",
+      "evidence": "Duplicate and replay test"
+    },
+    {
+      "id": "NP-004",
+      "condition": "Server authorization or business validation fails.",
+      "expected_behavior": "Perform no write, disclose no sensitive detail, and return actionable client feedback.",
+      "evidence": "Security and functional negative tests"
+    },
+    {
+      "id": "NP-005",
+      "condition": "The user activates Submit repeatedly while the first command is pending.",
+      "expected_behavior": "Prevent additional client commands while preserving keyboard focus and announcing the pending state.",
+      "evidence": "Accessibility and duplicate-action test"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Valid command from client through server validation to one durable write and success feedback",
+      "expected": "Exactly one write and a correlated accessible success outcome",
+      "evidence_required": "Automated test output and runtime correlation evidence",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "reliability",
+      "scope": "Concurrent update using a stale token",
+      "expected": "No overwrite, conflict outcome emitted, and reload-and-reconcile guidance shown",
+      "evidence_required": "Concurrent-change test output",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Duplicate and replayed submission or acknowledgement",
+      "expected": "One durable action with stable duplicate handling",
+      "evidence_required": "Idempotency test output and duplicate telemetry",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "security",
+      "scope": "Unauthorized command and tampered client validation",
+      "expected": "Server denies the operation and performs no write",
+      "evidence_required": "Security test output without sensitive payloads",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "accessibility",
+      "scope": "Keyboard, focus, disabled, loading, validation, conflict, permission, success, and failure states",
+      "expected": "Operable keyboard journey with announced status and deterministic focus placement",
+      "evidence_required": "Automated accessibility results and manual keyboard observations",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "alm",
+      "scope": "Solution dependency, configuration reference, and artifact integrity checks",
+      "expected": "Deterministic package with no unintended direct-write component",
+      "evidence_required": "Build and package validation output",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "deployment",
+      "scope": "Authorised non-production import, configuration binding, and readback",
+      "expected": "Client resolves the intended server command and no competing write path is active",
+      "evidence_required": "Import result and sanitized configuration readback",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-008",
+      "class": "rollback",
+      "scope": "Restore the previous component versions and bindings",
+      "expected": "Prior server-owned behavior is restored without deleting valid records",
+      "evidence_required": "Non-production rollback rehearsal and configuration readback",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised non-production environment resolved before deployment"
+    ],
+    "prerequisites": [
+      "Authorised implementation and deployment workflow",
+      "Resolved publisher, solution, environment, connection, and configuration bindings",
+      "Approved test personas for authorized and restricted paths",
+      "Existing server-side command endpoint and durable-write permissions",
+      "Backup or export of the currently deployed component versions",
+      "No client direct-write permission or competing write handler"
+    ],
+    "steps": [
+      "Implement the client as a command initiator while retaining the server-side write owner",
+      "Add focused validation, concurrency, idempotency, feedback, telemetry, and accessibility tests",
+      "Build and inspect the solution artifact and dependencies",
+      "Import through the authorised non-production ALM path",
+      "Bind environment-specific references and verify configuration readback",
+      "Run success, conflict, duplicate, permission, failure, and replay checks"
+    ],
+    "post_deploy_checks": [
+      "Confirm one client command produces at most one server-owned durable write",
+      "Confirm no client direct-write path or duplicate handler is active",
+      "Confirm stale updates are rejected without data loss",
+      "Confirm replayed idempotency keys do not repeat the action",
+      "Confirm permission failures disclose no sensitive data",
+      "Confirm telemetry contains correlation and outcome fields but no excluded payloads"
+    ],
+    "evidence_required": [
+      "Sanitized import result",
+      "Configuration and dependency readback",
+      "Target runtime correlation evidence",
+      "Conflict and duplicate runtime evidence",
+      "Permission and failure-path runtime evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "More than one durable write occurs for one logical operation",
+      "The client bypasses the server-side owner",
+      "Stale data can overwrite a current version",
+      "Unauthorized writes or sensitive telemetry are observed",
+      "The deployed client cannot reliably invoke the server command"
+    ],
+    "steps": [
+      "Stop promotion and disable the affected client entry point if required",
+      "Restore the previously exported client and server component versions",
+      "Restore prior environment bindings and verify readback",
+      "Retest the original server-owned success and failure paths",
+      "Reconcile any operations whose correlation IDs show an uncertain outcome"
+    ],
+    "data_considerations": [
+      "Do not delete valid records created before rollback",
+      "Identify possible duplicates by idempotency key and correlation ID before remediation",
+      "Preserve conflicting versions for reconciliation",
+      "Handle uncertain operations through an approved operational process rather than blind replay"
+    ],
+    "owner": "Authorised solution delivery owner",
+    "evidence_required": [
+      "Previous artifact and configuration snapshot",
+      "Rollback execution record",
+      "Post-rollback configuration readback",
+      "Post-rollback functional and replay evidence"
+    ]
+  },
+  "next_action": "Continue the supplied Ready slice unchanged at the ownership boundary: implement through an authorised workflow with the client initiating one server-owned command, retain the server-side component as the sole durable-write owner, and carry forward RJ-001 as the only delta. This Ready brief does not authorize implementation or deployment."
+}

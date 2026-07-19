@@ -1,0 +1,174 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.1.0-rc2-codex-20260719:NO-TRIGGER-005:full",
+  "run_id": "ppid-v0.1.0-rc2-codex-20260719",
+  "case_id": "NO-TRIGGER-005",
+  "suite": "should-not-trigger",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.1.0",
+    "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/trigger-cases.yaml",
+    "sha256": "8d98c93a17e504cb3e525d07dc4c3feebd40cde026173e4ae616811df4d90c96",
+    "exact_input": "Implement the already approved and current build brief exactly as written.",
+    "exact_input_sha256": "ca407184c984543703efdf0637f00e6574f273c29da24089b0eeb74ab6f41fd9"
+  },
+  "execution": {
+    "started_at": "2026-07-19T15:20:08.657513Z",
+    "completed_at": "2026-07-19T15:20:41.938951Z",
+    "first_output": "{\n  \"status\": \"Blocked\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"The requested action is direct implementation of an already approved current build brief.\",\n        \"basis\": \"The invocation explicitly requests implementation.\",\n        \"source_refs\": [\n          \"user invocation\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"This skill is authorised to produce build briefs only and prohibits implementation or operational workflow actions.\",\n        \"basis\": \"Power Platform Incremental Delivery package version 0.1.0 outcome, workflow, and stop contracts.\",\n        \"source_refs\": [\n          \"power-platform-incremental-delivery/SKILL.md sections 1, 2, 5, and 9\"\n        ]\n      }\n    ],\n    \"assumptions\": [],\n    \"open_questions\": [],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Implement the approved build brief within this skill invocation.\",\n        \"reason\": \"Direct implementation is outside this skill's authority and is a prohibited action.\",\n        \"reconsider_if\": \"The approved brief is passed unchanged to an authorised implementation workflow outside this skill.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"public\",\n    \"cross_zone_transfer\": \"approval-required\"\n  },\n  \"slice\": {\n    \"outcome\": \"No implementation is performed in this invocation.\",\n    \"entry\": \"The user explicitly selected the build-brief orchestration skill and requested direct implementation.\",\n    \"validation\": \"The request is checked against the skill's authority and prohibited-action rules.\",\n    \"persistence_or_action\": \"No files, tenant resources, solution components, deployments, commits, or external systems are modified.\",\n    \"feedback\": \"Return a sanitized stop record identifying the authorised continuation path.\",\n    \"telemetry\": \"No operational telemetry is emitted because no workflow operation is permitted.\",\n    \"evidence\": \"The proof boundary is limited to the supplied request and skill contract; no repository, package, deployment, or runtime evidence was inspected.\",\n    \"scope\": [\n      \"Classify the requested implementation against the selected skill's authority\"\n    ],\n    \"exclusions\": [\n      \"Repository inspection\",\n      \"Source modification\",\n      \"Solution implementation\",\n      \"Tenant access\",\n      \"Deployment\",\n      \"Commit or push\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [],\n    \"data\": [],\n    \"integration\": [],\n    \"ai\": [],\n    \"security\": [],\n    \"operations\": [],\n    \"alm\": []\n  },\n  \"delegations\": [],\n  \"acceptance_criteria\": [],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"Direct implementation is requested through a brief-generation-only skill.\",\n      \"expected_behavior\": \"Perform zero workflow operations, preserve the approved brief unchanged, and direct the work to an authorised implementation workflow.\",\n      \"evidence\": \"This JSON stop record and the absence of implementation, deployment, or repository operations.\"\n    }\n  ],\n  \"tests\": [\n    {\n      \"id\": \"TEST-001\",\n      \"class\": \"security\",\n      \"scope\": \"Skill authority boundary\",\n      \"expected\": \"No prohibited implementation or operational action is attempted.\",\n      \"evidence_required\": \"Zero workflow operations during this invocation.\",\n      \"status\": \"passed\"\n    }\n  ],\n  \"deployment\": {\n    \"authorization_status\": \"not-authorized\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Target environment not accessed\"\n    ],\n    \"prerequisites\": [\n      \"Use an authorised implementation workflow\",\n      \"Provide that workflow with the complete approved current build brief\",\n      \"Resolve environment-specific configuration before deployment\"\n    ],\n    \"steps\": [\n      \"No deployment steps are executed in this invocation\"\n    ],\n    \"post_deploy_checks\": [\n      \"No post-deployment checks apply because deployment is not authorised\"\n    ],\n    \"evidence_required\": [\n      \"Implementation evidence produced by the authorised workflow\",\n      \"Separate deployment and runtime evidence if those actions are later authorised\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"No rollback trigger applies because no state is changed\"\n    ],\n    \"steps\": [\n      \"No rollback action is required\"\n    ],\n    \"data_considerations\": [\n      \"No data is read, written, transferred, or deleted\"\n    ],\n    \"owner\": \"Authorised implementation workflow owner\",\n    \"evidence_required\": [\n      \"Confirmation that this invocation performed zero workflow operations\"\n    ]\n  },\n  \"next_action\": \"Exit this brief-generation skill and pass the complete approved current build brief unchanged to an authorised implementation workflow; this invocation made no implementation or delivery-state changes.\"\n}",
+    "first_output_sha256": "379914d85a51d74680450f205a0349642df2c7c2b2f7e6e1a63e1d9719784945"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: configured explicit selector separately from exact input",
+        "evaluator: supplied exact fixture input through stdin",
+        "evaluator: captured first output, JSONL, and stderr",
+        "evaluator: validated output, case criteria, and operation evidence without repair"
+      ],
+      "source": "invocation.json and evaluator validation"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator review",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7af6-9abb-72d1-b33f-57d4a39ae812",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged input and explicit orchestrator selection",
+        "result": "Pass",
+        "evidence": "Input and selector hashes are preserved separately in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero workflow operations",
+        "result": "Pass",
+        "evidence": "Observed workflow-operation count: 0.",
+        "deviation": ""
+      },
+      {
+        "name": "Trigger routing: do not trigger",
+        "result": "Pass",
+        "evidence": "Explicit-selection handling recognized the case as do not trigger; observed status Blocked.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "human-and-automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-19T15:39:48.183565Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4",
+      "use": "RC2 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/trigger-cases.yaml",
+      "sha256": "8d98c93a17e504cb3e525d07dc4c3feebd40cde026173e4ae616811df4d90c96",
+      "use": "Exact unchanged case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "b5c1c2ea756a88132b18145dbf34ee2e504c2e8d53d73c3ce54153c765ce7a96",
+      "use": "Codex-profile result-record validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "b662dca36aade046fedd290daca668229d8f4dbda0ab3099fdcbb55b4b61338a",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "24a3ead73d20d39cda62b68fc09cea112ef88ec75ef18e05d89ea2bac6b2885e",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

@@ -1,0 +1,78 @@
+{
+  "case_id": "DEL-001",
+  "specialist": "dataverse-webapi-query",
+  "specialist_version": "remediation-0.2.2",
+  "upstream_registered_pin": "f4bb4ad5bf55e2d50076292bd6301f6337d38083",
+  "adapter_tested_pin": "33bc38456abb83f27daad968b748c8085f2a78ef",
+  "selected_blob": "8791590eeca8b1c697856c8a5cca9fbab3ef12b6",
+  "register_status": "repository-level approved; explicit invocation only",
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "tools_allowed": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-07-19T15:57:21.528223Z",
+      "completed_at": "2026-07-19T22:07:26.240321Z",
+      "exit_code": 0,
+      "command_argv": [
+        "codex",
+        "--disable",
+        "shell_tool",
+        "--disable",
+        "browser_use",
+        "--disable",
+        "computer_use",
+        "--disable",
+        "apps",
+        "--disable",
+        "plugins",
+        "exec",
+        "--ephemeral",
+        "--ignore-user-config",
+        "-C",
+        "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+        "-m",
+        "gpt-5.6-sol",
+        "-c",
+        "model_reasoning_effort=\"high\"",
+        "-c",
+        "approval_policy=\"on-request\"",
+        "-c",
+        "web_search=\"disabled\"",
+        "-s",
+        "read-only",
+        "--json",
+        "-o",
+        "/tmp/power-platform-incremental-delivery-v0.1.0-rc3/specialists/DEL-001/first-output.txt",
+        "$dataverse-webapi-query"
+      ],
+      "explicit_invocation_configuration": "$dataverse-webapi-query",
+      "exact_input": "Create a build brief for a synthetic model-driven account review slice. The user opens a view of the top ten active synthetic accounts ordered by createdon descending and sees name and accountnumber. Query construction requires the approved repository specialist. Delegation is explicitly enabled for public/synthetic data, standard synthetic Account schema assumptions are authorised, and the required host is Xrm.WebApi. Select $dataverse-webapi-query explicitly, accept only its schema-valid result, embed that validated query contract in the slice, and define validation, feedback, telemetry, evidence, deployment prerequisites, and rollback. Do not authenticate or access a tenant.",
+      "exact_input_sha256": "d3b75bbb4bcb6322a7981124145adeefb6a8fe47c4296d985bf57e201afd8b14",
+      "first_output": "## Build brief: Synthetic account review\n\nA smallest production-credible, read-only slice for an account reviewer using a model-driven app.\n\n### Outcome and acceptance criteria\n\nThe reviewer opens **Account Review** and:\n\n- Sees at most ten active synthetic accounts.\n- Sees only the account name and account number.\n- Gets newest accounts first by `createdon`.\n- Gets deterministic ordering for equal timestamps via `accountid asc`.\n- Can distinguish loading, empty, permission/error, and stale states.\n- Can retry without starting concurrent or duplicate reads.\n- Never triggers a Dataverse write.\n\nThe implementation must call the exact validated query contract below. Any query change requires revalidation by `$dataverse-webapi-query`.\n\n### Validated query contract\n\n```json\n{\n  \"result_type\": \"success\",\n  \"status\": \"Resolved\",\n  \"recommendation\": \"Use the validated Xrm.WebApi.retrieveMultipleRecords call in the model-driven client. Render only name and accountnumber, ignore any continuation link, and do not add authentication or tenant-specific values.\",\n  \"assumptions\": [\n    \"The prompt explicitly authorizes standard synthetic Microsoft Dataverse Account schema assumptions.\",\n    \"Active Account rows map to statecode=0.\",\n    \"accountid is used only as a deterministic secondary ordering attribute and is not displayed.\",\n    \"The caller runs in a supported model-driven app surface that exposes Xrm.WebApi.\"\n  ],\n  \"resolved_schema\": {\n    \"table_logical_name\": \"account\",\n    \"entity_set_name\": \"accounts\",\n    \"attribute_logical_names\": [\n      \"name\",\n      \"accountnumber\",\n      \"createdon\",\n      \"accountid\",\n      \"statecode\"\n    ],\n    \"lookup_annotation_columns\": [],\n    \"navigation_properties\": [],\n    \"choice_or_status_values\": [\n      \"statecode=0 (Active)\"\n    ],\n    \"generated_service_name\": null,\n    \"host_api_contract\": \"xrm_webapi\"\n  },\n  \"unresolved_schema\": [],\n  \"host_context\": {\n    \"status\": \"resolved\",\n    \"selected\": \"xrm_webapi\",\n    \"supported_options\": [\n      \"xrm_webapi\"\n    ],\n    \"required_clarification\": null\n  },\n  \"query_or_code\": \"Xrm.WebApi.retrieveMultipleRecords(\\\"account\\\", \\\"?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc,accountid asc&$top=10\\\")\",\n  \"security_notes\": [\n    \"This contract constructs a synthetic read-only query and performs no authentication, tenant access, metadata discovery, or operational Dataverse work.\",\n    \"Do not log returned account names, account numbers, environment URLs, tokens, or complete service error payloads.\"\n  ],\n  \"sources_or_reference_basis\": [\n    {\n      \"source\": \"Controlled inline dataverse-webapi-query adaptation supplied in the prompt\",\n      \"pin\": \"33bc38456abb83f27daad968b748c8085f2a78ef\",\n      \"availability\": \"available\",\n      \"use\": \"Host contract, supported OData shape, standard synthetic schema gate, and strict result validation\"\n    }\n  ],\n  \"open_questions\": []\n}\n```\n\nThis passes the specialist invariants: `success`/`Resolved`, resolved host and schema, no unresolved facts, flat choice values, and non-empty runnable code.\n\n### Implementation slice\n\nUse a solution-contained client component in an existing supported model-driven app surface exposing `Xrm.WebApi`. Before building, confirm that surface; do not silently substitute `context.webAPI`, Canvas `dataApi`, or a raw endpoint.\n\nKeep three small responsibilities:\n\n- A query module containing the exact validated call.\n- A controller owning initial load and refresh, with one in-flight request.\n- A renderer producing an accessible two-column table.\n\nRender null or blank account numbers as `—`. Use a request-generation token so a late response cannot replace newer results. Disable Refresh while loading.\n\nRequired UI states:\n\n- Loading: labelled progress indicator.\n- Success: accessible Name and Account number table.\n- Empty: “No active accounts found.”\n- Error/permission: generic safe message and Retry action.\n- Stale: retain existing rows, show last-successful refresh time, and indicate refresh failure.\n- Narrow/long content: wrapping or horizontal scrolling without hiding values.\n- Keyboard/focus: logical tab order, visible focus, and status updates through an appropriate live region.\n\n### Validation\n\nFocused automated checks should prove:\n\n- The table logical name and query string exactly match the validated contract.\n- No second request starts while one is in flight.\n- Fixtures render no more than ten rows in the supplied order.\n- Empty, null account number, permission failure, general failure, retry, and stale-response handling work.\n- Only name and account number appear in the UI.\n- Telemetry contains no returned row data.\n- Accessibility checks cover table semantics, focus, keyboard use, and status announcements.\n\nPackage validation should include the repository’s normal lint/build/tests, solution integrity checks, and a reviewed generated artifact diff.\n\nTarget-environment acceptance requires separate authorized deployment and runtime work:\n\n1. Seed synthetic active and inactive accounts, including equal `createdon` values.\n2. Confirm inactive rows never appear.\n3. Confirm descending creation order and deterministic tie ordering.\n4. Confirm the ten-row maximum.\n5. Exercise empty, denied-read, failure, retry, and reload behavior.\n\n### Feedback and telemetry\n\nShow concise inline status, row count, last successful refresh time, and Retry where applicable.\n\nEmit only operational events such as:\n\n- `account_review_load_started`\n- `account_review_load_succeeded`\n- `account_review_load_failed`\n- `account_review_retry_requested`\n\nPermitted dimensions: duration, returned count, retry count, client component version, and sanitized error category/code. Exclude account fields, record IDs, error bodies, tenant identifiers, environment URLs, and credentials.\n\n### Deployment prerequisites\n\n- Target solution, publisher, app, navigation location, and component ownership confirmed.\n- Selected model-driven surface verified to expose `Xrm.WebApi`.\n- Users have least-privilege Account read access; this slice changes no roles.\n- Synthetic test data and permission-denied test persona are available.\n- Standard build, solution-checking, deployment, and rollback pipelines are operational.\n- No custom authentication, connection string, environment URL, or secret is introduced.\n\n### Rollback\n\nPrefer redeploying the previous known-good solution version or disabling/removing the Account Review navigation entry. The slice performs no writes or schema changes, so rollback requires no data restoration. Preserve sanitized failure telemetry long enough to verify recovery.\n\n### Evidence boundary\n\nOnly the brief and static specialist-contract validation are established. No repository implementation, build, package, import, configuration readback, or runtime tenant behavior was inspected or proved. A separate specialist worker could not start because the collaboration runtime reported no active thread, so the supplied `$dataverse-webapi-query` contract was applied and validated in-process without tenant or filesystem access.",
+      "first_output_sha256": "8d35e8924fc0f0efe5ff37a76378d3313fb4e253505499390b687534aadbfa96",
+      "answer_schema_valid": false,
+      "answer_schema_errors": [
+        "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+      ],
+      "workflow_operations": [
+        {
+          "event_type": "stderr",
+          "item_type": "rejected-tool-attempt"
+        }
+      ],
+      "approval_events": [],
+      "network_operations": [],
+      "event_count": 6,
+      "events_file": "run.events.jsonl",
+      "stderr_file": "run.stderr.txt"
+    }
+  ],
+  "selected_attempt": 1,
+  "relative_result_reference": "tests/results/codex/v0.1.0-rc3/targeted/DEL-001/specialist/first-output.txt",
+  "deviations": []
+}

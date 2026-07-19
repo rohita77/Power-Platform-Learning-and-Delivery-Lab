@@ -1,0 +1,79 @@
+{
+  "DEL-001": {
+    "status": "Open",
+    "delegation": {
+      "source_type": "upstream",
+      "selection_mode": "explicit",
+      "execution_observed": true,
+      "result_schema_valid": false,
+      "invoked": false,
+      "result_reference": "tests/results/codex/v0.1.0-rc3/targeted/DEL-001/specialist/first-output.txt"
+    },
+    "case_result": "Fail"
+  },
+  "DEL-004": {
+    "status": "Open",
+    "delegation": {
+      "source_type": "upstream",
+      "selection_mode": "none",
+      "execution_observed": false,
+      "result_schema_valid": null,
+      "invoked": false,
+      "result_reference": ""
+    },
+    "case_result": "Pass"
+  },
+  "DEL-005": {
+    "status": "Blocked",
+    "delegation": {
+      "source_type": "upstream",
+      "selection_mode": "none",
+      "execution_observed": false,
+      "result_schema_valid": null,
+      "invoked": false,
+      "result_reference": ""
+    },
+    "case_result": "Pass"
+  },
+  "DEL-008": {
+    "status": "Blocked",
+    "delegation": {
+      "source_type": "upstream",
+      "selection_mode": "explicit",
+      "execution_observed": true,
+      "result_schema_valid": false,
+      "invoked": false,
+      "result_reference": ""
+    },
+    "case_result": "Pass"
+  },
+  "DEL-009": {
+    "status": "Open",
+    "delegation": {
+      "source_type": "upstream",
+      "selection_mode": "none",
+      "execution_observed": false,
+      "result_schema_valid": null,
+      "invoked": false,
+      "result_reference": ""
+    },
+    "case_result": "Pass"
+  },
+  "GOLD-005": {
+    "status": "Open",
+    "delegation": {
+      "source_type": "upstream",
+      "selection_mode": "explicit",
+      "execution_observed": true,
+      "result_schema_valid": false,
+      "invoked": false,
+      "result_reference": "tests/results/codex/v0.1.0-rc3/targeted/GOLD-005/specialist/first-output.txt"
+    },
+    "case_result": "Fail"
+  },
+  "NO-TRIGGER-004": {
+    "status": "Open",
+    "delegation": null,
+    "case_result": "Pass"
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The Power Platform incremental-delivery workflow was explicitly selected.",
+        "basis": "The user selected $power-platform-incremental-delivery and supplied its version 0.1.0 contract.",
+        "source_refs": [
+          "User invocation",
+          "Supplied skill contract v0.1.0"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No business outcome, persona, host, primary journey, existing solution state, or acceptance result was supplied.",
+        "basis": "The invocation contains only a delegation preference.",
+        "source_refs": [
+          "User invocation"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "A Dataverse query helper was requested through implicit rather than exact explicit selection.",
+        "basis": "The user requested whichever helper seems appropriate without explicitly selecting it.",
+        "source_refs": [
+          "User stdin"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "Only the public invocation text is currently in scope; no tenant data or confidential organisational content has been supplied.",
+        "impact": "Reasoning may continue in the personal OpenAI zone, but no live schema, record, tenant, or credential material may be introduced.",
+        "validation_required": "Confirm the classification and permitted transfer path before supplying any solution-specific information.",
+        "source_refs": [
+          "User invocation",
+          "Supplied skill boundary rules"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business or operational result should the next vertical slice deliver?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Who is the persona, which Power Platform or Dynamics 365 host will they use, and what initiates the primary journey?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "What Dataverse query-construction outcome is required, using only public or synthetic table, column, filter, relationship, and host-context details?",
+        "owner": "Solution architect",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Silently choose or simulate execution of a Dataverse query specialist.",
+        "reason": "The supplied delegation contract requires explicit enablement, exact specialist selection, observed execution, and a schema-valid result.",
+        "reconsider_if": "The query need is established and the approved specialist is explicitly enabled and selected with permitted public or synthetic input."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open pending an observable business or operational result.",
+    "entry": "Open pending the persona, host, entry point, initial state, and initiating event.",
+    "validation": "Open pending the business rules, security checks, input constraints, and concurrency requirements.",
+    "persistence_or_action": "Open pending identification of the authoritative action owner, durable operation, and idempotency boundary.",
+    "feedback": "Open pending definition of loading, success, validation, permission, conflict, retry, and failure behavior.",
+    "telemetry": "Open pending a privacy-safe event model, correlation identifier, outcomes, and excluded payloads.",
+    "evidence": "No implementation evidence exists; future proof must distinguish source, automated test, package, deployment/configuration, and runtime evidence.",
+    "scope": [
+      "Reconstruct the agreed position after the observable outcome, persona, and host are supplied.",
+      "Produce one smallest deployable vertical-slice build brief."
+    ],
+    "exclusions": [
+      "Tenant authentication or inspection",
+      "Implementation or deployment",
+      "Implicit specialist invocation",
+      "Confidential organisational data transfer"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "The persona, host, entry point, journey, and interaction states remain undefined.",
+        "rationale": "No user-visible or operational workflow was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Dataverse schema, ownership, classification, validation, concurrency, and persistence requirements remain undefined.",
+        "rationale": "No solution context or synthetic schema was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component or external interface can yet be selected.",
+        "rationale": "The required end-to-end action is unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is selected.",
+        "rationale": "No outcome establishes a need for AI, and no organisational data transfer has been approved.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Security roles, identity boundary, DLP constraints, permitted transfer path, and least-privilege access remain to be defined.",
+        "rationale": "Only public invocation content is available.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Operational ownership, telemetry destination, support path, and service expectations remain undefined.",
+        "rationale": "No target solution or environment was identified.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Repository, solution, environment path, publisher conventions, deployment controls, and rollback ownership remain undefined.",
+        "rationale": "No current implementation or ALM context was supplied.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dataverse-webapi-query",
+      "source_type": "lab",
+      "registry": {
+        "path": ".agents/skills/dataverse-webapi-query/",
+        "entry_status": "missing",
+        "version_or_pin": "not-established",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Dataverse query construction requested without a defined query outcome or exact specialist selection.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": [
+          "Reasoning over public or synthetic query requirements only"
+        ]
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "implicit",
+        "selector": "unspecified Dataverse query helper",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": "No specialist result was supplied."
+      },
+      "evidence_refs": [
+        "User stdin",
+        "Supplied incremental-delivery delegation contract"
+      ],
+      "open_items": [
+        "Define the bounded Dataverse query-construction requirement.",
+        "Confirm that all inputs are public or synthetic.",
+        "Establish current approval, compatibility, prerequisites, and permission evidence.",
+        "Explicitly enable and select the exact approved specialist if delegation is required."
+      ],
+      "next_action": "Do not invoke a query helper implicitly; first define the delivery outcome and bounded query need."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A Dataverse query specialist is requested through implicit or unspecified selection.",
+      "expected_behavior": "Keep the delegation open, set invoked to false, and perform no specialist or tenant operation.",
+      "evidence": "Delegation control and execution record DEL-001."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Confidential data, credentials, tenant URLs, live metadata, or unauthorised access are introduced.",
+      "expected_behavior": "Stop the workflow without reproducing the sensitive content and return a sanitized blocked record.",
+      "evidence": "Boundary review before any future brief."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Validate that a supplied outcome defines one observable end-to-end result.",
+      "expected": "The slice covers entry, validation, authoritative action, feedback, telemetry, and evidence.",
+      "evidence_required": "Approved build brief and traceable acceptance criteria.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Validate boundary classification and specialist delegation controls.",
+      "expected": "Only permitted public or synthetic inputs are used and implicit specialist selection never counts as invocation.",
+      "evidence_required": "Boundary decision and schema-valid delegation record.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Open: no target Power Platform environment has been identified."
+    ],
+    "prerequisites": [
+      "Define the observable outcome, persona, host, current solution position, and boundary.",
+      "Resolve any required specialist delegation through explicit approved configuration.",
+      "Obtain separate implementation and deployment authorization."
+    ],
+    "steps": [
+      "Do not implement or deploy until a Ready build brief exists.",
+      "After authorization, follow the approved ALM path for the identified solution and environment."
+    ],
+    "post_deploy_checks": [
+      "Read back configuration and environment bindings.",
+      "Execute the approved end-to-end acceptance and negative-path tests.",
+      "Record deployment evidence separately from runtime evidence."
+    ],
+    "evidence_required": [
+      "Import or deployment result",
+      "Configuration readback",
+      "Runtime acceptance evidence",
+      "Failure and replay evidence where applicable"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Deployment validation fails.",
+      "Security or data-boundary behavior differs from the approved design.",
+      "The authoritative write path causes duplicate, stale, or inconsistent actions."
+    ],
+    "steps": [
+      "Stop further rollout or processing.",
+      "Apply the approved solution-version rollback or disable the introduced entry point.",
+      "Preserve diagnostic evidence without confidential payloads.",
+      "Reconcile affected durable actions before re-enablement."
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite durable records as an unverified rollback shortcut.",
+      "Define reconciliation for partial writes, duplicate actions, and concurrent changes before deployment."
+    ],
+    "owner": "Open: deployment and operational owners have not been identified.",
+    "evidence_required": [
+      "Rollback authorization",
+      "Restored component and configuration readback",
+      "Data reconciliation result",
+      "Post-rollback smoke-test evidence"
+    ]
+  },
+  "next_action": "Provide the minimum observable business outcome, persona, and Power Platform or Dynamics 365 host; also state the bounded public or synthetic Dataverse query need, after which the exact approved specialist-selection requirement can be resolved without performing any tenant, implementation, or deployment action."
+}

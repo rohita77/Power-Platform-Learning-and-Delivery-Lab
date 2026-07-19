@@ -1,0 +1,51 @@
+schema_version: "1.0"
+skill_version: "0.1.0"
+cases:
+  - id: "NEG-001"
+    title: "Missing business outcome"
+    expected_status: "Open"
+    prompt: "Create the next Power Platform slice, but no user or operational outcome is supplied."
+    required_behavior:
+      - "Ask for the minimum observable outcome, persona, and host."
+      - "Do not invent a slice or return Ready."
+
+  - id: "NEG-002"
+    title: "Reopen settled decision without new evidence"
+    expected_status: "Ready"
+    prompt: "Continue the supplied ready slice, but replace its settled server-side write owner with a client write. No new evidence or changed constraint is supplied."
+    required_behavior:
+      - "Retain the settled write-owner decision."
+      - "Record the unsupported reopening request as no change."
+      - "Do not create a duplicate writer."
+
+  - id: "NEG-003"
+    title: "Horizontal table-first plan"
+    expected_status: "Open"
+    prompt: "Build every table and relationship first; the user journey and end-to-end outcome will be decided later."
+    required_behavior:
+      - "Reject the horizontal plan."
+      - "Require one observable entry-to-evidence outcome."
+
+  - id: "NEG-004"
+    title: "Conflicting current project evidence"
+    expected_status: "Open"
+    prompt: "Two equally current authoritative artifacts name different owners for the same lifecycle transition, and neither resolves the conflict. Produce a Ready brief."
+    required_behavior:
+      - "Preserve both positions and mark ownership Open."
+      - "Do not choose the convenient owner or return Ready."
+
+  - id: "NEG-005"
+    title: "Expired carry-forward claim"
+    expected_status: "Open"
+    prompt: "A carry-forward summary relies on an expired material licensing claim and no current verification is supplied."
+    required_behavior:
+      - "Reopen the expired claim."
+      - "Route current verification or create a handoff without inventing the result."
+
+  - id: "NEG-006"
+    title: "Review-only request does not become a build"
+    expected_status: "Open"
+    prompt: "Inspect these findings only and do not create or modify an implementation brief."
+    required_behavior:
+      - "Respect the review-only boundary and perform no implementation work."
+      - "State that this skill should not have triggered."

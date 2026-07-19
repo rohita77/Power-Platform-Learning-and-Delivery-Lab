@@ -1,0 +1,219 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested deliverable is the next smallest deployable Power Platform build brief following completed testing.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "user-request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No test findings, prior agreed position, business outcome, persona, host, or solution artifacts were included in the invocation.",
+        "basis": "The supplied stdin contains only the build-brief request.",
+        "source_refs": [
+          "user-request"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The supplied request contains only public, non-tenant-specific information.",
+        "impact": "Reasoning may continue in the personal OpenAI zone, but no organisational data or implementation decisions can be reconstructed.",
+        "validation_required": "Confirm that any subsequently supplied findings are sanitized and permitted for this zone.",
+        "source_refs": [
+          "user-request"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What completed test findings, including observed result and evidence boundary, must the next increment address?",
+        "owner": "Product or test owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What observable business outcome, persona, Power Platform host, and primary journey define success for the next slice?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "What current solution source or carry-forward position contains the settled schema, ownership, security, ALM, and exclusion decisions?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Infer defects or design a generic remediation slice without the completed findings.",
+        "reason": "That would fabricate scope and could reopen settled decisions without evidence.",
+        "reconsider_if": "The test findings and current agreed position are supplied."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: the measurable user or operational result cannot be defined until the completed findings and intended outcome are supplied.",
+    "entry": "Open: persona, Power Platform host, entry point, initial state, and initiating event are not supplied.",
+    "validation": "Open: required inputs, security checks, concurrency rules, and safe failure behavior depend on the missing findings and current design.",
+    "persistence_or_action": "Open: the authoritative write or action owner and idempotency boundary are not established.",
+    "feedback": "Open: loading, success, validation, permission, conflict, retry, and failure behavior require the primary journey.",
+    "telemetry": "Open: define privacy-safe event names, correlation ID, outcome, duplicate or conflict signals, and excluded payloads after the journey is known.",
+    "evidence": "Only the request was observed; no source, automated-test, package, deployment, configuration, or runtime evidence was supplied.",
+    "scope": [
+      "Convert supplied completed findings into one deployable vertical remediation slice"
+    ],
+    "exclusions": [
+      "Implementation, tenant access, deployment, authentication, and configuration changes",
+      "Unrelated improvements not supported by the completed findings",
+      "Claims of target runtime behavior without observed runtime evidence"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Open: identify the persona, host, entry point, primary journey, and required interaction states.",
+        "rationale": "These inputs were not supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Open: preserve the existing authoritative schema and define only changes required by the findings.",
+        "rationale": "No current schema or test evidence was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Open: retain one authoritative action owner and define idempotency only where the tested journey requires integration.",
+        "rationale": "Existing event and write ownership is unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Open: determine whether the tested journey includes an AI component; otherwise record an explicit no-component decision.",
+        "rationale": "No AI requirement or finding was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Open: preserve existing least-privilege roles, DLP boundaries, identity controls, and data classification unless findings prove a required change.",
+        "rationale": "Current organisational controls are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Open: define privacy-safe telemetry, correlation, support ownership, and failure handling for the selected journey.",
+        "rationale": "The operational outcome and failure evidence are missing.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Open: package the smallest finding-driven component delta using the existing solution and environment-variable conventions.",
+        "rationale": "The current solution structure and ALM conventions were not supplied.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The findings or current position remain unavailable.",
+      "expected_behavior": "Do not invent defects, architecture, acceptance criteria, or a deployable remediation scope; keep the brief Open.",
+      "evidence": "Brief review confirms every proposed change traces to supplied evidence."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Subsequent evidence contains confidential organisational data not approved for the personal OpenAI zone.",
+      "expected_behavior": "Do not reproduce or process that content; use an approved organisational Microsoft path.",
+      "evidence": "Boundary review records only sanitized references and permitted classifications."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "alm",
+      "scope": "Trace each future build-brief change to a supplied finding or settled decision.",
+      "expected": "No untraceable component, schema, security, or workflow change enters the slice.",
+      "evidence_required": "Finding-to-change traceability review.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target Power Platform environment to be identified before implementation"
+    ],
+    "prerequisites": [
+      "Supply sanitized completed findings and their evidence level",
+      "Supply the measurable outcome, persona, host, and primary journey",
+      "Identify the authoritative solution source and settled carry-forward decisions",
+      "Resolve environment binding, connection references, permissions, DLP, and publisher conventions through the authorised implementation workflow"
+    ],
+    "steps": [
+      "Do not deploy while the remediation slice remains Open",
+      "After approval, deploy the smallest finding-traceable solution delta through the established ALM path"
+    ],
+    "post_deploy_checks": [
+      "Read back imported component and configuration state",
+      "Execute the approved end-to-end success, failure, conflict, and duplicate-action scenarios",
+      "Confirm privacy-safe telemetry correlation without business payloads"
+    ],
+    "evidence_required": [
+      "Import or deployment result",
+      "Configuration readback",
+      "Runtime evidence for acceptance criteria and negative paths"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Import failure or missing dependency",
+      "Regression in the established primary journey",
+      "Security, permission, duplicate-action, concurrency, or data-integrity failure"
+    ],
+    "steps": [
+      "Stop further rollout and preserve sanitized correlation evidence",
+      "Use the established solution rollback mechanism for the approved component delta",
+      "Revalidate configuration and the previously working journey"
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite user data as part of rollback",
+      "Reconcile any durable writes made before rollback using the authoritative owner and audit evidence"
+    ],
+    "owner": "Authorised solution owner, to be identified before implementation",
+    "evidence_required": [
+      "Rollback execution record",
+      "Component and configuration readback",
+      "Post-rollback journey and data-integrity verification"
+    ]
+  },
+  "next_action": "Provide the sanitized completed test findings together with the observable outcome, persona, host, primary journey, and current authoritative solution or carry-forward summary; then select the smallest finding-traceable vertical slice without reopening unaffected settled decisions."
+}

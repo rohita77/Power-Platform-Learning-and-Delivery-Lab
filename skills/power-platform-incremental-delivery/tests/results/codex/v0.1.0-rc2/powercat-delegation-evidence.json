@@ -1,0 +1,37 @@
+{
+  "specialist": "dataverse-webapi-query",
+  "adapter_version": "remediation-0.2.2",
+  "evaluation_evidence_version": "explicit-0.3.1",
+  "registered_upstream_pin": "f4bb4ad5bf55e2d50076292bd6301f6337d38083",
+  "adapter_tested_pin": "33bc38456abb83f27daad968b748c8085f2a78ef",
+  "selected_blob": "8791590eeca8b1c697856c8a5cca9fbab3ef12b6",
+  "register_status": "repository-level approved; explicit invocation only",
+  "invocation_mode": "evaluator configuration: $power-platform-incremental-delivery $dataverse-webapi-query",
+  "boundary": "personal-openai; synthetic only; transfer permitted",
+  "tools_allowed": [],
+  "workflow_operations": 0,
+  "cases": {
+    "GOLD-005": {
+      "selector_explicit": true,
+      "standalone_specialist_result_present": false,
+      "specialist_answer_schema_valid": false,
+      "orchestrator_output_schema_valid": false,
+      "invoked_recorded_truthfully_by_evaluator": false,
+      "deviations": [
+        "Workflow narrated/summarized DQV-001 and claimed invoked=true without preserving a standalone schema-valid specialist result.",
+        "source_type was lab; schema requires upstream."
+      ]
+    },
+    "DEL-001": {
+      "selector_explicit": true,
+      "standalone_specialist_result_present": true,
+      "specialist_answer_schema_valid": true,
+      "orchestrator_output_schema_valid": false,
+      "invoked_recorded_truthfully_by_evaluator": true,
+      "result_reference": "Embedded DQV-001 in slice.persistence_or_action",
+      "deviations": [
+        "source_type was lab; schema requires upstream."
+      ]
+    }
+  }
+}

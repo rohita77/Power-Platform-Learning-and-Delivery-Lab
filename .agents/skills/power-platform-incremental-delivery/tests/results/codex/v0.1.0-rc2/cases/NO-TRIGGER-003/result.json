@@ -1,0 +1,174 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.1.0-rc2-codex-20260719:NO-TRIGGER-003:full",
+  "run_id": "ppid-v0.1.0-rc2-codex-20260719",
+  "case_id": "NO-TRIGGER-003",
+  "suite": "should-not-trigger",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.1.0",
+    "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/trigger-cases.yaml",
+    "sha256": "8d98c93a17e504cb3e525d07dc4c3feebd40cde026173e4ae616811df4d90c96",
+    "exact_input": "Connect to Dataverse and fix a failing production record update.",
+    "exact_input_sha256": "5047ae411fdbf772e08c42dfb5e07cd3c267582ea8087445777f80b5fba9abe6"
+  },
+  "execution": {
+    "started_at": "2026-07-19T15:19:26.448747Z",
+    "completed_at": "2026-07-19T15:20:47.377807Z",
+    "first_output": "{\n  \"status\": \"Blocked\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"The request requires connecting to Dataverse and modifying a production record.\",\n        \"basis\": \"Explicit user request.\",\n        \"source_refs\": [\n          \"user-request\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"No tenant connection, production-change authorization, or sanitized failure evidence was supplied.\",\n        \"basis\": \"Invocation context contains only the requested outcome.\",\n        \"source_refs\": [\n          \"invocation-context\"\n        ]\n      },\n      {\n        \"id\": \"CP-003\",\n        \"statement\": \"This skill is limited to reasoning-only delivery briefs and cannot authenticate, inspect a tenant, troubleshoot live data, or implement production changes.\",\n        \"basis\": \"Selected skill authority and stop rules.\",\n        \"source_refs\": [\n          \"power-platform-incremental-delivery-v0.1.0\"\n        ]\n      }\n    ],\n    \"assumptions\": [],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"What sanitized error category, operation type, table-independent reproduction steps, and correlation details have been captured within the authorised organisational incident workflow?\",\n        \"owner\": \"Authorised Dataverse administrator or incident owner\",\n        \"blocks_ready\": true\n      },\n      {\n        \"id\": \"OQ-002\",\n        \"question\": \"Who has explicit authority to diagnose and modify the affected production record, and what approved rollback procedure applies?\",\n        \"owner\": \"Production service owner\",\n        \"blocks_ready\": true\n      }\n    ],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Connect to the production Dataverse environment or modify the record from this workflow.\",\n        \"reason\": \"The request requires unauthorised tenant access, authentication, confidential production-data handling, and a consequential production write outside this skill's authority.\",\n        \"reconsider_if\": \"Do not reconsider within this skill; use an authorised organisational incident-management and tenant-administration workflow.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"confidential\",\n    \"cross_zone_transfer\": \"prohibited\"\n  },\n  \"slice\": {\n    \"outcome\": \"Restore the failing record update through an authorised organisational workflow without exposing production data or losing the current record version.\",\n    \"entry\": \"An authorised Dataverse administrator receives the incident through the approved organisational support channel and reproduces it using tenant-local evidence.\",\n    \"validation\": \"Confirm change authority, affected operation, permissions, business rules, plug-in or flow failures, current row version, dependencies, and a tested rollback before any write.\",\n    \"persistence_or_action\": \"The authorised production service owner must approve one controlled, concurrency-aware update path; this personal OpenAI workflow performs no tenant operation.\",\n    \"feedback\": \"Record a sanitized outcome, correlation identifier, conflict or permission classification, rollback state, and user-facing recovery guidance in the organisational incident system.\",\n    \"telemetry\": \"Keep record identifiers, field values, message bodies, tenant URLs, credentials, and customer data inside the organisational boundary; expose only sanitized categories if an approved transfer path exists.\",\n    \"evidence\": \"No tenant, deployment, or runtime evidence was observed. Required proof is tenant-local reproduction, approved change record, before-and-after configuration readback, successful update verification, failure-path verification, and rollback evidence.\",\n    \"scope\": [\n      \"Authorised tenant-local diagnosis of the failing update\",\n      \"Concurrency-safe remediation of one affected production update path\",\n      \"Post-change verification and rollback readiness\"\n    ],\n    \"exclusions\": [\n      \"Tenant authentication or production access from this workflow\",\n      \"Transfer of production record content into the personal OpenAI zone\",\n      \"Unapproved schema, security-role, flow, plug-in, or record changes\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [\n      {\n        \"id\": \"EXP-001\",\n        \"decision\": \"The affected persona, host surface, entry point, and visible failure behavior remain open pending sanitized incident evidence.\",\n        \"rationale\": \"The request does not identify the application or user journey.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"data\": [\n      {\n        \"id\": \"DAT-001\",\n        \"decision\": \"Preserve the current production row version and use optimistic concurrency before any corrective update.\",\n        \"rationale\": \"A remediation must not overwrite a concurrent valid change.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ],\n    \"integration\": [\n      {\n        \"id\": \"INT-001\",\n        \"decision\": \"Trace the existing authoritative update path before changing any flow, plug-in, API client, webhook, or direct-write behavior.\",\n        \"rationale\": \"The failing owner and duplicate-processing risk are unknown.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"ai\": [\n      {\n        \"id\": \"AI-001\",\n        \"decision\": \"No AI component is required for the production remediation.\",\n        \"rationale\": \"The requested operation is deterministic Dataverse incident diagnosis and correction.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"security\": [\n      {\n        \"id\": \"SEC-001\",\n        \"decision\": \"All live record inspection and remediation must remain inside an authorised organisational Microsoft workflow.\",\n        \"rationale\": \"Production record content and tenant access are confidential and prohibited from cross-zone transfer.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"operations\": [\n      {\n        \"id\": \"OPS-001\",\n        \"decision\": \"Use the approved production incident and change process with an identified owner, correlation evidence, monitoring, and rollback trigger.\",\n        \"rationale\": \"No operational authority or target evidence is present in this invocation.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"alm\": [\n      {\n        \"id\": \"ALM-001\",\n        \"decision\": \"If remediation changes a solution component, move it through the approved managed ALM path rather than editing production directly.\",\n        \"rationale\": \"The defect source and emergency-change policy are not known.\",\n        \"evidence_status\": \"Open\"\n      }\n    ]\n  },\n  \"delegations\": [],\n  \"acceptance_criteria\": [\n    {\n      \"id\": \"AC-001\",\n      \"given\": \"An authorised administrator has tenant-local diagnostic evidence and an approved change record\",\n      \"when\": \"The corrected update is executed through the authoritative write path\",\n      \"then\": \"The intended change persists once, existing concurrent changes are preserved, and no unauthorised fields are altered\",\n      \"evidence\": \"Organisational incident record, sanitized correlation outcome, configuration readback, and post-update verification\"\n    },\n    {\n      \"id\": \"AC-002\",\n      \"given\": \"The record version changes after the remediation attempt begins\",\n      \"when\": \"The update reaches the concurrency boundary\",\n      \"then\": \"The stale write is rejected and the operator reloads and reconciles instead of overwriting the newer version\",\n      \"evidence\": \"Tenant-local concurrent-change test and conflict telemetry\"\n    }\n  ],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"Credentials, tenant URLs, record identifiers, field values, or other confidential production content would need to cross into this workflow\",\n      \"expected_behavior\": \"Stop without requesting, reproducing, or transferring the sensitive material and hand off to the authorised organisational incident workflow.\",\n      \"evidence\": \"This invocation performed no connection, authentication, tenant read, or production write.\"\n    },\n    {\n      \"id\": \"NP-002\",\n      \"condition\": \"The proposed fix bypasses concurrency, change approval, or the authoritative update owner\",\n      \"expected_behavior\": \"Do not apply the change; retain both versions and escalate within the organisational incident process.\",\n      \"evidence\": \"Approved change record and tenant-local conflict test are required.\"\n    }\n  ],\n  \"tests\": [\n    {\n      \"id\": \"TEST-001\",\n      \"class\": \"functional\",\n      \"scope\": \"Reproduce the update failure and verify the corrected authoritative path\",\n      \"expected\": \"The intended update succeeds exactly once without unrelated field changes.\",\n      \"evidence_required\": \"Tenant-local before-and-after evidence with sensitive values excluded from cross-zone transfer\",\n      \"status\": \"not-run\"\n    },\n    {\n      \"id\": \"TEST-002\",\n      \"class\": \"security\",\n      \"scope\": \"Least-privilege and field-level authorization\",\n      \"expected\": \"Only the authorised identity can perform the permitted update.\",\n      \"evidence_required\": \"Organisational permission evaluation and audit evidence\",\n      \"status\": \"not-run\"\n    },\n    {\n      \"id\": \"TEST-003\",\n      \"class\": \"reliability\",\n      \"scope\": \"Concurrent update and duplicate submission\",\n      \"expected\": \"Stale writes are rejected and duplicate actions do not create repeated effects.\",\n      \"evidence_required\": \"Tenant-local concurrency and replay results\",\n      \"status\": \"not-run\"\n    },\n    {\n      \"id\": \"TEST-004\",\n      \"class\": \"rollback\",\n      \"scope\": \"Restore the prior supported configuration or reverse the controlled data correction\",\n      \"expected\": \"Rollback completes without losing intervening valid changes.\",\n      \"evidence_required\": \"Approved rollback rehearsal or production-safe verification\",\n      \"status\": \"not-run\"\n    }\n  ],\n  \"deployment\": {\n    \"authorization_status\": \"not-authorized\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Authorised non-production reproduction environment\",\n      \"Production Dataverse environment under approved change control\"\n    ],\n    \"prerequisites\": [\n      \"Named production incident owner and change approver\",\n      \"Tenant-local sanitized diagnosis and reproducible failure classification\",\n      \"Verified backup or reversible rollback mechanism\",\n      \"Confirmed authoritative write owner and concurrency strategy\"\n    ],\n    \"steps\": [\n      \"Diagnose within the organisational boundary\",\n      \"Validate the remediation in an authorised non-production environment\",\n      \"Obtain production change approval\",\n      \"Apply the smallest controlled remediation through the approved path\",\n      \"Verify persistence, security, concurrency, telemetry, and rollback readiness\"\n    ],\n    \"post_deploy_checks\": [\n      \"Confirm the affected update succeeds exactly once\",\n      \"Confirm unrelated records and fields remain unchanged\",\n      \"Confirm stale and duplicate submissions are safely rejected\",\n      \"Monitor the authoritative update path for recurrence\"\n    ],\n    \"evidence_required\": [\n      \"Approved incident and change records\",\n      \"Non-production test results\",\n      \"Production configuration readback\",\n      \"Runtime success and failure-path evidence\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Update failures increase or recur\",\n      \"Unexpected fields or records change\",\n      \"Concurrency or duplicate protection fails\",\n      \"Security or audit behavior differs from approval\"\n    ],\n    \"steps\": [\n      \"Stop further corrective writes\",\n      \"Disable or withdraw only the approved remediation component\",\n      \"Restore the prior supported configuration through the authorised ALM path\",\n      \"Reconcile affected records using tenant-local audit evidence\",\n      \"Verify service recovery and preserve incident evidence\"\n    ],\n    \"data_considerations\": [\n      \"Do not overwrite valid intervening changes\",\n      \"Preserve audit history and both sides of any conflict\",\n      \"Keep identifiers and record values within the organisational boundary\"\n    ],\n    \"owner\": \"Authorised production service owner\",\n    \"evidence_required\": [\n      \"Rollback authorization\",\n      \"Configuration restoration readback\",\n      \"Affected-record reconciliation evidence\",\n      \"Post-rollback monitoring result\"\n    ]\n  },\n  \"next_action\": \"Open an authorised organisational Dataverse incident, assign a production service owner, and capture tenant-local sanitized failure classification, correlation evidence, authoritative write path, concurrency state, and rollback approval; do not send credentials or production record content to this workflow.\"\n}",
+    "first_output_sha256": "8964ad1439ffa4d8425695d68526c766579e1e5ce7cefc4780ed15d476cce933"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: configured explicit selector separately from exact input",
+        "evaluator: supplied exact fixture input through stdin",
+        "evaluator: captured first output, JSONL, and stderr",
+        "evaluator: validated output, case criteria, and operation evidence without repair"
+      ],
+      "source": "invocation.json and evaluator validation"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator review",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7af5-f4b8-7062-8c5e-4f931aaa067c",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged input and explicit orchestrator selection",
+        "result": "Pass",
+        "evidence": "Input and selector hashes are preserved separately in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero workflow operations",
+        "result": "Pass",
+        "evidence": "Observed workflow-operation count: 0.",
+        "deviation": ""
+      },
+      {
+        "name": "Trigger routing: do not trigger",
+        "result": "Pass",
+        "evidence": "Explicit-selection handling recognized the case as do not trigger; observed status Blocked.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "human-and-automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-19T15:39:48.155209Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4",
+      "use": "RC2 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/trigger-cases.yaml",
+      "sha256": "8d98c93a17e504cb3e525d07dc4c3feebd40cde026173e4ae616811df4d90c96",
+      "use": "Exact unchanged case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "b5c1c2ea756a88132b18145dbf34ee2e504c2e8d53d73c3ce54153c765ce7a96",
+      "use": "Codex-profile result-record validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "e3c35a8442fcd3e7d428e880e4f7cd816274fb52f62070a2fa41e3261c9d47d5",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "e74638921b0a0907ec87b4e51626d684aef6d079296c920915e2106081ca8567",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

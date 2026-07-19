@@ -1,0 +1,96 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request asks for general education about model-driven apps, not a deployable delivery slice.",
+        "basis": "The supplied request contains no implementation or build-brief outcome.",
+        "source_refs": [
+          "user-request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and host should a delivery slice address?",
+        "owner": "requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was requested.",
+    "entry": "Not defined because the request is educational.",
+    "validation": "Not defined because no workflow was supplied.",
+    "persistence_or_action": "No persistence or action is in scope.",
+    "feedback": "No application feedback behavior is in scope.",
+    "telemetry": "No telemetry is in scope.",
+    "evidence": "The user request is the only available evidence.",
+    "scope": [
+      "Abstention and routing"
+    ],
+    "exclusions": [
+      "General Power Platform education",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No target environment identified"
+    ],
+    "prerequisites": [
+      "A delivery-slice request is required"
+    ],
+    "steps": [
+      "Do not deploy"
+    ],
+    "post_deploy_checks": [
+      "Not applicable because deployment is out of scope"
+    ],
+    "evidence_required": [
+      "No deployment evidence required"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable because no change is proposed"
+    ],
+    "steps": [
+      "No rollback action required"
+    ],
+    "data_considerations": [
+      "No data changes are proposed"
+    ],
+    "owner": "requester",
+    "evidence_required": [
+      "No rollback evidence required"
+    ]
+  },
+  "next_action": "Route this request to a general Power Platform education workflow; if a build brief is wanted, provide the observable outcome, persona, and host."
+}

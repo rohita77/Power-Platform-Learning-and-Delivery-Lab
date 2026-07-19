@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-07-19T22:19:55Z",
+  "canonical_source": "skills/power-platform-incremental-delivery/",
+  "publication_target": ".agents/skills/power-platform-incremental-delivery/",
+  "recursive_byte_equality": true,
+  "symlink_count": 0,
+  "rc1_evidence_unchanged": true,
+  "rc1_checksum_validation": "pass",
+  "rc2_evidence_unchanged": true,
+  "rc2_checksum_validation": "pass",
+  "powercat_source": "experiments/powercat-dataverse-webapi-query/adapted-skill/dataverse-webapi-query/",
+  "powercat_publication": ".agents/skills/dataverse-webapi-query/",
+  "powercat_recursive_byte_equality": true,
+  "powercat_symlink_count": 0,
+  "verification_boundary": "Local recursive byte comparison, symlink scan, and checksum validation only; no tenant, authentication, MCP, network, deployment, commit, or push evidence. Final parity is rechecked after publication."
+}

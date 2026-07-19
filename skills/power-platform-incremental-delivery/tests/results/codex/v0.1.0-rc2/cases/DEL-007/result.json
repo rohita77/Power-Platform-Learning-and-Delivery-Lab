@@ -1,0 +1,222 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.1.0-rc2-codex-20260719:DEL-007:full",
+  "run_id": "ppid-v0.1.0-rc2-codex-20260719",
+  "case_id": "DEL-007",
+  "suite": "delegation",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.1.0",
+    "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/delegation-cases.yaml",
+    "sha256": "e592d5cd0db129c50f1a39d1e2dd92de86b909c5dfe5252dfc07f01bf526bddc",
+    "exact_input": "The explicitly selected synthetic query specialist returned output that fails its declared schema.",
+    "exact_input_sha256": "4f7556d787afde34b22cebcbc02fc1eee833e544caf01d2d0542f357270fe8bb"
+  },
+  "execution": {
+    "started_at": "2026-07-19T15:31:51.320807Z",
+    "completed_at": "2026-07-19T15:33:34.253235Z",
+    "first_output": "{\n  \"status\": \"Open\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"An explicitly selected synthetic Dataverse query specialist executed and returned output that does not conform to its declared schema.\",\n        \"basis\": \"Direct invocation-context evidence supplied by the user.\",\n        \"source_refs\": [\n          \"stdin\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"Schema-invalid specialist output cannot be accepted, repaired, or counted as a successful delegation.\",\n        \"basis\": \"Power Platform Incremental Delivery delegation contract.\",\n        \"source_refs\": [\n          \"power-platform-incremental-delivery v0.1.0 sections 5-7\"\n        ]\n      }\n    ],\n    \"assumptions\": [\n      {\n        \"id\": \"AS-001\",\n        \"statement\": \"This reasoning-only invocation is operating in the personal OpenAI zone and contains synthetic data only.\",\n        \"impact\": \"No confidential organisational content or prohibited cross-zone transfer may be introduced.\",\n        \"validation_required\": \"Confirm the zone and classification if later inputs contain anything other than public or synthetic data.\",\n        \"source_refs\": [\n          \"stdin\",\n          \"invocation context\"\n        ]\n      }\n    ],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"What observable business outcome, persona, and host surface must the next deployable slice support?\",\n        \"owner\": \"Product owner\",\n        \"blocks_ready\": true\n      },\n      {\n        \"id\": \"OQ-002\",\n        \"question\": \"Can the query specialist be rerun with the same bounded synthetic request and return an unmodified result that validates against its declared schema?\",\n        \"owner\": \"Delegation host\",\n        \"blocks_ready\": true\n      },\n      {\n        \"id\": \"OQ-003\",\n        \"question\": \"What current canonical-register evidence confirms approval and pinning for the selected repository-root query specialist?\",\n        \"owner\": \"Skill governance owner\",\n        \"blocks_ready\": true\n      }\n    ],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Treat the malformed specialist result as a completed invocation.\",\n        \"reason\": \"Observed execution with schema-invalid output requires invoked=false and an Open handoff.\",\n        \"reconsider_if\": \"The specialist is rerun and its actual, unmodified output validates against the declared schema while every approval and control gate passes.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"synthetic\",\n    \"cross_zone_transfer\": \"permitted\"\n  },\n  \"slice\": {\n    \"outcome\": \"Open: no measurable product or operational outcome was supplied, so a deployable vertical slice cannot yet be defined.\",\n    \"entry\": \"Open pending identification of the persona, host surface, entry point, initial state, and initiating event.\",\n    \"validation\": \"Open pending the business outcome; any query artifact must first pass its declared output schema without silent repair.\",\n    \"persistence_or_action\": \"Open pending identification of the authoritative action owner, durable operation, and idempotency boundary.\",\n    \"feedback\": \"Open pending the host journey and its loading, success, validation, permission, conflict, retry, and failure states.\",\n    \"telemetry\": \"Open pending the journey; telemetry must remain privacy-safe and exclude query payloads or confidential data.\",\n    \"evidence\": \"Current proof is limited to invocation-context evidence that execution occurred and schema validation failed; no implementation, package, deployment, configuration, or runtime proof exists.\",\n    \"scope\": [\n      \"Establish the missing outcome, persona, and host.\",\n      \"Obtain a schema-valid synthetic query specialist result through an approved explicit delegation.\"\n    ],\n    \"exclusions\": [\n      \"Silent repair or normalization of malformed specialist output.\",\n      \"Tenant access, implementation, deployment, authentication, commit, or push.\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [],\n    \"data\": [],\n    \"integration\": [],\n    \"ai\": [],\n    \"security\": [],\n    \"operations\": [],\n    \"alm\": []\n  },\n  \"delegations\": [\n    {\n      \"id\": \"DEL-001\",\n      \"specialist\": \"dataverse-webapi-query\",\n      \"source_type\": \"lab\",\n      \"registry\": {\n        \"path\": \".agents/skills/dataverse-webapi-query/\",\n        \"entry_status\": \"missing\",\n        \"version_or_pin\": \"unknown\",\n        \"verified_on\": \"not-applicable\"\n      },\n      \"request\": {\n        \"scope\": \"Construct a bounded Dataverse query using synthetic data.\",\n        \"data_classification\": \"synthetic\",\n        \"zone\": \"personal-openai\",\n        \"permitted_tools\": []\n      },\n      \"control\": {\n        \"enabled\": true,\n        \"selection_mode\": \"explicit\",\n        \"selector\": \"$dataverse-webapi-query\",\n        \"client_compatible\": false,\n        \"prerequisites_satisfied\": false,\n        \"boundary_permitted\": true,\n        \"permissions_approved\": false\n      },\n      \"execution\": {\n        \"execution_observed\": true,\n        \"result_schema_valid\": false,\n        \"invoked\": false,\n        \"outcome_status\": \"open\",\n        \"result_reference\": \"stdin statement reporting the schema-invalid specialist result\"\n      },\n      \"evidence_refs\": [\n        \"stdin\"\n      ],\n      \"open_items\": [\n        \"Supply current canonical-register approval and version or pin evidence.\",\n        \"Confirm compatible host prerequisites.\",\n        \"Rerun the exact approved selector and retain the unmodified schema-valid result.\"\n      ],\n      \"next_action\": \"After approval and compatibility evidence are available, rerun $dataverse-webapi-query with only the bounded synthetic request and validate the returned object against its declared schema without extracting, repairing, or normalizing it.\"\n    }\n  ],\n  \"acceptance_criteria\": [],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"The selected specialist executes but returns output that fails its declared schema.\",\n      \"expected_behavior\": \"Reject the result as untrusted, keep invoked=false, set the delegation outcome to open, and request a compliant rerun without silent repair.\",\n      \"evidence\": \"Schema-validation failure linked to the unmodified specialist result.\"\n    },\n    {\n      \"id\": \"NP-002\",\n      \"condition\": \"A later request supplies confidential tenant data, credentials, or live metadata for the personal OpenAI workflow.\",\n      \"expected_behavior\": \"Stop before processing or repeating the content and return a sanitized Blocked record.\",\n      \"evidence\": \"Boundary classification and sanitized stop record.\"\n    }\n  ],\n  \"tests\": [\n    {\n      \"id\": \"TEST-001\",\n      \"class\": \"functional\",\n      \"scope\": \"Validate the rerun specialist result against its declared output schema.\",\n      \"expected\": \"The unmodified result validates successfully before it is consumed.\",\n      \"evidence_required\": \"Schema-validator result and a non-sensitive reference to the returned artifact.\",\n      \"status\": \"not-run\"\n    },\n    {\n      \"id\": \"TEST-002\",\n      \"class\": \"security\",\n      \"scope\": \"Verify that only public or synthetic data enters the delegated query-construction request.\",\n      \"expected\": \"No credentials, tenant URLs, live metadata, confidential records, or prohibited tools are present.\",\n      \"evidence_required\": \"Sanitized boundary review of the delegated request.\",\n      \"status\": \"not-run\"\n    }\n  ],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Target environment remains open.\"\n    ],\n    \"prerequisites\": [\n      \"Define the observable outcome, persona, host, and target environment.\",\n      \"Resolve the query delegation with a schema-valid approved result.\",\n      \"Authorise implementation and deployment separately.\"\n    ],\n    \"steps\": [\n      \"No deployment steps may be defined until the deployable slice is Ready and separately authorised.\"\n    ],\n    \"post_deploy_checks\": [\n      \"Define runtime checks after the business journey and target environment are known.\"\n    ],\n    \"evidence_required\": [\n      \"Deployment or import record.\",\n      \"Configuration readback.\",\n      \"Runtime end-to-end evidence including failure and replay behavior.\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Schema-invalid generated query detected before implementation.\",\n      \"Post-deployment validation fails after a future authorised release.\"\n    ],\n    \"steps\": [\n      \"Do not consume the malformed query artifact.\",\n      \"For a future deployment, restore the last verified solution version using the authorised ALM process.\"\n    ],\n    \"data_considerations\": [\n      \"Preserve existing records and both versions of any future concurrency conflict.\",\n      \"Do not use rollback to erase evidence needed for reconciliation.\"\n    ],\n    \"owner\": \"Authorised solution release owner\",\n    \"evidence_required\": [\n      \"Rejected-artifact validation evidence.\",\n      \"For a future rollback, solution-version and configuration readback evidence.\"\n    ]\n  },\n  \"next_action\": \"Provide the observable outcome, persona, and host, then supply current approval and compatibility evidence and rerun $dataverse-webapi-query with the bounded synthetic request; carry forward that execution was observed but its schema-invalid result was rejected and invoked remains false.\"\n}",
+    "first_output_sha256": "b01a65b029c9d29a984445696ae9c450b6e8a85419671950c92d19255b841715"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [
+    {
+      "specialist": "dataverse-webapi-query",
+      "selector": "$dataverse-webapi-query",
+      "selection_mode": "explicit",
+      "execution_observed": true,
+      "result_schema_valid": false,
+      "invoked": false,
+      "evidence_refs": [
+        "stdin"
+      ]
+    }
+  ],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: configured explicit selector separately from exact input",
+        "evaluator: supplied exact fixture input through stdin",
+        "evaluator: captured first output, JSONL, and stderr",
+        "evaluator: validated output, case criteria, and operation evidence without repair"
+      ],
+      "source": "invocation.json and evaluator validation"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator review",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7b01-5207-7f60-9992-897b43f8f189",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged input and explicit orchestrator selection",
+        "result": "Pass",
+        "evidence": "Input and selector hashes are preserved separately in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero workflow operations",
+        "result": "Pass",
+        "evidence": "Observed workflow-operation count: 0.",
+        "deviation": ""
+      },
+      {
+        "name": "Expected status Open",
+        "result": "Pass",
+        "evidence": "Observed status: Open.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Preserve the malformed result as failed evidence without silently repairing it.",
+        "result": "Pass",
+        "evidence": "The preserved first output implements this required behavior.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Leave the query-dependent build brief Open.",
+        "result": "Pass",
+        "evidence": "The preserved first output implements this required behavior.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation selection_mode='explicit'",
+        "result": "Pass",
+        "evidence": "Observed selection_mode='explicit'.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation execution_observed=True",
+        "result": "Pass",
+        "evidence": "Observed execution_observed=True.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation result_schema_valid=False",
+        "result": "Pass",
+        "evidence": "Observed result_schema_valid=False.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation invoked=False",
+        "result": "Pass",
+        "evidence": "Observed invoked=False.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "human-and-automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-19T15:39:47.917054Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4",
+      "use": "RC2 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/delegation-cases.yaml",
+      "sha256": "e592d5cd0db129c50f1a39d1e2dd92de86b909c5dfe5252dfc07f01bf526bddc",
+      "use": "Exact unchanged case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "b5c1c2ea756a88132b18145dbf34ee2e504c2e8d53d73c3ce54153c765ce7a96",
+      "use": "Codex-profile result-record validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "5be38eae91afc28f04638b594547b5e2d1fa77c7368792de360e83cc97721895",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "57bc6dbbadab217f8f3c6037ec810ade695941b58f3287a0224a1f556f43b206",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

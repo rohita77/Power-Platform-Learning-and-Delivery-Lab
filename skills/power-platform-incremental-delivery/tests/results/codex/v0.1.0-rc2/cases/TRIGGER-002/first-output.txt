@@ -1,0 +1,203 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested outcome is a build brief for the next Dynamics 365 MVP increment.",
+        "basis": "Explicit invocation request.",
+        "source_refs": [
+          "stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Previously settled decisions must remain unchanged unless new material evidence is supplied.",
+        "basis": "Explicit continuation constraint.",
+        "source_refs": [
+          "stdin"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "Only public, synthetic, or explicitly approved non-confidential information will be supplied to this personal OpenAI workflow.",
+        "impact": "Confidential organisational data cannot be used here; it must remain within approved organisational Microsoft boundaries.",
+        "validation_required": "Classify each subsequently supplied artifact before using it.",
+        "source_refs": [
+          "power-platform-incremental-delivery boundary policy"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What single observable user or operational result must the next increment achieve?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona performs the primary journey?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which Dynamics 365 or Power Platform host surface contains the entry point?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Reopen previously settled solution decisions without new material evidence.",
+        "reason": "The continuation request explicitly requires preservation of the agreed position.",
+        "reconsider_if": "New source, test, review, or runtime evidence materially invalidates a decision's basis."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no measurable user-visible or operational outcome was supplied, so no MVP slice has been fabricated.",
+    "entry": "Open pending identification of the persona, host surface, entry point, initial state, and initiating event.",
+    "validation": "Open pending the selected journey and its business, security, concurrency, and input rules.",
+    "persistence_or_action": "Open pending identification of the authoritative write or action owner and its idempotency boundary.",
+    "feedback": "Open pending the selected experience; loading, success, validation, permission, conflict, retry, and failure states remain to be defined.",
+    "telemetry": "Open pending the selected journey; any design must use privacy-safe events, a correlation ID, outcomes, and duplicate or conflict signals without business payloads.",
+    "evidence": "No implementation evidence exists. Future proof must distinguish source validation, automated tests, package integrity, deployment and configuration readback, and runtime end-to-end evidence.",
+    "scope": [
+      "Define one deployable vertical slice after the observable outcome, persona, and host are supplied"
+    ],
+    "exclusions": [
+      "Reopening settled decisions without new material evidence",
+      "Implementation or tenant modification",
+      "Deployment or target-runtime verification",
+      "Confidential organisational data transfer into the personal OpenAI zone"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "The persona, host, entry point, and complete interaction states remain open.",
+        "rationale": "No primary journey or host surface was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "The authoritative records, schema, ownership, validation, and concurrency controls remain open.",
+        "rationale": "The business outcome and agreed solution position are not present in the invocation context.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component can yet be selected.",
+        "rationale": "The selected vertical journey and system boundaries are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component can yet be selected.",
+        "rationale": "The outcome does not establish an AI requirement, and organisational data must not cross into the personal OpenAI zone.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Role, privilege, field-access, DLP, identity, and compliance requirements remain open.",
+        "rationale": "The persona, host, data, and agreed security position were not supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Operational ownership, telemetry destination, alerting, support, and replay handling remain open.",
+        "rationale": "The durable action and operational result have not been identified.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Solution packaging, environment binding, configuration, deployment sequence, and verification remain open.",
+        "rationale": "The current solution and target delivery constraints were not supplied.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Confidential organisational or tenant-specific content is proposed for transfer into this personal OpenAI workflow.",
+      "expected_behavior": "Stop the transfer, do not reproduce the content, and continue only with sanitized or approved non-confidential material.",
+      "evidence": "Boundary classification recorded before reconstruction."
+    },
+    {
+      "id": "NP-002",
+      "condition": "A settled decision is challenged without new material evidence.",
+      "expected_behavior": "Preserve the settled decision and exclude reconsideration from the increment.",
+      "evidence": "Decision classification retains the accepted position and records no change."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environments remain to be identified before implementation"
+    ],
+    "prerequisites": [
+      "Resolve the observable outcome, persona, and host",
+      "Use only approved organisational delivery tooling for tenant operations"
+    ],
+    "steps": [
+      "Do not deploy until an authorised implementation workflow has completed and validated the approved build brief"
+    ],
+    "post_deploy_checks": [
+      "Verify configuration readback and the selected end-to-end journey in the target environment"
+    ],
+    "evidence_required": [
+      "Deployment or import result",
+      "Configuration readback",
+      "Runtime success and failure-path evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "The increment fails its defined acceptance criteria",
+      "A security, data-integrity, duplicate-processing, or concurrency defect is observed"
+    ],
+    "steps": [
+      "Use the implementation brief's component-specific rollback procedure",
+      "Preserve affected records and correlation evidence before reverting configuration or components"
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite business records as part of rollback without an explicitly approved recovery procedure"
+    ],
+    "owner": "Deployment owner to be assigned before implementation",
+    "evidence_required": [
+      "Rollback execution record",
+      "Post-rollback configuration readback",
+      "Data-integrity verification"
+    ]
+  },
+  "next_action": "Provide only the minimum missing definition in this form: '[persona] uses [Dynamics 365 or Power Platform host] to [observable result], with success measured by [signal].' The settled-decisions constraint is carried forward unchanged."
+}

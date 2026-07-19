@@ -1,0 +1,255 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested delegation concerns synthetic query construction.",
+        "basis": "The case input explicitly classifies the query as synthetic.",
+        "source_refs": [
+          "case-input"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The applicable upstream register entry is past its revalidation date and cannot currently be refreshed.",
+        "basis": "The case input explicitly reports the expired revalidation state.",
+        "source_refs": [
+          "case-input"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "No evaluator or host evidence proves specialist selection, execution, schema validation, or preservation of a standalone result.",
+        "basis": "Only a request to delegate was supplied; a request is not execution evidence.",
+        "source_refs": [
+          "case-input",
+          "power-platform-incremental-delivery-v0.1.0"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The intended specialist is dataverse-webapi-query.",
+        "impact": "Its upstream source classification and current-register approval gate apply.",
+        "validation_required": "Confirm the intended specialist and provide the exact synthetic query requirements during an eligible handoff.",
+        "source_refs": [
+          "case-input",
+          "power-platform-incremental-delivery-v0.1.0"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which currently approved eligible specialist, if any, may receive the synthetic query request when the stale upstream entry cannot be refreshed?",
+        "owner": "Delivery governance owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What observable business outcome, persona, and host should a delivery-slice brief address?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Delegate through the stale upstream register entry anyway.",
+        "reason": "A stale register entry stops delegation before specialist selection and cannot be overridden by the requested action.",
+        "reconsider_if": "A current approving canonical-register entry or another currently approved eligible specialist is supplied."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was supplied; only an ineligible delegation was requested.",
+    "entry": "Not defined because no persona, host, entry point, or initiating event was supplied.",
+    "validation": "Before delegation, require current register approval, explicit enablement, compatible prerequisites, and an exact eligible selector.",
+    "persistence_or_action": "No specialist selection, query construction, tenant action, or durable write is authorised.",
+    "feedback": "Report the delegation as Open and preserve the query requirement for an approved handoff.",
+    "telemetry": "No runtime event is produced; retain only the sanitized stale-register decision and no query payload.",
+    "evidence": "The case input proves the reported stale state only; it provides no specialist execution, package, deployment, or runtime evidence.",
+    "scope": [
+      "Record the stale-register delegation gate"
+    ],
+    "exclusions": [
+      "Query construction",
+      "Tenant access",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "No user experience is selected until the persona, host, and observable outcome are supplied.",
+        "rationale": "The request contains no delivery journey.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Only synthetic data may be included in a future query-construction handoff.",
+        "rationale": "Synthetic classification is explicit and no tenant data was supplied.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Do not invoke the upstream query specialist while its canonical-register approval is stale.",
+        "rationale": "Current approval is a mandatory preselection gate.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is selected for a delivery slice.",
+        "rationale": "No delivery outcome or AI requirement was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Do not bypass specialist approval controls in response to a delegation request.",
+        "rationale": "Requested action does not establish approval, selection, or execution authority.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Preserve the query request as an open handoff without operational execution.",
+        "rationale": "No eligible specialist route is currently established.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Require current canonical-register approval before any future explicit specialist selection.",
+        "rationale": "The reported upstream entry has expired.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dataverse-webapi-query",
+      "source_type": "upstream",
+      "registry": {
+        "path": "canonical-upstream-register:dataverse-webapi-query",
+        "entry_status": "stale",
+        "version_or_pin": "not supplied",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Construct a synthetic Dataverse query after its exact query requirements are supplied.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "none",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "evidence_refs": [
+        "case-input: stale upstream register assertion",
+        ".agents/skills/dataverse-webapi-query/: approved local adapter path not inspected"
+      ],
+      "open_items": [
+        "No current approving canonical-register entry is available.",
+        "No eligible alternative specialist has been identified.",
+        "No standalone specialist result exists."
+      ],
+      "next_action": "Identify a currently approved eligible specialist or restore current canonical approval before making a new explicit selection."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "The applicable upstream register entry is stale",
+      "when": "Delegation is requested",
+      "then": "No specialist is selected or invoked, and the delegation remains Open",
+      "evidence": "The delegation record shows selection_mode none, execution_observed false, invoked false, and an empty result_reference."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A caller requests that stale register approval be bypassed",
+      "expected_behavior": "Reject the bypass, perform no delegation, and request a currently approved route.",
+      "evidence": "Sanitized delegation control and execution fields remain false with outcome_status open."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Stale-register delegation gate",
+      "expected": "The specialist is not selected or invoked despite the request to proceed.",
+      "evidence_required": "Schema-valid output with stale registry status, selection_mode none, invoked false, and empty result_reference.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No target environment identified"
+    ],
+    "prerequisites": [
+      "Define a measurable delivery outcome before implementation planning"
+    ],
+    "steps": [
+      "No deployment action is in scope"
+    ],
+    "post_deploy_checks": [
+      "No post-deployment verification is applicable"
+    ],
+    "evidence_required": [
+      "No deployment evidence is claimed"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "No rollback trigger exists because no change was made"
+    ],
+    "steps": [
+      "Retain the pre-delegation state"
+    ],
+    "data_considerations": [
+      "No data was transferred or modified"
+    ],
+    "owner": "Delivery governance owner",
+    "evidence_required": [
+      "Delegation execution remains unobserved"
+    ]
+  },
+  "next_action": "Do not delegate through the stale entry. Identify a currently approved eligible specialist, then provide the exact synthetic query requirements and separately supply the outcome, persona, and host if a delivery-slice brief is required."
+}

@@ -1,0 +1,37 @@
+schema_version: "1.0"
+skill_version: "0.1.0"
+delegation_id: "DEL-001"
+specialist: ""
+source_type: "lab|upstream"
+registry:
+  path: ""
+  entry_status: "missing|current-approved|stale|not-approved|not-applicable"
+  version_or_pin: ""
+  verified_on: "YYYY-MM-DD"
+request:
+  scope: ""
+  data_classification: "public|synthetic|approved-non-confidential|confidential"
+  zone: "personal-openai|organisational-microsoft"
+  permitted_tools: []
+control:
+  enabled: false
+  selection_mode: "none|explicit|implicit"
+  selector: ""
+  client_compatible: false
+  prerequisites_satisfied: false
+  boundary_permitted: false
+  permissions_approved: false
+execution:
+  execution_observed: false
+  result_schema_valid: null
+  invoked: false
+  outcome_status: "not-required|open|blocked|completed"
+  result_reference: ""
+evidence_refs: []
+open_items: []
+next_action: ""
+
+# Invariant: invoked may be true only when selection_mode is explicit, the
+# exact approved selector was used, execution was observed, result_schema_valid
+# is true, and every register, boundary, permission, client, and prerequisite
+# gate passed.

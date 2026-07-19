@@ -1,0 +1,223 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.1.0-rc2-codex-20260719:DEL-002:full",
+  "run_id": "ppid-v0.1.0-rc2-codex-20260719",
+  "case_id": "DEL-002",
+  "suite": "delegation",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.1.0",
+    "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/delegation-cases.yaml",
+    "sha256": "e592d5cd0db129c50f1a39d1e2dd92de86b909c5dfe5252dfc07f01bf526bddc",
+    "exact_input": "Prepare the synthetic Xrm.WebApi account-view slice, but delegation configuration is disabled.",
+    "exact_input_sha256": "efe40876204a547ddacade8f65dc25a551788a4aaf7f6291ca202734a277ae49"
+  },
+  "execution": {
+    "started_at": "2026-07-19T15:29:26.821415Z",
+    "completed_at": "2026-07-19T15:32:47.604575Z",
+    "first_output": "{\n  \"status\": \"Open\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"The requested increment is a synthetic, read-only Xrm.WebApi account-view slice.\",\n        \"basis\": \"Explicit invocation request.\",\n        \"source_refs\": [\n          \"user-request\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"Specialist delegation is disabled for this invocation.\",\n        \"basis\": \"Explicit invocation constraint.\",\n        \"source_refs\": [\n          \"user-request\"\n        ]\n      },\n      {\n        \"id\": \"CP-003\",\n        \"statement\": \"No implementation, tenant access, deployment, or runtime verification is authorised.\",\n        \"basis\": \"The selected skill produces an implementation-ready brief only.\",\n        \"source_refs\": [\n          \"power-platform-incremental-delivery-v0.1.0\"\n        ]\n      }\n    ],\n    \"assumptions\": [\n      {\n        \"id\": \"AS-001\",\n        \"statement\": \"The persona is an authorised model-driven app user opening an account-view client component.\",\n        \"impact\": \"Determines the host, accessibility behavior, and Dataverse security context.\",\n        \"validation_required\": \"Confirm the target model-driven app and entry point before implementation.\",\n        \"source_refs\": [\n          \"bounded-synthetic-assumption\"\n        ]\n      },\n      {\n        \"id\": \"AS-002\",\n        \"statement\": \"The smallest useful result shows at most 50 active synthetic accounts, ordered by name, with account name and record navigation.\",\n        \"impact\": \"Defines the bounded query requirement and visible acceptance result.\",\n        \"validation_required\": \"Confirm the row fields, active-record rule, page-size requirement, and navigation behavior through the approved query handoff and product owner.\",\n        \"source_refs\": [\n          \"bounded-synthetic-assumption\"\n        ]\n      },\n      {\n        \"id\": \"AS-003\",\n        \"statement\": \"The slice performs no Dataverse write and introduces no connector, flow, plug-in, AI component, or external integration.\",\n        \"impact\": \"Keeps the increment read-only and limits duplicate-action risk to client requests and rendering.\",\n        \"validation_required\": \"Verify the implementation diff and solution package contain only the approved client component and configuration.\",\n        \"source_refs\": [\n          \"smallest-safe-slice\"\n        ]\n      }\n    ],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"What schema-valid Xrm.WebApi query shape should implement the bounded active-account retrieval requirement?\",\n        \"owner\": \"dataverse-webapi-query specialist through an explicitly enabled and approved delegation\",\n        \"blocks_ready\": true\n      }\n    ],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Construct or infer the final Xrm.WebApi query without the required specialist result.\",\n        \"reason\": \"Dataverse query construction is specialist-owned, and delegation is disabled.\",\n        \"reconsider_if\": \"The exact approved specialist is explicitly enabled and returns a schema-valid result under the synthetic-data boundary.\"\n      },\n      {\n        \"id\": \"RJ-002\",\n        \"decision\": \"Use live tenant metadata or real account data to complete the brief.\",\n        \"reason\": \"The request is synthetic and does not authorise tenant access or confidential data transfer.\",\n        \"reconsider_if\": \"A separate authorised organisational workflow supplies approved non-confidential metadata without crossing a prohibited boundary.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"synthetic\",\n    \"cross_zone_transfer\": \"permitted\"\n  },\n  \"slice\": {\n    \"outcome\": \"An authorised model-driven app user opens the account-view component and receives a deterministic, accessible list of up to 50 active synthetic accounts ordered by name, or a clear empty, permission, or failure state, without any Dataverse write.\",\n    \"entry\": \"The user enters through the agreed account-view surface in a model-driven app. The component starts empty, creates a privacy-safe correlation ID and request sequence token, exposes a loading state, and initiates one bounded Xrm.WebApi read.\",\n    \"validation\": \"Before execution, validate that the approved query configuration is present and contains only the allowed account projection, filter, ordering, and page bound. Render returned values as text. Respect the current user's Dataverse privileges. Ignore responses whose sequence token is no longer current.\",\n    \"persistence_or_action\": \"Dataverse is the authoritative read owner and Xrm.WebApi is the only data-access boundary. The component performs no durable write. One current request owns rendered state; repeated or overlapping loads replace the current sequence token so late responses cannot overwrite newer results.\",\n    \"feedback\": \"Provide keyboard- and screen-reader-visible loading, success, empty, permission-denied, retryable failure, and terminal configuration-error states. Disable repeated activation while the same request is pending, preserve focus after refresh, support narrow layouts and long names, and allow retry without duplicating rows.\",\n    \"telemetry\": \"Emit a privacy-safe account-view-load event containing correlation ID, outcome, duration, result-count bucket, retry indicator, and stale-response indicator. Exclude account names, record identifiers, query text, response payloads, user identifiers, tenant URLs, and credentials.\",\n    \"evidence\": \"Local proof covers source review, static checks, and focused automated tests. Package proof covers solution contents and dependency integrity. Deployment proof requires authorised import and configuration readback in the target environment. Runtime proof requires observed loading, populated, empty, permission, failure, retry, navigation, accessibility, and overlapping-request behavior; no lower evidence level proves deployment or runtime behavior.\",\n    \"scope\": [\n      \"Read-only account retrieval through Xrm.WebApi\",\n      \"Bounded active-account list rendering\",\n      \"Loading, populated, empty, permission, configuration-error, and retryable-failure states\",\n      \"Record navigation from an activated result\",\n      \"Stale-response suppression for overlapping loads\",\n      \"Privacy-safe telemetry and correlation\",\n      \"Solution-aware packaging and focused tests\"\n    ],\n    \"exclusions\": [\n      \"Account creation, update, deletion, or bulk actions\",\n      \"Live tenant inspection or metadata discovery\",\n      \"Real customer or confidential account data\",\n      \"Custom Dataverse schema\",\n      \"Power Automate, plug-ins, connectors, AI, or external services\",\n      \"Implementation, deployment, role assignment, commit, or push\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [\n      {\n        \"id\": \"EXP-001\",\n        \"decision\": \"Use an accessible account-view client component within a model-driven app, with platform record navigation and explicit asynchronous states.\",\n        \"rationale\": \"This provides the requested user-visible journey while retaining native identity and navigation behavior.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ],\n    \"data\": [\n      {\n        \"id\": \"DAT-001\",\n        \"decision\": \"Read only the minimum account projection required for display and navigation, limited to active records and a maximum of 50 results.\",\n        \"rationale\": \"A bounded projection minimizes exposure, payload size, and nondeterministic rendering.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"integration\": [\n      {\n        \"id\": \"INT-001\",\n        \"decision\": \"Use one Xrm.WebApi read boundary and no connector, flow, external API, or direct HTTP integration.\",\n        \"rationale\": \"The platform-native client API is sufficient for the synthetic read-only slice.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"ai\": [\n      {\n        \"id\": \"AI-001\",\n        \"decision\": \"No AI component is included.\",\n        \"rationale\": \"The outcome is deterministic retrieval and presentation and does not require generative behavior.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"security\": [\n      {\n        \"id\": \"SEC-001\",\n        \"decision\": \"Rely on the current user's Dataverse table and row privileges, request only minimum fields, render values as text, and provide no privilege-bypass fallback.\",\n        \"rationale\": \"This preserves Dataverse authorization and prevents client code from expanding access.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ],\n    \"operations\": [\n      {\n        \"id\": \"OPS-001\",\n        \"decision\": \"Record privacy-safe load outcomes with correlation, timing, retry, count-bucket, and stale-response signals while excluding business payloads and environment identifiers.\",\n        \"rationale\": \"These signals support failure diagnosis without transferring account content.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ],\n    \"alm\": [\n      {\n        \"id\": \"ALM-001\",\n        \"decision\": \"Package the client component and non-secret configuration in a solution, validate dependencies deterministically, and promote through an authorised development-to-test path before production consideration.\",\n        \"rationale\": \"Solution-aware packaging provides reviewable changes, environment binding, and rollback.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ]\n  },\n  \"delegations\": [\n    {\n      \"id\": \"DEL-001\",\n      \"specialist\": \"dataverse-webapi-query\",\n      \"source_type\": \"lab\",\n      \"registry\": {\n        \"path\": \".agents/skills/dataverse-webapi-query/\",\n        \"entry_status\": \"missing\",\n        \"version_or_pin\": \"not-observed\",\n        \"verified_on\": \"not-applicable\"\n      },\n      \"request\": {\n        \"scope\": \"Return the strict JSON query-construction result for an Xrm.WebApi read of the minimum account projection needed to display and navigate up to 50 active synthetic accounts ordered by name; include paging and safe-error considerations without tenant access.\",\n        \"data_classification\": \"synthetic\",\n        \"zone\": \"personal-openai\",\n        \"permitted_tools\": [\n          \"Reasoning over the supplied synthetic requirement only\"\n        ]\n      },\n      \"control\": {\n        \"enabled\": false,\n        \"selection_mode\": \"none\",\n        \"selector\": \"$dataverse-webapi-query\",\n        \"client_compatible\": false,\n        \"prerequisites_satisfied\": false,\n        \"boundary_permitted\": true,\n        \"permissions_approved\": false\n      },\n      \"execution\": {\n        \"execution_observed\": false,\n        \"result_schema_valid\": null,\n        \"invoked\": false,\n        \"outcome_status\": \"open\",\n        \"result_reference\": \"none\"\n      },\n      \"evidence_refs\": [\n        \"user-stated-delegation-disabled\",\n        \"no-specialist-result-supplied\"\n      ],\n      \"open_items\": [\n        \"Enable explicit specialist delegation.\",\n        \"Supply current canonical-register approval and version evidence.\",\n        \"Confirm compatible client and prerequisites.\",\n        \"Select the exact $dataverse-webapi-query selector.\",\n        \"Obtain and validate the unmodified schema-valid specialist result.\"\n      ],\n      \"next_action\": \"Enable and explicitly select the approved $dataverse-webapi-query specialist for the synthetic bounded requirement, then supply its actual schema-valid result to this orchestration workflow.\"\n    }\n  ],\n  \"acceptance_criteria\": [\n    {\n      \"id\": \"AC-001\",\n      \"given\": \"An authorised user and synthetic active accounts exist\",\n      \"when\": \"The user opens the account-view component\",\n      \"then\": \"The component shows a loading state and then renders no more than 50 accounts in deterministic name order without duplicate rows.\",\n      \"evidence\": \"Focused automated component test plus observed target-runtime populated-state evidence.\"\n    },\n    {\n      \"id\": \"AC-002\",\n      \"given\": \"The approved query returns no matching accounts\",\n      \"when\": \"The load completes\",\n      \"then\": \"The component presents an accessible empty state and does not present an error or stale prior results.\",\n      \"evidence\": \"Automated empty-response test plus observed target-runtime empty-state evidence.\"\n    },\n    {\n      \"id\": \"AC-003\",\n      \"given\": \"The user can read an account returned by the query\",\n      \"when\": \"The user activates its row by keyboard or pointer\",\n      \"then\": \"Platform navigation opens the corresponding account record once and preserves an understandable focus transition.\",\n      \"evidence\": \"Navigation and keyboard test plus observed model-driven app runtime evidence.\"\n    },\n    {\n      \"id\": \"AC-004\",\n      \"given\": \"Two loads overlap and the earlier request finishes last\",\n      \"when\": \"Both responses reach the component\",\n      \"then\": \"Only the newest request may update visible state and telemetry records the ignored stale response without business payloads.\",\n      \"evidence\": \"Deterministic deferred-promise reliability test.\"\n    },\n    {\n      \"id\": \"AC-005\",\n      \"given\": \"The current user lacks required read permission\",\n      \"when\": \"Xrm.WebApi rejects the request\",\n      \"then\": \"The component shows a non-disclosing permission state, offers no bypass, and emits a sanitized correlated outcome.\",\n      \"evidence\": \"Mocked authorization-failure test plus authorised target-runtime role test.\"\n    },\n    {\n      \"id\": \"AC-006\",\n      \"given\": \"A transient request failure occurs\",\n      \"when\": \"The user retries after the first request settles\",\n      \"then\": \"The component starts one new current request, clears obsolete error state, and does not duplicate rendered rows.\",\n      \"evidence\": \"Automated failure-and-retry test plus observed runtime evidence.\"\n    }\n  ],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"The approved query configuration is absent, malformed, or requests fields outside the allowlist.\",\n      \"expected_behavior\": \"Do not call Xrm.WebApi; show a sanitized configuration error and emit a correlated failure without query content.\",\n      \"evidence\": \"Configuration validation tests.\"\n    },\n    {\n      \"id\": \"NP-002\",\n      \"condition\": \"The user lacks account read permission.\",\n      \"expected_behavior\": \"Show a non-disclosing permission state and do not retry automatically or attempt an alternate access path.\",\n      \"evidence\": \"Authorization-failure test and target-role runtime check.\"\n    },\n    {\n      \"id\": \"NP-003\",\n      \"condition\": \"A superseded request completes after a newer request.\",\n      \"expected_behavior\": \"Ignore the stale response, retain the newer state, and emit only a privacy-safe stale-response signal.\",\n      \"evidence\": \"Overlapping-request reliability test.\"\n    },\n    {\n      \"id\": \"NP-004\",\n      \"condition\": \"The user repeatedly activates load or retry while a request is pending.\",\n      \"expected_behavior\": \"Prevent duplicate current actions or supersede them deterministically without duplicate rows or unhandled promises.\",\n      \"evidence\": \"Rapid-activation reliability test.\"\n    },\n    {\n      \"id\": \"NP-005\",\n      \"condition\": \"Returned text is empty, unusually long, or contains markup-like characters.\",\n      \"expected_behavior\": \"Render safe text with an accessible fallback for missing names and responsive handling for long content.\",\n      \"evidence\": \"Rendering, security, and narrow-layout tests.\"\n    },\n    {\n      \"id\": \"NP-006\",\n      \"condition\": \"The service returns a retryable platform or network error.\",\n      \"expected_behavior\": \"Clear loading state, preserve no stale rows, show a retry action, and avoid exposing raw platform details.\",\n      \"evidence\": \"Mocked failure test and authorised runtime failure-path evidence.\"\n    }\n  ],\n  \"tests\": [\n    {\n      \"id\": \"TEST-001\",\n      \"class\": \"functional\",\n      \"scope\": \"Loading, bounded populated results, deterministic ordering, empty state, record navigation, and retry.\",\n      \"expected\": \"Each state and transition satisfies AC-001 through AC-003 and AC-006.\",\n      \"evidence_required\": \"Automated test output and observed target-runtime results.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-002\",\n      \"class\": \"reliability\",\n      \"scope\": \"Overlapping requests, repeated activation, stale responses, and failed-request recovery.\",\n      \"expected\": \"Only the current request controls rendered state and no duplicate rows or unhandled failures occur.\",\n      \"evidence_required\": \"Deterministic asynchronous unit-test output.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-003\",\n      \"class\": \"security\",\n      \"scope\": \"Permission denial, field allowlisting, text rendering, and telemetry exclusions.\",\n      \"expected\": \"No privilege bypass, unsafe rendering, business payload telemetry, or raw platform error disclosure occurs.\",\n      \"evidence_required\": \"Security-focused automated tests and authorised role-based runtime evidence.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-004\",\n      \"class\": \"accessibility\",\n      \"scope\": \"Keyboard operation, focus, status announcements, empty and error states, long content, and narrow layout.\",\n      \"expected\": \"The complete journey is understandable and operable without pointer input.\",\n      \"evidence_required\": \"Automated accessibility checks and manual keyboard and screen-reader evidence.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-005\",\n      \"class\": \"alm\",\n      \"scope\": \"Solution contents, dependencies, configuration schema, generated artifacts, and environment independence.\",\n      \"expected\": \"The package contains only intended components and no secret or environment-specific value.\",\n      \"evidence_required\": \"Package inspection and deterministic validation output.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-006\",\n      \"class\": \"deployment\",\n      \"scope\": \"Authorised import, configuration readback, dependency resolution, and smoke journey.\",\n      \"expected\": \"Import and configuration succeed and the target smoke path matches the approved brief.\",\n      \"evidence_required\": \"Target import log, configuration readback, and runtime smoke evidence.\",\n      \"status\": \"not-run\"\n    },\n    {\n      \"id\": \"TEST-007\",\n      \"class\": \"rollback\",\n      \"scope\": \"Removal or deactivation of the account-view entry point and restoration of the prior solution version.\",\n      \"expected\": \"The prior experience is restored without Dataverse data repair because the slice performs no writes.\",\n      \"evidence_required\": \"Rollback rehearsal record and post-rollback smoke evidence.\",\n      \"status\": \"not-run\"\n    }\n  ],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Authorised development environment\",\n      \"Authorised test environment before any production consideration\"\n    ],\n    \"prerequisites\": [\n      \"Schema-valid result from the explicitly enabled and approved $dataverse-webapi-query specialist\",\n      \"Confirmed model-driven app and account-view entry point\",\n      \"Confirmed account field allowlist, active-record rule, page bound, and navigation behavior\",\n      \"Approved solution publisher and component ownership\",\n      \"Target users with least-privilege account read access\",\n      \"Privacy-approved telemetry destination and retention configuration\",\n      \"Authorised deployment operator and rollback owner\"\n    ],\n    \"steps\": [\n      \"Implement the approved query configuration and client state machine in the authorised workflow.\",\n      \"Run focused functional, reliability, security, and accessibility checks.\",\n      \"Package the approved components in a solution and inspect dependencies and configuration.\",\n      \"Import into the authorised test environment.\",\n      \"Read back configuration and execute populated, empty, permission, failure, retry, navigation, accessibility, and overlapping-request checks.\"\n    ],\n    \"post_deploy_checks\": [\n      \"Confirm the entry point is visible only to intended users.\",\n      \"Confirm the approved projection, filter, ordering, and result bound are active.\",\n      \"Confirm record navigation respects Dataverse permissions.\",\n      \"Confirm stale responses cannot overwrite newer state.\",\n      \"Confirm telemetry contains correlation and outcomes but no excluded payloads.\",\n      \"Confirm the prior experience remains recoverable.\"\n    ],\n    \"evidence_required\": [\n      \"Automated test results\",\n      \"Solution package integrity report\",\n      \"Authorised import result\",\n      \"Configuration readback\",\n      \"Role-based runtime evidence\",\n      \"Failure, retry, accessibility, and overlapping-request evidence\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Unauthorised data exposure or telemetry payload\",\n      \"Permission bypass or unsafe rendering\",\n      \"Incorrect or unbounded account retrieval\",\n      \"Stale responses replacing current state\",\n      \"Material accessibility regression\",\n      \"Repeated runtime failures after deployment\"\n    ],\n    \"steps\": [\n      \"Disable or remove the new account-view entry point.\",\n      \"Restore the previously approved solution version or configuration.\",\n      \"Verify the prior account experience and permissions.\",\n      \"Preserve sanitized correlation and failure evidence for diagnosis.\"\n    ],\n    \"data_considerations\": [\n      \"No Dataverse business-data rollback is expected because the slice is read-only.\",\n      \"Remove or retain privacy-safe telemetry according to the approved retention policy.\",\n      \"Do not copy account payloads into rollback evidence.\"\n    ],\n    \"owner\": \"Authorised solution delivery owner\",\n    \"evidence_required\": [\n      \"Rollback authorization record\",\n      \"Solution or configuration restoration result\",\n      \"Post-rollback permission and navigation smoke evidence\",\n      \"Confirmation that no Dataverse data repair was required\"\n    ]\n  },\n  \"next_action\": \"Keep the slice Open: enable delegation, provide current approval and compatibility evidence, explicitly select $dataverse-webapi-query with only the synthetic bounded account requirement, and return its actual schema-valid result; the carry-forward delta is that the vertical journey and controls are defined, while the specialist-owned query shape remains unresolved.\"\n}",
+    "first_output_sha256": "145b8ebdeeb0fa8bc214dde2efff6b4fd38a025a9358f340ab3fc81fc7605585"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [
+    {
+      "specialist": "dataverse-webapi-query",
+      "selector": "$dataverse-webapi-query",
+      "selection_mode": "none",
+      "execution_observed": false,
+      "result_schema_valid": null,
+      "invoked": false,
+      "evidence_refs": [
+        "user-stated-delegation-disabled",
+        "no-specialist-result-supplied"
+      ]
+    }
+  ],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: configured explicit selector separately from exact input",
+        "evaluator: supplied exact fixture input through stdin",
+        "evaluator: captured first output, JSONL, and stderr",
+        "evaluator: validated output, case criteria, and operation evidence without repair"
+      ],
+      "source": "invocation.json and evaluator validation"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex workflow events; evaluator transport excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator review",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7aff-1fc6-7601-87de-4ac5086834c5",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged input and explicit orchestrator selection",
+        "result": "Pass",
+        "evidence": "Input and selector hashes are preserved separately in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero workflow operations",
+        "result": "Pass",
+        "evidence": "Observed workflow-operation count: 0.",
+        "deviation": ""
+      },
+      {
+        "name": "Expected status Open",
+        "result": "Pass",
+        "evidence": "Observed status: Open.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Do not select or invoke the specialist.",
+        "result": "Pass",
+        "evidence": "The preserved first output implements this required behavior.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Produce an Open build brief with the exact delegation handoff.",
+        "result": "Pass",
+        "evidence": "The preserved first output implements this required behavior.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation selection_mode='none'",
+        "result": "Pass",
+        "evidence": "Observed selection_mode='none'.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation execution_observed=False",
+        "result": "Pass",
+        "evidence": "Observed execution_observed=False.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation result_schema_valid=None",
+        "result": "Pass",
+        "evidence": "Observed result_schema_valid=None.",
+        "deviation": ""
+      },
+      {
+        "name": "Delegation expectation invoked=False",
+        "result": "Pass",
+        "evidence": "Observed invoked=False.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "human-and-automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-19T15:39:47.835687Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "a6ea65f6675bc9b3198c4ab99c351789b721021f6c21a8fbf9a17cb2be2d56c4",
+      "use": "RC2 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/delegation-cases.yaml",
+      "sha256": "e592d5cd0db129c50f1a39d1e2dd92de86b909c5dfe5252dfc07f01bf526bddc",
+      "use": "Exact unchanged case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "6c83c3e2760dbd02adaaea294ebaf55d3e302baaa4ea05e679ff320343e189df",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "b5c1c2ea756a88132b18145dbf34ee2e504c2e8d53d73c3ce54153c765ce7a96",
+      "use": "Codex-profile result-record validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "f19de0ecad85231604e9892c83f52256614e65a2ce0a465952d705601304370b",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "8695329bf095cbecb0488361d383b065551caea87e435a27b37b6bfe588c90fd",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

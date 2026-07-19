@@ -1,0 +1,265 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The intended specialist has current register approval.",
+        "basis": "Explicitly stated in the supplied case.",
+        "source_refs": [
+          "stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The active client cannot explicitly select the intended specialist.",
+        "basis": "Explicitly stated in the supplied case.",
+        "source_refs": [
+          "stdin"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The supplied case contains only public, non-tenant-specific information.",
+        "impact": "Reasoning may continue without transferring organisational confidential data.",
+        "validation_required": "Reclassify the boundary before supplying solution or tenant information.",
+        "source_refs": [
+          "stdin"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and host surface should the next vertical slice address?",
+        "owner": "Request owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What is the exact approved specialist name and selector?",
+        "owner": "Request owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which compatible client can explicitly select the approved specialist and preserve its standalone validated result?",
+        "owner": "Delivery orchestrator",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Treat the user's request or the specialist's register approval as proof of explicit selection.",
+        "reason": "Approval and intent do not prove that the active client selected or executed the specialist.",
+        "reconsider_if": "A compatible host supplies evidence of explicit selection and a preserved standalone result."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "Not defined because no observable delivery outcome was supplied.",
+    "entry": "Not defined pending the persona, host surface, entry point, and initiating event.",
+    "validation": "Not defined pending the business outcome, data boundary, and applicable business and security checks.",
+    "persistence_or_action": "Not defined; no authoritative write or action owner can be selected without the requested outcome.",
+    "feedback": "Not defined pending the user journey and host surface.",
+    "telemetry": "No solution telemetry is defined; any future design must exclude confidential payloads and include a privacy-safe correlation identifier.",
+    "evidence": "The current evidence proves only register approval and client incompatibility; it does not prove specialist execution, implementation, deployment, or runtime behavior.",
+    "scope": [
+      "Record the incompatible specialist-selection state truthfully.",
+      "Identify the minimum information and compatible execution path required for a build brief."
+    ],
+    "exclusions": [
+      "Simulating or silently substituting specialist output.",
+      "Implementation, tenant access, deployment, commit, or push.",
+      "Fabricating a vertical slice without an observable outcome."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Defer experience design until the persona, host, and primary journey are supplied.",
+        "rationale": "No user-visible outcome or host surface is defined.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Do not define schema, persistence, or data ownership yet.",
+        "rationale": "The outcome and permitted solution-data boundary are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Do not select an integration component.",
+        "rationale": "No system interaction or operational action has been supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Do not use or simulate the approved specialist in the incompatible active client.",
+        "rationale": "Explicit specialist selection and preserved standalone output are required.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Keep any future organisational or confidential content out of the personal OpenAI zone unless an approved transfer path is established.",
+        "rationale": "Only public case metadata is currently permitted.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "No operational component is selected.",
+        "rationale": "There is no defined slice, runtime, or support outcome.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "No implementation or deployment workflow is authorised.",
+        "rationale": "This invocation is limited to build-brief orchestration and is not Ready.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "Named approved specialist not identified in the supplied case",
+      "source_type": "upstream",
+      "registry": {
+        "path": "canonical upstream register",
+        "entry_status": "current-approved",
+        "version_or_pin": "not supplied",
+        "verified_on": "2026-07-20"
+      },
+      "request": {
+        "scope": "Obtain the narrow specialist decision required by the future delivery slice.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": [
+          "Explicit specialist selection by a compatible host only"
+        ]
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "none",
+        "selector": "not supplied",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": true
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "evidence_refs": [
+        "stdin"
+      ],
+      "open_items": [
+        "Identify the exact specialist and approved selector.",
+        "Use a compatible client that can explicitly select the specialist.",
+        "Preserve and independently validate the complete standalone first output."
+      ],
+      "next_action": "Move the unchanged public or synthetic specialist request to a compatible client and explicitly select the exact approved specialist."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The active client cannot explicitly select the required specialist.",
+      "expected_behavior": "Keep the delegation open with invoked false and do not simulate, infer, or embed a specialist result.",
+      "evidence": "Delegation record showing selection_mode none, execution_observed false, and an empty result_reference."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Organisational confidential data is introduced into the personal OpenAI workflow.",
+      "expected_behavior": "Stop before reading or transferring the content and return a sanitized Blocked record.",
+      "evidence": "Boundary classification and sanitized stop evidence."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Delegation state for an approved specialist that the active client cannot explicitly select.",
+      "expected": "Status is Open; selection_mode is none; execution_observed and invoked are false; result_schema_valid is null; result_reference is empty.",
+      "evidence_required": "Schema-valid build-brief JSON and compatible-client execution evidence before changing the outcome to completed.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Personal OpenAI and organisational Microsoft data boundary.",
+      "expected": "Confidential cross-zone content is stopped and not reproduced.",
+      "evidence_required": "Sanitized boundary test result.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment not yet identified"
+    ],
+    "prerequisites": [
+      "Define the observable outcome, persona, and host.",
+      "Resolve the specialist handoff through a compatible client.",
+      "Confirm the organisational data boundary and deployment authority."
+    ],
+    "steps": [
+      "Do not begin deployment until a complete Ready build brief exists and deployment is separately authorised."
+    ],
+    "post_deploy_checks": [
+      "No post-deployment checks can be specified until the vertical slice is defined."
+    ],
+    "evidence_required": [
+      "Explicit deployment authorisation.",
+      "Target configuration readback.",
+      "Runtime evidence for the defined success and failure paths."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "No rollback trigger is applicable before implementation or deployment.",
+      "Future rollback triggers must include security-boundary failure and acceptance-test failure."
+    ],
+    "steps": [
+      "Define component-specific rollback steps in the Ready build brief before deployment."
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite data as part of an undefined rollback.",
+      "Preserve audit and correlation evidence without confidential payloads."
+    ],
+    "owner": "Delivery owner to be assigned before implementation",
+    "evidence_required": [
+      "Approved rollback procedure.",
+      "Rollback test result before production deployment."
+    ]
+  },
+  "next_action": "Supply the observable outcome, persona, host surface, and exact approved specialist selector, then use a compatible client to explicitly select that specialist and preserve its independently validated standalone result; until then, carry forward register approval with client incompatibility and invoked false."
+}

@@ -1,0 +1,55 @@
+Reading additional input from stdin...
+2026-07-19T15:57:21.949838Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T15:57:22.805797Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:22.806752Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:22.838636Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:22.839770Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:22.840407Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:22.841248Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:22.842923Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:22.844231Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:22.845368Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:22.846465Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-07-19T15:57:47.896755Z ERROR codex_core::tools::router: error=collab spawn failed: no thread with id: 019f7b18-adf1-7df1-b6e7-005a9aa3d54f
+2026-07-19T15:57:47.899154Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T15:58:07.523178Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T15:58:08.739505Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T15:58:35.759099Z  WARN codex_protocol::openai_models: Model personality requested but model_messages is missing, falling back to base instructions. model=gpt-5.6-sol personality=pragmatic
+2026-07-19T15:58:35.788428Z  WARN codex_core::hook_runtime: failed to resolve parent transcript path for subagent hook parent_thread_id=019f7b18-adf1-7df1-b6e7-005a9aa3d54f error=invalid thread-store request: no rollout found for thread id 019f7b18-adf1-7df1-b6e7-005a9aa3d54f
+2026-07-19T15:58:35.796787Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T15:58:48.909239Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T15:58:48.916975Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T15:59:30.535629Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:01:45.511109Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)
+2026-07-19T22:01:54.368132Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (1/5 in 206ms)...
+2026-07-19T22:01:55.278477Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:02:27.792486Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:03:04.867549Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:03:07.634037Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:03:39.728176Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:03:43.171107Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:03:47.976582Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:03:47.979576Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:04:19.824056Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:04:22.998795Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:04:29.162837Z ERROR codex_core::tools::router: error=collab spawn failed: no thread with id: 019f7b18-adf1-7df1-b6e7-005a9aa3d54f
+2026-07-19T22:04:29.165624Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:04:34.509012Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:04:35.459977Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:04:41.717357Z  WARN codex_protocol::openai_models: Model personality requested but model_messages is missing, falling back to base instructions. model=gpt-5.6-sol personality=pragmatic
+2026-07-19T22:04:41.720787Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:04:41.721431Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:04:49.619919Z  WARN codex_protocol::openai_models: Model personality requested but model_messages is missing, falling back to base instructions. model=gpt-5.6-sol personality=pragmatic
+2026-07-19T22:04:49.624148Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:04:49.624732Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:05:03.153498Z  WARN codex_protocol::openai_models: Model personality requested but model_messages is missing, falling back to base instructions. model=gpt-5.6-sol personality=pragmatic
+2026-07-19T22:05:03.177879Z  WARN codex_core::hook_runtime: failed to resolve parent transcript path for subagent hook parent_thread_id=019f7b18-adf1-7df1-b6e7-005a9aa3d54f error=invalid thread-store request: no rollout found for thread id 019f7b18-adf1-7df1-b6e7-005a9aa3d54f
+2026-07-19T22:05:03.182026Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:05:49.181965Z  WARN codex_protocol::openai_models: Model personality requested but model_messages is missing, falling back to base instructions. model=gpt-5.6-sol personality=pragmatic
+2026-07-19T22:05:49.205722Z  WARN codex_core::hook_runtime: failed to resolve parent transcript path for subagent hook parent_thread_id=019f7b18-adf1-7df1-b6e7-005a9aa3d54f error=invalid thread-store request: no rollout found for thread id 019f7b18-adf1-7df1-b6e7-005a9aa3d54f
+2026-07-19T22:05:49.210132Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:06:03.094232Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-19T22:06:33.006069Z  WARN codex_protocol::openai_models: Model personality requested but model_messages is missing, falling back to base instructions. model=gpt-5.6-sol personality=pragmatic
+2026-07-19T22:06:33.030776Z  WARN codex_core::hook_runtime: failed to resolve parent transcript path for subagent hook parent_thread_id=019f7b18-adf1-7df1-b6e7-005a9aa3d54f error=invalid thread-store request: no rollout found for thread id 019f7b18-adf1-7df1-b6e7-005a9aa3d54f
+2026-07-19T22:06:56.166648Z  WARN codex_file_watcher: failed to unwatch /home/rohit/.codex/skills/.system: No watch was found. about ["/home/rohit/.codex/skills/.system"]
+2026-07-19T22:06:56.170218Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at AbsolutePathBuf("/home/rohit/.codex/shell_snapshots/019f7b18-adf1-7df1-b6e7-005a9aa3d54f.1784476642801899510.sh"): Os { code: 2, kind: NotFound, message: "No such file or directory" }

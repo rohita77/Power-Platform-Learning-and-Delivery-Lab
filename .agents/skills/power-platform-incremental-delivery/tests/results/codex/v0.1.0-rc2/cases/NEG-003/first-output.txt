@@ -1,0 +1,238 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested approach is to build every table and relationship before defining the user journey or end-to-end result.",
+        "basis": "Explicit user instruction.",
+        "source_refs": [
+          "stdin"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "Only synthetic design information is currently in scope; no tenant data, credentials, live metadata, or confidential organisational content was supplied.",
+        "impact": "Reasoning may continue in the personal OpenAI zone, but no tenant-specific schema or security design can be inferred.",
+        "validation_required": "Confirm the permitted data classification and target organisational environment before implementation.",
+        "source_refs": [
+          "stdin"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What single observable business or operational outcome should the first increment deliver?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona will perform the primary journey?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which Power Platform or Dynamics 365 host and entry point will the persona use?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Build every anticipated table and relationship as the first increment.",
+        "reason": "This is a horizontal data-model layer without an observable end-to-end outcome. Its required entities, ownership, security, lifecycle, validation, concurrency controls, and acceptance evidence cannot be determined safely before selecting a journey.",
+        "reconsider_if": "A complete target-domain model is independently mandated by an approved integration or regulatory contract and that evidence is supplied."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no measurable user-visible or operational result has been defined.",
+    "entry": "Open: persona, host surface, entry point, initial state, and initiating event are unknown.",
+    "validation": "Open: required inputs, business rules, permissions, and concurrency checks depend on the selected journey.",
+    "persistence_or_action": "Open: the authoritative write owner, minimum records, lifecycle transition, and idempotency boundary cannot yet be selected.",
+    "feedback": "Open: loading, success, validation, permission, conflict, retry, and failure feedback depend on the host and journey.",
+    "telemetry": "Open: define privacy-safe events, correlation identifiers, outcomes, and excluded payloads after selecting the observable result.",
+    "evidence": "No implementation evidence exists. The eventual slice must distinguish source validation, automated tests, package integrity, deployment readback, and runtime end-to-end proof.",
+    "scope": [
+      "Define one smallest deployable vertical slice after the outcome, persona, and host are supplied",
+      "Model only the tables and relationships required by that slice"
+    ],
+    "exclusions": [
+      "Building an exhaustive domain schema before selecting an end-to-end journey",
+      "Tenant access, implementation, deployment, authentication, or live metadata inspection",
+      "Unrelated future journeys and speculative entities"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Select the persona, host, entry point, and complete primary journey before component design.",
+        "rationale": "The interaction states and accessibility requirements cannot be derived from a schema-only request.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Create only the minimum tables, columns, keys, relationships, ownership rules, status model, and concurrency controls needed by the selected slice.",
+        "rationale": "Journey-driven modeling limits speculative schema and establishes a testable lifecycle.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Add no integration component unless the selected slice requires an external boundary.",
+        "rationale": "No external system or interface contract has been identified.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Add no AI component unless it is necessary for the selected outcome and can be evaluated safely.",
+        "rationale": "No AI-assisted task or evaluation target has been identified.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Define least-privilege roles, record ownership, field sensitivity, permitted transfers, and audit requirements from the selected persona and journey.",
+        "rationale": "Security boundaries cannot be established from tables and relationships alone.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Define privacy-safe telemetry, correlation, failure handling, duplicate protection, and support ownership for the selected lifecycle transition.",
+        "rationale": "Operational controls require a known initiating event and authoritative action owner.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the eventual slice with deterministic schema dependencies, environment-bound configuration, validation, deployment checks, and rollback instructions.",
+        "rationale": "The component inventory and dependency order are unknown until the slice is chosen.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Implementation begins with an exhaustive table and relationship inventory while the outcome, persona, or host remains undefined.",
+      "expected_behavior": "Pause schema construction and select one observable end-to-end result before defining the minimum supporting data model.",
+      "evidence": "Approved build brief linking every in-scope table and relationship to the selected journey and acceptance criteria."
+    },
+    {
+      "id": "NP-002",
+      "condition": "A proposed entity, relationship, workflow, or integration is not required by the first vertical slice.",
+      "expected_behavior": "Exclude it from the increment and record it only as a future candidate if justified.",
+      "evidence": "Reviewed component-to-acceptance-criterion traceability."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Trace the eventual persona journey from entry through validation, one authoritative durable action, feedback, and observable result.",
+      "expected": "Every component supports the defined outcome and the journey completes without relying on speculative schema.",
+      "evidence_required": "Executed end-to-end result and focused automated test evidence.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Verify the eventual persona has only the permissions required for the selected records and actions.",
+      "expected": "Authorized actions succeed and unauthorized reads or writes fail safely.",
+      "evidence_required": "Role configuration readback and positive and negative runtime tests.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Verify duplicate submission, stale data, concurrent change, retry, and replay behavior for the authoritative action.",
+      "expected": "Duplicate processing is prevented, stale writes preserve both versions, and users receive safe reconciliation guidance.",
+      "evidence_required": "Executed concurrency, idempotency, and failure-path tests with privacy-safe correlation evidence.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "alm",
+      "scope": "Validate dependencies and deterministic packaging for the minimum slice.",
+      "expected": "Only required components are included and package validation succeeds.",
+      "evidence_required": "Package validation output and reviewed component inventory.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target development environment to be identified before implementation"
+    ],
+    "prerequisites": [
+      "Approve the measurable outcome, persona, host, and entry point",
+      "Confirm target environment, publisher convention, security model, DLP constraints, and permitted data classification",
+      "Approve the minimum schema and dependency inventory derived from the selected journey"
+    ],
+    "steps": [
+      "Create the minimum slice in an authorised development solution",
+      "Validate schema dependencies, security configuration, and focused automated checks",
+      "Export and validate the deployment artifact before any authorised import"
+    ],
+    "post_deploy_checks": [
+      "Read back imported component and environment-binding configuration",
+      "Run the primary journey and permission-denied path",
+      "Verify persistence, concurrency handling, duplicate protection, telemetry, and correlation behavior"
+    ],
+    "evidence_required": [
+      "Deployment authorization and sanitized import result",
+      "Configuration readback",
+      "Runtime end-to-end, permission, concurrency, duplicate, and failure-path evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Package import or dependency validation fails",
+      "The primary journey cannot complete safely",
+      "Unauthorized data access or an incorrect ownership boundary is observed",
+      "Duplicate, stale, or concurrent actions can corrupt state"
+    ],
+    "steps": [
+      "Stop further rollout and disable the affected entry point or action",
+      "Restore the last approved solution version using the authorised ALM process",
+      "Reconcile records affected by the failed lifecycle transition before re-enablement"
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite user records as part of solution rollback",
+      "Preserve both versions of conflicted records and retain privacy-safe correlation evidence",
+      "Use an approved data-reconciliation plan for schema changes that are not automatically reversible"
+    ],
+    "owner": "Solution owner and authorised environment administrator",
+    "evidence_required": [
+      "Rollback execution result",
+      "Restored configuration readback",
+      "Post-rollback journey, security, and data-integrity checks"
+    ]
+  },
+  "next_action": "Provide three values: the single observable outcome, the primary persona, and the Power Platform or Dynamics 365 host and entry point. Then define the smallest end-to-end slice and derive only its required tables and relationships."
+}

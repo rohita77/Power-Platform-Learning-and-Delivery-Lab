@@ -1,0 +1,143 @@
+# Synthetic Account Review — build brief
+
+## Outcome and acceptance
+
+Deliver a read-only “Account Review” page inside the model-driven app. An authorized user can open it and:
+
+- See at most ten active synthetic Accounts.
+- See only Name and Account Number.
+- Receive rows ordered by `createdon` descending, with `accountid` ascending as a deterministic tie-breaker.
+- See clear loading, empty, error, permission-denied, and refresh states.
+- Retry safely without duplicate or stale results.
+- Use the page by keyboard and at narrow viewport widths.
+
+No authentication, tenant access, CRUD, import, or deployment is included in this brief.
+
+## Smallest production-credible implementation
+
+Use a solution-aware HTML/JavaScript web resource exposed through the model-driven app sitemap.
+
+- One page controller owns initial load, refresh, rendering, and request state.
+- One gateway owns the validated `Xrm.WebApi` call.
+- Render returned values with `textContent`; never inject record values through HTML.
+- Permit only one active request. Disable Refresh while loading and ignore late responses using a request-generation counter.
+- Display Account Number as an em dash when null.
+- Show “Updated at” time and a Refresh action to make data freshness explicit.
+- Do not add flows, plug-ins, writes, queues, or additional query handlers.
+
+## Accepted specialist query contract
+
+The explicitly delegated specialist result passed the required JSON structure and success invariants: resolved schema and host, empty `unresolved_schema`, flat choice values, and non-empty Xrm.WebApi code.
+
+```json
+{
+  "result_type": "success",
+  "status": "Resolved",
+  "recommendation": "Retrieve the 10 most recently created active Account rows, returning name and account number, with accountid providing deterministic ordering when createdon values are equal.",
+  "assumptions": [
+    "Synthetic Account data is in scope.",
+    "Standard Microsoft Dataverse Account schema is authorized.",
+    "Active Account state is represented by statecode value 0.",
+    "The standard Account primary key accountid is authorized as a deterministic tie-breaker."
+  ],
+  "resolved_schema": {
+    "table_logical_name": "account",
+    "entity_set_name": "accounts",
+    "attribute_logical_names": [
+      "accountid",
+      "name",
+      "accountnumber",
+      "createdon",
+      "statecode"
+    ],
+    "lookup_annotation_columns": [],
+    "navigation_properties": [],
+    "choice_or_status_values": [
+      "statecode=0 (Active)"
+    ],
+    "generated_service_name": null,
+    "host_api_contract": "Xrm.WebApi.retrieveMultipleRecords(entityLogicalName, options)"
+  },
+  "unresolved_schema": [],
+  "host_context": {
+    "status": "resolved",
+    "selected": "xrm_webapi",
+    "supported_options": [
+      "xrm_webapi"
+    ],
+    "required_clarification": null
+  },
+  "query_or_code": "Xrm.WebApi.retrieveMultipleRecords(\"account\", \"?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc,accountid asc&$top=10\")",
+  "security_notes": [
+    "No authentication, tenant access, confidential records, or runtime execution was performed."
+  ],
+  "sources_or_reference_basis": [
+    {
+      "source": "Controlled inline adaptation",
+      "pin": "33bc38456abb83f27daad968b748c8085f2a78ef",
+      "availability": "available",
+      "use": "Resolved the standard Account schema and constructed the deterministic Xrm.WebApi query."
+    }
+  ],
+  "open_questions": []
+}
+```
+
+The implementation must preserve that table name and options string exactly unless a replacement specialist result is validated.
+
+## User states and feedback
+
+- **Loading:** progress indicator, `aria-busy="true"`, and disabled Refresh.
+- **Success:** zero to ten rows, row count, and last-updated time.
+- **Empty:** “No active accounts found,” without presenting an error.
+- **Failure:** concise message and keyboard-accessible Retry action.
+- **Permission failure:** explain that Account read access is required; do not expose raw platform details.
+- **Stale or concurrent response:** discard results from any superseded request.
+- **Long content:** wrap or truncate visually without losing accessible text.
+- **Narrow layout:** allow horizontal scrolling or switch to labelled row cards.
+- **Focus:** move focus to the result summary after refresh and to the error summary after failure.
+
+## Validation
+
+Focused automated checks:
+
+- Assert `retrieveMultipleRecords` receives `account` and the exact validated options string.
+- Confirm inactive rows cannot be requested by the client contract.
+- Confirm at most ten returned rows are rendered.
+- Test loading, empty, success, nullable account number, permission error, general error, and retry.
+- Test double-refresh suppression and late-response rejection.
+- Verify values resembling markup are rendered as text.
+- Run linting, unit tests, accessibility checks, and the repository’s normal build/package validation.
+
+Authorized post-deployment checks should use synthetic data covering more than ten active rows, a newer inactive row, equal `createdon` values, and a missing Account Number.
+
+## Telemetry
+
+Emit through the app’s existing approved telemetry provider:
+
+- `account_review_load_started`
+- `account_review_load_succeeded`: duration and row count
+- `account_review_load_failed`: duration and sanitized category
+- `account_review_retry`
+
+Do not capture names, account numbers, record IDs, query strings, raw error messages, user identifiers, environment URLs, or credentials. If no approved telemetry provider exists, telemetry integration is a deployment blocker rather than justification for embedding a new endpoint or secret.
+
+## Deployment prerequisites
+
+- A solution and publisher for the web resources and app navigation change.
+- Confirmed target model-driven app and sitemap location.
+- Security roles granting intended users Account read access, including relevant field-level access.
+- Confirmation that the chosen web-resource host exposes `Xrm.WebApi`.
+- An approved telemetry provider and non-secret environment configuration.
+- Synthetic test records and authorized deployment/import access.
+- A retained prior managed solution version for rollback.
+
+Deploy to a development/test environment first, publish, run the focused checks, then promote the same artifact through the normal solution pipeline.
+
+## Rollback
+
+Reimport the prior managed solution version or deploy a patch that removes the sitemap entry and restores the previous web resources. Disable the page’s telemetry registration with the same rollback. The slice performs no writes, so no Account-data rollback is required.
+
+## Evidence boundary
+
+Current proof is limited to the schema-valid specialist query contract and build-design review. No source implementation, automated test, package, import, configuration readback, or runtime behavior was observed.

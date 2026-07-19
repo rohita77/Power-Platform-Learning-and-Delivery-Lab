@@ -1,0 +1,150 @@
+## Build brief: Synthetic account review
+
+A smallest production-credible, read-only slice for an account reviewer using a model-driven app.
+
+### Outcome and acceptance criteria
+
+The reviewer opens **Account Review** and:
+
+- Sees at most ten active synthetic accounts.
+- Sees only the account name and account number.
+- Gets newest accounts first by `createdon`.
+- Gets deterministic ordering for equal timestamps via `accountid asc`.
+- Can distinguish loading, empty, permission/error, and stale states.
+- Can retry without starting concurrent or duplicate reads.
+- Never triggers a Dataverse write.
+
+The implementation must call the exact validated query contract below. Any query change requires revalidation by `$dataverse-webapi-query`.
+
+### Validated query contract
+
+```json
+{
+  "result_type": "success",
+  "status": "Resolved",
+  "recommendation": "Use the validated Xrm.WebApi.retrieveMultipleRecords call in the model-driven client. Render only name and accountnumber, ignore any continuation link, and do not add authentication or tenant-specific values.",
+  "assumptions": [
+    "The prompt explicitly authorizes standard synthetic Microsoft Dataverse Account schema assumptions.",
+    "Active Account rows map to statecode=0.",
+    "accountid is used only as a deterministic secondary ordering attribute and is not displayed.",
+    "The caller runs in a supported model-driven app surface that exposes Xrm.WebApi."
+  ],
+  "resolved_schema": {
+    "table_logical_name": "account",
+    "entity_set_name": "accounts",
+    "attribute_logical_names": [
+      "name",
+      "accountnumber",
+      "createdon",
+      "accountid",
+      "statecode"
+    ],
+    "lookup_annotation_columns": [],
+    "navigation_properties": [],
+    "choice_or_status_values": [
+      "statecode=0 (Active)"
+    ],
+    "generated_service_name": null,
+    "host_api_contract": "xrm_webapi"
+  },
+  "unresolved_schema": [],
+  "host_context": {
+    "status": "resolved",
+    "selected": "xrm_webapi",
+    "supported_options": [
+      "xrm_webapi"
+    ],
+    "required_clarification": null
+  },
+  "query_or_code": "Xrm.WebApi.retrieveMultipleRecords(\"account\", \"?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc,accountid asc&$top=10\")",
+  "security_notes": [
+    "This contract constructs a synthetic read-only query and performs no authentication, tenant access, metadata discovery, or operational Dataverse work.",
+    "Do not log returned account names, account numbers, environment URLs, tokens, or complete service error payloads."
+  ],
+  "sources_or_reference_basis": [
+    {
+      "source": "Controlled inline dataverse-webapi-query adaptation supplied in the prompt",
+      "pin": "33bc38456abb83f27daad968b748c8085f2a78ef",
+      "availability": "available",
+      "use": "Host contract, supported OData shape, standard synthetic schema gate, and strict result validation"
+    }
+  ],
+  "open_questions": []
+}
+```
+
+This passes the specialist invariants: `success`/`Resolved`, resolved host and schema, no unresolved facts, flat choice values, and non-empty runnable code.
+
+### Implementation slice
+
+Use a solution-contained client component in an existing supported model-driven app surface exposing `Xrm.WebApi`. Before building, confirm that surface; do not silently substitute `context.webAPI`, Canvas `dataApi`, or a raw endpoint.
+
+Keep three small responsibilities:
+
+- A query module containing the exact validated call.
+- A controller owning initial load and refresh, with one in-flight request.
+- A renderer producing an accessible two-column table.
+
+Render null or blank account numbers as `—`. Use a request-generation token so a late response cannot replace newer results. Disable Refresh while loading.
+
+Required UI states:
+
+- Loading: labelled progress indicator.
+- Success: accessible Name and Account number table.
+- Empty: “No active accounts found.”
+- Error/permission: generic safe message and Retry action.
+- Stale: retain existing rows, show last-successful refresh time, and indicate refresh failure.
+- Narrow/long content: wrapping or horizontal scrolling without hiding values.
+- Keyboard/focus: logical tab order, visible focus, and status updates through an appropriate live region.
+
+### Validation
+
+Focused automated checks should prove:
+
+- The table logical name and query string exactly match the validated contract.
+- No second request starts while one is in flight.
+- Fixtures render no more than ten rows in the supplied order.
+- Empty, null account number, permission failure, general failure, retry, and stale-response handling work.
+- Only name and account number appear in the UI.
+- Telemetry contains no returned row data.
+- Accessibility checks cover table semantics, focus, keyboard use, and status announcements.
+
+Package validation should include the repository’s normal lint/build/tests, solution integrity checks, and a reviewed generated artifact diff.
+
+Target-environment acceptance requires separate authorized deployment and runtime work:
+
+1. Seed synthetic active and inactive accounts, including equal `createdon` values.
+2. Confirm inactive rows never appear.
+3. Confirm descending creation order and deterministic tie ordering.
+4. Confirm the ten-row maximum.
+5. Exercise empty, denied-read, failure, retry, and reload behavior.
+
+### Feedback and telemetry
+
+Show concise inline status, row count, last successful refresh time, and Retry where applicable.
+
+Emit only operational events such as:
+
+- `account_review_load_started`
+- `account_review_load_succeeded`
+- `account_review_load_failed`
+- `account_review_retry_requested`
+
+Permitted dimensions: duration, returned count, retry count, client component version, and sanitized error category/code. Exclude account fields, record IDs, error bodies, tenant identifiers, environment URLs, and credentials.
+
+### Deployment prerequisites
+
+- Target solution, publisher, app, navigation location, and component ownership confirmed.
+- Selected model-driven surface verified to expose `Xrm.WebApi`.
+- Users have least-privilege Account read access; this slice changes no roles.
+- Synthetic test data and permission-denied test persona are available.
+- Standard build, solution-checking, deployment, and rollback pipelines are operational.
+- No custom authentication, connection string, environment URL, or secret is introduced.
+
+### Rollback
+
+Prefer redeploying the previous known-good solution version or disabling/removing the Account Review navigation entry. The slice performs no writes or schema changes, so rollback requires no data restoration. Preserve sanitized failure telemetry long enough to verify recovery.
+
+### Evidence boundary
+
+Only the brief and static specialist-contract validation are established. No repository implementation, build, package, import, configuration readback, or runtime tenant behavior was inspected or proved. A separate specialist worker could not start because the collaboration runtime reported no active thread, so the supplied `$dataverse-webapi-query` contract was applied and validated in-process without tenant or filesystem access.

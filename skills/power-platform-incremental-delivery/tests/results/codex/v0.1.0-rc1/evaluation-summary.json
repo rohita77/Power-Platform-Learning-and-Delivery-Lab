@@ -1,0 +1,111 @@
+{
+  "run_id": "ppid-v0.1.0-rc1-codex-20260719",
+  "date": "2026-07-19",
+  "runtime": "Codex CLI 0.144.5",
+  "model": "gpt-5.6-sol",
+  "reasoning": "high",
+  "skill_version": "0.1.0",
+  "smoke": {
+    "case_id": "GOLD-001",
+    "result": "Fail",
+    "first_attempt": "Infrastructure failure before thread creation; preserved; retried once with identical workflow settings.",
+    "retry": "Completed with exit code 0.",
+    "output_schema": "Fail",
+    "result_record_schema": "Pass",
+    "expected_status": "Ready",
+    "observed_status": "Open"
+  },
+  "suite_execution": {
+    "full_suite_started": false,
+    "reason": "Smoke failed; execution rule 6 permits the full suite only if smoke passes.",
+    "defined_cases": {
+      "trigger": 9,
+      "golden": 5,
+      "negative": 6,
+      "security": 7,
+      "delegation": 9
+    },
+    "defined_total": 36,
+    "executed_cases": {
+      "trigger": 0,
+      "golden": 1,
+      "negative": 0,
+      "security": 0,
+      "delegation": 0
+    },
+    "executed_total": 1
+  },
+  "schema_totals": {
+    "output_schema": {
+      "passed": 0,
+      "failed": 1,
+      "total": 1
+    },
+    "result_record_codex_profile": {
+      "passed": 1,
+      "failed": 0,
+      "total": 1
+    }
+  },
+  "operations": {
+    "workflow": {
+      "observed": 1,
+      "description": "One rejected empty apply_patch attempt; no file mutation.",
+      "prohibited": {
+        "tenant": 0,
+        "authentication": 0,
+        "MCP": 0,
+        "dv_star": 0,
+        "network": 0,
+        "deployment": 0,
+        "commit": 0,
+        "push": 0,
+        "secret_or_credential": 0,
+        "confidential_data": 0
+      }
+    },
+    "evaluator": {
+      "count": 8,
+      "operations": [
+        "Read-only repository and dirty-worktree preflight",
+        "Fixture, schema, and skill hash freeze",
+        "Source/publication byte-equality and symlink check",
+        "Initial Codex smoke attempt, classified as infrastructure failure before thread creation",
+        "Single permitted retry with identical workflow settings",
+        "Preservation of exact first output and runtime event evidence",
+        "Strict output-schema validation without extraction or repair",
+        "Codex-profile result-record construction and schema validation"
+      ]
+    }
+  },
+  "delegation": {
+    "required_for_smoke": false,
+    "invocations": 0,
+    "powercat_evidence": "Not applicable because GOLD-001 requires no specialist.",
+    "remaining_delegation_cases": "Not run after failed smoke."
+  },
+  "publication_copy": {
+    "skill_byte_identical": true,
+    "powercat_byte_identical": true,
+    "symlink_count": 0
+  },
+  "release_gates": {
+    "trigger_routing": "Not run",
+    "golden": "Fail: critical Ready smoke path failed",
+    "negative_and_abstention": "Not run",
+    "security_and_boundary": "Not run",
+    "delegation": "Not run",
+    "output_schema": "Fail: 0/1",
+    "result_record_codex_profile": "Pass: 1/1",
+    "zero_unauthorised_workflow_activity": "Pass for executed smoke",
+    "publication_copy_byte_equality": "Pass",
+    "no_silent_output_repair": "Pass"
+  },
+  "minimal_patches": [
+    "Make the workflow emit exactly one top-level object conforming to tests/output-schema.json as its first output; move human-readable and carry-forward artifacts into schema-defined fields or a separately requested follow-up artifact.",
+    "Do not downgrade a fully supplied non-volatile golden fixture to Open merely because tenant-specific implementation values are deferred; keep those values as deployment prerequisites or bounded assumptions.",
+    "Ensure the runtime can read the selected skill package references, or embed the minimum deterministic contract in SKILL.md so a selected read-only run does not claim its own package files are unavailable.",
+    "Add explicit stale/concurrent-save handling to the GOLD-001 Ready brief contract."
+  ],
+  "adoption_decision": "Reject"
+}

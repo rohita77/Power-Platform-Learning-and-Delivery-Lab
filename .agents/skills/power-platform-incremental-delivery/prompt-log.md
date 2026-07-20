@@ -1,8 +1,8 @@
-# Power Platform Incremental Delivery v0.2.0-rc1 Prompt Log
+# Power Platform Incremental Delivery v0.2.0 Release Prompt Log
 
 **Workstream:** Portable Skill 6 delegation correction and evaluation
-**Checkpointed:** 2026-07-20
-**Final candidate:** v0.2.0-rc1
+**Released:** 2026-07-21
+**Release:** v0.2.0
 **Adoption:** Repository-level approved for explicit use in
 ChatGPT Work and Codex/VS Code, within the documented personal-zone and
 public/synthetic or approved non-confidential data boundary.
@@ -51,6 +51,12 @@ public/synthetic or approved non-confidential data boundary.
     sign-off gate, then release in a separate commit.
 18. Record human reviewer Rohit, role Lead, on 2026-07-21 using durable
     reference `reviewer-signoff.md#2026-07-21`.
+19. Promote the unchanged candidate to v0.2.0 without modifying behavior or
+    schemas.
+20. Run final static schema, publication equality, symlink, secret, manifest,
+    archive, and diff checks.
+21. Create and commit a clean runtime-only ChatGPT Skills ZIP separately from
+    all evaluation evidence and diagnostics.
 
 ## Delivered result
 
@@ -95,6 +101,13 @@ public/synthetic or approved non-confidential data boundary.
 - Human approval is complete: Rohit, Lead, approved the bounded repository-
   level scope on 2026-07-21 at
   `reviewer-signoff.md#2026-07-21`.
+- v0.2.0 promotes the tested candidate unchanged and retains all RC evidence at
+  its original paths.
+- The clean runtime package contains only the skill, changelog, references,
+  templates, required output schema, and manifest.
+- The 30,873-byte `power-platform-incremental-delivery-v0.2.0.zip` passed its
+  nine-entry manifest and archive checks with SHA-256
+  `7894fd62fee8c2f646999016d7ddb4a69c68572abb263f1bfa61612725d166ec`.
 
 ## Diagnostic history
 
@@ -117,8 +130,8 @@ deployed, committed during the workflow, or pushed. Power CAT remains an
 explicit, external, public/synthetic-only specialist governed by the canonical
 register and its approved repository publication.
 
-This checkpoint establishes the required three-case ChatGPT Work parity,
-technical expert-assurance gate, and formal bounded human approval. It does not
+This release establishes v0.2.0 for explicit bounded repository use after
+Codex, ChatGPT Work, expert-assurance, and human-approval gates. It does not
 claim automatic or implicit skill selection, tenant verification, deployment,
 activation, or production runtime evidence. Any behavioral change requires a
 new immutable candidate.

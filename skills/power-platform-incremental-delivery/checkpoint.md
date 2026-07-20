@@ -1,7 +1,7 @@
-# Power Platform Incremental Delivery v0.2.0-rc1 Checkpoint
+# Power Platform Incremental Delivery v0.2.0 Release Checkpoint
 
-**Checkpoint date:** 2026-07-20
-**Status:** Repository-level approved — v0.2.0 release pending
+**Checkpoint date:** 2026-07-21
+**Status:** Released — repository-level approved within the bounded scope
 **Adoption:** Repository-level approved for explicit use in
 ChatGPT Work and Codex/VS Code, within the documented personal-zone and
 public/synthetic or approved non-confidential data boundary.
@@ -11,7 +11,7 @@ public/synthetic or approved non-confidential data boundary.
 
 ## Outcome
 
-`power-platform-incremental-delivery` v0.2.0-rc1 implements the portable
+`power-platform-incremental-delivery` v0.2.0 implements the portable
 three-stage delegation protocol:
 
 1. Skill 6 emits a validated, sanitized specialist request.
@@ -102,7 +102,7 @@ improvements:
 
 The review is preserved under
 `tests/results/expert-review/v0.2.0-rc1/` with its normalized JSON record,
-unsigned human sign-off template, and SHA-256 manifest. Its source SHA-256 is
+signed human approval record, and SHA-256 manifest. Its source SHA-256 is
 `fe2eb550e5a96ad9b5661284931e30539917349e809502d8fad0386e52c0c419`;
 the stored Markdown removes seven trailing line-break markers without changing
 wording and has SHA-256
@@ -111,8 +111,24 @@ wording and has SHA-256
 The technical evidence supports the adoption label above. Human reviewer
 Rohit, Lead, approved the bounded repository-level decision on 2026-07-21 at
 `reviewer-signoff.md#2026-07-21`. Promotion to v0.2.0 and creation of the clean
-runtime installation ZIP may proceed as a separate release commit after the
-required static checks.
+runtime installation ZIP are recorded below after the required static checks.
+
+## Release promotion
+
+The approved v0.2.0-rc1 behavior is promoted unchanged to v0.2.0. No workflow,
+schema, delegation, boundary, status, or test contract changed. Candidate,
+cross-runtime, and expert evidence remain under their immutable RC paths.
+
+The clean ChatGPT Skills ZIP contains only `SKILL.md`, `changelog.md`, the
+three references, the three templates, `tests/output-schema.json`, and a
+package manifest. It excludes `.git`, `.agents`, result records, parity and
+expert evidence, diagnostics, repository history, credentials, and
+confidential material.
+
+The 30,873-byte ZIP has SHA-256
+`7894fd62fee8c2f646999016d7ddb4a69c68572abb263f1bfa61612725d166ec`.
+Its nine-entry internal manifest has SHA-256
+`b6e4dfb0f3213360b0dd634854b02af10e37ba16cb203a54465eda02cf2df80d`.
 
 ## Evidence boundary
 
@@ -129,25 +145,26 @@ and pass structural validation. The Power CAT experiment source and
 repository-root publication remain byte-identical and unmodified.
 
 This checkpoint proves local source, deterministic schema, preserved evaluator
-evidence, full Codex evaluation, and three-case ChatGPT Work functional parity.
-It does not prove expert approval, automatic or implicit skill selection,
-tenant configuration, deployment, activation, or production runtime behavior.
+evidence, full Codex evaluation, three-case ChatGPT Work functional parity,
+expert assurance, and bounded human repository approval. It does not prove
+automatic or implicit skill selection, tenant configuration, deployment,
+activation, or production runtime behavior.
 
 ## Continuing position
 
-1. Promote the unchanged candidate to v0.2.0 in a separate release commit,
-   run static gates, and create a clean runtime-only ChatGPT Skills ZIP.
+1. Use v0.2.0 only through explicit selection and within the approved boundary.
 2. Preserve all versioned evidence and use a new immutable candidate for any
    behavioral change.
-3. Keep Power CAT execution external, explicit, pinned, synthetic/public only,
+3. Schedule the non-blocking expert findings for v0.2.1 and revalidate by
+   2026-08-20 or before a material change.
+4. Keep Power CAT execution external, explicit, pinned, synthetic/public only,
    and configuration-gated by the canonical register.
 
 ## Repository state at checkpoint
 
-The human-approval commit updates only the existing expert-review result,
-checkpoint pair, and changelog together with byte-identical `.agents`
-publication copies. The Power CAT repository publication remains the separate
-`ea9708b` prerequisite. Canonical-pack replacement work, the current-feature-
-verifier publication, and all other unrelated worktree changes remain outside
-this checkpoint. The v0.2.0 release remains a separate commit. No push is
-authorized.
+The release commit contains only the v0.2.0 version and release records, their
+byte-identical `.agents` publication copies, and the clean runtime ZIP. The
+Power CAT repository publication remains the separate `ea9708b` prerequisite.
+Canonical-pack replacement work, the current-feature-verifier publication,
+the preserved full-evidence ZIP, and all other unrelated worktree changes
+remain outside this release. No push is authorized.

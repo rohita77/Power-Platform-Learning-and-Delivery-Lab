@@ -2,6 +2,32 @@
 
 **Owner:** Power Platform Learning Lab
 
+## 0.2.0 — 2026-07-21
+
+- Promote the unchanged v0.2.0-rc1 behavior and deterministic contracts to
+  v0.2.0 after Codex 36/36, ChatGPT Work 3/3 parity, independent expert
+  assurance at 4.44/5, and formal human approval.
+- Adoption: repository-level approved for explicit use in ChatGPT Work and
+  Codex/VS Code within the documented personal-zone and public, synthetic, or
+  approved non-confidential data boundary.
+- No behavior or schema change from v0.2.0-rc1. The candidate evaluation and
+  expert-review evidence remain immutable under their original RC paths.
+- Release package: create the clean
+  `power-platform-incremental-delivery-v0.2.0.zip` ChatGPT Skills artifact with
+  only runtime instructions, references, templates, changelog, the required
+  output schema, and its integrity manifest.
+- Approval limitations: repository approval is not tenant or deployment
+  authority; `Ready` means build-brief ready; specialist execution remains
+  external and host-controlled; Power CAT remains explicit, pinned,
+  synthetic/public, and no-auth; organisational execution remains in-zone;
+  Copilot Studio and M365 adapters require separate implementation/testing;
+  and Claude Code, GitHub Copilot, and Cursor remain untested.
+- Schedule the six non-blocking hardening findings for v0.2.1. Revalidate by
+  2026-08-20 or before any boundary, schema, register, adapter, host, or
+  behavioral change.
+- Rollback: restore commit `b46827e`, remove only the v0.2.0 release record and
+  clean runtime ZIP, and retain all RC and approval evidence unchanged.
+
 ## 0.2.0-rc1 — 2026-07-20
 
 - Expert-assurance checkpoint: independent AI-assisted review passed at

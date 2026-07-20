@@ -20,7 +20,7 @@ deployable Power Platform or Dynamics 365 vertical slice. Reconstruct current
 state, enforce the data boundary, route specialist work, and preserve a concise
 carry-forward summary.
 
-Package version: **0.2.0**. Release candidate: **v0.2.0-rc1**.
+Package version: **0.2.0**. Release: **v0.2.0**.
 
 Own orchestration only. Do not duplicate current-feature verification,
 declarative-agent design, Copilot Studio review, component selection,

@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "skill": "power-platform-incremental-delivery",
+  "release": "0.2.0",
+  "source_candidate": "0.2.0-rc1",
+  "release_date": "2026-07-21",
+  "promotion": {
+    "behavior_changed": false,
+    "schemas_changed": false,
+    "candidate_evidence_preserved": true,
+    "basis": [
+      "Codex v0.2.0-rc1 full evaluation: 36/36",
+      "ChatGPT Work functional parity: 3/3",
+      "Independent expert assurance: 4.44/5, Pass with non-blocking improvements",
+      "Human repository approval: Rohit, Lead, 2026-07-21"
+    ]
+  },
+  "approval": {
+    "label": "Repository-level approved for explicit use in ChatGPT Work and Codex/VS Code, within the documented personal-zone and public/synthetic or approved non-confidential data boundary.",
+    "reference": "tests/results/expert-review/v0.2.0-rc1/reviewer-signoff.md#2026-07-21",
+    "next_revalidation": "2026-08-20"
+  },
+  "runtime_package": {
+    "path": "power-platform-incremental-delivery-v0.2.0.zip",
+    "bytes": 30873,
+    "sha256": "7894fd62fee8c2f646999016d7ddb4a69c68572abb263f1bfa61612725d166ec",
+    "internal_manifest_sha256": "b6e4dfb0f3213360b0dd634854b02af10e37ba16cb203a54465eda02cf2df80d",
+    "manifest_entries": 9,
+    "files_including_manifest": 10,
+    "included": [
+      "SKILL.md",
+      "changelog.md",
+      "references/boundary-policy.md",
+      "references/delegation-policy.md",
+      "references/vertical-slice-pattern.md",
+      "templates/build-brief.md",
+      "templates/carry-forward-summary.yaml",
+      "templates/delegation-record.yaml",
+      "tests/output-schema.json",
+      "MANIFEST.sha256"
+    ],
+    "excluded": [
+      ".git and .agents",
+      "Codex and ChatGPT Work result records",
+      "parity and expert-review evidence",
+      "RC1-RC3 diagnostics",
+      "repository history",
+      "credentials, secrets, tenant artifacts, and confidential material"
+    ]
+  },
+  "static_checks": {
+    "schema_validation": "Pass",
+    "canonical_publication_byte_equality": "Pass",
+    "no_symlinks": "Pass",
+    "secret_scan": "Pass",
+    "release_manifest": "9/9 Pass",
+    "archive_integrity": "Pass",
+    "git_diff_check": "Pass"
+  },
+  "approval_limitations": [
+    "Repository-level approval is not tenant authorisation.",
+    "Ready means build-brief ready, not deployment-approved.",
+    "External specialist execution remains controlled by the user, evaluator, or host.",
+    "Power CAT use remains explicit, pinned, public or synthetic, and no-auth.",
+    "Organisational Microsoft execution must occur separately within the authorised tenant boundary.",
+    "Microsoft 365 declarative-agent and Copilot Studio adapters require separate implementation and in-zone testing.",
+    "Claude Code, GitHub Copilot, and Cursor remain untested."
+  ],
+  "non_blocking_improvements_target": "0.2.1",
+  "release_commit_message": "Release power-platform-incremental-delivery v0.2.0"
+}

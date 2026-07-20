@@ -4,6 +4,28 @@
 
 ## 0.2.0-rc1 — 2026-07-20
 
+- Expert-assurance checkpoint: independent AI-assisted review passed at
+  4.44/5 overall, 4.00/5 for security/governance, and 4.80/5 for GOLD-005
+  delegation, with zero critical failures and no Blocker or High findings.
+- Technical adoption label: `Repository-level approved for explicit use in
+  ChatGPT Work and Codex/VS Code, within the documented personal-zone and
+  public/synthetic or approved non-confidential data boundary.` Formal human
+  approval remains pending and the candidate is not yet promoted to v0.2.0.
+- Evidence preservation: add the exact expert assurance review, normalized
+  JSON record, unsigned human sign-off template, and SHA-256 manifest under
+  `tests/results/expert-review/v0.2.0-rc1/`.
+- Non-blocking v0.2.1 backlog: strengthen GOLD-001 server-enforced
+  idempotency; align GOLD-005 response validation; add explicit licence,
+  capacity, geography, and dated revalidation gates; canonicalise specialist
+  identity/schema constraints; harden cross-field boundary enforcement; and
+  enrich future delegation provenance.
+- Approval limits retained: repository approval is not tenant or deployment
+  authority; `Ready` means build-brief ready; specialist execution remains
+  external and host-controlled; Power CAT remains explicit, pinned,
+  synthetic/public, and no-auth; organisational execution remains in-zone;
+  Copilot Studio and M365 adapters need separate implementation/testing; and
+  Claude Code, GitHub Copilot, and Cursor remain untested.
+
 - Cross-runtime evidence checkpoint: the three unchanged parity cases passed
   in ChatGPT Work at 3/3 Ready, 3/3 output-schema valid, 3/3 strict Work-profile
   valid, and 3/3 functionally equivalent to the matching Codex results, with

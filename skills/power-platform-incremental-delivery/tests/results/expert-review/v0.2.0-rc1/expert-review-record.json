@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "candidate_version": "0.2.0-rc1",
+    "proposed_release_version": "0.2.0"
+  },
+  "review": {
+    "type": "ai-assisted-independent-expert-assurance",
+    "review_date": "2026-07-20",
+    "source_path": "expert-assurance-review.md",
+    "attachment_source_sha256": "fe2eb550e5a96ad9b5661284931e30539917349e809502d8fad0386e52c0c419",
+    "stored_sha256": "a5d315ffa2bfe455e06612045258c35b54338e490313ae8de9ccca848e154967",
+    "normalization": "Removed seven trailing Markdown double-space line-break markers; wording and review findings are unchanged.",
+    "final_verdict": "Pass with non-blocking improvements",
+    "recommended_adoption_label": "Repository-level approved for explicit use in ChatGPT Work and Codex/VS Code, within the documented personal-zone and public/synthetic or approved non-confidential data boundary.",
+    "human_approval_authority": "retained"
+  },
+  "scores": {
+    "overall": "4.44/5",
+    "gold_001": "4.44/5",
+    "gold_005": "4.44/5",
+    "security_governance": "4.00/5",
+    "gold_005_delegation": "4.80/5",
+    "lowest_critical_dimension": "4/5"
+  },
+  "gates": {
+    "overall_threshold": "Pass",
+    "critical_dimensions": "Pass",
+    "security_governance_threshold": "Pass",
+    "delegation_threshold": "Pass",
+    "critical_failures": 0,
+    "blocker_findings": 0,
+    "high_findings": 0,
+    "deployment_authority_granted": false
+  },
+  "findings": {
+    "blocking": [],
+    "non_blocking": [
+      "F-001: strengthen GOLD-001 server-enforced idempotency",
+      "F-002: align GOLD-005 response validation with returned fields",
+      "F-003: canonicalise specialist identity and schema constraints",
+      "F-004: add explicit licensing, capacity, geography, and revalidation gates",
+      "F-005: add cross-field boundary enforcement to the schema",
+      "F-006: enrich future external-specialist provenance"
+    ],
+    "observations": [
+      "F-007: operational configuration remains an authorised in-zone deployment prerequisite"
+    ]
+  },
+  "approval_scope": [
+    "explicit use in ChatGPT Work",
+    "explicit use in Codex/VS Code",
+    "public, synthetic, or approved non-confidential inputs within the documented personal-zone boundary"
+  ],
+  "exclusions": [
+    "tenant authentication or access",
+    "organisational confidential content in the personal zone",
+    "deployment authorisation",
+    "dv-* invocation under the current baseline",
+    "Copilot Studio or Microsoft 365 runtime approval",
+    "automatic or implicit skill selection",
+    "Claude Code, GitHub Copilot, or Cursor runtime support"
+  ],
+  "human_signoff": {
+    "status": "pending",
+    "required_before_release": true,
+    "record_path": "reviewer-signoff.md",
+    "missing_fields": [
+      "reviewer_name",
+      "reviewer_role",
+      "approval_reference"
+    ]
+  },
+  "next_revalidation": "2026-08-20"
+}

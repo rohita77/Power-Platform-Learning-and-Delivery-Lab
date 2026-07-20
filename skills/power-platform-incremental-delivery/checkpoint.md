@@ -1,8 +1,11 @@
 # Power Platform Incremental Delivery v0.2.0-rc1 Checkpoint
 
 **Checkpoint date:** 2026-07-20
-**Status:** Checkpointed — Codex release and ChatGPT Work parity gates passed
-**Adoption:** Cross-runtime approved pending expert review
+**Status:** Technical gates passed — formal human sign-off pending
+**Technical adoption label:** Repository-level approved for explicit use in
+ChatGPT Work and Codex/VS Code, within the documented personal-zone and
+public/synthetic or approved non-confidential data boundary.
+**Approval authority:** Pending human reviewer sign-off
 **Power CAT publication prerequisite:** `ea9708b`
 
 ## Outcome
@@ -84,6 +87,31 @@ summary, both suite summaries, the relevant skill contract, and a 20-entry
 manifest. Its ZIP SHA-256 is
 `eb82f7a943f8326d6344b800ee6ba3bd1c06f7d50f1ae2fe9a2d2fd278592290`.
 
+## Expert assurance
+
+The independent AI-assisted assurance review passed with non-blocking
+improvements:
+
+- overall: 4.44/5;
+- security/governance: 4.00/5;
+- GOLD-005 delegation: 4.80/5;
+- lowest critical dimension: 4/5;
+- critical failures: zero; and
+- Blocker or High findings: zero.
+
+The review is preserved under
+`tests/results/expert-review/v0.2.0-rc1/` with its normalized JSON record,
+unsigned human sign-off template, and SHA-256 manifest. Its source SHA-256 is
+`fe2eb550e5a96ad9b5661284931e30539917349e809502d8fad0386e52c0c419`;
+the stored Markdown removes seven trailing line-break markers without changing
+wording and has SHA-256
+`a5d315ffa2bfe455e06612045258c35b54338e490313ae8de9ccca848e154967`.
+
+The technical evidence supports the adoption label above. It does not supply
+the missing human approval authority. Promotion to v0.2.0 and creation of the
+clean runtime installation ZIP remain stopped until the sign-off record names
+the reviewer, role, and durable approval reference.
+
 ## Evidence boundary
 
 Immutable evidence is retained under:
@@ -105,20 +133,20 @@ tenant configuration, deployment, activation, or production runtime behavior.
 
 ## Continuing position
 
-1. Keep v0.2.0-rc1 at cross-runtime approval pending expert review, not
-   production approval.
-2. Obtain the required expert review using the manifest-bound compact pack.
-3. Preserve all versioned evidence and use a new immutable candidate for any
+1. Obtain formal human sign-off for the bounded repository-level approval.
+2. Preserve all versioned evidence and use a new immutable candidate for any
    behavioral change.
-4. Keep Power CAT execution external, explicit, synthetic/public only, and
-   configuration-gated by the canonical register.
+3. After sign-off, promote v0.2.0-rc1 to v0.2.0 in a separate release commit,
+   run static gates, and create a clean runtime-only ChatGPT Skills ZIP.
+4. Keep Power CAT execution external, explicit, pinned, synthetic/public only,
+   and configuration-gated by the canonical register.
 
 ## Repository state at checkpoint
 
-The intended commit contains the existing canonical checkpoint pair and
-changelog, their byte-identical `.agents` publication copies, the compact Work
-input ZIP, the complete supplied Work results ZIP, and the folder/ZIP forms of
-the expert-review pack. The Power CAT repository publication remains the
-separate `ea9708b` prerequisite. Canonical-pack replacement work, the
-current-feature-verifier publication, and all other unrelated worktree changes
-remain outside this checkpoint. No push is authorized.
+The expert-evidence commit contains only the new expert-review result directory
+and updates to the existing canonical checkpoint pair and changelog, together
+with byte-identical `.agents` publication copies. The Power CAT repository
+publication remains the separate `ea9708b` prerequisite. Canonical-pack
+replacement work, the current-feature-verifier publication, and all other
+unrelated worktree changes remain outside this checkpoint. No release commit
+or push is authorized before human sign-off.

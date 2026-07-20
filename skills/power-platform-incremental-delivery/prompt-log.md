@@ -3,7 +3,10 @@
 **Workstream:** Portable Skill 6 delegation correction and evaluation
 **Checkpointed:** 2026-07-20
 **Final candidate:** v0.2.0-rc1
-**Adoption:** Cross-runtime approved pending expert review
+**Technical adoption label:** Repository-level approved for explicit use in
+ChatGPT Work and Codex/VS Code, within the documented personal-zone and
+public/synthetic or approved non-confidential data boundary.
+**Formal approval:** Pending human reviewer sign-off
 
 ## Request sequence
 
@@ -40,6 +43,11 @@
     summary, both runtime summaries, review instructions, rubric, and manifest.
 15. Checkpoint and commit the cross-runtime evidence without pushing or
     including unrelated worktree changes.
+16. Preserve the independent expert assurance, its normalized result, an
+    unsigned human sign-off record, and a manifest under the versioned expert-
+    review result path.
+17. Keep v0.2.0 promotion and runtime ZIP creation behind the formal human
+    sign-off gate, then release in a separate commit.
 
 ## Delivered result
 
@@ -75,6 +83,14 @@
 - The expert-review folder contains 21 files including its 20-entry manifest;
   the matching 90,627-byte ZIP has SHA-256
   `eb82f7a943f8326d6344b800ee6ba3bd1c06f7d50f1ae2fe9a2d2fd278592290`.
+- Independent expert assurance passed at 4.44/5 overall, 4.00/5 for
+  security/governance, and 4.80/5 for GOLD-005 delegation, with zero critical
+  failures and no Blocker or High findings.
+- Seven findings are retained: six non-blocking improvements and one
+  operational-configuration observation. The review grants no tenant,
+  implementation, deployment, or production authority.
+- Human approval remains pending because reviewer name, reviewer role, and a
+  durable approval reference were not supplied.
 
 ## Diagnostic history
 
@@ -97,7 +113,8 @@ deployed, committed during the workflow, or pushed. Power CAT remains an
 explicit, external, public/synthetic-only specialist governed by the canonical
 register and its approved repository publication.
 
-This checkpoint establishes the required three-case ChatGPT Work parity but
-does not claim automatic or implicit skill selection, expert approval, tenant
-verification, deployment, activation, or production runtime evidence. Any
-behavioral change requires a new immutable candidate.
+This checkpoint establishes the required three-case ChatGPT Work parity and
+technical expert-assurance gate. It does not claim formal human approval,
+automatic or implicit skill selection, tenant verification, deployment,
+activation, or production runtime evidence. Any behavioral change requires a
+new immutable candidate.

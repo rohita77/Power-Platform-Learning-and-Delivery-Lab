@@ -4,6 +4,22 @@
 
 ## 0.2.0-rc1 — 2026-07-20
 
+- Cross-runtime evidence checkpoint: the three unchanged parity cases passed
+  in ChatGPT Work at 3/3 Ready, 3/3 output-schema valid, 3/3 strict Work-profile
+  valid, and 3/3 functionally equivalent to the matching Codex results, with
+  zero workflow operations, retries, silent repair, nested/simulated
+  delegation, or prohibited activity.
+- Adoption label: advance from `Experiment approved pending ChatGPT Work parity
+  and expert review` to `Cross-runtime approved pending expert review`. This is
+  an evidence-only promotion; Skill 6 behavior, schemas, and version are
+  unchanged.
+- Review handoff: retain the compact parity input ZIP, the complete manifest-
+  verified Work result ZIP, and a 21-file expert-review folder plus matching
+  ZIP. The review pack contains GOLD-001 and GOLD-005 inputs, preserved Work
+  first outputs, strict Codex/Work records, frozen Power CAT evidence,
+  CHAIN-001 summary, suite summaries, review instructions, rubric, and a
+  20-entry SHA-256 manifest.
+
 - Architecture correction: replace same-invocation/nested specialist
   expectations with a portable three-stage protocol: Skill 6 emits a validated
   request, the user/evaluator/host executes the specialist externally, and

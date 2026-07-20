@@ -1,0 +1,16 @@
+{
+  "case_id": "CHAIN-001",
+  "source": {
+    "path": "summaries/codex-evaluation-summary.json",
+    "sha256": "037a74571e0ec150f528638df80eb3ce0f4e15c78b7c858de0b3942cecc59843",
+    "json_pointer": "/chain_001"
+  },
+  "summary": {
+    "passed": true,
+    "phase_2_input_sha256": "cfe0035670a2c16613f359f61fa2228fba9f20e0bf45145236147ce13451201f",
+    "phase_2_first_output_sha256": "c074362482c929648bb33ccdb60607df9c30879dd31a9e50a4e05e1c12f871f6",
+    "phase_2_answer_schema_valid": true,
+    "skill6_nested_specialist_execution_count": 0
+  },
+  "evidence_boundary": "Derived extract only; consult the source summary and immutable evaluation records for the complete three-phase execution evidence."
+}

@@ -1,0 +1,820 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:power-platform-learning-lab:power-platform-incremental-delivery:output:0.1.0",
+  "title": "Power Platform incremental delivery build brief",
+  "description": "Deterministic orchestration output. Ready describes build-brief completeness, not implementation or deployment proof.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "current_position",
+    "boundary",
+    "slice",
+    "architecture",
+    "delegations",
+    "acceptance_criteria",
+    "negative_paths",
+    "tests",
+    "deployment",
+    "rollback",
+    "next_action"
+  ],
+  "properties": {
+    "status": {
+      "enum": ["Ready", "Open", "Blocked"]
+    },
+    "current_position": {
+      "$ref": "#/$defs/currentPosition"
+    },
+    "boundary": {
+      "$ref": "#/$defs/boundary"
+    },
+    "slice": {
+      "$ref": "#/$defs/slice"
+    },
+    "architecture": {
+      "$ref": "#/$defs/architecture"
+    },
+    "delegations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/delegation"
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/acceptanceCriterion"
+      }
+    },
+    "negative_paths": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/negativePath"
+      }
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/test"
+      }
+    },
+    "deployment": {
+      "$ref": "#/$defs/deployment"
+    },
+    "rollback": {
+      "$ref": "#/$defs/rollback"
+    },
+    "next_action": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Ready"
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "current_position": {
+            "properties": {
+              "open_questions": {
+                "items": {
+                  "properties": {
+                    "blocks_ready": {
+                      "const": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "slice": {
+            "properties": {
+              "outcome": {"minLength": 1},
+              "scope": {"minItems": 1},
+              "entry": {"minLength": 1},
+              "validation": {"minLength": 1},
+              "persistence_or_action": {"minLength": 1},
+              "feedback": {"minLength": 1},
+              "telemetry": {"minLength": 1},
+              "evidence": {"minLength": 1}
+            }
+          },
+          "architecture": {
+            "properties": {
+              "experience": {"$ref": "#/$defs/readyDecisionList"},
+              "data": {"$ref": "#/$defs/readyDecisionList"},
+              "integration": {"$ref": "#/$defs/readyDecisionList"},
+              "ai": {"$ref": "#/$defs/readyDecisionList"},
+              "security": {"$ref": "#/$defs/readyDecisionList"},
+              "operations": {"$ref": "#/$defs/readyDecisionList"},
+              "alm": {"$ref": "#/$defs/readyDecisionList"}
+            }
+          },
+        "delegations": {
+          "items": {
+            "properties": {
+              "phase": {"const": "externally-completed"},
+              "execution": {
+                  "properties": {
+                    "outcome_status": {
+                      "enum": ["not-required", "completed"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "acceptance_criteria": {"minItems": 1},
+          "tests": {"minItems": 1},
+          "next_action": {"minLength": 1}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Open"
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "next_action": {"minLength": 1}
+        },
+        "anyOf": [
+          {
+            "properties": {
+              "current_position": {
+                "properties": {
+                  "open_questions": {"minItems": 1}
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "delegations": {
+                "contains": {
+                  "properties": {
+                    "execution": {
+                      "properties": {
+                        "outcome_status": {"const": "open"}
+                      },
+                      "required": ["outcome_status"]
+                    }
+                  },
+                  "required": ["execution"]
+                },
+                "minContains": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Blocked"
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "delegations": {
+            "items": {
+              "properties": {
+                "execution": {
+                  "properties": {
+                    "invoked": {"const": false}
+                  }
+                }
+              }
+            }
+          },
+          "negative_paths": {"minItems": 1},
+          "next_action": {"minLength": 1}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      },
+      "uniqueItems": true
+    },
+    "currentPosition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "confirmed",
+        "assumptions",
+        "open_questions",
+        "rejected",
+        "superseded"
+      ],
+      "properties": {
+        "confirmed": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/confirmedPosition"}
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/assumptionPosition"}
+        },
+        "open_questions": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/openQuestion"}
+        },
+        "rejected": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/rejectedPosition"}
+        },
+        "superseded": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/supersededPosition"}
+        }
+      }
+    },
+    "confirmedPosition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "basis", "source_refs"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^CP-[0-9]{3,}$"},
+        "statement": {"$ref": "#/$defs/nonEmptyString"},
+        "basis": {"$ref": "#/$defs/nonEmptyString"},
+        "source_refs": {"$ref": "#/$defs/stringList"}
+      }
+    },
+    "assumptionPosition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "impact", "validation_required", "source_refs"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^AS-[0-9]{3,}$"},
+        "statement": {"$ref": "#/$defs/nonEmptyString"},
+        "impact": {"$ref": "#/$defs/nonEmptyString"},
+        "validation_required": {"$ref": "#/$defs/nonEmptyString"},
+        "source_refs": {"$ref": "#/$defs/stringList"}
+      }
+    },
+    "openQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "question", "owner", "blocks_ready"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^OQ-[0-9]{3,}$"},
+        "question": {"$ref": "#/$defs/nonEmptyString"},
+        "owner": {"$ref": "#/$defs/nonEmptyString"},
+        "blocks_ready": {"type": "boolean"}
+      }
+    },
+    "rejectedPosition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "decision", "reason", "reconsider_if"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^RJ-[0-9]{3,}$"},
+        "decision": {"$ref": "#/$defs/nonEmptyString"},
+        "reason": {"$ref": "#/$defs/nonEmptyString"},
+        "reconsider_if": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "supersededPosition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "replaced_by", "reason", "source_refs"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^SS-[0-9]{3,}$"},
+        "statement": {"$ref": "#/$defs/nonEmptyString"},
+        "replaced_by": {"$ref": "#/$defs/nonEmptyString"},
+        "reason": {"$ref": "#/$defs/nonEmptyString"},
+        "source_refs": {"$ref": "#/$defs/stringList"}
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["zone", "data_classification", "cross_zone_transfer"],
+      "properties": {
+        "zone": {
+          "enum": ["personal-openai", "organisational-microsoft"]
+        },
+        "data_classification": {
+          "enum": ["public", "synthetic", "approved-non-confidential", "confidential"]
+        },
+        "cross_zone_transfer": {
+          "enum": ["permitted", "prohibited", "approval-required"]
+        }
+      }
+    },
+    "slice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "scope",
+        "exclusions",
+        "entry",
+        "validation",
+        "persistence_or_action",
+        "feedback",
+        "telemetry",
+        "evidence"
+      ],
+      "properties": {
+        "outcome": {"type": "string"},
+        "scope": {"$ref": "#/$defs/stringList"},
+        "exclusions": {"$ref": "#/$defs/stringList"},
+        "entry": {"type": "string"},
+        "validation": {"type": "string"},
+        "persistence_or_action": {"type": "string"},
+        "feedback": {"type": "string"},
+        "telemetry": {"type": "string"},
+        "evidence": {"type": "string"}
+      }
+    },
+    "architecture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["experience", "data", "integration", "ai", "security", "operations", "alm"],
+      "properties": {
+        "experience": {"$ref": "#/$defs/decisionList"},
+        "data": {"$ref": "#/$defs/decisionList"},
+        "integration": {"$ref": "#/$defs/decisionList"},
+        "ai": {"$ref": "#/$defs/decisionList"},
+        "security": {"$ref": "#/$defs/decisionList"},
+        "operations": {"$ref": "#/$defs/decisionList"},
+        "alm": {"$ref": "#/$defs/decisionList"}
+      }
+    },
+    "decisionList": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/decision"}
+    },
+    "readyDecisionList": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {"$ref": "#/$defs/decision"},
+          {
+            "properties": {
+              "evidence_status": {"enum": ["Confirmed", "Assumption"]}
+            }
+          }
+        ]
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "decision", "rationale", "evidence_status"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Z]+-[0-9]{3,}$"},
+        "decision": {"$ref": "#/$defs/nonEmptyString"},
+        "rationale": {"$ref": "#/$defs/nonEmptyString"},
+        "evidence_status": {
+          "enum": ["Confirmed", "Assumption", "Open"]
+        }
+      }
+    },
+    "delegation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "specialist",
+        "source_type",
+        "phase",
+        "registry",
+        "request",
+        "handoff",
+        "control",
+        "execution",
+        "verification",
+        "evidence_refs",
+        "open_items",
+        "next_action"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^DEL-[0-9]{3,}$"},
+        "specialist": {"$ref": "#/$defs/nonEmptyString"},
+        "source_type": {"enum": ["lab", "upstream"]},
+        "phase": {"enum": ["requested", "externally-completed", "invalid", "blocked"]},
+        "registry": {"$ref": "#/$defs/delegationRegistry"},
+        "request": {"$ref": "#/$defs/delegationRequest"},
+        "handoff": {"$ref": "#/$defs/delegationHandoff"},
+        "control": {"$ref": "#/$defs/delegationControl"},
+        "execution": {"$ref": "#/$defs/delegationExecution"},
+        "verification": {"$ref": "#/$defs/delegationVerification"},
+        "evidence_refs": {"$ref": "#/$defs/stringList"},
+        "open_items": {"$ref": "#/$defs/stringList"},
+        "next_action": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "execution": {
+                "properties": {
+                  "invoked": {"const": true}
+                },
+                "required": ["invoked"]
+              }
+            },
+            "required": ["execution"]
+          },
+          "then": {
+            "properties": {
+              "phase": {"const": "externally-completed"},
+              "registry": {
+                "properties": {
+                  "entry_status": {"const": "current-approved"}
+                }
+              },
+              "control": {
+                "properties": {
+                  "enabled": {"const": true},
+                  "selection_mode": {"const": "explicit"},
+                  "selector": {"type": "string", "pattern": "^\\$[a-z0-9-]+$"},
+                  "client_compatible": {"const": true},
+                  "prerequisites_satisfied": {"const": true},
+                  "boundary_permitted": {"const": true},
+                  "permissions_approved": {"const": true}
+                }
+              },
+              "execution": {
+                "properties": {
+                  "execution_observed": {"const": true},
+                  "result_schema_valid": {"const": true},
+                  "outcome_status": {"const": "completed"},
+                  "result_reference": {"minLength": 1}
+                }
+              },
+              "handoff": {
+                "properties": {
+                  "invocation_mode": {"const": "explicit-external"},
+                  "input_payload": {"minLength": 1},
+                  "expected_output_schema": {"minLength": 1},
+                  "continuation_instruction": {"minLength": 1}
+                }
+              },
+              "verification": {
+                "properties": {
+                  "specialist_identity_verified": {"const": true},
+                  "register_verified": {"const": true},
+                  "input_classification_verified": {"const": true},
+                  "boundary_verified": {"const": true},
+                  "result_hash_verified": {"const": true},
+                  "result_schema_verified": {"const": true},
+                  "untrusted_input_checked": {"const": true},
+                  "override_attempted": {"const": false},
+                  "result_sha256": {"pattern": "^[a-f0-9]{64}$"},
+                  "source_path": {"minLength": 1}
+                }
+              },
+              "evidence_refs": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"phase": {"const": "externally-completed"}},
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "execution": {
+                "properties": {"invoked": {"const": true}}
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"phase": {"const": "requested"}},
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "registry": {
+                "properties": {"entry_status": {"const": "current-approved"}}
+              },
+              "handoff": {
+                "properties": {
+                  "invocation_mode": {"const": "explicit-external"},
+                  "input_payload": {"minLength": 1},
+                  "expected_output_schema": {"minLength": 1},
+                  "continuation_instruction": {"minLength": 1}
+                }
+              },
+              "control": {
+                "properties": {
+                  "enabled": {"const": true},
+                  "selection_mode": {"const": "none"},
+                  "selector": {"type": "string", "pattern": "^\\$[a-z0-9-]+$"},
+                  "client_compatible": {"const": true},
+                  "prerequisites_satisfied": {"const": true},
+                  "boundary_permitted": {"const": true},
+                  "permissions_approved": {"const": true}
+                }
+              },
+              "execution": {
+                "properties": {
+                  "execution_observed": {"const": false},
+                  "result_schema_valid": {"const": null},
+                  "invoked": {"const": false},
+                  "outcome_status": {"const": "open"},
+                  "result_reference": {"const": ""}
+                }
+              },
+              "verification": {
+                "properties": {
+                  "specialist_identity_verified": {"const": true},
+                  "register_verified": {"const": true},
+                  "input_classification_verified": {"const": true},
+                  "boundary_verified": {"const": true},
+                  "result_hash_verified": {"const": null},
+                  "result_schema_verified": {"const": null},
+                  "untrusted_input_checked": {"const": null},
+                  "override_attempted": {"const": false},
+                  "result_sha256": {"const": ""},
+                  "source_path": {"const": ""}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"phase": {"const": "invalid"}},
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "execution": {
+                "properties": {
+                  "invoked": {"const": false},
+                  "outcome_status": {"const": "open"}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"phase": {"const": "blocked"}},
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "execution": {
+                "properties": {
+                  "invoked": {"const": false},
+                  "outcome_status": {"const": "blocked"}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "specialist": {"const": "dataverse-webapi-query"},
+              "execution": {
+                "properties": {
+                  "invoked": {"const": true}
+                },
+                "required": ["invoked"]
+              }
+            },
+            "required": ["specialist", "execution"]
+          },
+          "then": {
+            "properties": {
+              "source_type": {"const": "upstream"},
+              "request": {
+                "properties": {
+                  "data_classification": {"enum": ["public", "synthetic"]}
+                }
+              },
+              "control": {
+                "properties": {
+                  "selector": {"const": "$dataverse-webapi-query"}
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "delegationRegistry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "entry_status", "version_or_pin", "verified_on"],
+      "properties": {
+        "path": {"type": "string"},
+        "entry_status": {
+          "enum": ["missing", "current-approved", "stale", "not-approved", "not-applicable"]
+        },
+        "version_or_pin": {"type": "string"},
+        "verified_on": {
+          "oneOf": [
+            {"type": "string", "format": "date"},
+            {"const": "not-applicable"}
+          ]
+        }
+      }
+    },
+    "delegationRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "data_classification", "zone", "permitted_tools"],
+      "properties": {
+        "scope": {"$ref": "#/$defs/nonEmptyString"},
+        "data_classification": {
+          "enum": ["public", "synthetic", "approved-non-confidential", "confidential"]
+        },
+        "zone": {"enum": ["personal-openai", "organisational-microsoft"]},
+        "permitted_tools": {"$ref": "#/$defs/stringList"}
+      }
+    },
+    "delegationControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "selection_mode",
+        "selector",
+        "client_compatible",
+        "prerequisites_satisfied",
+        "boundary_permitted",
+        "permissions_approved"
+      ],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "selection_mode": {"enum": ["none", "explicit", "implicit"]},
+        "selector": {"type": "string"},
+        "client_compatible": {"type": "boolean"},
+        "prerequisites_satisfied": {"type": "boolean"},
+        "boundary_permitted": {"type": "boolean"},
+        "permissions_approved": {"type": "boolean"}
+      }
+    },
+    "delegationHandoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invocation_mode",
+        "input_payload",
+        "expected_output_schema",
+        "continuation_instruction"
+      ],
+      "properties": {
+        "invocation_mode": {"enum": ["explicit-external", "not-applicable"]},
+        "input_payload": {"type": "string"},
+        "expected_output_schema": {"type": "string"},
+        "continuation_instruction": {"type": "string"}
+      }
+    },
+    "delegationExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "execution_observed",
+        "result_schema_valid",
+        "invoked",
+        "outcome_status",
+        "result_reference"
+      ],
+      "properties": {
+        "execution_observed": {"type": "boolean"},
+        "result_schema_valid": {"type": ["boolean", "null"]},
+        "invoked": {"type": "boolean"},
+        "outcome_status": {"enum": ["not-required", "open", "blocked", "completed"]},
+        "result_reference": {"type": "string"}
+      }
+    },
+    "delegationVerification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "specialist_identity_verified",
+        "register_verified",
+        "input_classification_verified",
+        "boundary_verified",
+        "result_hash_verified",
+        "result_schema_verified",
+        "untrusted_input_checked",
+        "override_attempted",
+        "result_sha256",
+        "source_path"
+      ],
+      "properties": {
+        "specialist_identity_verified": {"type": ["boolean", "null"]},
+        "register_verified": {"type": ["boolean", "null"]},
+        "input_classification_verified": {"type": ["boolean", "null"]},
+        "boundary_verified": {"type": ["boolean", "null"]},
+        "result_hash_verified": {"type": ["boolean", "null"]},
+        "result_schema_verified": {"type": ["boolean", "null"]},
+        "untrusted_input_checked": {"type": ["boolean", "null"]},
+        "override_attempted": {"type": "boolean"},
+        "result_sha256": {"type": "string"},
+        "source_path": {"type": "string"}
+      }
+    },
+    "acceptanceCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "given", "when", "then", "evidence"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^AC-[0-9]{3,}$"},
+        "given": {"$ref": "#/$defs/nonEmptyString"},
+        "when": {"$ref": "#/$defs/nonEmptyString"},
+        "then": {"$ref": "#/$defs/nonEmptyString"},
+        "evidence": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "negativePath": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "condition", "expected_behavior", "evidence"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^NP-[0-9]{3,}$"},
+        "condition": {"$ref": "#/$defs/nonEmptyString"},
+        "expected_behavior": {"$ref": "#/$defs/nonEmptyString"},
+        "evidence": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "class", "scope", "expected", "evidence_required", "status"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^TEST-[0-9]{3,}$"},
+        "class": {
+          "enum": ["functional", "security", "reliability", "accessibility", "performance", "alm", "deployment", "rollback", "ai-evaluation"]
+        },
+        "scope": {"$ref": "#/$defs/nonEmptyString"},
+        "expected": {"$ref": "#/$defs/nonEmptyString"},
+        "evidence_required": {"$ref": "#/$defs/nonEmptyString"},
+        "status": {"enum": ["planned", "not-run", "passed", "failed"]}
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authorization_status",
+        "target_zone",
+        "environments",
+        "prerequisites",
+        "steps",
+        "post_deploy_checks",
+        "evidence_required"
+      ],
+      "properties": {
+        "authorization_status": {
+          "enum": ["not-requested", "not-authorized", "explicitly-authorized"]
+        },
+        "target_zone": {"enum": ["personal-openai", "organisational-microsoft"]},
+        "environments": {"$ref": "#/$defs/stringList"},
+        "prerequisites": {"$ref": "#/$defs/stringList"},
+        "steps": {"$ref": "#/$defs/stringList"},
+        "post_deploy_checks": {"$ref": "#/$defs/stringList"},
+        "evidence_required": {"$ref": "#/$defs/stringList"}
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["triggers", "steps", "data_considerations", "owner", "evidence_required"],
+      "properties": {
+        "triggers": {"$ref": "#/$defs/stringList"},
+        "steps": {"$ref": "#/$defs/stringList"},
+        "data_considerations": {"$ref": "#/$defs/stringList"},
+        "owner": {"type": "string"},
+        "evidence_required": {"$ref": "#/$defs/stringList"}
+      }
+    }
+  }
+}

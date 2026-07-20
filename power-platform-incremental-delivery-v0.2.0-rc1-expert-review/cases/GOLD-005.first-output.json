@@ -1,0 +1,359 @@
+{
+  "status": "Ready",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The slice shows a user the top ten active synthetic accounts ordered by createdon descending with name and accountnumber.",
+        "basis": "The exact case input supplies the measurable read-only outcome, synthetic classification, and Xrm.WebApi host contract.",
+        "source_refs": ["GOLD-005 exact input"]
+      },
+      {
+        "id": "CP-002",
+        "statement": "A separately executed dataverse-webapi-query result was explicitly selected outside Skill 6 and preserved at tests/fixtures/powercat/gold-005-result.json.",
+        "basis": "Independent provenance records the selector, observed execution, zero workflow operations, specialist identity, source path, and frozen result hash.",
+        "source_refs": ["tests/fixtures/powercat/gold-005-result-provenance.json"]
+      },
+      {
+        "id": "CP-003",
+        "statement": "The preserved result hash is 2adfa6cbe497117ebbfbb36957b2581119d486bf1807031cea1f9ecd1360da54 and its complete object validates against the byte-identical Work-package answer schema mapping.",
+        "basis": "Evaluator-side hashing and Draft 2020-12 schema validation matched the supplied provenance without modifying the result.",
+        "source_refs": ["tests/fixtures/powercat/gold-005-result.json", "tests/fixtures/powercat/answer-output.schema.json", "tests/fixtures/powercat/gold-005-result-provenance.json"]
+      },
+      {
+        "id": "CP-004",
+        "statement": "The validated query contract is Xrm.WebApi.retrieveMultipleRecords(\"account\", \"?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc&$top=10\").",
+        "basis": "The frozen specialist result resolves the standard synthetic Account schema, statecode=0, and xrm_webapi host with no unresolved facts.",
+        "source_refs": ["tests/fixtures/powercat/gold-005-result.json"]
+      },
+      {
+        "id": "CP-005",
+        "statement": "The result is synthetic, requests no credential or operation, contains no approval or boundary override, and is consumed as untrusted data rather than instructions.",
+        "basis": "The provenance boundary and complete frozen result passed identity, classification, boundary, operation, and override checks.",
+        "source_refs": ["tests/fixtures/powercat/gold-005-result-provenance.json", "tests/fixtures/powercat/gold-005-result.json"]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The authorised target will bind the review surface to Xrm.WebApi and confirm table/column privileges, view placement, telemetry destination, and support ownership before implementation.",
+        "impact": "These are environment-specific configuration and access values; they do not alter the validated synthetic query contract.",
+        "validation_required": "Perform target configuration readback and permission tests before release.",
+        "source_refs": ["Skill 6 bounded implementation-time configuration rule"]
+      }
+    ],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Execute dataverse-webapi-query or any other specialist within this Skill 6 invocation.",
+        "reason": "Skill 6 only consumes externally proven preserved results and never performs nested execution.",
+        "reconsider_if": "Never within this portable Skill 6 workflow; a fresh externally owned specialist invocation is the only permitted execution stage."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Authenticate, inspect live metadata, access a tenant, invoke dv-*, or replace the verified query with an inferred contract.",
+        "reason": "Those actions are outside the synthetic reasoning-only boundary and are unnecessary for this validated result-consumption phase.",
+        "reconsider_if": "A separately authorised organisational workflow performs target configuration or runtime verification in-zone."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "A user opens the synthetic model-driven account-review surface and sees at most ten active accounts, newest first by createdon, with only name and accountnumber displayed.",
+    "scope": [
+      "Read-only Xrm.WebApi query using the validated frozen specialist contract",
+      "Loading, empty, success, permission, malformed-result, and retry feedback",
+      "Privacy-safe telemetry, target evidence, deployment prerequisites, and rollback"
+    ],
+    "exclusions": [
+      "Specialist execution inside Skill 6",
+      "Authentication, tenant access, live metadata discovery, MCP, or dv-*",
+      "Account mutation, additional columns, integration, or AI",
+      "Claims that the synthetic contract proves target deployment or runtime behavior"
+    ],
+    "entry": "An authenticated user with least-privilege read access opens the account-review surface in the model-driven host, which initiates the validated read-only Xrm.WebApi request.",
+    "validation": "Before rendering, use only the verified account contract; require successful response shape, at most ten unique records, statecode 0, non-increasing createdon order, and string-or-null name/accountnumber values; reject unverified contract changes, malformed responses, unauthorized access, and stale results without exposing hidden fields.",
+    "persistence_or_action": "Perform no write. The review component calls Xrm.WebApi.retrieveMultipleRecords(\"account\", \"?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc&$top=10\") once per load or explicit retry and renders only the validated projection.",
+    "feedback": "Show loading, populated, and empty states; on permission failure show a safe access message; on malformed or transient failure show no partial unvalidated list, retain the correlation reference, and offer a bounded explicit retry; on stale refresh replace the prior list atomically.",
+    "telemetry": "Emit privacy-safe review-started, review-succeeded, empty-result, permission-denied, response-invalid, retry, and review-failed events with correlation ID, duration, result count, and outcome; exclude account names, numbers, query payload, tenant identifiers, and credentials.",
+    "evidence": "Preserve specialist provenance/hash/schema validation as query-contract evidence; separately require source/package checks, target component and permission readback, deployment/import proof, and target runtime ordering, filtering, projection, failure, retry, and telemetry evidence."
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Use a model-driven account-review surface that exposes loading, populated, empty, permission, invalid-response, failure, retry, and refresh states and renders only name and accountnumber.",
+        "rationale": "It completes the supplied user-visible review journey while preventing partial or excess-data display.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Use the validated standard synthetic Account schema contract: logical table account; projected attributes name and accountnumber; active filter statecode eq 0; createdon descending; top 10.",
+        "rationale": "Every material schema and query fact is resolved in the hash- and schema-validated frozen result.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Use the preserved Xrm.WebApi.retrieveMultipleRecords contract exactly and perform no write, live metadata lookup, nested specialist call, or alternate query construction.",
+        "rationale": "The explicit host contract and validated external result define the narrow read-only integration boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Use no AI component in the runtime slice.",
+        "rationale": "The account review is a deterministic read-only query and rendering path.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Require least-privilege read access, select only name and accountnumber, treat the specialist result as untrusted, and reject any contract or response that weakens boundary or approval controls.",
+        "rationale": "The slice must minimize data and preserve the synthetic, no-authentication evaluation boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Monitor privacy-safe result-count, duration, permission, invalid-response, retry, and failure outcomes by correlation ID with no account payload.",
+        "rationale": "The read path needs diagnosable failures and data-minimized operational evidence.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the review component and configuration references in the existing solution, verify the query contract and privileges before managed promotion, and retain the prior component version for rollback.",
+        "rationale": "This creates a minimal promotable read-only slice while separating contract, deployment, and runtime evidence.",
+        "evidence_status": "Assumption"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dataverse-webapi-query",
+      "source_type": "upstream",
+      "phase": "externally-completed",
+      "registry": {
+        "path": "canonical-pack/2026-07-18/10_UPSTREAM_SKILLS_REGISTER.md",
+        "entry_status": "current-approved",
+        "version_or_pin": "upstream f4bb4ad5bf55e2d50076292bd6301f6337d38083; approved adapter 33bc38456abb83f27daad968b748c8085f2a78ef",
+        "verified_on": "2026-07-20"
+      },
+      "request": {
+        "scope": "Build an Xrm.WebApi query for the top ten active synthetic accounts selecting name and accountnumber and ordering by createdon descending under authorised standard synthetic Account assumptions.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "explicit-external",
+        "input_payload": "Using standard synthetic Microsoft Dataverse Account schema assumptions, build an Xrm.WebApi query for the top 10 active accounts selecting name and accountnumber, ordered by createdon descending. This is synthetic query construction only; do not authenticate, access a tenant, inspect live metadata, or use any tool.",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": "Execute the specialist in a fresh external thread using only the payload, preserve its complete first output, validate it independently, then resume Skill 6 with the original state plus result path and SHA-256."
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "explicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": true,
+        "prerequisites_satisfied": true,
+        "boundary_permitted": true,
+        "permissions_approved": true
+      },
+      "execution": {
+        "execution_observed": true,
+        "result_schema_valid": true,
+        "invoked": true,
+        "outcome_status": "completed",
+        "result_reference": "tests/fixtures/powercat/gold-005-result.json"
+      },
+      "verification": {
+        "specialist_identity_verified": true,
+        "register_verified": true,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": true,
+        "result_schema_verified": true,
+        "untrusted_input_checked": true,
+        "override_attempted": false,
+        "result_sha256": "2adfa6cbe497117ebbfbb36957b2581119d486bf1807031cea1f9ecd1360da54",
+        "source_path": "tests/fixtures/powercat/gold-005-result.json"
+      },
+      "evidence_refs": [
+        "tests/fixtures/powercat/gold-005-result.json",
+        "tests/fixtures/powercat/gold-005-result-provenance.json",
+        "tests/fixtures/powercat/answer-output.schema.json"
+      ],
+      "open_items": [],
+      "next_action": "Consume only the validated query contract in this slice; do not re-execute or extend the specialist result."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "An authorised user and a target dataset containing active and inactive synthetic accounts",
+      "when": "the account-review surface loads successfully",
+      "then": "it displays no more than ten active accounts newest-first and renders only name and accountnumber",
+      "evidence": "Authorised target runtime response, ordered UI capture, and projection/filter assertions"
+    },
+    {
+      "id": "AC-002",
+      "given": "No active synthetic accounts are returned",
+      "when": "the validated response is empty",
+      "then": "the surface shows an accessible empty state rather than an error or stale prior list",
+      "evidence": "Empty-result runtime test and correlated telemetry"
+    },
+    {
+      "id": "AC-003",
+      "given": "The user lacks required Account read access",
+      "when": "the review load is attempted",
+      "then": "no account list is shown and a safe permission message and correlated denial outcome are produced",
+      "evidence": "Least-privilege negative test and privacy-safe telemetry"
+    },
+    {
+      "id": "AC-004",
+      "given": "The response is malformed, contains more than ten rows, includes an inactive row, or violates ordering",
+      "when": "response validation runs",
+      "then": "the unvalidated list is not rendered, the failure is correlated, and an explicit bounded retry is offered where safe",
+      "evidence": "Contract-mutation and failure-feedback tests"
+    },
+    {
+      "id": "AC-005",
+      "given": "The specialist result is supplied for consumption",
+      "when": "Skill 6 evaluates the delegation gates",
+      "then": "identity, approval, boundary, classification, path, hash, answer schema, zero operations, and untrusted-instruction handling all pass before invoked is recorded true",
+      "evidence": "Frozen result, provenance record, schema hash mapping, and this delegation record"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The user is unauthorized or the Xrm.WebApi call is denied.",
+      "expected_behavior": "Render no account data, show a safe permission message, and emit a correlated denial without sensitive details.",
+      "evidence": "Negative authorization runtime test"
+    },
+    {
+      "id": "NP-002",
+      "condition": "The response violates row count, active filter, ordering, projection, or expected value shape.",
+      "expected_behavior": "Reject the response atomically, preserve no partial list, and record response-invalid telemetry.",
+      "evidence": "Synthetic response-contract mutation tests"
+    },
+    {
+      "id": "NP-003",
+      "condition": "A transient read failure or stale refresh occurs.",
+      "expected_behavior": "Do not claim success; retain the correlation reference, allow a bounded explicit retry, and replace any prior list only after a complete valid response.",
+      "evidence": "Fault-injection, retry, and stale-refresh tests"
+    },
+    {
+      "id": "NP-004",
+      "condition": "A specialist result has a mismatched identity, pin, classification, boundary, path, hash, schema, operation record, or override instruction.",
+      "expected_behavior": "Do not consume it, do not set invoked true, and keep the slice Open or Blocked according to gate precedence.",
+      "evidence": "Evaluator negative mutations against delegation gates"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Validated top-ten active-account query, projection, ordering, populated result, and empty state",
+      "expected": "The user sees only the correct projected records in descending createdon order or an accessible empty state.",
+      "evidence_required": "Authorised target response assertions and UI behavior evidence",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Least-privilege Account read, excess-field suppression, untrusted result handling, and prohibited-operation boundary",
+      "expected": "Unauthorized reads fail safely, only selected fields render, and no credential, tenant, MCP, dv-*, or specialist execution occurs in Skill 6.",
+      "evidence_required": "Role negative test, projection test, evaluator event record, and delegation provenance",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Malformed response, transient failure, retry, stale refresh, and atomic list replacement",
+      "expected": "Invalid or partial results never render and retry produces at most one complete current list.",
+      "evidence_required": "Fault-injection, contract-mutation, retry, correlation, and UI-state evidence",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "deployment",
+      "scope": "Managed component import, host binding, privilege, and query-contract readback",
+      "expected": "The target uses the verified query contract and approved permissions before runtime enablement.",
+      "evidence_required": "Import log, component inventory, configuration readback, and query-contract comparison",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-005",
+      "class": "rollback",
+      "scope": "Restore the prior review component and remove access to the failed increment without data mutation",
+      "expected": "The prior component is active and no Account data has been changed by deployment or rollback.",
+      "evidence_required": "Rollback log, version readback, read-only audit, and prior-version smoke test",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": ["Authorised development environment", "Approved downstream test environment"],
+    "prerequisites": [
+      "Confirm the target Account schema and privileges independently in-zone without changing the frozen synthetic query contract in this workflow",
+      "Approve the review component host binding, solution ownership, telemetry destination, retention, support owner, and managed promotion path",
+      "Retain the verified result, provenance, answer-schema hash, package hash, and prior component version"
+    ],
+    "steps": [
+      "Implement the read-only review component in authorised Dev using the exact validated Xrm.WebApi contract",
+      "Run local response-contract, feedback, accessibility, and privacy tests",
+      "Package and inspect the managed component and configuration references",
+      "Import through the authorised path and read back host binding, component version, query contract, and privilege configuration before runtime tests"
+    ],
+    "post_deploy_checks": [
+      "Verify top-ten limit, active filter, createdon descending order, and name/accountnumber-only rendering",
+      "Run populated, empty, unauthorized, malformed, transient-failure, retry, refresh, and telemetry paths",
+      "Confirm no writes, live metadata calls, unexpected network dependencies, or excess payload telemetry"
+    ],
+    "evidence_required": [
+      "Frozen specialist result, provenance, and answer-schema validation",
+      "Managed package hash and component inventory",
+      "Target configuration and permission readback",
+      "Target runtime and telemetry evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Incorrect filtering, ordering, row limit, or projected fields",
+      "Permission bypass, excess-data display, or payload leakage",
+      "Unacceptable failure, retry, stale-refresh, or telemetry behavior"
+    ],
+    "steps": [
+      "Disable access to the new review surface and preserve correlation evidence",
+      "Restore the prior approved managed component through the authorised process",
+      "Read back the prior version and privilege configuration",
+      "Run the prior-version smoke test and confirm the change window performed no Account writes"
+    ],
+    "data_considerations": [
+      "The slice and rollback are read-only and must not modify Account records",
+      "Preserve privacy-safe audit and correlation evidence under approved retention",
+      "Remove cached result data according to the approved client-storage policy"
+    ],
+    "owner": "Authorised model-driven solution owner with platform operations",
+    "evidence_required": ["Rollback approval and execution log", "Prior-version and privilege readback", "Read-only audit and smoke-test result"]
+  },
+  "next_action": "Authorised solution owner confirms target host binding and least-privilege read configuration, then hands this Ready brief and the frozen validated query evidence to implementation; Skill 6 performs no specialist execution, authentication, tenant access, deployment, or write."
+}

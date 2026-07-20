@@ -3,7 +3,7 @@
 **Workstream:** Portable Skill 6 delegation correction and evaluation
 **Checkpointed:** 2026-07-20
 **Final candidate:** v0.2.0-rc1
-**Adoption:** Experiment approved pending ChatGPT Work parity and expert review
+**Adoption:** Cross-runtime approved pending expert review
 
 ## Request sequence
 
@@ -31,6 +31,15 @@
     prohibited activity.
 11. Checkpoint and commit the completed v0.2.0-rc1 work without pushing or
     including unrelated worktree changes.
+12. Create a compact 19-file Work parity input ZIP with the three unchanged
+    cases, exact schemas and fixtures, and matching immutable Codex records.
+13. Evaluate those cases in ChatGPT Work under the strict Work profile and
+    preserve the complete first outputs, result records, summary, and manifest.
+14. Create a small expert-review pack for GOLD-001 and GOLD-005 with the
+    relevant skill/delegation contract, frozen Power CAT evidence, CHAIN-001
+    summary, both runtime summaries, review instructions, rubric, and manifest.
+15. Checkpoint and commit the cross-runtime evidence without pushing or
+    including unrelated worktree changes.
 
 ## Delivered result
 
@@ -54,6 +63,18 @@
 - All final workflow-operation and prohibited-activity counts are zero.
 - RC1-RC3 evidence remains unchanged; all diagnostic and final v0.2 evidence
   is preserved under the v0.2.0-rc1 result directory.
+- The Work parity input ZIP is 75,641 bytes with SHA-256
+  `9d67818681e7cc4f20c90ad013aa00093a515ba52065fa4c19db55dd39a44bd4`.
+- The supplied Work results ZIP passed its seven-entry manifest and archive
+  checks; its SHA-256 is
+  `39539653a7d8f8e1056c6e1ae0d249f4de23a524610a37864422bb5f26bc209c`.
+- ChatGPT Work passed GOLD-001, GOLD-002, and GOLD-005 at 3/3 Ready, 3/3
+  output-schema valid, 3/3 strict Work-profile valid, and 3/3 functionally
+  equivalent to the matching Codex records, with zero workflow operations,
+  retries, output repairs, nested delegation, or prohibited activity.
+- The expert-review folder contains 21 files including its 20-entry manifest;
+  the matching 90,627-byte ZIP has SHA-256
+  `eb82f7a943f8326d6344b800ee6ba3bd1c06f7d50f1ae2fe9a2d2fd278592290`.
 
 ## Diagnostic history
 
@@ -76,6 +97,7 @@ deployed, committed during the workflow, or pushed. Power CAT remains an
 explicit, external, public/synthetic-only specialist governed by the canonical
 register and its approved repository publication.
 
-This checkpoint does not claim automatic skill selection, ChatGPT Work parity,
-expert approval, tenant verification, deployment, activation, or production
-runtime evidence. Any behavioral change requires a new immutable candidate.
+This checkpoint establishes the required three-case ChatGPT Work parity but
+does not claim automatic or implicit skill selection, expert approval, tenant
+verification, deployment, activation, or production runtime evidence. Any
+behavioral change requires a new immutable candidate.

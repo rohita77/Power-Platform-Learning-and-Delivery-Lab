@@ -1,8 +1,8 @@
 # Power Platform Incremental Delivery v0.2.0-rc1 Checkpoint
 
 **Checkpoint date:** 2026-07-20
-**Status:** Checkpointed — all Codex release gates passed
-**Adoption:** Experiment approved pending ChatGPT Work parity and expert review
+**Status:** Checkpointed — Codex release and ChatGPT Work parity gates passed
+**Adoption:** Cross-runtime approved pending expert review
 **Power CAT publication prerequisite:** `ea9708b`
 
 ## Outcome
@@ -59,6 +59,31 @@ correction.
 - Prohibited authentication, tenant, MCP, `dv-*`, network, deployment,
   commit, push, secret, and confidential-data activity: zero.
 
+## ChatGPT Work parity and expert-review handoff
+
+The three unchanged parity cases passed in ChatGPT Work with explicit Skill 6
+selection kept outside each exact case input:
+
+- GOLD-001, GOLD-002, and GOLD-005: 3/3 Ready;
+- output schema: 3/3;
+- strict ChatGPT Work result-record profile: 3/3;
+- required case behavior: 12/12;
+- forbidden behavior: 6/6;
+- functional parity with the matching Codex results: 3/3; and
+- Skill 6 workflow operations, retries, output repairs, nested or simulated
+  specialist execution, and prohibited activity: zero.
+
+GOLD-005 remained phase `externally-completed`. Its `invoked: true` value is
+supported only by the frozen Power CAT result and preserved external-execution
+provenance; ChatGPT Work and Skill 6 did not execute the specialist.
+
+The compact Work input package, complete Work result archive, and expert-review
+pack are retained at repository root. The expert pack contains only GOLD-001
+and GOLD-005 primary review evidence, the delegation fixtures and CHAIN-001
+summary, both suite summaries, the relevant skill contract, and a 20-entry
+manifest. Its ZIP SHA-256 is
+`eb82f7a943f8326d6344b800ee6ba3bd1c06f7d50f1ae2fe9a2d2fd278592290`.
+
 ## Evidence boundary
 
 Immutable evidence is retained under:
@@ -74,27 +99,26 @@ and pass structural validation. The Power CAT experiment source and
 repository-root publication remain byte-identical and unmodified.
 
 This checkpoint proves local source, deterministic schema, preserved evaluator
-evidence, and Codex runtime behavior only. It does not prove ChatGPT Work
-parity, expert approval, tenant configuration, deployment, activation, or
-production runtime behavior.
+evidence, full Codex evaluation, and three-case ChatGPT Work functional parity.
+It does not prove expert approval, automatic or implicit skill selection,
+tenant configuration, deployment, activation, or production runtime behavior.
 
 ## Continuing position
 
-1. Keep v0.2.0-rc1 at experiment approval, not production approval.
-2. Run exactly the three unchanged parity cases in ChatGPT Work without
-   creating Codex-only requirements.
-3. Obtain the required expert review before broader adoption.
-4. Preserve all versioned evidence and use a new immutable candidate for any
+1. Keep v0.2.0-rc1 at cross-runtime approval pending expert review, not
+   production approval.
+2. Obtain the required expert review using the manifest-bound compact pack.
+3. Preserve all versioned evidence and use a new immutable candidate for any
    behavioral change.
-5. Keep Power CAT execution external, explicit, synthetic/public only, and
+4. Keep Power CAT execution external, explicit, synthetic/public only, and
    configuration-gated by the canonical register.
 
 ## Repository state at checkpoint
 
-The intended commit contains only
-`skills/power-platform-incremental-delivery/` and its byte-identical
-`.agents/skills/power-platform-incremental-delivery/` publication. The Power
-CAT repository publication remains the separate `ea9708b` prerequisite.
-Canonical-pack replacement work, the current-feature-verifier publication, and
-all other unrelated worktree changes remain outside this checkpoint. No push
-is authorized.
+The intended commit contains the existing canonical checkpoint pair and
+changelog, their byte-identical `.agents` publication copies, the compact Work
+input ZIP, the complete supplied Work results ZIP, and the folder/ZIP forms of
+the expert-review pack. The Power CAT repository publication remains the
+separate `ea9708b` prerequisite. Canonical-pack replacement work, the
+current-feature-verifier publication, and all other unrelated worktree changes
+remain outside this checkpoint. No push is authorized.

@@ -1,11 +1,12 @@
 # Power Platform Incremental Delivery v0.2.0-rc1 Checkpoint
 
 **Checkpoint date:** 2026-07-20
-**Status:** Technical gates passed — formal human sign-off pending
-**Technical adoption label:** Repository-level approved for explicit use in
+**Status:** Repository-level approved — v0.2.0 release pending
+**Adoption:** Repository-level approved for explicit use in
 ChatGPT Work and Codex/VS Code, within the documented personal-zone and
 public/synthetic or approved non-confidential data boundary.
-**Approval authority:** Pending human reviewer sign-off
+**Human sign-off:** Rohit, Lead, 2026-07-21;
+`reviewer-signoff.md#2026-07-21`
 **Power CAT publication prerequisite:** `ea9708b`
 
 ## Outcome
@@ -107,10 +108,11 @@ the stored Markdown removes seven trailing line-break markers without changing
 wording and has SHA-256
 `a5d315ffa2bfe455e06612045258c35b54338e490313ae8de9ccca848e154967`.
 
-The technical evidence supports the adoption label above. It does not supply
-the missing human approval authority. Promotion to v0.2.0 and creation of the
-clean runtime installation ZIP remain stopped until the sign-off record names
-the reviewer, role, and durable approval reference.
+The technical evidence supports the adoption label above. Human reviewer
+Rohit, Lead, approved the bounded repository-level decision on 2026-07-21 at
+`reviewer-signoff.md#2026-07-21`. Promotion to v0.2.0 and creation of the clean
+runtime installation ZIP may proceed as a separate release commit after the
+required static checks.
 
 ## Evidence boundary
 
@@ -133,20 +135,19 @@ tenant configuration, deployment, activation, or production runtime behavior.
 
 ## Continuing position
 
-1. Obtain formal human sign-off for the bounded repository-level approval.
+1. Promote the unchanged candidate to v0.2.0 in a separate release commit,
+   run static gates, and create a clean runtime-only ChatGPT Skills ZIP.
 2. Preserve all versioned evidence and use a new immutable candidate for any
    behavioral change.
-3. After sign-off, promote v0.2.0-rc1 to v0.2.0 in a separate release commit,
-   run static gates, and create a clean runtime-only ChatGPT Skills ZIP.
-4. Keep Power CAT execution external, explicit, pinned, synthetic/public only,
+3. Keep Power CAT execution external, explicit, pinned, synthetic/public only,
    and configuration-gated by the canonical register.
 
 ## Repository state at checkpoint
 
-The expert-evidence commit contains only the new expert-review result directory
-and updates to the existing canonical checkpoint pair and changelog, together
-with byte-identical `.agents` publication copies. The Power CAT repository
-publication remains the separate `ea9708b` prerequisite. Canonical-pack
-replacement work, the current-feature-verifier publication, and all other
-unrelated worktree changes remain outside this checkpoint. No release commit
-or push is authorized before human sign-off.
+The human-approval commit updates only the existing expert-review result,
+checkpoint pair, and changelog together with byte-identical `.agents`
+publication copies. The Power CAT repository publication remains the separate
+`ea9708b` prerequisite. Canonical-pack replacement work, the current-feature-
+verifier publication, and all other unrelated worktree changes remain outside
+this checkpoint. The v0.2.0 release remains a separate commit. No push is
+authorized.

@@ -3,10 +3,11 @@
 **Workstream:** Portable Skill 6 delegation correction and evaluation
 **Checkpointed:** 2026-07-20
 **Final candidate:** v0.2.0-rc1
-**Technical adoption label:** Repository-level approved for explicit use in
+**Adoption:** Repository-level approved for explicit use in
 ChatGPT Work and Codex/VS Code, within the documented personal-zone and
 public/synthetic or approved non-confidential data boundary.
-**Formal approval:** Pending human reviewer sign-off
+**Formal approval:** Rohit, Lead, 2026-07-21;
+`reviewer-signoff.md#2026-07-21`
 
 ## Request sequence
 
@@ -48,6 +49,8 @@ public/synthetic or approved non-confidential data boundary.
     review result path.
 17. Keep v0.2.0 promotion and runtime ZIP creation behind the formal human
     sign-off gate, then release in a separate commit.
+18. Record human reviewer Rohit, role Lead, on 2026-07-21 using durable
+    reference `reviewer-signoff.md#2026-07-21`.
 
 ## Delivered result
 
@@ -89,8 +92,9 @@ public/synthetic or approved non-confidential data boundary.
 - Seven findings are retained: six non-blocking improvements and one
   operational-configuration observation. The review grants no tenant,
   implementation, deployment, or production authority.
-- Human approval remains pending because reviewer name, reviewer role, and a
-  durable approval reference were not supplied.
+- Human approval is complete: Rohit, Lead, approved the bounded repository-
+  level scope on 2026-07-21 at
+  `reviewer-signoff.md#2026-07-21`.
 
 ## Diagnostic history
 
@@ -113,8 +117,8 @@ deployed, committed during the workflow, or pushed. Power CAT remains an
 explicit, external, public/synthetic-only specialist governed by the canonical
 register and its approved repository publication.
 
-This checkpoint establishes the required three-case ChatGPT Work parity and
-technical expert-assurance gate. It does not claim formal human approval,
-automatic or implicit skill selection, tenant verification, deployment,
+This checkpoint establishes the required three-case ChatGPT Work parity,
+technical expert-assurance gate, and formal bounded human approval. It does not
+claim automatic or implicit skill selection, tenant verification, deployment,
 activation, or production runtime evidence. Any behavioral change requires a
 new immutable candidate.

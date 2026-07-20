@@ -7,10 +7,12 @@
 - Expert-assurance checkpoint: independent AI-assisted review passed at
   4.44/5 overall, 4.00/5 for security/governance, and 4.80/5 for GOLD-005
   delegation, with zero critical failures and no Blocker or High findings.
-- Technical adoption label: `Repository-level approved for explicit use in
+- Adoption label: `Repository-level approved for explicit use in
   ChatGPT Work and Codex/VS Code, within the documented personal-zone and
-  public/synthetic or approved non-confidential data boundary.` Formal human
-  approval remains pending and the candidate is not yet promoted to v0.2.0.
+  public/synthetic or approved non-confidential data boundary.` Human reviewer
+  Rohit, Lead, approved the bounded scope on 2026-07-21 at
+  `reviewer-signoff.md#2026-07-21`. The candidate is not yet promoted to
+  v0.2.0.
 - Evidence preservation: add the exact expert assurance review, normalized
   JSON record, unsigned human sign-off template, and SHA-256 manifest under
   `tests/results/expert-review/v0.2.0-rc1/`.

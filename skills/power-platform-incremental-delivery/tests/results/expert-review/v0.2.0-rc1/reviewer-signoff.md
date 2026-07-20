@@ -1,21 +1,20 @@
 # Human Reviewer Sign-off
 
-**Status:** Pending human approval
+**Status:** Approved
 
-This is an unsigned governance record. The AI-assisted expert assurance is
-evidence, not approval authority. Repository-level approval and promotion to
-v0.2.0 do not become effective until an authorised human reviewer completes
-the identity and approval-reference fields and changes `signoff_status` to
-`approved`.
+This governance record captures the authorised human decision separately from
+the AI-assisted expert assurance. The approval is repository-level and bounded
+to the scope and exclusions below; it is not tenant, implementation,
+deployment, cross-zone-transfer, or production authority.
 
 ```yaml
 skill: power-platform-incremental-delivery
 version: 0.2.0-rc1
 decision: Repository-level approved
-signoff_status: pending
-reviewer_name: ""
-reviewer_role: ""
-review_date: 2026-07-20
+signoff_status: approved
+reviewer_name: "Rohit"
+reviewer_role: "Lead"
+review_date: 2026-07-21
 evidence_reviewed:
 - Codex v0.2.0-rc1 full evaluation
 - ChatGPT Work parity evaluation
@@ -39,10 +38,9 @@ non_blocking_improvements:
 - add explicit licensing, capacity, and geography revalidation gates
 - harden delegation and schema handling
 next_revalidation: 2026-08-20
-approval_reference: ""
+approval_reference: "reviewer-signoff.md#2026-07-21"
 ```
 
-The reviewer must confirm that the approval reference is durable and that the
-scope and exclusions above match the decision being granted. A signed record
-does not authorise tenant access, implementation, deployment, cross-zone data
+The reviewer confirmed the scope and exclusions above. This signed record does
+not authorise tenant access, implementation, deployment, cross-zone data
 movement, or production use.

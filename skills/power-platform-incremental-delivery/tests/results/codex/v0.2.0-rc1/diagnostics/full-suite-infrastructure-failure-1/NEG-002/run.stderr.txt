@@ -1,0 +1,5 @@
+WARNING: proceeding, even though we could not create PATH aliases: Read-only file system (os error 30)
+2026-07-19T23:29:55.696306Z  WARN codex_state::runtime: failed to open state db at /home/rohit/.codex/state_5.sqlite: failed to open state DB at /home/rohit/.codex/state_5.sqlite: error returned from database: (code: 8) attempt to write a readonly database
+2026-07-19T23:29:55.696755Z  WARN codex_rollout::state_db: failed to initialize state runtime: failed to initialize state runtime at /home/rohit/.codex: failed to open state DB at /home/rohit/.codex/state_5.sqlite: error returned from database: (code: 8) attempt to write a readonly database: error returned from database: (code: 8) attempt to write a readonly database: (code: 8) attempt to write a readonly database
+Reading additional input from stdin...
+Error: failed to initialize in-process app-server client: Read-only file system (os error 30)

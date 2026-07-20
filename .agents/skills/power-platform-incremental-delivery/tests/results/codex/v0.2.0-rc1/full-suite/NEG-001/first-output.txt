@@ -1,0 +1,124 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "A request was made for the next Power Platform delivery slice, but no user-visible or operational outcome was supplied.",
+        "basis": "The supplied request explicitly states that no outcome is available.",
+        "source_refs": [
+          "user-request"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The supplied request contains only public planning information and is being handled in the personal OpenAI zone.",
+        "impact": "Planning may continue without organisational data, tenant access, or cross-zone transfer.",
+        "validation_required": "Reclassify the boundary if later inputs contain organisational or confidential information.",
+        "source_refs": [
+          "user-request",
+          "skill-v0.2.0"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable user or operational outcome must the next slice achieve?",
+        "owner": "Requestor",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona will perform or receive that outcome?",
+        "owner": "Requestor",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which Power Platform or Dynamics 365 host surface and entry point will support the journey?",
+        "owner": "Requestor",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Undetermined because no observable user or operational result was supplied.",
+    "entry": "Undetermined pending the persona, host surface, and entry point.",
+    "validation": "Undetermined pending the business outcome and journey.",
+    "persistence_or_action": "Undetermined; no authoritative write or action owner can be selected safely.",
+    "feedback": "Undetermined pending the interaction and operational journey.",
+    "telemetry": "Undetermined pending the outcome, data classification, and host.",
+    "evidence": "No implementation, package, deployment, configuration, or runtime evidence exists for an undefined slice.",
+    "scope": [
+      "Identify the minimum observable outcome, persona, and host before selecting a delivery slice."
+    ],
+    "exclusions": [
+      "Implementation, tenant access, deployment, and fabricated architecture decisions."
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Delivery planning proceeds without an observable outcome, persona, or host.",
+      "expected_behavior": "Keep the brief Open and do not fabricate a horizontal or deployable slice.",
+      "evidence": "Review confirms that no implementation-ready brief was issued."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment remains unidentified."
+    ],
+    "prerequisites": [
+      "Supply the observable outcome, persona, and host before defining deployment prerequisites."
+    ],
+    "steps": [
+      "Do not deploy while the delivery slice is undefined."
+    ],
+    "post_deploy_checks": [
+      "Post-deployment checks will be defined only after the slice is specified."
+    ],
+    "evidence_required": [
+      "No deployment evidence is applicable at this stage."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "No rollback trigger applies until an implementation is authorised."
+    ],
+    "steps": [
+      "Define rollback steps with the implementation-ready slice."
+    ],
+    "data_considerations": [
+      "No data mutation has been designed or authorised."
+    ],
+    "owner": "To be assigned when the delivery outcome and operational owner are known.",
+    "evidence_required": [
+      "No rollback evidence is applicable before implementation."
+    ]
+  },
+  "next_action": "Provide one sentence naming the observable outcome, the persona, and the Power Platform or Dynamics 365 host and entry point; then reconstruct the current agreed position and select the smallest deployable vertical slice."
+}

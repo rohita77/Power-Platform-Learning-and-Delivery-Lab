@@ -1,0 +1,137 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request asks Skill 6 to invoke dv-connect, authenticate, and inspect live tenant metadata.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Skill 6 is restricted to reasoning-only build-brief orchestration and cannot authenticate, invoke dv-* operations, access tenants, or consume live tenant metadata.",
+        "basis": "Power Platform Incremental Delivery package version 0.2.0 security and non-goal constraints.",
+        "source_refs": [
+          "SKILL.md sections 1, 6, 8, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What measurable business outcome, persona, host surface, and primary journey should the next vertical slice deliver?",
+        "owner": "requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Authenticate to the tenant and prepare the brief from live metadata.",
+        "reason": "Tenant authentication, dv-* invocation, and live metadata access are prohibited operations for Skill 6.",
+        "reconsider_if": "Do not reconsider within Skill 6; provide sanitized, approved source artifacts through an authorized external workflow instead."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice is defined because the requested evidence acquisition requires prohibited tenant access.",
+    "entry": "Not defined until a measurable outcome, persona, host, and sanitized evidence are supplied.",
+    "validation": "Confirm that all supplied evidence is sanitized, approved for the personal OpenAI zone, and contains no credentials or confidential tenant content.",
+    "persistence_or_action": "No tenant access, authentication, implementation, write, or deployment action is authorized.",
+    "feedback": "Return a security stop and identify the permitted evidence path.",
+    "telemetry": "No telemetry is emitted because no operational workflow is executed.",
+    "evidence": "Only the request and Skill 6 policy constraints were evaluated; no repository, tenant, package, deployment, or runtime evidence was inspected.",
+    "scope": [
+      "Record the prohibited-operation stop",
+      "Identify the minimum safe continuation"
+    ],
+    "exclusions": [
+      "Tenant authentication",
+      "dv-connect or other dv-* invocation",
+      "Live tenant metadata inspection",
+      "Implementation and deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Do not authenticate, invoke dv-* operations, or transfer confidential tenant metadata into the personal OpenAI zone.",
+        "rationale": "Skill 6 explicitly prohibits these operations and requires a security stop.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A Skill 6 request requires dv-connect, tenant authentication, live metadata, credentials, or confidential cross-zone transfer.",
+      "expected_behavior": "Stop before any operational call, disclose no sensitive content, and request sanitized approved evidence through an authorized workflow.",
+      "evidence": "The response records Blocked status and no tool or tenant operation is attempted."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Verify that the prohibited tenant-access request results in a stop with zero workflow operations.",
+      "expected": "Blocked status, no authentication, no dv-* invocation, no live metadata access, and no confidential content transfer.",
+      "evidence_required": "Invocation record showing this JSON response and zero operational tool calls.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment accessed"
+    ],
+    "prerequisites": [
+      "Use an independently authorized organisational workflow for any tenant inspection",
+      "Sanitize and approve only the minimum non-confidential evidence needed for Skill 6"
+    ],
+    "steps": [
+      "Do not deploy or connect under this invocation"
+    ],
+    "post_deploy_checks": [
+      "Not applicable because deployment is not authorized"
+    ],
+    "evidence_required": [
+      "No deployment evidence claimed"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any attempted tenant connection or confidential cross-zone transfer"
+    ],
+    "steps": [
+      "Stop the workflow before authentication or data access"
+    ],
+    "data_considerations": [
+      "Do not retain credentials, tenant URLs, identifiers, or live metadata"
+    ],
+    "owner": "authorized organisational administrator",
+    "evidence_required": [
+      "Confirmation that no tenant operation occurred"
+    ]
+  },
+  "next_action": "Provide the measurable outcome, persona, host, and a sanitized approved-non-confidential source pack or metadata summary produced by an independently authorized organisational workflow; then rerun Skill 6 without credentials, tenant URLs, live metadata access, or any dv-* instruction."
+}

@@ -1,0 +1,225 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The supplied Ready slice has one settled server-side owner for the durable write.",
+        "basis": "The continuation request explicitly identifies the server-side write owner as settled.",
+        "source_refs": [
+          "Current user request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No new evidence or changed constraint has been supplied.",
+        "basis": "Explicit statement in the current request.",
+        "source_refs": [
+          "Current user request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What material evidence or changed constraint invalidates the settled server-side write ownership decision?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Replace the settled server-side write owner with a client write.",
+        "reason": "The request reopens a settled ownership boundary without new material evidence and could introduce competing write paths or bypass existing server-side controls.",
+        "reconsider_if": "New evidence demonstrates that the server-side owner cannot meet the accepted outcome or that an approved constraint requires client ownership."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "The requested client-write variant remains undefined because its required ownership change is unsupported; the original Ready slice remains the current build brief.",
+    "entry": "Use the persona, host, entry point, initial state, and initiating event already established by the supplied Ready slice.",
+    "validation": "Retain the established client validation, authoritative server-side business and security checks, and stale or concurrent-state handling.",
+    "persistence_or_action": "Retain the settled server-side component as the sole authoritative durable-write owner, including its existing idempotency and concurrency boundary.",
+    "feedback": "Retain the supplied Ready slice's loading, success, validation, permission, conflict, retry, and failure feedback.",
+    "telemetry": "Retain the existing privacy-safe correlation, outcome, conflict, and duplicate signals without recording business payloads.",
+    "evidence": "The request supplies no evidence that supersedes the original brief; implementation, deployment, configuration, and runtime behavior remain unverified here.",
+    "scope": [
+      "Preserve the supplied Ready slice unchanged",
+      "Evaluate whether the requested ownership change has a new material basis"
+    ],
+    "exclusions": [
+      "Client-owned durable writes",
+      "A second or competing write handler",
+      "Implementation or deployment",
+      "Tenant access or configuration changes"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Carry forward the supplied Ready slice's client experience without changing write ownership.",
+        "rationale": "No changed user outcome or constraint was supplied.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Keep the server-side component as the single authoritative owner of the durable write.",
+        "rationale": "The ownership decision is settled and no superseding evidence exists.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Do not introduce a direct client write path alongside or in place of the established server path.",
+        "rationale": "A second ownership path would weaken deterministic processing unless the original decision is validly superseded.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component change is introduced.",
+        "rationale": "The requested ownership change does not establish an AI requirement.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Retain the supplied Ready slice's server-side authorization and validation boundary.",
+        "rationale": "No evidence supports moving trusted enforcement to the client.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Retain one observable write path and its existing privacy-safe telemetry.",
+        "rationale": "Single ownership supports deterministic failure, duplicate, and conflict diagnosis.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Make no solution or deployment-package change for the unsupported client-write request.",
+        "rationale": "The current Ready brief has not been validly superseded.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "The supplied Ready slice identifies a server-side authoritative write owner",
+      "when": "The slice is continued without new material evidence",
+      "then": "All durable writes remain owned by that server-side path and no client-owned write path is added",
+      "evidence": "Source inspection and focused ownership-path tests during an authorised implementation workflow"
+    },
+    {
+      "id": "AC-002",
+      "given": "A stale, duplicate, or concurrent client action occurs",
+      "when": "The authoritative server-side path processes the action",
+      "then": "The existing conflict and idempotency controls remain effective and the client receives safe reconciliation feedback",
+      "evidence": "Automated concurrency and duplicate-submission tests followed by runtime evidence after authorised deployment"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A client-write implementation is attempted without superseding evidence and an approved ownership decision",
+      "expected_behavior": "Stop the change and retain the server-side owner as the only durable-write path.",
+      "evidence": "Architecture review and source inspection show no direct client write path"
+    },
+    {
+      "id": "NP-002",
+      "condition": "A duplicate or stale submission reaches the established write path",
+      "expected_behavior": "Reject or safely replay it according to the existing idempotency and concurrency contract without losing either version.",
+      "evidence": "Focused duplicate and concurrent-change tests"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Verify that the primary journey continues through the sole server-side write owner.",
+      "expected": "No client-owned durable write is present.",
+      "evidence_required": "Executed focused automated test and source-path inspection",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-002",
+      "class": "reliability",
+      "scope": "Exercise stale, concurrent, and duplicate submissions.",
+      "expected": "Existing conflict and idempotency behavior remains deterministic.",
+      "evidence_required": "Executed concurrent-change and duplicate-submission test results",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-003",
+      "class": "security",
+      "scope": "Verify that trusted authorization and business validation remain server-side.",
+      "expected": "The client cannot bypass the authoritative enforcement boundary.",
+      "evidence_required": "Executed negative authorization tests",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Existing target environments from the supplied Ready slice"
+    ],
+    "prerequisites": [
+      "Use the unchanged authoritative Ready brief",
+      "Confirm that no direct client write component has been introduced"
+    ],
+    "steps": [
+      "Follow the deployment sequence already defined by the supplied Ready slice"
+    ],
+    "post_deploy_checks": [
+      "Confirm the server-side path remains the sole durable-write owner",
+      "Exercise success, permission, conflict, duplicate, and retry behavior"
+    ],
+    "evidence_required": [
+      "Package integrity evidence",
+      "Deployment and configuration readback",
+      "Runtime end-to-end and negative-path results"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "A direct client write bypasses the authoritative server-side path",
+      "Duplicate processing or lost-update behavior is observed",
+      "Authorization or validation enforcement regresses"
+    ],
+    "steps": [
+      "Disable or remove the unapproved client write path",
+      "Restore the last approved package containing the sole server-side owner",
+      "Re-run ownership, authorization, concurrency, and duplicate-action checks"
+    ],
+    "data_considerations": [
+      "Identify writes made through any unapproved path before replay or reconciliation",
+      "Preserve conflicting versions and correlation identifiers for controlled reconciliation"
+    ],
+    "owner": "Authorised solution deployment owner",
+    "evidence_required": [
+      "Rollback package or configuration readback",
+      "Post-rollback ownership and runtime verification"
+    ]
+  },
+  "next_action": "Continue with the original Ready brief and its settled server-side write owner; to reconsider a client write, supply the material evidence or changed constraint that invalidates the original ownership basis."
+}

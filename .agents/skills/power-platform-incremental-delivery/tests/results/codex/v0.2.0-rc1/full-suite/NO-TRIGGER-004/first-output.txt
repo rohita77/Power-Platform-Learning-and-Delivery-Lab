@@ -1,0 +1,78 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request asks for general Power Platform education, not a deployable delivery slice.",
+        "basis": "The user requested an explanation of a model-driven app.",
+        "source_refs": [
+          "user request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and host should a future delivery slice address?",
+        "owner": "requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was requested.",
+    "entry": "No application entry point was specified.",
+    "validation": "No delivery validation rules were specified.",
+    "persistence_or_action": "No persistent action was requested.",
+    "feedback": "No application feedback behavior was requested.",
+    "telemetry": "No telemetry behavior was requested.",
+    "evidence": "Only the educational nature of the request is established.",
+    "scope": [
+      "Abstain from delivery-slice generation"
+    ],
+    "exclusions": [
+      "General Power Platform education",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [],
+    "prerequisites": [],
+    "steps": [],
+    "post_deploy_checks": [],
+    "evidence_required": []
+  },
+  "rollback": {
+    "triggers": [],
+    "steps": [],
+    "data_considerations": [],
+    "owner": "Not applicable because no change is proposed.",
+    "evidence_required": []
+  },
+  "next_action": "Route this request to a general Power Platform education workflow; to use this delivery skill, provide an observable business outcome, persona, and host."
+}

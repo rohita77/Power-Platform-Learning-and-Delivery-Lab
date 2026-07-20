@@ -1,0 +1,10 @@
+{
+  "rc3_case": "GOLD-005 and DEL-001",
+  "rc3_input_shape": "complete Skill 6 build-brief input",
+  "rc3_input_length_characters": 686,
+  "rc3_input_sha256": "d3b75bbb4bcb6322a7981124145adeefb6a8fe47c4296d985bf57e201afd8b14",
+  "rc3_evidence": "tests/results/codex/v0.1.0-rc3/targeted/GOLD-005/specialist/invocation.json",
+  "properly_narrowed": false,
+  "corrected_payload_sha256": "cfe0035670a2c16613f359f61fa2228fba9f20e0bf45145236147ce13451201f",
+  "finding": "RC3 passed the complete orchestration request to the specialist instead of a sanitized specialist-only payload."
+}

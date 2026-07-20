@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-07-20T00:11:09Z",
+  "skill6_output_schema": {
+    "passed": 45,
+    "failed": 0,
+    "total": 45,
+    "silent_repairs": 0
+  },
+  "powercat_answer_schema": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  },
+  "result_record_v3_codex_profile": {
+    "passed": 44,
+    "failed": 0,
+    "total": 44
+  },
+  "delegation_contract_fixtures": {
+    "valid_records_accepted": 2,
+    "valid_records_total": 2,
+    "invalid_mutations_rejected": 6,
+    "invalid_mutations_total": 6
+  },
+  "result_record_profiles": {
+    "codex_vscode": "strict and executed",
+    "chatgpt_work": "strict and unchanged; no Work runtime records created"
+  }
+}

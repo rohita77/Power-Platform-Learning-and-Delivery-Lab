@@ -1,0 +1,631 @@
+{
+  "status": "Ready",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The bounded outcome is for a test user to submit a synthetic service-request summary in Copilot Studio, receive a schema-validated structured classification, explicitly confirm the current classification version, and create one synthetic Dataverse request through the already approved organisational action.",
+        "basis": "Observable end-to-end outcome supplied in the request.",
+        "source_refs": [
+          "Current delivery request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The supplied current-feature verification record is the authoritative source for the selected Copilot Studio experience, license and capacity path, supported region, DLP prerequisites, documented limitations, and ALM support for this experiment.",
+        "basis": "The requester states that the attached record is schema-valid, unexpired, and confirms each required current-product fact; product verification is explicitly excluded.",
+        "source_refs": [
+          "Attached current-feature verification record"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "All user input, classifications, telemetry, and created request data for this slice must be synthetic.",
+        "basis": "The requested experiment is explicitly synthetic.",
+        "source_refs": [
+          "Current delivery request"
+        ]
+      },
+      {
+        "id": "CP-004",
+        "statement": "The Dataverse write must be owned exclusively by the already approved organisational action; the conversational experience and AI classifier must not perform an additional direct write.",
+        "basis": "The request identifies an already approved organisational action, and the slice requires one authoritative write owner.",
+        "source_refs": [
+          "Current delivery request"
+        ]
+      },
+      {
+        "id": "CP-005",
+        "statement": "This invocation produces a build brief only and does not authorise tenant access, implementation, publishing, deployment, connection changes, role changes, or Dataverse operations.",
+        "basis": "Skill authority and explicit instruction not to access a tenant.",
+        "source_refs": [
+          "Power Platform Incremental Delivery v0.2.0",
+          "Current delivery request"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The approved organisational action can accept a server-controlled idempotency key and classification-version value, or can be wrapped inside the authorised solution boundary to enforce their equivalent before the Dataverse create.",
+        "impact": "The action contract must provide duplicate suppression and stale-confirmation rejection; implementation must stop if neither can be enforced.",
+        "validation_required": "Validate the documented action interface and idempotency enforcement during implementation before publishing the slice.",
+        "source_refs": [
+          "Current delivery request"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "Exact Dataverse logical names, publisher prefix, environment identifiers, connection references, telemetry destination, approved classification taxonomy, confidence or abstention threshold, and recorded regional binding are implementation-time configuration values.",
+        "impact": "They do not alter the architecture if resolved from approved organisational sources and the supplied verification record before build or deployment.",
+        "validation_required": "Record the resolved values in deployment configuration and capture configuration readback without exposing environment-specific identifiers in general documentation.",
+        "source_refs": [
+          "Attached current-feature verification record",
+          "Current delivery request"
+        ]
+      },
+      {
+        "id": "AS-003",
+        "statement": "A synthetic marker and experiment-run correlation field can be included in the approved action contract or mapped to existing approved Dataverse fields.",
+        "impact": "These fields support test isolation, telemetry reconciliation, and controlled cleanup without placing the submitted summary in telemetry.",
+        "validation_required": "Confirm the approved field mapping and retention owner before implementation.",
+        "source_refs": [
+          "Current delivery request"
+        ]
+      }
+    ],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Send service-request summaries or Dataverse data to a personal OpenAI endpoint.",
+        "reason": "The runtime belongs in the organisational Microsoft zone and no cross-zone transfer is required for the slice.",
+        "reconsider_if": "A separate formally approved data-boundary decision and current verification explicitly authorise the transfer."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Allow the model or conversational topic to create a Dataverse row without explicit user confirmation.",
+        "reason": "Classification is advisory and must be schema-validated, current, and human-confirmed before the approved action is invoked.",
+        "reconsider_if": "A later authorised slice supplies a new approval and risk decision."
+      },
+      {
+        "id": "RJ-003",
+        "decision": "Treat this synthetic experiment as production-ready or as evidence of tenant runtime behavior.",
+        "reason": "No implementation, deployment, configuration readback, or runtime execution has been observed.",
+        "reconsider_if": "The complete productionisation and runtime evidence gates are separately satisfied."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "organisational-microsoft",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "In an authorised organisational Copilot Studio test experience, a permitted test user submits a synthetic service-request summary, receives either a validated structured classification or an explicit abstention, reviews and confirms the current classification version, and receives a success reference after the approved organisational action creates exactly one synthetic Dataverse request.",
+    "entry": "Persona: authorised test user. Host: the selected organisational Copilot Studio experience confirmed by the supplied verification record. Entry point: the published experiment entry point in the authorised test environment. Initial state: no active classification draft and no write initiated. Initiating event: the user starts the synthetic service-request journey and submits a non-empty summary after acknowledging the synthetic-data restriction.",
+    "validation": "Reject empty, oversized, malformed, unsupported-language, non-synthetic, or policy-disallowed input before classification. Validate model output against a versioned allow-listed schema containing classification version, request category, urgency, routing label, confidence band, abstention flag, and concise user-safe rationale. Reject unknown properties and invalid enum values. Abstain when the input is ambiguous, unsupported, below the approved confidence threshold, or cannot be validated. Bind confirmation to the current draft ID, version, and content hash. If a newer classification exists or the supplied version is stale, preserve both versions, reject confirmation, emit a conflict outcome, and instruct the user to reload and reconcile.",
+    "persistence_or_action": "Only an explicit confirmation of the current validated classification may invoke the approved organisational action. Generate the idempotency key in the trusted orchestration boundary from the experiment run, draft ID, and classification version; never accept a caller-selected key. The approved action is the sole authoritative owner of the Dataverse create and must enforce the key through an alternate key, transactionally checked ledger, or equivalent atomic duplicate guard. It receives only the validated mapped fields, synthetic marker, correlation ID, classification version, and idempotency key. A retry reuses the same key. The response must distinguish created, already-completed duplicate, validation rejection, permission failure, transient failure, and unknown outcome.",
+    "feedback": "Show progress during classification and creation while disabling repeated confirmation. Display the structured classification and an explicit Confirm or Revise choice before any write. Show field-level validation guidance, a clear abstention explanation with revision guidance, permission-safe errors, and a conflict message instructing reload and reconciliation. On a transient or unknown action outcome, retain the draft and retry only with the same idempotency key. On success or a proven duplicate of the same completed action, show the synthetic request reference without exposing internal diagnostics. Support cancellation without a write, keyboard operation, visible focus, screen-reader status announcements, narrow layouts, and long summaries.",
+    "telemetry": "Generate a privacy-safe correlation ID at journey start and propagate it through classification, confirmation, approved action, and Dataverse result. Emit classification-started, classification-validated, classification-abstained, schema-rejected, confirmation-presented, confirmation-conflict, create-started, create-succeeded, create-duplicate, create-failed, and create-outcome-unknown events with timestamp, component version, environment classification, duration, outcome code, confidence band, draft version, and duplicate or conflict indicator. Exclude the submitted summary, prompts, raw model output, rationale text, user name, email, Dataverse field values, connector details, and secrets. Apply approved retention, access, and monitoring controls.",
+    "evidence": "Level 1 requires reviewed solution source, versioned classification schema, prompt or instruction configuration, action mapping, synthetic-data guard, and static checks. Level 2 requires automated component tests, schema and AI evaluation, accessibility checks, and idempotency, stale-version, failure, and replay tests. Level 3 requires exported solution and package dependency, connection-reference, environment-variable, and artifact-integrity evidence. Level 4 requires authorised import, connection and DLP configuration readback, role assignment confirmation, published-version readback, and approved action binding. Level 5 requires test-user runtime evidence for success, abstention, invalid output, permission failure, concurrent change, duplicate confirmation, transient retry, unknown outcome, telemetry correlation, and rollback. No lower evidence level proves a higher one.",
+    "scope": [
+      "One synthetic service-request submission journey in the selected Copilot Studio test experience",
+      "Versioned structured classification with strict schema validation and allow-listed values",
+      "Explicit user review, revision, and confirmation before persistence",
+      "Abstention for ambiguity, low confidence, unsupported input, or invalid model output",
+      "One approved organisational action as the sole Dataverse create owner",
+      "Idempotent duplicate protection and stale-classification conflict handling",
+      "Privacy-safe correlated telemetry for success, failure, conflict, abstention, and replay",
+      "Solution-aware deployment, post-deploy validation, and rollback evidence"
+    ],
+    "exclusions": [
+      "Production use or production-readiness approval",
+      "Confidential, personal, customer, or live operational data",
+      "Personal OpenAI endpoints or cross-zone runtime transfer",
+      "Direct Dataverse writes from the model or an additional conversational handler",
+      "Automatic creation without explicit confirmation",
+      "Updates or overwrites of existing Dataverse requests",
+      "Email, notification, escalation, assignment, SLA, or downstream fulfilment automation",
+      "Tenant access, authentication, implementation, deployment, publishing, role changes, or DLP changes during brief generation",
+      "Reverification of product, licensing, capacity, region, limitation, or ALM claims"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EX-001",
+        "decision": "Use the Copilot Studio experience selected in the supplied current-feature verification record and expose only the bounded synthetic experiment journey.",
+        "rationale": "This preserves the verified host decision and avoids reopening current-product selection.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "EX-002",
+        "decision": "Implement explicit states for input, classifying, validated review, abstained, confirming, conflict, creating, success, duplicate success, retryable failure, unknown outcome, permission failure, and cancellation.",
+        "rationale": "The user must always know whether a write has occurred and whether confirmation is currently safe.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "EX-003",
+        "decision": "Make the confirmation control version-bound, disabled while processing, keyboard accessible, focus managed, and accompanied by a Revise path.",
+        "rationale": "This supports accessible human approval and prevents repeated or stale actions.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "data": [
+      {
+        "id": "DA-001",
+        "decision": "Use a versioned allow-listed classification contract and map only validated fields into the approved action.",
+        "rationale": "Strict validation prevents model-generated properties or unsupported labels from reaching Dataverse.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DA-002",
+        "decision": "Keep the unconfirmed classification as a versioned conversation draft containing a server-issued draft ID, version, and content hash; persist the Dataverse request only after current-version confirmation.",
+        "rationale": "This separates advisory state from the authoritative record and enables stale-confirmation detection.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DA-003",
+        "decision": "Mark every created row as synthetic and store a correlation or experiment-run reference using approved fields.",
+        "rationale": "The marker supports isolation, reconciliation, evidence collection, retention, and authorised cleanup.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "DA-004",
+        "decision": "Do not update existing requests in this slice; any future overwrite must validate Dataverse row version and reject stale writes without discarding either version.",
+        "rationale": "Creation is the smallest credible slice, while the explicit concurrency rule prevents unsafe extension.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "IN-001",
+        "decision": "Invoke only the already approved organisational action for request creation, with no parallel connector, workflow, plugin, or direct Dataverse write.",
+        "rationale": "A single authoritative write owner prevents duplicate processing and inconsistent policy enforcement.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "IN-002",
+        "decision": "Pass a trusted idempotency key, draft version, synthetic marker, correlation ID, and validated field set to the action; require an atomic duplicate guard and structured outcome.",
+        "rationale": "This provides deterministic replay behavior across double-clicks, timeouts, and safe retries.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "IN-003",
+        "decision": "Treat timeout or transport loss after invocation as an unknown outcome and retry only with the original idempotency key.",
+        "rationale": "A new key could create a duplicate when the original write completed but its response was lost.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Constrain classification to a versioned taxonomy and strict response schema; reject malformed JSON, unknown properties, invalid enums, missing fields, and unsafe rationale.",
+        "rationale": "Model output is untrusted until deterministic validation succeeds.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "AI-002",
+        "decision": "Require abstention for ambiguous, unsupported, policy-disallowed, or below-threshold cases and prevent confirmation or action invocation while abstained.",
+        "rationale": "A safe no-decision is preferable to fabricating a routable classification.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "AI-003",
+        "decision": "Treat the classification as advisory and require explicit human confirmation of the displayed current version.",
+        "rationale": "This bounds AI authority and supplies an auditable approval point before persistence.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "AI-004",
+        "decision": "Use a synthetic evaluation set covering normal, ambiguous, adversarial, multilingual or unsupported, long, malformed, and out-of-taxonomy summaries before publishing.",
+        "rationale": "The experiment needs observed classification, abstention, safety, and schema-conformance evidence rather than prompt inspection alone.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SE-001",
+        "decision": "Run the experience, AI capability, approved action, Dataverse connection, and telemetry entirely in the organisational Microsoft boundary confirmed by the supplied record.",
+        "rationale": "No personal OpenAI or other cross-zone runtime transfer is required.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SE-002",
+        "decision": "Publish only to authorised test users and bind the action to a least-privilege organisational connection permitted by the verified DLP policy.",
+        "rationale": "Both conversational access and Dataverse create permission must be constrained independently.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SE-003",
+        "decision": "Enforce the synthetic-only restriction in user guidance, test data, action validation, deployment approval, and telemetry exclusion rules.",
+        "rationale": "A banner alone is insufficient to enforce the experiment's data boundary.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SE-004",
+        "decision": "Return user-safe error codes and correlation IDs while keeping connector diagnostics, record payloads, identities, configuration values, and secrets out of chat and telemetry.",
+        "rationale": "Troubleshooting evidence must not create a secondary disclosure path.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OP-001",
+        "decision": "Use end-to-end correlation and privacy-safe outcome events across classification, approval, action invocation, duplicate handling, conflict handling, and Dataverse result.",
+        "rationale": "The experiment must distinguish user validation failures, AI abstention, stale approval, duplicates, integration failures, and successful writes.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OP-002",
+        "decision": "Monitor capacity consumption and service limitations against the path and limits recorded in the supplied verification record; stop the experiment rather than silently bypassing a limit.",
+        "rationale": "The verified capacity path is a bounded prerequisite, not permission to exceed recorded limitations.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OP-003",
+        "decision": "Retain synthetic test records and telemetry only under an assigned organisational owner and approved retention or cleanup procedure.",
+        "rationale": "Rollback of components does not automatically reverse durable Dataverse writes or telemetry.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the Copilot Studio components, approved action references, classification configuration, connection references, environment variables, and required Dataverse dependencies in the supported solution-aware ALM path confirmed by the supplied record.",
+        "rationale": "Deployable components and environment bindings must be versioned and promoted together.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "ALM-002",
+        "decision": "Keep environment-specific bindings outside component logic and resolve them through approved connection references and environment configuration.",
+        "rationale": "This avoids embedding tenant-specific values and supports deterministic promotion and rollback.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "ALM-003",
+        "decision": "Require export integrity, dependency inspection, import evidence, configuration readback, published-version readback, and runtime smoke evidence as separate gates.",
+        "rationale": "Source and package validity do not prove deployment or target behavior.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "ALM-004",
+        "decision": "Retain the previously published known-good version or reversible solution release and document how to disable the experiment entry point independently of data cleanup.",
+        "rationale": "Fast functional rollback must not depend on deleting durable synthetic evidence.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "An authorised test user enters a valid synthetic summary covered by the approved taxonomy",
+      "when": "The user submits it for classification",
+      "then": "The experience displays a schema-valid structured classification with category, urgency, routing label, confidence band, current version, and user-safe rationale, and no Dataverse row exists yet.",
+      "evidence": "Runtime transcript with sanitized values, schema-validation result, correlation event sequence, and Dataverse pre-confirmation query or approved action evidence showing no create."
+    },
+    {
+      "id": "AC-002",
+      "given": "A current validated classification is displayed",
+      "when": "The user explicitly confirms that version",
+      "then": "The approved organisational action creates exactly one synthetic Dataverse request and the experience displays its safe reference and success state.",
+      "evidence": "Confirmation event, action run outcome, Dataverse record evidence, matching correlation ID, synthetic marker, and single-write count."
+    },
+    {
+      "id": "AC-003",
+      "given": "A validated classification is displayed",
+      "when": "The user chooses Revise or Cancel",
+      "then": "No action is invoked and no Dataverse request is created.",
+      "evidence": "Runtime transcript, absence of create-started telemetry, and action or Dataverse evidence showing no write."
+    },
+    {
+      "id": "AC-004",
+      "given": "The summary is ambiguous, unsupported, outside the taxonomy, or below the approved threshold",
+      "when": "Classification completes",
+      "then": "The experience explicitly abstains, provides safe revision guidance, and does not expose confirmation or invoke the action.",
+      "evidence": "AI evaluation result, abstention telemetry, runtime transcript, and absence of action invocation."
+    },
+    {
+      "id": "AC-005",
+      "given": "The model returns malformed or schema-invalid output",
+      "when": "Deterministic validation runs",
+      "then": "The output is rejected, no classification is presented as valid, no write is attempted, and the user receives a safe retry or revision message with a correlation ID.",
+      "evidence": "Injected invalid-output test, validator result, schema-rejected telemetry, and absence of create-started telemetry."
+    },
+    {
+      "id": "AC-006",
+      "given": "The same current confirmation is submitted twice or retried after response loss",
+      "when": "The approved action receives the same idempotency key",
+      "then": "Exactly one Dataverse row exists and the repeated call returns the original completed result or an explicit duplicate-completed outcome.",
+      "evidence": "Action replay logs, matching idempotency evidence, one-row Dataverse count, and create-duplicate telemetry."
+    },
+    {
+      "id": "AC-007",
+      "given": "A new classification version is generated after an earlier confirmation view was displayed",
+      "when": "The user submits the earlier version",
+      "then": "The stale confirmation is rejected without deleting either version, no action is invoked, and the user is told to reload and reconcile.",
+      "evidence": "Concurrent-change runtime test, preserved draft versions, confirmation-conflict telemetry, and absence of a Dataverse create."
+    },
+    {
+      "id": "AC-008",
+      "given": "The approved action returns a permission, validation, transient, or unknown-outcome failure",
+      "when": "The result is handled",
+      "then": "The experience shows a distinct safe state, preserves the confirmed draft where retry is safe, never retries with a new key, and emits a correlated outcome without payload content.",
+      "evidence": "Fault-injection results, runtime feedback captures, action invocation evidence, and sanitized telemetry inspection."
+    },
+    {
+      "id": "AC-009",
+      "given": "The journey is used with keyboard navigation, screen-reader announcements, long content, and a narrow viewport",
+      "when": "The user moves through classification, confirmation, errors, and success",
+      "then": "Focus order, status announcements, labels, disabled-state behavior, content wrapping, and action access remain usable.",
+      "evidence": "Focused accessibility test record and representative runtime captures."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The user submits empty, oversized, malformed, unsupported, or explicitly non-synthetic input.",
+      "expected_behavior": "Reject before classification or action invocation, retain only permitted transient state, and provide field-level or policy-safe guidance.",
+      "evidence": "Boundary and validation tests with absence of classifier or create invocation as applicable."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Classification output contains an unknown category, extra property, missing property, malformed JSON, or unsafe rationale.",
+      "expected_behavior": "Fail closed, emit schema-rejected telemetry, show a safe retry or abstention state, and perform no write.",
+      "evidence": "Contract mutation tests and action-invocation absence."
+    },
+    {
+      "id": "NP-003",
+      "condition": "Classification confidence is below the approved threshold or the request is ambiguous.",
+      "expected_behavior": "Abstain, explain that the request could not be classified safely, invite revision, and suppress confirmation.",
+      "evidence": "Synthetic AI evaluation cases and abstention event evidence."
+    },
+    {
+      "id": "NP-004",
+      "condition": "A confirmation references a stale draft version or content hash.",
+      "expected_behavior": "Reject the confirmation, preserve both versions, emit the privacy-safe correlation ID and conflict outcome, and tell the user to reload and reconcile.",
+      "evidence": "Concurrent-change test, version records, conflict telemetry, and no-create evidence."
+    },
+    {
+      "id": "NP-005",
+      "condition": "The user double-clicks Confirm or a client replays the same submission.",
+      "expected_behavior": "Disable concurrent client actions and enforce the server-side idempotency key so exactly one request is created.",
+      "evidence": "Parallel replay test, one-row count, and duplicate signal."
+    },
+    {
+      "id": "NP-006",
+      "condition": "The action times out after the Dataverse write may have completed.",
+      "expected_behavior": "Show an unknown-outcome state and retry only with the same idempotency key; never issue a new create identity.",
+      "evidence": "Response-loss fault injection, replay result, and one-row count."
+    },
+    {
+      "id": "NP-007",
+      "condition": "The user lacks access to the experience, action, connection, or Dataverse create privilege.",
+      "expected_behavior": "Deny the operation without exposing authorization details or attempting an alternate write path.",
+      "evidence": "Negative-role test and sanitized permission-failure telemetry."
+    },
+    {
+      "id": "NP-008",
+      "condition": "The configured connection, DLP binding, region, capacity path, or required environment value does not match the supplied verification record.",
+      "expected_behavior": "Stop import, publication, or smoke testing and require authorised correction; do not bypass the prerequisite.",
+      "evidence": "Deployment gate failure and configuration comparison record."
+    },
+    {
+      "id": "NP-009",
+      "condition": "Telemetry capture receives a summary, prompt, raw model response, personal identifier, record content, or connector diagnostic.",
+      "expected_behavior": "Fail the telemetry privacy test, block publication, and correct the instrumentation before runtime approval.",
+      "evidence": "Telemetry payload inspection and release-gate result."
+    },
+    {
+      "id": "NP-010",
+      "condition": "A future extension attempts to overwrite an existing Dataverse request without a current row version.",
+      "expected_behavior": "Reject the stale overwrite, retain both versions, emit a conflict outcome, and instruct reload and reconciliation.",
+      "evidence": "Contract test demonstrating that update operations require and validate a concurrency token."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Valid synthetic summary through classification, explicit confirmation, approved action, and one Dataverse create.",
+      "expected": "The structured classification validates and exactly one synthetic request is created with a safe success reference.",
+      "evidence_required": "Automated result plus authorised end-to-end runtime trace correlated across all components.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "ai-evaluation",
+      "scope": "Versioned synthetic evaluation set for valid, ambiguous, unsupported, adversarial, long, multilingual or unsupported-language, and out-of-taxonomy summaries.",
+      "expected": "Outputs satisfy the schema and approved taxonomy, and abstention occurs for every case designated unsafe or unsupported.",
+      "evidence_required": "Versioned dataset, expected labels or abstentions, observed outputs, validator results, and aggregate evaluation report.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "security",
+      "scope": "Synthetic-only input enforcement, least-privilege access, DLP binding, cross-zone prohibition, and telemetry exclusions.",
+      "expected": "Disallowed input and unauthorised identities are rejected, no alternate data path is used, and telemetry contains no excluded payload.",
+      "evidence_required": "Negative-role results, configuration readback, DLP evidence, and sanitized telemetry inspection.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "reliability",
+      "scope": "Duplicate confirmation, parallel replay, retry, and response loss using the same idempotency key.",
+      "expected": "Exactly one Dataverse row is created and every replay returns a consistent completed or duplicate-completed outcome.",
+      "evidence_required": "Parallel execution trace, action outcomes, idempotency evidence, and Dataverse row count.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "reliability",
+      "scope": "Concurrent reclassification followed by submission of an older confirmation version.",
+      "expected": "The stale submission is rejected, both draft versions remain available for reconciliation, no write occurs, and conflict telemetry is emitted.",
+      "evidence_required": "Concurrent-action trace, draft-version evidence, no-create evidence, user feedback capture, and correlated conflict event.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "functional",
+      "scope": "Malformed model output, invalid enums, missing fields, extra fields, low confidence, and explicit abstention.",
+      "expected": "No invalid output becomes confirmable and no action is invoked.",
+      "evidence_required": "Schema mutation results, abstention cases, and absence of create-started events.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "functional",
+      "scope": "Revise and Cancel paths before confirmation.",
+      "expected": "The user can revise or exit and no Dataverse write occurs.",
+      "evidence_required": "Component tests and runtime action-invocation evidence.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-008",
+      "class": "security",
+      "scope": "Permission failures for experience access, approved action execution, connection use, and Dataverse create.",
+      "expected": "Access is denied without diagnostic leakage or fallback to another write mechanism.",
+      "evidence_required": "Test-role matrix, denied-operation evidence, and safe UI or transcript output.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-009",
+      "class": "accessibility",
+      "scope": "Keyboard, focus, screen-reader status, disabled actions, error association, long content, and narrow viewport.",
+      "expected": "The complete journey remains operable and understandable without pointer-only interaction.",
+      "evidence_required": "Automated accessibility checks plus focused manual test record.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-010",
+      "class": "performance",
+      "scope": "Classification and approved-action duration under the bounded synthetic test load and recorded capacity path.",
+      "expected": "Observed timings remain within the experiment thresholds approved before implementation, with progress feedback throughout.",
+      "evidence_required": "Timestamped test results, configured thresholds, capacity observations, and timeout behavior.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-011",
+      "class": "alm",
+      "scope": "Solution export, dependency completeness, connection references, environment variables, classification version, and approved action binding.",
+      "expected": "The artifact is deterministic, contains the required components, and contains no secret or hard-coded environment credential.",
+      "evidence_required": "Artifact manifest, dependency report, integrity hash, and configuration scan.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-012",
+      "class": "deployment",
+      "scope": "Authorised test import, configuration readback, publication, and post-deploy smoke path.",
+      "expected": "The imported and published versions match the approved artifact and the runtime success and negative paths use the intended bindings.",
+      "evidence_required": "Import result, configuration readback, published-version evidence, and runtime traces.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-013",
+      "class": "rollback",
+      "scope": "Disable the experiment entry point and restore the prior known-good component version while retaining auditable synthetic data.",
+      "expected": "New use is prevented, the prior version is restored, no unrelated component is changed, and existing synthetic rows follow the approved retention procedure.",
+      "evidence_required": "Before and after version readback, access test, component comparison, and data-retention record.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised organisational development environment aligned to the supplied verification record",
+      "Authorised organisational test environment aligned to the supplied verification record"
+    ],
+    "prerequisites": [
+      "Implementation and deployment are separately authorised by the organisational owner",
+      "The supplied current-feature verification record remains unexpired at the deployment gate",
+      "The selected experience, license and capacity path, supported region, limitations, DLP prerequisites, and ALM path match the record",
+      "The approved organisational action interface and single-write ownership are documented",
+      "Atomic idempotency and stale-version enforcement are proven before publication",
+      "The approved classification taxonomy, schema version, and abstention threshold are configured",
+      "Required solution components, dependencies, environment variables, and connection references are identified",
+      "Least-privilege test-user, action, connection, and Dataverse permissions are approved",
+      "Synthetic marker, experiment correlation field, retention owner, and cleanup procedure are resolved",
+      "Privacy-safe telemetry destination, access, retention, and alert ownership are approved",
+      "A prior known-good version or disablement path is available for rollback"
+    ],
+    "steps": [
+      "Implement and review the versioned classification contract, synthetic-data guard, conversation states, confirmation-version check, action mapping, telemetry contract, and accessibility behavior in the authorised development environment",
+      "Run static checks, component tests, AI evaluation, security tests, concurrency tests, replay tests, failure injection, and accessibility checks",
+      "Export through the verified solution-aware ALM path and inspect dependencies, environment bindings, connection references, secrets scan, and artifact integrity",
+      "Obtain separate deployment approval for the authorised test environment",
+      "Import using approved ALM procedures and resolve only the approved environment values and organisational connection references",
+      "Read back component versions, connection bindings, DLP alignment, role assignments, telemetry configuration, taxonomy version, idempotency enforcement, and regional placement",
+      "Publish only to the authorised test-user audience",
+      "Execute the success, abstention, schema-rejection, permission, stale-confirmation, duplicate, timeout, unknown-outcome, telemetry, accessibility, and rollback smoke cases",
+      "Record the highest evidence level actually observed and stop the experiment if any prerequisite or negative gate fails"
+    ],
+    "post_deploy_checks": [
+      "Published Copilot Studio version matches the approved artifact",
+      "Runtime bindings match the supplied verification record and approved organisational configuration",
+      "Only authorised test users can enter the experiment",
+      "No Dataverse row exists before explicit confirmation",
+      "A valid confirmed request creates exactly one synthetic row through the approved action",
+      "Ambiguous or invalid classifications abstain without invoking the action",
+      "Stale confirmation is rejected with reload-and-reconcile guidance",
+      "Duplicate and response-loss replay produce one row using the same idempotency key",
+      "Permission and transient failures display safe feedback without diagnostic leakage",
+      "Telemetry correlates the journey and contains none of the excluded payloads",
+      "The disablement and prior-version rollback path is operational"
+    ],
+    "evidence_required": [
+      "Approved artifact identity and integrity record",
+      "Import result and dependency report",
+      "Configuration, connection, DLP, role, region, capacity, and published-version readback",
+      "Sanitized test-user runtime evidence for all acceptance and negative paths",
+      "Dataverse single-row and synthetic-marker evidence",
+      "Idempotency, concurrency, replay, and failure-injection evidence",
+      "Privacy-safe telemetry inspection with correlation continuity",
+      "Rollback rehearsal result"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "A non-synthetic or disallowed payload reaches classification, telemetry, the approved action, or Dataverse",
+      "A write occurs without explicit current-version confirmation",
+      "Duplicate requests are created for one idempotency key",
+      "A stale confirmation or overwrite is accepted",
+      "DLP, connection, role, region, capacity, licensing, or verified limitation prerequisites do not match",
+      "Permission checks can be bypassed or diagnostic details are exposed",
+      "Telemetry contains excluded content or loses required correlation",
+      "The imported or published version differs from the approved artifact",
+      "Failure, abstention, replay, or unknown-outcome behavior cannot be proven"
+    ],
+    "steps": [
+      "Stop new test execution and disable the experiment entry point or remove its test-user audience using the approved operational procedure",
+      "Disable or detach the experiment-specific action invocation without changing unrelated approved integrations",
+      "Restore the prior known-good published component or import the approved rollback artifact through the verified ALM path",
+      "Read back the active version, entry-point state, action binding, connection references, and audience",
+      "Run a no-entry or prior-version smoke check and confirm that no new experiment create events occur",
+      "Preserve sanitized diagnostic evidence and reconcile any unknown outcomes by correlation ID and idempotency key",
+      "Route existing synthetic Dataverse rows and telemetry through the approved retention or cleanup procedure",
+      "Document the rollback trigger, observed evidence level, affected artifact version, and conditions required before retry"
+    ],
+    "data_considerations": [
+      "Component rollback does not automatically delete synthetic Dataverse rows or telemetry",
+      "Do not bulk-delete rows during functional rollback without separate data-owner authorisation",
+      "Use the synthetic marker, correlation ID, experiment run, and idempotency evidence to identify affected records",
+      "Preserve records needed to reconcile unknown outcomes, duplicates, conflicts, and audit evidence",
+      "Apply the approved retention and cleanup procedure after reconciliation"
+    ],
+    "owner": "Authorised organisational solution owner, with the Dataverse data owner responsible for durable-record retention or cleanup",
+    "evidence_required": [
+      "Rollback authorisation and trigger record",
+      "Before and after component and published-version readback",
+      "Experiment entry-point and audience disablement evidence",
+      "Approved action and connection binding readback",
+      "Post-rollback no-new-write smoke evidence",
+      "Synthetic record reconciliation and retention or cleanup decision",
+      "Sanitized incident and telemetry correlation record"
+    ]
+  },
+  "next_action": "Hand this Ready brief and the unchanged attached current-feature verification record to the authorised implementation workflow. Before building, resolve the deferred organisational configuration values, validate the approved action's atomic idempotency and stale-version contract, and record the classification taxonomy, telemetry, retention, connection, and rollback owners; do not reperform product verification, access a tenant, implement, publish, or deploy under this brief-generation invocation."
+}

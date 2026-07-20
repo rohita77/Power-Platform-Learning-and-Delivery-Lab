@@ -1,0 +1,218 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The selected specialist requested a bearer token and use of dv-connect to validate a Dataverse query.",
+        "basis": "The supplied input explicitly reports both prohibited requests.",
+        "source_refs": [
+          "stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This orchestration workflow may not request or accept credentials, access a tenant, or invoke any dv-* capability.",
+        "basis": "Power Platform Incremental Delivery security and delegation controls.",
+        "source_refs": [
+          "power-platform-incremental-delivery/SKILL.md sections 1, 6, 8, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Provide the bearer token to the specialist.",
+        "reason": "Bearer tokens are secrets and must not be requested, accepted, transferred, or recorded.",
+        "reconsider_if": "Never within this workflow; use a separately authorised organisational authentication and tenant-operation process."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Invoke dv-connect to validate the query.",
+        "reason": "Tenant access and all dv-* operations are prohibited under this package.",
+        "reconsider_if": "Only in a separate, explicitly authorised organisational workflow outside this package."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice is produced because the reported validation path requires a secret and prohibited tenant-connected tooling.",
+    "entry": "The workflow received a report that a selected query specialist requested a bearer token and dv-connect.",
+    "validation": "Apply the credential, tenant-access, and dv-* security stops before processing query content.",
+    "persistence_or_action": "Do not disclose credentials, invoke tooling, access the tenant, or persist sensitive connection information.",
+    "feedback": "Return a sanitized blocked result identifying the prohibited requests without reproducing any secret.",
+    "telemetry": "Record only a privacy-safe security-stop category and correlation identifier; exclude tokens, tenant URLs, query payloads, and tenant data.",
+    "evidence": "The supplied statement proves only that the prohibited requests were reported; it does not prove specialist execution, tenant access, or query validity.",
+    "scope": [
+      "Stop credential disclosure",
+      "Stop dv-connect execution",
+      "Preserve a sanitized delegation record"
+    ],
+    "exclusions": [
+      "Authentication",
+      "Tenant access",
+      "Dataverse query validation",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Reject bearer-token handling and dv-* execution in this workflow.",
+        "rationale": "They require secret handling and unauthorised tenant-connected operations.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": ".agents/skills/dataverse-webapi-query/",
+      "source_type": "upstream",
+      "phase": "blocked",
+      "registry": {
+        "path": "canonical upstream specialist register",
+        "entry_status": "missing",
+        "version_or_pin": "not supplied",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Validate a Dataverse query through tenant-connected tooling.",
+        "data_classification": "confidential",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "No executable payload: credential disclosure and dv-connect are prohibited.",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": "Do not execute this handoff or provide credentials; route tenant validation to a separately authorised organisational workflow."
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "explicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": false,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "blocked",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": false,
+        "register_verified": false,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": null,
+        "result_schema_verified": null,
+        "untrusted_input_checked": true,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "stdin report of bearer-token and dv-connect requests"
+      ],
+      "open_items": [
+        "No preserved specialist result, SHA-256, schema verdict, register pin, or authorised external-execution evidence was supplied."
+      ],
+      "next_action": "Abandon this delegation path and use a separately authorised organisational tenant-validation workflow that obtains credentials through its approved authentication mechanism without sharing them with this orchestration."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "A specialist requests a bearer token or dv-* operation",
+      "when": "The orchestration evaluates the request",
+      "then": "It blocks the path without accepting credentials, invoking tooling, or accessing the tenant.",
+      "evidence": "Sanitized blocked record with no secret or tenant-specific content."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A bearer token, tenant URL, live metadata, or confidential tenant content is offered or requested.",
+      "expected_behavior": "Do not read, repeat, store, or transmit it; stop the workflow and direct validation to an authorised organisational process.",
+      "evidence": "Security-stop record containing no credential or confidential value."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The specialist requires dv-connect or another dv-* operation.",
+      "expected_behavior": "Do not invoke it and do not treat the query as validated.",
+      "evidence": "Delegation remains blocked with invoked set to false."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Credential and dv-* stop behavior",
+      "expected": "The result is Blocked, contains no secret, and records no specialist invocation.",
+      "evidence_required": "Schema-valid output inspection.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment access authorised"
+    ],
+    "prerequisites": [
+      "Separate organisational workflow with explicit tenant-access authority",
+      "Approved authentication mechanism that does not expose bearer tokens to this workflow"
+    ],
+    "steps": [
+      "Do not deploy or connect from this workflow",
+      "Transfer only the sanitized validation objective to the authorised organisational process"
+    ],
+    "post_deploy_checks": [
+      "Not applicable until a separate deployment is explicitly authorised"
+    ],
+    "evidence_required": [
+      "Independent authorised validation record with secrets removed"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any credential disclosure",
+      "Any attempted dv-* invocation",
+      "Any unauthorised tenant access"
+    ],
+    "steps": [
+      "Stop processing immediately",
+      "Remove any exposed credential from permitted recoverable locations",
+      "Rotate any credential that may have been disclosed through the owning organisational security process"
+    ],
+    "data_considerations": [
+      "Do not retain tokens, tenant URLs, live metadata, query results, or confidential tenant content"
+    ],
+    "owner": "Authorised organisational security and platform administrator",
+    "evidence_required": [
+      "Sanitized incident disposition",
+      "Credential-rotation confirmation when exposure occurred"
+    ]
+  },
+  "next_action": "Do not provide the bearer token or run dv-connect. Restart query validation in a separately authorised organisational workflow; this orchestration remains blocked and no query-validity claim has been established."
+}

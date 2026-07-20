@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-07-20T00:21:11Z",
+  "canonical_source": "skills/power-platform-incremental-delivery/",
+  "publication_target": ".agents/skills/power-platform-incremental-delivery/",
+  "recursive_byte_equality": true,
+  "content_tree_excludes": [
+    "tests/results/codex/v0.2.0-rc1/publication-copy-evidence.json",
+    "tests/results/codex/v0.2.0-rc1/SHA256SUMS"
+  ],
+  "canonical_content_tree_sha256": "3d9d0643579599359ccad84567c2e02a3cd3aa1c0e75ea67b9d4f9abb8f26aa1",
+  "publication_content_tree_sha256": "3d9d0643579599359ccad84567c2e02a3cd3aa1c0e75ea67b9d4f9abb8f26aa1",
+  "symlink_count": 0,
+  "prior_evidence": {
+    "v0.1.0-rc1_manifest_sha256": "1cb6710b3b6ac727784ed825c0d3d89e89c1d7e55f7e3495ab7ec4f3740bacc6",
+    "v0.1.0-rc2_manifest_sha256": "fdc2106f69faf07f620e28b2b57c6fa19149de64ddfb3d1688a3dc9b8dd0e03d",
+    "v0.1.0-rc3_manifest_sha256": "f003ac26c4937035ba2656a7f15627f1c5daa040d1480a6bbcf232d675a6d8ef",
+    "canonical_checksum_validation": "pass",
+    "publication_checksum_validation": "pass"
+  },
+  "powercat_adapter": {
+    "source": "experiments/powercat-dataverse-webapi-query/adapted-skill/dataverse-webapi-query/",
+    "publication": ".agents/skills/dataverse-webapi-query/",
+    "recursive_byte_equality": true,
+    "source_tree_sha256": "5c985ef8f28a9936f4bea366189a57c494dade603850abda2b49226039371ee0",
+    "publication_tree_sha256": "5c985ef8f28a9936f4bea366189a57c494dade603850abda2b49226039371ee0",
+    "symlink_count": 0,
+    "modified": false
+  },
+  "git_diff_check": "pass",
+  "verification_boundary": "Local recursive byte comparison, deterministic tree hashing, symlink scan, prior-manifest validation, and git diff --check only. No authentication, tenant access, MCP, network, deployment, commit, or push evidence."
+}

@@ -1,0 +1,310 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The explicitly selected synthetic Dataverse query specialist returned output that does not conform to its declared answer schema.",
+        "basis": "The supplied external-execution outcome explicitly reports schema failure.",
+        "source_refs": [
+          "User-supplied external execution outcome"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Malformed specialist output cannot be repaired, normalized, inferred, or consumed by this orchestration workflow.",
+        "basis": "The result-consumption contract requires complete independent schema validity before consumption.",
+        "source_refs": [
+          "Power Platform Incremental Delivery v0.2.0 result-consumption contract"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The specialist input contained only synthetic data.",
+        "impact": "The reported failure is not treated as a confidential-data boundary stop.",
+        "validation_required": "Confirm this classification when reconstructing the original orchestration state.",
+        "source_refs": [
+          "User description: synthetic query specialist"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "The external selection used the selector $dataverse-webapi-query.",
+        "impact": "The failed execution is attributed to the approved specialist identity, subject to verification from preserved execution evidence.",
+        "validation_required": "Provide the preserved external invocation record with the original orchestration state.",
+        "source_refs": [
+          "Explicitly selected specialist described by the user",
+          ".agents/skills/dataverse-webapi-query/"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Where are the complete standalone specialist output, its relative source path, and its independently calculated SHA-256?",
+        "owner": "External executor or evaluator",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What original orchestration state and narrow phase-1 payload must be carried forward for a fresh external execution?",
+        "owner": "Delivery owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "What current approving register entry and upstream pin governed the external specialist execution?",
+        "owner": "Specialist registry owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Consume, repair, or silently normalize the schema-invalid specialist output.",
+        "reason": "Schema-invalid external output is untrusted and cannot support build decisions.",
+        "reconsider_if": "Never for the failed artifact; use a newly executed, preserved, independently validated result."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No deployable delivery slice is finalized because the required synthetic query result failed its declared answer schema.",
+    "entry": "Resume from the preserved original orchestration state before external specialist execution.",
+    "validation": "Verify specialist identity, current register approval and pin, synthetic classification, permitted boundary, preserved path and SHA-256, complete answer-schema validity, zero prohibited operations, and absence of policy overrides.",
+    "persistence_or_action": "Do not persist or use the failed result; obtain a fresh standalone result through the explicit external-execution protocol.",
+    "feedback": "Report the delegation as invalid and keep readiness open without repairing or substituting query content.",
+    "telemetry": "Record only a privacy-safe delegation identifier, schema-validation failure outcome, and correlation identifier; exclude payloads, query content, credentials, tenant details, and environment identifiers.",
+    "evidence": "The user statement proves an observed schema failure only; it does not prove the result path, hash, register approval, package integrity, deployment, configuration, or runtime behavior.",
+    "scope": [
+      "Reject the schema-invalid synthetic query result",
+      "Preserve the orchestration boundary",
+      "Define the safe external re-execution requirement"
+    ],
+    "exclusions": [
+      "Repairing or reconstructing the specialist answer",
+      "Executing the specialist from this workflow",
+      "Tenant access or live metadata inspection",
+      "Implementation or deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "The delivery experience remains undefined until the original outcome, persona, host, and journey are restored.",
+        "rationale": "A malformed specialist result cannot establish product experience decisions.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DATA-001",
+        "decision": "Do not adopt any query shape or schema assertion from the failed specialist output.",
+        "rationale": "The declared answer schema failed validation.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "A fresh result must use the explicit external delegation protocol and a preserved standalone artifact.",
+        "rationale": "Deterministic path, hash, and schema evidence are required before consumption.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI-generated specialist content from the failed artifact will influence the build brief.",
+        "rationale": "Malformed external output is untrusted.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Only synthetic input is permitted for the re-execution; credentials, tenant URLs, live metadata, and confidential content remain prohibited.",
+        "rationale": "The specialist and orchestration boundary allow only public or synthetic query construction.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Record the failed execution as invalid without treating it as an invoked or consumable delegation.",
+        "rationale": "Observed execution with invalid output does not satisfy the invocation evidence contract.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "No implementation, package, deployment, or runtime claim may be based on this result.",
+        "rationale": "Evidence stops at the reported external schema failure.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dataverse-webapi-query",
+      "source_type": "upstream",
+      "phase": "invalid",
+      "registry": {
+        "path": "Canonical upstream specialist register",
+        "entry_status": "missing",
+        "version_or_pin": "not-supplied",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Construct the bounded synthetic Dataverse query defined by the original phase-1 payload.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "No executable handoff is emitted because the observed external result failed its declared schema and the original orchestration payload was not supplied.",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": "Do not consume or repair the failed artifact. Reconstruct the original orchestration state, create a fresh stage-1 request, execute the specialist in a new external thread using only its narrow payload, preserve the complete first output, validate it independently, and resume with its relative path and SHA-256."
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "explicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": true,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": true
+      },
+      "execution": {
+        "execution_observed": true,
+        "result_schema_valid": false,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": false,
+        "register_verified": false,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": false,
+        "result_schema_verified": false,
+        "untrusted_input_checked": false,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "User-supplied statement that explicit external execution returned schema-invalid output"
+      ],
+      "open_items": [
+        "Original orchestration state and narrow payload are absent",
+        "Current approving register entry and pin are unverified",
+        "Preserved result path and SHA-256 are absent",
+        "Complete untrusted-input inspection cannot be performed",
+        "A schema-valid replacement result is required"
+      ],
+      "next_action": "Discard the failed result from decision-making and restart at delegation stage 1 using the preserved original orchestration state."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "A fresh synthetic specialist execution and the preserved original orchestration state",
+      "when": "The complete first output is independently validated",
+      "then": "The output conforms fully to the declared answer schema and its relative path and SHA-256 match the supplied evidence.",
+      "evidence": "Preserved standalone result, independent schema-validation record, relative source path, and SHA-256."
+    },
+    {
+      "id": "AC-002",
+      "given": "A preserved schema-valid result",
+      "when": "Result-consumption gates are evaluated",
+      "then": "Identity, current register approval and pin, classification, boundary, prohibited-operation checks, and untrusted-input checks all pass before any query decision is consumed.",
+      "evidence": "Completed delegation verification record with every required gate satisfied."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The specialist output fails any declared answer-schema constraint.",
+      "expected_behavior": "Mark the delegation invalid, keep invoked false, consume no query content, and require fresh external execution.",
+      "evidence": "Independent schema-validation failure."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The result path, SHA-256, original orchestration state, or current register evidence is missing or mismatched.",
+      "expected_behavior": "Keep the delivery brief Open and do not infer or reconstruct missing evidence.",
+      "evidence": "Delegation verification record identifying each unsatisfied gate."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "alm",
+      "scope": "Validate the externally returned specialist output against answer-output.schema.json.",
+      "expected": "The complete output passes every schema constraint without repair or normalization.",
+      "evidence_required": "Independent validator output tied to the preserved result SHA-256.",
+      "status": "failed"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Inspect the replacement output for prohibited operations, credential requests, confidential content, and policy overrides.",
+      "expected": "No prohibited request, content, or override is present.",
+      "evidence_required": "Completed sanitized untrusted-input verification record.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment identified"
+    ],
+    "prerequisites": [
+      "Restore the original orchestration state",
+      "Obtain and validate a replacement specialist result",
+      "Complete a delivery brief before implementation authorization"
+    ],
+    "steps": [
+      "Do not deploy from the failed specialist result"
+    ],
+    "post_deploy_checks": [
+      "No post-deploy checks are applicable before a build brief and deployment authorization exist"
+    ],
+    "evidence_required": [
+      "No deployment evidence is claimed"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any attempted use of the schema-invalid specialist output"
+    ],
+    "steps": [
+      "Remove the failed artifact from build-decision inputs",
+      "Restore the preserved pre-execution orchestration state",
+      "Restart the external delegation protocol at stage 1"
+    ],
+    "data_considerations": [
+      "Preserve no query assertions derived from the failed output",
+      "Do not copy payload or tenant-specific content into logs"
+    ],
+    "owner": "Delivery owner",
+    "evidence_required": [
+      "Record that the failed artifact was excluded from decision-making",
+      "Preserved original orchestration state for the fresh request"
+    ]
+  },
+  "next_action": "Restore the original orchestration state and issue a fresh stage-1 explicit-external request for $dataverse-webapi-query; the external executor must pass only the narrow synthetic payload, preserve the complete first output, validate it against .agents/skills/dataverse-webapi-query/references/answer-output.schema.json, calculate its SHA-256, and resume with the relative result path and hash. Carry-forward delta: the prior external result was observed but schema-invalid, so it remains phase invalid, invoked false, and unusable."
+}

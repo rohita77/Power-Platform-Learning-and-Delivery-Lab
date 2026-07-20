@@ -1,0 +1,275 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "Two equally current authoritative artifacts assign different owners to the same lifecycle transition.",
+        "basis": "The supplied request explicitly identifies an unresolved ownership conflict.",
+        "source_refs": [
+          "user-provided stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No precedence rule or superseding decision resolves the conflicting ownership assignments.",
+        "basis": "The supplied request states that neither authoritative artifact resolves the conflict.",
+        "source_refs": [
+          "user-provided stdin"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The brief contains only public or synthetic descriptions and no tenant or confidential organisational data.",
+        "impact": "Reasoning may remain in the personal OpenAI zone; this assumption must be revisited before organisational artifacts or records are transferred.",
+        "validation_required": "Confirm the classification before implementation begins.",
+        "source_refs": [
+          "bounded safe assumption"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which single component or process is the authoritative owner of the lifecycle transition, and which conflicting artifact will be superseded or corrected?",
+        "owner": "Solution owner or architecture decision authority",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What observable business outcome must this lifecycle transition produce?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which persona, host surface, and entry point initiate or observe the transition?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Select either named owner by assumption.",
+        "reason": "Choosing between equally authoritative conflicting artifacts would create an unsupported second ownership path and risk duplicate or inconsistent processing.",
+        "reconsider_if": "A current authoritative decision establishes precedence and explicitly supersedes or corrects the conflicting assignment."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "Not yet definable: the observable result of the lifecycle transition has not been supplied.",
+    "entry": "Pending identification of the persona, host, entry point, initial state, and initiating event.",
+    "validation": "Reject processing when lifecycle ownership is ambiguous; implementation must later define input, permission, state, and concurrency checks.",
+    "persistence_or_action": "No write or action may be assigned until one authoritative owner and its idempotency boundary are confirmed.",
+    "feedback": "Surface a safe unavailable or configuration-error state if unresolved ownership is detected; detailed user feedback depends on the host journey.",
+    "telemetry": "Plan a privacy-safe correlation ID and an ownership-configuration failure outcome without recording business payloads.",
+    "evidence": "A signed or otherwise authoritative decision record is required before source, package, deployment, or runtime evidence can be planned credibly.",
+    "scope": [
+      "Resolve ownership for the single lifecycle transition",
+      "Define the smallest end-to-end outcome after ownership is settled",
+      "Prevent duplicate processing paths"
+    ],
+    "exclusions": [
+      "Implementation",
+      "Deployment",
+      "Tenant inspection",
+      "Choosing an owner without authoritative evidence"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Persona, host, entry point, and feedback states remain unresolved.",
+        "rationale": "The request does not identify the user journey.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "No schema or durable-write design is selected.",
+        "rationale": "The transition outcome and authoritative write owner are unresolved.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Exactly one authoritative handler must own the lifecycle transition.",
+        "rationale": "Multiple owners could cause duplicate, conflicting, or non-idempotent processing.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AID-001",
+        "decision": "No AI component is included unless the defined outcome later requires one.",
+        "rationale": "No AI requirement is present in the supplied evidence.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Implementation must fail safely when ownership configuration is ambiguous and must not expose record payloads in telemetry.",
+        "rationale": "Ambiguous authority can permit unintended writes or duplicate processing.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Operational monitoring must distinguish ownership-configuration failures from business validation and runtime failures.",
+        "rationale": "This permits deterministic diagnosis without treating configuration ambiguity as a valid transition attempt.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "The resolved owner and superseded artifact must be changed together in one reviewed release.",
+        "rationale": "Atomic alignment prevents conflicting definitions from remaining current across environments.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "A current authoritative decision names exactly one lifecycle-transition owner and identifies the conflicting artifact to supersede",
+      "when": "The build brief is reconstructed",
+      "then": "The persistence or action path names one owner and one idempotency boundary with no competing handler",
+      "evidence": "Approved decision record plus aligned authoritative artifact revisions"
+    },
+    {
+      "id": "AC-002",
+      "given": "The business outcome, persona, host, and entry point are confirmed",
+      "when": "The transition is initiated",
+      "then": "One observable end-to-end success result and its failure behavior can be specified",
+      "evidence": "Approved journey and acceptance definition"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Ownership remains conflicting or ambiguous",
+      "expected_behavior": "Do not implement or execute the lifecycle transition; return the decision to the designated architecture authority.",
+      "evidence": "Review gate showing the slice remains unapproved"
+    },
+    {
+      "id": "NP-002",
+      "condition": "A proposed design introduces a second handler or direct write for the same transition",
+      "expected_behavior": "Reject the design until one owner and an idempotent interaction contract are established.",
+      "evidence": "Architecture and event-path review"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Verify the confirmed owner performs the defined lifecycle transition exactly once.",
+      "expected": "One observable outcome is produced through one authoritative path.",
+      "evidence_required": "Executed automated test after the outcome and owner are confirmed",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "reliability",
+      "scope": "Submit the same transition request more than once.",
+      "expected": "The idempotency boundary prevents duplicate actions or writes.",
+      "evidence_required": "Executed duplicate-submission test with correlation evidence",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "alm",
+      "scope": "Inspect the packaged lifecycle definitions and dependencies.",
+      "expected": "Only the approved owner is active and the superseded ownership assignment is absent or explicitly inactive.",
+      "evidence_required": "Package inspection report",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "deployment",
+      "scope": "Read back the deployed ownership configuration.",
+      "expected": "The target environment resolves the transition to exactly one approved owner.",
+      "evidence_required": "Post-deployment configuration readback",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "rollback",
+      "scope": "Restore the previous aligned lifecycle configuration without creating two active owners.",
+      "expected": "Rollback leaves one known authoritative path and preserves recoverable data.",
+      "evidence_required": "Executed rollback rehearsal in an authorised non-production environment",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised non-production environment before production"
+    ],
+    "prerequisites": [
+      "Approve one authoritative lifecycle-transition owner",
+      "Identify and revise or supersede the conflicting artifact",
+      "Confirm the measurable outcome, persona, host, and entry point",
+      "Define the idempotency boundary and rollback owner"
+    ],
+    "steps": [
+      "Review the aligned artifact changes as one release unit",
+      "Import through the authorised ALM process",
+      "Read back the active ownership configuration",
+      "Execute functional, duplicate-action, and failure-path checks"
+    ],
+    "post_deploy_checks": [
+      "Confirm exactly one owner is active",
+      "Confirm competing handlers or direct writes are absent",
+      "Confirm telemetry records correlation and outcome without business payloads"
+    ],
+    "evidence_required": [
+      "Approved ownership decision",
+      "Reviewed package diff",
+      "Successful import evidence",
+      "Configuration readback",
+      "Runtime end-to-end and duplicate-action results"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "More than one active owner is detected",
+      "The approved owner cannot complete the transition",
+      "Duplicate or inconsistent lifecycle actions occur"
+    ],
+    "steps": [
+      "Disable the newly released transition path through the approved rollback mechanism",
+      "Restore the last known aligned single-owner configuration",
+      "Reconcile affected transition attempts using correlation records",
+      "Verify that exactly one owner remains active"
+    ],
+    "data_considerations": [
+      "Do not delete transition records during rollback",
+      "Preserve both versions of conflicting or partially processed data for reconciliation",
+      "Use idempotency and correlation records to prevent replay duplication"
+    ],
+    "owner": "Release owner designated after lifecycle ownership is resolved",
+    "evidence_required": [
+      "Rollback execution record",
+      "Configuration readback showing one active owner",
+      "Reconciliation report for affected attempts"
+    ]
+  },
+  "next_action": "The solution or architecture decision authority must issue one current decision naming the sole lifecycle-transition owner and the artifact to supersede; the product owner must add the observable outcome, persona, host, and entry point. Resume brief generation with those deltas. Until then, Ready would be unsupported and no implementation or deployment is authorised."
+}

@@ -1,0 +1,82 @@
+{
+  "case_id": "DEL-009",
+  "suite": "delegation",
+  "fixture_path": "skills/power-platform-incremental-delivery/tests/delegation-cases.yaml",
+  "fixture_sha256": "6ba1083f8bc3b5e1c1cb6fd13c519bc7f5e8da6c236fceb608e6165aaf6e3919",
+  "input_field": "prompt",
+  "exact_input": "The named specialist is approved in the register but the active client cannot explicitly select it.",
+  "exact_input_sha256": "738b36f5ab23fc937d4085e7639b820ff21d41715d74af088027072eb2ba68db",
+  "case_definition": {
+    "id": "DEL-009",
+    "title": "Incompatible client or prerequisite",
+    "expected_status": "Open",
+    "prompt": "The named specialist is approved in the register but the active client cannot explicitly select it.",
+    "expected_delegation": {
+      "phase": "invalid",
+      "selection_mode": "none",
+      "execution_observed": false,
+      "result_schema_valid": null,
+      "invoked": false,
+      "result_reference": ""
+    },
+    "required_behavior": [
+      "Do not infer compatibility from folder structure or upstream claims.",
+      "Produce an Open handoff naming the incompatible prerequisite."
+    ]
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-07-19T23:41:28.708135Z",
+      "completed_at": "2026-07-19T23:42:33.001121Z",
+      "exit_code": 0,
+      "command_argv": [
+        "codex",
+        "--disable",
+        "shell_tool",
+        "--disable",
+        "browser_use",
+        "--disable",
+        "computer_use",
+        "--disable",
+        "apps",
+        "--disable",
+        "plugins",
+        "exec",
+        "--ephemeral",
+        "--ignore-user-config",
+        "-C",
+        "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+        "-m",
+        "gpt-5.6-sol",
+        "-c",
+        "model_reasoning_effort=\"high\"",
+        "-c",
+        "approval_policy=\"on-request\"",
+        "-c",
+        "web_search=\"disabled\"",
+        "-s",
+        "read-only",
+        "--json",
+        "-o",
+        "/tmp/power-platform-incremental-delivery-v0.2.0-rc1/full-suite-final/DEL-009/first-output.txt",
+        "$power-platform-incremental-delivery"
+      ],
+      "explicit_invocation_configuration": "$power-platform-incremental-delivery",
+      "first_output": "{\n  \"status\": \"Open\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"The intended specialist has a current approved register entry.\",\n        \"basis\": \"Explicit user-supplied fact; the exact identity, register path, and pin were not supplied.\",\n        \"source_refs\": [\n          \"user-input\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"The active client cannot explicitly select the intended specialist.\",\n        \"basis\": \"Explicit user-supplied client limitation.\",\n        \"source_refs\": [\n          \"user-input\"\n        ]\n      }\n    ],\n    \"assumptions\": [\n      {\n        \"id\": \"AS-001\",\n        \"statement\": \"The supplied request contains only public orchestration metadata and no tenant or confidential organisational content.\",\n        \"impact\": \"The incompatibility can be recorded without transferring protected data.\",\n        \"validation_required\": \"Reclassify before any specialist payload is prepared.\",\n        \"source_refs\": [\n          \"user-input\"\n        ]\n      }\n    ],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"What observable delivery outcome, persona, and Power Platform host should the next vertical slice address?\",\n        \"owner\": \"requester\",\n        \"blocks_ready\": true\n      },\n      {\n        \"id\": \"OQ-002\",\n        \"question\": \"What are the intended specialist's exact approved selector, register path, and current version or pin?\",\n        \"owner\": \"requester\",\n        \"blocks_ready\": true\n      },\n      {\n        \"id\": \"OQ-003\",\n        \"question\": \"Which compatible external client can explicitly select the approved specialist?\",\n        \"owner\": \"requester\",\n        \"blocks_ready\": true\n      }\n    ],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Treat approval in the register as sufficient evidence that the active client invoked the specialist.\",\n        \"reason\": \"Register approval does not prove compatible explicit selection or external execution.\",\n        \"reconsider_if\": \"Never; explicit selection and preserved execution evidence remain independently required.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"public\",\n    \"cross_zone_transfer\": \"approval-required\"\n  },\n  \"slice\": {\n    \"outcome\": \"No deployable delivery outcome can yet be defined because the business result, persona, and host are missing.\",\n    \"entry\": \"Not defined pending the observable outcome, persona, host, and entry point.\",\n    \"validation\": \"Before routing, validate the exact specialist identity, current pin, explicit enablement, compatible client, data classification, and permitted boundary.\",\n    \"persistence_or_action\": \"No product write or action is authorised; orchestration retains the delegation as invalid and uninvoked.\",\n    \"feedback\": \"Report that approval exists but the active client cannot perform the required explicit specialist selection.\",\n    \"telemetry\": \"If later implemented, record only a privacy-safe correlation ID, routing outcome, and incompatibility reason; exclude payload content and credentials.\",\n    \"evidence\": \"Current proof is limited to user-supplied orchestration facts; there is no specialist execution, artifact, deployment, configuration, or runtime evidence.\",\n    \"scope\": [\n      \"Record the incompatible-client delegation state truthfully\",\n      \"Identify the minimum information and compatible host needed to continue\"\n    ],\n    \"exclusions\": [\n      \"Specialist invocation or simulated specialist output\",\n      \"Tenant access, implementation, deployment, commit, or push\",\n      \"A fabricated vertical-slice design\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [\n      {\n        \"id\": \"EXP-001\",\n        \"decision\": \"Persona, host, entry point, and primary journey remain undefined.\",\n        \"rationale\": \"No delivery outcome or user journey was supplied.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"data\": [\n      {\n        \"id\": \"DAT-001\",\n        \"decision\": \"No solution schema or persistence design is selected.\",\n        \"rationale\": \"The requested vertical slice is not yet defined.\",\n        \"evidence_status\": \"Open\"\n      }\n    ],\n    \"integration\": [\n      {\n        \"id\": \"INT-001\",\n        \"decision\": \"Do not route to the specialist from the active client.\",\n        \"rationale\": \"The client cannot perform the required explicit selection.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"ai\": [\n      {\n        \"id\": \"AI-001\",\n        \"decision\": \"Do not infer, simulate, or silently substitute the specialist response.\",\n        \"rationale\": \"No compatible explicit external execution or preserved result exists.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"security\": [\n      {\n        \"id\": \"SEC-001\",\n        \"decision\": \"Revalidate classification and cross-zone permission before preparing any specialist payload.\",\n        \"rationale\": \"Only public orchestration metadata is currently in scope; the eventual solution data boundary is unknown.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ],\n    \"operations\": [\n      {\n        \"id\": \"OPS-001\",\n        \"decision\": \"Keep the delegation uninvoked until a compatible client performs explicit selection.\",\n        \"rationale\": \"Approval alone is not execution evidence.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"alm\": [\n      {\n        \"id\": \"ALM-001\",\n        \"decision\": \"No implementation or deployment workflow is authorised.\",\n        \"rationale\": \"This invocation can only reconstruct and route a future delivery brief.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ]\n  },\n  \"delegations\": [\n    {\n      \"id\": \"DEL-001\",\n      \"specialist\": \"intended-approved-specialist-identity-not-supplied\",\n      \"source_type\": \"lab\",\n      \"phase\": \"invalid\",\n      \"registry\": {\n        \"path\": \"approved-register-path-not-supplied\",\n        \"entry_status\": \"current-approved\",\n        \"version_or_pin\": \"not-supplied\",\n        \"verified_on\": \"2026-07-20\"\n      },\n      \"request\": {\n        \"scope\": \"Obtain the narrow specialist decision required by a future delivery slice.\",\n        \"data_classification\": \"public\",\n        \"zone\": \"personal-openai\",\n        \"permitted_tools\": []\n      },\n      \"handoff\": {\n        \"invocation_mode\": \"not-applicable\",\n        \"input_payload\": \"No specialist payload may be issued from the incompatible active client.\",\n        \"expected_output_schema\": \"not-applicable-until-specialist-identity-is-supplied\",\n        \"continuation_instruction\": \"Move the request to a compatible client, verify the exact approved selector and pin, then resume orchestration to generate a sanitized explicit-external handoff.\"\n      },\n      \"control\": {\n        \"enabled\": true,\n        \"selection_mode\": \"none\",\n        \"selector\": \"exact-selector-not-supplied\",\n        \"client_compatible\": false,\n        \"prerequisites_satisfied\": false,\n        \"boundary_permitted\": true,\n        \"permissions_approved\": true\n      },\n      \"execution\": {\n        \"execution_observed\": false,\n        \"result_schema_valid\": null,\n        \"invoked\": false,\n        \"outcome_status\": \"open\",\n        \"result_reference\": \"\"\n      },\n      \"verification\": {\n        \"specialist_identity_verified\": false,\n        \"register_verified\": true,\n        \"input_classification_verified\": true,\n        \"boundary_verified\": true,\n        \"result_hash_verified\": null,\n        \"result_schema_verified\": null,\n        \"untrusted_input_checked\": null,\n        \"override_attempted\": false,\n        \"result_sha256\": \"\",\n        \"source_path\": \"\"\n      },\n      \"evidence_refs\": [\n        \"user-input\"\n      ],\n      \"open_items\": [\n        \"Exact specialist identity and selector\",\n        \"Register path and current version or pin\",\n        \"Compatible client with explicit specialist selection\",\n        \"Narrow specialist payload derived from an agreed delivery outcome\"\n      ],\n      \"next_action\": \"Use a compatible client that supports explicit selection; do not invoke or simulate the specialist from the active client.\"\n    }\n  ],\n  \"acceptance_criteria\": [],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"The active client cannot explicitly select the approved specialist.\",\n      \"expected_behavior\": \"Keep the delegation invalid with selection mode none, execution unobserved, and invoked false.\",\n      \"evidence\": \"Client capability evidence plus the orchestration record.\"\n    },\n    {\n      \"id\": \"NP-002\",\n      \"condition\": \"A specialist answer is embedded, narrated, or inferred without a preserved schema-valid result.\",\n      \"expected_behavior\": \"Do not consume it or claim specialist execution.\",\n      \"evidence\": \"Delegation verification record with no result reference or hash.\"\n    }\n  ],\n  \"tests\": [\n    {\n      \"id\": \"TEST-001\",\n      \"class\": \"functional\",\n      \"scope\": \"Incompatible-client delegation gate\",\n      \"expected\": \"The approved specialist remains unselected and uninvoked, and no executable handoff is emitted.\",\n      \"evidence_required\": \"Schema-valid output showing phase invalid, selection mode none, client compatible false, and invoked false.\",\n      \"status\": \"not-run\"\n    },\n    {\n      \"id\": \"TEST-002\",\n      \"class\": \"security\",\n      \"scope\": \"No implicit or simulated specialist substitution\",\n      \"expected\": \"No specialist result is invented or consumed.\",\n      \"evidence_required\": \"Empty result reference and hash with unobserved execution.\",\n      \"status\": \"not-run\"\n    }\n  ],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Target environment to be identified before implementation\"\n    ],\n    \"prerequisites\": [\n      \"Define the measurable delivery outcome, persona, and host\",\n      \"Resolve the exact specialist identity and current pin\",\n      \"Use a compatible client for explicit specialist selection\",\n      \"Approve the solution data boundary and environment bindings\"\n    ],\n    \"steps\": [\n      \"No deployment steps may begin until a complete Ready build brief exists\"\n    ],\n    \"post_deploy_checks\": [\n      \"No post-deployment checks are applicable before implementation and deployment are separately authorised\"\n    ],\n    \"evidence_required\": [\n      \"Explicit deployment authorization\",\n      \"Import and configuration readback\",\n      \"Runtime end-to-end and failure-path evidence\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Specialist identity or approval mismatch\",\n      \"Boundary classification failure\",\n      \"Deployment validation failure after a future authorised release\"\n    ],\n    \"steps\": [\n      \"Stop routing or release activity\",\n      \"Restore the last verified solution version and configuration through the authorised ALM process\",\n      \"Preserve correlation and validation evidence without protected payloads\"\n    ],\n    \"data_considerations\": [\n      \"Do not delete or overwrite user data during rollback\",\n      \"Reconcile durable writes made before rollback using the authoritative owner\"\n    ],\n    \"owner\": \"Future authorised delivery owner\",\n    \"evidence_required\": [\n      \"Rollback authorization\",\n      \"Artifact version evidence\",\n      \"Configuration and runtime health readback\"\n    ]\n  },\n  \"next_action\": \"Move orchestration to a client that can explicitly select the approved specialist, then provide the exact selector, register path and pin, plus the observable outcome, persona, and host; preserve this delegation as invalid and uninvoked until those facts are available.\"\n}",
+      "first_output_sha256": "3e63dae1e0fb5b81be7a4559265f5a7a129bb179bcfd2f676e06ebaa9c907d56",
+      "output_schema_valid": true,
+      "output_schema_errors": [],
+      "observed_status": "Open",
+      "event_count": 4,
+      "event_parse_errors": [],
+      "workflow_operations": [],
+      "approval_events": [],
+      "network_operations": [],
+      "events_file": "run.events.jsonl",
+      "stderr_file": "run.stderr.txt"
+    }
+  ],
+  "selected_attempt": 1,
+  "infrastructure_retry_count": 0
+}

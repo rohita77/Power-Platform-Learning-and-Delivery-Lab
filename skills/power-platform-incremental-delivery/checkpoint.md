@@ -1,83 +1,100 @@
-+# Power Platform Incremental Delivery v0.1.0 Checkpoint
+# Power Platform Incremental Delivery v0.2.0-rc1 Checkpoint
 
 **Checkpoint date:** 2026-07-20
-**Status:** Checkpointed — RC3 rejected
-**Adoption:** Reject
+**Status:** Checkpointed — all Codex release gates passed
+**Adoption:** Experiment approved pending ChatGPT Work parity and expert review
 **Power CAT publication prerequisite:** `ea9708b`
 
 ## Outcome
 
-Version 0.1.0 of `power-platform-incremental-delivery` is implemented as a
-narrow orchestration skill that reconstructs settled delivery state and emits
-the next Power Platform or Dynamics 365 vertical-slice build brief. It does not
-act as a general Power Platform expert, duplicate specialist workflows, access
-a tenant, authenticate, deploy, or perform operational Dataverse work.
+`power-platform-incremental-delivery` v0.2.0-rc1 implements the portable
+three-stage delegation protocol:
 
-RC3 corrected do-not-trigger abstention, deterministic delegation state,
-Power CAT upstream provenance, string `result_reference` handling, and
-truthful `invoked` reporting. A specialist result counts as invoked only when
-explicit selection, observed execution, a preserved standalone first output,
-independent answer-schema validation, a non-empty evidence reference, and all
-register, boundary, scope, permission, and zero-operation gates pass.
+1. Skill 6 emits a validated, sanitized specialist request.
+2. The user, evaluator, or host executes the specialist explicitly in a fresh
+   thread using only the narrowed payload.
+3. Skill 6 resumes with a preserved result and verifies identity, register,
+   boundary, classification, source path, SHA-256, answer schema, operation
+   evidence, and untrusted content before consuming it.
+
+Skill 6 never depends on deterministic nested skill invocation and never
+authenticates, accesses a tenant, invokes `dv-*`, uses MCP, deploys, commits,
+or pushes as part of its workflow.
+
+## Root cause and correction
+
+RC3 passed the complete 686-character Skill 6 build-brief input to Power CAT
+instead of a narrowed specialist payload. That input has SHA-256
+`d3b75bbb4bcb6322a7981124145adeefb6a8fe47c4296d985bf57e201afd8b14`.
+
+The corrected specialist-only payload has SHA-256
+`cfe0035670a2c16613f359f61fa2228fba9f20e0bf45145236147ce13451201f`.
+An isolated exact 0.3.1 Power CAT control passed before implementation.
+`DEL-001` now emits an `Open` delegation request, `GOLD-005` consumes a frozen
+independently validated result, and `CHAIN-001` proves the full external
+handoff and resume sequence.
+
+The diagnostic full-suite pass also exposed one status defect: `NEG-002`
+preserved the settled server-side owner but returned `Open`. The final contract
+keeps an already complete supplied brief `Ready` after rejecting an unsupported
+reopening request. The targeted and complete suites were rerun after that
+correction.
 
 ## Evaluation result
 
-The RC3 targeted gate completed in seven distinct Codex threads:
-
-- Passed: `NO-TRIGGER-004`, `DEL-004`, `DEL-005`, `DEL-008`, and
-  `DEL-009`.
-- Failed: `GOLD-005` and `DEL-001`.
-- Skill 6 output schema: 7/7.
-- Codex result-record profile: 7/7.
-- Standalone Power CAT answer schema: 0/2.
-- Skill 6 workflow operations: zero.
-- Power CAT rejected tool attempts: two; completed operational actions: zero.
-- Targeted gate: 5/7, so the full 36-case suite was not run.
-
-Both Power CAT runs were explicitly configured and executed first in distinct
-threads with synthetic input. Their unchanged standalone first outputs were
-preserved, but each returned prose rather than one answer-schema-valid JSON
-object and each made one rejected tool attempt. Skill 6 therefore returned
-`Open` with `invoked: false` instead of simulating successful delegation.
+- Isolated Power CAT control: pass; answer schema valid; zero operations.
+- Targeted gate: 8/8 cases passed across nine Skill 6 invocations and one
+  evaluator-owned Power CAT invocation.
+- Trigger routing: 9/9.
+- Golden: 5/5.
+- Negative: 6/6.
+- Security: 7/7.
+- Delegation: 9/9.
+- Complete suite: 36/36 in 36 distinct Codex threads.
+- Skill 6 output schema: 45/45.
+- Codex result-record v3 profile: 44/44.
+- Power CAT answer schema: 3/3.
+- Delegation schema fixtures: 2/2 valid accepted and 6/6 invalid rejected.
+- Skill 6 and Power CAT workflow operations: zero.
+- Prohibited authentication, tenant, MCP, `dv-*`, network, deployment,
+  commit, push, secret, and confidential-data activity: zero.
 
 ## Evidence boundary
 
-Immutable evidence is retained under
-`tests/results/codex/v0.1.0-rc1/`,
-`tests/results/codex/v0.1.0-rc2/`, and
-`tests/results/codex/v0.1.0-rc3/`.
+Immutable evidence is retained under:
 
-Local validation proved:
+- `tests/results/codex/v0.1.0-rc1/`;
+- `tests/results/codex/v0.1.0-rc2/`;
+- `tests/results/codex/v0.1.0-rc3/`; and
+- `tests/results/codex/v0.2.0-rc1/`.
 
-- all RC1, RC2, and RC3 checksum manifests;
-- 7/7 RC3 Skill 6 output-schema results;
-- 7/7 RC3 Codex result records;
-- canonical and `.agents` Skill 6 recursive byte equality;
-- experiment and repository-root Power CAT recursive byte equality;
-- zero symlinks across both canonical/publication pairs;
-- structural skill validation and `git diff --check`.
+The RC1-RC3 checksum manifests remain unchanged and valid. The canonical skill
+and `.agents` publication are recursively byte-identical, contain no symlinks,
+and pass structural validation. The Power CAT experiment source and
+repository-root publication remain byte-identical and unmodified.
 
-No authentication, tenant access, MCP, network request, `dv-*` invocation,
-deployment, commit-time push, credential handling, secret storage, or
-confidential-data processing occurred during implementation or evaluation.
-This checkpoint proves local source, schema, and immutable evidence only.
+This checkpoint proves local source, deterministic schema, preserved evaluator
+evidence, and Codex runtime behavior only. It does not prove ChatGPT Work
+parity, expert approval, tenant configuration, deployment, activation, or
+production runtime behavior.
 
 ## Continuing position
 
-1. Keep adoption at Reject.
-2. Remediate or replace the repository Power CAT runtime behavior so explicit
-   invocation produces exactly one standalone answer-schema-valid JSON object
-   with zero workflow operations.
-3. Create a new immutable candidate and rerun the seven targeted cases
-   unchanged.
-4. Run the full 36-case suite only after the targeted gate reaches 7/7.
-5. Require ChatGPT Work parity and expert review before experiment approval.
-6. Preserve RC1, RC2, and RC3 evidence unchanged.
+1. Keep v0.2.0-rc1 at experiment approval, not production approval.
+2. Run exactly the three unchanged parity cases in ChatGPT Work without
+   creating Codex-only requirements.
+3. Obtain the required expert review before broader adoption.
+4. Preserve all versioned evidence and use a new immutable candidate for any
+   behavioral change.
+5. Keep Power CAT execution external, explicit, synthetic/public only, and
+   configuration-gated by the canonical register.
 
 ## Repository state at checkpoint
 
-The Skill 6 source, its byte-identical `.agents` publication, the RC1-RC3
-evidence corpus, this checkpoint, and the paired prompt log form the intended
-Skill 6 commit. The Power CAT repository publication was committed separately
-as `ea9708b`. Canonical-pack replacement work and other unrelated worktree
-changes remain outside this checkpoint. No push is authorized.
+The intended commit contains only
+`skills/power-platform-incremental-delivery/` and its byte-identical
+`.agents/skills/power-platform-incremental-delivery/` publication. The Power
+CAT repository publication remains the separate `ea9708b` prerequisite.
+Canonical-pack replacement work, the current-feature-verifier publication, and
+all other unrelated worktree changes remain outside this checkpoint. No push
+is authorized.

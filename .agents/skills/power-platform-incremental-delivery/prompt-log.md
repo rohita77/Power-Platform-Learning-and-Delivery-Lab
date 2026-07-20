@@ -1,70 +1,81 @@
-+# Power Platform Incremental Delivery v0.1.0 Prompt Log
+# Power Platform Incremental Delivery v0.2.0-rc1 Prompt Log
 
-**Workstream:** Build, evaluate, and remediate
-`power-platform-incremental-delivery`
+**Workstream:** Portable Skill 6 delegation correction and evaluation
 **Checkpointed:** 2026-07-20
-**Final candidate:** v0.1.0-rc3
-**Adoption:** Reject
+**Final candidate:** v0.2.0-rc1
+**Adoption:** Experiment approved pending ChatGPT Work parity and expert review
 
 ## Request sequence
 
-1. Design the smallest reusable orchestration skill that reconstructs the
-   agreed delivery position and produces the next deployable Power Platform or
-   Dynamics 365 vertical-slice build brief.
-2. Apply source governance, the skill design standard, the upstream register,
-   the approved Power CAT Dataverse adapter experiment, the personal/OpenAI
-   versus organisational/Microsoft boundary, and explicit specialist routing.
-3. Publish the approved `dataverse-webapi-query` adapter byte-identically to
-   the repository root as a separable prerequisite; do not install or alter its
-   behavior incidentally.
-4. Implement v0.1.0 with deterministic JSON output, carry-forward state,
-   vertical-slice structure, abstention, delegation configuration gates, and
-   immutable tests.
-5. Evaluate RC1 across the defined suites without tenant access, tools,
-   authentication, deployment, output repair, commit, or push.
-6. Create RC2 to remediate the smoke failure, preserve RC1, and rerun the suite.
-7. Create RC3 to correct delegation truthfulness, deterministic
-   `selection_mode`, Power CAT `source_type`, string
-   `result_reference`, do-not-trigger abstention, and the seven recorded RC2
-   failures.
-8. Execute the seven-case RC3 gate first, stop on failure, retain the exact
-   outputs, and report adoption honestly.
-9. Checkpoint and commit the completed local work without pushing.
+1. Preserve rejected RC1-RC3 evidence and create a new immutable v0.2.0-rc1
+   candidate.
+2. Correct the architecture so Skill 6 never depends on deterministic nested
+   skill invocation.
+3. Before editing, run one isolated exact previously passing 0.3.1 Power CAT
+   control with only `$dataverse-webapi-query`; stop if it fails.
+4. Determine whether RC3 passed the complete Skill 6 input or a correctly
+   narrowed specialist payload.
+5. Implement a three-stage protocol: validated request, external explicit
+   execution owned by the evaluator/host, and preserved-result consumption.
+6. Change `DEL-001` into an `Open`, uninvoked request case and `GOLD-005` into
+   a `Ready` frozen-result-consumption case without specialist execution inside
+   Skill 6.
+7. Add `CHAIN-001` so the evaluator executes Power CAT in a fresh thread with
+   only the exact handoff payload and resumes Skill 6 with preserved evidence.
+8. Keep the strict output and cross-runtime result schemas, add valid and
+   invalid delegation fixtures, and do not create ChatGPT Work runtime records.
+9. Run the targeted gate before the complete suite, preserve first outputs,
+   separate evaluator and workflow operations, and apply no silent repair.
+10. Require 100% routing, golden, negative, security, delegation, output-schema,
+    result-record, control, and chain gates; retain byte parity and zero
+    prohibited activity.
+11. Checkpoint and commit the completed v0.2.0-rc1 work without pushing or
+    including unrelated worktree changes.
 
 ## Delivered result
 
-- Skill source and repository publication are recursively byte-identical and
-  contain no symlinks.
-- The Power CAT publication prerequisite is separately committed as
-  `ea9708b` (`Publish approved Dataverse query skill`).
-- RC3 targeted evaluation: 5/7.
-- Skill 6 output schema: 7/7.
-- Codex result-record profile: 7/7.
-- Standalone Power CAT answer schema: 0/2.
-- Full suite: not run because the targeted 7/7 gate failed.
-- Adoption: Reject.
-- RC1, RC2, and RC3 evidence is preserved under versioned immutable result
-  directories.
-- No push was performed.
+- The isolated exact Power CAT control passed with first-output SHA-256
+  `180f94ea67509fbe0e1487c029788891d9702913b909184062ade09a1ad80f52`.
+- RC3 root cause was confirmed: the specialist received the complete
+  orchestration request, not a narrow query payload.
+- `DEL-001` now emits an exact external handoff with `invoked: false` and an
+  empty result reference.
+- `GOLD-005` consumes the frozen schema-valid Power CAT result at
+  `tests/fixtures/powercat/gold-005-result.json`, SHA-256
+  `2adfa6cbe497117ebbfbb36957b2581119d486bf1807031cea1f9ecd1360da54`.
+- `CHAIN-001` passed request, external execution, and result-consumption phases
+  with the exact narrow-payload SHA-256
+  `cfe0035670a2c16613f359f61fa2228fba9f20e0bf45145236147ce13451201f`.
+- The post-remediation targeted gate passed 8/8.
+- The final complete suite passed 36/36: routing 9/9, golden 5/5, negative 6/6,
+  security 7/7, and delegation 9/9.
+- Output schema passed 45/45; Codex result records passed 44/44; Power CAT
+  answer schema passed 3/3.
+- All final workflow-operation and prohibited-activity counts are zero.
+- RC1-RC3 evidence remains unchanged; all diagnostic and final v0.2 evidence
+  is preserved under the v0.2.0-rc1 result directory.
 
-## Failure and continuation
+## Diagnostic history
 
-`GOLD-005` and `DEL-001` require successful explicit Power CAT execution.
-The separately executed specialist outputs were preserved unchanged but were
-prose rather than one schema-valid JSON object and each attempted one rejected
-tool operation. Skill 6 correctly returned `Open`, recorded
-`invoked: false`, used `source_type: upstream`, and did not reconstruct or
-simulate a specialist result.
+The first full-suite launch failed before any workflow thread because the
+evaluator sandbox could not open its local state database. The permitted retry
+used the approved access path with otherwise identical settings.
 
-Continuation must address the Power CAT runtime output/operation defect,
-create a new immutable candidate, rerun the seven exact targeted inputs, and
-run the full 36 cases only after 7/7 targeted success. ChatGPT Work parity and
-expert review remain pending.
+The first diagnostic full suite then found `NEG-002` returned `Open` rather
+than retaining the complete supplied `Ready` brief after rejecting an
+unsupported write-owner change. The status rule was clarified, and both the
+targeted and full suites were rerun successfully. Development attempts and the
+pre-correction outputs remain preserved as diagnostics; no first output was
+silently repaired or overwritten.
 
 ## Boundaries retained
 
-Do not broaden this checkpoint into implicit skill selection, autonomous
-delegation, tenant access, authentication, live metadata, MCP, tokens,
-confidential data, operational Dataverse work, deployment, or general Power
-Platform expertise. Preserve the separation between evaluator configuration
-and exact test input, and never overwrite prior evidence.
+No evaluation or implementation step authenticated, accessed a tenant, used
+MCP, invoked `dv-*`, handled a credential, processed confidential data,
+deployed, committed during the workflow, or pushed. Power CAT remains an
+explicit, external, public/synthetic-only specialist governed by the canonical
+register and its approved repository publication.
+
+This checkpoint does not claim automatic skill selection, ChatGPT Work parity,
+expert approval, tenant verification, deployment, activation, or production
+runtime evidence. Any behavioral change requires a new immutable candidate.

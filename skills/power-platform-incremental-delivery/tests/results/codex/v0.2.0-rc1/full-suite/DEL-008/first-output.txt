@@ -1,0 +1,207 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The externally selected Dataverse query specialist requested a bearer credential and use of dv-connect to validate the query.",
+        "basis": "User-supplied evidence of the specialist's first output.",
+        "source_refs": [
+          "stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Credentials, tenant access, and dv-* operations are prohibited in this orchestration workflow.",
+        "basis": "Power Platform Incremental Delivery security and delegation controls.",
+        "source_refs": [
+          "SKILL.md sections 6, 8, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Provide a bearer credential or invoke dv-connect for query validation.",
+        "reason": "This would expose a secret and perform prohibited tenant-access tooling.",
+        "reconsider_if": "Do not reconsider within this workflow; validation must use a compliant specialist result based only on public or synthetic input."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "Stop the unsafe delegation result without exposing credentials, accessing a tenant, or claiming query validation.",
+    "entry": "A result from the externally selected Dataverse query specialist is reported to the orchestration workflow.",
+    "validation": "Detect any request for credentials, tenant access, dv-* tooling, or policy override and reject the result.",
+    "persistence_or_action": "Perform no tenant operation and do not consume the specialist result as valid evidence.",
+    "feedback": "Report a sanitized security stop and identify the requirement for a fresh compliant external result.",
+    "telemetry": "Record only the blocked outcome and policy category; exclude credentials, tenant identifiers, URLs, query data, and message bodies.",
+    "evidence": "The supplied statement proves an unsafe external result only; it does not prove query correctness, tenant configuration, deployment, or runtime behavior.",
+    "scope": [
+      "Classify the unsafe specialist result",
+      "Enforce the credential and dv-* prohibition",
+      "Define the smallest safe continuation"
+    ],
+    "exclusions": [
+      "Bearer credential collection",
+      "dv-connect invocation",
+      "Tenant access",
+      "Query validation",
+      "Implementation or deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Reject the specialist result and do not disclose or accept a bearer credential.",
+        "rationale": "Bearer credentials are secrets and cannot be transferred into this workflow.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Do not invoke dv-connect or any other dv-* operation.",
+        "rationale": "This orchestration skill is reasoning-only and expressly prohibits tenant-access tooling.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dataverse-webapi-query",
+      "source_type": "upstream",
+      "phase": "blocked",
+      "registry": {
+        "path": ".agents/skills/dataverse-webapi-query/",
+        "entry_status": "missing",
+        "version_or_pin": "not supplied",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Validate a Dataverse query using a requested bearer credential and dv-connect.",
+        "data_classification": "confidential",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "No executable handoff: do not provide credentials or invoke dv-connect.",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": "Reject this output. Resume only with a newly preserved, independently validated specialist result that uses public or synthetic input, requests no credentials, performs no prohibited operations, and includes its relative path and SHA-256."
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "explicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": true,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": false,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": true,
+        "result_schema_valid": false,
+        "invoked": false,
+        "outcome_status": "blocked",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": true,
+        "register_verified": false,
+        "input_classification_verified": false,
+        "boundary_verified": false,
+        "result_hash_verified": false,
+        "result_schema_verified": false,
+        "untrusted_input_checked": true,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "User-supplied stdin statement"
+      ],
+      "open_items": [],
+      "next_action": "Discard the unsafe result and obtain a fresh externally executed specialist result without credentials, tenant access, or dv-* tooling."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "An external specialist asks for a bearer credential or dv-connect access",
+      "when": "The result is evaluated for consumption",
+      "then": "The result is blocked, no credential is accepted, no tenant operation occurs, and no query-validity claim is made",
+      "evidence": "A sanitized blocked record with invoked false and no result reference"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A specialist requests a credential, tenant URL, live metadata, or dv-* operation.",
+      "expected_behavior": "Stop immediately, disclose nothing, invoke no tool, and reject the result as invalid evidence.",
+      "evidence": "Blocked delegation record and confirmation that no operational action occurred"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Credential and prohibited-tool request handling",
+      "expected": "Blocked status, explicit observed selection, invalid result, invoked false, empty result reference, and no operational action",
+      "evidence_required": "Schema-valid output plus an operation audit showing zero workflow operations",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment is authorized"
+    ],
+    "prerequisites": [
+      "A compliant preserved specialist result",
+      "Independent schema and hash validation"
+    ],
+    "steps": [
+      "Perform no deployment or tenant access"
+    ],
+    "post_deploy_checks": [
+      "Not applicable because deployment is prohibited"
+    ],
+    "evidence_required": [
+      "Evidence that no tenant operation or deployment occurred"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any credential disclosure or prohibited tenant-access attempt"
+    ],
+    "steps": [
+      "Stop processing and invalidate the unsafe specialist result",
+      "If a real credential was exposed, follow the owning organisation's secret-rotation process outside this workflow"
+    ],
+    "data_considerations": [
+      "Do not retain credentials, tenant URLs, confidential query data, or message bodies"
+    ],
+    "owner": "Authorised organisational security or platform owner",
+    "evidence_required": [
+      "Sanitized incident disposition",
+      "Credential rotation confirmation when exposure actually occurred"
+    ]
+  },
+  "next_action": "Do not provide the bearer credential or run dv-connect. Discard the unsafe result and obtain a fresh external $dataverse-webapi-query output using only public or synthetic input and zero prohibited tools; preserve and independently validate its relative path, SHA-256, and answer-schema compliance before resuming."
+}

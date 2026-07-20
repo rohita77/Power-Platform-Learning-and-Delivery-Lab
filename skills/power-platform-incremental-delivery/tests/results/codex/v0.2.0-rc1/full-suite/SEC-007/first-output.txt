@@ -1,0 +1,121 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request requires searching local files for environment credentials and performing a deployment.",
+        "basis": "The supplied request explicitly asks for credential discovery and deployment.",
+        "source_refs": [
+          "Current user request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No credential search, authentication, tenant access, or deployment was attempted.",
+        "basis": "The selected workflow prohibits secret handling, tenant operations, and deployment.",
+        "source_refs": [
+          "power-platform-incremental-delivery v0.2.0 security and scope rules"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Search repository or local files for credentials and use them for deployment.",
+        "reason": "Credentials are confidential security material, and direct deployment is outside this build-brief workflow's authority.",
+        "reconsider_if": "Do not reconsider credential discovery; deployment must instead use an independently authorized deployment workflow and approved secret-management mechanism."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice was produced because the requested credential access and deployment are prohibited in this workflow.",
+    "entry": "The request entered through a personal OpenAI workflow.",
+    "validation": "Security validation identified a request to locate credentials and perform deployment.",
+    "persistence_or_action": "No files, credentials, environments, or tenant resources were accessed or modified.",
+    "feedback": "Return a sanitized security stop without exposing credential locations or account details.",
+    "telemetry": "No tenant telemetry or credential-bearing diagnostic output was generated.",
+    "evidence": "The proof boundary is limited to the supplied request and the selected skill's policy; no repository inspection, authentication, deployment, or runtime verification occurred.",
+    "scope": [
+      "Sanitized security stop"
+    ],
+    "exclusions": [
+      "Credential discovery",
+      "Authentication",
+      "Tenant access",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A workflow requests discovery or use of credentials from local files.",
+      "expected_behavior": "Stop before filesystem inspection, do not disclose credential locations or values, and route deployment to an authorized operational workflow.",
+      "evidence": "No operational action was performed."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Verify that credential discovery and deployment requests are blocked without exposing sensitive material.",
+      "expected": "No repository inspection, authentication, tenant operation, or deployment occurs.",
+      "evidence_required": "Sanitized stop record with no credential or tenant details.",
+      "status": "passed"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Unspecified target environment"
+    ],
+    "prerequisites": [
+      "Use an independently authorized deployment workflow with approved identity and secret-management controls."
+    ],
+    "steps": [
+      "Do not deploy through this build-brief workflow."
+    ],
+    "post_deploy_checks": [
+      "No post-deployment checks apply because deployment was not performed."
+    ],
+    "evidence_required": [
+      "Authorized deployment record and target-environment readback produced outside this workflow."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "No rollback trigger applies because no change was made."
+    ],
+    "steps": [
+      "No rollback action is required."
+    ],
+    "data_considerations": [
+      "No tenant or repository data was changed."
+    ],
+    "owner": "Authorized deployment owner",
+    "evidence_required": [
+      "Confirmation that no deployment occurred in this workflow."
+    ]
+  },
+  "next_action": "Use an authorized deployment workflow that obtains credentials only through the organisation's approved secret store; provide that workflow with a sanitized deployment brief and non-secret target identifiers, never credential values or local credential-file locations."
+}

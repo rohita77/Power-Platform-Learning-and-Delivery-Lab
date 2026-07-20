@@ -1,0 +1,105 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request is to directly implement an already approved build brief.",
+        "basis": "Direct implementation is outside this orchestration-only skill's authority.",
+        "source_refs": [
+          "user request",
+          "SKILL.md sections 1, 2, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Implement the build brief through this skill invocation.",
+        "reason": "This skill must not inspect the repository, modify files, invoke tools, implement components, or deploy.",
+        "reconsider_if": "The approved brief is passed to an authorised implementation workflow."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "No implementation is performed by this orchestration-only skill.",
+    "entry": "The user requested direct implementation of an existing approved brief.",
+    "validation": "The request was checked against the skill's implementation prohibition.",
+    "persistence_or_action": "No repository, tenant, package, or deployment action is permitted.",
+    "feedback": "The request is routed to an authorised implementation workflow.",
+    "telemetry": "No operational telemetry is emitted.",
+    "evidence": "Only the supplied request and skill authority boundary were evaluated.",
+    "scope": [
+      "Abstain from direct implementation"
+    ],
+    "exclusions": [
+      "Repository inspection",
+      "Source modification",
+      "Tenant access",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Direct implementation is requested through the orchestration-only skill.",
+      "expected_behavior": "Stop without invoking tools or changing repository, tenant, package, or deployment state.",
+      "evidence": "No workflow operation was performed."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment was inspected"
+    ],
+    "prerequisites": [
+      "Use an authorised implementation workflow with the approved current build brief"
+    ],
+    "steps": [
+      "Do not implement or deploy under this skill"
+    ],
+    "post_deploy_checks": [
+      "Not applicable until authorised implementation occurs"
+    ],
+    "evidence_required": [
+      "Implementation and validation evidence from the authorised workflow"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any unauthorised implementation attempt"
+    ],
+    "steps": [
+      "Stop without modifying source or target state"
+    ],
+    "data_considerations": [
+      "No data changes were performed"
+    ],
+    "owner": "Authorised implementation owner",
+    "evidence_required": [
+      "Evidence that no implementation operation occurred in this invocation"
+    ]
+  },
+  "next_action": "Pass the approved current build brief to an authorised implementation workflow; this skill performs no implementation, repository inspection, deployment, or tenant operation."
+}

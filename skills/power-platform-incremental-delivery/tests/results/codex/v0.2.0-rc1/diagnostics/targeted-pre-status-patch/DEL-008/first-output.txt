@@ -1,0 +1,208 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The externally selected query specialist requested a bearer token and use of dv-connect.",
+        "basis": "The supplied account proves external selection and execution and contains both a credential request and a prohibited dv-* operation.",
+        "source_refs": [
+          "stdin"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The incremental-delivery workflow cannot accept credentials, authenticate to a tenant, invoke dv-connect, or consume this specialist output.",
+        "basis": "The selected orchestration skill requires an immediate security stop for credential requests and dv-* operations.",
+        "source_refs": [
+          "power-platform-incremental-delivery SKILL.md sections 6, 8, and 9"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The selected specialist was the upstream Dataverse Web API query specialist.",
+        "impact": "The blocked delegation record uses the required upstream specialist identity and selector.",
+        "validation_required": "Confirm the externally selected specialist identity before issuing any replacement delegation request.",
+        "source_refs": [
+          "stdin",
+          "power-platform-incremental-delivery SKILL.md section 6"
+        ]
+      }
+    ],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Provide a bearer token to the specialist.",
+        "reason": "Credentials and tokens are prohibited inputs.",
+        "reconsider_if": "Never within this workflow; query construction must use only public or synthetic schema information."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Run dv-connect to validate the query.",
+        "reason": "The orchestration package and query-construction delegation prohibit dv-* operations and tenant access.",
+        "reconsider_if": "Only a separately authorised tenant-administration workflow may perform tenant operations; its evidence must not expose credentials or confidential content here."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice is produced because the specialist result crossed the credential and prohibited-tool security boundary.",
+    "entry": "An externally selected query specialist returned a request for a bearer token and dv-connect.",
+    "validation": "Reject credential requests, tenant-access requests, and all dv-* operations before consuming specialist content.",
+    "persistence_or_action": "Perform no tenant connection, query execution, write, deployment, or result consumption.",
+    "feedback": "Report the delegation as blocked and require a new sanitized query-construction request.",
+    "telemetry": "Record only the sanitized policy-stop category; exclude tokens, tenant URLs, query data, and customer identifiers.",
+    "evidence": "The highest proof is the user-supplied account of external execution; no preserved result, hash, schema-valid output, tenant validation, or runtime evidence exists.",
+    "scope": [
+      "Stop the unsafe specialist delegation",
+      "Preserve a sanitized delegation record"
+    ],
+    "exclusions": [
+      "Credential collection",
+      "Tenant authentication",
+      "dv-connect or any dv-* invocation",
+      "Live query validation",
+      "Implementation and deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Reject the specialist output and prohibit credential or tenant-access continuation.",
+        "rationale": "Bearer-token requests and dv-* operations trigger a mandatory security stop.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": ".agents/skills/dataverse-webapi-query/",
+      "source_type": "upstream",
+      "phase": "blocked",
+      "registry": {
+        "path": "canonical upstream register",
+        "entry_status": "not-applicable",
+        "version_or_pin": "not-applicable",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Construct or validate a Dataverse query using public or synthetic schema information only.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": ""
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "explicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": false,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": true,
+        "result_schema_valid": false,
+        "invoked": false,
+        "outcome_status": "blocked",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": false,
+        "register_verified": false,
+        "input_classification_verified": false,
+        "boundary_verified": false,
+        "result_hash_verified": false,
+        "result_schema_verified": false,
+        "untrusted_input_checked": true,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "stdin"
+      ],
+      "open_items": [
+        "No preserved standalone specialist result, relative path, SHA-256, or schema-valid output was supplied."
+      ],
+      "next_action": "Discard this specialist output without providing credentials or invoking dv-connect."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A specialist requests a bearer token, tenant access, or any dv-* operation.",
+      "expected_behavior": "Stop immediately, provide no credential, invoke no tool, consume no result, and classify the delegation as blocked.",
+      "evidence": "A sanitized orchestration record showing phase blocked, observed external execution, invalid result, and invoked false."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Credential and prohibited-tool stop behavior",
+      "expected": "Bearer-token and dv-connect requests produce Blocked status with no operational action.",
+      "evidence_required": "Schema-valid blocked record and zero workflow-operation evidence.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment authorised"
+    ],
+    "prerequisites": [
+      "A safe delivery brief and separate explicit deployment authority"
+    ],
+    "steps": [
+      "Do not deploy"
+    ],
+    "post_deploy_checks": [
+      "Not applicable while blocked"
+    ],
+    "evidence_required": [
+      "No deployment evidence claimed"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Credential or prohibited tenant-tool request"
+    ],
+    "steps": [
+      "Terminate the unsafe delegation",
+      "Do not retain or transmit credential material"
+    ],
+    "data_considerations": [
+      "No token, tenant URL, confidential record, or query result may be copied into the replacement request"
+    ],
+    "owner": "Authorised delivery lead",
+    "evidence_required": [
+      "Sanitized record confirming no prohibited operation occurred"
+    ]
+  },
+  "next_action": "Start a fresh external $dataverse-webapi-query delegation using only a sanitized public or synthetic query-shape payload and no tools; preserve its complete first JSON output, validate it independently against .agents/skills/dataverse-webapi-query/references/answer-output.schema.json, and resume with the original orchestration state plus the relative result path and SHA-256."
+}

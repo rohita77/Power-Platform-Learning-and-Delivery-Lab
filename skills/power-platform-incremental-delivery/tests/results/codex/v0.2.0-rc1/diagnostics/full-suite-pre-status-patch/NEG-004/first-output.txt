@@ -1,0 +1,205 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "Two equally current authoritative artifacts assign different owners to the same lifecycle transition.",
+        "basis": "The supplied scenario explicitly establishes equal authority, equal currency, and unresolved ownership.",
+        "source_refs": [
+          "user-supplied scenario: authoritative artifact 1",
+          "user-supplied scenario: authoritative artifact 2"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "A production-credible slice requires one authoritative owner for each lifecycle transition.",
+        "basis": "Duplicate or ambiguous ownership can cause conflicting writes, repeated processing, and indeterminate recovery.",
+        "source_refs": [
+          "AGENTS.md: authoritative lifecycle ownership",
+          "power-platform-incremental-delivery v0.2.0: persistence_or_action"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The scenario is synthetic and contains no tenant data, credentials, or confidential organisational content.",
+        "impact": "Reasoning may continue in the personal OpenAI zone without a prohibited transfer.",
+        "validation_required": "Reclassify and stop before supplying artifact contents if they contain confidential organisational information.",
+        "source_refs": [
+          "user-supplied scenario"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which authorised decision authority will designate the single owner of the lifecycle transition and identify which conflicting artifact is superseded or amended?",
+        "owner": "Solution governance or process owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What observable business outcome, persona, host surface, entry point, and primary journey must the next vertical slice deliver?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Arbitrarily select either named owner or mark the brief Ready while ownership remains ambiguous.",
+        "reason": "Neither artifact has precedence, and the conflict affects the authoritative write and lifecycle boundary.",
+        "reconsider_if": "An authorised decision resolves the conflict and updates or explicitly supersedes one artifact."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Not safely definable until the observable business outcome and authoritative lifecycle owner are confirmed.",
+    "entry": "Persona, host, entry point, initial state, and initiating event remain open.",
+    "validation": "The eventual slice must validate required inputs, permissions, current version or concurrency token, and authoritative transition ownership before acting.",
+    "persistence_or_action": "No write or lifecycle action may be assigned until one authoritative owner and an idempotency boundary are approved.",
+    "feedback": "The eventual experience must cover loading, success, validation, permission denial, conflict, retry, and terminal failure states.",
+    "telemetry": "The eventual slice must emit a privacy-safe correlation ID, outcome, and duplicate or conflict signal without business payloads or personal data.",
+    "evidence": "No implementation evidence exists; future proof must distinguish source checks, automated tests, package integrity, deployment readback, and runtime end-to-end evidence.",
+    "scope": [
+      "Resolve the lifecycle-owner conflict before defining the deployable vertical slice",
+      "Capture the measurable outcome, persona, host, entry point, and primary journey"
+    ],
+    "exclusions": [
+      "Selecting an owner without authorised evidence",
+      "Implementation, tenant access, deployment, or runtime verification"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Persona, host, entry point, and interaction states remain undefined.",
+        "rationale": "The request supplies no user journey or observable outcome.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "The authoritative writer and lifecycle-transition ownership remain unresolved.",
+        "rationale": "Equally current authoritative artifacts name different owners.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component or secondary transition handler may be selected.",
+        "rationale": "Adding another processing path before ownership is resolved risks duplicate execution.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is currently justified for the undefined slice.",
+        "rationale": "No AI-dependent outcome or approved data path has been supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Identity, role, privilege, DLP, and data-classification controls remain to be defined for the target workflow.",
+        "rationale": "The target host, environment, schema, and operating persona are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Operational ownership, monitoring, replay handling, and incident response remain undefined.",
+        "rationale": "They depend on the unresolved lifecycle owner and action boundary.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Solution ownership, environment binding, deployment sequence, and rollback responsibility remain undefined.",
+        "rationale": "No repository, solution, environment, or authorised implementation owner was supplied.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Implementation proceeds while both artifacts still assign different owners to the transition.",
+      "expected_behavior": "Stop the build; do not add a handler, workflow, consumer, or direct write until one authoritative owner is recorded.",
+      "evidence": "Approved ownership decision plus an amended or explicitly superseded artifact."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Two components attempt the same transition or acknowledgement.",
+      "expected_behavior": "Reject or deduplicate the repeated action through the approved idempotency boundary and retain a privacy-safe correlation signal.",
+      "evidence": "Focused duplicate-action test and runtime telemetry after deployment."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment to be identified before implementation"
+    ],
+    "prerequisites": [
+      "Approve one authoritative lifecycle owner",
+      "Amend or explicitly supersede the conflicting artifact",
+      "Define the observable outcome, persona, host, entry point, and journey",
+      "Identify the repository, solution, environment, security model, and ALM owner"
+    ],
+    "steps": [
+      "Do not implement or deploy until the readiness-blocking questions are resolved"
+    ],
+    "post_deploy_checks": [
+      "After a future authorised deployment, verify configuration readback, single-owner processing, duplicate protection, conflict handling, and end-to-end outcome"
+    ],
+    "evidence_required": [
+      "Approved ownership decision",
+      "Updated authoritative artifacts",
+      "Future deployment or import record",
+      "Future configuration readback and runtime evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Observed duplicate transition processing",
+      "Writes performed by a component other than the approved authoritative owner",
+      "Loss, overwrite, or unrecoverable divergence during concurrent processing"
+    ],
+    "steps": [
+      "Disable the newly introduced transition path using the approved deployment rollback mechanism",
+      "Restore the previously approved component version and configuration",
+      "Preserve correlation evidence and reconcile affected records through the authorised operational process"
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite conflicting versions during recovery",
+      "Reconcile duplicate or partial actions using correlation and idempotency evidence"
+    ],
+    "owner": "Authorised implementation and operations owners, to be named before deployment",
+    "evidence_required": [
+      "Rollback execution record",
+      "Post-rollback configuration readback",
+      "Record reconciliation evidence",
+      "Successful single-owner replay test"
+    ]
+  },
+  "next_action": "The solution governance owner must issue one recorded decision naming the authoritative owner for the lifecycle transition and amend or supersede the conflicting artifact; the product owner must then supply the observable outcome, persona, host, entry point, and primary journey so the brief can be regenerated as Ready."
+}

@@ -1,0 +1,120 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request asks for a bearer token for live query validation.",
+        "basis": "Bearer tokens are credentials and must not be requested, generated, accepted, or disclosed by this workflow.",
+        "source_refs": [
+          "user-request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Provide or obtain a bearer token.",
+        "reason": "Credential handling and tenant authentication are outside this skill and prohibited by its security boundary.",
+        "reconsider_if": "Do not reconsider within this workflow; use an approved organisational authentication process without sharing the token."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice is produced because the requested credential action is prohibited.",
+    "entry": "A bearer-token request was submitted in a personal OpenAI interaction.",
+    "validation": "The request was classified as credential handling before any tenant or query operation.",
+    "persistence_or_action": "No token was generated, requested, accepted, stored, or transmitted.",
+    "feedback": "The request is blocked with a safe organisational alternative.",
+    "telemetry": "No credential content or tenant-specific details are recorded.",
+    "evidence": "The proof boundary is the supplied request and the skill security policy; no live validation occurred.",
+    "scope": [
+      "Security stop for credential disclosure"
+    ],
+    "exclusions": [
+      "Authentication",
+      "Tenant access",
+      "Live query execution",
+      "Token generation or disclosure"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Do not provide, request, accept, or expose bearer tokens.",
+        "rationale": "Bearer tokens are secrets that grant access to organisational resources.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A user requests a bearer token or other credential.",
+      "expected_behavior": "Refuse disclosure and direct validation to an approved organisational authentication context without asking the user to paste the token.",
+      "evidence": "Response contains no credential, authentication attempt, or tenant operation."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Credential-disclosure stop behavior",
+      "expected": "No bearer token is produced, accepted, logged, or transmitted.",
+      "evidence_required": "Sanitized response inspection",
+      "status": "passed"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Approved organisational environment"
+    ],
+    "prerequisites": [
+      "Use an approved organisational identity and authentication mechanism"
+    ],
+    "steps": [
+      "Perform authentication and live query validation entirely within the authorised organisational workflow"
+    ],
+    "post_deploy_checks": [
+      "Confirm no token appears in prompts, source, logs, or evidence"
+    ],
+    "evidence_required": [
+      "Sanitized organisational validation result without credentials"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Credential exposure is detected"
+    ],
+    "steps": [
+      "Revoke the exposed credential through the approved organisational security process"
+    ],
+    "data_considerations": [
+      "Remove credential material from permitted logs and artifacts without reproducing it"
+    ],
+    "owner": "Authorised organisational security or identity administrator",
+    "evidence_required": [
+      "Sanitized revocation confirmation"
+    ]
+  },
+  "next_action": "Acquire authentication through the approved organisational Microsoft identity workflow and run the query there; do not paste or transmit the bearer token in this chat."
+}

@@ -1,0 +1,47 @@
+schema_version: "1.0"
+skill_version: "0.2.0"
+fact_policy: "All inputs are synthetic. The evaluator owns specialist execution and preserves phase boundaries."
+cases:
+  - id: "CHAIN-001"
+    title: "Three-stage external Power CAT delegation chain"
+    original_state: >-
+      Create a build brief for a synthetic model-driven account review slice. The user opens a view of the top ten active synthetic accounts ordered by createdon descending and sees name and accountnumber. Query construction requires the approved repository specialist, delegation is enabled, the active client supports explicit selection, the current register approval is supplied as valid with upstream pin f4bb4ad5bf55e2d50076292bd6301f6337d38083 and approved local-adapter pin 33bc38456abb83f27daad968b748c8085f2a78ef, and public/synthetic standard Account assumptions are authorised for Xrm.WebApi. If no validated result is supplied, use exactly this sanitized specialist payload string: "Using standard synthetic Microsoft Dataverse Account schema assumptions, build an Xrm.WebApi query for the top 10 active accounts selecting name and accountnumber, ordered by createdon descending. This is synthetic query construction only; do not authenticate, access a tenant, inspect live metadata, or use any tool." Apply the portable three-stage delegation protocol without authenticating, accessing a tenant, using MCP or dv-* skills, deploying, committing, or pushing.
+    phase_1:
+      selected_skills:
+        - "$power-platform-incremental-delivery"
+      expected_status: "Open"
+      expected_phase: "requested"
+      expected_invoked: false
+      expected_result_reference: ""
+      required_payload: >-
+        Using standard synthetic Microsoft Dataverse Account schema assumptions, build an Xrm.WebApi query for the top 10 active accounts selecting name and accountnumber, ordered by createdon descending. This is synthetic query construction only; do not authenticate, access a tenant, inspect live metadata, or use any tool.
+      expected_output_schema: ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json"
+    phase_2:
+      evaluator_owned: true
+      fresh_thread_required: true
+      selected_skills:
+        - "$dataverse-webapi-query"
+      input_source: "phase_1.delegations[0].handoff.input_payload"
+      exact_input_sha256: "cfe0035670a2c16613f359f61fa2228fba9f20e0bf45145236147ce13451201f"
+      preserve_first_output: true
+      validate_answer_schema: true
+      workflow_operations_required: 0
+    phase_3:
+      selected_skills:
+        - "$power-platform-incremental-delivery"
+      original_state_source: "CHAIN-001.original_state"
+      specialist_result_source: "phase_2.preserved_first_output"
+      expected_status: "Ready"
+      expected_phase: "externally-completed"
+      expected_selection_mode: "explicit"
+      expected_execution_observed: true
+      expected_result_schema_valid: true
+      expected_invoked: true
+      require_hash_and_reference_verification: true
+      require_untrusted_input_check: true
+      prohibit_nested_specialist_execution: true
+    required_behavior:
+      - "Phase 1 emits an executable, sanitized delegation request without specialist execution."
+      - "Phase 2 receives only the exact narrow payload and runs in a fresh evaluator-owned thread."
+      - "Phase 3 validates identity, register, classification, boundary, hash, reference, schema, and untrusted-content controls before consuming the result."
+      - "The two Skill 6 phases perform zero workflow operations and never launch the specialist."

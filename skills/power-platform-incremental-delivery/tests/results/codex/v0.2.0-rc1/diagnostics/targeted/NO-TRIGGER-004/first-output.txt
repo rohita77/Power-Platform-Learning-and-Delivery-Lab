@@ -1,0 +1,74 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request is for general Power Platform education, not a deployable delivery slice.",
+        "basis": "The user asked for an explanation of a model-driven app without requesting a solution increment or build brief.",
+        "source_refs": [
+          "user request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable outcome, persona, and host should a delivery slice address?",
+        "owner": "User",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was requested.",
+    "entry": "Not defined.",
+    "validation": "Not defined.",
+    "persistence_or_action": "Not defined.",
+    "feedback": "Not defined.",
+    "telemetry": "Not defined.",
+    "evidence": "Not defined.",
+    "scope": [],
+    "exclusions": [
+      "General Power Platform education"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [],
+    "prerequisites": [],
+    "steps": [],
+    "post_deploy_checks": [],
+    "evidence_required": []
+  },
+  "rollback": {
+    "triggers": [],
+    "steps": [],
+    "data_considerations": [],
+    "owner": "Not assigned",
+    "evidence_required": []
+  },
+  "next_action": "Route the question to a general Power Platform education workflow; if a build brief is wanted, provide the observable outcome, persona, and host."
+}

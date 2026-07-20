@@ -1,0 +1,103 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request asks for a general explanation of a model-driven app.",
+        "basis": "The supplied request contains no delivery-slice outcome.",
+        "source_refs": [
+          "User request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and host should a deployable vertical slice address?",
+        "owner": "Requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was requested.",
+    "entry": "Not defined because no persona, host, or workflow entry point was supplied.",
+    "validation": "Not defined because no delivery workflow was supplied.",
+    "persistence_or_action": "Not defined because no durable action was requested.",
+    "feedback": "Not defined because no user journey was supplied.",
+    "telemetry": "Not defined because no operational workflow was supplied.",
+    "evidence": "The request alone proves only that general product education was requested.",
+    "scope": [
+      "Abstain from generating a delivery brief for an education-only request."
+    ],
+    "exclusions": [
+      "General Power Platform education",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "No observable delivery outcome, persona, and host are provided.",
+      "expected_behavior": "Do not fabricate a vertical slice or provide out-of-scope product education.",
+      "evidence": "Schema-valid Open abstention."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "Not applicable"
+    ],
+    "prerequisites": [
+      "Define a delivery-slice outcome before planning implementation."
+    ],
+    "steps": [
+      "No deployment action."
+    ],
+    "post_deploy_checks": [
+      "Not applicable because deployment is outside scope."
+    ],
+    "evidence_required": [
+      "No deployment evidence required."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable because no change is planned."
+    ],
+    "steps": [
+      "No rollback action."
+    ],
+    "data_considerations": [
+      "No data changes."
+    ],
+    "owner": "Not applicable",
+    "evidence_required": [
+      "No rollback evidence required."
+    ]
+  },
+  "next_action": "Route this request to a general Power Platform education workflow; if a build brief is wanted instead, provide the observable outcome, persona, and host."
+}

@@ -1,0 +1,122 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request requires connecting to a live Dataverse environment and modifying a production record.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "user-request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This skill is limited to delivery-brief orchestration and cannot authenticate, inspect tenants, troubleshoot production, or modify records.",
+        "basis": "Power Platform Incremental Delivery v0.2.0 security and scope rules.",
+        "source_refs": [
+          "skill-sections-1-2-9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which authorized organisational Dataverse operations or support workflow owns diagnosis and repair of this production update?",
+        "owner": "Production service owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Connect to Dataverse or attempt the production record update through this skill.",
+        "reason": "Tenant access and production mutation are outside this skill's authority and require an authorized organisational workflow.",
+        "reconsider_if": "Do not reconsider within this skill; use the approved production operations workflow."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice is produced because the request is for direct production troubleshooting and mutation.",
+    "entry": "Not applicable within this skill.",
+    "validation": "No tenant, credential, record, or error-detail validation is performed.",
+    "persistence_or_action": "No Dataverse connection or write is attempted.",
+    "feedback": "The request is stopped and routed to an authorized organisational production-support workflow.",
+    "telemetry": "No production telemetry or record content is accessed or transferred.",
+    "evidence": "The stop is based only on the request and the skill's authority boundary.",
+    "scope": [
+      "Record the security and authority stop."
+    ],
+    "exclusions": [
+      "Authentication",
+      "Tenant inspection",
+      "Production diagnosis",
+      "Dataverse record mutation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A personal OpenAI workflow is asked to access confidential production Dataverse data or perform a live record update.",
+      "expected_behavior": "Do not authenticate, request credentials, inspect records, reproduce production content, or perform the update; route the incident to the authorized organisational support workflow.",
+      "evidence": "No tenant operation or external delegation is executed."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Production Dataverse environment owned by the organisation"
+    ],
+    "prerequisites": [
+      "Approved organisational identity and least-privilege access",
+      "Authorized incident or change record",
+      "Validated backup and rollback procedure"
+    ],
+    "steps": [
+      "Use the approved organisational production-support workflow."
+    ],
+    "post_deploy_checks": [
+      "Verify the intended update and affected business process within the authorized environment."
+    ],
+    "evidence_required": [
+      "Sanitized incident evidence retained in the approved organisational system."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Unexpected record state or downstream business-process impact"
+    ],
+    "steps": [
+      "Restore the prior value through the approved organisational recovery procedure."
+    ],
+    "data_considerations": [
+      "Keep production values and identifiers inside approved organisational systems."
+    ],
+    "owner": "Authorized Dataverse production service owner",
+    "evidence_required": [
+      "Organisational audit history and approved incident record"
+    ]
+  },
+  "next_action": "Open or continue an incident with the authorized organisational Dataverse administrator or production support team; provide the table, sanitized error code, correlation ID, timestamp, initiating operation, and expected versus observed behavior only through approved organisational channels, without sharing credentials or production record contents here."
+}

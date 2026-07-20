@@ -1,0 +1,527 @@
+{
+  "status": "Ready",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The slice provides a model-driven account-review surface showing the ten most recently created active synthetic accounts with name and account number.",
+        "basis": "The requested observable outcome defines the persona journey, record limit, active-state filter, ordering, and displayed fields.",
+        "source_refs": [
+          "user-request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The required query host contract is Xrm.WebApi and standard synthetic Microsoft Dataverse Account schema assumptions are authorized.",
+        "basis": "The request explicitly fixes the host and authorizes the synthetic schema assumptions required by the query specialist.",
+        "source_refs": [
+          "user-request",
+          ".agents/skills/dataverse-webapi-query/"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "The validated query contract is Xrm.WebApi.retrieveMultipleRecords(\"account\", \"?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc&$top=10\").",
+        "basis": "The externally executed specialist result passed identity, approval, classification, boundary, path, hash, schema, prohibited-operation, and untrusted-input gates.",
+        "source_refs": [
+          "tests/fixtures/powercat/gold-005-result.json",
+          "tests/fixtures/powercat/gold-005-result-provenance.json",
+          ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json"
+        ]
+      },
+      {
+        "id": "CP-004",
+        "statement": "The specialist used account as the table logical name, accounts as the entity set, statecode=0 as Active, and name, accountnumber, createdon, and statecode as the material attributes.",
+        "basis": "These resolved schema facts are present in the preserved schema-valid specialist result.",
+        "source_refs": [
+          "tests/fixtures/powercat/gold-005-result.json"
+        ]
+      },
+      {
+        "id": "CP-005",
+        "statement": "This invocation performs orchestration and brief generation only; it does not authenticate, inspect a tenant, implement, deploy, or execute a specialist.",
+        "basis": "The selected delivery skill prohibits operational actions and the supplied external evidence reports zero specialist workflow operations.",
+        "source_refs": [
+          "power-platform-incremental-delivery@0.2.0",
+          "evaluator-supplied-external-delegation-evidence"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "An account reviewer with existing model-driven app and Account read privileges is the initial persona.",
+        "impact": "The surface can remain read-only and rely on Dataverse security rather than introducing a new write path or role.",
+        "validation_required": "Confirm the named persona and least-privilege Account read role before implementation.",
+        "source_refs": [
+          "bounded-slice-assumption"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "The Xrm.WebApi review surface will be implemented as a solution-managed model-driven web resource or equivalent supported component that runs within model-driven app context.",
+        "impact": "This preserves the required Xrm.WebApi contract; a native Dataverse view or Power Fx custom page would require a different query shape.",
+        "validation_required": "Confirm the selected model-driven component and supported app navigation pattern during implementation planning.",
+        "source_refs": [
+          "required-host-contract",
+          "bounded-slice-assumption"
+        ]
+      },
+      {
+        "id": "AS-003",
+        "statement": "Publisher prefix, target environment names, app navigation label, telemetry destination, and accessibility test tooling are implementation-time configuration.",
+        "impact": "These values do not change the slice architecture when supplied through solution configuration and approved deployment procedures.",
+        "validation_required": "Resolve and record each value before solution build or deployment.",
+        "source_refs": [
+          "bounded-implementation-configuration"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which approved publisher prefix, model-driven app, navigation label, security role, telemetry destination, and target environments will the authorized implementation use?",
+        "owner": "Solution owner and environment administrator",
+        "blocks_ready": false
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Use a native Dataverse system view as the implementation while retaining the supplied Xrm.WebApi query contract.",
+        "reason": "Native model-driven views use a different definition and execution contract, so this would not faithfully embed the validated Xrm.WebApi result.",
+        "reconsider_if": "The host requirement changes and a separately validated FetchXML or native-view contract is supplied."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Inspect live metadata or access tenant records to validate schema assumptions during brief generation.",
+        "reason": "The request is synthetic and expressly prohibits authentication, tenant access, and live metadata inspection.",
+        "reconsider_if": "A separately authorized organisational Microsoft implementation workflow performs target-side validation without transferring confidential data."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "An authorized account reviewer opens the model-driven Recent Active Accounts review surface and sees no more than ten active synthetic accounts, newest by createdon first, with only name and accountnumber displayed.",
+    "entry": "The account reviewer selects the solution-managed Recent Active Accounts navigation entry in the model-driven app. The surface renders its heading and accessible loading state, creates a privacy-safe correlation ID, and initiates the validated Xrm.WebApi read.",
+    "validation": "The component uses the exact validated account query contract, permits no user-supplied query fragments, validates that returned items are objects containing only the expected rendered fields, safely handles null or long values, and relies on Dataverse read authorization. A monotonically increasing request token ensures that an older response cannot overwrite a newer refresh result.",
+    "persistence_or_action": "This slice is read-only: Dataverse remains the single authoritative data owner and no durable write occurs. One request coordinator owns retrieval and rendering; repeated opens or refreshes replace the current in-flight request logically, and only the latest request token may update the visible state.",
+    "feedback": "Show an accessible loading announcement, a table on success, an explicit empty state when no active accounts exist, and sanitized permission, network, malformed-response, and retry messages. Disable duplicate refresh action while a request is pending, preserve the last successfully rendered result during a refresh where safe, and tell the user when newer data could not be loaded.",
+    "telemetry": "Emit privacy-safe review_started and review_completed events with correlation ID, duration, outcome, returned row count, retry indicator, and stale-response-suppressed indicator. Exclude account names, account numbers, record identifiers, raw responses, query results, tenant identifiers, environment URLs, credentials, and exception payloads.",
+    "evidence": "Local proof comprises source review, exact query-contract assertions, component tests, accessibility checks, and static validation. Package proof comprises solution unpack/pack validation and artifact inspection. Deployment proof requires authorized import history, dependency and app-navigation readback, role/configuration confirmation, and smoke-test setup. Runtime proof requires observed target execution for ordered active results, empty, permission-denied, failure, retry, narrow-layout, keyboard, and stale-response scenarios; no lower evidence level proves deployment or runtime behavior.",
+    "scope": [
+      "Solution-managed read-only model-driven account-review surface",
+      "Exact validated Xrm.WebApi query contract",
+      "Display of name and accountnumber for up to ten active accounts",
+      "Newest-created ordering",
+      "Loading, success, empty, permission, retry, failure, long-content, and narrow-layout states",
+      "Keyboard and screen-reader accessibility",
+      "Privacy-safe telemetry and correlation",
+      "Focused tests, deployment prerequisites, evidence controls, and rollback"
+    ],
+    "exclusions": [
+      "Account creation, update, deletion, or acknowledgement processing",
+      "Authentication, tenant access, and live metadata discovery during this brief",
+      "Custom schema inference",
+      "Licensing or current-feature verification",
+      "AI or Copilot components",
+      "Deployment, role assignment, environment administration, commit, or push",
+      "Transfer of organisational records into the personal OpenAI zone"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Provide a read-only Recent Active Accounts review surface inside the model-driven app with an accessible two-column table and explicit loading, empty, error, permission, retry, long-content, and narrow-layout states.",
+        "rationale": "This is the smallest user-visible workflow that satisfies the requested review outcome while covering production-relevant interaction states.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "EXP-002",
+        "decision": "Use a model-driven component capable of executing Xrm.WebApi and expose it through solution-managed app navigation.",
+        "rationale": "The host choice must preserve the externally validated Xrm.WebApi contract.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Read account records using statecode=0, order by createdon descending, limit the response to ten, and render only name and accountnumber.",
+        "rationale": "This exactly represents the validated synthetic Account query contract and minimizes returned columns.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-002",
+        "decision": "Keep Dataverse as the sole authoritative owner and introduce no persistence or duplicated cache for this slice.",
+        "rationale": "The outcome is read-only and does not require another lifecycle owner.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Use Xrm.WebApi.retrieveMultipleRecords with the exact validated query string and no dynamically concatenated OData input.",
+        "rationale": "A fixed contract is deterministic, reduces injection risk, and conforms to the required host.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "INT-002",
+        "decision": "Do not add connectors, flows, webhooks, queues, or secondary handlers.",
+        "rationale": "No external integration or asynchronous action is required for the read-only slice.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Include no AI, Copilot, prompt, or generative component.",
+        "rationale": "The deterministic account retrieval and display outcome does not require AI.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Rely on model-driven authentication and Dataverse table privileges, require least-privilege Account read access, and render no data when authorization fails.",
+        "rationale": "Platform-native authorization remains authoritative and the client must not bypass or reinterpret it.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "SEC-002",
+        "decision": "Keep real organisational account data within the organisational Microsoft zone and exclude record values and identifiers from telemetry.",
+        "rationale": "Only synthetic evidence is permitted in the current personal OpenAI workflow.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Record privacy-safe start and completion telemetry with correlation, duration, row count, outcome, retry, and stale-response suppression signals.",
+        "rationale": "These signals support diagnosis without exposing account or tenant content.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "OPS-002",
+        "decision": "Suppress late responses using a latest-request token and expose a safe retry path for transient failures.",
+        "rationale": "This prevents stale UI state and duplicate rendering during concurrent refresh actions.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the component, app navigation change, and configuration references in a solution using the approved publisher and environment-specific binding process.",
+        "rationale": "Solution ownership provides deterministic packaging, dependency inspection, deployment evidence, and rollback.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "ALM-002",
+        "decision": "Keep the query contract under source control with focused assertions that fail on filter, ordering, selected-column, table-name, or limit drift.",
+        "rationale": "The externally validated contract should remain reviewable and deterministic through later changes.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "dataverse-webapi-query",
+      "source_type": "upstream",
+      "phase": "externally-completed",
+      "registry": {
+        "path": ".agents/skills/dataverse-webapi-query/",
+        "entry_status": "current-approved",
+        "version_or_pin": "f4bb4ad5bf55e2d50076292bd6301f6337d38083",
+        "verified_on": "2026-07-20"
+      },
+      "request": {
+        "scope": "Construct an Xrm.WebApi query for the ten newest active synthetic Account records, selecting name and accountnumber.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "explicit-external",
+        "input_payload": "Using standard synthetic Microsoft Dataverse Account schema assumptions, build an Xrm.WebApi query for the top 10 active accounts selecting name and accountnumber, ordered by createdon descending. This is synthetic query construction only; do not authenticate, access a tenant, inspect live metadata, or use any tool.",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": "Execute the specialist in a fresh external thread using only the sanitized payload, preserve its complete first output, validate it independently, then resume the delivery skill with the original orchestration state plus the preserved result path and SHA-256."
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "explicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": true,
+        "prerequisites_satisfied": true,
+        "boundary_permitted": true,
+        "permissions_approved": true
+      },
+      "execution": {
+        "execution_observed": true,
+        "result_schema_valid": true,
+        "invoked": true,
+        "outcome_status": "completed",
+        "result_reference": "tests/fixtures/powercat/gold-005-result.json"
+      },
+      "verification": {
+        "specialist_identity_verified": true,
+        "register_verified": true,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": true,
+        "result_schema_verified": true,
+        "untrusted_input_checked": true,
+        "override_attempted": false,
+        "result_sha256": "2adfa6cbe497117ebbfbb36957b2581119d486bf1807031cea1f9ecd1360da54",
+        "source_path": "tests/fixtures/powercat/gold-005-result.json"
+      },
+      "evidence_refs": [
+        "tests/fixtures/powercat/gold-005-result.json",
+        "tests/fixtures/powercat/gold-005-result-provenance.json",
+        ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "upstream-pin:f4bb4ad5bf55e2d50076292bd6301f6337d38083",
+        "approved-adapter-pin:33bc38456abb83f27daad968b748c8085f2a78ef"
+      ],
+      "open_items": [],
+      "next_action": "Retain the validated result and provenance with the build brief; do not re-execute or reinterpret the specialist unless the schema, requested fields, filter, ordering, limit, or host contract changes."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "More than ten synthetic accounts exist with mixed active and inactive states and distinct createdon values",
+      "when": "An authorized reviewer opens the Recent Active Accounts surface",
+      "then": "Exactly the ten newest active accounts are shown in createdon-descending order and no inactive account is shown.",
+      "evidence": "Target runtime capture plus deterministic seeded-record assertion comparing the rendered sequence with expected active records."
+    },
+    {
+      "id": "AC-002",
+      "given": "The retrieval is initiated",
+      "when": "The component calls Dataverse",
+      "then": "It uses the exact validated Xrm.WebApi account query selecting name and accountnumber, filtering statecode eq 0, ordering createdon desc, and limiting results to ten.",
+      "evidence": "Source-level contract test and reviewed built artifact."
+    },
+    {
+      "id": "AC-003",
+      "given": "Between one and ten active accounts are returned",
+      "when": "The response succeeds",
+      "then": "Each row exposes name and accountnumber through an accessible table without displaying unrequested fields.",
+      "evidence": "Component test, accessibility-tree assertion, and authorized runtime observation."
+    },
+    {
+      "id": "AC-004",
+      "given": "No active accounts are returned",
+      "when": "The request completes successfully",
+      "then": "The reviewer receives a clear empty state rather than a blank table or error.",
+      "evidence": "Empty-response component test and target smoke evidence."
+    },
+    {
+      "id": "AC-005",
+      "given": "A request is loading, fails, is denied, or is retried",
+      "when": "The state changes",
+      "then": "The surface provides keyboard-accessible, screen-reader-announced, sanitized feedback and prevents duplicate refresh actions.",
+      "evidence": "State-transition tests, keyboard test, accessibility scan, and runtime failure-path evidence."
+    },
+    {
+      "id": "AC-006",
+      "given": "Two refresh requests overlap",
+      "when": "The older request completes after the newer request",
+      "then": "The older response is suppressed, the newer result remains visible, and privacy-safe telemetry records the stale-response outcome.",
+      "evidence": "Controlled concurrent-response test and telemetry assertion."
+    },
+    {
+      "id": "AC-007",
+      "given": "Telemetry is emitted for the review journey",
+      "when": "Events are inspected",
+      "then": "They contain correlation, outcome, duration, row count, retry, and stale-response signals but no account values, record identifiers, tenant details, URLs, credentials, or raw payloads.",
+      "evidence": "Telemetry schema test and sanitized target telemetry sample."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The reviewer lacks Account read permission.",
+      "expected_behavior": "Show a sanitized permission message, render no records, offer no privilege-bypass path, and record only a privacy-safe denied outcome.",
+      "evidence": "Least-privilege security test in an authorized target environment."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Dataverse returns a network, throttling, or service failure.",
+      "expected_behavior": "Show a retryable sanitized error, avoid raw response disclosure, preserve the last successful view when safe, and correlate the failure without logging record content.",
+      "evidence": "Mocked failure tests and authorized target failure-path observation."
+    },
+    {
+      "id": "NP-003",
+      "condition": "The response is malformed or contains unexpected properties.",
+      "expected_behavior": "Reject unsafe rendering, show a generic failure state, and record a schema-failure outcome without logging the payload.",
+      "evidence": "Malformed-response component tests."
+    },
+    {
+      "id": "NP-004",
+      "condition": "A name or accountnumber is null, unusually long, or contains markup-like text.",
+      "expected_behavior": "Render a safe fallback or wrapped text without executing markup, breaking layout, or losing table semantics.",
+      "evidence": "Boundary-value, encoding, narrow-layout, and accessibility tests."
+    },
+    {
+      "id": "NP-005",
+      "condition": "The user repeatedly opens or refreshes the surface while a request is pending.",
+      "expected_behavior": "Do not create duplicate visible rows or allow an older response to replace a newer result; record stale-response suppression when applicable.",
+      "evidence": "Rapid-action and out-of-order completion tests."
+    },
+    {
+      "id": "NP-006",
+      "condition": "An attempt is made to transfer real organisational account data or telemetry payloads into the personal OpenAI zone.",
+      "expected_behavior": "Stop the transfer and keep organisational records within approved Microsoft boundaries.",
+      "evidence": "Design review, telemetry-field inspection, and deployment security approval."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Assert the exact Xrm.WebApi table and query string, active filter, selected columns, descending createdon ordering, ten-row limit, rendering, and empty state.",
+      "expected": "Contract drift fails deterministically and valid responses render the required rows and fields.",
+      "evidence_required": "Automated test report and source-to-built-artifact review.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Exercise denied access, unexpected response content, safe text rendering, telemetry exclusion, and prohibition on user-controlled query fragments.",
+      "expected": "No data is shown on denial, no payload is leaked, and no executable or additional query content is accepted.",
+      "evidence_required": "Automated security assertions and authorized least-privilege target test.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Exercise network failure, retry, rapid repeated actions, and out-of-order concurrent completions.",
+      "expected": "Errors remain recoverable, duplicate rendering is prevented, and only the latest request updates the view.",
+      "evidence_required": "Controlled async test report with correlation and stale-response telemetry assertions.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "accessibility",
+      "scope": "Check heading and table semantics, loading and error announcements, keyboard operation, focus behavior, contrast, zoom, long content, and narrow layout.",
+      "expected": "The complete review journey is understandable and operable without a pointer and without clipped essential content.",
+      "evidence_required": "Automated scan plus documented keyboard and screen-reader checks.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "performance",
+      "scope": "Measure request duration and render behavior for zero through ten returned rows under an agreed target profile.",
+      "expected": "The bounded result renders without UI blocking and meets the implementation-approved response budget.",
+      "evidence_required": "Target timing sample with sanitized telemetry and approved threshold.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "alm",
+      "scope": "Validate solution dependencies, component inclusion, app navigation, configuration references, publisher ownership, and exact query-contract preservation after packing.",
+      "expected": "The artifact is deterministic, complete, and contains no environment-specific secrets or unmanaged dependency.",
+      "evidence_required": "Solution diff, validation report, and package inspection.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "deployment",
+      "scope": "Import into an authorized non-production environment and read back component, navigation, security, and telemetry configuration before smoke testing.",
+      "expected": "Import and configuration succeed and the required surface is available only to the intended persona.",
+      "evidence_required": "Import history, configuration readback, role check, and runtime smoke record.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-008",
+      "class": "rollback",
+      "scope": "Remove or revert the navigation and review component using the approved prior solution version.",
+      "expected": "The previous app experience is restored without Account data changes or orphaned configuration.",
+      "evidence_required": "Non-production rollback rehearsal and post-rollback readback.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorized organisational development environment",
+      "Authorized organisational test environment",
+      "Authorized organisational production environment after approval"
+    ],
+    "prerequisites": [
+      "Confirm the target model-driven app, account-review persona, and least-privilege Account read role",
+      "Confirm the supported Xrm.WebApi-capable component and app navigation pattern",
+      "Allocate the approved solution publisher and prefix",
+      "Define environment-specific telemetry binding and retention with no record payload collection",
+      "Confirm target DLP, security, compliance, accessibility, and operational approvals",
+      "Prepare synthetic test records with known active states and createdon ordering",
+      "Establish an approved managed-solution promotion and rollback path",
+      "Complete automated functional, security, reliability, accessibility, and package checks"
+    ],
+    "steps": [
+      "Implement the read-only component and exact query contract in the approved development workflow",
+      "Add the component and navigation entry to the solution under the approved publisher",
+      "Configure privacy-safe telemetry through environment-specific binding",
+      "Run local tests and inspect the unpacked and packed solution diff",
+      "Import the managed artifact into the authorized test environment",
+      "Read back dependencies, navigation, configuration, and persona access",
+      "Run positive and negative runtime smoke tests with synthetic records",
+      "Promote the identical approved artifact through the organizational release process"
+    ],
+    "post_deploy_checks": [
+      "Confirm the navigation entry is visible to the intended persona and hidden where not assigned",
+      "Confirm the exact active, ordering, selected-field, and ten-row behavior",
+      "Confirm loading, empty, permission, retry, failure, long-content, keyboard, and narrow-layout states",
+      "Confirm overlapping requests cannot produce stale visible results",
+      "Confirm telemetry correlation and outcomes while verifying excluded payload fields",
+      "Confirm no Account writes, extra connectors, flows, or environment-specific secrets were introduced"
+    ],
+    "evidence_required": [
+      "Approved change and deployment record",
+      "Managed solution artifact identity and integrity evidence",
+      "Import history and dependency readback",
+      "App navigation, role, and telemetry configuration readback",
+      "Runtime positive, empty, denied, failure, accessibility, and concurrency evidence",
+      "Sanitized telemetry sample",
+      "Rollback readiness confirmation"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "The surface returns inactive, incorrectly ordered, excessive, or unintended fields",
+      "Authorization is bypassed or account data appears in telemetry",
+      "The component causes material model-driven app navigation or accessibility regression",
+      "Concurrent requests expose stale results or duplicate rows",
+      "Import dependencies or environment bindings are incorrect",
+      "Operational error rate exceeds the approved threshold"
+    ],
+    "steps": [
+      "Disable or remove the Recent Active Accounts navigation entry through the approved release mechanism",
+      "Reimport the last approved managed solution or apply the approved solution upgrade rollback path",
+      "Remove or disable the slice-specific telemetry configuration if it is contributing to the incident",
+      "Read back the restored app, component, role, and configuration state",
+      "Run the prior-version smoke checks and retain sanitized incident correlation evidence"
+    ],
+    "data_considerations": [
+      "The slice performs no Account writes, so business-data rollback is not expected",
+      "Do not delete or alter Account records during rollback",
+      "Retain operational telemetry only under the approved retention policy and without record payloads",
+      "Treat any discovered data exposure as a security incident under organisational procedure"
+    ],
+    "owner": "Authorized solution release owner",
+    "evidence_required": [
+      "Rollback authorization and execution record",
+      "Prior solution version or upgrade-path identity",
+      "Post-rollback component and navigation readback",
+      "Post-rollback security and smoke-test evidence",
+      "Sanitized incident and telemetry correlation record"
+    ]
+  },
+  "next_action": "Hand this Ready brief and the preserved specialist result evidence to the authorized organisational implementation workflow; first confirm the Xrm.WebApi-capable model-driven component, target app, publisher, persona role, telemetry binding, and environment promotion path, then implement and test without re-running the specialist unless the query contract changes."
+}

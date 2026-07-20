@@ -1,0 +1,78 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request asks for general Power Platform education, not a deployable delivery slice.",
+        "basis": "The requested outcome is an explanation of a model-driven app.",
+        "source_refs": [
+          "user-request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and host should a delivery slice address?",
+        "owner": "requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was requested.",
+    "entry": "Not defined because this is a general education request.",
+    "validation": "Not applicable until a delivery outcome is supplied.",
+    "persistence_or_action": "No persistent action was requested.",
+    "feedback": "Not applicable until a delivery outcome is supplied.",
+    "telemetry": "No telemetry is required for this educational request.",
+    "evidence": "The user request is the only evidence considered.",
+    "scope": [
+      "Classify the request and abstain from delivery-slice design."
+    ],
+    "exclusions": [
+      "General Power Platform education",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [],
+    "prerequisites": [],
+    "steps": [],
+    "post_deploy_checks": [],
+    "evidence_required": []
+  },
+  "rollback": {
+    "triggers": [],
+    "steps": [],
+    "data_considerations": [],
+    "owner": "not-applicable",
+    "evidence_required": []
+  },
+  "next_action": "Route this request to a general Power Platform education workflow; if a build brief is wanted, provide the observable outcome, persona, and host."
+}

@@ -1,0 +1,147 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested outcome is the next MVP increment for an existing Dynamics 365 solution.",
+        "basis": "Explicit continuation request.",
+        "source_refs": [
+          "Current user request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Settled decisions must remain unchanged unless new material evidence justifies reconsideration.",
+        "basis": "Explicit user constraint.",
+        "source_refs": [
+          "Current user request"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The current input is treated as public orchestration context because it contains no tenant data, solution records, credentials, or confidential organisational content.",
+        "impact": "Reasoning may continue, but no organisational evidence may be transferred until its classification and permitted path are confirmed.",
+        "validation_required": "Confirm the classification and permitted transfer path before supplying repository extracts, exports, screenshots, or tenant evidence.",
+        "source_refs": [
+          "Current user request"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What single observable business or operational result must the next increment deliver?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona, Dynamics 365 host surface, entry point, and primary journey must produce that result?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "What concise authoritative carry-forward summary identifies the current solution state, settled and rejected decisions, schema and component ownership, known defects, and latest test evidence?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-004",
+        "question": "What data classification, execution zone, and approved transfer path apply to the carry-forward evidence?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "Open: no measurable end-to-end result has been supplied, so selecting an MVP slice would fabricate product intent.",
+    "entry": "Open pending confirmation of the persona, Dynamics 365 host surface, entry point, initial state, and initiating event.",
+    "validation": "Open pending the selected journey, authoritative schema, business rules, security checks, and concurrency requirements.",
+    "persistence_or_action": "No write or action is selected; its authoritative owner and idempotency boundary must be reconstructed from the current solution.",
+    "feedback": "Open pending the journey; the eventual slice must cover loading, success, validation, permission, conflict, retry, and failure states.",
+    "telemetry": "Open pending the outcome and approved privacy boundary; eventual telemetry must exclude business payloads and include a correlation ID and outcome.",
+    "evidence": "No implementation, package, deployment, configuration, or runtime evidence was supplied or inferred.",
+    "scope": [
+      "Reconstruct the agreed Dynamics 365 position from a concise authoritative carry-forward summary.",
+      "Define one smallest deployable vertical slice after the observable outcome, persona, and host are confirmed."
+    ],
+    "exclusions": [
+      "Reopening settled decisions without new material evidence.",
+      "Implementation, tenant inspection, authentication, deployment, administration, commit, or push.",
+      "Treating local source or package evidence as proof of target deployment or runtime behavior."
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The next increment is selected without an observable outcome, persona, host, or authoritative carry-forward position.",
+      "expected_behavior": "Keep the brief Open and do not invent requirements or reopen settled decisions.",
+      "evidence": "Review the completed carry-forward inputs before slice selection."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Confidential organisational evidence would cross into the personal OpenAI zone without an approved transfer path.",
+      "expected_behavior": "Stop the transfer and continue only with sanitized public or synthetic information.",
+      "evidence": "Approved classification and transfer decision."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target Dynamics 365 environment to be identified before implementation."
+    ],
+    "prerequisites": [
+      "Complete a Ready build brief from authoritative, safely classified inputs.",
+      "Resolve target environment, connection binding, security-role ownership, and deployment authority."
+    ],
+    "steps": [
+      "Do not deploy until an authorised implementation workflow has completed and produced validated artifacts."
+    ],
+    "post_deploy_checks": [
+      "Define configuration readback and runtime end-to-end checks after the vertical slice is selected."
+    ],
+    "evidence_required": [
+      "Deployment or import record, configuration readback, and runtime evidence must be captured separately."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Implementation or deployment begins before the outcome, boundary, ownership, and acceptance criteria are approved."
+    ],
+    "steps": [
+      "Stop the unauthorised activity and return to the last verified solution state."
+    ],
+    "data_considerations": [
+      "No data mutation is authorised by this brief."
+    ],
+    "owner": "Solution owner to assign before implementation",
+    "evidence_required": [
+      "Verified pre-change artifact and documented rollback validation."
+    ]
+  },
+  "next_action": "Provide one sanitized carry-forward package containing: the measurable result, persona and Dynamics 365 host/entry point, concise settled/rejected/open decisions, current authoritative source or artifact references, latest evidence with its proof boundary, and the approved data classification and transfer path. The next invocation can then select and fully specify one deployable MVP vertical slice without reopening settled decisions."
+}

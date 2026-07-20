@@ -1,0 +1,225 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested approach is to build every table and relationship before deciding the user journey or end-to-end outcome.",
+        "basis": "Explicit user instruction.",
+        "source_refs": [
+          "Current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No tenant access, implementation, deployment, or external execution is authorised.",
+        "basis": "This workflow produces build briefs only, and no consequential action was requested.",
+        "source_refs": [
+          "Power Platform Incremental Delivery v0.2.0"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The current request contains only synthetic, non-tenant-specific information.",
+        "impact": "Reasoning may continue in the personal OpenAI zone, but organisational data must not be introduced without an approved transfer path.",
+        "validation_required": "Reclassify the boundary before supplying tenant-specific schema, records, security configuration, or identifiers.",
+        "source_refs": [
+          "Current request"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What single observable user or operational result should the first deployable slice achieve?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona performs the journey?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which Power Platform or Dynamics 365 host surface and entry point will the persona use?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Design and build every table and relationship before defining the outcome and journey.",
+        "reason": "This horizontal schema-first approach cannot establish the smallest deployable vertical slice, justify which data is necessary, or produce outcome-based acceptance criteria.",
+        "reconsider_if": "A separately authorised foundational data-platform programme provides bounded domains, consumers, retention rules, ownership, security requirements, and measurable platform acceptance criteria."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no observable end-to-end result has been supplied.",
+    "entry": "Open: persona, host surface, entry point, initial state, and initiating event are undecided.",
+    "validation": "Open: validation, authorization, concurrency, and safe-failure rules depend on the selected journey.",
+    "persistence_or_action": "Open: no authoritative write owner, durable action, or idempotency boundary can be selected before the outcome is known.",
+    "feedback": "Open: loading, success, validation, permission, conflict, retry, and failure feedback depend on the host and journey.",
+    "telemetry": "Open: define a privacy-safe event, correlation identifier, outcome, and duplicate or conflict signal after selecting the observable result; exclude business payloads and personal data.",
+    "evidence": "Only the stated planning preference is evidenced. No source, automated test, package, deployment, configuration, or runtime proof has been supplied.",
+    "scope": [
+      "Define the first observable outcome, persona, host, and primary journey",
+      "Derive only the minimum data model required by that vertical slice"
+    ],
+    "exclusions": [
+      "Exhaustive table and relationship construction",
+      "Tenant access or metadata inspection",
+      "Implementation and deployment",
+      "Unvalidated licensing or current-feature claims"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Defer experience design until the persona, host, entry point, and primary journey are supplied.",
+        "rationale": "These inputs determine interaction states, accessibility behavior, and user feedback.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Do not define an exhaustive schema; derive the minimum tables, columns, relationships, ownership, and lifecycle rules from the selected vertical slice.",
+        "rationale": "A data model without a bounded outcome cannot be tested for necessity, correctness, security, or lifecycle completeness.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component is selected.",
+        "rationale": "External systems, events, and ownership boundaries have not been identified.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is selected.",
+        "rationale": "The outcome does not currently establish an AI-supported task or evaluation target.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Defer roles, privileges, ownership, field protection, and data classification until the persona and data handled by the slice are known.",
+        "rationale": "Security cannot be inferred safely from an unspecified schema or journey.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Defer monitoring, support ownership, service expectations, and recovery procedures until the durable action is defined.",
+        "rationale": "Operational controls must follow the actual write and lifecycle path.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Use a solution-managed, environment-aware delivery path once the first slice is defined.",
+        "rationale": "Publisher, environment variables, connection bindings, dependency checks, and target environments remain implementation prerequisites.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Schema construction begins before an observable outcome, persona, and host are agreed.",
+      "expected_behavior": "Pause schema construction and obtain the three blocking inputs so that tables and relationships can be justified by a deployable journey.",
+      "evidence": "Approved outcome statement identifying the result, persona, and host."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Trace every proposed table and relationship to a validation, durable action, feedback, telemetry, security, or evidence need in the selected journey.",
+      "expected": "Every schema component has at least one necessary role in the first vertical slice; speculative components are excluded.",
+      "evidence_required": "Approved journey traceability and schema review record.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Verify least-privilege access and data classification for the selected persona and slice.",
+      "expected": "Only authorised personas can read or modify the minimum required data.",
+      "evidence_required": "Security design plus post-deployment role and permission readback.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Development environment to be identified"
+    ],
+    "prerequisites": [
+      "Approve the observable outcome, persona, host, and primary journey",
+      "Identify the current repository, solution, publisher, environment strategy, and authoritative source",
+      "Confirm data classification, security, DLP, licensing, capacity, compliance, and ALM constraints"
+    ],
+    "steps": [
+      "Produce and approve the smallest vertical-slice build brief before implementation",
+      "Implement only the schema and components traced to that slice",
+      "Validate package integrity before any authorised import"
+    ],
+    "post_deploy_checks": [
+      "Read back deployed schema, relationships, configuration, and security assignments",
+      "Execute the approved journey including failure and concurrency paths",
+      "Capture privacy-safe runtime evidence without business payloads"
+    ],
+    "evidence_required": [
+      "Source and static-validation results",
+      "Automated test and build results",
+      "Package integrity evidence",
+      "Deployment and configuration readback",
+      "Runtime end-to-end evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Schema or relationship dependencies differ from the approved slice",
+      "Security grants unintended data access",
+      "Deployment or runtime validation fails"
+    ],
+    "steps": [
+      "Stop promotion and preserve diagnostic evidence",
+      "Use the approved solution rollback or forward-fix procedure for the identified target",
+      "Revalidate schema, configuration, security, and the end-to-end journey"
+    ],
+    "data_considerations": [
+      "Do not remove tables, columns, or relationships containing retained data without an approved migration and recovery plan",
+      "Preserve identifiers, ownership, audit requirements, and referential integrity during rollback"
+    ],
+    "owner": "Solution owner to be assigned before implementation",
+    "evidence_required": [
+      "Rollback authorization",
+      "Pre-change package and configuration inventory",
+      "Post-rollback configuration and data-integrity verification"
+    ]
+  },
+  "next_action": "Provide one sentence in the form: '[persona] uses [host and entry point] to [action], resulting in [observable measurable outcome].' Then derive the minimum tables and relationships needed for that single vertical slice."
+}

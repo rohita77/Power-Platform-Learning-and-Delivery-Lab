@@ -1,0 +1,95 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request seeks current Copilot Studio release-status and licensing verification, not a deployable delivery-slice brief.",
+        "basis": "The explicitly selected skill does not cover standalone current-feature or licensing research.",
+        "source_refs": [
+          "User request",
+          "power-platform-incremental-delivery SKILL.md section 2"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which specific Copilot Studio feature does 'this feature' refer to?",
+        "owner": "Requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was requested.",
+    "entry": "Not applicable to this standalone feature-verification request.",
+    "validation": "The specific Copilot Studio feature must be identified.",
+    "persistence_or_action": "No implementation or tenant action is authorised.",
+    "feedback": "Return the request to the current-feature verification workflow.",
+    "telemetry": "No telemetry is defined or produced.",
+    "evidence": "No product-status or licensing evidence was gathered by this skill.",
+    "scope": [
+      "Abstention and routing"
+    ],
+    "exclusions": [
+      "Copilot Studio availability and licensing claims"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "Not applicable"
+    ],
+    "prerequisites": [
+      "A delivery-slice request would be required"
+    ],
+    "steps": [
+      "No deployment"
+    ],
+    "post_deploy_checks": [
+      "Not applicable"
+    ],
+    "evidence_required": [
+      "None"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable"
+    ],
+    "steps": [
+      "No rollback"
+    ],
+    "data_considerations": [
+      "No data changes"
+    ],
+    "owner": "Not applicable",
+    "evidence_required": [
+      "None"
+    ]
+  },
+  "next_action": "Identify the specific Copilot Studio feature, then route the standalone availability and licensing question to power-platform-current-feature-verifier."
+}

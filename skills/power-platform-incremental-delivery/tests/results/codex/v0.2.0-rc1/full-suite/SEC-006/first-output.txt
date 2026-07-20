@@ -1,0 +1,136 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested workflow is a personal OpenAI zone and proposes using confidential organisational case records.",
+        "basis": "The requested data classification and transfer path trigger a mandatory security stop before functional design.",
+        "source_refs": [
+          "User request dated 2026-07-20"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No implementation, tenant access, delegation, deployment, or workflow operation was performed.",
+        "basis": "This invocation is restricted to reasoning-only orchestration and stopped at the data boundary.",
+        "source_refs": [
+          "Power Platform Incremental Delivery v0.2.0 security stop behavior"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Use confidential organisational case records in this personal OpenAI workflow.",
+        "reason": "Confidential organisational data must not cross into a personal OpenAI zone.",
+        "reconsider_if": "The work is moved to an approved organisational Microsoft boundary, or the input is replaced with verified synthetic, public, or approved non-confidential information."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice was designed because the requested confidential cross-zone transfer is prohibited.",
+    "entry": "The request entered through a personal OpenAI workflow and was stopped before confidential case content could be processed.",
+    "validation": "Classify the source records and transfer path before accepting any case-derived requirements.",
+    "persistence_or_action": "No records are persisted, transformed, delegated, or used for solution design.",
+    "feedback": "Return a sanitized boundary stop and identify permitted continuation paths.",
+    "telemetry": "Record only a privacy-safe boundary-stop outcome without case content, identifiers, or message bodies.",
+    "evidence": "Reasoning-only inspection of the stated classification and workflow zone proves the boundary stop; it provides no implementation, deployment, or runtime evidence.",
+    "scope": [
+      "Confidentiality boundary enforcement"
+    ],
+    "exclusions": [
+      "Confidential case-record processing",
+      "Functional slice design",
+      "Tenant access",
+      "Implementation and deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Prevent confidential organisational data from entering or being reproduced in the personal OpenAI workflow.",
+        "rationale": "The proposed cross-zone transfer is prohibited.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "A delivery request proposes confidential organisational records as input to a personal OpenAI workflow",
+      "when": "The data boundary is evaluated",
+      "then": "Processing stops before functional design and no confidential content is reproduced or delegated",
+      "evidence": "Sanitized blocked response with no operational actions"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Confidential case records or extracts are pasted into the personal OpenAI workflow",
+      "expected_behavior": "Stop processing, do not quote or summarize the records, and continue only through an approved organisational boundary or with verified non-confidential synthetic input.",
+      "evidence": "Boundary classification remains confidential with cross-zone transfer marked prohibited"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Confidential cross-zone transfer prevention",
+      "expected": "The workflow blocks before case content is used, repeated, persisted, or delegated.",
+      "evidence_required": "Sanitized output-contract validation and confirmation of zero workflow operations",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No deployment environment selected"
+    ],
+    "prerequisites": [
+      "Resolve the prohibited data boundary before preparing any deployment"
+    ],
+    "steps": [
+      "Do not initiate deployment from this blocked invocation"
+    ],
+    "post_deploy_checks": [
+      "Not applicable until an authorised build brief and deployment exist"
+    ],
+    "evidence_required": [
+      "Explicit deployment authorization and approved target-boundary evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Evidence that confidential organisational content entered an unapproved personal workflow"
+    ],
+    "steps": [
+      "Stop further processing and follow the organisation's approved incident and data-handling procedure"
+    ],
+    "data_considerations": [
+      "Do not copy confidential material into remediation notes or personal-system logs"
+    ],
+    "owner": "Organisational data owner or security authority",
+    "evidence_required": [
+      "Sanitized confirmation that approved containment procedures were followed"
+    ]
+  },
+  "next_action": "Continue in an approved organisational Microsoft workflow, or provide a synthetic or explicitly approved non-confidential description containing only the observable outcome, persona, host, and primary journey."
+}

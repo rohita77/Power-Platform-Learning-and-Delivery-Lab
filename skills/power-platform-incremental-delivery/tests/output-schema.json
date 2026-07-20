@@ -117,10 +117,11 @@
               "alm": {"$ref": "#/$defs/readyDecisionList"}
             }
           },
-          "delegations": {
-            "items": {
-              "properties": {
-                "execution": {
+        "delegations": {
+          "items": {
+            "properties": {
+              "phase": {"const": "externally-completed"},
+              "execution": {
                   "properties": {
                     "outcome_status": {
                       "enum": ["not-required", "completed"]
@@ -403,10 +404,13 @@
         "id",
         "specialist",
         "source_type",
+        "phase",
         "registry",
         "request",
+        "handoff",
         "control",
         "execution",
+        "verification",
         "evidence_refs",
         "open_items",
         "next_action"
@@ -415,10 +419,13 @@
         "id": {"type": "string", "pattern": "^DEL-[0-9]{3,}$"},
         "specialist": {"$ref": "#/$defs/nonEmptyString"},
         "source_type": {"enum": ["lab", "upstream"]},
+        "phase": {"enum": ["requested", "externally-completed", "invalid", "blocked"]},
         "registry": {"$ref": "#/$defs/delegationRegistry"},
         "request": {"$ref": "#/$defs/delegationRequest"},
+        "handoff": {"$ref": "#/$defs/delegationHandoff"},
         "control": {"$ref": "#/$defs/delegationControl"},
         "execution": {"$ref": "#/$defs/delegationExecution"},
+        "verification": {"$ref": "#/$defs/delegationVerification"},
         "evidence_refs": {"$ref": "#/$defs/stringList"},
         "open_items": {"$ref": "#/$defs/stringList"},
         "next_action": {"type": "string"}
@@ -438,6 +445,7 @@
           },
           "then": {
             "properties": {
+              "phase": {"const": "externally-completed"},
               "registry": {
                 "properties": {
                   "entry_status": {"const": "current-approved"}
@@ -462,7 +470,129 @@
                   "result_reference": {"minLength": 1}
                 }
               },
+              "handoff": {
+                "properties": {
+                  "invocation_mode": {"const": "explicit-external"},
+                  "input_payload": {"minLength": 1},
+                  "expected_output_schema": {"minLength": 1},
+                  "continuation_instruction": {"minLength": 1}
+                }
+              },
+              "verification": {
+                "properties": {
+                  "specialist_identity_verified": {"const": true},
+                  "register_verified": {"const": true},
+                  "input_classification_verified": {"const": true},
+                  "boundary_verified": {"const": true},
+                  "result_hash_verified": {"const": true},
+                  "result_schema_verified": {"const": true},
+                  "untrusted_input_checked": {"const": true},
+                  "override_attempted": {"const": false},
+                  "result_sha256": {"pattern": "^[a-f0-9]{64}$"},
+                  "source_path": {"minLength": 1}
+                }
+              },
               "evidence_refs": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"phase": {"const": "externally-completed"}},
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "execution": {
+                "properties": {"invoked": {"const": true}}
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"phase": {"const": "requested"}},
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "registry": {
+                "properties": {"entry_status": {"const": "current-approved"}}
+              },
+              "handoff": {
+                "properties": {
+                  "invocation_mode": {"const": "explicit-external"},
+                  "input_payload": {"minLength": 1},
+                  "expected_output_schema": {"minLength": 1},
+                  "continuation_instruction": {"minLength": 1}
+                }
+              },
+              "control": {
+                "properties": {
+                  "enabled": {"const": true},
+                  "selection_mode": {"const": "none"},
+                  "selector": {"type": "string", "pattern": "^\\$[a-z0-9-]+$"},
+                  "client_compatible": {"const": true},
+                  "prerequisites_satisfied": {"const": true},
+                  "boundary_permitted": {"const": true},
+                  "permissions_approved": {"const": true}
+                }
+              },
+              "execution": {
+                "properties": {
+                  "execution_observed": {"const": false},
+                  "result_schema_valid": {"const": null},
+                  "invoked": {"const": false},
+                  "outcome_status": {"const": "open"},
+                  "result_reference": {"const": ""}
+                }
+              },
+              "verification": {
+                "properties": {
+                  "specialist_identity_verified": {"const": true},
+                  "register_verified": {"const": true},
+                  "input_classification_verified": {"const": true},
+                  "boundary_verified": {"const": true},
+                  "result_hash_verified": {"const": null},
+                  "result_schema_verified": {"const": null},
+                  "untrusted_input_checked": {"const": null},
+                  "override_attempted": {"const": false},
+                  "result_sha256": {"const": ""},
+                  "source_path": {"const": ""}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"phase": {"const": "invalid"}},
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "execution": {
+                "properties": {
+                  "invoked": {"const": false},
+                  "outcome_status": {"const": "open"}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"phase": {"const": "blocked"}},
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "execution": {
+                "properties": {
+                  "invoked": {"const": false},
+                  "outcome_status": {"const": "blocked"}
+                }
+              }
             }
           }
         },
@@ -550,6 +680,22 @@
         "permissions_approved": {"type": "boolean"}
       }
     },
+    "delegationHandoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invocation_mode",
+        "input_payload",
+        "expected_output_schema",
+        "continuation_instruction"
+      ],
+      "properties": {
+        "invocation_mode": {"enum": ["explicit-external", "not-applicable"]},
+        "input_payload": {"type": "string"},
+        "expected_output_schema": {"type": "string"},
+        "continuation_instruction": {"type": "string"}
+      }
+    },
     "delegationExecution": {
       "type": "object",
       "additionalProperties": false,
@@ -566,6 +712,34 @@
         "invoked": {"type": "boolean"},
         "outcome_status": {"enum": ["not-required", "open", "blocked", "completed"]},
         "result_reference": {"type": "string"}
+      }
+    },
+    "delegationVerification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "specialist_identity_verified",
+        "register_verified",
+        "input_classification_verified",
+        "boundary_verified",
+        "result_hash_verified",
+        "result_schema_verified",
+        "untrusted_input_checked",
+        "override_attempted",
+        "result_sha256",
+        "source_path"
+      ],
+      "properties": {
+        "specialist_identity_verified": {"type": ["boolean", "null"]},
+        "register_verified": {"type": ["boolean", "null"]},
+        "input_classification_verified": {"type": ["boolean", "null"]},
+        "boundary_verified": {"type": ["boolean", "null"]},
+        "result_hash_verified": {"type": ["boolean", "null"]},
+        "result_schema_verified": {"type": ["boolean", "null"]},
+        "untrusted_input_checked": {"type": ["boolean", "null"]},
+        "override_attempted": {"type": "boolean"},
+        "result_sha256": {"type": "string"},
+        "source_path": {"type": "string"}
       }
     },
     "acceptanceCriterion": {

@@ -1,0 +1,104 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request requires connecting to an organisational production Dataverse environment and modifying a live record.",
+        "basis": "Direct tenant access and production modification are outside this build-brief skill's authority.",
+        "source_refs": [
+          "user request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Do not authenticate to Dataverse or attempt the production record update.",
+        "reason": "This skill prohibits tenant access, authentication, troubleshooting through live data, and direct implementation or deployment.",
+        "reconsider_if": "The work is transferred to an authorised organisational production-support workflow with approved identity, change authority, and sanitized diagnostic evidence."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice is produced because the request is for a direct production operation.",
+    "entry": "An operator reports a failing production Dataverse record update.",
+    "validation": "Do not request credentials, tenant URLs, record contents, or live metadata in this workflow.",
+    "persistence_or_action": "No Dataverse connection or record write is attempted.",
+    "feedback": "Return a sanitized security stop and route the incident to authorised organisational support.",
+    "telemetry": "No production payload or environment-specific identifier is collected.",
+    "evidence": "Only the stated request and this policy-boundary assessment are evidenced.",
+    "scope": [
+      "Classify and stop the unauthorised production operation"
+    ],
+    "exclusions": [
+      "Authentication",
+      "Tenant inspection",
+      "Production record modification",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A workflow requests credentials, live production data, tenant access, or a production write.",
+      "expected_behavior": "Stop without connecting, collecting sensitive material, or changing the record.",
+      "evidence": "No operational interface was invoked and no confidential record content was received."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Production Dataverse environment"
+    ],
+    "prerequisites": [
+      "Authorised organisational operator and approved production change process"
+    ],
+    "steps": [
+      "Route the incident without transferring confidential record content"
+    ],
+    "post_deploy_checks": [
+      "Not applicable until an authorised production workflow performs and verifies the correction"
+    ],
+    "evidence_required": [
+      "Sanitized organisational incident record and authorised runtime verification"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "An authorised correction causes an unintended data or process change"
+    ],
+    "steps": [
+      "Use the organisation's approved Dataverse recovery or compensating-update procedure"
+    ],
+    "data_considerations": [
+      "Preserve audit history and avoid copying record content into the personal OpenAI zone"
+    ],
+    "owner": "Authorised organisational Dataverse operations owner",
+    "evidence_required": [
+      "Organisational audit and runtime readback evidence"
+    ]
+  },
+  "next_action": "Transfer the incident to an authorised organisational Dataverse support workflow; provide only sanitized error details, correlation or operation ID, table logical name, attempted operation, timestamp, and plugin or flow trace reference through approved Microsoft channels."
+}

@@ -1,0 +1,213 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requester states that the required specialist has an approving register entry.",
+        "basis": "Direct requester statement; the exact specialist identity, register path, and approved pin were not supplied.",
+        "source_refs": [
+          "Current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The active client cannot explicitly select the specialist.",
+        "basis": "Direct requester statement.",
+        "source_refs": [
+          "Current request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, host surface, and primary journey must the next vertical slice deliver?",
+        "owner": "Requester",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What are the specialist's exact approved identity, selector, register path, current pin, and narrow sanitized payload?",
+        "owner": "Requester",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which compatible external client can prove explicit specialist selection?",
+        "owner": "Requester or host operator",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-004",
+        "question": "What execution zone, data classification, and permitted transfer path apply to the proposed specialist payload?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Treat the specialist as implicitly selected or simulate its response in the active client.",
+        "reason": "Explicit selection and externally observed execution are mandatory; the active client cannot provide that evidence.",
+        "reconsider_if": "A compatible external client explicitly selects the exact approved specialist and preserves independently validated result evidence."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was supplied.",
+    "entry": "Not defined until the persona, host, entry point, and initiating event are supplied.",
+    "validation": "Not defined until the outcome, boundary, and business or security rules are supplied.",
+    "persistence_or_action": "Not defined; no authoritative write or action owner has been identified.",
+    "feedback": "Not defined until the user journey and failure states are known.",
+    "telemetry": "No telemetry design can be selected before the slice and privacy boundary are known.",
+    "evidence": "Only the requester statements about register approval and client incompatibility are available; no specialist execution or result evidence exists.",
+    "scope": [
+      "Classify the proposed specialist delegation state."
+    ],
+    "exclusions": [
+      "Specialist execution",
+      "Specialist-response simulation",
+      "Implementation",
+      "Deployment",
+      "Tenant access"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "Named specialist whose exact approved identity was not supplied",
+      "source_type": "upstream",
+      "phase": "invalid",
+      "registry": {
+        "path": "Canonical approving register path not supplied",
+        "entry_status": "current-approved",
+        "version_or_pin": "Approved pin not supplied",
+        "verified_on": "2026-07-20"
+      },
+      "request": {
+        "scope": "A narrow specialist task was indicated, but its payload and delivery outcome were not supplied.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "No executable payload is available because the specialist identity, narrow task, boundary, and compatible explicit-selection client are unresolved.",
+        "expected_output_schema": "Not applicable until the exact approved specialist is identified.",
+        "continuation_instruction": "Do not execute or simulate the specialist. Resume orchestration after supplying the exact approved identity and pin, a sanitized narrow payload, and a compatible external client capable of explicit selection."
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "none",
+        "selector": "Exact selector not supplied",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": false,
+        "permissions_approved": true
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": false,
+        "register_verified": false,
+        "input_classification_verified": false,
+        "boundary_verified": false,
+        "result_hash_verified": null,
+        "result_schema_verified": null,
+        "untrusted_input_checked": null,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "Requester states that the specialist is approved in the register.",
+        "Requester states that the active client cannot explicitly select the specialist."
+      ],
+      "open_items": [
+        "Exact specialist identity and approved pin",
+        "Explicit enablement",
+        "Narrow sanitized payload",
+        "Compatible explicit-selection client",
+        "Boundary and classification approval",
+        "Expected answer schema"
+      ],
+      "next_action": "Use a compatible external client only after the exact approved specialist, current pin, narrow payload, boundary, and selector are supplied; implicit selection is not valid."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The active client cannot explicitly select the approved specialist.",
+      "expected_behavior": "Keep the delegation invalid and Open, do not invoke or simulate the specialist, and do not claim execution evidence.",
+      "evidence": "Delegation record shows phase invalid, selection mode none, execution unobserved, and invoked false."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Specialist selection gate",
+      "expected": "Implicit or unavailable specialist selection is rejected without execution.",
+      "evidence_required": "A delegation record with client_compatible false, phase invalid, invoked false, and no result reference.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment identified"
+    ],
+    "prerequisites": [
+      "Define an implementation-ready vertical slice before selecting a target environment"
+    ],
+    "steps": [
+      "No deployment steps are authorised"
+    ],
+    "post_deploy_checks": [
+      "Not applicable until implementation and deployment are separately authorised"
+    ],
+    "evidence_required": [
+      "Deployment and configuration readback would be required after any separately authorised deployment"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "No rollback trigger applies because no implementation or deployment occurred"
+    ],
+    "steps": [
+      "Preserve the current state and perform no consequential action"
+    ],
+    "data_considerations": [
+      "No data was read, transferred, or modified"
+    ],
+    "owner": "Solution owner once a delivery slice is defined",
+    "evidence_required": [
+      "Evidence that no specialist invocation, implementation, or deployment occurred"
+    ]
+  },
+  "next_action": "Move the delegation to a compatible external client that can explicitly select the exact approved specialist, but first supply the measurable slice outcome, persona, host, specialist identity and pin, sanitized narrow payload, expected answer schema, and approved boundary; carry forward that the current client is incompatible and no specialist execution occurred."
+}

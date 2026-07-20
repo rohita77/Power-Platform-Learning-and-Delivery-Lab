@@ -1,0 +1,48 @@
+{
+  "result_type": "success",
+  "status": "Resolved",
+  "recommendation": "Use Xrm.WebApi.retrieveMultipleRecords with the standard synthetic Account schema.",
+  "assumptions": [
+    "Standard synthetic Microsoft Dataverse Account schema assumptions are explicitly authorized.",
+    "Active accounts are represented by statecode=0."
+  ],
+  "resolved_schema": {
+    "table_logical_name": "account",
+    "entity_set_name": "accounts",
+    "attribute_logical_names": [
+      "name",
+      "accountnumber",
+      "createdon",
+      "statecode"
+    ],
+    "lookup_annotation_columns": [],
+    "navigation_properties": [],
+    "choice_or_status_values": [
+      "statecode=0 (Active)"
+    ],
+    "generated_service_name": null,
+    "host_api_contract": "xrm_webapi"
+  },
+  "unresolved_schema": [],
+  "host_context": {
+    "status": "resolved",
+    "selected": "xrm_webapi",
+    "supported_options": [
+      "xrm_webapi"
+    ],
+    "required_clarification": null
+  },
+  "query_or_code": "Xrm.WebApi.retrieveMultipleRecords(\"account\", \"?$select=name,accountnumber&$filter=statecode eq 0&$orderby=createdon desc&$top=10\");",
+  "security_notes": [
+    "Synthetic query construction only; no authentication, tenant access, or live metadata inspection was performed."
+  ],
+  "sources_or_reference_basis": [
+    {
+      "source": "Controlled inline Dataverse Web API Query Builder adaptation",
+      "pin": "33bc38456abb83f27daad968b748c8085f2a78ef",
+      "availability": "available",
+      "use": "Applied the inline Xrm.WebApi contract and standard synthetic schema authorization rules."
+    }
+  ],
+  "open_questions": []
+}

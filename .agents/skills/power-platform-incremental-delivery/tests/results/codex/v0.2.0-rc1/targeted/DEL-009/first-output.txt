@@ -1,0 +1,196 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested specialist is reported as approved in the governing register.",
+        "basis": "Explicit user-supplied fact; the specialist identity and approval pin were not supplied for independent verification.",
+        "source_refs": [
+          "User request dated 2026-07-20"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The active client cannot explicitly select the specialist.",
+        "basis": "Explicit user-supplied client limitation.",
+        "source_refs": [
+          "User request dated 2026-07-20"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and host surface should the next vertical slice cover?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which compatible client can explicitly select the approved specialist using its exact registered selector and pin?",
+        "owner": "Delegation owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Treat implicit availability or a generic helper as equivalent to explicit specialist selection.",
+        "reason": "The delegation protocol requires explicit selection and does not permit simulated, inferred, or substituted specialist execution.",
+        "reconsider_if": "A compatible client provides observed explicit selection of the exact currently approved specialist."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no observable delivery-slice outcome was supplied.",
+    "entry": "Open: persona, host, entry point, and initiating event are not defined.",
+    "validation": "Open: functional, security, and concurrency validations depend on the selected outcome.",
+    "persistence_or_action": "Open: no authoritative action owner or idempotency boundary can yet be defined.",
+    "feedback": "Open: workflow feedback states depend on the selected journey.",
+    "telemetry": "Open: define privacy-safe events and correlation behavior after the outcome is supplied.",
+    "evidence": "Only the user-reported register approval and client incompatibility are established; no specialist execution or implementation evidence exists.",
+    "scope": [
+      "Assess whether the reported specialist can be delegated through the active client"
+    ],
+    "exclusions": [
+      "Implicit or simulated specialist execution",
+      "Implementation",
+      "Deployment",
+      "Tenant access"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "approved specialist whose exact identity was not supplied",
+      "source_type": "lab",
+      "phase": "invalid",
+      "registry": {
+        "path": "Approved register path not supplied",
+        "entry_status": "current-approved",
+        "version_or_pin": "Approval pin not supplied",
+        "verified_on": "2026-07-20"
+      },
+      "request": {
+        "scope": "Obtain the narrow specialist decision required by the future delivery slice.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "No executable handoff is available because the active client cannot explicitly select the approved specialist.",
+        "expected_output_schema": "not-applicable",
+        "continuation_instruction": "Move the original orchestration state to a compatible client, explicitly select the exact approved specialist, and create a fresh narrow delegation request before any external execution."
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "none",
+        "selector": "not-supplied",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": true
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": false,
+        "register_verified": false,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": null,
+        "result_schema_verified": null,
+        "untrusted_input_checked": null,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "User-reported register approval and active-client selection limitation"
+      ],
+      "open_items": [
+        "Exact specialist identity, selector, register path, and approval pin",
+        "A compatible client capable of explicit specialist selection",
+        "A narrow payload derived from a defined delivery outcome"
+      ],
+      "next_action": "Use a compatible client that supports explicit selection of the exact registered specialist; do not substitute an implicit or generic helper."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The active client cannot explicitly select the approved specialist.",
+      "expected_behavior": "Keep the delegation invalid and uninvoked; do not infer, simulate, or substitute a specialist response.",
+      "evidence": "Delegation record shows phase invalid, selection mode none, execution unobserved, and invoked false."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Delegation selection gate",
+      "expected": "An incompatible client produces an invalid delegation with no specialist execution.",
+      "evidence_required": "Observed compatible-client execution evidence is required before changing the delegation to externally-completed.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No deployment environment selected"
+    ],
+    "prerequisites": [
+      "Define the delivery outcome before implementation planning"
+    ],
+    "steps": [
+      "No deployment steps are authorised"
+    ],
+    "post_deploy_checks": [
+      "Not applicable until a build brief is Ready and deployment is separately authorised"
+    ],
+    "evidence_required": [
+      "Separate deployment and configuration readback evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable because no implementation or deployment occurred"
+    ],
+    "steps": [
+      "Preserve the original orchestration state and invalid delegation record"
+    ],
+    "data_considerations": [
+      "No data was written or transferred"
+    ],
+    "owner": "Solution owner",
+    "evidence_required": [
+      "Confirmation that no external specialist execution or target change occurred"
+    ]
+  },
+  "next_action": "Provide the observable outcome, persona, and host, then continue in a compatible client that can explicitly select the exact approved specialist; preserve the original orchestration state and do not treat implicit availability as execution."
+}

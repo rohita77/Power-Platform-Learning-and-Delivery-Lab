@@ -1,0 +1,97 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request is for architecture review findings only and explicitly excludes creation of a build brief.",
+        "basis": "Explicit user instruction.",
+        "source_refs": [
+          "User request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which review-only architecture assessment workflow should receive the solution architecture?",
+        "owner": "Requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery slice requested.",
+    "entry": "Not applicable to this review-only request.",
+    "validation": "Not applicable to this review-only request.",
+    "persistence_or_action": "No implementation action authorised.",
+    "feedback": "Not applicable to this review-only request.",
+    "telemetry": "Not applicable to this review-only request.",
+    "evidence": "No architecture artifact or review evidence was assessed.",
+    "scope": [
+      "Abstention and routing"
+    ],
+    "exclusions": [
+      "Architecture findings",
+      "Build-brief creation",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No target environment"
+    ],
+    "prerequisites": [
+      "A delivery-slice request is required before build-brief generation"
+    ],
+    "steps": [
+      "No deployment action"
+    ],
+    "post_deploy_checks": [
+      "Not applicable"
+    ],
+    "evidence_required": [
+      "None for this abstention"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable because no change was made"
+    ],
+    "steps": [
+      "No rollback action"
+    ],
+    "data_considerations": [
+      "No data was changed"
+    ],
+    "owner": "Not applicable",
+    "evidence_required": [
+      "No rollback evidence required"
+    ]
+  },
+  "next_action": "Route the supplied solution architecture to a review-only architecture assessment workflow; do not invoke incremental delivery or create a build brief."
+}

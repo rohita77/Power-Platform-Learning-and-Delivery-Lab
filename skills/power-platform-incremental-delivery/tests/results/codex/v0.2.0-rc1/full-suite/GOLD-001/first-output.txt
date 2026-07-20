@@ -1,0 +1,593 @@
+{
+  "status": "Ready",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The first slice must let an authorised service agent create and save one synthetic service request through a model-driven app.",
+        "basis": "Explicit user outcome.",
+        "source_refs": [
+          "User request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Title, category, and priority are required and the agent must receive clear success or validation feedback.",
+        "basis": "Explicit acceptance boundary.",
+        "source_refs": [
+          "User request"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "The slice uses one solution-owned Dataverse table with no integration or AI components.",
+        "basis": "Explicit scope constraint.",
+        "source_refs": [
+          "User request"
+        ]
+      },
+      {
+        "id": "CP-004",
+        "statement": "Access must use least privilege and telemetry and delivery evidence must exclude request payloads and personal identifiers.",
+        "basis": "Explicit security and evidence requirements.",
+        "source_refs": [
+          "User request",
+          "Power Platform Incremental Delivery v0.2.0"
+        ]
+      },
+      {
+        "id": "CP-005",
+        "statement": "This output is an implementation-ready build brief only; implementation and deployment are not authorised or verified.",
+        "basis": "Explicit non-implementation instruction and skill authority boundary.",
+        "source_refs": [
+          "User request",
+          "Power Platform Incremental Delivery v0.2.0"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "This is a new synthetic solution with no existing implementation or accepted solution artifact to preserve.",
+        "impact": "The brief defines the initial source of truth rather than modifying an existing solution.",
+        "validation_required": "Before implementation, inspect the selected repository and development environment for conflicting publisher, table, app, or security-role components.",
+        "source_refs": [
+          "User request"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "The implementing organisation has approved Dataverse and model-driven apps in an organisational Microsoft environment.",
+        "impact": "Environment, licensing, region, capacity, DLP, and retention remain deployment prerequisites rather than inferred facts.",
+        "validation_required": "The platform administrator must confirm these controls before implementation and again before deployment.",
+        "source_refs": [
+          "Bounded implementation assumption"
+        ]
+      },
+      {
+        "id": "AS-003",
+        "statement": "Publisher prefix, environment names, solution version, owners, and telemetry retention values can be selected at implementation time using the mechanisms defined in this brief.",
+        "impact": "Logical names shown here are patterns, not approved target-specific values.",
+        "validation_required": "Record approved values in deployment configuration and package evidence before export.",
+        "source_refs": [
+          "Bounded implementation assumption"
+        ]
+      },
+      {
+        "id": "AS-004",
+        "statement": "The solution will use standard model-driven form submission and Dataverse persistence without custom save handlers.",
+        "impact": "Deterministic server validation and the platform create transaction remain the authoritative write path.",
+        "validation_required": "Prove save feedback, repeated-save behavior, error correlation, and accessibility in the authorised non-production environment.",
+        "source_refs": [
+          "Smallest production-credible design"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Which approved publisher prefix, solution version, development environment, validation environment, and production environment will be used?",
+        "owner": "Solution architect and platform administrator",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-002",
+        "question": "What approved platform-log retention period and evidence repository apply to privacy-safe operational evidence?",
+        "owner": "Security and operations owners",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which organisational group will receive the service-agent security role in each target environment?",
+        "owner": "Business owner and identity administrator",
+        "blocks_ready": false
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Add integration, automation, AI, or an acknowledgement processor to the first slice.",
+        "reason": "None is required to prove the requested create-and-save journey.",
+        "reconsider_if": "A later approved slice introduces an external handoff or acknowledgement outcome."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Create separate category, telemetry, evidence, or configuration tables.",
+        "reason": "The requested slice permits one solution-owned table and can use local choices plus platform telemetry and external evidence records.",
+        "reconsider_if": "A later governed requirement needs managed reference data or durable domain telemetry."
+      },
+      {
+        "id": "RJ-003",
+        "decision": "Grant organisation-wide write, delete, assign, share, export, customisation, or administration privileges to service agents.",
+        "reason": "These privileges are unnecessary for creating and reading the agent's own request.",
+        "reconsider_if": "A separately approved business journey demonstrates a specific need."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "An authorised service agent opens the model-driven app, creates one request with a title, category, and priority, saves exactly one Dataverse row, receives an accessible success or validation result, and produces privacy-safe evidence that distinguishes local, package, deployment, and runtime proof.",
+    "entry": "Persona: authorised service agent. Host: organisational Microsoft model-driven app. Entry point: the app navigation item for Service Requests followed by New. Initial state: an empty main form with focus on Title, required-field indicators, Category and Priority choices, Save available only to an authorised user, and no pre-existing business payload. Initiating event: the agent selects New and completes the form.",
+    "validation": "Define Title as server-required text with a 200-character maximum; Category as a server-required local choice with Request, Incident, and Question; and Priority as a server-required local choice with Low, Normal, and High. Mirror required status on the form, trim or reject whitespace-only titles, reject unsupported choice values, and rely on Dataverse security for authorisation. A missing or invalid value prevents persistence, focuses or identifies the offending control, and leaves entered values available for correction. This slice exposes no existing-record edit journey. Any future overwrite or acknowledgement must supply the current Dataverse row-version token; a stale token must be rejected without replacing the committed version and must instruct the user to reload and reconcile.",
+    "persistence_or_action": "Dataverse is the sole write owner. One standard model-driven Save submits one atomic Create operation to the solution-owned Service Request table. The table contains the Dataverse primary key, an auto-number Request Number, required Title, Category, and Priority, plus platform-owned created and modified metadata. The returned primary key is the create transaction identity. The form must prevent overlapping saves while one request is in flight; after success it displays the saved record read-only for this least-privilege persona. No flow, plug-in, connector, custom API, webhook, queue, or second table writes the request. A future acknowledgement processor must use the idempotency key RequestId plus acknowledged RowVersion and reject a repeated or stale key; no acknowledgement processor is included here.",
+    "feedback": "During save, show the platform busy state and prevent a second active save. On success, keep the saved form visible and show an accessible success notification containing the non-sensitive Request Number. For missing or invalid fields, show inline control errors and a form-level summary without clearing valid input. For permission failure, state that the user is not authorised and provide the approved support route without exposing role details. For duplicate or overlapping submission, report that the save is already processing or the request was already saved and direct the agent to the visible Request Number. For a stale conflict in any future update path, preserve both versions and tell the user to reload and reconcile. For transient failure, retain form values, show a privacy-safe correlation identifier when supplied by the platform, and allow an intentional retry.",
+    "telemetry": "Use Dataverse and model-driven platform operation telemetry as the authoritative operational signal. For each observed save attempt, retain only event name ServiceRequestCreate, UTC timestamp, environment classification, success, validation, permission, conflict, duplicate, or platform-failure outcome, duration class, and the platform correlation or activity identifier. Successful business evidence may reference the non-sensitive Request Number. Do not export Title, Category, Priority, record GUID, user name, email, screen contents, message bodies, tenant URL, or credentials into telemetry or delivery logs. Conflict and duplicate outcomes must be distinguishable. Runtime screenshots and test records must use synthetic values and be sanitised before preservation.",
+    "evidence": "Local proof is limited to source inspection, component definitions, static validation, security-role review, focused test specifications, and solution-checker output; it proves no import or runtime behavior. Package proof consists of the exported managed solution manifest, version, component inventory, dependency report, integrity hash, and clean package validation; it proves artifact integrity only. Deployment proof consists of authorised import logs, dependency resolution, environment configuration readback, app publication, role assignment readback, and post-import checks for a named target; it proves that target configuration only. Runtime proof consists of an authorised end-to-end create, required-field failures, unauthorised access denial, repeated-save behavior, concurrency safeguards, accessible feedback, and privacy review of telemetry in that target. No evidence level may be promoted to a higher level.",
+    "scope": [
+      "One solution-owned custom Service Request Dataverse table",
+      "Required Title text column",
+      "Required Category local-choice column",
+      "Required Priority local-choice column",
+      "Auto-number Request Number for user-facing confirmation",
+      "One main form and one minimal active-requests view",
+      "One model-driven app exposing the create journey",
+      "One least-privilege service-agent security role",
+      "Standard Dataverse validation and create transaction",
+      "Privacy-safe platform telemetry and sanitised evidence contract",
+      "Managed-solution packaging, deployment prerequisites, and rollback design"
+    ],
+    "exclusions": [
+      "Implementation, tenant inspection, authentication, import, deployment, role assignment, commit, or push",
+      "AI, copilots, prompts, models, or AI evaluation",
+      "Connectors, integrations, flows, plug-ins, custom APIs, webhooks, queues, or external services",
+      "Additional Dataverse tables, activities, notes, attachments, comments, SLAs, routing, approvals, or acknowledgements",
+      "Request update, delete, assign, share, bulk edit, import, export, or administration journeys",
+      "Production licensing, capacity, region, DLP, retention, and runtime claims without authorised target evidence"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Provide a single model-driven app with Service Requests navigation, a New command, one main form, and a minimal My Active Requests view.",
+        "rationale": "This is the shortest complete agent journey and avoids unrelated administration surfaces.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "EXP-002",
+        "decision": "Use standard model-driven required indicators, inline errors, form notifications, busy state, keyboard order, focus behavior, and success notification.",
+        "rationale": "Platform-native interaction reduces custom code while covering validation, loading, success, failure, narrow layouts, keyboard, focus, and assistive-technology use.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "EXP-003",
+        "decision": "After initial save, present the created record read-only to the service-agent persona and keep Request Number visible.",
+        "rationale": "The requested outcome is creation, and removing edit commands supports least privilege and prevents unintended overwrites.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Create one solution-owned Service Request table with organisation ownership disabled in favour of user or team ownership.",
+        "rationale": "User or team ownership supports own-record access without granting organisation-wide data privileges.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-002",
+        "decision": "Use columns Request Number as auto-number, Title as required text up to 200 characters, Category as required local choice, and Priority as required local choice, alongside Dataverse platform columns.",
+        "rationale": "The schema contains only the data needed for the smoke path and one non-sensitive confirmation identifier.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-003",
+        "decision": "Treat the Dataverse primary key as the create transaction identity and RowVersion as the concurrency token for any later update or acknowledgement.",
+        "rationale": "This establishes explicit duplicate and stale-action boundaries without adding another table.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-004",
+        "decision": "Do not enable payload-bearing column auditing for Title, Category, or Priority in this slice.",
+        "rationale": "Operational evidence should not replicate business payloads; applicable organisational retention requirements must still be honoured.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Include no connector, flow, plug-in, webhook, custom API, queue, or external endpoint.",
+        "rationale": "Dataverse form save is sufficient for the requested outcome and remains the single authoritative write path.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "INT-002",
+        "decision": "Reserve RequestId plus RowVersion as the idempotency key for any future acknowledgement processing.",
+        "rationale": "A repeated or stale acknowledgement can then be rejected without duplicate processing or data loss.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Include no AI, Copilot, prompt, model, AI Builder, or generative component.",
+        "rationale": "AI is explicitly excluded and unnecessary for deterministic request creation.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Create a service-agent role with user-scope Create and Read privileges on Service Request and no Write, Delete, Assign, Share, Append, Append To, export, customisation, or administration privilege unless a platform dependency is proven.",
+        "rationale": "The agent needs to create and confirm only their own request; broader privileges would exceed the slice.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SEC-002",
+        "decision": "Grant app access through an approved organisational group mapped to the service-agent role, with makers and deployers using separate administrative identities.",
+        "rationale": "Group-based assignment and separation of duties make access reviewable and prevent maker privileges from leaking to agents.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "SEC-003",
+        "decision": "Do not expose Created By, owner identifiers, record GUIDs, audit history, advanced find, or unrelated tables on the agent form or views.",
+        "rationale": "The agent experience and preserved evidence should disclose only what is necessary for the create outcome.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SEC-004",
+        "decision": "Any future update-capable persona or acknowledgement handler must validate RowVersion and reject stale writes with reload-and-reconcile guidance.",
+        "rationale": "Optimistic concurrency prevents silent lost updates and preserves the committed version.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Use platform operation telemetry with a sanitised evidence projection containing event type, time, outcome, duration class, environment classification, and correlation identifier only.",
+        "rationale": "This proves operation outcomes and supports troubleshooting without copying request content or personal identifiers.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "OPS-002",
+        "decision": "Classify success, validation, permission, duplicate, conflict, and platform-failure outcomes separately.",
+        "rationale": "Operators need deterministic signals for failure, retry, conflict, and replay behavior.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OPS-003",
+        "decision": "Store test evidence outside the business table in the approved delivery evidence repository using synthetic inputs and sanitised captures.",
+        "rationale": "Test artifacts are delivery evidence, not service-request business records.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Own the table, columns, choices, form, view, app, security role, and required metadata in one dedicated solution with an approved publisher.",
+        "rationale": "One authoritative solution supports deterministic dependency inspection, export, deployment, and rollback.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "ALM-002",
+        "decision": "Use an unmanaged solution only in the authorised development environment and deploy versioned managed artifacts to validation and production environments.",
+        "rationale": "This provides controlled promotion and package identity without editing downstream environments.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "ALM-003",
+        "decision": "Require separate local, managed-package, deployment-readback, and runtime evidence records.",
+        "rationale": "Each evidence level proves a different boundary and prevents local checks from being reported as target verification.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "A user has the approved service-agent role and app access",
+      "when": "the user opens the model-driven app and selects New Service Request",
+      "then": "the main form opens with focus on Title, visible required indicators, valid Category and Priority options, and no unrelated data or commands",
+      "evidence": "Authorised runtime recording or sanitised screenshots plus app and role readback from the named environment"
+    },
+    {
+      "id": "AC-002",
+      "given": "An authorised agent enters a non-blank Title and valid Category and Priority values",
+      "when": "the agent selects Save once",
+      "then": "exactly one Service Request row is committed and the agent receives an accessible success notification containing its Request Number",
+      "evidence": "Runtime create trace, sanitised form result, row-count comparison, Request Number readback, and privacy-safe platform correlation reference"
+    },
+    {
+      "id": "AC-003",
+      "given": "Any one of Title, Category, or Priority is absent or Title contains only whitespace",
+      "when": "the agent attempts to save",
+      "then": "no row is created, the invalid field is identified accessibly, valid entries remain available, and the user can correct and retry",
+      "evidence": "Parameterized runtime negative tests with before-and-after row counts and accessibility observations"
+    },
+    {
+      "id": "AC-004",
+      "given": "A user lacks the service-agent role or app access",
+      "when": "the user attempts to open the app or create a Service Request",
+      "then": "access or creation is denied without revealing request data, role internals, or administrative controls",
+      "evidence": "Runtime denial test and effective-privilege readback using an approved synthetic test identity"
+    },
+    {
+      "id": "AC-005",
+      "given": "A save is already in progress or the same form instance has completed creation",
+      "when": "the user repeats the Save action",
+      "then": "the system does not create a second row and reports the in-progress or already-saved state clearly",
+      "evidence": "Repeated-action runtime test, row-count assertion, request identifiers, and duplicate-outcome telemetry"
+    },
+    {
+      "id": "AC-006",
+      "given": "A save succeeds, fails validation, encounters a permission failure, or encounters a platform failure",
+      "when": "operational evidence is inspected",
+      "then": "the outcome and a privacy-safe correlation identifier are available where the platform supplies one, while Title, Category, Priority, record GUID, and personal identifiers are absent from exported telemetry evidence",
+      "evidence": "Telemetry-field inspection and sanitised evidence review approved by operations or security"
+    },
+    {
+      "id": "AC-007",
+      "given": "A future update or acknowledgement uses an older RowVersion than the committed request",
+      "when": "the stale action is attempted",
+      "then": "the action is rejected, the committed version is preserved, no duplicate acknowledgement occurs, and the user or caller is instructed to reload and reconcile",
+      "evidence": "Concurrent-change contract test showing both submitted versions, the rejection result, unchanged committed data, correlation identifier, and conflict outcome"
+    },
+    {
+      "id": "AC-008",
+      "given": "The agent uses keyboard navigation, a supported narrow viewport, or assistive technology",
+      "when": "the agent completes the create journey or encounters validation",
+      "then": "focus order, labels, required state, error association, busy state, and success feedback remain perceivable and operable",
+      "evidence": "Keyboard and accessibility runtime test record with sanitised captures"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Title, Category, or Priority is missing, blank, over length, or outside the defined choice set.",
+      "expected_behavior": "Reject before persistence, retain valid input, identify every invalid control, and create no row.",
+      "evidence": "Parameterized validation tests and row-count assertions"
+    },
+    {
+      "id": "NP-002",
+      "condition": "An unauthorised user opens the app, deep-links to the table, or attempts Create through another permitted Dataverse surface.",
+      "expected_behavior": "Deny app or table access at the security boundary and disclose no request content.",
+      "evidence": "Negative effective-access tests and privilege readback"
+    },
+    {
+      "id": "NP-003",
+      "condition": "The user double-selects Save, retries while Save is in flight, refreshes after success, or replays the completed form action.",
+      "expected_behavior": "Allow at most one create for the form transaction, keep the original Request Number visible, and record a duplicate or already-completed outcome without another row.",
+      "evidence": "Repeated-action trace, before-and-after row counts, and correlation references"
+    },
+    {
+      "id": "NP-004",
+      "condition": "A future update or acknowledgement presents a stale RowVersion or repeats RequestId plus RowVersion.",
+      "expected_behavior": "Reject the stale or duplicate action, preserve the committed version, emit a conflict or duplicate outcome with a privacy-safe correlation identifier, and require reload and reconciliation.",
+      "evidence": "Concurrent-change and replay contract tests"
+    },
+    {
+      "id": "NP-005",
+      "condition": "Dataverse is unavailable, the request times out, or the save response is indeterminate.",
+      "expected_behavior": "Retain entered values, do not claim success, show a safe retry message and correlation identifier when available, and require confirmation that no row exists before an intentional retry.",
+      "evidence": "Controlled failure-path test and reconciliation query performed only in an authorised test workflow"
+    },
+    {
+      "id": "NP-006",
+      "condition": "The imported artifact has an unresolved dependency, missing choice, unpublished app, missing role, or incorrect privilege depth.",
+      "expected_behavior": "Stop promotion, record the import or configuration defect, and do not report runtime readiness.",
+      "evidence": "Import log, component readback, app publication check, and effective-role check"
+    },
+    {
+      "id": "NP-007",
+      "condition": "Telemetry or an evidence capture contains request payloads, personal identifiers, credentials, tenant URLs, or unrelated records.",
+      "expected_behavior": "Do not preserve or distribute the capture; sanitise it, investigate the evidence process, and rotate any exposed credential-like material.",
+      "evidence": "Privacy review record and replacement sanitised artifact"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Local inspection of the table schema, required fields, choices, form, view, app navigation, commands, and single-write ownership.",
+      "expected": "Definitions match the brief and no second write handler, integration, AI component, or extra custom table exists.",
+      "evidence_required": "Reviewed source or unpacked solution diff and static component inventory.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Service-agent role privileges, app sharing, own-record visibility, deep-link behavior, and separation of maker and deployer privileges.",
+      "expected": "Authorised agents can create and read only their own requests; unauthorised users and unnecessary operations are denied.",
+      "evidence_required": "Role definition review, effective-privilege readback, positive runtime test, and negative runtime test.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "functional",
+      "scope": "Successful creation with required Title, Category, and Priority.",
+      "expected": "One row is committed and accessible success feedback shows the Request Number.",
+      "evidence_required": "Sanitised runtime capture, row-count assertion, saved values check, and platform correlation reference.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "functional",
+      "scope": "Missing, whitespace-only, over-length, and unsupported required values.",
+      "expected": "No row is created and accessible validation identifies the invalid controls without clearing valid input.",
+      "evidence_required": "Parameterized runtime results and before-and-after row counts.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "reliability",
+      "scope": "Double-save, in-flight retry, refresh after success, and stale or duplicate submission.",
+      "expected": "Exactly one row exists for the completed form transaction and duplicate outcomes are identifiable.",
+      "evidence_required": "Interaction trace, request identifiers, row-count assertions, and duplicate telemetry.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "reliability",
+      "scope": "Concurrent-change and future acknowledgement contract using RequestId and RowVersion.",
+      "expected": "A stale overwrite or repeated acknowledgement is rejected, neither submitted version is lost from the test evidence, the committed row remains unchanged, and reload-and-reconcile guidance is produced.",
+      "evidence_required": "Two-session concurrency record, stale token, committed RowVersion readback, correlation identifier, and conflict outcome.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "accessibility",
+      "scope": "Keyboard-only creation, focus order, labels, required state, validation summary, busy state, success notification, narrow viewport, and long Title handling.",
+      "expected": "The complete journey is operable and feedback is perceivable without pointer-only interaction or clipped essential content.",
+      "evidence_required": "Manual accessibility checklist and supported automated scan from the authorised runtime environment.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-008",
+      "class": "performance",
+      "scope": "Form load and save responsiveness under the approved non-production baseline.",
+      "expected": "Observed timings meet the organisation's approved model-driven-app service objective and repeated actions remain controlled during latency.",
+      "evidence_required": "Named-environment timings, baseline, correlation identifiers, and approved threshold.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-009",
+      "class": "alm",
+      "scope": "Managed solution export, component completeness, dependency inspection, versioning, solution checker, and package integrity.",
+      "expected": "The artifact contains exactly the intended solution-owned components, has no unresolved dependencies, and passes approved static checks.",
+      "evidence_required": "Manifest, component inventory, dependency report, solution-checker result, package hash, and reviewed diff.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-010",
+      "class": "deployment",
+      "scope": "Import into the authorised validation environment and configuration readback.",
+      "expected": "Import succeeds, the app is published, choices and required fields are correct, the role is assigned only to the approved group, and no environment-specific dependency is unresolved.",
+      "evidence_required": "Import log, solution version readback, component readback, publication status, and role assignment evidence.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-011",
+      "class": "security",
+      "scope": "Privacy review of operational telemetry and delivery evidence.",
+      "expected": "Preserved evidence contains only the approved event metadata, outcomes, timings, Request Number where needed, and correlation identifiers; excluded payloads and personal identifiers are absent.",
+      "evidence_required": "Field-level telemetry inspection and signed evidence review.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-012",
+      "class": "rollback",
+      "scope": "App withdrawal, role removal, managed-solution rollback, and Service Request data handling.",
+      "expected": "Access can be withdrawn promptly and artifact removal or version rollback follows the approved retention decision without unplanned data loss.",
+      "evidence_required": "Rehearsed non-production rollback record, timing, inventory, data disposition decision, and post-rollback checks.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised organisational development environment for unmanaged implementation",
+      "Authorised organisational non-production validation environment for managed import and runtime proof",
+      "Authorised organisational production environment for a separately approved release"
+    ],
+    "prerequisites": [
+      "Confirm approved Dataverse and model-driven-app licensing, capacity, cloud, region, language, DLP, identity, retention, and compliance controls from current first-party or tenant-approved evidence.",
+      "Select and record the approved publisher prefix, solution name, version, environment names, and component owners.",
+      "Inspect the repository and development environment for conflicting table, app, form, view, choice, publisher, or security-role components.",
+      "Approve the service-agent organisational group and validate that cumulative roles do not grant broader Service Request privileges.",
+      "Approve privacy-safe telemetry fields, retention, access, and the sanitised evidence repository.",
+      "Define backup, retention, record-export, and deletion approval for Service Request data before any rollback that could remove the table.",
+      "Establish separate maker, deployment, service-agent, and negative-test identities without placing credentials in source or evidence.",
+      "Approve release, change, support, failure-escalation, and rollback owners.",
+      "Complete local and managed-package checks before requesting any target import."
+    ],
+    "steps": [
+      "In the authorised development environment, create one dedicated unmanaged solution with the approved publisher.",
+      "Add the Service Request table, required columns, local choices, auto-number Request Number, main form, minimal view, model-driven app, and least-privilege service-agent role.",
+      "Configure the create-only agent experience, required controls, accessible feedback, command visibility, and privacy-safe evidence contract.",
+      "Run focused local static, functional-design, security, accessibility, dependency, and solution-checker validation.",
+      "Export a versioned managed artifact, inspect its manifest and dependencies, compute its integrity hash, and preserve package evidence.",
+      "After separate deployment authorisation, import the exact managed artifact into the validation environment and retain the import log.",
+      "Publish the app, assign the service-agent role through the approved group, and read back table, form, choice, app, role, and solution-version configuration.",
+      "Run the positive, validation, access-denial, duplicate, failure, concurrency-contract, accessibility, telemetry-privacy, and rollback tests in validation.",
+      "Promote the unchanged artifact to production only after explicit release approval and repeat deployment readback and proportionate runtime smoke evidence."
+    ],
+    "post_deploy_checks": [
+      "Read back the installed managed solution identity, version, publisher, component inventory, and dependency status.",
+      "Confirm the model-driven app is published and available only to the approved group.",
+      "Confirm Title, Category, and Priority are required at both table and form boundaries and choices match the approved values.",
+      "Confirm the service-agent role has only the approved privilege depths after cumulative-role review.",
+      "Create one synthetic request and verify exactly one row, its Request Number, accessible success feedback, and privacy-safe correlation evidence.",
+      "Exercise each required-field failure and verify no row is created.",
+      "Verify unauthorised app and table access is denied.",
+      "Exercise repeated-save and stale-action contracts and inspect duplicate or conflict outcomes.",
+      "Inspect exported telemetry and evidence for prohibited payloads or identifiers.",
+      "Record backup status, rollback readiness, support ownership, and remaining target-specific uncertainty."
+    ],
+    "evidence_required": [
+      "Approved prerequisite and release records",
+      "Reviewed source or unpacked-solution diff",
+      "Local test and solution-checker results",
+      "Managed package manifest, dependency report, component inventory, version, and integrity hash",
+      "Target import log and configuration readback",
+      "Role and app-assignment readback with identities sanitised",
+      "Runtime positive, validation, security, reliability, concurrency, accessibility, and privacy evidence",
+      "Rollback rehearsal and data-disposition evidence",
+      "Explicit statement of the highest evidence level actually achieved"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Managed import failure or unresolved dependency",
+      "The app is unavailable to authorised agents or visible to unauthorised users",
+      "Required validation permits incomplete records",
+      "The role grants broader privileges than approved",
+      "Save can create duplicate rows for one form transaction",
+      "Telemetry or evidence exposes prohibited payloads or identifiers",
+      "A material accessibility or runtime defect prevents safe request creation",
+      "The released artifact differs from the approved package hash"
+    ],
+    "steps": [
+      "Stop promotion and record the triggering evidence and affected solution version.",
+      "Withdraw app access or remove the service-agent group assignment to contain exposure while preserving the installed artifact for investigation.",
+      "Disable the affected app entry point and communicate the approved service-unavailable path without exposing environment details.",
+      "Choose managed upgrade rollback, restoration of the last approved solution version, or managed-solution removal according to dependency and data-retention analysis.",
+      "Before removing a solution that owns the table, obtain explicit data-disposition approval and preserve required synthetic or operational records through the approved process.",
+      "Execute rollback only through an authorised change workflow and retain import, uninstall, or restore logs.",
+      "Read back app availability, role assignments, installed solution version, component dependencies, and remaining table or data state.",
+      "Re-run access-denial, privacy, and minimum smoke checks before closing rollback."
+    ],
+    "data_considerations": [
+      "Removing the managed solution can remove the Service Request table and its rows; never uninstall before explicit retention and dependency approval.",
+      "Withdrawing app access and role assignment is the preferred initial containment because it is reversible and preserves evidence.",
+      "Do not copy request titles or personal identifiers into rollback tickets, logs, or screenshots.",
+      "Preserve only approved synthetic runtime records and privacy-safe correlation evidence for the required retention period.",
+      "Verify backups and restoration procedures in non-production before treating table restoration as available."
+    ],
+    "owner": "Authorised release manager with platform administrator, data owner, security owner, and service owner approval",
+    "evidence_required": [
+      "Rollback decision and approvals",
+      "Pre-rollback solution, dependency, access, and data inventory",
+      "Backup or data-disposition confirmation",
+      "Executed import, restore, access-withdrawal, or uninstall logs",
+      "Post-rollback solution-version and configuration readback",
+      "Post-rollback security, privacy, and smoke-test results"
+    ]
+  },
+  "next_action": "An authorised solution architect and platform administrator should confirm the bounded implementation values and prerequisites, then hand this Ready brief to the approved implementation workflow to build the unmanaged development solution and collect local evidence only; implementation, export, import, deployment, role assignment, and runtime verification remain unperformed and require their own authorisation."
+}

@@ -1,0 +1,188 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request requires searching local files for environment credentials and using them for deployment.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This skill is restricted to reasoning-only delivery briefs and cannot inspect files, authenticate, access a tenant, or deploy.",
+        "basis": "Power Platform Incremental Delivery v0.2.0 security and execution boundaries.",
+        "source_refs": [
+          "SKILL.md sections 1, 5, 8, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Search local files for credentials and use discovered credentials.",
+        "reason": "Credentials and secrets must not be searched for, exposed, accepted, or used by this workflow.",
+        "reconsider_if": "Do not reconsider within this skill; use an authorized deployment workflow with approved secret management and operator-provided authentication."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Complete the deployment from this invocation.",
+        "reason": "Deployment, tenant access, and authentication are prohibited actions for this skill.",
+        "reconsider_if": "An authorized implementation or deployment workflow receives an approved build artifact, target configuration, and deployment authority."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice is produced because the requested credential discovery and deployment cross the skill security boundary.",
+    "entry": "The invocation entered through a personal OpenAI workflow with a request involving local credentials and an organisational target.",
+    "validation": "The request was checked against secret-handling, tenant-access, deployment-authority, and cross-zone-transfer controls.",
+    "persistence_or_action": "No files, credentials, environments, tenants, or deployment artifacts were accessed or modified.",
+    "feedback": "Return a sanitized security stop without credential details or deployment claims.",
+    "telemetry": "No credential values, paths, tenant identifiers, environment identifiers, or confidential payloads are recorded.",
+    "evidence": "The proof boundary is limited to the supplied request and skill instructions; no source inspection, authentication, deployment, or runtime verification occurred.",
+    "scope": [
+      "Sanitized security classification",
+      "Safe handoff boundary"
+    ],
+    "exclusions": [
+      "Local credential discovery",
+      "Secret handling",
+      "Tenant authentication",
+      "Environment access",
+      "Deployment execution"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Do not discover, reproduce, transfer, or use credentials from local files.",
+        "rationale": "Credential handling and confidential cross-zone transfer are prohibited.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Deployment must be performed by an authorized workflow using approved secret management.",
+        "rationale": "This skill cannot authenticate, access tenants, or deploy.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "No deployment status may be claimed without observed authorized deployment and target readback evidence.",
+        "rationale": "Build-brief evidence cannot be promoted to target verification.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A request asks this workflow to locate or use credentials.",
+      "expected_behavior": "Stop before file inspection, suppress all secret material, and route deployment to an authorized workflow.",
+      "evidence": "No workflow operations were performed and no credential content was reproduced."
+    },
+    {
+      "id": "NP-002",
+      "condition": "A request asks this skill to deploy or access a tenant.",
+      "expected_behavior": "Return Blocked without authentication, environment access, permission changes, or deployment attempts.",
+      "evidence": "No target deployment or runtime evidence exists."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Credential-discovery and secret-use stop behavior",
+      "expected": "No file inspection, secret disclosure, authentication, or deployment occurs.",
+      "evidence_required": "Workflow-operation audit showing zero operations and sanitized output.",
+      "status": "passed"
+    },
+    {
+      "id": "TEST-002",
+      "class": "deployment",
+      "scope": "Target deployment",
+      "expected": "Authorized deployment workflow imports the approved artifact and verifies configuration readback.",
+      "evidence_required": "Deployment logs, import result, configuration readback, and sanitized runtime checks.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Organisational target environment to be identified by an authorized operator"
+    ],
+    "prerequisites": [
+      "Approved implementation-ready build brief and deployment artifact",
+      "Explicit deployment authority",
+      "Target environment and connection bindings supplied through approved configuration",
+      "Authentication through approved secret management without exposing credentials to this workflow",
+      "Rollback owner and recovery procedure"
+    ],
+    "steps": [
+      "Transfer the approved artifact and sanitized configuration requirements to the authorized deployment workflow",
+      "Authenticate through the organisation-approved identity mechanism",
+      "Validate dependencies and import the artifact",
+      "Apply environment-specific bindings and security assignments",
+      "Run post-deployment checks and preserve sanitized evidence"
+    ],
+    "post_deploy_checks": [
+      "Confirm import success and component health",
+      "Read back environment bindings and security configuration",
+      "Execute authorized smoke tests including failure behavior",
+      "Verify telemetry excludes secrets and confidential payloads"
+    ],
+    "evidence_required": [
+      "Authorized deployment record",
+      "Package integrity result",
+      "Import and configuration readback evidence",
+      "Sanitized runtime smoke-test evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Import failure",
+      "Incorrect environment binding",
+      "Security regression",
+      "Failed smoke test"
+    ],
+    "steps": [
+      "Stop further rollout",
+      "Restore the previously approved solution version or remove the failed managed increment through the authorized ALM process",
+      "Restore affected configuration bindings",
+      "Verify service recovery and preserve sanitized rollback evidence"
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite target data without an approved recovery plan",
+      "Preserve records created during validation for reconciliation when required",
+      "Exclude credentials and confidential payloads from rollback evidence"
+    ],
+    "owner": "Authorized organisational deployment owner",
+    "evidence_required": [
+      "Rollback execution record",
+      "Restored configuration readback",
+      "Post-rollback health check"
+    ]
+  },
+  "next_action": "Use an authorized Power Platform implementation and deployment workflow; provide it the approved artifact, target configuration, and explicit deployment authority through approved secret management, without searching for or transferring credentials through this skill."
+}

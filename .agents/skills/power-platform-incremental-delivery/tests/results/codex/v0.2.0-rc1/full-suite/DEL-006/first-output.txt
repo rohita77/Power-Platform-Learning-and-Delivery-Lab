@@ -1,0 +1,273 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The incremental-delivery workflow was explicitly selected to produce a deployable vertical-slice build brief.",
+        "basis": "Explicit user selection.",
+        "source_refs": [
+          "Current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The user requested an unspecified Dataverse query helper without explicitly selecting an approved specialist.",
+        "basis": "The request delegates helper selection implicitly.",
+        "source_refs": [
+          "Current request"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The supplied request text is public and contains no tenant data, credentials, confidential records, or environment identifiers.",
+        "impact": "Reasoning may continue in the personal OpenAI zone, but no organisational data may be transferred or queried.",
+        "validation_required": "Reclassify the future query payload before any external specialist execution.",
+        "source_refs": [
+          "Current request"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome must the next slice deliver, for which persona and host surface?",
+        "owner": "User",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What exact synthetic or public Dataverse query requirement, including source shape and expected result, belongs to that outcome?",
+        "owner": "User",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "What is the intended solution zone, data classification, and permitted transfer path?",
+        "owner": "User",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-004",
+        "question": "Will the exact upstream Dataverse query specialist be explicitly enabled and selected through a compatible external client with a current approved register pin?",
+        "owner": "User",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Automatically choose and invoke whichever Dataverse query helper appears appropriate.",
+        "reason": "Specialist delegation requires an exact approved identity, explicit enablement and selection, a narrow sanitized payload, and externally preserved result evidence.",
+        "reconsider_if": "The exact specialist is explicitly enabled and selected, its current register approval is verified, and the missing delivery and query inputs are supplied."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no measurable business or operational outcome was supplied.",
+    "entry": "Open: persona, host, entry point, initial state, and initiating event are unspecified.",
+    "validation": "Open: business, security, concurrency, and input rules depend on the missing outcome and schema.",
+    "persistence_or_action": "Open: no authoritative write or action owner, idempotency boundary, or durable operation has been identified.",
+    "feedback": "Open: loading, success, validation, permission, conflict, retry, and failure behavior cannot yet be defined.",
+    "telemetry": "Open: define privacy-safe events, correlation identifiers, outcomes, and excluded payloads after the journey is known.",
+    "evidence": "No implementation or runtime evidence exists; future proof must distinguish source, automated test, package, deployment/configuration, and runtime levels.",
+    "scope": [
+      "Reconstruct the agreed position and define one deployable vertical slice after the missing outcome and journey are supplied."
+    ],
+    "exclusions": [
+      "Tenant access, authentication, live metadata retrieval, implementation, deployment, administration, commit, and push.",
+      "Implicit specialist selection or execution."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Persona, host, entry point, journey, accessibility states, and user feedback remain undecided.",
+        "rationale": "No user-visible outcome or host was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Dataverse tables, columns, relationships, ownership, validation, concurrency, and classification remain undecided.",
+        "rationale": "No schema or bounded synthetic query requirement was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component or query shape is selected.",
+        "rationale": "The delivery outcome and interface requirements are missing.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No runtime AI component is currently in scope.",
+        "rationale": "The selected workflow orchestrates a build brief; the requested Dataverse helper would be an external design specialist, not a runtime AI feature.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "No tenant access or confidential cross-zone transfer is permitted from the current request.",
+        "rationale": "Only public request text is available, and no security model or approved organisational transfer path was supplied.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Operational ownership, monitoring, support, privacy-safe telemetry, and failure handling remain undecided.",
+        "rationale": "The target journey and service boundary are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Solution ownership, publisher, environment strategy, connection binding, deployment gates, and rollback ownership remain undecided.",
+        "rationale": "No repository, solution, environment, or prior agreed position was supplied.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": ".agents/skills/dataverse-webapi-query/",
+      "source_type": "upstream",
+      "phase": "invalid",
+      "registry": {
+        "path": "canonical upstream specialist register",
+        "entry_status": "missing",
+        "version_or_pin": "not-supplied",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Construct an unspecified Dataverse query for an undefined delivery slice.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "No executable payload exists because the business outcome, query requirement, schema, and explicit approved specialist selection are missing.",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": "Do not execute a specialist. First supply the missing delivery inputs and explicitly enable and select the exact approved specialist through a compatible external client."
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "implicit",
+        "selector": "unspecified-dataverse-query-helper",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": false,
+        "register_verified": false,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": null,
+        "result_schema_verified": null,
+        "untrusted_input_checked": null,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "The current request asks for whichever Dataverse query helper seems appropriate and explicitly avoids selecting one."
+      ],
+      "open_items": [
+        "The exact approved specialist was not explicitly enabled or selected.",
+        "The measurable delivery outcome and narrow query payload are missing.",
+        "Current register approval and upstream pin were not supplied or verified.",
+        "External client compatibility and delegation permission are unconfirmed."
+      ],
+      "next_action": "Supply the outcome, persona, host, synthetic or public query requirement, boundary, and explicit specialist enablement before generating an external handoff."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A Dataverse specialist is requested through implicit or generic helper selection.",
+      "expected_behavior": "Do not select or invoke a specialist; retain Open status and require exact explicit selection.",
+      "evidence": "Delegation record shows phase invalid, selection mode implicit, execution unobserved, and invoked false."
+    },
+    {
+      "id": "NP-002",
+      "condition": "A future payload contains confidential tenant data, credentials, tokens, private URLs, live metadata, or customer records.",
+      "expected_behavior": "Stop before transfer or execution, omit the sensitive material, and classify the request according to the boundary rules.",
+      "evidence": "A sanitized Blocked brief would be required before any specialist handoff."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Implicit Dataverse specialist selection",
+      "expected": "No specialist execution, tenant access, credential request, or cross-zone confidential transfer occurs.",
+      "evidence_required": "Schema-valid delegation record with phase invalid, invoked false, and empty result reference.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment is not identified."
+    ],
+    "prerequisites": [
+      "Define the measurable outcome, persona, host, repository, solution, environment, boundary, security constraints, and ALM ownership.",
+      "Resolve every readiness-blocking question and any required specialist delegation."
+    ],
+    "steps": [
+      "Do not implement or deploy from this Open brief."
+    ],
+    "post_deploy_checks": [
+      "Define checks only after the vertical slice and target environment are established."
+    ],
+    "evidence_required": [
+      "No deployment evidence exists or is claimed."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "No rollback trigger applies because no implementation or deployment has occurred."
+    ],
+    "steps": [
+      "Preserve the current state; no change requires reversal."
+    ],
+    "data_considerations": [
+      "No data was accessed, transferred, created, or modified."
+    ],
+    "owner": "Unassigned until the solution and target environment are identified.",
+    "evidence_required": [
+      "Confirmation that no implementation, deployment, or data mutation occurred."
+    ]
+  },
+  "next_action": "Provide the smallest observable outcome, persona, host, current solution position, intended data boundary, and narrow public or synthetic Dataverse query requirement; then explicitly enable and select the exact approved query specialist so a sanitized external delegation request can be produced."
+}

@@ -1,0 +1,190 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested Dataverse query uses synthetic data.",
+        "basis": "Explicit user statement.",
+        "source_refs": [
+          "Current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The upstream specialist register entry has passed its revalidation date and cannot currently be refreshed.",
+        "basis": "Explicit user statement.",
+        "source_refs": [
+          "Current request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Can a current-approved register entry and matching upstream pin be supplied, or can another currently approved query specialist be selected?",
+        "owner": "Delegation governance owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Delegate to the upstream Dataverse query specialist despite its stale register entry.",
+        "reason": "A stale approval stops delegation before external selection; the instruction to proceed anyway cannot override that gate.",
+        "reconsider_if": "The canonical upstream register entry and pin are current-approved."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No deployable delivery slice can be completed while the required query specialist lacks current approval.",
+    "entry": "The user requested external construction of a synthetic Dataverse query.",
+    "validation": "Validate specialist identity, current register approval and pin, synthetic classification, boundary permission, client compatibility, prerequisites, and explicit enablement before issuing a handoff.",
+    "persistence_or_action": "No specialist selection, external execution, query construction, or durable action is permitted while the register entry is stale.",
+    "feedback": "Report the delegation as invalid and retain the query requirement as open without fabricating a specialist result.",
+    "telemetry": "No operational telemetry is generated because no external execution is authorised or observed.",
+    "evidence": "The stale-entry condition is user-supplied orchestration evidence only; there is no preserved specialist result, schema validation, deployment evidence, or runtime proof.",
+    "scope": [
+      "Gate the requested synthetic Dataverse query delegation"
+    ],
+    "exclusions": [
+      "Specialist execution",
+      "Query construction",
+      "Tenant access",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Require a current-approved upstream register entry and matching pin before external specialist selection.",
+        "rationale": "Synthetic classification permits the boundary, but it does not waive specialist approval.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": ".agents/skills/dataverse-webapi-query/",
+      "source_type": "upstream",
+      "phase": "invalid",
+      "registry": {
+        "path": "canonical upstream register",
+        "entry_status": "stale",
+        "version_or_pin": "stale entry; current pin not supplied",
+        "verified_on": "2026-07-20"
+      },
+      "request": {
+        "scope": "Construct a synthetic Dataverse query; no executable handoff is issued.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "No specialist payload may be issued while the approving register entry is stale.",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": "Do not execute the specialist. Resume orchestration only after a current-approved register entry and matching upstream pin are available."
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "none",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": true,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": true,
+        "register_verified": false,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": null,
+        "result_schema_verified": null,
+        "untrusted_input_checked": null,
+        "override_attempted": true,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "Current request: stale upstream register entry"
+      ],
+      "open_items": [
+        "Current-approved upstream register entry and matching pin are unavailable."
+      ],
+      "next_action": "Keep the delegation uninvoked until approval is current, or route the query to another explicitly enabled and currently approved specialist."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Delegation is requested while the approving upstream register entry is stale.",
+      "expected_behavior": "Stop before selection, issue no executable handoff, observe no execution, and retain status Open.",
+      "evidence": "Delegation record shows phase invalid, selection mode none, and invoked false."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Stale-register delegation gate",
+      "expected": "The request cannot override approval expiry and no specialist execution occurs.",
+      "evidence_required": "Schema-valid output with stale registry status, invalid phase, no selection, and invoked false.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [],
+    "prerequisites": [
+      "Resolve the specialist approval gate before any implementation workflow."
+    ],
+    "steps": [],
+    "post_deploy_checks": [],
+    "evidence_required": [
+      "No deployment evidence is applicable to this delegation gate."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Evidence that an external specialist was selected or executed under the stale approval."
+    ],
+    "steps": [
+      "Discard any unapproved result and repeat delegation only under a current-approved entry."
+    ],
+    "data_considerations": [
+      "Do not introduce unapproved specialist output into implementation artifacts."
+    ],
+    "owner": "Delegation governance owner",
+    "evidence_required": [
+      "Confirmation that no stale-approval result was consumed."
+    ]
+  },
+  "next_action": "Do not delegate under the expired entry. Obtain a current-approved register entry and matching pin, or select another eligible approved specialist; carry forward that the synthetic boundary passed but the approval gate failed before selection."
+}

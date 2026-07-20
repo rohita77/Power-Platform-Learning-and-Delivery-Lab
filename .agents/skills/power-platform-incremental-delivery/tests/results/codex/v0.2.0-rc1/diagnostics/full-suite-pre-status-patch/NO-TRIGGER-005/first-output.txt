@@ -1,0 +1,123 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request is to implement an already approved and current build brief.",
+        "basis": "Explicit user instruction.",
+        "source_refs": [
+          "Current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This skill is restricted to reasoning-only build-brief orchestration and cannot implement solution components.",
+        "basis": "Power Platform Incremental Delivery skill authority boundary.",
+        "source_refs": [
+          "SKILL.md sections 1, 2, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Implement the approved build brief through this skill invocation.",
+        "reason": "Direct implementation is outside this skill's authority and is a prohibited workflow operation.",
+        "reconsider_if": "The approved brief is supplied to an authorized implementation workflow outside this skill."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Abstain from implementation and preserve the approved brief for an authorized implementation workflow.",
+    "entry": "The user explicitly selected the orchestration-only skill and requested direct implementation.",
+    "validation": "The requested action was checked against the skill's authority and identified as prohibited.",
+    "persistence_or_action": "No repository, solution, tenant, deployment, or external state is modified.",
+    "feedback": "Return a deterministic blocked result identifying the correct authorized continuation.",
+    "telemetry": "No telemetry is emitted because workflow operations are prohibited.",
+    "evidence": "The result is supported only by the current request and the supplied skill authority rules.",
+    "scope": [
+      "Authority-boundary enforcement"
+    ],
+    "exclusions": [
+      "Repository inspection",
+      "Solution implementation",
+      "Tenant access",
+      "Deployment",
+      "Commit or push"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Direct implementation is requested through the orchestration-only incremental-delivery skill.",
+      "expected_behavior": "Perform zero workflow operations and route the approved brief to an authorized implementation workflow.",
+      "evidence": "No tools, repository operations, tenant operations, or mutations were performed."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Verify that the skill does not exceed its reasoning-only authority.",
+      "expected": "The request is blocked without implementation or external-state mutation.",
+      "evidence_required": "A single schema-valid blocked response and zero workflow operations.",
+      "status": "passed"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment accessed"
+    ],
+    "prerequisites": [
+      "Use an authorized implementation workflow",
+      "Provide that workflow with the approved current build brief"
+    ],
+    "steps": [
+      "Perform no deployment in this invocation"
+    ],
+    "post_deploy_checks": [
+      "Not applicable because deployment was not performed"
+    ],
+    "evidence_required": [
+      "Observed implementation and validation evidence must come from the authorized workflow"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable because no change was made"
+    ],
+    "steps": [
+      "No rollback action required"
+    ],
+    "data_considerations": [
+      "No data was read, transferred, or modified"
+    ],
+    "owner": "Authorized implementation workflow owner",
+    "evidence_required": [
+      "Confirmation that this invocation performed zero mutations"
+    ]
+  },
+  "next_action": "Pass the already approved current build brief to an authorized implementation workflow; this skill must not inspect, implement, deploy, commit, or push it."
+}

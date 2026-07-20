@@ -1,0 +1,252 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.2.0-rc1-codex-20260720:NEG-001:full-suite",
+  "run_id": "ppid-v0.2.0-rc1-codex-20260720",
+  "case_id": "NEG-001",
+  "suite": "negative",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.2.0",
+    "sha256": "ed2d9b2059ea9a6291e0382be396944fbf7797e6516ad6a70113484e4b7531e4"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/negative-cases.yaml",
+    "sha256": "43b04a51775b87e722ae93f71535f1759ff2ea4b83d40af4b07ec00c8629631e",
+    "exact_input": "Create the next Power Platform slice, but no user or operational outcome is supplied.",
+    "exact_input_sha256": "16b07826ee2d3777cb163fad9b7a18dd80e9fcd03969484db5f743b8a7a4ad25"
+  },
+  "execution": {
+    "started_at": "2026-07-19T23:59:21.465117Z",
+    "completed_at": "2026-07-20T00:00:01.134463Z",
+    "first_output": "{\n  \"status\": \"Open\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"A request was made for the next Power Platform delivery slice, but no user-visible or operational outcome was supplied.\",\n        \"basis\": \"The supplied request explicitly states that no outcome is available.\",\n        \"source_refs\": [\n          \"user-request\"\n        ]\n      }\n    ],\n    \"assumptions\": [\n      {\n        \"id\": \"AS-001\",\n        \"statement\": \"The supplied request contains only public planning information and is being handled in the personal OpenAI zone.\",\n        \"impact\": \"Planning may continue without organisational data, tenant access, or cross-zone transfer.\",\n        \"validation_required\": \"Reclassify the boundary if later inputs contain organisational or confidential information.\",\n        \"source_refs\": [\n          \"user-request\",\n          \"skill-v0.2.0\"\n        ]\n      }\n    ],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"What observable user or operational outcome must the next slice achieve?\",\n        \"owner\": \"Requestor\",\n        \"blocks_ready\": true\n      },\n      {\n        \"id\": \"OQ-002\",\n        \"question\": \"Which persona will perform or receive that outcome?\",\n        \"owner\": \"Requestor\",\n        \"blocks_ready\": true\n      },\n      {\n        \"id\": \"OQ-003\",\n        \"question\": \"Which Power Platform or Dynamics 365 host surface and entry point will support the journey?\",\n        \"owner\": \"Requestor\",\n        \"blocks_ready\": true\n      }\n    ],\n    \"rejected\": [],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"public\",\n    \"cross_zone_transfer\": \"permitted\"\n  },\n  \"slice\": {\n    \"outcome\": \"Undetermined because no observable user or operational result was supplied.\",\n    \"entry\": \"Undetermined pending the persona, host surface, and entry point.\",\n    \"validation\": \"Undetermined pending the business outcome and journey.\",\n    \"persistence_or_action\": \"Undetermined; no authoritative write or action owner can be selected safely.\",\n    \"feedback\": \"Undetermined pending the interaction and operational journey.\",\n    \"telemetry\": \"Undetermined pending the outcome, data classification, and host.\",\n    \"evidence\": \"No implementation, package, deployment, configuration, or runtime evidence exists for an undefined slice.\",\n    \"scope\": [\n      \"Identify the minimum observable outcome, persona, and host before selecting a delivery slice.\"\n    ],\n    \"exclusions\": [\n      \"Implementation, tenant access, deployment, and fabricated architecture decisions.\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [],\n    \"data\": [],\n    \"integration\": [],\n    \"ai\": [],\n    \"security\": [],\n    \"operations\": [],\n    \"alm\": []\n  },\n  \"delegations\": [],\n  \"acceptance_criteria\": [],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"Delivery planning proceeds without an observable outcome, persona, or host.\",\n      \"expected_behavior\": \"Keep the brief Open and do not fabricate a horizontal or deployable slice.\",\n      \"evidence\": \"Review confirms that no implementation-ready brief was issued.\"\n    }\n  ],\n  \"tests\": [],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Target environment remains unidentified.\"\n    ],\n    \"prerequisites\": [\n      \"Supply the observable outcome, persona, and host before defining deployment prerequisites.\"\n    ],\n    \"steps\": [\n      \"Do not deploy while the delivery slice is undefined.\"\n    ],\n    \"post_deploy_checks\": [\n      \"Post-deployment checks will be defined only after the slice is specified.\"\n    ],\n    \"evidence_required\": [\n      \"No deployment evidence is applicable at this stage.\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"No rollback trigger applies until an implementation is authorised.\"\n    ],\n    \"steps\": [\n      \"Define rollback steps with the implementation-ready slice.\"\n    ],\n    \"data_considerations\": [\n      \"No data mutation has been designed or authorised.\"\n    ],\n    \"owner\": \"To be assigned when the delivery outcome and operational owner are known.\",\n    \"evidence_required\": [\n      \"No rollback evidence is applicable before implementation.\"\n    ]\n  },\n  \"next_action\": \"Provide one sentence naming the observable outcome, the persona, and the Power Platform or Dynamics 365 host and entry point; then reconstruct the current agreed position and select the smallest deployable vertical slice.\"\n}",
+    "first_output_sha256": "6eacd03821cfedd826a2461b3cff8c3502af8f75ffbb45db5399b1c391712cae"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "40e84f5e2b5d2e8bb7fa54512a0b03dda71fc666bfb983be7ae77e8cd5ceed55",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex operation events; textual mentions in agent messages excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: separate selector configuration",
+        "evaluator: unchanged stdin input",
+        "evaluator: first-output preservation",
+        "evaluator: validation without repair"
+      ],
+      "source": "invocation.json and Codex JSONL"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex operation events; textual mentions in agent messages excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator validation",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7cd1-f382-7d80-a5ab-d1618cb1e930",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged case input",
+        "result": "Pass",
+        "evidence": "The exact input and SHA-256 are preserved in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Explicit Skill 6 selector kept outside case input",
+        "result": "Pass",
+        "evidence": "The evaluator configuration is recorded separately from the unchanged case input.",
+        "deviation": ""
+      },
+      {
+        "name": "Output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed without repair.",
+        "deviation": ""
+      },
+      {
+        "name": "Case routing or expected status",
+        "result": "Pass",
+        "evidence": "Observed status Open and route structure match the case definition.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero workflow operations",
+        "result": "Pass",
+        "evidence": "Observed 0 workflow operations.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Ask for the minimum observable outcome, persona, and host.",
+        "result": "Pass",
+        "evidence": "Evaluator reviewed the preserved JSON fields, status, and operation evidence against this exact criterion.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Do not invent a slice or return Ready.",
+        "result": "Pass",
+        "evidence": "Evaluator reviewed the preserved JSON fields, status, and operation evidence against this exact criterion.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited tenant access workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited authentication workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited MCP workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited dv-* workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited network workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited deployment workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited commit workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited push workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited secret handling workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited confidential-data processing workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-20T00:08:21.318515Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "ed2d9b2059ea9a6291e0382be396944fbf7797e6516ad6a70113484e4b7531e4",
+      "use": "v0.2.0-rc1 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/negative-cases.yaml",
+      "sha256": "43b04a51775b87e722ae93f71535f1759ff2ea4b83d40af4b07ec00c8629631e",
+      "use": "Exact case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "40e84f5e2b5d2e8bb7fa54512a0b03dda71fc666bfb983be7ae77e8cd5ceed55",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "2457dc09310de99d9c1914cc6125894a23df72b728173d0b4ccfec047f06f527",
+      "use": "Strict Codex-profile result validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "12954e12de0849fdbb6dac32313cdba093ca000abd931ff1405178e12d99a5d9",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "7732f0fc1089b76fd76913be32ecbec04bc1b57363d0a635934a6086a1021fac",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

@@ -1,0 +1,97 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request asks for general Power Platform education about model-driven apps, not a deployable delivery slice.",
+        "basis": "The explicitly selected skill excludes general Power Platform education.",
+        "source_refs": [
+          "user-request",
+          "power-platform-incremental-delivery:2"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, and host should a model-driven app delivery slice address?",
+        "owner": "requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was requested.",
+    "entry": "Not defined because this is a general education request.",
+    "validation": "Not defined because no business workflow was supplied.",
+    "persistence_or_action": "Not defined because no durable action was requested.",
+    "feedback": "Not defined because no application journey was supplied.",
+    "telemetry": "Not defined because no delivery slice was requested.",
+    "evidence": "The request text establishes only an educational question.",
+    "scope": [
+      "Abstain from answering the out-of-scope educational question."
+    ],
+    "exclusions": [
+      "Product implementation",
+      "Deployment",
+      "Tenant access"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No target environment identified."
+    ],
+    "prerequisites": [
+      "Define a delivery-slice outcome before implementation planning."
+    ],
+    "steps": [
+      "No deployment steps are authorized."
+    ],
+    "post_deploy_checks": [
+      "Not applicable until a delivery slice exists."
+    ],
+    "evidence_required": [
+      "No deployment evidence is required for this educational request."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable because no change is proposed."
+    ],
+    "steps": [
+      "No rollback action is required."
+    ],
+    "data_considerations": [
+      "No data changes are in scope."
+    ],
+    "owner": "requester",
+    "evidence_required": [
+      "No rollback evidence is required."
+    ]
+  },
+  "next_action": "Route this request to a general Power Platform education workflow, or provide an observable business outcome, persona, and host if an implementation-ready vertical-slice brief is wanted."
+}

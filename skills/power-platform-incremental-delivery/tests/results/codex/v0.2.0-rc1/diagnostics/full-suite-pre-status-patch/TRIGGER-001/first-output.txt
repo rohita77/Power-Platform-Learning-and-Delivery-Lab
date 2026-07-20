@@ -1,0 +1,557 @@
+{
+  "status": "Ready",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested product is a new synthetic service-request solution hosted in a model-driven app.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "user-request:2026-07-20"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This invocation produces an implementation-ready vertical-slice brief only; implementation, tenant access, and deployment are not authorised.",
+        "basis": "Power Platform Incremental Delivery v0.2.0 orchestration boundary.",
+        "source_refs": [
+          "power-platform-incremental-delivery:0.2.0"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "No prior solution artifacts, deployment evidence, runtime evidence, or settled product decisions were supplied.",
+        "basis": "The request describes a new solution and contains no carry-forward state.",
+        "source_refs": [
+          "user-request:2026-07-20"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The initial persona is a service desk agent using a model-driven app to create and acknowledge service requests.",
+        "impact": "Defines the first app, form, permissions, and command journey.",
+        "validation_required": "Confirm with the product owner before implementation.",
+        "source_refs": [
+          "bounded-synthetic-assumption"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "The smallest observable outcome is that an authorised agent can create one valid request and acknowledge it exactly once, while stale and duplicate submissions are handled safely.",
+        "impact": "Sets the slice boundary and acceptance result without introducing routing, SLA, integration, or AI scope.",
+        "validation_required": "Confirm that create-and-acknowledge is the desired smoke path before implementation.",
+        "source_refs": [
+          "bounded-synthetic-assumption",
+          "power-platform-incremental-delivery:synthetic-service-request-smoke-path"
+        ]
+      },
+      {
+        "id": "AS-003",
+        "statement": "An organisational Microsoft Dataverse environment with model-driven app and server-side extension capability will be available.",
+        "impact": "Implementation cannot begin until environment, licensing, capacity, and extension policy are confirmed.",
+        "validation_required": "Implementation owner must verify these prerequisites in the target organisation.",
+        "source_refs": [
+          "bounded-synthetic-assumption"
+        ]
+      },
+      {
+        "id": "AS-004",
+        "statement": "The first slice requires no external integration, AI component, email notification, SLA automation, queue routing, or Power Automate flow.",
+        "impact": "Keeps one authoritative acknowledgement path and minimizes deployment dependencies.",
+        "validation_required": "Revisit only if the product owner supplies a material first-slice requirement.",
+        "source_refs": [
+          "smallest-deployable-slice-principle"
+        ]
+      },
+      {
+        "id": "AS-005",
+        "statement": "Only synthetic design content may cross from the personal OpenAI authoring zone into an organisational Microsoft implementation workflow.",
+        "impact": "No tenant metadata, credentials, private URLs, or organisational records may be added to this brief.",
+        "validation_required": "Implementation must remain inside the organisational boundary and use approved configuration values.",
+        "source_refs": [
+          "user-request:synthetic",
+          "power-platform-incremental-delivery:data-boundary"
+        ]
+      },
+      {
+        "id": "AS-006",
+        "statement": "A two-second p95 acknowledgement target under an agreed synthetic test load is an initial non-binding performance objective.",
+        "impact": "Provides a measurable baseline without claiming target-environment capacity.",
+        "validation_required": "Confirm the workload and threshold before making it a production release gate.",
+        "source_refs": [
+          "bounded-synthetic-assumption"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What approved publisher prefix, solution unique name, and semantic version should implementation use?",
+        "owner": "Power Platform solution owner",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which authorised development and test environments, security groups, and synthetic test identities will be used?",
+        "owner": "Environment administrator",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-003",
+        "question": "What approved plug-in trace retention and operational alert destination should be configured?",
+        "owner": "Platform operations owner",
+        "blocks_ready": false
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Use a Power Automate flow as a second acknowledgement writer.",
+        "reason": "It would introduce duplicate lifecycle ownership, asynchronous ambiguity, and unnecessary dependencies for the smoke path.",
+        "reconsider_if": "A later requirement needs asynchronous downstream processing after the authoritative Dataverse transition."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Include AI classification or summarisation in the first slice.",
+        "reason": "AI is not required to prove the create-and-acknowledge outcome.",
+        "reconsider_if": "A later increment supplies an evaluated AI outcome, approved data boundary, and responsible-AI controls."
+      },
+      {
+        "id": "RJ-003",
+        "decision": "Treat form-level read-only behavior as sufficient protection for acknowledgement fields.",
+        "reason": "Presentation controls do not protect API or alternate-client write paths.",
+        "reconsider_if": "Never without an equivalent server-side transition control."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "An authorised service desk agent can create a synthetic service request and acknowledge it exactly once in the model-driven app; the durable record, privacy-safe command evidence, stale-conflict handling, and duplicate protection are observable.",
+    "entry": "Persona: service desk agent. Host: organisational Microsoft model-driven app. Entry point: Service Requests area and New command. Initial state: an accessible request list or empty state. Initiating event: the agent creates a request, opens the saved active record, and selects Acknowledge.",
+    "validation": "Creation requires Title, Category, Priority, and Description within configured lengths. Acknowledgement requires an active New request, execute permission, the version token captured when the form loaded or last refreshed, and a client-generated idempotency key retained across retries. The server rechecks record access, state, version, and command key. Missing input returns field-level guidance; denied access reveals no record details; a stale token rejects the transition without overwriting either version and instructs the user to reload and reconcile.",
+    "persistence_or_action": "Dataverse owns request creation. A bound Acknowledge Service Request custom API and its synchronous server plug-in exclusively own the New-to-Acknowledged transition. In one transaction, the plug-in checks the idempotency ledger, validates the expected version and state, writes acknowledgement metadata, and records correlation ID and outcome without request content. A unique alternate key on the command ledger protects concurrent duplicate keys. Replay of a completed key returns its prior outcome; a different key against an already acknowledged record returns an idempotent already-acknowledged outcome. A pre-update server guard rejects direct changes to protected acknowledgement fields outside the custom API parent operation.",
+    "feedback": "The form shows required-field errors without discarding input. Acknowledge is hidden or disabled when unavailable and disabled while a command is pending. Success refreshes the record, shows Acknowledged state and correlation ID, and moves focus to the status notification. Permission failures give a non-disclosing access message. Conflicts preserve the unsaved view and tell the user to reload and reconcile. Retryable failures retain the same idempotency key and offer Retry; non-retryable failures retain the record and provide the correlation ID. Empty lists, loading, long text, narrow layouts, keyboard invocation, disabled states, and focus restoration use model-driven accessibility patterns.",
+    "telemetry": "Persist a synthetic-safe command event containing correlation ID, command type, UTC timestamp, outcome, duplicate/conflict indicator, duration, request identifier, and sanitized error category. Exclude title, description, user-entered content, names, email addresses, tokens, URLs, and stack traces from user-visible output. A telemetry-write failure rolls back acknowledgement so success is never reported without its required evidence.",
+    "evidence": "Local proof comprises source review, automated plug-in tests, client checks, and solution validation. Package proof comprises unpacked-source comparison, dependency inspection, and solution artifact integrity. Deployment proof requires authorised import logs, component/configuration readback, role assignment evidence, and plug-in registration readback. Runtime proof requires an authorised synthetic end-to-end create and acknowledge, stale concurrent change, same-key replay, different-key duplicate, permission denial, and telemetry correlation. No lower evidence level proves a higher one.",
+    "scope": [
+      "One Dataverse Service Request table",
+      "One Dataverse Service Request Command table used as an idempotency and outcome ledger",
+      "One model-driven app with request list, main form, New command, and Acknowledge command",
+      "Create a request in New state",
+      "Transactional acknowledgement through one bound custom API",
+      "Server-side concurrency, transition, permission, and duplicate protection",
+      "Privacy-safe correlation and outcome telemetry",
+      "Least-privilege agent security role and acknowledgement privilege",
+      "Managed-solution-ready ALM source and focused automated tests"
+    ],
+    "exclusions": [
+      "External integrations and connectors",
+      "Email, Teams, or SMS notifications",
+      "Queue routing, assignment automation, escalation, and SLA processing",
+      "Customer self-service portal",
+      "Attachments and knowledge management",
+      "AI classification, generation, summarisation, or copilots",
+      "Historical data migration",
+      "Production deployment or tenant administration"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Use one model-driven app with a Service Requests list and main form supporting create, review, and acknowledge.",
+        "rationale": "This is the smallest platform-native journey that proves the requested outcome.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "EXP-002",
+        "decision": "Expose acknowledgement as an async-aware command with pending, success, permission, conflict, retry, and terminal-failure feedback.",
+        "rationale": "Prevents repeat clicks and gives deterministic recovery guidance.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "EXP-003",
+        "decision": "Use native form validation and notifications while preserving keyboard access, focus visibility, long-content behavior, and responsive layout.",
+        "rationale": "Keeps accessibility and responsive behavior aligned with the host design system.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Create a user-or-team-owned Service Request table with Title, Description, Category, Priority, Status, Acknowledged On, Acknowledged By, and immutable request identifier.",
+        "rationale": "Supports least-privilege access and the complete smoke-path state.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "DAT-002",
+        "decision": "Create an append-oriented Service Request Command table containing idempotency key, request reference, command type, correlation ID, outcome, duplicate/conflict flag, duration, and UTC timestamps, with a unique alternate key on idempotency key.",
+        "rationale": "Provides durable duplicate protection and privacy-safe operational evidence.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "DAT-003",
+        "decision": "Use the Dataverse version token captured at form load or refresh as the acknowledgement precondition.",
+        "rationale": "A stale client must not overwrite or acknowledge a changed request.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "DAT-004",
+        "decision": "Allow only New-to-Acknowledged in this slice and reject direct protected-field changes outside the acknowledgement operation.",
+        "rationale": "Maintains one authoritative lifecycle owner and prevents bypass through APIs or alternate clients.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Include no external integration, connector, webhook, flow, or queue consumer in this slice.",
+        "rationale": "The outcome is fully contained in Dataverse and needs no secondary writer.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AIC-001",
+        "decision": "Include no AI component or AI-processed data in this slice.",
+        "rationale": "AI does not contribute to the minimum create-and-acknowledge outcome.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Define a least-privilege Service Request Agent role granting required request access and the custom acknowledgement privilege, while restricting command-ledger administration.",
+        "rationale": "Separates normal operation from configuration and audit administration.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "SEC-002",
+        "decision": "Enforce access, state, version, and protected-field transition checks on the server.",
+        "rationale": "Client visibility and disabled controls are not security boundaries.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "SEC-003",
+        "decision": "Keep all runtime data and configuration in the organisational Microsoft zone; only synthetic source and test fixtures may enter from this brief.",
+        "rationale": "Preserves the personal OpenAI versus organisational Microsoft boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Use one correlation ID from client command through server outcome and ledger record.",
+        "rationale": "Supports diagnosis without copying request content into telemetry.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "OPS-002",
+        "decision": "Monitor acknowledgement success, conflict, duplicate, permission-denied, and failure counts plus duration.",
+        "rationale": "These signals expose functional and concurrency regressions in the slice.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "OPS-003",
+        "decision": "Resolve trace retention, alert destination, and support ownership through approved environment configuration before deployment.",
+        "rationale": "Environment-specific operational values can be deferred without changing the architecture.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Keep tables, columns, choices, app, forms, views, commands, custom API, custom privilege, plug-in steps, role, and configuration in one versioned solution.",
+        "rationale": "Creates one reviewable and deployable vertical-slice artifact.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "ALM-002",
+        "decision": "Develop unmanaged in an authorised development environment and promote a built managed artifact through test and later production stages.",
+        "rationale": "Separates editable source from controlled deployment artifacts.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "ALM-003",
+        "decision": "Treat publisher details, environment names, role principals, retention, and alert bindings as deployment prerequisites rather than hard-coded values.",
+        "rationale": "Avoids environment-specific metadata in source and permits deterministic promotion.",
+        "evidence_status": "Assumption"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "An authorised agent is in the model-driven app with no existing requests required",
+      "when": "the agent enters valid Title, Category, Priority, and Description values and saves",
+      "then": "one Service Request is durably created in New state with an immutable identifier and the saved record is displayed",
+      "evidence": "Authorised synthetic runtime record, created-row readback, and correlation evidence"
+    },
+    {
+      "id": "AC-002",
+      "given": "An authorised agent has an unchanged New request open",
+      "when": "the agent selects Acknowledge",
+      "then": "the request transitions once to Acknowledged, acknowledgement metadata is stored, the form refreshes, and success shows the privacy-safe correlation ID",
+      "evidence": "Runtime before-and-after readback, command-ledger record, and matching correlation ID"
+    },
+    {
+      "id": "AC-003",
+      "given": "Two sessions loaded the same New request version and one session subsequently changes it",
+      "when": "the other session submits acknowledgement with its stale version token",
+      "then": "acknowledgement is rejected, neither version is lost, a conflict outcome is recorded, and the user is instructed to reload and reconcile",
+      "evidence": "Concurrent synthetic runtime trace, unchanged current-row readback, and conflict ledger event"
+    },
+    {
+      "id": "AC-004",
+      "given": "An acknowledgement command has completed",
+      "when": "the same idempotency key is replayed or another acknowledgement is submitted",
+      "then": "no second state transition occurs; the same key returns its prior result and a new key returns an already-acknowledged outcome with a duplicate signal",
+      "evidence": "Command-ledger uniqueness readback, single transition evidence, and duplicate outcome traces"
+    },
+    {
+      "id": "AC-005",
+      "given": "A user lacks request access or acknowledgement privilege",
+      "when": "the user attempts the command or a direct protected-field update",
+      "then": "the operation is denied without disclosing inaccessible record content and no protected data changes",
+      "evidence": "Negative security runtime test, unchanged-row readback, and sanitized denial event"
+    },
+    {
+      "id": "AC-006",
+      "given": "A keyboard-only user opens a valid request",
+      "when": "the user invokes acknowledgement and receives success, conflict, or failure feedback",
+      "then": "the command is reachable, pending state prevents repeats, focus remains visible, and the result is announced and actionable",
+      "evidence": "Keyboard and accessibility test record across success, conflict, and failure states"
+    },
+    {
+      "id": "AC-007",
+      "given": "Any acknowledgement attempt reaches the server",
+      "when": "the attempt completes, conflicts, duplicates, is denied, or fails",
+      "then": "a privacy-safe outcome with correlation ID is available and contains no request body, personal identifier, secret, private URL, or stack trace",
+      "evidence": "Telemetry schema assertion and sampled sanitized synthetic events"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Required create input is missing, invalid, or over its configured maximum length.",
+      "expected_behavior": "Block save, identify the affected fields, retain valid input, and create no partial request.",
+      "evidence": "Client validation and server-boundary automated tests"
+    },
+    {
+      "id": "NP-002",
+      "condition": "The expected version differs from the current request version.",
+      "expected_behavior": "Reject acknowledgement without overwriting either version, record a conflict outcome and correlation ID, and tell the user to reload and reconcile.",
+      "evidence": "Concurrent-change automated and runtime tests"
+    },
+    {
+      "id": "NP-003",
+      "condition": "The same idempotency key is submitted more than once, including concurrently.",
+      "expected_behavior": "Return the completed result or deterministic in-progress/retry response without repeating the state transition.",
+      "evidence": "Parallel replay test, alternate-key readback, and single-transition assertion"
+    },
+    {
+      "id": "NP-004",
+      "condition": "A new idempotency key attempts to acknowledge an already acknowledged request.",
+      "expected_behavior": "Return a safe already-acknowledged result, emit a duplicate signal, and make no additional lifecycle change.",
+      "evidence": "Duplicate-action runtime test and unchanged acknowledgement metadata"
+    },
+    {
+      "id": "NP-005",
+      "condition": "A user directly updates protected status or acknowledgement columns outside the custom API.",
+      "expected_behavior": "The server guard rejects the write and preserves the existing row.",
+      "evidence": "Direct API update security test and row readback"
+    },
+    {
+      "id": "NP-006",
+      "condition": "The caller lacks row access or acknowledgement privilege.",
+      "expected_behavior": "Deny the operation, disclose no inaccessible content, persist no command payload, and return a sanitized correlation reference.",
+      "evidence": "Least-privilege negative test and unchanged-row evidence"
+    },
+    {
+      "id": "NP-007",
+      "condition": "The plug-in, ledger write, or request update fails before transaction completion.",
+      "expected_behavior": "Roll back the transaction, report no success, retain the retry key, and provide a sanitized retry or support message.",
+      "evidence": "Injected-failure unit test and transaction rollback readback"
+    },
+    {
+      "id": "NP-008",
+      "condition": "The model-driven list is empty, loading, stale, narrow, or contains long text.",
+      "expected_behavior": "Show usable native states, prevent actions until state is known, truncate or wrap safely, and preserve keyboard and focus behavior.",
+      "evidence": "Responsive and accessibility UI test record"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Create a request with valid and invalid field combinations.",
+      "expected": "Valid input creates exactly one New request; invalid input creates none and retains actionable field feedback.",
+      "evidence_required": "Automated validation results and authorised synthetic runtime readback",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "functional",
+      "scope": "Acknowledge an unchanged New request.",
+      "expected": "Exactly one transactional transition and matching command-ledger outcome occur.",
+      "evidence_required": "Plug-in unit result and runtime before-and-after readback",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Submit acknowledgement from a stale concurrent session.",
+      "expected": "The server rejects the stale token, preserves the current row, and records a conflict signal.",
+      "evidence_required": "Automated concurrency result and two-session runtime evidence",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "reliability",
+      "scope": "Replay identical and distinct acknowledgement keys sequentially and concurrently.",
+      "expected": "No duplicate transition occurs; same-key and already-acknowledged outcomes are deterministic.",
+      "evidence_required": "Parallel test output, alternate-key evidence, and single-transition assertion",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "security",
+      "scope": "Attempt acknowledgement, protected-field update, and record access with insufficient privileges.",
+      "expected": "Every unauthorised action is denied without data disclosure or mutation.",
+      "evidence_required": "Role matrix, negative test output, and unchanged-row readback",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "security",
+      "scope": "Inspect telemetry and user-visible errors for sensitive content.",
+      "expected": "Only approved identifiers, timing, outcome, and sanitized categories are present.",
+      "evidence_required": "Telemetry schema test and sanitized event samples",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "accessibility",
+      "scope": "Use create and acknowledge journeys with keyboard navigation, zoom, narrow layout, long text, and success/conflict/failure feedback.",
+      "expected": "Controls remain operable, focus is visible and restored, and messages are announced and actionable.",
+      "evidence_required": "Manual accessibility checklist and automated scan where supported",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-008",
+      "class": "performance",
+      "scope": "Measure acknowledgement under an agreed synthetic workload.",
+      "expected": "Record median and p95 duration; provisionally meet p95 of two seconds without duplicate transitions.",
+      "evidence_required": "Documented workload, timestamped measurements, and target-environment configuration",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-009",
+      "class": "alm",
+      "scope": "Build the solution artifact and inspect component dependencies and environment bindings.",
+      "expected": "The managed artifact is reproducible, contains the complete slice, and has no unmanaged or environment-specific dependency.",
+      "evidence_required": "Source diff, build output, dependency report, and solution validation result",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-010",
+      "class": "deployment",
+      "scope": "Import into an authorised test environment and read back components, plug-in steps, privilege, role, alternate key, and configuration.",
+      "expected": "Import succeeds and every required component is active and correctly bound.",
+      "evidence_required": "Import log and post-import configuration readback",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-011",
+      "class": "rollback",
+      "scope": "Disable the command path and restore the prior managed artifact or approved baseline without deleting request data.",
+      "expected": "New acknowledgements stop safely, existing records remain readable, and the prior behavior is restored.",
+      "evidence_required": "Rollback execution record, component readback, and retained-data verification",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised organisational Dataverse development environment",
+      "Authorised organisational Dataverse test environment",
+      "Production environment deferred until a separately authorised release"
+    ],
+    "prerequisites": [
+      "Approved publisher prefix, solution unique name, and initial semantic version",
+      "Verified model-driven app, Dataverse, storage, API, and server-extension entitlement and capacity",
+      "Approved development and test environments with deployment identities",
+      "Approved Service Request Agent role mapping and synthetic test identities",
+      "Approved plug-in signing, registration, trace retention, and alerting configuration",
+      "Environment backup or recoverable baseline before import",
+      "No credentials, tenant URLs, private identifiers, or environment-specific secrets stored in source"
+    ],
+    "steps": [
+      "Create the unmanaged development solution using the approved publisher and add all scoped components",
+      "Implement tables, keys, state choices, forms, views, app navigation, commands, custom privilege, custom API, server guard, and transactional plug-in",
+      "Add focused unit, integration-contract, client, security, concurrency, accessibility, ALM, deployment, and rollback tests",
+      "Validate source and solution dependencies and build one versioned managed artifact",
+      "Review artifact contents and configuration placeholders before promotion",
+      "Import the exact managed artifact into the authorised test environment",
+      "Bind approved operational configuration and assign the least-privilege role",
+      "Run post-deploy readback and authorised synthetic runtime tests"
+    ],
+    "post_deploy_checks": [
+      "Read back tables, columns, relationships, choices, forms, views, app, custom API, plug-in steps, custom privilege, role, and alternate key",
+      "Confirm protected acknowledgement fields cannot be changed outside the authoritative operation",
+      "Create and acknowledge one synthetic request through the model-driven app",
+      "Prove stale conflict, same-key replay, different-key duplicate, permission denial, and injected-failure behavior",
+      "Match user-visible correlation IDs to privacy-safe command outcomes",
+      "Confirm no confidential data, secrets, private URLs, or environment credentials exist in solution source or evidence"
+    ],
+    "evidence_required": [
+      "Reviewed source diff and automated test reports",
+      "Managed artifact identity, hash, version, and dependency report",
+      "Authorised import log and configuration readback",
+      "Security role and custom privilege readback",
+      "Synthetic runtime evidence for success, conflict, duplicate, denial, failure, and accessibility states",
+      "Rollback rehearsal evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Import or dependency validation fails",
+      "Acknowledgement can bypass the authoritative custom API",
+      "Duplicate or stale requests cause an extra transition or lost update",
+      "Permission checks disclose or mutate unauthorised data",
+      "Telemetry contains excluded content or cannot be correlated",
+      "Material regression prevents request creation or access"
+    ],
+    "steps": [
+      "Disable or remove the Acknowledge command from the app configuration",
+      "Disable the custom API and related plug-in steps through the authorised rollback procedure",
+      "Restore the prior managed artifact or approved environment baseline",
+      "Verify request creation and existing-record access after restoration",
+      "Retain diagnostic evidence and reconcile any in-flight command outcomes before re-enabling",
+      "Prefer a corrected roll-forward; remove the initial solution only with separate authorisation and a proven data-preservation plan"
+    ],
+    "data_considerations": [
+      "Do not delete Service Request or Service Request Command records during routine rollback",
+      "Preserve correlation and outcome records needed to reconcile in-flight attempts",
+      "Export or otherwise protect required synthetic records before any authorised uninstall",
+      "Do not retry an uncertain acknowledgement with a new idempotency key until the prior outcome is reconciled"
+    ],
+    "owner": "Authorised Power Platform release owner with platform operations and product-owner approval",
+    "evidence_required": [
+      "Rollback authorization and timestamped execution record",
+      "Component and plug-in activation readback",
+      "Preserved-record and command-ledger verification",
+      "Post-rollback smoke test and unresolved-command reconciliation"
+    ]
+  },
+  "next_action": "Carry forward this Ready brief into an authorised implementation workflow: first confirm the agent persona and create-and-acknowledge outcome, resolve the publisher, environment, role-principal, trace-retention, and alert-binding values, then build the unmanaged development solution and focused tests exactly within this slice. No specialist delegation, tenant action, implementation, or deployment has been performed or authorised here."
+}

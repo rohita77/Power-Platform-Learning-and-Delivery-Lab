@@ -1,0 +1,262 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested deliverable is a build-ready Power Platform vertical-slice brief covering entry, validation, persistence or action, feedback, telemetry, evidence, deployment, and rollback.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "User request dated 2026-07-20"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No tenant access, implementation, deployment, schema artifact, repository artifact, runtime evidence, or prior approved brief was supplied or authorised.",
+        "basis": "The request contains only the desired brief scope.",
+        "source_refs": [
+          "User request dated 2026-07-20"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "Any eventual implementation will target an organisational Microsoft Power Platform environment.",
+        "impact": "Environment bindings, identities, security roles, DLP controls, telemetry destinations, and ALM settings must be resolved inside the organisational boundary.",
+        "validation_required": "Confirm the target environment class and authorised delivery owner before implementation.",
+        "source_refs": [
+          "Power Platform delivery context"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome must the slice deliver, for which persona, in which Power Platform host and entry point?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "Not yet defined; an observable business result and success measure are required before a build-ready slice can be produced.",
+    "entry": "Pending confirmation of the persona, Power Platform host, entry point, initial state, and initiating event.",
+    "validation": "Pending the outcome-specific required fields, business rules, permission checks, input limits, and stale or concurrent-state policy.",
+    "persistence_or_action": "Pending identification of the authoritative record or action owner, durable operation, idempotency boundary, and concurrency behavior.",
+    "feedback": "The completed design must define loading, success, validation, permission, conflict, retry, empty, disabled, and terminal-failure states.",
+    "telemetry": "The completed design must emit privacy-safe events with a correlation ID, outcome, duration, and conflict or duplicate signal while excluding field values, message bodies, secrets, and personal identifiers.",
+    "evidence": "Evidence must remain separated into source or static validation, automated tests and build, package integrity, deployment and configuration readback, and observed runtime end-to-end proof.",
+    "scope": [
+      "Define one deployable end-to-end journey after the outcome, persona, and host are confirmed.",
+      "Include deterministic validation, one authoritative write or action path, user feedback, privacy-safe telemetry, focused tests, deployment controls, and rollback."
+    ],
+    "exclusions": [
+      "Tenant access, implementation, deployment, permission changes, and production-readiness claims.",
+      "Unrelated journeys, speculative integrations, and capabilities not required by the confirmed outcome."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Select the host-native experience and define its entry, responsive behavior, keyboard path, focus handling, and loading, empty, error, permission, conflict, and success states after the persona and host are confirmed.",
+        "rationale": "The primary journey cannot be designed credibly without knowing who performs it and where it runs.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Identify the authoritative data owner, minimum schema, required fields, validation boundaries, ownership rules, audit requirements, and concurrency token before implementation.",
+        "rationale": "Persistence and conflict behavior depend on the selected business record and existing schema.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Include no integration component unless the confirmed end-to-end outcome requires an external boundary.",
+        "rationale": "The smallest production-credible slice should avoid unneeded connectors, flows, queues, and duplicate action owners.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Include no AI component unless the confirmed outcome requires probabilistic behavior and an approved evaluation and data-boundary design.",
+        "rationale": "No AI requirement or safe evaluation target is currently defined.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Resolve identity, least-privilege roles, row and field access, DLP, data classification, audit, and permitted connector boundaries before implementation.",
+        "rationale": "The current request provides no tenant-specific security model or authorisation evidence.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Define a privacy-safe telemetry destination, correlation strategy, operational owner, alert threshold, retention policy, and support procedure before deployment.",
+        "rationale": "Telemetry fields can be designed now, but their organisational destination and ownership require approved configuration.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the slice as solution-aware components, externalise environment-specific values, bind connections during authorised deployment, validate dependencies, and retain an importable prior version for rollback.",
+        "rationale": "This provides a deterministic delivery and recovery mechanism without assuming a specific tenant or pipeline.",
+        "evidence_status": "Assumption"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Implementation is proposed before the observable outcome, persona, and host are confirmed.",
+      "expected_behavior": "Stop implementation and obtain the missing product definition rather than fabricating a journey or schema.",
+      "evidence": "Approved outcome statement naming the persona, host, initiating event, expected result, and measurable success condition."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The future slice receives an unauthorised, invalid, stale, duplicate, or concurrent submission.",
+      "expected_behavior": "Perform no unintended write, preserve existing durable state, return actionable feedback with a privacy-safe correlation ID, and record the outcome without sensitive payloads.",
+      "evidence": "Focused negative-path test results and runtime telemetry from an authorised test environment."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Confirmed primary journey from entry through durable success feedback.",
+      "expected": "The authorised persona completes the measurable outcome exactly once and the persisted result is read back.",
+      "evidence_required": "Automated test result plus authorised runtime record and persistence readback.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Unauthorised entry, write, and restricted-field access.",
+      "expected": "Access is denied without data disclosure or unintended mutation.",
+      "evidence_required": "Role-matrix test results and authorised runtime denial evidence.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Duplicate submission, stale state, concurrent change, retry, and downstream failure.",
+      "expected": "The action remains idempotent, conflicts preserve both versions, and users receive safe reload, reconcile, or retry guidance.",
+      "evidence_required": "Automated concurrency and replay results with privacy-safe correlated telemetry.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "accessibility",
+      "scope": "Keyboard navigation, focus order, labels, validation announcements, contrast, narrow layout, and long content.",
+      "expected": "The complete journey remains perceivable and operable without pointer-only interaction.",
+      "evidence_required": "Automated accessibility scan and documented keyboard walkthrough.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "alm",
+      "scope": "Solution packaging, dependency validation, environment-variable resolution, connection binding, and upgrade behavior.",
+      "expected": "The artifact validates and imports deterministically without unmanaged or environment-specific leakage.",
+      "evidence_required": "Solution checker or equivalent output, package manifest, dependency report, and import log.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "deployment",
+      "scope": "Authorised non-production import and post-deployment configuration readback.",
+      "expected": "The intended version, bindings, permissions, and telemetry configuration are present and the smoke path succeeds.",
+      "evidence_required": "Import record, configuration readback, version evidence, and runtime smoke-test result.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "rollback",
+      "scope": "Rollback to the retained prior solution version and configuration.",
+      "expected": "The prior journey is restored without deleting valid business data.",
+      "evidence_required": "Rollback rehearsal record, restored-version readback, and post-rollback smoke test.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised Power Platform development environment to be identified.",
+      "Authorised validation environment to be identified before deployment."
+    ],
+    "prerequisites": [
+      "Approve the observable outcome, persona, host, scope, and acceptance measure.",
+      "Confirm the authoritative schema and write owner.",
+      "Approve security roles, DLP boundaries, data classification, connection bindings, telemetry destination, and operational ownership.",
+      "Define publisher, solution identity, environment variables, connection references, deployment identity, and retained rollback version.",
+      "Complete focused automated checks and package validation."
+    ],
+    "steps": [
+      "Build and validate the outcome-specific slice in the authorised development environment.",
+      "Export and inspect the versioned solution artifact and dependency manifest.",
+      "Import through the authorised ALM path using approved environment bindings.",
+      "Read back solution version, configuration, connections, permissions, and telemetry settings.",
+      "Run the primary smoke path and negative checks without using confidential evidence."
+    ],
+    "post_deploy_checks": [
+      "Verify the installed solution version and component activation state.",
+      "Verify environment-variable and connection-reference bindings.",
+      "Verify least-privilege access and denial behavior.",
+      "Verify one successful journey, one validation failure, one permission failure, one conflict or duplicate path, and telemetry correlation.",
+      "Confirm monitoring ownership and rollback readiness."
+    ],
+    "evidence_required": [
+      "Reviewed artifact manifest and dependency validation output.",
+      "Authorised import record and configuration readback.",
+      "Sanitised runtime results for success and negative paths.",
+      "Telemetry event evidence containing no business payload or personal identifier.",
+      "Recorded deployment decision and retained rollback artifact."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Primary journey failure after deployment.",
+      "Unauthorised access or data disclosure.",
+      "Duplicate, corrupt, or unintended durable writes.",
+      "Unresolved dependency, binding, telemetry, or performance regression."
+    ],
+    "steps": [
+      "Stop further use through the approved reversible control without deleting business data.",
+      "Capture sanitised correlation identifiers, installed version, configuration state, and failure evidence.",
+      "Restore the retained prior solution version and approved bindings through the authorised ALM path.",
+      "Read back restored configuration and run the prior-version smoke and access checks.",
+      "Reconcile valid records created during the affected interval using an approved data procedure."
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite valid business records as part of solution rollback.",
+      "Separate component rollback from data remediation and preserve audit history.",
+      "Identify duplicate or partial actions by idempotency key and privacy-safe correlation ID."
+    ],
+    "owner": "Authorised Power Platform delivery owner to be named before implementation.",
+    "evidence_required": [
+      "Rollback authorization and trigger record.",
+      "Prior artifact identity and restored-version readback.",
+      "Post-rollback functional and security smoke-test results.",
+      "Data-reconciliation record where durable writes occurred."
+    ]
+  },
+  "next_action": "Provide one sentence naming the persona, Power Platform host and entry point, initiating event, observable end result, and measurable success condition; then replace the open placeholders with one outcome-specific vertical slice and its concrete acceptance criteria."
+}

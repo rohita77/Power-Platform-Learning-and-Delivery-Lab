@@ -1,0 +1,287 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "A synthetic Dataverse query requires specialist construction.",
+        "basis": "The request explicitly asks to delegate a synthetic query.",
+        "source_refs": [
+          "user request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The applicable upstream register entry is past its revalidation date and cannot currently be refreshed.",
+        "basis": "The request explicitly reports the approval evidence as stale.",
+        "source_refs": [
+          "user request"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The proposed specialist input contains synthetic data only.",
+        "impact": "No confidential organisational data may be included in a later handoff.",
+        "validation_required": "Validate the complete narrow payload before external execution.",
+        "source_refs": [
+          "user request"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, host, and primary journey should the query support?",
+        "owner": "requester",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What is the sanitized narrow query requirement, including source shape, required fields, filters, ordering, expansion, pagination, and expected query dialect?",
+        "owner": "requester",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Can a current approved register entry and upstream pin be obtained for the required specialist?",
+        "owner": "delegation authority",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Delegate despite the stale upstream approval.",
+        "reason": "A stale register entry cannot authorize external specialist execution; the delegation must remain invalid and uninvoked.",
+        "reconsider_if": "The canonical upstream register contains a current approved entry and pin, and every remaining delegation gate passes."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Not yet defined because no observable business result was supplied.",
+    "entry": "Not yet defined; persona, host, entry point, and initiating event remain open.",
+    "validation": "Validate synthetic classification, query inputs, permissions assumptions, and stale or concurrent state before execution.",
+    "persistence_or_action": "No write or external specialist action is authorized; query ownership and idempotency boundaries remain to be defined.",
+    "feedback": "Surface validation, permission, stale-approval, conflict, retry, and failure states without exposing payload data.",
+    "telemetry": "Use a privacy-safe correlation identifier and outcome code while excluding query payloads and record values.",
+    "evidence": "No execution evidence exists; future source, package, deployment, and runtime evidence must remain separately classified.",
+    "scope": [
+      "Define the smallest user-visible slice supported by the synthetic Dataverse query.",
+      "Prepare a sanitized specialist payload after approval and outcome gates pass."
+    ],
+    "exclusions": [
+      "External specialist execution under stale approval.",
+      "Tenant access, authentication, live metadata, implementation, deployment, and confidential data."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Persona, host, entry point, and feedback states remain open.",
+        "rationale": "The request supplies no user journey.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Only synthetic records may be included in the query-design handoff.",
+        "rationale": "The stated request is synthetic and does not authorize tenant data.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "The query dialect and consuming interface remain open.",
+        "rationale": "No OData, FetchXML, Xrm.WebApi, dataApi, generated-service, Canvas, or Power Automate target was specified.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No runtime AI component is currently in scope.",
+        "rationale": "The requested specialist work concerns deterministic query construction.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Stale specialist approval cannot be bypassed.",
+        "rationale": "Current register approval and pin are mandatory delegation gates.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Use privacy-safe correlation and outcome telemetry without record values or query payloads.",
+        "rationale": "This supports diagnosis while preserving the synthetic-only boundary.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Implementation and deployment remain outside this brief until the outcome and specialist result are validated.",
+        "rationale": "No approved build brief or deployment authority exists.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": ".agents/skills/dataverse-webapi-query/",
+      "source_type": "upstream",
+      "phase": "invalid",
+      "registry": {
+        "path": "canonical upstream specialist register",
+        "entry_status": "stale",
+        "version_or_pin": "not-supplied",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Construct a strict JSON Dataverse query from a sanitized synthetic requirement once supplied.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "explicit-external",
+        "input_payload": "No payload issued: the narrow query requirement is missing and the approving register entry is stale.",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/tests/output-schema.json",
+        "continuation_instruction": "Do not execute this handoff. After current approval and pin are established, create a fresh external thread using only the sanitized narrow payload, preserve the complete first output, validate it independently, and resume with the original orchestration state plus the relative result path and SHA-256."
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "implicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": true,
+        "register_verified": false,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": false,
+        "result_schema_verified": false,
+        "untrusted_input_checked": false,
+        "override_attempted": true,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "user statement that the upstream register entry is past revalidation"
+      ],
+      "open_items": [
+        "Current approved register entry and pin",
+        "Explicit external specialist selection",
+        "Compatible client confirmation",
+        "Sanitized narrow query payload",
+        "Preserved schema-valid result and SHA-256"
+      ],
+      "next_action": "Do not invoke the specialist; obtain current approval evidence and the missing narrow query requirement first."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "External specialist execution is attempted using the stale register entry.",
+      "expected_behavior": "Reject execution, preserve invoked as false, and request current approval evidence.",
+      "evidence": "Delegation control record showing stale status and no result reference."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The proposed handoff contains confidential, tenant-derived, credential, or live metadata content.",
+      "expected_behavior": "Stop the transfer and do not reproduce or execute the payload.",
+      "evidence": "Sanitized boundary-review record."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Stale-register delegation gate",
+      "expected": "The delegation remains invalid and uninvoked.",
+      "evidence_required": "Control record with stale register status, invoked false, and an empty result reference.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-002",
+      "class": "functional",
+      "scope": "Synthetic query acceptance behavior",
+      "expected": "Define after the query dialect, user outcome, and narrow payload are supplied.",
+      "evidence_required": "Approved build brief and validated specialist result.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment to be identified before implementation."
+    ],
+    "prerequisites": [
+      "Approved build brief",
+      "Validated specialist result",
+      "Authorized connection binding and security model"
+    ],
+    "steps": [
+      "No deployment steps are authorized in the current state."
+    ],
+    "post_deploy_checks": [
+      "Verify configuration readback and the defined user-visible outcome after an authorized deployment."
+    ],
+    "evidence_required": [
+      "Deployment record",
+      "Configuration readback",
+      "Runtime success and failure-path evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Query returns an incorrect data set.",
+      "Permission boundaries are exceeded.",
+      "Duplicate or stale processing is observed."
+    ],
+    "steps": [
+      "Disable the consuming component or revert to the last approved query artifact.",
+      "Preserve privacy-safe diagnostic evidence.",
+      "Revalidate the corrected query before re-enablement."
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite records as part of query rollback.",
+      "Preserve both versions when resolving stale-state conflicts."
+    ],
+    "owner": "Authorized solution owner",
+    "evidence_required": [
+      "Rollback decision record",
+      "Artifact version evidence",
+      "Post-rollback verification"
+    ]
+  },
+  "next_action": "Keep the delegation uninvoked. Supply the observable outcome, persona, host, query dialect, and sanitized synthetic query requirement, then obtain a current approved upstream register entry and pin before issuing a fresh explicit-external handoff."
+}

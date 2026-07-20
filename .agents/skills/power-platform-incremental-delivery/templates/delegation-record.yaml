@@ -1,8 +1,9 @@
 schema_version: "1.0"
-skill_version: "0.1.0"
+skill_version: "0.2.0"
 delegation_id: "DEL-001"
 specialist: ""
 source_type: "lab|upstream"
+phase: "requested|externally-completed|invalid|blocked"
 registry:
   path: ""
   entry_status: "missing|current-approved|stale|not-approved|not-applicable"
@@ -13,6 +14,11 @@ request:
   data_classification: "public|synthetic|approved-non-confidential|confidential"
   zone: "personal-openai|organisational-microsoft"
   permitted_tools: []
+handoff:
+  invocation_mode: "explicit-external|not-applicable"
+  input_payload: ""
+  expected_output_schema: ""
+  continuation_instruction: ""
 control:
   enabled: false
   selection_mode: "none|explicit|implicit"
@@ -27,11 +33,22 @@ execution:
   invoked: false
   outcome_status: "not-required|open|blocked|completed"
   result_reference: ""
+verification:
+  specialist_identity_verified: null
+  register_verified: null
+  input_classification_verified: null
+  boundary_verified: null
+  result_hash_verified: null
+  result_schema_verified: null
+  untrusted_input_checked: null
+  override_attempted: false
+  result_sha256: ""
+  source_path: ""
 evidence_refs: []
 open_items: []
 next_action: ""
 
-# Invariant: invoked may be true only when selection_mode is explicit, the
-# exact approved selector was used, execution was observed, result_schema_valid
-# is true, and every register, boundary, permission, client, and prerequisite
-# gate passed.
+# Invariant: Skill 6 never performs the external execution. invoked may be true
+# only in phase externally-completed when the externally selected specialist,
+# exact request payload, preserved result path/hash, answer schema, register,
+# boundary, permissions, and untrusted-input checks all pass.

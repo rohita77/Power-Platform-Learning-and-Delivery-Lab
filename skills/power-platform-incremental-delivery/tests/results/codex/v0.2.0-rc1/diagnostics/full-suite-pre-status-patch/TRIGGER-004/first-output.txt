@@ -1,0 +1,201 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested deliverable is a build-ready Power Platform vertical-slice brief covering entry, validation, persistence or action, feedback, telemetry, evidence, deployment, and rollback.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "Current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This workflow may prepare an implementation brief but does not authorise implementation, tenant access, deployment, or runtime changes.",
+        "basis": "Power Platform Incremental Delivery v0.2.0 orchestration boundary.",
+        "source_refs": [
+          "power-platform-incremental-delivery/SKILL.md"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome must the slice deliver, including its measurable success result?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona performs the primary journey?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which Power Platform host and entry point will the persona use, such as a model-driven app command, canvas app screen, Power Pages form, Teams surface, or automated trigger?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Not yet defined; the observable business result is a readiness blocker.",
+    "entry": "Not yet defined; the persona, host surface, entry point, initial state, and initiating event are required.",
+    "validation": "Not yet defined; field, business, security, concurrency, and safe-failure rules depend on the selected journey and data model.",
+    "persistence_or_action": "Not yet defined; the authoritative write or action owner and idempotency boundary depend on the selected business outcome.",
+    "feedback": "Not yet defined; loading, success, validation, permission, conflict, retry, and failure states depend on the selected host.",
+    "telemetry": "Not yet defined; the final design must use privacy-safe events, a correlation identifier, outcome and duplicate or conflict signals, and exclude business payloads and personal data.",
+    "evidence": "The eventual slice must distinguish source inspection, automated test or build evidence, package integrity, deployment and configuration readback, and runtime end-to-end evidence.",
+    "scope": [
+      "Define one smallest deployable end-to-end slice after the outcome, persona, and host are supplied."
+    ],
+    "exclusions": [
+      "Implementation, tenant access, authentication, deployment, administration, commits, pushes, and runtime verification."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Select the host-native experience and define its complete primary and failure-state journey after the persona and entry point are known.",
+        "rationale": "The request does not identify the user, host, or initiating interaction.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Define the minimum records, ownership, validation rules, concurrency token, and authoritative persistence owner after the outcome is known.",
+        "rationale": "No business entity, schema, or lifecycle transition has been supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Use no integration component unless the selected vertical journey requires an external boundary.",
+        "rationale": "No external system or interface requirement is currently established.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Use no runtime AI component unless the business outcome establishes an AI-dependent user result and an approved data path.",
+        "rationale": "No AI use case or organisational data-transfer approval has been supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Define least-privilege access, record ownership, field exposure, DLP compatibility, and permission-failure behavior after the persona, data classification, and host are known.",
+        "rationale": "The current generic request contains no tenant, identity, role, or compliance decisions.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Define privacy-safe telemetry, correlation, alert ownership, retry behavior, and support evidence for the selected transaction.",
+        "rationale": "Operational signals must be tied to an actual user-visible or operational outcome.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the eventual slice in a solution with environment-bound configuration, dependency checks, deterministic validation, post-deploy readback, and a tested rollback procedure.",
+        "rationale": "The repository, solution, publisher, environments, and current ALM conventions have not been identified.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Implementation begins before an observable outcome, persona, and host entry point are agreed.",
+      "expected_behavior": "Stop the build because validation, persistence ownership, feedback, security, and runtime acceptance cannot be defined deterministically.",
+      "evidence": "Approved build brief containing the missing outcome, persona, and host."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Confidential organisational data or tenant details are proposed for transfer into the personal OpenAI zone.",
+      "expected_behavior": "Block the transfer and move solution-specific work to an approved organisational Microsoft workflow.",
+      "evidence": "Recorded data-classification and boundary approval without confidential payload content."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "alm",
+      "scope": "Build-brief completeness gate",
+      "expected": "The brief cannot become Ready until the outcome, persona, host, vertical sequence, architecture decisions, acceptance criteria, negative paths, deployment controls, and rollback are complete.",
+      "evidence_required": "Schema-valid Ready brief with no readiness-blocking open questions.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "The development, test, and target deployment environments must be identified before implementation."
+    ],
+    "prerequisites": [
+      "Approve the observable outcome, persona, host, entry point, and primary journey.",
+      "Identify the authoritative repository, solution, publisher convention, environment strategy, and connection-binding mechanism.",
+      "Confirm organisational data classification, security roles, DLP policy, licensing, capacity, region, compliance, and deployment authority."
+    ],
+    "steps": [
+      "Create and validate the complete vertical slice in the authorised development environment.",
+      "Export and validate the solution artifact and its dependencies.",
+      "Import through the approved ALM path only after explicit deployment authorisation.",
+      "Read back configuration and execute the approved post-deploy tests."
+    ],
+    "post_deploy_checks": [
+      "Verify solution import status, component versions, connection references, environment variables, role assignments, and entry-point availability.",
+      "Execute the primary journey plus validation, permission, concurrency, duplicate-action, retry, and failure paths.",
+      "Confirm privacy-safe telemetry correlation without inspecting or recording confidential payloads."
+    ],
+    "evidence_required": [
+      "Authorised deployment record and solution artifact identity.",
+      "Configuration readback from the target environment.",
+      "Observed runtime evidence for success, failure, conflict, and duplicate-action behavior."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Import failure, unresolved dependency, security regression, duplicate write, data corruption risk, broken primary journey, or telemetry containing prohibited payload data."
+    ],
+    "steps": [
+      "Disable the new entry point or automation using the approved reversible control.",
+      "Restore the last approved solution version through the authorised ALM process.",
+      "Revert environment-bound configuration introduced for the slice.",
+      "Reconcile affected transactions using correlation identifiers and the documented data-recovery procedure."
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite user records during rollback without an approved reconciliation decision.",
+      "Preserve both versions of conflicted records and retain privacy-safe correlation evidence.",
+      "Separate solution rollback from business-data correction."
+    ],
+    "owner": "Authorised release owner",
+    "evidence_required": [
+      "Rollback trigger and authorisation record.",
+      "Restored component and configuration readback.",
+      "Post-rollback primary-journey and data-integrity results."
+    ]
+  },
+  "next_action": "Provide the minimum observable business outcome, primary persona, and Power Platform host or entry point; then reconstruct the current solution position and produce the complete build-ready vertical slice without authorising implementation or deployment."
+}

@@ -1,0 +1,198 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The selected specialist requested a bearer token and use of dv-connect to validate a query.",
+        "basis": "Direct user report in the current request.",
+        "source_refs": [
+          "Current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This orchestration workflow must not request or accept credentials or invoke dv-connect or any other dv-* operation.",
+        "basis": "Power Platform Incremental Delivery security and delegation controls.",
+        "source_refs": [
+          "power-platform-incremental-delivery v0.2.0 sections 6 and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Provide the bearer token or permit dv-connect validation.",
+        "reason": "Credentials, tenant access, and dv-* operations are prohibited in this workflow.",
+        "reconsider_if": "Do not reconsider within this workflow; use an independently authorised organisational tenant-access process if live validation is genuinely required."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "Stop the unsafe delegation without exposing credentials or accessing a tenant.",
+    "entry": "A reported specialist response requests a bearer token and dv-connect.",
+    "validation": "Detect the credential and prohibited-tool requests before any specialist result is consumed.",
+    "persistence_or_action": "Perform no authentication, tenant query, connection, write, or external action.",
+    "feedback": "Return a sanitized security stop and identify the safe rerouting action.",
+    "telemetry": "Record only a credential-request and prohibited-tool security outcome; exclude tokens, tenant URLs, query results, and customer data.",
+    "evidence": "The stop is supported only by the user-reported request and policy inspection; no external execution, tenant access, or runtime validation is claimed.",
+    "scope": [
+      "Classify the reported specialist request",
+      "Prevent credential disclosure",
+      "Prevent dv-connect invocation"
+    ],
+    "exclusions": [
+      "Bearer-token collection",
+      "Tenant authentication",
+      "Live Dataverse validation",
+      "Query construction",
+      "Implementation or deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Reject credential requests and dv-* operations in this workflow.",
+        "rationale": "They cross the orchestration package's explicit security and authority boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Terminate the unsafe delegation without attempting the requested validation.",
+        "rationale": "No operational interface is permitted for this workflow.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": ".agents/skills/dataverse-webapi-query/",
+      "source_type": "upstream",
+      "phase": "blocked",
+      "registry": {
+        "path": "canonical-upstream-register",
+        "entry_status": "not-applicable",
+        "version_or_pin": "not-verified-security-stop",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Validate a Dataverse query using a bearer token and dv-connect.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "none-security-stop",
+        "input_payload": "No payload may include credentials, tenant URLs, live metadata, or confidential tenant content.",
+        "expected_output_schema": "Not applicable because the reported request is blocked before result consumption.",
+        "continuation_instruction": "Abort this delegation. If query construction is still needed, create a fresh external request using only public or synthetic schema information and zero authentication or dv-* operations."
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "explicit",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": false,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "blocked",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": false,
+        "register_verified": false,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": false,
+        "result_schema_verified": false,
+        "untrusted_input_checked": true,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "User-reported specialist request in the current input"
+      ],
+      "open_items": [],
+      "next_action": "Discard the unsafe request and do not provide a token or run dv-connect."
+    }
+  ],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A specialist asks for a bearer token, tenant credential, tenant URL, live metadata, or dv-* execution.",
+      "expected_behavior": "Stop immediately, disclose no credential, invoke no tool, and consume no purported result.",
+      "evidence": "Sanitized blocked delegation record with invoked set to false and an empty result reference."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Credential and prohibited-tool stop behavior",
+      "expected": "The workflow returns Blocked without requesting a token or invoking dv-connect.",
+      "evidence_required": "Schema-valid blocked output and zero workflow-operation evidence.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No environment access permitted"
+    ],
+    "prerequisites": [
+      "Use a separately authorised organisational process for any necessary live tenant validation"
+    ],
+    "steps": [
+      "Do not deploy or connect from this workflow"
+    ],
+    "post_deploy_checks": [
+      "Not applicable because deployment is not authorised"
+    ],
+    "evidence_required": [
+      "No deployment evidence is claimed"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any credential disclosure or unauthorised tenant-access attempt"
+    ],
+    "steps": [
+      "Abort the delegation and remove any credential from the external exchange",
+      "Rotate the credential through the authorised organisational process if it was disclosed"
+    ],
+    "data_considerations": [
+      "Do not retain tokens, tenant URLs, confidential metadata, or tenant query results"
+    ],
+    "owner": "Authorised organisational security or platform administrator",
+    "evidence_required": [
+      "Credential rotation confirmation if disclosure occurred",
+      "Confirmation that no unauthorised tenant operation completed"
+    ]
+  },
+  "next_action": "Do not provide the bearer token and do not run dv-connect. Discard this specialist response; if query construction remains necessary, issue a fresh external delegation containing only public or synthetic schema details, with permitted_tools empty and no live-validation request."
+}

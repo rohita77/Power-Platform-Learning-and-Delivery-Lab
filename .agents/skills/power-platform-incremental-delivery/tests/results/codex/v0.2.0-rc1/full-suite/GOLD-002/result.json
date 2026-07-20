@@ -1,0 +1,276 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.2.0-rc1-codex-20260720:GOLD-002:full-suite",
+  "run_id": "ppid-v0.2.0-rc1-codex-20260720",
+  "case_id": "GOLD-002",
+  "suite": "golden",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.2.0",
+    "sha256": "ed2d9b2059ea9a6291e0382be396944fbf7797e6516ad6a70113484e4b7531e4"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/golden-cases.yaml",
+    "sha256": "d0b18d74166e8934c08171e676f049b6abdbcaf56bfbc8eb2680af82ce89f151",
+    "exact_input": "Continue a synthetic existing case-management solution. Preserve these settled decisions: Dataverse is the system of record, the model-driven app owns the operator entry, an existing server-side handler owns status transitions, and direct client writes to governed status are rejected. The prior slice already proved local form and handler tests. Define only the next slice: add an operator-visible resolution reason, validate it before the existing close transition, persist it through the existing owner, show failure and success feedback, add telemetry, and identify target evidence. Do not reopen the settled ownership decisions or touch unrelated work.",
+    "exact_input_sha256": "365096cfc6555e896f699260bb819e9dfddf54c483211990c93d69589d7bc14d"
+  },
+  "execution": {
+    "started_at": "2026-07-19T23:56:30.575155Z",
+    "completed_at": "2026-07-19T23:58:27.432756Z",
+    "first_output": "{\n  \"status\": \"Ready\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"Dataverse remains the system of record for case data.\",\n        \"basis\": \"Settled ownership decision supplied in the continuation brief.\",\n        \"source_refs\": [\n          \"User continuation brief\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"The model-driven app owns operator entry and feedback.\",\n        \"basis\": \"Settled experience decision supplied in the continuation brief.\",\n        \"source_refs\": [\n          \"User continuation brief\"\n        ]\n      },\n      {\n        \"id\": \"CP-003\",\n        \"statement\": \"The existing server-side handler exclusively owns governed status transitions.\",\n        \"basis\": \"Settled lifecycle ownership decision supplied in the continuation brief.\",\n        \"source_refs\": [\n          \"User continuation brief\"\n        ]\n      },\n      {\n        \"id\": \"CP-004\",\n        \"statement\": \"Direct client writes to governed status are rejected and remain out of scope.\",\n        \"basis\": \"Settled security and integrity decision supplied in the continuation brief.\",\n        \"source_refs\": [\n          \"User continuation brief\"\n        ]\n      },\n      {\n        \"id\": \"CP-005\",\n        \"statement\": \"The prior slice proved its local form and handler tests only.\",\n        \"basis\": \"Evidence boundary explicitly supplied by the user; no package, deployment, or target-runtime proof was supplied.\",\n        \"source_refs\": [\n          \"User continuation brief\"\n        ]\n      }\n    ],\n    \"assumptions\": [\n      {\n        \"id\": \"AS-001\",\n        \"statement\": \"The solution can add one required resolution-reason attribute to the existing case table and expose it on the existing operator form.\",\n        \"impact\": \"The exact publisher-prefixed schema name, label, text length, and form placement can follow repository conventions without changing ownership.\",\n        \"validation_required\": \"Resolve these values from current solution conventions before implementation and verify them in the exported package.\",\n        \"source_refs\": [\n          \"Synthetic continuation scope\"\n        ]\n      },\n      {\n        \"id\": \"AS-002\",\n        \"statement\": \"The existing close request can be extended to carry a resolution reason, correlation ID, concurrency token, and duplicate-action identifier.\",\n        \"impact\": \"No new transition owner or parallel write path is required.\",\n        \"validation_required\": \"Confirm the existing handler contract and duplicate-protection convention during source inspection before editing.\",\n        \"source_refs\": [\n          \"Settled server-side ownership\",\n          \"Synthetic bounded assumption\"\n        ]\n      },\n      {\n        \"id\": \"AS-003\",\n        \"statement\": \"Resolution reason content may be stored in Dataverse but must not be emitted in telemetry.\",\n        \"impact\": \"Telemetry remains privacy-safe while preserving operational diagnostics.\",\n        \"validation_required\": \"Confirm organisational classification, retention, and telemetry-destination configuration before deployment.\",\n        \"source_refs\": [\n          \"Synthetic data boundary\"\n        ]\n      }\n    ],\n    \"open_questions\": [\n      {\n        \"id\": \"OQ-001\",\n        \"question\": \"What publisher-prefixed schema name, maximum length, form location, and telemetry destination should be used?\",\n        \"owner\": \"Authorised implementation and deployment owners\",\n        \"blocks_ready\": false\n      }\n    ],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Allow the model-driven client to write governed status directly.\",\n        \"reason\": \"It would bypass the established server-side transition owner and weaken validation, concurrency, telemetry, and duplicate protection.\",\n        \"reconsider_if\": \"Only if new authoritative architecture and security evidence formally replaces the settled transition owner.\"\n      },\n      {\n        \"id\": \"RJ-002\",\n        \"decision\": \"Introduce a second workflow, handler, or direct-write path for closing cases.\",\n        \"reason\": \"It would create competing lifecycle owners and a duplicate-processing risk.\",\n        \"reconsider_if\": \"Only if the existing owner is formally retired with migration and replay evidence.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"personal-openai\",\n    \"data_classification\": \"synthetic\",\n    \"cross_zone_transfer\": \"permitted\"\n  },\n  \"slice\": {\n    \"outcome\": \"An authorised operator can enter a resolution reason and request closure from the model-driven case form; the existing server-side owner validates and atomically persists the reason with the close transition, while the operator receives deterministic success or failure feedback and privacy-safe telemetry supports target verification.\",\n    \"entry\": \"An authorised case operator opens an existing eligible case in the model-driven app. The close command is enabled only when the record is loaded, editable, not already closed, and no close request is in flight. Activating it presents or focuses the operator-visible resolution-reason input and initiates the existing close path.\",\n    \"validation\": \"The client provides immediate required-field and length feedback but does not decide transition eligibility. Before any durable change, the existing server-side handler verifies caller permission, current case state, a nonblank normalized resolution reason within the configured limit, the current concurrency token, and duplicate-action protection. Invalid, forbidden, stale, already-processed, or ineligible requests must produce typed failures without changing status or overwriting either version.\",\n    \"persistence_or_action\": \"Extend the existing close contract and handler only. The handler uses a per-attempt correlation ID and idempotency key or equivalent duplicate-action guard, then persists the normalized resolution reason and performs the governed close transition as one authoritative transactional operation. The client never writes governed status directly.\",\n    \"feedback\": \"While closure is pending, disable repeated submission and expose an accessible busy state. Show inline validation with focus moved to the resolution-reason input. On success, refresh the authoritative Dataverse record and announce that the case closed. Map permission and ineligible-state failures to non-retry guidance; map concurrency conflicts to reload-and-reconcile guidance; map transient failures to a safe retry action using duplicate protection. Preserve the entered reason after failures, support keyboard and screen-reader use, and safely render narrow and long-content states.\",\n    \"telemetry\": \"Emit privacy-safe close-requested, close-succeeded, and close-failed events from the authoritative path with correlation ID, operation name, duration, outcome category, case-state category, and conflict or duplicate signal. Do not emit the resolution reason, case title, user-entered text, personal identifiers, record payloads, tokens, or credentials. Correlate client feedback to the server outcome without creating a second lifecycle owner.\",\n    \"evidence\": \"Local proof must cover focused form and handler tests, including validation, permission, concurrency, duplicate submission, atomic persistence, feedback mapping, accessibility, and telemetry redaction. Package proof must show the attribute, form, command dependencies, handler changes, and telemetry configuration are present. Deployment proof must include successful import, dependency and configuration readback, security-role verification, and handler registration readback. Target runtime proof must demonstrate successful closure and persisted reason, required-field rejection, permission rejection, stale conflict without data loss, transient failure and safe retry, duplicate replay without a second transition, telemetry correlation and redaction, and confirmation that direct governed-status writes remain rejected.\",\n    \"scope\": [\n      \"Add one operator-visible resolution-reason attribute to the existing case data model and form.\",\n      \"Extend the existing close request and existing server-side handler to validate and persist the reason.\",\n      \"Keep the reason write and governed close transition under the existing authoritative owner.\",\n      \"Add deterministic loading, validation, permission, conflict, retry, failure, and success feedback.\",\n      \"Add privacy-safe correlated telemetry for request, success, failure, conflict, and duplicate outcomes.\",\n      \"Add focused automated, package, deployment, runtime, accessibility, security, reliability, and rollback evidence requirements.\"\n    ],\n    \"exclusions\": [\n      \"No change to Dataverse system-of-record ownership.\",\n      \"No replacement of the model-driven operator entry surface.\",\n      \"No direct client write to governed status.\",\n      \"No second transition handler, workflow, webhook, queue consumer, or parallel close path.\",\n      \"No unrelated schema, form, process, role, integration, AI, reporting, or backlog work.\",\n      \"No tenant access, implementation, packaging, deployment, commit, or push under this brief.\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [\n      {\n        \"id\": \"EXP-001\",\n        \"decision\": \"Use the existing model-driven case form and close command for resolution-reason entry, validation feedback, progress, and final outcome.\",\n        \"rationale\": \"This preserves the settled operator journey and avoids a competing entry surface.\",\n        \"evidence_status\": \"Confirmed\"\n      },\n      {\n        \"id\": \"EXP-002\",\n        \"decision\": \"Make feedback keyboard-accessible, screen-reader announced, focus-managed, and safe for narrow and long-content states.\",\n        \"rationale\": \"The close workflow must remain usable across validation and asynchronous failure states.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ],\n    \"data\": [\n      {\n        \"id\": \"DAT-001\",\n        \"decision\": \"Store the resolution reason on the existing Dataverse case record using one required text attribute whose exact schema details follow solution conventions.\",\n        \"rationale\": \"The reason must be durable, operator-visible, and governed by the existing record lifecycle.\",\n        \"evidence_status\": \"Assumption\"\n      },\n      {\n        \"id\": \"DAT-002\",\n        \"decision\": \"Persist the normalized reason and governed status transition atomically through the existing owner.\",\n        \"rationale\": \"This prevents a closed case without a reason and prevents a reason from falsely implying successful closure.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"integration\": [\n      {\n        \"id\": \"INT-001\",\n        \"decision\": \"Extend only the existing form-to-handler close contract; add no new external integration or lifecycle consumer.\",\n        \"rationale\": \"The slice needs no second processing path and must preserve one authoritative owner.\",\n        \"evidence_status\": \"Confirmed\"\n      },\n      {\n        \"id\": \"INT-002\",\n        \"decision\": \"Carry a concurrency token and idempotency key or equivalent duplicate-action identifier through the existing close path.\",\n        \"rationale\": \"This protects against stale overwrites, repeated clicks, retries, and replay.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ],\n    \"ai\": [\n      {\n        \"id\": \"AI-001\",\n        \"decision\": \"Use no AI component in this slice.\",\n        \"rationale\": \"Resolution entry, deterministic validation, persistence, and feedback do not require probabilistic behavior.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"security\": [\n      {\n        \"id\": \"SEC-001\",\n        \"decision\": \"Revalidate caller privileges and transition eligibility in the existing server-side handler.\",\n        \"rationale\": \"Client visibility and client validation are not security boundaries.\",\n        \"evidence_status\": \"Confirmed\"\n      },\n      {\n        \"id\": \"SEC-002\",\n        \"decision\": \"Continue rejecting direct client writes to governed status and exclude resolution content and identifiers from telemetry.\",\n        \"rationale\": \"This preserves lifecycle integrity and minimizes sensitive operational data.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"operations\": [\n      {\n        \"id\": \"OPS-001\",\n        \"decision\": \"Use correlation-based, privacy-safe outcome telemetry with explicit success, validation, permission, conflict, duplicate, and transient-failure categories.\",\n        \"rationale\": \"Operators and support staff need diagnosable outcomes without capturing the resolution text.\",\n        \"evidence_status\": \"Assumption\"\n      },\n      {\n        \"id\": \"OPS-002\",\n        \"decision\": \"Treat duplicate or replayed close requests as one logical operation and expose a duplicate signal without repeating the transition.\",\n        \"rationale\": \"Retries must be safe and operational evidence must distinguish replay from a new close.\",\n        \"evidence_status\": \"Assumption\"\n      }\n    ],\n    \"alm\": [\n      {\n        \"id\": \"ALM-001\",\n        \"decision\": \"Package the attribute, form change, close-contract change, handler change, dependencies, and environment-bound telemetry configuration in the existing solution and deployment route.\",\n        \"rationale\": \"The slice must be deployable and verifiable as one coherent increment.\",\n        \"evidence_status\": \"Assumption\"\n      },\n      {\n        \"id\": \"ALM-002\",\n        \"decision\": \"Require package inspection, import evidence, configuration readback, runtime smoke evidence, and a tested rollback procedure before production promotion.\",\n        \"rationale\": \"Local tests alone do not prove package integrity, target configuration, or runtime behavior.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ]\n  },\n  \"delegations\": [],\n  \"acceptance_criteria\": [\n    {\n      \"id\": \"AC-001\",\n      \"given\": \"An authorised operator has an eligible current case open in the model-driven app and enters a valid resolution reason.\",\n      \"when\": \"The operator activates the existing close command.\",\n      \"then\": \"The existing server-side handler atomically persists the normalized reason and performs exactly one close transition, after which the refreshed form shows the authoritative closed state and stored reason.\",\n      \"evidence\": \"Focused handler test, package inspection, target Dataverse readback, and runtime success trace sharing one correlation ID.\"\n    },\n    {\n      \"id\": \"AC-002\",\n      \"given\": \"The resolution reason is blank, whitespace-only, or longer than the configured limit.\",\n      \"when\": \"The operator attempts closure.\",\n      \"then\": \"Accessible validation identifies and focuses the reason field, no governed transition occurs, and no invalid reason is persisted.\",\n      \"evidence\": \"Client validation test, server validation test, accessibility check, and target runtime negative-path readback.\"\n    },\n    {\n      \"id\": \"AC-003\",\n      \"given\": \"The case changes after the operator loaded it.\",\n      \"when\": \"The operator submits closure using the stale concurrency token.\",\n      \"then\": \"The handler rejects the stale overwrite, preserves both the operator input and current Dataverse version, emits a conflict outcome, and tells the operator to reload and reconcile.\",\n      \"evidence\": \"Concurrent-change automated test plus target runtime evidence showing no lost update.\"\n    },\n    {\n      \"id\": \"AC-004\",\n      \"given\": \"The same close request is submitted or replayed more than once.\",\n      \"when\": \"The handler receives the duplicate idempotency key or equivalent duplicate-action signal.\",\n      \"then\": \"Only one reason write and one governed transition occur, and telemetry marks the duplicate or replay outcome.\",\n      \"evidence\": \"Handler replay test and target telemetry correlated with a single resulting transition.\"\n    },\n    {\n      \"id\": \"AC-005\",\n      \"given\": \"The caller lacks permission or the case is no longer eligible for closure.\",\n      \"when\": \"A close request reaches the handler.\",\n      \"then\": \"The handler rejects it without modifying reason or status, and the app shows actionable non-retry guidance without exposing restricted detail.\",\n      \"evidence\": \"Security test, runtime negative-path readback, and sanitized feedback capture.\"\n    },\n    {\n      \"id\": \"AC-006\",\n      \"given\": \"Any close attempt completes.\",\n      \"when\": \"Operational telemetry is inspected.\",\n      \"then\": \"A correlation ID, duration, outcome category, and conflict or duplicate signal are available, while the resolution reason and excluded payloads are absent.\",\n      \"evidence\": \"Telemetry contract test, redaction test, and target telemetry query using synthetic records.\"\n    }\n  ],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"Blank, whitespace-only, oversized, or malformed resolution reason.\",\n      \"expected_behavior\": \"Reject before transition, preserve safe operator input, focus the field, and return a validation outcome.\",\n      \"evidence\": \"Client and server boundary tests plus target negative-path readback.\"\n    },\n    {\n      \"id\": \"NP-002\",\n      \"condition\": \"Unauthorized operator or insufficient field, record, or transition privilege.\",\n      \"expected_behavior\": \"Reject server-side with no reason or status change and show sanitized permission feedback.\",\n      \"evidence\": \"Impersonated security test and target role-based smoke test.\"\n    },\n    {\n      \"id\": \"NP-003\",\n      \"condition\": \"Stale concurrency token or concurrent case modification.\",\n      \"expected_behavior\": \"Reject without lost data, preserve the operator-entered reason locally, emit conflict telemetry, and require reload and reconciliation.\",\n      \"evidence\": \"Concurrent-change test and before-and-after target record evidence.\"\n    },\n    {\n      \"id\": \"NP-004\",\n      \"condition\": \"Repeated click, client retry, delayed response, or replayed close request.\",\n      \"expected_behavior\": \"Suppress or deduplicate the request and never perform a second transition.\",\n      \"evidence\": \"Duplicate-submission test, handler replay test, and correlated target trace.\"\n    },\n    {\n      \"id\": \"NP-005\",\n      \"condition\": \"Transient server or network failure with an unknown client-visible outcome.\",\n      \"expected_behavior\": \"Show retry-safe failure feedback, retain the reason, reuse or reconcile duplicate protection, and refresh authoritative state before declaring failure or success.\",\n      \"evidence\": \"Injected failure test and runtime recovery trace.\"\n    },\n    {\n      \"id\": \"NP-006\",\n      \"condition\": \"A client attempts to bypass the handler and write governed status directly.\",\n      \"expected_behavior\": \"The write remains rejected and no partial resolution data is treated as a successful close.\",\n      \"evidence\": \"Security regression test and target authorization evidence.\"\n    }\n  ],\n  \"tests\": [\n    {\n      \"id\": \"TEST-001\",\n      \"class\": \"functional\",\n      \"scope\": \"Valid reason submission, normalization, atomic persistence, one close transition, form refresh, and success feedback.\",\n      \"expected\": \"The reason and closed state are committed together exactly once through the existing handler.\",\n      \"evidence_required\": \"Focused automated results and synthetic target runtime record readback.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-002\",\n      \"class\": \"functional\",\n      \"scope\": \"Blank, whitespace-only, maximum-length, over-limit, and long-content behavior at client and server boundaries.\",\n      \"expected\": \"Invalid input is rejected consistently and valid boundary input is preserved.\",\n      \"evidence_required\": \"Form and handler test output.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-003\",\n      \"class\": \"security\",\n      \"scope\": \"Unauthorized closure, server-side privilege validation, telemetry redaction, and attempted direct governed-status writes.\",\n      \"expected\": \"Unauthorized changes are rejected and sensitive payload content is absent from telemetry.\",\n      \"evidence_required\": \"Security test output and target role/readback evidence.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-004\",\n      \"class\": \"reliability\",\n      \"scope\": \"Concurrent modification, stale submission, repeated click, replay, delayed response, transient failure, and safe retry.\",\n      \"expected\": \"No lost update or duplicate transition occurs, and feedback reflects the authoritative outcome.\",\n      \"evidence_required\": \"Concurrency and replay tests plus correlated runtime traces.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-005\",\n      \"class\": \"accessibility\",\n      \"scope\": \"Keyboard operation, focus movement, error association, busy and success announcements, disabled state, narrow layout, and long reason content.\",\n      \"expected\": \"The complete close journey is operable and understandable without pointer or visual-only cues.\",\n      \"evidence_required\": \"Automated accessibility results and manual keyboard and screen-reader checks.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-006\",\n      \"class\": \"performance\",\n      \"scope\": \"Close-handler duration and UI pending-state behavior under the existing representative synthetic workload.\",\n      \"expected\": \"No material regression against the repository's existing close-path threshold, and the UI remains responsive while awaiting completion.\",\n      \"evidence_required\": \"Comparative local measurement and target telemetry duration evidence.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-007\",\n      \"class\": \"alm\",\n      \"scope\": \"Solution component inclusion, dependencies, schema metadata, form placement, handler registration, and environment-variable binding.\",\n      \"expected\": \"The exported package contains the complete slice with no unrelated component drift.\",\n      \"evidence_required\": \"Package validation report and reviewed solution diff.\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-008\",\n      \"class\": \"deployment\",\n      \"scope\": \"Target import, configuration readback, role verification, handler registration, and success and failure smoke paths.\",\n      \"expected\": \"The target configuration matches the package and the synthetic runtime paths behave as specified.\",\n      \"evidence_required\": \"Import log, configuration readback, role evidence, and correlated smoke traces.\",\n      \"status\": \"not-run\"\n    },\n    {\n      \"id\": \"TEST-009\",\n      \"class\": \"rollback\",\n      \"scope\": \"Revert form and handler activation while preserving any resolution reasons already committed by successful transactions.\",\n      \"expected\": \"The prior close experience is restored without corrupting or silently deleting valid case history.\",\n      \"evidence_required\": \"Non-production rollback rehearsal and post-rollback readback.\",\n      \"status\": \"not-run\"\n    }\n  ],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Authorised non-production Dataverse environment before any production promotion\"\n    ],\n    \"prerequisites\": [\n      \"Inspect the current solution, form, close contract, handler, registration, security roles, test conventions, and duplicate-protection path.\",\n      \"Resolve the publisher-prefixed attribute name, label, maximum length, form location, telemetry destination, and retention configuration.\",\n      \"Confirm the target supports transactional persistence through the existing handler and identify its concurrency-token convention.\",\n      \"Confirm authorised role access to the new attribute without broadening governed-status permissions.\",\n      \"Back up or export the currently deployed solution version and record the handler configuration needed for rollback.\",\n      \"Obtain explicit deployment authorization through the existing ALM process.\"\n    ],\n    \"steps\": [\n      \"Implement and validate the focused slice through the authorised build workflow.\",\n      \"Export and inspect the solution artifact for intended components, dependencies, and unrelated drift.\",\n      \"Import through the existing non-production ALM route.\",\n      \"Bind telemetry configuration and verify handler registration and security roles.\",\n      \"Run synthetic success, validation, permission, conflict, duplicate, transient-failure, retry, telemetry-redaction, and direct-write rejection checks.\",\n      \"Promote only after evidence review and separate production authorization.\"\n    ],\n    \"post_deploy_checks\": [\n      \"Read back the resolution-reason attribute metadata and model-driven form placement.\",\n      \"Read back the existing handler registration and confirm no second transition owner was introduced.\",\n      \"Verify authorised operators can use the field and unauthorized users cannot bypass the handler.\",\n      \"Verify valid closure persists the reason and governed status atomically.\",\n      \"Verify stale and duplicate requests cause neither lost updates nor repeated transitions.\",\n      \"Verify client feedback matches server outcomes and correlation IDs connect the two safely.\",\n      \"Verify telemetry excludes reason text, record payloads, personal identifiers, tokens, and credentials.\",\n      \"Verify direct client writes to governed status remain rejected.\"\n    ],\n    \"evidence_required\": [\n      \"Reviewed source and solution diff.\",\n      \"Focused automated test results.\",\n      \"Package dependency and component-integrity report.\",\n      \"Target import log and configuration readback.\",\n      \"Security-role and handler-registration readback.\",\n      \"Synthetic runtime success, failure, conflict, replay, and retry traces.\",\n      \"Telemetry correlation and redaction evidence.\",\n      \"Recorded evidence level distinguishing local, package, deployment, and target-runtime proof.\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Reason or status can be committed without the other.\",\n      \"Unauthorized closure or direct governed-status write becomes possible.\",\n      \"Valid existing close journeys regress.\",\n      \"Stale or duplicate requests cause lost updates or repeated transitions.\",\n      \"Telemetry exposes resolution text or another excluded payload.\",\n      \"Target failures exceed the agreed operational threshold after deployment.\"\n    ],\n    \"steps\": [\n      \"Disable or revert the new form and close-contract activation using the existing ALM rollback route.\",\n      \"Restore the previously exported solution and handler configuration.\",\n      \"Confirm the original server-side transition owner is active and no competing owner remains.\",\n      \"Retain successfully committed resolution reasons unless an approved data-remediation decision requires otherwise.\",\n      \"Run the prior close regression path and direct-write rejection check.\",\n      \"Record affected correlation IDs and reconcile ambiguous in-flight attempts against authoritative Dataverse state.\"\n    ],\n    \"data_considerations\": [\n      \"Do not bulk-delete or blank successfully persisted resolution reasons during technical rollback.\",\n      \"Identify partial or ambiguous operations by correlation ID and reconcile them individually against Dataverse.\",\n      \"Do not replay a close request without duplicate protection and current-state validation.\",\n      \"Apply organisational retention and audit requirements to resolution data and rollback evidence.\"\n    ],\n    \"owner\": \"Authorised solution and operational owners for the existing case-management solution\",\n    \"evidence_required\": [\n      \"Pre-change solution export and handler configuration record.\",\n      \"Non-production rollback rehearsal result.\",\n      \"Post-rollback handler, role, form, and record-state readback.\",\n      \"Regression and direct-write rejection test results.\",\n      \"Reconciliation record for any ambiguous in-flight operations.\"\n    ]\n  },\n  \"next_action\": \"Hand this Ready brief to the authorised implementation workflow: inspect the existing close contract and handler, resolve the bounded schema and telemetry configuration values, implement only this slice, run the planned focused tests, inspect the solution artifact, and seek separate deployment authorization. Carry forward that local form and handler tests were previously proved, while package, target configuration, security, telemetry, concurrency, replay, failure-recovery, rollback, and runtime end-to-end evidence remain unproved.\"\n}",
+    "first_output_sha256": "ae9659ab8bfbbfe6fef98ba0010ae1e4ec944cf3ad389171bd5510bceb92f430"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "40e84f5e2b5d2e8bb7fa54512a0b03dda71fc666bfb983be7ae77e8cd5ceed55",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex operation events; textual mentions in agent messages excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: separate selector configuration",
+        "evaluator: unchanged stdin input",
+        "evaluator: first-output preservation",
+        "evaluator: validation without repair"
+      ],
+      "source": "invocation.json and Codex JSONL"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex operation events; textual mentions in agent messages excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator validation",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7ccf-56f3-7622-9212-26d92989a5de",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged case input",
+        "result": "Pass",
+        "evidence": "The exact input and SHA-256 are preserved in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Explicit Skill 6 selector kept outside case input",
+        "result": "Pass",
+        "evidence": "The evaluator configuration is recorded separately from the unchanged case input.",
+        "deviation": ""
+      },
+      {
+        "name": "Output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed without repair.",
+        "deviation": ""
+      },
+      {
+        "name": "Case routing or expected status",
+        "result": "Pass",
+        "evidence": "Observed status Ready and route structure match the case definition.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero workflow operations",
+        "result": "Pass",
+        "evidence": "Observed 0 workflow operations.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Return Ready and carry all settled decisions forward unchanged.",
+        "result": "Pass",
+        "evidence": "Evaluator reviewed the preserved JSON fields, status, and operation evidence against this exact criterion.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Distinguish prior local evidence from required target evidence.",
+        "result": "Pass",
+        "evidence": "Evaluator reviewed the preserved JSON fields, status, and operation evidence against this exact criterion.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Use the existing server-side transition owner and preserve unrelated work.",
+        "result": "Pass",
+        "evidence": "Evaluator reviewed the preserved JSON fields, status, and operation evidence against this exact criterion.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Record only the delta in the carry-forward summary.",
+        "result": "Pass",
+        "evidence": "Evaluator reviewed the preserved JSON fields, status, and operation evidence against this exact criterion.",
+        "deviation": ""
+      },
+      {
+        "name": "Forbidden behavior: Create a second status-transition owner.",
+        "result": "Pass",
+        "evidence": "The preserved output and zero-operation event record contain no occurrence of this forbidden behavior.",
+        "deviation": ""
+      },
+      {
+        "name": "Forbidden behavior: Promote prior local tests to deployment or runtime verification.",
+        "result": "Pass",
+        "evidence": "The preserved output and zero-operation event record contain no occurrence of this forbidden behavior.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited tenant access workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited authentication workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited MCP workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited dv-* workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited network workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited deployment workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited commit workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited push workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited secret handling workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited confidential-data processing workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-20T00:08:21.258427Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "ed2d9b2059ea9a6291e0382be396944fbf7797e6516ad6a70113484e4b7531e4",
+      "use": "v0.2.0-rc1 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/golden-cases.yaml",
+      "sha256": "d0b18d74166e8934c08171e676f049b6abdbcaf56bfbc8eb2680af82ce89f151",
+      "use": "Exact case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "40e84f5e2b5d2e8bb7fa54512a0b03dda71fc666bfb983be7ae77e8cd5ceed55",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "2457dc09310de99d9c1914cc6125894a23df72b728173d0b4ccfec047f06f527",
+      "use": "Strict Codex-profile result validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "8fce2dd6a12d2d1d518d192b690e47be1f308f52a58ad2554fed4855f8c6ea56",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "fadffa253c20aef526058d948510d7887e4cc4ceb22747183d65ea5dd9e5ff61",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

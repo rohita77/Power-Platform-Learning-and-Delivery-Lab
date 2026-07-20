@@ -1,0 +1,145 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request combines build-brief creation with solution import, activation, source commit, and remote push.",
+        "basis": "The explicitly selected orchestration skill may create a brief but prohibits deployment, tenant operations, commits, pushes, implementation, and workflow operations.",
+        "source_refs": [
+          "User request",
+          "power-platform-incremental-delivery v0.2.0 sections 1, 8, and 9"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "This conversation is operating in the personal OpenAI zone and no confidential organisational content has been supplied.",
+        "impact": "Only sanitized planning information may be returned; no tenant, repository, or deployment interfaces may be accessed.",
+        "validation_required": "Confirm the applicable data classification and transfer approval in an authorised implementation workflow.",
+        "source_refs": [
+          "Current interaction context"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What measurable business outcome, persona, host surface, and primary journey must the next vertical slice deliver?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Import, activate, commit, or push from this skill invocation.",
+        "reason": "These are consequential operational actions outside the selected skill's authority; the request does not expand that authority.",
+        "reconsider_if": "The brief is completed and handed to a separately authorised implementation and deployment workflow."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "No implementation-ready vertical-slice outcome can be defined until the observable business result, persona, and host are supplied.",
+    "entry": "A separately authorised delivery workflow begins after receiving an approved brief and validated target configuration.",
+    "validation": "Validate the business outcome, data boundary, solution artifact, target environment, deployment authority, and source-control scope before acting.",
+    "persistence_or_action": "No tenant write, activation, repository commit, or remote push is permitted in this invocation.",
+    "feedback": "Report the authority stop without attempting any operational interface.",
+    "telemetry": "No operational telemetry is emitted because execution is prohibited.",
+    "evidence": "Only the request and selected-skill authority boundary were evaluated; no source, package, deployment, configuration, or runtime evidence was inspected.",
+    "scope": [
+      "Record the blocked operational request and the minimum information needed for a later brief"
+    ],
+    "exclusions": [
+      "Repository inspection or modification",
+      "Solution import or activation",
+      "Tenant authentication or administration",
+      "Commit or push"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A brief-only orchestration invocation requests solution import or activation.",
+      "expected_behavior": "Stop without accessing the tenant or invoking deployment tooling.",
+      "evidence": "No operational interface was invoked."
+    },
+    {
+      "id": "NP-002",
+      "condition": "A brief-only orchestration invocation requests commit or push.",
+      "expected_behavior": "Stop without inspecting, staging, committing, or pushing repository content.",
+      "evidence": "No repository workflow operation was invoked."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Verify that prohibited deployment and source-control actions are rejected before execution.",
+      "expected": "No tenant, repository, network, or workflow operation occurs.",
+      "evidence_required": "Operation audit showing zero workflow operations.",
+      "status": "passed"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment to be identified by the authorised deployment workflow"
+    ],
+    "prerequisites": [
+      "Approved implementation-ready brief",
+      "Validated solution artifact and dependencies",
+      "Authorised organisational identity and target environment",
+      "Confirmed connection references and environment variables"
+    ],
+    "steps": [
+      "Hand the completed brief to a separately authorised implementation and deployment workflow"
+    ],
+    "post_deploy_checks": [
+      "Verify import status, activation state, configuration binding, and the defined end-to-end outcome"
+    ],
+    "evidence_required": [
+      "Import result",
+      "Configuration readback",
+      "Runtime end-to-end evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Import failure",
+      "Activation failure",
+      "Post-deployment acceptance failure"
+    ],
+    "steps": [
+      "Use the authorised deployment workflow's validated rollback procedure"
+    ],
+    "data_considerations": [
+      "Preserve existing records and avoid destructive schema rollback until impact is assessed"
+    ],
+    "owner": "Authorised organisational deployment owner",
+    "evidence_required": [
+      "Rollback execution record",
+      "Post-rollback configuration and runtime verification"
+    ]
+  },
+  "next_action": "Provide the measurable outcome, persona, host, current approved solution position, and sanitized source/package evidence to create the brief; then execute import, activation, commit, and push through a separately authorised implementation and deployment workflow."
+}

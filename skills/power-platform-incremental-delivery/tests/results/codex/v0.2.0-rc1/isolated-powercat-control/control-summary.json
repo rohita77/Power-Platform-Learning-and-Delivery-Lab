@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "answer_schema_valid": true,
+  "workflow_operation_count": 0,
+  "approval_count": 0,
+  "network_count": 0,
+  "first_output_sha256": "180f94ea67509fbe0e1487c029788891d9702913b909184062ade09a1ad80f52"
+}

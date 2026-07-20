@@ -1,0 +1,132 @@
+schema_version: "1.0"
+skill_version: "0.2.0"
+schema_target: "output-schema.json#/$defs/delegation"
+valid_records:
+  - id: "SCHEMA-DELEGATION-REQUESTED"
+    record:
+      id: "DEL-001"
+      specialist: "dataverse-webapi-query"
+      source_type: "upstream"
+      phase: "requested"
+      registry:
+        path: ".agents/skills/dataverse-webapi-query/"
+        entry_status: "current-approved"
+        version_or_pin: "f4bb4ad5bf55e2d50076292bd6301f6337d38083"
+        verified_on: "2026-07-20"
+      request:
+        scope: "Construct the bounded synthetic active-account Xrm.WebApi query."
+        data_classification: "synthetic"
+        zone: "personal-openai"
+        permitted_tools: []
+      handoff:
+        invocation_mode: "explicit-external"
+        input_payload: "Using standard synthetic Microsoft Dataverse Account schema assumptions, build an Xrm.WebApi query for the top 10 active accounts selecting name and accountnumber, ordered by createdon descending. This is synthetic query construction only; do not authenticate, access a tenant, inspect live metadata, or use any tool."
+        expected_output_schema: ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json"
+        continuation_instruction: "Execute $dataverse-webapi-query in a fresh thread with only input_payload, preserve its first output, validate it against expected_output_schema, then resume $power-platform-incremental-delivery with the original state plus the result path and SHA-256."
+      control:
+        enabled: true
+        selection_mode: "none"
+        selector: "$dataverse-webapi-query"
+        client_compatible: true
+        prerequisites_satisfied: true
+        boundary_permitted: true
+        permissions_approved: true
+      execution:
+        execution_observed: false
+        result_schema_valid: null
+        invoked: false
+        outcome_status: "open"
+        result_reference: ""
+      verification:
+        specialist_identity_verified: true
+        register_verified: true
+        input_classification_verified: true
+        boundary_verified: true
+        result_hash_verified: null
+        result_schema_verified: null
+        untrusted_input_checked: null
+        override_attempted: false
+        result_sha256: ""
+        source_path: ""
+      evidence_refs:
+        - "canonical register: current approved explicit-only entry"
+      open_items:
+        - "External specialist result has not been supplied."
+      next_action: "Execute the exact handoff externally and resume with preserved evidence."
+
+  - id: "SCHEMA-DELEGATION-EXTERNALLY-COMPLETED"
+    record:
+      id: "DEL-001"
+      specialist: "dataverse-webapi-query"
+      source_type: "upstream"
+      phase: "externally-completed"
+      registry:
+        path: ".agents/skills/dataverse-webapi-query/"
+        entry_status: "current-approved"
+        version_or_pin: "f4bb4ad5bf55e2d50076292bd6301f6337d38083"
+        verified_on: "2026-07-20"
+      request:
+        scope: "Construct the bounded synthetic active-account Xrm.WebApi query."
+        data_classification: "synthetic"
+        zone: "personal-openai"
+        permitted_tools: []
+      handoff:
+        invocation_mode: "explicit-external"
+        input_payload: "Using standard synthetic Microsoft Dataverse Account schema assumptions, build an Xrm.WebApi query for the top 10 active accounts selecting name and accountnumber, ordered by createdon descending. This is synthetic query construction only; do not authenticate, access a tenant, inspect live metadata, or use any tool."
+        expected_output_schema: ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json"
+        continuation_instruction: "Resume $power-platform-incremental-delivery with the original state and this preserved result evidence."
+      control:
+        enabled: true
+        selection_mode: "explicit"
+        selector: "$dataverse-webapi-query"
+        client_compatible: true
+        prerequisites_satisfied: true
+        boundary_permitted: true
+        permissions_approved: true
+      execution:
+        execution_observed: true
+        result_schema_valid: true
+        invoked: true
+        outcome_status: "completed"
+        result_reference: "tests/fixtures/powercat/gold-005-result.json"
+      verification:
+        specialist_identity_verified: true
+        register_verified: true
+        input_classification_verified: true
+        boundary_verified: true
+        result_hash_verified: true
+        result_schema_verified: true
+        untrusted_input_checked: true
+        override_attempted: false
+        result_sha256: "2adfa6cbe497117ebbfbb36957b2581119d486bf1807031cea1f9ecd1360da54"
+        source_path: "tests/fixtures/powercat/gold-005-result.json"
+      evidence_refs:
+        - "tests/fixtures/powercat/gold-005-result-provenance.json"
+      open_items: []
+      next_action: "Use only the validated query contract in the vertical slice."
+
+invalid_mutations:
+  - id: "SCHEMA-INVALID-REQUESTED-INVOKED"
+    base: "SCHEMA-DELEGATION-REQUESTED"
+    set:
+      execution.invoked: true
+  - id: "SCHEMA-INVALID-REQUESTED-REFERENCE"
+    base: "SCHEMA-DELEGATION-REQUESTED"
+    set:
+      execution.result_reference: "not-created.json"
+  - id: "SCHEMA-INVALID-COMPLETED-EMPTY-HASH"
+    base: "SCHEMA-DELEGATION-EXTERNALLY-COMPLETED"
+    set:
+      verification.result_sha256: ""
+  - id: "SCHEMA-INVALID-COMPLETED-OVERRIDE"
+    base: "SCHEMA-DELEGATION-EXTERNALLY-COMPLETED"
+    set:
+      verification.override_attempted: true
+  - id: "SCHEMA-INVALID-INVOKED-WRONG-PHASE"
+    base: "SCHEMA-DELEGATION-EXTERNALLY-COMPLETED"
+    set:
+      phase: "invalid"
+  - id: "SCHEMA-INVALID-ADDITIONAL-PROPERTY"
+    base: "SCHEMA-DELEGATION-REQUESTED"
+    set:
+      unexpected: "not allowed"

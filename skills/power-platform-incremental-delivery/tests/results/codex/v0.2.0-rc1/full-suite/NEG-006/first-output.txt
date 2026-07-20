@@ -1,0 +1,101 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request is limited to inspecting findings and explicitly excludes creating or modifying an implementation brief.",
+        "basis": "Explicit user instruction.",
+        "source_refs": [
+          "stdin"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What findings should the review-only workflow inspect?",
+        "owner": "requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Create or modify a delivery-slice implementation brief.",
+        "reason": "No delivery-slice outcome was requested, and the user explicitly prohibited this action.",
+        "reconsider_if": "The requester separately authorizes a build-brief outcome."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery slice defined because this is a review-only request.",
+    "entry": "Not applicable to the requested findings inspection.",
+    "validation": "Not applicable to the requested findings inspection.",
+    "persistence_or_action": "No implementation, persistence, or external action is authorized.",
+    "feedback": "Return review findings only through the appropriate non-build workflow.",
+    "telemetry": "No telemetry design requested.",
+    "evidence": "Any review conclusion must remain bounded to the findings supplied.",
+    "scope": [
+      "Classify this invocation as review-only."
+    ],
+    "exclusions": [
+      "Implementation-brief creation or modification."
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No deployment environment requested."
+    ],
+    "prerequisites": [
+      "Not applicable to a review-only request."
+    ],
+    "steps": [
+      "Do not deploy."
+    ],
+    "post_deploy_checks": [
+      "Not applicable because deployment is excluded."
+    ],
+    "evidence_required": [
+      "No deployment evidence required."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable because no change is authorized."
+    ],
+    "steps": [
+      "No rollback action required."
+    ],
+    "data_considerations": [
+      "No data mutation is authorized."
+    ],
+    "owner": "requester",
+    "evidence_required": [
+      "Confirmation that no implementation state was changed."
+    ]
+  },
+  "next_action": "Route the supplied findings to a review-only inspection workflow; no findings were included in this invocation, and no implementation brief should be created or modified."
+}

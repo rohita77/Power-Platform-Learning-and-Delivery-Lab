@@ -1,0 +1,402 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested increment is a synthetic account-view slice using Xrm.WebApi.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "user-request-2026-07-20"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Specialist delegation is disabled.",
+        "basis": "Explicit user constraint.",
+        "source_refs": [
+          "user-request-2026-07-20"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The persona is an authorised internal model-driven-app user who needs a bounded read-only list of synthetic accounts.",
+        "impact": "Defines the host, journey, permission expectations, and acceptance criteria without assuming tenant-specific roles.",
+        "validation_required": "Confirm the persona and that a model-driven app Account grid command is the intended entry point before implementation.",
+        "source_refs": [
+          "user-request-2026-07-20"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "Only standard synthetic Account attributes will be displayed, with the final columns and ordering deferred to approved query construction.",
+        "impact": "Avoids inventing custom schema names or tenant metadata.",
+        "validation_required": "Resolve the exact select, filter, order, and page-size contract through the approved Dataverse query specialist.",
+        "source_refs": [
+          "power-platform-incremental-delivery-v0.2.0"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Can delegation to the approved dataverse-webapi-query specialist be explicitly enabled, or can a preserved externally generated result with path and SHA-256 be supplied?",
+        "owner": "request owner and host administrator",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Construct or infer the Xrm.WebApi query inside the orchestration skill.",
+        "reason": "Dataverse query construction belongs to the approved dataverse-webapi-query specialist, and delegation is disabled.",
+        "reconsider_if": "Do not reconsider; enable the approved specialist protocol or supply a validated preserved result."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "An authorised model-driven-app user invokes the account-view action and receives a deterministic, bounded, read-only list of synthetic accounts, with clear empty, permission, loading, and failure states.",
+    "entry": "Persona: authorised internal user. Host: model-driven app. Entry point: Account main-grid command. Initial state: no client-side result retained. Initiating event: the user activates the command once.",
+    "validation": "Confirm the supported client context, validate the returned payload shape, enforce a bounded page size, treat missing privileges as a permission outcome, and reject stale or duplicate UI completions by correlation identifier. No tenant-specific schema is assumed.",
+    "persistence_or_action": "A single client command handler owns one read-only Xrm.WebApi retrieval per invocation. No Dataverse write occurs. The invocation correlation identifier and disabled-while-running command state form the duplicate-action boundary.",
+    "feedback": "Disable the command and show loading during retrieval; show a bounded account list on success; show an accessible empty state for no matches; distinguish permission, unsupported-client, transient, and terminal failures; permit retry only after the active invocation settles.",
+    "telemetry": "Emit a privacy-safe event containing correlation ID, operation name, duration band, result-count band, outcome, retry indicator, and duplicate-suppression signal. Exclude account names, identifiers, query text, response bodies, user identifiers, tenant URLs, and error payloads.",
+    "evidence": "Local proof covers source inspection and focused tests; package proof covers solution-component integrity; deployment proof covers import and command/configuration readback; runtime proof separately demonstrates authorised retrieval, empty, permission, failure, retry, and duplicate-action behavior in the target environment.",
+    "scope": [
+      "One Account main-grid command",
+      "One bounded read-only Xrm.WebApi retrieval",
+      "Synthetic standard Account data only",
+      "Loading, success, empty, permission, retry, and failure feedback",
+      "Privacy-safe telemetry and correlation",
+      "Focused functional, security, accessibility, reliability, ALM, deployment, and rollback tests"
+    ],
+    "exclusions": [
+      "Account creation, update, deletion, or bulk operations",
+      "Custom schema or live metadata discovery",
+      "Confidential or customer data",
+      "Offline support",
+      "Server-side integration or custom API",
+      "Tenant access, implementation, deployment, or permission changes",
+      "AI-generated summaries or recommendations"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Use a single Account main-grid command with accessible loading, empty, success, permission, retry, and failure states.",
+        "rationale": "This is the smallest model-driven-app journey that exposes the complete read-only outcome.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Retrieve only a bounded projection of synthetic standard Account attributes; the exact query contract remains open.",
+        "rationale": "The orchestration skill must not invent schema or substitute for the Dataverse query specialist.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Use the supported Xrm.WebApi read path from the model-driven client with no additional connector, flow, or direct HTTP owner.",
+        "rationale": "One authoritative retrieval path prevents duplicated calls and unnecessary integration components.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No runtime AI component is included.",
+        "rationale": "The requested account-view outcome is deterministic and does not require AI processing.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Rely on Dataverse user-context read privileges, minimize returned attributes, and expose no credential, tenant URL, or raw error payload.",
+        "rationale": "This preserves platform-native authorization and data minimization.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Record privacy-safe correlated outcome telemetry without record-level or user-level content.",
+        "rationale": "Operators need failure and latency evidence without transferring business data.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the command definition, JavaScript web resource, configuration, and dependencies in the existing managed solution path.",
+        "rationale": "Solution-native packaging supports deterministic import, dependency review, and rollback.",
+        "evidence_status": "Assumption"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": ".agents/skills/dataverse-webapi-query/",
+      "source_type": "upstream",
+      "phase": "invalid",
+      "registry": {
+        "path": "not-supplied",
+        "entry_status": "missing",
+        "version_or_pin": "not-verified",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Construct the strict synthetic Xrm.WebApi retrieveMultipleRecords account query contract for a bounded read-only model-driven-app view, including select, filter, ordering, page size, and safe encoding guidance.",
+        "data_classification": "synthetic",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "Delegation is disabled; no specialist payload is executable in the current state.",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": "Enable the explicitly approved specialist and restart the requested phase, or supply a preserved externally generated result with its relative path, SHA-256, schema verdict, selector evidence, and original orchestration state."
+      },
+      "control": {
+        "enabled": false,
+        "selection_mode": "none",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": false,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": true,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "open",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": false,
+        "register_verified": false,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": null,
+        "result_schema_verified": null,
+        "untrusted_input_checked": null,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "user-request-2026-07-20",
+        "power-platform-incremental-delivery-v0.2.0"
+      ],
+      "open_items": [
+        "Delegation must be explicitly enabled.",
+        "The current approving registry entry and upstream pin must be verified.",
+        "Client compatibility and specialist prerequisites must be confirmed.",
+        "No preserved schema-valid specialist result was supplied."
+      ],
+      "next_action": "Enable the approved dataverse-webapi-query external delegation protocol or provide a preserved, independently validated specialist result; do not construct the query implicitly."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "An authorised user is on the Account main grid with synthetic records available",
+      "when": "the user activates the account-view command",
+      "then": "one bounded Xrm.WebApi request completes and the configured account projection is rendered in deterministic order",
+      "evidence": "Focused client test plus target runtime trace correlated without record content"
+    },
+    {
+      "id": "AC-002",
+      "given": "No synthetic accounts match the approved query",
+      "when": "retrieval succeeds",
+      "then": "an accessible empty state is shown and no error is reported",
+      "evidence": "Automated empty-result test and target runtime screenshot or accessibility trace"
+    },
+    {
+      "id": "AC-003",
+      "given": "The user lacks Account read privilege",
+      "when": "the command attempts retrieval",
+      "then": "no account data is displayed and an accessible permission-specific message is shown without raw error details",
+      "evidence": "Mocked permission test and authorised target role-based runtime evidence"
+    },
+    {
+      "id": "AC-004",
+      "given": "A retrieval is already active",
+      "when": "the user attempts the action again",
+      "then": "the duplicate action is suppressed and one correlation-scoped completion updates the UI",
+      "evidence": "Concurrent-action automated test and duplicate-suppression telemetry"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Delegation remains disabled or the specialist approval and pin cannot be verified.",
+      "expected_behavior": "Keep the build brief Open and do not invent, execute, or embed an Xrm.WebApi query.",
+      "evidence": "Delegation control record showing enabled false and invoked false"
+    },
+    {
+      "id": "NP-002",
+      "condition": "Xrm.WebApi returns a permission failure.",
+      "expected_behavior": "Clear loading state, display a permission-safe message, emit a sanitized outcome, and reveal no response body.",
+      "evidence": "Security test and sanitized telemetry assertion"
+    },
+    {
+      "id": "NP-003",
+      "condition": "A timeout or transient platform failure occurs.",
+      "expected_behavior": "Clear loading state, preserve no partial results, show a retry action, and start any retry with a new correlation ID.",
+      "evidence": "Reliability test with controlled failure and retry"
+    },
+    {
+      "id": "NP-004",
+      "condition": "A duplicate activation or late response from an older invocation occurs.",
+      "expected_behavior": "Suppress the duplicate or stale completion and retain the newest valid UI state.",
+      "evidence": "Concurrent-action test and duplicate-suppression signal"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Successful bounded account retrieval, deterministic rendering, and empty result",
+      "expected": "The approved projection renders once in order, and zero matches produces the empty state.",
+      "evidence_required": "Automated client tests and runtime correlation evidence",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Privilege failure, attribute minimization, and telemetry redaction",
+      "expected": "Unauthorized data is not rendered and no record, user, tenant, query, or raw error content is logged.",
+      "evidence_required": "Automated assertions plus authorised role-based runtime evidence",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Duplicate activation, late completion, transient failure, and retry",
+      "expected": "Only the active invocation owns the UI; retries are explicit and independently correlated.",
+      "evidence_required": "Controlled concurrency and failure-injection test results",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "accessibility",
+      "scope": "Keyboard activation, focus management, status announcements, and error recovery",
+      "expected": "The workflow is keyboard operable, communicates state through assistive technology, and restores focus predictably.",
+      "evidence_required": "Automated accessibility scan and manual keyboard and screen-reader checks",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "performance",
+      "scope": "Bounded query and client rendering",
+      "expected": "The approved page limit is enforced and rendering remains responsive at that limit.",
+      "evidence_required": "Request-count, result-count, and duration-band evidence without payload capture",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "alm",
+      "scope": "Solution dependencies and deterministic component packaging",
+      "expected": "The command, web resource, configuration, and dependencies are present with no unintended components.",
+      "evidence_required": "Solution diff and package integrity report",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "deployment",
+      "scope": "Import, publish, command visibility, configuration readback, and smoke retrieval",
+      "expected": "The authorised target imports cleanly and the command runs with the approved configuration.",
+      "evidence_required": "Import log, configuration readback, and target runtime smoke evidence",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-008",
+      "class": "rollback",
+      "scope": "Removal or deactivation of the command and restoration of the prior solution version",
+      "expected": "The entry point is removed without data migration or residual handlers.",
+      "evidence_required": "Rollback rehearsal or authorised rollback verification",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorised development environment",
+      "Authorised test environment"
+    ],
+    "prerequisites": [
+      "Approved schema-valid Dataverse query specialist result",
+      "Confirmed persona, host, and Account grid entry point",
+      "Existing solution and publisher ownership identified",
+      "Target security role grants only required Account read access",
+      "Telemetry destination and retention approved",
+      "Connection and environment-specific values resolved without embedding secrets"
+    ],
+    "steps": [
+      "Implement and test the single command handler against mocked Xrm.WebApi boundaries",
+      "Add the command, web resource, and configuration to the existing solution",
+      "Review the solution diff and dependency report",
+      "Import into the authorised test environment",
+      "Publish customizations and verify command configuration",
+      "Run the runtime smoke, permission, empty, retry, and duplicate-action checks"
+    ],
+    "post_deploy_checks": [
+      "Command visibility matches the intended persona",
+      "Successful retrieval is bounded and deterministic",
+      "Empty and permission states are accessible",
+      "Duplicate invocation is suppressed",
+      "Telemetry contains correlation and outcome but no excluded payloads",
+      "No unintended solution components or handlers were introduced"
+    ],
+    "evidence_required": [
+      "Automated test and build results",
+      "Solution package integrity and dependency evidence",
+      "Import and configuration readback evidence",
+      "Target runtime evidence for success and failure paths"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Unauthorized data exposure or telemetry leakage",
+      "Duplicate or unbounded retrieval",
+      "Command prevents normal Account grid operation",
+      "Material accessibility regression",
+      "Solution import or dependency failure"
+    ],
+    "steps": [
+      "Disable or remove the Account grid command entry point",
+      "Publish the restored command configuration",
+      "Import the prior approved managed solution version if required",
+      "Verify that no obsolete handler remains active",
+      "Repeat the Account grid smoke and telemetry checks"
+    ],
+    "data_considerations": [
+      "The slice performs no Dataverse writes and requires no data rollback.",
+      "Operational telemetry follows the approved retention and deletion policy.",
+      "Do not retain response payloads or account identifiers during rollback analysis."
+    ],
+    "owner": "authorised solution release owner",
+    "evidence_required": [
+      "Restored solution version and configuration readback",
+      "Account grid smoke result",
+      "Confirmation that obsolete handlers and telemetry events have ceased"
+    ]
+  },
+  "next_action": "Keep the slice Open. Enable the explicitly approved $dataverse-webapi-query external delegation and verify its current registry pin and client prerequisites, or resume with a preserved schema-valid result path and SHA-256. Carry forward that the slice is synthetic, read-only, model-driven, and currently blocked only from build-brief readiness by the unresolved query contract and delegation evidence."
+}

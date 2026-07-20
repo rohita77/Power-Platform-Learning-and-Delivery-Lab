@@ -1,0 +1,58 @@
+{
+  "result_type": "success",
+  "status": "Resolved",
+  "recommendation": "Use the standard Account schema with statecode=0 for active accounts. The query returns the 10 newest active accounts and expands their primary contacts.",
+  "assumptions": [
+    "The prompt explicitly authorizes standard synthetic Microsoft Dataverse schema assumptions.",
+    "The standard Account table uses logical name account and entity set accounts.",
+    "The primary contact lookup annotation column is _primarycontactid_value and its navigation property is primarycontactid.",
+    "Account statecode value 0 represents Active."
+  ],
+  "resolved_schema": {
+    "table_logical_name": "account",
+    "entity_set_name": "accounts",
+    "attribute_logical_names": [
+      "name",
+      "accountnumber",
+      "createdon",
+      "statecode",
+      "primarycontactid",
+      "fullname",
+      "emailaddress1"
+    ],
+    "lookup_annotation_columns": [
+      "_primarycontactid_value"
+    ],
+    "navigation_properties": [
+      "primarycontactid"
+    ],
+    "choice_or_status_values": [
+      "statecode=0 (Active)"
+    ],
+    "generated_service_name": null,
+    "host_api_contract": "xrm_webapi"
+  },
+  "unresolved_schema": [],
+  "host_context": {
+    "status": "resolved",
+    "selected": "xrm_webapi",
+    "supported_options": [
+      "host_neutral_odata",
+      "xrm_webapi"
+    ],
+    "required_clarification": null
+  },
+  "query_or_code": "const query = \"?$select=name,accountnumber,createdon,_primarycontactid_value&$filter=statecode eq 0&$orderby=createdon desc&$top=10&$expand=primarycontactid($select=fullname,emailaddress1)\";\n\nconst result = await Xrm.WebApi.retrieveMultipleRecords(\"account\", query);",
+  "security_notes": [
+    "This is a synthetic query definition only and performs no authenticated tenant access."
+  ],
+  "sources_or_reference_basis": [
+    {
+      "source": "Controlled inline Dataverse Web API Query Builder adaptation",
+      "pin": "33bc38456abb83f27daad968b748c8085f2a78ef",
+      "availability": "available",
+      "use": "Applied the supported OData selection, filtering, ordering, top, lookup expansion, and Xrm.WebApi conventions."
+    }
+  ],
+  "open_questions": []
+}

@@ -2,6 +2,50 @@
 
 **Owner:** Power Platform Learning Lab
 
+## 0.2.0-rc1 — 2026-07-20
+
+- Architecture correction: replace same-invocation/nested specialist
+  expectations with a portable three-stage protocol: Skill 6 emits a validated
+  request, the user/evaluator/host executes the specialist externally, and
+  Skill 6 resumes with preserved result evidence.
+- RC3 root cause: its two Power CAT runs received the complete 686-character
+  Skill 6 build-brief prompt (SHA-256
+  `d3b75bbb4bcb6322a7981124145adeefb6a8fe47c4296d985bf57e201afd8b14`)
+  rather than a narrowed specialist payload. An isolated exact 0.3.1
+  `GOLDEN-001` control passed with answer-schema-valid JSON and zero operations.
+- Delegation-request contract: phase `requested` is `Open`, unexecuted,
+  `invoked: false`, and includes approved identity/pin, explicit-external mode,
+  sanitized payload, answer schema, boundary/tool restrictions, and exact
+  continuation instructions.
+- Result-consumption contract: phase `externally-completed` requires verified
+  external explicit selection, identity/register/classification/boundary,
+  source path and SHA-256, complete answer-schema validity, zero prohibited
+  specialist operations, and untrusted-input/override checks before
+  `invoked: true`.
+- Behavioral schema change: add strict `phase`, `handoff`, and `verification`
+  objects to every delegation record while retaining
+  `additionalProperties: false`. Add valid requested/completed fixtures and six
+  intentional invalid mutations. The strict Codex/VS Code and ChatGPT Work
+  result-record profiles remain unchanged; their shared skill-version field is
+  extended from the v0.1.0 constant to the closed `0.1.0|0.2.0` enum so prior
+  records and new executed evidence both validate truthfully.
+- Case correction: change `DEL-001` to a phase-1 delegation request and
+  `GOLD-005` to phase-3 consumption of the frozen independently validated
+  fixture at `tests/fixtures/powercat/gold-005-result.json` with SHA-256
+  `2adfa6cbe497117ebbfbb36957b2581119d486bf1807031cea1f9ecd1360da54`.
+- Integration coverage: add `CHAIN-001` to prove the request, fresh-thread
+  external specialist execution with only the narrow payload, and resumed
+  result consumption as distinct phases.
+- Settled-decision status correction: when an unsupported reopening request is
+  rejected and the supplied current brief remains complete, preserve `Ready`
+  without inventing a readiness-blocking question; use `Open` only when the
+  requested slice genuinely depends on reopening the decision.
+- Prior evidence rule: `v0.1.0-rc1`, `v0.1.0-rc2`, and `v0.1.0-rc3` remain
+  immutable and unchanged. New runtime evidence belongs only under
+  `tests/results/codex/v0.2.0-rc1/`.
+- Rollback: restore the `72d2989` Skill 6 tree, remove only v0.2-specific
+  fixtures/evidence, and republish the canonical package byte-identically.
+
 ## 0.1.0-rc3 — 2026-07-19
 
 - RC2 retained evidence: preserve `tests/results/codex/v0.1.0-rc1/` and

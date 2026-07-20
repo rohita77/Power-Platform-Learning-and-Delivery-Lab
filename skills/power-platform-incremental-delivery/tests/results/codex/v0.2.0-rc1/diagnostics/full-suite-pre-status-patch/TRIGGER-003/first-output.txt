@@ -1,0 +1,203 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested outcome is the next smallest deployable Power Platform build brief following completed testing.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "Current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This workflow is authorised to prepare a build brief only; implementation, tenant access, and deployment are not authorised.",
+        "basis": "Power Platform Incremental Delivery scope and current request.",
+        "source_refs": [
+          "power-platform-incremental-delivery v0.2.0"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "No test findings or prior agreed-position artifact were included in the supplied request.",
+        "impact": "The next corrective or incremental slice cannot be selected without inventing requirements.",
+        "validation_required": "Supply the completed findings and the current authoritative solution or build-brief reference.",
+        "source_refs": [
+          "Current request"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What completed test findings, including passed behavior, defects, severity, and observed evidence, should drive this increment?",
+        "owner": "Solution delivery owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What observable user or operational outcome must the next increment achieve?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Who is the target persona, which Power Platform host surface do they use, and what is the journey entry point?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-004",
+        "question": "Which current source, solution artifact, or prior build brief is authoritative for settled decisions and existing implementation?",
+        "owner": "Solution delivery owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "Not yet definable because the observable product outcome and completed test findings were not supplied.",
+    "entry": "Not yet definable because the persona, host surface, entry point, and initiating event are unknown.",
+    "validation": "Do not select or design a corrective slice until the findings and current authoritative implementation are reconciled.",
+    "persistence_or_action": "No write or operational action is selected; its authoritative owner and idempotency boundary remain open.",
+    "feedback": "Loading, success, validation, permission, conflict, retry, and failure behavior must be derived from the selected user journey.",
+    "telemetry": "Privacy-safe events, correlation identifiers, outcomes, and excluded payloads must be defined after the slice is selected.",
+    "evidence": "Completed test evidence must be separated from source, package, deployment, configuration, and runtime proof.",
+    "scope": [
+      "Select one deployable vertical slice from supplied completed test findings",
+      "Preserve settled decisions from the current authoritative solution position"
+    ],
+    "exclusions": [
+      "Implementation",
+      "Tenant inspection or administration",
+      "Deployment",
+      "Authentication or credential handling"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Persona, host, entry point, interaction states, and accessibility behavior remain open.",
+        "rationale": "The tested journey and findings were not supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Data entities, ownership, validation, concurrency, and durable-write behavior remain open.",
+        "rationale": "No schema, source artifact, or relevant defect evidence was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component is selected.",
+        "rationale": "The next outcome and existing interfaces are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AID-001",
+        "decision": "No AI component is selected.",
+        "rationale": "No tested requirement establishes an AI need.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Identity, privilege, DLP, classification, and permitted transfer requirements remain open for solution artifacts.",
+        "rationale": "Only the public request text is currently available.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Operational telemetry, alerting, support ownership, and replay behavior remain open.",
+        "rationale": "The selected workflow and its failure modes are not known.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Solution boundaries, environment variables, connection references, deployment sequence, and rollback artifact remain open.",
+        "rationale": "No authoritative solution or environment position was supplied.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The findings or current solution position remain unavailable.",
+      "expected_behavior": "Do not fabricate a product slice or reopen settled decisions; retain Open status.",
+      "evidence": "Input review showing the required artifacts are absent."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Supplied evidence contains confidential organisational data that is not approved for the personal OpenAI zone.",
+      "expected_behavior": "Stop before reproducing or processing the content and move the work to an approved organisational Microsoft workflow.",
+      "evidence": "Sanitized boundary classification record."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment to be identified before implementation"
+    ],
+    "prerequisites": [
+      "Provide the completed test findings and authoritative current solution position",
+      "Confirm the target environment, security boundary, and deployment authority"
+    ],
+    "steps": [
+      "Do not deploy until a Ready build brief is approved and deployment is separately authorised"
+    ],
+    "post_deploy_checks": [
+      "Define checks from the selected acceptance criteria and observed failure paths"
+    ],
+    "evidence_required": [
+      "Import or deployment result from the authorised target",
+      "Configuration readback",
+      "Runtime evidence for success and negative paths"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Selected acceptance criteria fail after deployment",
+      "Security, data integrity, or duplicate-processing regression is observed"
+    ],
+    "steps": [
+      "Define component-specific rollback steps after the solution delta is selected",
+      "Preserve affected data and diagnostic correlation identifiers before rollback"
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite user data as part of rollback",
+      "Define reconciliation for writes made between deployment and rollback"
+    ],
+    "owner": "Solution delivery owner to be confirmed",
+    "evidence_required": [
+      "Rollback rehearsal or documented package-restoration proof",
+      "Post-rollback configuration and runtime verification"
+    ]
+  },
+  "next_action": "Provide the sanitized completed test findings, the observable outcome, persona and host, and the authoritative current solution or prior build brief; then select the single highest-value deployable finding as the next vertical slice."
+}

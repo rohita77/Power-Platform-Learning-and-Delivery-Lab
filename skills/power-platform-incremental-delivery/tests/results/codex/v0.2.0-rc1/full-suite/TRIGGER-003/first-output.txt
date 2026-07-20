@@ -1,0 +1,203 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested outcome is the next smallest deployable Power Platform vertical-slice build brief derived from completed testing.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "Current user request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "No test findings, current solution position, business outcome, persona, or host were included in the supplied input.",
+        "basis": "The supplied stdin contains only the build-brief instruction.",
+        "source_refs": [
+          "Current user input"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "No confidential organisational content has been supplied.",
+        "impact": "Reasoning may continue in the personal OpenAI zone, but no organisational evidence can be transferred or inferred.",
+        "validation_required": "Classify and sanitize the test findings before supplying them.",
+        "source_refs": [
+          "Current user input"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What completed test findings, including passed behavior, failures, severity, and observed evidence boundary, must drive the next increment?",
+        "owner": "Product or test owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What measurable user or operational outcome, persona, host surface, and entry point apply to the tested solution?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "What current solution components and settled decisions must be preserved?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "Open: the observable product outcome cannot be selected until the completed findings and current agreed position are supplied.",
+    "entry": "Open: persona, Power Platform host, entry point, initial state, and initiating event are not supplied.",
+    "validation": "Open: required inputs, business rules, permissions, and concurrency controls depend on the missing findings and solution context.",
+    "persistence_or_action": "Open: no authoritative write or action owner can be identified from the supplied input.",
+    "feedback": "Open: loading, success, validation, permission, conflict, retry, and failure behavior must follow the selected journey.",
+    "telemetry": "Open: define privacy-safe events, correlation identifiers, outcomes, and excluded payloads after selecting the slice.",
+    "evidence": "Completed test evidence was referenced but not supplied; no source, automated, package, deployment, or runtime proof can be claimed.",
+    "scope": [
+      "Select one deployable corrective or enabling vertical slice from the supplied completed findings."
+    ],
+    "exclusions": [
+      "Implementation, tenant access, deployment, administration, and reopening settled decisions without new evidence."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Defer experience changes until the persona, host, journey, and relevant findings are supplied.",
+        "rationale": "No user-visible workflow can be selected safely from the available input.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Defer schema and persistence changes until the current model and failed behavior are known.",
+        "rationale": "The authoritative data owner and concurrency requirements are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component is selected.",
+        "rationale": "No integration finding or interface contract was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component is selected.",
+        "rationale": "The requested outcome does not establish an AI requirement.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Keep organisational or confidential test evidence inside approved Microsoft boundaries unless an approved sanitized transfer path is established.",
+        "rationale": "The current workflow is in the personal OpenAI zone and the findings have not been classified.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Require privacy-safe correlation and outcome telemetry for the selected slice.",
+        "rationale": "Operational proof must distinguish success, failure, conflict, and duplicate processing without capturing business payloads.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the selected increment as the smallest independently deployable solution change with explicit prerequisites and rollback.",
+        "rationale": "The requested artifact is a production-credible incremental build brief.",
+        "evidence_status": "Assumption"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The findings contain confidential organisational information or environment-specific credentials.",
+      "expected_behavior": "Do not transfer or reproduce the content; provide only an approved sanitized summary through a permitted boundary.",
+      "evidence": "Classification and sanitization review."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The supplied findings do not identify an observable user or operational result.",
+      "expected_behavior": "Keep the brief Open and request the minimum outcome, persona, and host information.",
+      "evidence": "Input completeness review."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Reconcile each supplied completed finding to the current source and one observable vertical-slice outcome.",
+      "expected": "Findings are classified as confirmed, superseded, rejected, or still open without overstating their evidence boundary.",
+      "evidence_required": "Sanitized findings with test identifiers, expected and actual results, execution context, status, and evidence references.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-002",
+      "class": "security",
+      "scope": "Classify the supplied evidence before cross-zone use.",
+      "expected": "No confidential content, credentials, tenant URLs, private identifiers, or message payloads enter the personal OpenAI workflow.",
+      "evidence_required": "Recorded classification and sanitization confirmation.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment to be identified before implementation."
+    ],
+    "prerequisites": [
+      "Supply the sanitized findings, current solution position, measurable outcome, persona, host, and environment constraints."
+    ],
+    "steps": [
+      "Do not define deployment steps until one safe vertical slice has been selected."
+    ],
+    "post_deploy_checks": [
+      "Verify the selected acceptance result and its negative paths in the authorised target environment."
+    ],
+    "evidence_required": [
+      "Deployment or import record, configuration readback, and runtime evidence must remain distinct from local source and package proof."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "The selected slice regresses the established primary journey, security boundary, data integrity, or duplicate-processing behavior."
+    ],
+    "steps": [
+      "Define component-specific rollback after the affected solution components and persistence behavior are known."
+    ],
+    "data_considerations": [
+      "Do not delete or overwrite records during rollback; define reconciliation for any durable writes introduced by the slice."
+    ],
+    "owner": "Solution owner",
+    "evidence_required": [
+      "Rollback execution record and post-rollback verification of the prior accepted behavior."
+    ]
+  },
+  "next_action": "Provide a sanitized findings table containing test ID, persona and host, scenario, expected result, actual result, pass or fail status, severity, evidence level, affected component, and any settled decision it challenges; include the measurable outcome and current solution position so the smallest corrective vertical slice can be selected."
+}

@@ -1,0 +1,122 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "A brief for the next Power Platform vertical slice was requested without an observable user or operational outcome.",
+        "basis": "Explicit request input.",
+        "source_refs": [
+          "User request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable user or operational result must this slice deliver?",
+        "owner": "Request owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona will perform or benefit from the primary journey?",
+        "owner": "Request owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which Power Platform host surface will provide the entry point?",
+        "owner": "Request owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Invent a generic Power Platform feature or horizontal technical layer as the next slice.",
+        "reason": "No supplied outcome establishes product value, acceptance behavior, or safe scope.",
+        "reconsider_if": "A concrete observable outcome, persona, and host are supplied."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "Open: no observable user or operational outcome was supplied.",
+    "entry": "Open pending identification of the persona, host surface, entry point, and initiating event.",
+    "validation": "Open pending definition of the journey, inputs, business rules, security checks, and concurrency behavior.",
+    "persistence_or_action": "Open pending identification of the required durable action and its authoritative owner.",
+    "feedback": "Open pending definition of the user journey and its loading, success, validation, permission, conflict, retry, and failure states.",
+    "telemetry": "Open pending definition of the outcome; any future telemetry must be privacy-safe and exclude business payloads.",
+    "evidence": "No implementation, package, deployment, configuration, or runtime evidence exists for an undefined slice.",
+    "scope": [
+      "Define one smallest deployable vertical slice after the observable outcome, persona, and host are supplied."
+    ],
+    "exclusions": [
+      "Implementation, tenant access, deployment, and target-runtime claims.",
+      "A fabricated feature or architecture selected without an outcome."
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Delivery planning proceeds without a measurable outcome, persona, or host.",
+      "expected_behavior": "Keep the brief Open and do not fabricate a slice or implementation decision.",
+      "evidence": "Review confirms the missing inputs remain explicitly recorded as readiness blockers."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment to be identified before implementation or deployment."
+    ],
+    "prerequisites": [
+      "Supply the observable outcome, persona, and host surface.",
+      "Confirm the organisational data boundary and permitted transfer path before using tenant information."
+    ],
+    "steps": [
+      "Do not begin deployment planning until a complete vertical-slice brief is Ready and deployment is separately authorised."
+    ],
+    "post_deploy_checks": [
+      "Define post-deployment checks from the future acceptance criteria."
+    ],
+    "evidence_required": [
+      "No deployment evidence is applicable until the slice is defined and separately authorised."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not definable until the slice has an authoritative action and measurable acceptance result."
+    ],
+    "steps": [
+      "Define reversible component and data steps in the completed build brief."
+    ],
+    "data_considerations": [
+      "Do not prescribe data restoration or deletion behavior before the data model and authoritative write path are known."
+    ],
+    "owner": "Delivery owner to be identified with the slice outcome.",
+    "evidence_required": [
+      "Rollback validation evidence will be required before production deployment."
+    ]
+  },
+  "next_action": "Provide three items only: the observable result to achieve, the persona who needs it, and the Power Platform host surface where the journey begins."
+}

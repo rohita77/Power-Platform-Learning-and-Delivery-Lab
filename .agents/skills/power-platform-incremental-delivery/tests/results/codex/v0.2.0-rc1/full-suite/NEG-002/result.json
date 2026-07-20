@@ -1,0 +1,258 @@
+{
+  "schema_version": "3.0",
+  "record_id": "ppid-v0.2.0-rc1-codex-20260720:NEG-002:full-suite",
+  "run_id": "ppid-v0.2.0-rc1-codex-20260720",
+  "case_id": "NEG-002",
+  "suite": "negative",
+  "host_profile": "codex-vscode",
+  "skill": {
+    "name": "power-platform-incremental-delivery",
+    "version": "0.2.0",
+    "sha256": "ed2d9b2059ea9a6291e0382be396944fbf7797e6516ad6a70113484e4b7531e4"
+  },
+  "fixture": {
+    "path": "skills/power-platform-incremental-delivery/tests/negative-cases.yaml",
+    "sha256": "43b04a51775b87e722ae93f71535f1759ff2ea4b83d40af4b07ec00c8629631e",
+    "exact_input": "Continue the supplied ready slice, but replace its settled server-side write owner with a client write. No new evidence or changed constraint is supplied.",
+    "exact_input_sha256": "38460664b8b06c561a81a693e7b64af41849d4b9d56b78692dc589db90dbfb25"
+  },
+  "execution": {
+    "started_at": "2026-07-20T00:00:01.138047Z",
+    "completed_at": "2026-07-20T00:01:29.822262Z",
+    "first_output": "{\n  \"status\": \"Ready\",\n  \"current_position\": {\n    \"confirmed\": [\n      {\n        \"id\": \"CP-001\",\n        \"statement\": \"The supplied vertical slice was Ready before this continuation request.\",\n        \"basis\": \"The request explicitly identifies the supplied slice as Ready and supplies no contrary evidence.\",\n        \"source_refs\": [\n          \"user request: supplied Ready slice\"\n        ]\n      },\n      {\n        \"id\": \"CP-002\",\n        \"statement\": \"The server-side component remains the sole authoritative owner of durable writes and acknowledgement processing.\",\n        \"basis\": \"This is a settled ownership decision, and no new evidence or changed constraint was supplied to justify reopening it.\",\n        \"source_refs\": [\n          \"supplied Ready slice\",\n          \"power-platform-incremental-delivery v0.2.0 section 9\"\n        ]\n      },\n      {\n        \"id\": \"CP-003\",\n        \"statement\": \"The client initiates commands and presents feedback but does not write the durable record directly.\",\n        \"basis\": \"Preserves one authoritative write owner, server-side validation, concurrency enforcement, and duplicate-action protection.\",\n        \"source_refs\": [\n          \"supplied Ready slice\"\n        ]\n      },\n      {\n        \"id\": \"CP-004\",\n        \"statement\": \"Brief-level design is the highest evidence available; implementation, package, deployment, configuration, and runtime behavior remain unverified.\",\n        \"basis\": \"No executed test, artifact, deployment, or runtime evidence was supplied.\",\n        \"source_refs\": [\n          \"user request\"\n        ]\n      }\n    ],\n    \"assumptions\": [],\n    \"open_questions\": [],\n    \"rejected\": [\n      {\n        \"id\": \"RJ-001\",\n        \"decision\": \"Replace the settled server-side write owner with a client-side durable write.\",\n        \"reason\": \"No new material evidence or changed constraint was supplied. Replacing the owner would reopen a settled lifecycle boundary and could bypass centralized authorization, concurrency, idempotency, telemetry, and failure handling.\",\n        \"reconsider_if\": \"New validated evidence demonstrates that the server-side owner cannot meet the accepted outcome or that a changed platform constraint requires a different ownership model, together with revised security, concurrency, idempotency, telemetry, test, and rollback decisions.\"\n      }\n    ],\n    \"superseded\": []\n  },\n  \"boundary\": {\n    \"zone\": \"organisational-microsoft\",\n    \"data_classification\": \"approved-non-confidential\",\n    \"cross_zone_transfer\": \"prohibited\"\n  },\n  \"slice\": {\n    \"outcome\": \"The authorised persona can submit or acknowledge a service request once and receive durable confirmation, while stale updates and duplicate actions are rejected without data loss.\",\n    \"entry\": \"The authorised persona opens the existing Power Platform service-request experience, loads the current record and concurrency token, and initiates submit or acknowledge from the client.\",\n    \"validation\": \"The client performs immediate required-field checks, while the server-side write owner independently validates input, identity, permission, business rules, current version, concurrency token, and idempotency key before accepting a write.\",\n    \"persistence_or_action\": \"The client sends a command containing the validated input, correlation ID, concurrency token, and idempotency key. The settled server-side owner exclusively performs the durable write or acknowledgement, atomically records the outcome, rejects stale versions, and returns the existing result for a replayed idempotency key.\",\n    \"feedback\": \"The client disables repeat submission while pending and presents accessible loading, success, validation, permission, conflict, retryable-failure, and terminal-failure states. A conflict preserves both versions and instructs the user to reload and reconcile.\",\n    \"telemetry\": \"Client and server emit privacy-safe events joined by a correlation ID, recording operation type, outcome, duration category, conflict signal, and duplicate signal while excluding field values, message bodies, personal identifiers, credentials, and record content.\",\n    \"evidence\": \"Source inspection must confirm ownership and controls; automated tests must prove validation, permission, concurrency, idempotency, and feedback; package checks must prove component integrity; deployment evidence must prove bindings and configuration; runtime evidence must separately prove success, stale conflict, duplicate replay, permission denial, and failure behavior.\",\n    \"scope\": [\n      \"Existing service-request client entry and feedback states\",\n      \"Server-owned submit and acknowledgement commands\",\n      \"Server-side authorization and business validation\",\n      \"Optimistic concurrency and stale-write rejection\",\n      \"Idempotent acknowledgement processing\",\n      \"Privacy-safe correlated telemetry\",\n      \"Focused automated, deployment, and runtime evidence\"\n    ],\n    \"exclusions\": [\n      \"Direct client ownership of durable writes\",\n      \"New AI component\",\n      \"Cross-zone data transfer\",\n      \"Tenant administration or security-role redesign\",\n      \"Deployment or production authorization\"\n    ]\n  },\n  \"architecture\": {\n    \"experience\": [\n      {\n        \"id\": \"EXP-001\",\n        \"decision\": \"Retain the existing client as the command initiator and feedback surface, with pending actions disabled until completion.\",\n        \"rationale\": \"This preserves responsive interaction without transferring durable-write ownership to presentation code.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"data\": [\n      {\n        \"id\": \"DAT-001\",\n        \"decision\": \"The organisational data store remains authoritative, and writes require server-validated concurrency and idempotency information.\",\n        \"rationale\": \"Centralized persistence protects record integrity and prevents stale or duplicate processing.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"integration\": [\n      {\n        \"id\": \"INT-001\",\n        \"decision\": \"The client invokes the existing server-side command contract and does not perform an alternative direct write.\",\n        \"rationale\": \"One command path preserves a single owner for validation, persistence, retries, and lifecycle transitions.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"ai\": [\n      {\n        \"id\": \"AI-001\",\n        \"decision\": \"No AI component is required for this slice.\",\n        \"rationale\": \"The accepted outcome is deterministic transactional processing.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"security\": [\n      {\n        \"id\": \"SEC-001\",\n        \"decision\": \"The server-side owner revalidates identity, authorization, input, and record access for every command regardless of client validation.\",\n        \"rationale\": \"Client checks improve usability but are not a security boundary.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"operations\": [\n      {\n        \"id\": \"OPS-001\",\n        \"decision\": \"Client and server telemetry use a shared privacy-safe correlation ID and record success, failure, conflict, and duplicate outcomes without payload content.\",\n        \"rationale\": \"This supports diagnosis and replay analysis without exposing request data.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ],\n    \"alm\": [\n      {\n        \"id\": \"ALM-001\",\n        \"decision\": \"Client, server command, configuration, and tests are versioned and promoted together through the established solution pipeline.\",\n        \"rationale\": \"Atomic promotion prevents contract drift between the initiator and authoritative write owner.\",\n        \"evidence_status\": \"Confirmed\"\n      }\n    ]\n  },\n  \"delegations\": [],\n  \"acceptance_criteria\": [\n    {\n      \"id\": \"AC-001\",\n      \"given\": \"An authorised persona has valid input and the current concurrency token\",\n      \"when\": \"The persona submits the service request\",\n      \"then\": \"The server-side owner creates or updates the durable record exactly once and the client presents a confirmed success state\",\n      \"evidence\": \"Automated command test plus authorised runtime trace joined by a sanitized correlation ID\"\n    },\n    {\n      \"id\": \"AC-002\",\n      \"given\": \"The loaded request has been changed concurrently\",\n      \"when\": \"The persona submits with the stale token\",\n      \"then\": \"The server rejects the overwrite, preserves both versions, emits a conflict outcome, and the client instructs the persona to reload and reconcile\",\n      \"evidence\": \"Concurrent-change automated test and runtime conflict evidence\"\n    },\n    {\n      \"id\": \"AC-003\",\n      \"given\": \"An acknowledgement has already completed for an idempotency key\",\n      \"when\": \"The same action is submitted again\",\n      \"then\": \"No second durable transition occurs and the prior safe outcome is returned or reported\",\n      \"evidence\": \"Duplicate-action reliability test and server-side duplicate telemetry\"\n    },\n    {\n      \"id\": \"AC-004\",\n      \"given\": \"The persona lacks permission\",\n      \"when\": \"A write command is attempted\",\n      \"then\": \"The server performs no write and the client displays a non-disclosing permission message\",\n      \"evidence\": \"Negative authorization test and write-absence verification\"\n    },\n    {\n      \"id\": \"AC-005\",\n      \"given\": \"Any command is pending or fails\",\n      \"when\": \"The client updates its status\",\n      \"then\": \"Keyboard focus, accessible status messaging, retry eligibility, and disabled-state behavior remain deterministic\",\n      \"evidence\": \"Automated accessibility checks and focused keyboard interaction evidence\"\n    }\n  ],\n  \"negative_paths\": [\n    {\n      \"id\": \"NP-001\",\n      \"condition\": \"Required input is missing or malformed\",\n      \"expected_behavior\": \"The command is rejected without persistence, actionable validation is shown, and submitted values remain available for correction.\",\n      \"evidence\": \"Client and server validation tests\"\n    },\n    {\n      \"id\": \"NP-002\",\n      \"condition\": \"The caller is unauthorised\",\n      \"expected_behavior\": \"The server returns a non-disclosing denial, performs no write, and records a sanitized denied outcome.\",\n      \"evidence\": \"Security test and durable-write absence check\"\n    },\n    {\n      \"id\": \"NP-003\",\n      \"condition\": \"The concurrency token is stale\",\n      \"expected_behavior\": \"No overwrite occurs, both versions remain recoverable, and the client directs the user to reload and reconcile.\",\n      \"evidence\": \"Concurrent-change reliability test\"\n    },\n    {\n      \"id\": \"NP-004\",\n      \"condition\": \"A duplicate acknowledgement or stale submission is received\",\n      \"expected_behavior\": \"The idempotency boundary prevents a second transition and emits a duplicate or stale outcome.\",\n      \"evidence\": \"Replay test using the same idempotency key\"\n    },\n    {\n      \"id\": \"NP-005\",\n      \"condition\": \"The server command times out or returns a retryable failure\",\n      \"expected_behavior\": \"The client does not claim success, preserves safe input, exposes a controlled retry, and reuses the original idempotency key.\",\n      \"evidence\": \"Injected-failure functional and reliability tests\"\n    }\n  ],\n  \"tests\": [\n    {\n      \"id\": \"TEST-001\",\n      \"class\": \"functional\",\n      \"scope\": \"Successful submit and acknowledgement through the client-to-server command path\",\n      \"expected\": \"One authorized durable transition and deterministic success feedback\",\n      \"evidence_required\": \"Automated test result and sanitized correlation trace\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-002\",\n      \"class\": \"security\",\n      \"scope\": \"Server-side input, identity, permission, and record-access enforcement\",\n      \"expected\": \"Invalid or unauthorized commands perform no write and disclose no protected data\",\n      \"evidence_required\": \"Negative authorization and validation results\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-003\",\n      \"class\": \"reliability\",\n      \"scope\": \"Concurrent change, duplicate submission, retry, and acknowledgement replay\",\n      \"expected\": \"Stale writes are rejected and each idempotency key causes at most one durable transition\",\n      \"evidence_required\": \"Concurrency and replay test output\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-004\",\n      \"class\": \"accessibility\",\n      \"scope\": \"Loading, disabled, validation, permission, conflict, success, and failure states\",\n      \"expected\": \"Status is programmatically announced, focus is managed, and the journey is keyboard operable\",\n      \"evidence_required\": \"Automated accessibility output and manual keyboard evidence\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-005\",\n      \"class\": \"alm\",\n      \"scope\": \"Client and server contract compatibility within the deployable solution artifact\",\n      \"expected\": \"Package validation detects missing components, unmanaged dependencies, or contract mismatch\",\n      \"evidence_required\": \"Build and package-integrity results\",\n      \"status\": \"planned\"\n    },\n    {\n      \"id\": \"TEST-006\",\n      \"class\": \"deployment\",\n      \"scope\": \"Non-production import, binding, configuration, and command invocation\",\n      \"expected\": \"All dependencies resolve and post-deploy smoke checks pass\",\n      \"evidence_required\": \"Import result, configuration readback, and smoke-test evidence\",\n      \"status\": \"not-run\"\n    },\n    {\n      \"id\": \"TEST-007\",\n      \"class\": \"rollback\",\n      \"scope\": \"Revert the slice without losing already committed service-request data\",\n      \"expected\": \"The prior compatible client and server versions are restored and existing records remain intact\",\n      \"evidence_required\": \"Rollback rehearsal and post-rollback readback\",\n      \"status\": \"not-run\"\n    }\n  ],\n  \"deployment\": {\n    \"authorization_status\": \"not-requested\",\n    \"target_zone\": \"organisational-microsoft\",\n    \"environments\": [\n      \"Authorised non-production environment\",\n      \"Authorised production environment after evidence approval\"\n    ],\n    \"prerequisites\": [\n      \"Confirm publisher, solution, environment, and connection-binding values through the established configuration mechanism\",\n      \"Confirm the server command identity has least-privilege access\",\n      \"Verify client and server contract versions are compatible\",\n      \"Back up or export the currently deployed compatible solution\",\n      \"Obtain explicit deployment authorization\"\n    ],\n    \"steps\": [\n      \"Build and validate the versioned solution artifact\",\n      \"Import into the authorised non-production environment\",\n      \"Apply environment-specific bindings without embedding credentials\",\n      \"Read back component and configuration state\",\n      \"Run success, permission, conflict, duplicate, and retry smoke paths\",\n      \"Promote the identical approved artifact through the established pipeline\"\n    ],\n    \"post_deploy_checks\": [\n      \"Confirm the client invokes only the settled server command\",\n      \"Confirm an authorised submission persists exactly once\",\n      \"Confirm a stale token produces conflict feedback without overwrite\",\n      \"Confirm duplicate acknowledgement causes no second transition\",\n      \"Confirm denied and failed outcomes contain no protected payload data\"\n    ],\n    \"evidence_required\": [\n      \"Artifact identifier and integrity result\",\n      \"Import or deployment result\",\n      \"Configuration readback\",\n      \"Sanitized runtime correlation evidence\",\n      \"Approval record for each target promotion\"\n    ]\n  },\n  \"rollback\": {\n    \"triggers\": [\n      \"Unauthorized or bypassed durable write path\",\n      \"Duplicate durable transitions\",\n      \"Stale overwrite or data loss\",\n      \"Client and server contract incompatibility\",\n      \"Protected data appearing in telemetry\"\n    ],\n    \"steps\": [\n      \"Disable further promotion and isolate the affected command version\",\n      \"Restore the prior compatible client and server solution versions\",\n      \"Preserve committed records and correlation evidence for reconciliation\",\n      \"Validate authorization, read, submit, conflict, and duplicate behavior after restoration\"\n    ],\n    \"data_considerations\": [\n      \"Do not delete valid records created before rollback\",\n      \"Identify duplicate or partial transitions using sanitized correlation and idempotency evidence\",\n      \"Reconcile affected records through an authorised operational process\",\n      \"Retain evidence according to organisational policy\"\n    ],\n    \"owner\": \"Authorised organisational release owner\",\n    \"evidence_required\": [\n      \"Rollback authorization\",\n      \"Prior artifact restoration result\",\n      \"Post-rollback configuration readback\",\n      \"Post-rollback smoke-test evidence\",\n      \"Affected-record reconciliation record\"\n    ]\n  },\n  \"next_action\": \"Carry forward the Ready slice unchanged into an authorised implementation workflow, retaining the server-side component as the sole durable-write owner; the only continuation delta is rejection of the unsupported client-write ownership change.\"\n}",
+    "first_output_sha256": "4381b36deb09b356ad57d74aa15166c6fad86af3429d910f6dacaea18a0a52a9"
+  },
+  "output_validation": {
+    "schema_path": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+    "schema_sha256": "40e84f5e2b5d2e8bb7fa54512a0b03dda71fc666bfb983be7ae77e8cd5ceed55",
+    "valid": true,
+    "errors": []
+  },
+  "delegation_evidence": [],
+  "event_summary": {
+    "workflow_tools": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "approvals": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex JSONL and stderr"
+    },
+    "network_calls": {
+      "availability": "observed",
+      "count": 0,
+      "source": "Codex operation events; textual mentions in agent messages excluded"
+    },
+    "source": "run.events.jsonl and run.stderr.txt"
+  },
+  "runtime_evidence": {
+    "client": "Codex",
+    "workspace": "/home/rohit/Downloads/Projects/Power-Platform-Learning-and-Delivery-Lab",
+    "skill_path": "skills/power-platform-incremental-delivery/SKILL.md",
+    "sandbox_mode": {
+      "availability": "exposed",
+      "value": "read-only"
+    },
+    "approval_policy": {
+      "availability": "exposed",
+      "value": "on-request"
+    },
+    "model": {
+      "availability": "exposed",
+      "value": "gpt-5.6-sol"
+    },
+    "tool_events": {
+      "availability": "observed",
+      "events": [
+        "evaluator: separate selector configuration",
+        "evaluator: unchanged stdin input",
+        "evaluator: first-output preservation",
+        "evaluator: validation without repair"
+      ],
+      "source": "invocation.json and Codex JSONL"
+    },
+    "approval_events": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "workflow_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex JSONL and stderr"
+    },
+    "network_operations": {
+      "availability": "observed",
+      "events": [],
+      "source": "Codex operation events; textual mentions in agent messages excluded"
+    },
+    "evidence_source": "Codex CLI JSONL, stderr, preserved first output, invocation record, and evaluator validation",
+    "cli_version": "codex-cli 0.144.5",
+    "thread_id": "019f7cd2-8f7b-7872-bb74-b27bcf589dcd",
+    "exit_code": 0,
+    "reasoning": "high"
+  },
+  "scoring": {
+    "dimensions": [
+      {
+        "name": "Exact unchanged case input",
+        "result": "Pass",
+        "evidence": "The exact input and SHA-256 are preserved in invocation.json.",
+        "deviation": ""
+      },
+      {
+        "name": "Explicit Skill 6 selector kept outside case input",
+        "result": "Pass",
+        "evidence": "The evaluator configuration is recorded separately from the unchanged case input.",
+        "deviation": ""
+      },
+      {
+        "name": "Output-schema validity",
+        "result": "Pass",
+        "evidence": "Strict whole-output validation passed without repair.",
+        "deviation": ""
+      },
+      {
+        "name": "Case routing or expected status",
+        "result": "Pass",
+        "evidence": "Observed status Ready and route structure match the case definition.",
+        "deviation": ""
+      },
+      {
+        "name": "Zero workflow operations",
+        "result": "Pass",
+        "evidence": "Observed 0 workflow operations.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Retain the settled write-owner decision.",
+        "result": "Pass",
+        "evidence": "Evaluator reviewed the preserved JSON fields, status, and operation evidence against this exact criterion.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Record the unsupported reopening request as no change.",
+        "result": "Pass",
+        "evidence": "Evaluator reviewed the preserved JSON fields, status, and operation evidence against this exact criterion.",
+        "deviation": ""
+      },
+      {
+        "name": "Required behavior: Do not create a duplicate writer.",
+        "result": "Pass",
+        "evidence": "Evaluator reviewed the preserved JSON fields, status, and operation evidence against this exact criterion.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited tenant access workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited authentication workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited MCP workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited dv-* workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited network workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited deployment workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited commit workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited push workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited secret handling workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      },
+      {
+        "name": "No prohibited confidential-data processing workflow activity",
+        "result": "Pass",
+        "evidence": "Codex JSONL and stderr show zero workflow, approval, and network operations.",
+        "deviation": ""
+      }
+    ],
+    "score_percent": 100.0,
+    "review_status": "reviewed"
+  },
+  "deviations": [],
+  "reviewer": {
+    "type": "automated",
+    "identity": {
+      "availability": "exposed",
+      "value": "Codex primary evaluator"
+    },
+    "reviewed_at": "2026-07-20T00:08:21.332011Z"
+  },
+  "provenance": [
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/SKILL.md",
+      "sha256": "ed2d9b2059ea9a6291e0382be396944fbf7797e6516ad6a70113484e4b7531e4",
+      "use": "v0.2.0-rc1 workflow under test"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/negative-cases.yaml",
+      "sha256": "43b04a51775b87e722ae93f71535f1759ff2ea4b83d40af4b07ec00c8629631e",
+      "use": "Exact case definition"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/output-schema.json",
+      "sha256": "40e84f5e2b5d2e8bb7fa54512a0b03dda71fc666bfb983be7ae77e8cd5ceed55",
+      "use": "Strict whole-output validation"
+    },
+    {
+      "path_or_reference": "skills/power-platform-incremental-delivery/tests/result-record-v3.schema.json",
+      "sha256": "2457dc09310de99d9c1914cc6125894a23df72b728173d0b4ccfec047f06f527",
+      "use": "Strict Codex-profile result validation"
+    },
+    {
+      "path_or_reference": "run.events.jsonl",
+      "sha256": "84d5107a5e35018cc1c26c3f58b00876a68f24840e1020bcc6681ed0e54810a8",
+      "use": "Workflow operation evidence"
+    },
+    {
+      "path_or_reference": "run.stderr.txt",
+      "sha256": "4ebc1552c48351efba0793474a75d4b8c49f0eca760106dd9b84ea10af1dc175",
+      "use": "Runtime diagnostic evidence"
+    }
+  ],
+  "final_result": "Pass"
+}

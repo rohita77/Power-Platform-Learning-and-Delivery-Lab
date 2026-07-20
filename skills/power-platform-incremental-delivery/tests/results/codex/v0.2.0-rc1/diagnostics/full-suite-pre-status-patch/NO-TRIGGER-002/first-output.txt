@@ -1,0 +1,96 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request is for architecture review findings only and explicitly excludes creation of a build brief.",
+        "basis": "The user requested a review and said not to create a build brief.",
+        "source_refs": [
+          "current user request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What measurable delivery-slice outcome should this orchestration workflow prepare?",
+        "owner": "requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was requested.",
+    "entry": "Not applicable to this review-only request.",
+    "validation": "Not applicable to this review-only request.",
+    "persistence_or_action": "No implementation action is authorized.",
+    "feedback": "Return an abstention and route the request to a review-only workflow.",
+    "telemetry": "No telemetry design is in scope.",
+    "evidence": "The request text establishes that a build brief is explicitly excluded.",
+    "scope": [
+      "Abstain from build-brief generation"
+    ],
+    "exclusions": [
+      "Architecture findings",
+      "Implementation",
+      "Deployment"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No target environment"
+    ],
+    "prerequisites": [
+      "A delivery-slice request would be required"
+    ],
+    "steps": [
+      "Do not deploy"
+    ],
+    "post_deploy_checks": [
+      "Not applicable"
+    ],
+    "evidence_required": [
+      "Not applicable"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Not applicable because no change is authorized"
+    ],
+    "steps": [
+      "No rollback action"
+    ],
+    "data_considerations": [
+      "No data changes"
+    ],
+    "owner": "requester",
+    "evidence_required": [
+      "No rollback evidence required"
+    ]
+  },
+  "next_action": "Route the supplied solution architecture to a review-only architecture assessment workflow; do not use this incremental-delivery skill unless a deployable vertical-slice build brief is requested."
+}

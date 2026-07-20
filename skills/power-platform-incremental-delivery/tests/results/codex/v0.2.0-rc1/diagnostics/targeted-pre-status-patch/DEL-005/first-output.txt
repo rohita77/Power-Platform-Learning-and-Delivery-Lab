@@ -1,0 +1,201 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request requires confidential organisational details to be processed in a personal OpenAI zone.",
+        "basis": "The supplied request explicitly identifies both the personal-zone adapter and confidential organisational data.",
+        "source_refs": [
+          "Sanitized user request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Construct or delegate the requested query in the current personal zone.",
+        "reason": "Confidential organisational data cannot cross into a personal OpenAI workflow.",
+        "reconsider_if": "The work is moved entirely into an approved organisational Microsoft boundary, or the input is replaced with public or synthetic data."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No query is constructed because the requested data transfer violates the organisational-to-personal boundary.",
+    "entry": "A personal-zone request asks for Power CAT query construction using confidential organisational details.",
+    "validation": "Classify the zone and data before processing; reject confidential organisational input in the personal zone.",
+    "persistence_or_action": "No specialist invocation, query construction, tenant access, data persistence, or external action occurs.",
+    "feedback": "Return a sanitized boundary stop without repeating confidential table or record details.",
+    "telemetry": "If host telemetry exists, record only a privacy-safe boundary-block outcome and correlation identifier; exclude schema, record, tenant, and message content.",
+    "evidence": "The proof boundary is limited to the supplied request and policy evaluation; no specialist execution, target access, or runtime verification occurred.",
+    "scope": [
+      "Classify the requested transfer and stop prohibited processing"
+    ],
+    "exclusions": [
+      "Query construction",
+      "Confidential data handling",
+      "Tenant access",
+      "Specialist execution"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Keep confidential organisational schema and record details inside the approved organisational boundary.",
+        "rationale": "The requested personal-zone transfer is prohibited.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Do not invoke the personal-zone Power CAT adapter for this payload.",
+        "rationale": "Invocation would expose confidential organisational input across zones.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Apply a hard boundary stop before reading, reproducing, transforming, or delegating confidential details.",
+        "rationale": "Confidential organisational data is prohibited in the personal OpenAI zone.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": ".agents/skills/dataverse-webapi-query/",
+      "source_type": "upstream",
+      "phase": "blocked",
+      "registry": {
+        "path": "not-applicable",
+        "entry_status": "not-applicable",
+        "version_or_pin": "not-applicable",
+        "verified_on": "not-applicable"
+      },
+      "request": {
+        "scope": "Construct a Dataverse query from organisational table and record details.",
+        "data_classification": "confidential",
+        "zone": "personal-openai",
+        "permitted_tools": []
+      },
+      "handoff": {
+        "invocation_mode": "not-applicable",
+        "input_payload": "",
+        "expected_output_schema": ".agents/skills/dataverse-webapi-query/references/answer-output.schema.json",
+        "continuation_instruction": "No external execution is permitted for this payload."
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "none",
+        "selector": "$dataverse-webapi-query",
+        "client_compatible": true,
+        "prerequisites_satisfied": false,
+        "boundary_permitted": false,
+        "permissions_approved": false
+      },
+      "execution": {
+        "execution_observed": false,
+        "result_schema_valid": null,
+        "invoked": false,
+        "outcome_status": "blocked",
+        "result_reference": ""
+      },
+      "verification": {
+        "specialist_identity_verified": true,
+        "register_verified": null,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": null,
+        "result_schema_verified": null,
+        "untrusted_input_checked": null,
+        "override_attempted": false,
+        "result_sha256": "",
+        "source_path": ""
+      },
+      "evidence_refs": [
+        "Sanitized user request",
+        "Power Platform Incremental Delivery boundary policy"
+      ],
+      "open_items": [],
+      "next_action": "Do not execute this delegation; establish a compliant input and execution boundary first."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "A personal OpenAI workflow receives a request containing confidential organisational details",
+      "when": "The request is classified before specialist processing",
+      "then": "Processing and delegation are blocked without reproducing the confidential content",
+      "evidence": "Sanitized blocked response with no specialist execution evidence"
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Confidential organisational table or record details are supplied to the personal-zone adapter",
+      "expected_behavior": "Reject the transfer before query construction or specialist invocation and disclose none of the confidential content.",
+      "evidence": "Delegation remains uninvoked with boundary_permitted set to false"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Confidential cross-zone transfer prevention",
+      "expected": "The request is blocked before confidential content is processed or delegated.",
+      "evidence_required": "A sanitized stop record showing no invocation, tools, result, or external execution",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No deployment environment"
+    ],
+    "prerequisites": [
+      "A permitted organisational execution boundary is required before implementation"
+    ],
+    "steps": [
+      "Perform no deployment"
+    ],
+    "post_deploy_checks": [
+      "Not applicable because deployment is prohibited for this request"
+    ],
+    "evidence_required": [
+      "No deployment or target configuration evidence exists"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any evidence that confidential content entered the personal workflow"
+    ],
+    "steps": [
+      "Stop processing and follow the organisation's incident and data-handling procedure"
+    ],
+    "data_considerations": [
+      "Do not copy confidential content into logs, prompts, source, or evidence"
+    ],
+    "owner": "Authorised organisational security or platform owner",
+    "evidence_required": [
+      "Confirmation that no specialist execution or persistence occurred"
+    ]
+  },
+  "next_action": "Run the query workflow entirely inside an approved organisational Microsoft boundary with the confidential details retained there, or replace them with public or synthetic inputs before creating a fresh external specialist request."
+}

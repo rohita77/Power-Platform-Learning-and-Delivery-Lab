@@ -1,0 +1,560 @@
+{
+  "status": "Ready",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The slice must escalate a synthetic service request when its status changes to a qualifying value.",
+        "basis": "The requested observable outcome is explicit.",
+        "source_refs": [
+          "user-request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The authoritative component is a solution-aware Power Automate cloud flow because the trigger, rules, recipients, retry policy, and output are deterministic.",
+        "basis": "This is a supplied current approved component decision and must not be reconsidered.",
+        "source_refs": [
+          "supplied-approved-component-decision"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "Each qualifying escalation must create one idempotent escalation record, invoke one synthetic notification action through an approved connection reference, expose the outcome to the operator, and record privacy-safe correlation telemetry.",
+        "basis": "These are explicit required outcomes.",
+        "source_refs": [
+          "user-request"
+        ]
+      },
+      {
+        "id": "CP-004",
+        "statement": "This invocation produces a build brief only and does not authorize implementation, tenant access, import, deployment, connection binding, or flow activation.",
+        "basis": "The incremental-delivery workflow owns orchestration and brief generation only.",
+        "source_refs": [
+          "power-platform-incremental-delivery-v0.2.0"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The service request and escalation records are stored in Dataverse and delivered in one solution with an active alternate key on the escalation table.",
+        "impact": "Implementation must map the logical fields and alternate key to the approved publisher prefix and schema names.",
+        "validation_required": "Confirm schema names and prove alternate-key activation before enabling the flow.",
+        "source_refs": [
+          "bounded-synthetic-design-assumption"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "The operator uses an organisational model-driven app and can view an escalation status, outcome summary, timestamp, and correlation ID on or alongside the service-request form.",
+        "impact": "A different approved host may change the presentation component but not the flow, persistence, or idempotency design.",
+        "validation_required": "Confirm the host and operator security role before implementation.",
+        "source_refs": [
+          "bounded-host-assumption"
+        ]
+      },
+      {
+        "id": "AS-003",
+        "statement": "The recipient is synthetic, is derived from approved configuration or an approved Dataverse relationship, and can be checked against an active-recipient allowlist.",
+        "impact": "Notification is stopped safely when the recipient is missing, inactive, malformed, or outside the approved synthetic route.",
+        "validation_required": "Bind and validate the recipient source in the development environment before flow activation.",
+        "source_refs": [
+          "bounded-recipient-assumption"
+        ]
+      },
+      {
+        "id": "AS-004",
+        "statement": "The approved notification action is solution-aware through a connection reference and permits synthetic content under the target environment DLP policy.",
+        "impact": "The flow cannot be activated until the connection reference has an approved owner, binding, and DLP-compatible connector.",
+        "validation_required": "Read back the connection-reference binding and execute a synthetic test after import.",
+        "source_refs": [
+          "bounded-connection-assumption"
+        ]
+      }
+    ],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Use an agent or generative orchestration for service-request escalation.",
+        "reason": "The supplied approved decision establishes that the trigger, rules, recipients, retry behavior, and output are deterministic.",
+        "reconsider_if": "Only new approved evidence demonstrates a genuinely nondeterministic user outcome outside this slice."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "For one synthetic service request entering the qualifying status, an operator can observe one durable escalation outcome linked to that request; the flow creates no duplicate escalation, invokes the approved synthetic notification action no more than once for the idempotency key, and records a privacy-safe correlation ID and terminal outcome.",
+    "entry": "Persona: service-request operator. Host: organisational model-driven app. Entry point: an existing synthetic service-request form. Initial state: a valid request that is not currently escalated. Initiating event: the Dataverse status column is updated to the configured qualifying value, causing the solution-aware cloud-flow trigger to receive the request identifier and event version.",
+    "validation": "The flow generates a correlation ID, gets the current request, and validates existence, required request fields, qualifying current status, active synthetic recipient, permitted recipient route, and caller or flow-owner access. It compares the trigger event version with the current Dataverse version number before acting. A missing, unauthorized, invalid, or stale request creates or updates only the safe escalation outcome where permitted, sends no notification, records a sanitized outcome, and instructs the operator to correct data or reload and reconcile. No confidential request text is copied into telemetry or notification content.",
+    "persistence_or_action": "The cloud flow is the sole escalation-process owner. Before notification, it creates one escalation row using an active alternate key composed from service-request ID, qualifying target status, and escalation-rule version. The row stores correlation ID, event version, recipient route identifier, lifecycle status, timestamps, and sanitized outcome. A duplicate-key conflict is handled as an idempotent duplicate: retrieve the existing row, emit a duplicate outcome, and do not notify again. Only the run that successfully creates the row may invoke the notification action. Dataverse reads and writes use bounded exponential retries; the outbound notification action has automatic retry disabled to prevent replay after an ambiguous timeout. The escalation row is then updated to Sent, Failed, or DeliveryUnknown without creating another row.",
+    "feedback": "The model-driven app shows Pending while processing and then Sent, ValidationFailed, PermissionDenied, Conflict, Failed, DeliveryUnknown, or DuplicateSuppressed with timestamp and correlation ID. Status is conveyed through text as well as visual styling. A conflict tells the operator to reload and reconcile without discarding either version. Failed and unknown delivery states do not offer an uncontrolled resend; any controlled resend is excluded from this slice and requires a separately approved idempotent design.",
+    "telemetry": "The escalation row is the durable operational telemetry record. It records a generated correlation ID, flow run reference, idempotency-key hash, rule version, event version, start and completion timestamps, outcome, duplicate or conflict signal, and sanitized error category. It excludes request descriptions, notification bodies, recipient addresses, personal identifiers, secrets, connection details, and raw connector responses.",
+    "evidence": "Evidence is separated by level: source inspection proves flow definitions, expressions, alternate-key design, retry settings, connection-reference use, feedback bindings, and secret exclusion; automated tests and solution validation prove deterministic branches and build integrity; package evidence proves required components and dependencies are present; deployment evidence proves import, alternate-key activation, environment-variable and connection-reference binding, permissions, DLP compatibility, and flow activation in the target environment; runtime evidence alone proves a qualifying transition, duplicate and concurrent delivery behavior, stale-event handling, connector failure behavior, operator feedback, telemetry correlation, and rollback readback.",
+    "scope": [
+      "One Dataverse status-change trigger for the configured qualifying status",
+      "Validation of request state, event version, required fields, recipient, and permissions",
+      "One idempotent escalation record per request, target status, and rule version",
+      "One approved synthetic notification-action invocation by the row-creating run",
+      "Operator-visible asynchronous outcome in the model-driven app",
+      "Privacy-safe correlation, duplicate, conflict, and terminal-outcome telemetry",
+      "Focused functional, security, concurrency, failure, ALM, deployment, and rollback evidence"
+    ],
+    "exclusions": [
+      "Agents, generative AI, or nondeterministic routing",
+      "Confidential, personal, customer, or production message content",
+      "Tenant access, implementation, import, deployment, or activation by this brief",
+      "Automatic replay of a failed or ambiguous notification",
+      "A manually initiated resend workflow",
+      "Multiple escalation cycles for the same request, target status, and rule version",
+      "Recipient administration or approval workflows",
+      "Historical migration of existing service requests"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Expose the related escalation lifecycle and sanitized outcome on the service-request form, with refreshable Pending and terminal states.",
+        "rationale": "The operator needs a visible operational result without relying on flow-run access.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "EXP-002",
+        "decision": "Present validation, permission, conflict, duplicate, failure, and unknown-delivery states as accessible text with a correlation ID.",
+        "rationale": "Operators need actionable feedback that does not depend on color or disclose restricted payloads.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Store one escalation row linked to the service request and enforce uniqueness with an alternate key over request ID, qualifying target status, and rule version.",
+        "rationale": "A database-enforced key makes duplicate suppression race-safe.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "DAT-002",
+        "decision": "Persist the trigger event version and compare it with the current request version before creating the escalation.",
+        "rationale": "Stale events must not act on a newer request state or overwrite either version.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-003",
+        "decision": "Treat the escalation row as the durable operator outcome and privacy-safe telemetry record.",
+        "rationale": "One record provides traceability without adding an unnecessary telemetry table for the slice.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Use one solution-aware Power Automate cloud flow triggered by the service-request status column.",
+        "rationale": "This preserves the supplied approved deterministic component decision.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "INT-002",
+        "decision": "Invoke the synthetic notification only through an approved solution connection reference after the escalation row is created successfully.",
+        "rationale": "This gives the creating run exclusive dispatch ownership and keeps environment binding outside the flow definition.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "INT-003",
+        "decision": "Enable bounded exponential retries for safe Dataverse operations and disable automatic retries on the notification action.",
+        "rationale": "Safe operations can retry, while disabling notification replay prevents duplicate delivery attempts after an ambiguous connector response.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Use no AI, agent, prompt, model, knowledge source, or AI evaluation component.",
+        "rationale": "The approved rules and outputs are deterministic.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Run under an approved least-privilege organisational identity that can read required request fields and create or update escalation rows but cannot administer connections or security roles.",
+        "rationale": "The flow needs only narrow operational permissions.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "SEC-002",
+        "decision": "Validate the synthetic recipient against approved configuration and stop before notification when the route is missing, inactive, malformed, or disallowed.",
+        "rationale": "Recipient validation prevents unintended disclosure or routing.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SEC-003",
+        "decision": "Keep secrets, raw errors, recipient addresses, request descriptions, notification bodies, and connection details out of telemetry and operator feedback.",
+        "rationale": "Only synthetic, privacy-safe operational evidence is required.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Use one correlation ID from trigger handling through escalation persistence, notification invocation, feedback, and evidence capture.",
+        "rationale": "A single identifier supports deterministic reconciliation without exposing payload content.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OPS-002",
+        "decision": "Classify outcomes as Pending, Sent, ValidationFailed, PermissionDenied, Conflict, Failed, DeliveryUnknown, or DuplicateSuppressed.",
+        "rationale": "Explicit states distinguish business rejection, concurrency, connector failure, and ambiguous delivery.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OPS-003",
+        "decision": "Do not automatically replay Failed or DeliveryUnknown notification outcomes.",
+        "rationale": "Without a proven downstream idempotency contract, replay could create a duplicate notification.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OPS-004",
+        "decision": "Configure retention and operational ownership for escalation evidence before deployment.",
+        "rationale": "Retention and ownership are environment-specific operational values that do not alter the slice architecture.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the flow, Dataverse schema changes, alternate key, connection reference, environment variables, app feedback component, and required security-role changes in one solution.",
+        "rationale": "The slice must be independently importable and configurable.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "ALM-002",
+        "decision": "Externalize qualifying status, rule version, recipient-route identifier, and environment-specific bindings through solution-aware configuration.",
+        "rationale": "Environment values must not be hard-coded in the flow.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "ALM-003",
+        "decision": "Require solution validation, dependency inspection, import evidence, configuration readback, runtime smoke evidence, and rollback evidence as separate gates.",
+        "rationale": "Package proof must not be promoted to deployment or runtime proof.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "A valid synthetic service request with an active approved recipient is at the current version and has no escalation for the configured target status and rule version.",
+      "when": "Its status changes to the qualifying value.",
+      "then": "The flow creates exactly one linked escalation row, invokes the approved notification action once, marks the row Sent after a successful response, and exposes the same correlation ID and Sent outcome to the operator.",
+      "evidence": "Runtime trace correlated across the trigger, Dataverse row, single notification-action invocation, app readback, and sanitized telemetry."
+    },
+    {
+      "id": "AC-002",
+      "given": "An escalation row already exists for the same request, target status, and rule version.",
+      "when": "The same event is delivered again or two equivalent flow runs race.",
+      "then": "The alternate key preserves one escalation row, the non-creating run records DuplicateSuppressed, and no additional notification action is invoked.",
+      "evidence": "Concurrent runtime runs, duplicate-key handling trace, one-row query result, and one notification-action invocation."
+    },
+    {
+      "id": "AC-003",
+      "given": "The trigger event version is older than the current service-request version.",
+      "when": "The flow validates the request before escalation.",
+      "then": "The flow performs no escalation creation or notification, preserves both observed versions in sanitized evidence, records Conflict, and tells the operator to reload and reconcile.",
+      "evidence": "Runtime stale-event trace, unchanged request and escalation data, operator feedback, and correlation telemetry."
+    },
+    {
+      "id": "AC-004",
+      "given": "The request or recipient is missing, invalid, inactive, unauthorized, or outside the approved synthetic route.",
+      "when": "The flow performs validation.",
+      "then": "No notification is invoked, the outcome uses the applicable sanitized validation or permission state, and the operator receives actionable feedback with a correlation ID.",
+      "evidence": "Negative-path runtime trace, zero notification invocations, app readback, and sanitized outcome row where permission permits."
+    },
+    {
+      "id": "AC-005",
+      "given": "The escalation row was created and the notification action returns a definitive failure or ambiguous timeout.",
+      "when": "The flow handles the connector outcome.",
+      "then": "The same escalation row becomes Failed or DeliveryUnknown, no automatic notification replay occurs, and the operator can see the terminal state and correlation ID.",
+      "evidence": "Injected connector-failure run, action retry-policy readback, single invocation count, escalation-row readback, and app feedback."
+    },
+    {
+      "id": "AC-006",
+      "given": "The solution has been imported into an authorized target environment and all prerequisites are satisfied.",
+      "when": "Configuration and smoke checks are executed.",
+      "then": "The alternate key is active, environment values and connection reference are correctly bound, the flow is enabled under the approved owner, and the synthetic happy and duplicate paths pass.",
+      "evidence": "Import log, dependency and configuration readback, flow-state readback, and target runtime smoke records."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The status update does not result in the configured qualifying current status.",
+      "expected_behavior": "Exit without creating an escalation or invoking the notification action; retain only minimal flow-run evidence.",
+      "evidence": "Runtime run showing the qualification branch and zero durable escalation or notification action."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The same qualifying event is submitted twice.",
+      "expected_behavior": "The alternate key preserves one escalation row, records DuplicateSuppressed for the duplicate path, and prevents a second notification invocation.",
+      "evidence": "Two correlated submissions, one escalation row, and one notification invocation."
+    },
+    {
+      "id": "NP-003",
+      "condition": "Two qualifying runs concurrently attempt to create the same escalation.",
+      "expected_behavior": "Exactly one create succeeds; the duplicate-key loser retrieves the existing row and exits without notification.",
+      "evidence": "Overlapping run timestamps, duplicate-key result, one row, and one notification invocation."
+    },
+    {
+      "id": "NP-004",
+      "condition": "The request changes after the trigger event but before validation.",
+      "expected_behavior": "Reject the stale event, preserve current data, send no notification, emit Conflict with both sanitized version tokens, and tell the operator to reload and reconcile.",
+      "evidence": "Controlled concurrent update, unchanged current request, zero escalation creation, zero notification invocation, and conflict feedback."
+    },
+    {
+      "id": "NP-005",
+      "condition": "The recipient is missing, inactive, malformed, unauthorized, or not in the approved synthetic route.",
+      "expected_behavior": "Stop before notification and expose a sanitized validation or permission outcome without logging the recipient value.",
+      "evidence": "Validation trace, zero notification invocations, sanitized telemetry inspection, and operator feedback."
+    },
+    {
+      "id": "NP-006",
+      "condition": "A Dataverse read or write experiences a transient failure.",
+      "expected_behavior": "Apply the configured bounded retry policy; on exhaustion, mark the available escalation outcome Failed without invoking the notification when dispatch ownership was not established.",
+      "evidence": "Fault-injection run, retry timestamps and count, final state, and notification invocation count."
+    },
+    {
+      "id": "NP-007",
+      "condition": "The notification action fails definitively or its delivery result is ambiguous.",
+      "expected_behavior": "Record Failed or DeliveryUnknown on the existing row and do not automatically replay the notification action.",
+      "evidence": "Fault-injection run, retry-policy readback showing no notification retry, one invocation, and terminal-state readback."
+    },
+    {
+      "id": "NP-008",
+      "condition": "The flow identity lacks required request or escalation permissions.",
+      "expected_behavior": "Fail safely, expose PermissionDenied through the approved operator channel where possible, disclose no restricted data, and invoke no notification.",
+      "evidence": "Least-privilege negative test, sanitized failure evidence, and zero notification invocations."
+    },
+    {
+      "id": "NP-009",
+      "condition": "An operator submits an acknowledgement or outcome update using a stale version token.",
+      "expected_behavior": "Reject the overwrite without losing either version, emit Conflict with a correlation ID, and instruct the operator to reload and reconcile.",
+      "evidence": "Concurrent-change UI test, before-and-after row evidence, and conflict telemetry."
+    },
+    {
+      "id": "NP-010",
+      "condition": "The same acknowledgement is submitted more than once.",
+      "expected_behavior": "Use an acknowledgement idempotency key derived from escalation ID, acknowledgement action, and acknowledged version to suppress duplicate processing without another lifecycle transition.",
+      "evidence": "Duplicate-submission test showing one acknowledged transition and a DuplicateSuppressed outcome."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Qualifying status-change happy path from request update through operator-visible Sent outcome.",
+      "expected": "One escalation row, one notification invocation, matching correlation ID, and Sent feedback.",
+      "evidence_required": "Automated or controlled runtime trace plus Dataverse and app readback.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "functional",
+      "scope": "Non-qualifying status, missing fields, and invalid recipient branches.",
+      "expected": "No notification and the correct sanitized outcome for each branch.",
+      "evidence_required": "Branch results, notification invocation count, and outcome readback.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Duplicate delivery and concurrent create attempts for one idempotency key.",
+      "expected": "One escalation row and one notification invocation; all other runs terminate as DuplicateSuppressed.",
+      "evidence_required": "Parallel run evidence, alternate-key response, row count, and action invocation count.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "reliability",
+      "scope": "Request changes between trigger capture and validation.",
+      "expected": "Stale processing is rejected, neither version is lost, no notification occurs, and Conflict feedback instructs reload and reconciliation.",
+      "evidence_required": "Concurrent-change timestamps, version tokens, unchanged row evidence, telemetry, and app feedback.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "reliability",
+      "scope": "Dataverse transient errors and retry exhaustion.",
+      "expected": "Only safe Dataverse operations retry within configured limits; terminal failure is deterministic.",
+      "evidence_required": "Fault-injection trace, retry intervals and counts, terminal outcome, and invocation count.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "reliability",
+      "scope": "Definitive notification failure and ambiguous timeout.",
+      "expected": "The row becomes Failed or DeliveryUnknown and the notification action is not automatically replayed.",
+      "evidence_required": "Connector fault evidence, action-policy readback, single invocation, and row readback.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "security",
+      "scope": "Recipient allowlist, least-privilege flow identity, permission denial, telemetry minimization, and secret exclusion.",
+      "expected": "Unauthorized routes and access fail closed; evidence contains no excluded payloads or connection details.",
+      "evidence_required": "Role matrix, negative runs, DLP check, and sanitized log inspection.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-008",
+      "class": "accessibility",
+      "scope": "Pending, success, validation, permission, conflict, duplicate, failed, and unknown-delivery feedback.",
+      "expected": "Every state is keyboard reachable, programmatically labelled, readable at narrow width, and understandable without color.",
+      "evidence_required": "Keyboard and screen-reader checks plus narrow-layout captures.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-009",
+      "class": "functional",
+      "scope": "Stale and duplicate acknowledgement submissions.",
+      "expected": "A stale acknowledgement is rejected with reload guidance and duplicate acknowledgement processing is suppressed by its idempotency key.",
+      "evidence_required": "Concurrent and repeated submissions, one lifecycle transition, preserved versions, and correlation telemetry.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-010",
+      "class": "performance",
+      "scope": "Expected synthetic trigger volume and worst-case validation latency.",
+      "expected": "Runs complete within the agreed operational threshold without bypassing concurrency or idempotency controls.",
+      "evidence_required": "Approved target threshold, representative synthetic load results, and throttling observations.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-011",
+      "class": "alm",
+      "scope": "Solution contents, dependencies, environment variables, connection reference, alternate key, and retry settings.",
+      "expected": "The exported package contains the complete slice with no hard-coded environment binding or unmanaged dependency.",
+      "evidence_required": "Solution validation output, package manifest inspection, dependency report, and source diff.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-012",
+      "class": "deployment",
+      "scope": "Authorized target import, configuration binding, permissions, alternate-key activation, flow activation, and smoke paths.",
+      "expected": "Import and configuration readback succeed; happy, duplicate, and failure smoke paths produce the defined outcomes.",
+      "evidence_required": "Import log, component and binding readback, role check, flow-state readback, and target runtime traces.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-013",
+      "class": "rollback",
+      "scope": "Flow deactivation and restoration of the prior app and solution version without deleting evidence rows.",
+      "expected": "No new escalations occur after deactivation, the prior operator experience is restored, and existing evidence remains queryable.",
+      "evidence_required": "Rollback execution log, flow-state readback, version readback, retained-row check, and post-rollback negative trigger.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "authorised development environment",
+      "authorised test environment",
+      "authorised production environment after release approval"
+    ],
+    "prerequisites": [
+      "Approved publisher prefix and Dataverse schema names",
+      "Service-request status and version fields identified",
+      "Escalation table and active alternate-key definition approved",
+      "Synthetic recipient source and allowlist approved",
+      "Solution connection reference created and bound to an approved organisational connection owner",
+      "Target DLP policy permits the selected Dataverse and notification connectors",
+      "Least-privilege flow identity and operator roles approved",
+      "Qualifying status, rule version, and recipient-route configuration values approved",
+      "Telemetry retention, support owner, and alerting route defined",
+      "Rollback solution version and owner identified",
+      "Explicit import and activation authorization obtained"
+    ],
+    "steps": [
+      "Build and validate the complete slice in an authorised development solution.",
+      "Activate the alternate key and verify its status before enabling the flow.",
+      "Export the approved solution artifact and inspect its components and dependencies.",
+      "Import into the authorised test environment without activating the flow prematurely.",
+      "Bind environment variables and the approved connection reference, then read them back.",
+      "Assign approved least-privilege roles and verify DLP compatibility.",
+      "Enable the flow and execute synthetic happy, duplicate, concurrent, stale-event, permission, connector-failure, and acknowledgement tests.",
+      "Promote the identical approved artifact to production only after release authorization.",
+      "Repeat configuration readback and the approved synthetic smoke set in production."
+    ],
+    "post_deploy_checks": [
+      "Solution version and component inventory match the approved artifact",
+      "Alternate key is active",
+      "Environment-variable values are resolved without hard-coded target identifiers",
+      "Connection reference resolves to the approved organisational connection",
+      "Flow owner and run-only permissions match the approved identity model",
+      "Flow is enabled with the intended trigger filter and retry policies",
+      "Qualifying transition produces one escalation and one notification invocation",
+      "Duplicate and concurrent events produce no additional notification",
+      "Stale events and acknowledgements produce Conflict and reload guidance",
+      "Connector failure produces Failed or DeliveryUnknown without automatic replay",
+      "Operator feedback and privacy-safe correlation telemetry are readable",
+      "No excluded payload or credential material appears in operational evidence"
+    ],
+    "evidence_required": [
+      "Approved solution artifact identifier and integrity hash",
+      "Solution validation and dependency reports",
+      "Import logs for each authorized target",
+      "Alternate-key activation readback",
+      "Environment-variable and connection-reference readback",
+      "DLP and least-privilege role verification",
+      "Flow definition, owner, activation, trigger-filter, and retry-policy readback",
+      "Correlated target runtime evidence for happy, duplicate, concurrent, conflict, permission, and failure paths",
+      "Operator experience and accessibility evidence",
+      "Release authorization and rollback readiness record"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Duplicate notification invocation for one idempotency key",
+      "Escalation creation for a non-qualifying or stale request",
+      "Notification routing outside the approved synthetic recipient path",
+      "Confidential or excluded data appearing in feedback or telemetry",
+      "Unrecoverable import or dependency failure",
+      "Sustained connector failures or throttling beyond the approved threshold",
+      "Operator experience blocks normal service-request processing"
+    ],
+    "steps": [
+      "Disable the escalation flow to stop new processing.",
+      "Confirm deactivation through target configuration readback.",
+      "Unbind or disable the notification connection only if required by the incident owner.",
+      "Restore the last approved solution version or remove only the newly introduced app presentation changes through the authorised ALM path.",
+      "Preserve escalation rows and correlated run evidence for reconciliation.",
+      "Identify Pending or DeliveryUnknown rows and quarantine them from replay.",
+      "Verify that a synthetic qualifying update no longer invokes the disabled slice.",
+      "Document the sanitized incident outcome and obtain approval before any reactivation."
+    ],
+    "data_considerations": [
+      "Do not delete escalation rows during rollback because they are audit and reconciliation evidence.",
+      "Do not replay Failed or DeliveryUnknown notifications without a separately approved idempotent recovery procedure.",
+      "Retain request and escalation version values needed to reconcile concurrent changes.",
+      "Classify any partially processed row by terminal outcome and correlation ID.",
+      "Use an approved retention process after the incident evidence window expires."
+    ],
+    "owner": "Authorised Power Platform release owner with the service operations owner",
+    "evidence_required": [
+      "Flow deactivation timestamp and readback",
+      "Restored solution version and component readback",
+      "Connection state where changed",
+      "Preserved escalation-row count and outcome reconciliation",
+      "Post-rollback negative trigger result",
+      "Sanitized rollback log and reactivation decision"
+    ]
+  },
+  "next_action": "An authorised implementation owner should resolve the deferred publisher/schema names, model-driven host, synthetic recipient route, connection binding, security roles, performance threshold, and retention owner; then implement this brief unchanged in an authorised development solution and collect source plus automated-test evidence before requesting any target import."
+}

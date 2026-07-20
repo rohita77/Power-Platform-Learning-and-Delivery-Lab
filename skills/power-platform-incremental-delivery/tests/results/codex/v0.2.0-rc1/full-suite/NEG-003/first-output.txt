@@ -1,0 +1,196 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested approach is to build every table and relationship before deciding the user journey or end-to-end outcome.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "User request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Only a public planning statement was supplied; no tenant data, environment evidence, solution artifacts, or confidential content were provided.",
+        "basis": "Current invocation content.",
+        "source_refs": [
+          "User request"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "A measurable end-to-end outcome, persona, and host are required before a production-credible vertical-slice build brief can be Ready.",
+        "basis": "The incremental-delivery contract rejects horizontal layer plans without an observable outcome.",
+        "source_refs": [
+          "Power Platform Incremental Delivery v0.2.0 sections 3, 5, and 8"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What is the first observable user or operational outcome that must work end to end?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "Which persona must achieve that outcome?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which Power Platform or Dynamics 365 host will provide the entry point for that persona?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Build every table and relationship before defining the first user journey and outcome.",
+        "reason": "This horizontal approach cannot establish which data is necessary, who owns each write, what security applies, or how the model will be validated through an end-to-end result.",
+        "reconsider_if": "A measurable vertical slice is agreed; then only the tables and relationships required by that slice should be selected."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Open: no observable user or operational outcome has been supplied, so no implementation slice is defined.",
+    "entry": "Open: the persona, host, entry point, initial state, and initiating event are not defined.",
+    "validation": "Open: required inputs, business rules, permissions, and concurrency behavior depend on the first journey.",
+    "persistence_or_action": "Open: no table, durable action, authoritative write owner, or idempotency boundary can be selected safely yet.",
+    "feedback": "Open: loading, success, validation, permission, conflict, retry, and failure states depend on the host and journey.",
+    "telemetry": "Open: no privacy-safe outcome event, correlation boundary, or failure signal can be defined before the outcome is known.",
+    "evidence": "No implementation, package, deployment, configuration, or runtime evidence exists; this response establishes planning status only.",
+    "scope": [
+      "Identify the minimum observable outcome, persona, host, and first end-to-end journey.",
+      "Derive only the data model and supporting components required for that first vertical slice."
+    ],
+    "exclusions": [
+      "Creating an exhaustive table and relationship model before the journey is defined.",
+      "Implementation, tenant access, deployment, or target-environment configuration.",
+      "Treating a schema or package as evidence of deployed runtime behavior."
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Defer experience design until the persona, host, entry point, and primary journey are supplied.",
+        "rationale": "The required interaction states and accessibility behavior cannot be derived without these inputs.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DATA-001",
+        "decision": "Do not approve an exhaustive schema; derive the smallest table and relationship set from the first agreed vertical slice.",
+        "rationale": "Outcome-driven modeling limits unused schema, ambiguous ownership, excess permissions, and migration burden.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Defer integration components and interfaces until the slice identifies an external system or boundary.",
+        "rationale": "No integration requirement or authoritative system has been supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "Select no AI component for the undefined slice.",
+        "rationale": "No AI-supported outcome, evaluation requirement, or approved data path has been identified.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Defer table permissions, roles, field protection, and data classification until the persona and required records are known.",
+        "rationale": "Least-privilege access cannot be designed safely without a journey and data scope.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Defer operational telemetry, support ownership, and failure handling until the slice outcome is defined.",
+        "rationale": "Operational signals must correspond to a real initiating event and observable result.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "No implementation or deployment is authorized by this brief.",
+        "rationale": "The invocation lacks a Ready slice, target environment, deployment authority, and validation plan.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Implementation is requested before an observable outcome, persona, and host are agreed.",
+      "expected_behavior": "Keep the brief Open and do not create tables, relationships, components, or deployment artifacts.",
+      "evidence": "A reviewable Ready vertical-slice brief must exist before implementation begins."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Future inputs contain confidential tenant or organisational data in the personal OpenAI zone.",
+      "expected_behavior": "Stop the transfer and continue only through an approved organisational Microsoft path with sanitized planning context.",
+      "evidence": "Recorded classification and approved boundary decision."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No target environment has been identified."
+    ],
+    "prerequisites": [
+      "A Ready vertical-slice brief with a measurable outcome, persona, host, and bounded schema.",
+      "Approved security, data-classification, environment-binding, and ALM decisions.",
+      "Explicit implementation and deployment authorization."
+    ],
+    "steps": [
+      "Do not define deployment steps until the first vertical slice and target environment are approved."
+    ],
+    "post_deploy_checks": [
+      "Not applicable until a deployment is explicitly authorized and observed."
+    ],
+    "evidence_required": [
+      "Separate package-integrity, deployment-readback, and runtime end-to-end evidence for the eventual slice."
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any schema implementation or deployment begins under this Open brief."
+    ],
+    "steps": [
+      "Stop the unauthorized work and preserve the existing solution state; no rollback operation is currently authorized."
+    ],
+    "data_considerations": [
+      "No table, relationship, or data change is authorized, so no data rollback is presently required."
+    ],
+    "owner": "Authorised delivery owner, once identified",
+    "evidence_required": [
+      "Evidence that no schema or target-environment change was made under this brief."
+    ]
+  },
+  "next_action": "Provide one sentence naming the first observable outcome, the persona who must achieve it, and the Power Platform or Dynamics 365 host; use that answer to define the smallest end-to-end slice and only its required tables and relationships."
+}

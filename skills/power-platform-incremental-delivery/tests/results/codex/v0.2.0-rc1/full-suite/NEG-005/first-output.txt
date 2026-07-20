@@ -1,0 +1,91 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The carry-forward summary contains a material licensing claim supported only by expired evidence, and no current verification was supplied.",
+        "basis": "Explicit invocation input.",
+        "source_refs": [
+          "stdin"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable delivery outcome, persona, and host surface should the next vertical slice target?",
+        "owner": "Request owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What exact licensing claim requires verification against current first-party evidence?",
+        "owner": "power-platform-current-feature-verifier workflow",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": [
+      {
+        "id": "SS-001",
+        "statement": "The material licensing claim may be carried forward as currently established.",
+        "replaced_by": "OQ-002",
+        "reason": "Its supporting evidence has expired, so the claim must be reopened rather than treated as confirmed.",
+        "source_refs": [
+          "stdin"
+        ]
+      }
+    ]
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "No delivery-slice outcome was requested.",
+    "entry": "Not defined because the persona, host, and entry point were not supplied.",
+    "validation": "Not defined because no delivery workflow was supplied.",
+    "persistence_or_action": "Not defined because no delivery workflow was supplied.",
+    "feedback": "Not defined because no delivery workflow was supplied.",
+    "telemetry": "Not defined because no delivery workflow was supplied.",
+    "evidence": "The licensing claim has only expired supporting evidence; no current verification is available.",
+    "scope": [],
+    "exclusions": [
+      "Treating the expired licensing claim as current",
+      "Producing an implementation-ready build brief without a delivery outcome"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [],
+    "prerequisites": [],
+    "steps": [],
+    "post_deploy_checks": [],
+    "evidence_required": []
+  },
+  "rollback": {
+    "triggers": [],
+    "steps": [],
+    "data_considerations": [],
+    "owner": "Not applicable because no build or deployment was requested.",
+    "evidence_required": []
+  },
+  "next_action": "Provide the observable outcome, persona, and host for the intended delivery slice, and route the exact licensing claim to the power-platform-current-feature-verifier workflow for dated first-party verification before carrying it forward."
+}

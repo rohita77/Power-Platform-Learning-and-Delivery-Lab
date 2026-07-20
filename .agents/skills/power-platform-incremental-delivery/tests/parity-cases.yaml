@@ -1,5 +1,5 @@
 schema_version: "1.0"
-skill_version: "0.1.0"
+skill_version: "0.2.0"
 immutability_rule: "Supply each exact golden-case prompt byte-for-byte without host-specific additions, omissions, or rewritten selectors."
 active_targets:
   - "codex-vscode"
@@ -13,8 +13,9 @@ cases:
     exact_input_sha256: "365096cfc6555e896f699260bb819e9dfddf54c483211990c93d69589d7bc14d"
   - case_id: "GOLD-005"
     source: "golden-cases.yaml"
-    exact_input_sha256: "d3b75bbb4bcb6322a7981124145adeefb6a8fe47c4296d985bf57e201afd8b14"
-    required_selector: "$dataverse-webapi-query"
+    exact_input_sha256: "078cbb901ead4a6654790dab057ed72bd7e581745b88a542e7eee59b84338b5b"
+    orchestration_phase: "result-consumption"
+    supplied_result_fixture: "tests/fixtures/powercat/gold-005-result.json"
 
 # This file identifies future parity inputs only. It records no execution,
 # score, delegation success, or runtime result.

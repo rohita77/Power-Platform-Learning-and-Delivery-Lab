@@ -1,0 +1,62 @@
+{
+  "skill6_cases": 9,
+  "powercat_phases": 1,
+  "all_schema_valid": true,
+  "skill6_workflow_operations": 0,
+  "powercat_workflow_operations": 0,
+  "records": {
+    "NO-TRIGGER-004": {
+      "status": "Open",
+      "schema": true,
+      "ops": 0
+    },
+    "DEL-001": {
+      "status": "Open",
+      "schema": true,
+      "ops": 0
+    },
+    "DEL-004": {
+      "status": "Open",
+      "schema": true,
+      "ops": 0
+    },
+    "DEL-005": {
+      "status": "Blocked",
+      "schema": true,
+      "ops": 0
+    },
+    "DEL-008": {
+      "status": "Blocked",
+      "schema": true,
+      "ops": 0
+    },
+    "DEL-009": {
+      "status": "Open",
+      "schema": true,
+      "ops": 0
+    },
+    "GOLD-005": {
+      "status": "Ready",
+      "schema": true,
+      "ops": 0
+    }
+  },
+  "chain": {
+    "phase_1": {
+      "status": "Open",
+      "schema": true,
+      "ops": 0
+    },
+    "phase_2": {
+      "status": "Resolved",
+      "schema": true,
+      "ops": 0,
+      "input_sha256": "cfe0035670a2c16613f359f61fa2228fba9f20e0bf45145236147ce13451201f"
+    },
+    "phase_3": {
+      "status": "Ready",
+      "schema": true,
+      "ops": 0
+    }
+  }
+}

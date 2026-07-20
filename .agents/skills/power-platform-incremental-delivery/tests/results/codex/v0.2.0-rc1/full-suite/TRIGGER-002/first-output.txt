@@ -1,0 +1,194 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "An existing Dynamics 365 solution and an agreed position exist.",
+        "basis": "Explicit user statement.",
+        "source_refs": [
+          "Current request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "The next deliverable is an MVP vertical-slice build brief that preserves settled decisions.",
+        "basis": "Explicit user request and selected incremental-delivery workflow.",
+        "source_refs": [
+          "Current request",
+          "power-platform-incremental-delivery v0.2.0"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "Only public, sanitized orchestration information is present in the current personal OpenAI interaction.",
+        "impact": "No confidential organisational content may be supplied while reconstructing the agreed position.",
+        "validation_required": "Confirm the classification of any carry-forward summary before providing it.",
+        "source_refs": [
+          "Current request"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What is the concise current agreed-position summary, including settled decisions, completed increments, known defects, and authoritative source references?",
+        "owner": "Solution owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-002",
+        "question": "What single observable business outcome should the next MVP increment deliver, for which persona and Dynamics 365 host surface?",
+        "owner": "Product owner",
+        "blocks_ready": true
+      },
+      {
+        "id": "OQ-003",
+        "question": "What data classification and approved transfer path apply to the information needed for this build brief?",
+        "owner": "Solution owner or security owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "public",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "Open: the observable end-to-end result has not been supplied.",
+    "entry": "Open: persona, Dynamics 365 host surface, entry point, initial state, and initiating event are not yet known.",
+    "validation": "Open: required inputs, business and security rules, concurrency checks, and safe failure behavior depend on the agreed position and selected outcome.",
+    "persistence_or_action": "Open: the authoritative write or action owner and idempotency boundary have not been identified.",
+    "feedback": "Open: loading, success, validation, permission, conflict, retry, and failure behavior will be defined after the journey is known.",
+    "telemetry": "Open: privacy-safe events, correlation handling, outcome signals, and excluded payloads depend on the selected slice and data classification.",
+    "evidence": "No implementation, package, deployment, configuration, or runtime evidence was supplied or observed.",
+    "scope": [
+      "Reconstruct the existing agreed position",
+      "Select one smallest deployable MVP vertical slice",
+      "Define implementation and validation controls without reopening settled decisions"
+    ],
+    "exclusions": [
+      "Tenant access",
+      "Implementation",
+      "Deployment",
+      "Reconsideration of settled decisions without new material evidence"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Persona, host, entry point, journey, interaction states, and accessibility behavior remain open.",
+        "rationale": "The current agreed position and target outcome were not supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Dataverse entities, ownership, schema, validation, concurrency, and persistence boundaries remain open.",
+        "rationale": "No authoritative schema or carry-forward decision was supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "No integration component can yet be selected.",
+        "rationale": "The next journey and existing interfaces are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "No AI component can yet be selected.",
+        "rationale": "The agreed position does not identify an AI requirement or permitted data path.",
+        "evidence_status": "Open"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Security roles, field access, identity, DLP, compliance, and data-transfer controls remain open.",
+        "rationale": "No authoritative security constraints or data classification were supplied.",
+        "evidence_status": "Open"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Telemetry, support ownership, alerting, replay, and failure-management controls remain open.",
+        "rationale": "The operational outcome and current support model are unknown.",
+        "evidence_status": "Open"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Solution boundaries, environment strategy, connection binding, deployment sequence, and rollback mechanism remain open.",
+        "rationale": "No repository, solution inventory, environment model, or prior delivery evidence was supplied.",
+        "evidence_status": "Open"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The carry-forward material contains confidential organisational data without an approved cross-zone transfer path.",
+      "expected_behavior": "Stop reconstruction and do not reproduce or process the confidential content in the personal OpenAI zone.",
+      "evidence": "Security-owner confirmation of classification and permitted handling path."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environments to be identified from the agreed position"
+    ],
+    "prerequisites": [
+      "Approved build brief",
+      "Confirmed solution and environment ownership",
+      "Resolved security and data-boundary requirements"
+    ],
+    "steps": [
+      "Define deployment steps after the vertical slice and authoritative ALM path are confirmed"
+    ],
+    "post_deploy_checks": [
+      "Define configuration readback and runtime checks from the selected acceptance criteria"
+    ],
+    "evidence_required": [
+      "Deployment or import record",
+      "Configuration readback",
+      "Runtime end-to-end evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Failed acceptance criteria",
+      "Security or data-boundary violation",
+      "Material regression in the target journey"
+    ],
+    "steps": [
+      "Define component-specific rollback steps after the slice and current ALM mechanism are confirmed"
+    ],
+    "data_considerations": [
+      "Preserve user data and reconcile writes before reverting components"
+    ],
+    "owner": "Deployment owner to be identified from the agreed position",
+    "evidence_required": [
+      "Rollback authorization",
+      "Rollback execution record",
+      "Post-rollback configuration and runtime verification"
+    ]
+  },
+  "next_action": "Provide a sanitized carry-forward summary containing the observable outcome, persona, Dynamics 365 host and entry point, settled decisions, completed components, known defects or test findings, authoritative source references, and confirmed data classification; do not include tenant details, credentials, confidential records, or environment-specific secrets."
+}

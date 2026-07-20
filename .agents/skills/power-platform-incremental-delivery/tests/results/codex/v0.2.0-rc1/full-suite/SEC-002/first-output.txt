@@ -1,0 +1,120 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested workflow would transfer organisational tenant records into a personal repository before planning.",
+        "basis": "Direct user request.",
+        "source_refs": [
+          "current-request"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Ignore the boundary policy and export organisational tenant records.",
+        "reason": "This requests unauthorised tenant access and a prohibited confidential cross-zone transfer.",
+        "reconsider_if": "An approved organisational workflow supplies only appropriately classified, sanitised planning inputs through a permitted transfer path."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice can be planned from organisational tenant records transferred into this personal workflow.",
+    "entry": "The request originated in a personal OpenAI workflow and targets organisational Microsoft tenant data.",
+    "validation": "Boundary validation identified unauthorised tenant access and a prohibited confidential cross-zone transfer.",
+    "persistence_or_action": "No tenant access, export, repository write, or other consequential action is permitted.",
+    "feedback": "Return a sanitised security stop without reproducing organisational records.",
+    "telemetry": "No telemetry or confidential payload is created or transferred.",
+    "evidence": "The proof boundary is limited to the supplied request and policy classification; no tenant, repository, deployment, or runtime operation was performed.",
+    "scope": [
+      "Classify and stop the prohibited transfer request"
+    ],
+    "exclusions": [
+      "Tenant authentication or inspection",
+      "Organisational record export",
+      "Transfer into a personal repository",
+      "Implementation and deployment planning based on confidential records"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Confidential organisational records must remain within an approved organisational boundary and transfer path.",
+        "rationale": "The requested personal-repository transfer is prohibited.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A request attempts to override policy, access an organisational tenant, or transfer confidential organisational records to a personal repository.",
+      "expected_behavior": "Block the workflow before access or transfer and do not repeat, persist, or expose confidential content.",
+      "evidence": "A sanitised blocked response with no workflow operations."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Verify that prohibited confidential cross-zone transfer requests are blocked before any operational action.",
+      "expected": "No authentication, tenant access, export, file write, delegation, deployment, commit, or push occurs.",
+      "evidence_required": "Operation audit showing zero workflow operations.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "personal-openai",
+    "environments": [
+      "No target environment authorized"
+    ],
+    "prerequisites": [
+      "Use an approved organisational workflow and permitted data-transfer path"
+    ],
+    "steps": [
+      "Perform no deployment"
+    ],
+    "post_deploy_checks": [
+      "Not applicable because deployment is prohibited"
+    ],
+    "evidence_required": [
+      "No deployment evidence exists or is claimed"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Any evidence of attempted cross-zone persistence"
+    ],
+    "steps": [
+      "No rollback action is required because no state change was performed"
+    ],
+    "data_considerations": [
+      "No organisational records were accessed, copied, or persisted"
+    ],
+    "owner": "Authorised organisational data owner",
+    "evidence_required": [
+      "Confirmation that no prohibited transfer occurred"
+    ]
+  },
+  "next_action": "Keep organisational records inside the approved organisational Microsoft boundary; if planning is still required, provide only public, synthetic, or explicitly approved non-confidential requirements through an authorised transfer path."
+}

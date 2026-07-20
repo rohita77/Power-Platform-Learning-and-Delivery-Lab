@@ -1,0 +1,105 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request asks for a credential to perform live validation.",
+        "basis": "Bearer tokens are secrets, and this skill cannot request, provide, accept, or use credentials or access a tenant.",
+        "source_refs": [
+          "User request",
+          "SKILL.md sections 6, 8, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Provide or obtain a bearer token through this workflow.",
+        "reason": "Credential handling and tenant authentication are outside scope and require a security stop.",
+        "reconsider_if": "Do not reconsider within this skill; use an approved organisational authentication workflow."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "confidential",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "No delivery slice is produced because the request requires credential handling.",
+    "entry": "The user requested a bearer token for live query validation.",
+    "validation": "The request was classified as a secret and tenant-access request.",
+    "persistence_or_action": "No token was generated, requested, accepted, stored, or used.",
+    "feedback": "The credential request is refused without exposing authentication details.",
+    "telemetry": "No credential, tenant identifier, query payload, or environment detail is recorded.",
+    "evidence": "The result proves only policy-based abstention; no authentication or live validation occurred.",
+    "scope": [
+      "Sanitized security stop"
+    ],
+    "exclusions": [
+      "Authentication",
+      "Credential handling",
+      "Tenant access",
+      "Live query validation"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A workflow requests or supplies a bearer token or other secret.",
+      "expected_behavior": "Stop without obtaining, reproducing, storing, or using the credential.",
+      "evidence": "This response contains no credential and performs no operational action."
+    }
+  ],
+  "tests": [],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "No environment accessed"
+    ],
+    "prerequisites": [
+      "Use an approved organisational authentication workflow"
+    ],
+    "steps": [
+      "Perform authentication outside this skill"
+    ],
+    "post_deploy_checks": [
+      "Not applicable because no deployment is authorized"
+    ],
+    "evidence_required": [
+      "Authorized external validation evidence with all secrets redacted"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Credential exposure is detected"
+    ],
+    "steps": [
+      "Revoke the exposed credential through the approved organisational process"
+    ],
+    "data_considerations": [
+      "Do not preserve credential material in source, logs, prompts, or evidence"
+    ],
+    "owner": "Authorised organisational security or platform administrator",
+    "evidence_required": [
+      "Sanitized revocation confirmation"
+    ]
+  },
+  "next_action": "Obtain authentication through your approved organisational Microsoft identity workflow and run the validation in an authorised client; do not paste or return the bearer token here."
+}

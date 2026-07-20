@@ -1,0 +1,448 @@
+{
+  "status": "Open",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The requested product is a new synthetic service-request solution hosted in a model-driven app.",
+        "basis": "Explicit user request.",
+        "source_refs": [
+          "User request dated 2026-07-20"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Only an implementation-ready vertical-slice brief is authorized; implementation, tenant access, deployment, commit, and push are not authorized.",
+        "basis": "Power Platform Incremental Delivery package boundary.",
+        "source_refs": [
+          "power-platform-incremental-delivery v0.2.0"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "The first slice must include concurrency protection, stale-overwrite handling, privacy-safe correlation, and idempotent acknowledgement processing.",
+        "basis": "Required synthetic service-request smoke-path controls.",
+        "source_refs": [
+          "power-platform-incremental-delivery v0.2.0 section 5"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "The proposed primary persona is an internal service agent who records and acknowledges synthetic service requests.",
+        "impact": "Determines the app navigation, form, command, permissions, and acceptance journey.",
+        "validation_required": "Product owner must confirm the persona and observable outcome before this brief becomes Ready.",
+        "source_refs": [
+          "Bounded synthetic design assumption"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "The smallest useful journey is to create one request and acknowledge it exactly once from the model-driven app.",
+        "impact": "Constrains the slice to one Dataverse table, one acknowledgement action, essential user feedback, and evidence controls.",
+        "validation_required": "Confirm that creation plus acknowledgement is the intended first operational result.",
+        "source_refs": [
+          "Bounded synthetic design assumption"
+        ]
+      },
+      {
+        "id": "AS-003",
+        "statement": "Publisher prefix, environment names, telemetry destination, role names, and connection bindings are implementation-time configuration values.",
+        "impact": "They do not alter the proposed architecture but must be resolved before implementation or deployment.",
+        "validation_required": "Record approved values during implementation preparation and verify them before packaging.",
+        "source_refs": [
+          "Deferred implementation configuration"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Confirm whether the primary persona is an internal service agent and whether the first measurable result is that the agent can create one synthetic request and acknowledge it exactly once in the model-driven app.",
+        "owner": "Product owner",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Deliver only foundational tables, security, or navigation without an end-to-end user outcome.",
+        "reason": "A horizontal foundation does not produce a deployable, observable vertical slice.",
+        "reconsider_if": "Never for the first slice unless those components directly support a validated end-to-end result."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Allow the client form or command to update acknowledgement state directly.",
+        "reason": "Direct client writes would fragment ownership and weaken concurrency and duplicate-action protection.",
+        "reconsider_if": "A later design proves equivalent server-enforced concurrency and idempotency with one authoritative owner."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "permitted"
+  },
+  "slice": {
+    "outcome": "Proposed outcome pending OQ-001: an internal service agent creates a synthetic service request and acknowledges it exactly once in a model-driven app, with durable status, safe conflict handling, and observable success.",
+    "entry": "The service agent opens the model-driven app, selects Service Requests, creates a request from the main form, saves it, and then invokes Acknowledge from the saved request command bar.",
+    "validation": "Creation requires a non-blank title and description within configured length limits. Acknowledgement requires read and update permission, an active request, its current Dataverse concurrency token, and a client-generated acknowledgement idempotency key. The server rejects missing input, unauthorized access, inactive requests, stale versions, and conflicting duplicate keys without overwriting either version.",
+    "persistence_or_action": "Dataverse owns request creation. A single server-side acknowledgement operation owns the acknowledgement transition: it validates the submitted concurrency token and idempotency key, changes status from New to Acknowledged, records the acknowledgement timestamp and operation key, and returns the durable result. Replays with the same key return the original outcome without another transition; stale or different duplicate submissions are rejected.",
+    "feedback": "The form and acknowledgement command expose loading and disabled states while work is in progress. Success refreshes the row and shows the acknowledged state. Field validation is shown near affected fields. Permission failures provide no restricted data. Version conflicts tell the agent that the request changed and require reload and reconciliation. Retry is offered only for safe transient failures, while duplicate and terminal failures explain the next action.",
+    "telemetry": "Emit privacy-safe RequestCreate and RequestAcknowledge outcome events containing a generated correlation ID, operation name, duration class, success or sanitized failure category, and duplicate or conflict signal. Exclude titles, descriptions, user-entered content, personal identifiers, record payloads, credentials, and tenant-specific URLs.",
+    "evidence": "Local proof covers source inspection, component configuration review, static checks, and focused automated tests. Package proof covers solution validation and artifact integrity. Deployment proof requires authorized import, configuration readback, role assignment verification, and published app visibility. Runtime proof separately requires the complete create-and-acknowledge journey plus permission, duplicate, transient-failure, and concurrent-change observations in the target environment.",
+    "scope": [
+      "One model-driven app with Service Requests navigation",
+      "One synthetic Service Request Dataverse table",
+      "Create and view service-request forms and views",
+      "Server-owned acknowledgement operation",
+      "Optimistic concurrency validation",
+      "Acknowledgement idempotency protection",
+      "Least-privilege service-agent role definition",
+      "Privacy-safe operational telemetry",
+      "Managed solution packaging and rollback controls"
+    ],
+    "exclusions": [
+      "External or customer-facing intake",
+      "Email, Teams, portal, or telephony integration",
+      "Automatic assignment, queues, routing, escalation, or SLA processing",
+      "Attachments and free-form activity timelines",
+      "AI summarization, classification, copilots, or generative features",
+      "Migration of existing records",
+      "Production deployment or tenant administration",
+      "Use of confidential or live customer data"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "Use a model-driven app with a Service Requests area, active-request view, main form, and Acknowledge command visible only for eligible saved records.",
+        "rationale": "This is the smallest platform-native experience supporting the proposed create-and-acknowledge journey.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "EXP-002",
+        "decision": "The command must prevent repeated clicks while pending and present accessible loading, success, validation, permission, conflict, retry, and terminal-failure states.",
+        "rationale": "Deterministic feedback prevents accidental duplicate actions and supports keyboard and assistive-technology users.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "Create a Service Request table with request number, title, description, status, acknowledged timestamp, acknowledgement operation key, ownership, audit timestamps, and the platform concurrency token.",
+        "rationale": "These fields are sufficient for durable creation, acknowledgement, concurrency, and replay evidence.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "DAT-002",
+        "decision": "Treat New to Acknowledged as the only lifecycle transition in this slice and prevent acknowledgement fields from being edited directly through the form.",
+        "rationale": "A narrow state model and server-owned transition establish one authoritative lifecycle owner.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "Use one Dataverse server-side acknowledgement operation called by the model-driven command; add no external integration.",
+        "rationale": "The operation provides an explicit atomic boundary for validation, concurrency, idempotency, and persistence.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "INT-002",
+        "decision": "Require a unique client-generated acknowledgement key and the last-read concurrency token in every acknowledgement request.",
+        "rationale": "The pair distinguishes safe replay from stale or conflicting submissions.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AID-001",
+        "decision": "Add no AI component to the first slice.",
+        "rationale": "AI is unnecessary for the proposed measurable outcome and would expand data, evaluation, licensing, and safety scope.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "Define a least-privilege service-agent role with app access and only the Service Request create, read, and permitted update privileges required by the journey.",
+        "rationale": "The persona should not receive unrelated Dataverse or administrative privileges.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "SEC-002",
+        "decision": "Enforce authorization and valid state on the server operation and return sanitized errors without record payloads or restricted details.",
+        "rationale": "Client visibility rules are not a security boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Correlate client and server outcomes using a privacy-safe correlation ID and record duplicate, conflict, success, and sanitized failure categories.",
+        "rationale": "This supports diagnosis and replay analysis without exposing request content.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OPS-002",
+        "decision": "Configure the telemetry destination and retention policy before deployment and prohibit request content from telemetry.",
+        "rationale": "The destination is environment-specific, while the privacy boundary is fixed.",
+        "evidence_status": "Assumption"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "Package the app, table, operation, command, role, and required configuration in one managed-solution-ready increment with deterministic component verification.",
+        "rationale": "One package keeps the vertical slice deployable and dependency reviewable.",
+        "evidence_status": "Assumption"
+      },
+      {
+        "id": "ALM-002",
+        "decision": "Keep environment-specific identifiers and telemetry settings outside hard-coded source and resolve them through documented deployment configuration.",
+        "rationale": "This avoids environment coupling and supports repeatable promotion.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "An authorized service agent is in the model-driven app with valid synthetic input.",
+      "when": "The agent creates a service request.",
+      "then": "One durable request is saved with a generated request number and New status, and the form displays the saved record.",
+      "evidence": "Runtime observation plus Dataverse readback showing one row and the expected initial state."
+    },
+    {
+      "id": "AC-002",
+      "given": "A saved New request, its current concurrency token, and a new acknowledgement key.",
+      "when": "The authorized agent invokes Acknowledge.",
+      "then": "The server changes the request to Acknowledged exactly once, records the acknowledgement timestamp and key, returns a correlation ID, and refreshes the form.",
+      "evidence": "Runtime command result, server telemetry, and Dataverse readback of the durable state."
+    },
+    {
+      "id": "AC-003",
+      "given": "A previously successful acknowledgement key for the same request.",
+      "when": "The identical acknowledgement is replayed.",
+      "then": "The operation returns the original successful outcome without a second transition or duplicate side effect.",
+      "evidence": "Automated replay test, one durable transition, and telemetry marked as duplicate replay."
+    },
+    {
+      "id": "AC-004",
+      "given": "Another actor has changed the request after the agent loaded it.",
+      "when": "The agent submits acknowledgement with the stale concurrency token.",
+      "then": "The operation rejects the change without losing either version and instructs the agent to reload and reconcile.",
+      "evidence": "Concurrent runtime test, unchanged newer row, conflict telemetry, and visible reconciliation message."
+    },
+    {
+      "id": "AC-005",
+      "given": "A user without required acknowledgement permission.",
+      "when": "The user attempts to invoke or call the acknowledgement operation.",
+      "then": "The action is unavailable or denied server-side and no acknowledgement fields change.",
+      "evidence": "Role-based negative test and unchanged Dataverse row."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "Required title or description is missing or exceeds its configured length.",
+      "expected_behavior": "Block save, identify the invalid field accessibly, and create no partial row.",
+      "evidence": "Form validation test and Dataverse row-count check."
+    },
+    {
+      "id": "NP-002",
+      "condition": "Acknowledgement carries a stale concurrency token.",
+      "expected_behavior": "Reject the overwrite, retain the newer version, emit a conflict outcome and correlation ID, and instruct the user to reload and reconcile.",
+      "evidence": "Two-session concurrent-change test and durable row readback."
+    },
+    {
+      "id": "NP-003",
+      "condition": "The same acknowledgement key is submitted more than once.",
+      "expected_behavior": "Return the prior result without a second lifecycle transition or duplicate telemetry success event.",
+      "evidence": "Replay test and transition-count evidence."
+    },
+    {
+      "id": "NP-004",
+      "condition": "An already acknowledged request is submitted with a different acknowledgement key.",
+      "expected_behavior": "Reject it as an invalid duplicate or stale action and preserve the original acknowledgement evidence.",
+      "evidence": "Negative operation test and unchanged row readback."
+    },
+    {
+      "id": "NP-005",
+      "condition": "The caller lacks permission or the request is inactive.",
+      "expected_behavior": "Deny the action without leaking restricted fields or changing state.",
+      "evidence": "Security test under a restricted role and server-side audit evidence."
+    },
+    {
+      "id": "NP-006",
+      "condition": "A transient server or network failure occurs before the client receives a response.",
+      "expected_behavior": "Show a retry-safe message retaining the same idempotency key; retry must not create another transition.",
+      "evidence": "Injected failure and replay test with one durable acknowledgement."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Create and view a valid synthetic service request.",
+      "expected": "Exactly one New request is saved and displayed with its generated request number.",
+      "evidence_required": "Automated result and Dataverse readback.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "functional",
+      "scope": "Acknowledge a valid New request.",
+      "expected": "One authoritative server operation performs the single durable transition.",
+      "evidence_required": "Operation response, telemetry correlation, and row readback.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "reliability",
+      "scope": "Replay the same acknowledgement key after success and after an ambiguous client failure.",
+      "expected": "Both replays are idempotent and produce no duplicate transition.",
+      "evidence_required": "Automated replay results and durable transition count.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "reliability",
+      "scope": "Modify a request concurrently and submit with the stale token.",
+      "expected": "The stale submission is rejected, both versions remain recoverable, and conflict feedback requests reload and reconciliation.",
+      "evidence_required": "Two-session runtime capture, row readback, and conflict telemetry.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "security",
+      "scope": "Attempt acknowledgement using a role without required privilege and by bypassing the command UI.",
+      "expected": "Server authorization denies both paths without state change or sensitive error content.",
+      "evidence_required": "Restricted-role runtime result, sanitized error, and unchanged row.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "accessibility",
+      "scope": "Keyboard, focus, label, error-announcement, disabled, loading, conflict, and long-content behavior.",
+      "expected": "The complete journey is keyboard-operable, focus is deterministic, and feedback is programmatically exposed.",
+      "evidence_required": "Accessibility checklist and automated scan supplemented by keyboard observation.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "performance",
+      "scope": "Request form load, save, and acknowledgement response under the agreed synthetic test profile.",
+      "expected": "Measured results meet thresholds approved before implementation without duplicate submissions caused by slow feedback.",
+      "evidence_required": "Timestamped measurements, approved thresholds, and test profile.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-008",
+      "class": "alm",
+      "scope": "Solution component dependency, environment-variable, and unmanaged-layer validation.",
+      "expected": "The package contains the complete slice with no missing dependencies, secrets, or hard-coded environment values.",
+      "evidence_required": "Solution checker or equivalent static output and package manifest review.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-009",
+      "class": "deployment",
+      "scope": "Authorized import, configuration, publication, role assignment, and application visibility.",
+      "expected": "The solution imports successfully and the configured service agent can access only the intended journey.",
+      "evidence_required": "Import result, configuration readback, published app check, and role verification.",
+      "status": "not-run"
+    },
+    {
+      "id": "TEST-010",
+      "class": "rollback",
+      "scope": "Disable the app entry point and acknowledgement command, restore the prior managed version, and preserve created rows.",
+      "expected": "New use is stopped, the prior version is restored, and existing service-request data remains recoverable.",
+      "evidence_required": "Authorized rollback rehearsal and post-rollback row readback.",
+      "status": "not-run"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-requested",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Authorized development environment",
+      "Authorized test environment"
+    ],
+    "prerequisites": [
+      "Confirm OQ-001 and approve this build brief",
+      "Select publisher and publisher prefix",
+      "Confirm target environments and solution ownership",
+      "Approve table ownership model and least-privilege role mapping",
+      "Configure privacy-safe telemetry destination and retention",
+      "Confirm managed solution and environment configuration conventions",
+      "Use synthetic data only",
+      "Obtain separate implementation and deployment authorization"
+    ],
+    "steps": [
+      "Implement and validate the slice in the authorized development environment",
+      "Run focused functional, reliability, security, accessibility, performance, and ALM checks",
+      "Generate and inspect the managed-solution artifact",
+      "Import into the authorized test environment",
+      "Bind environment configuration and assign the approved service-agent role",
+      "Publish the model-driven app",
+      "Run post-deploy smoke, negative, concurrent-change, and replay tests"
+    ],
+    "post_deploy_checks": [
+      "App and Service Requests navigation are visible only to the intended role",
+      "A valid request can be created and read back",
+      "Acknowledgement changes state exactly once",
+      "Duplicate acknowledgement replay is idempotent",
+      "Stale acknowledgement is rejected with reconciliation guidance",
+      "Unauthorized acknowledgement is denied server-side",
+      "Telemetry contains correlation and outcome fields but no request content",
+      "No unexpected unmanaged layers or missing dependencies are present"
+    ],
+    "evidence_required": [
+      "Reviewed package manifest and integrity evidence",
+      "Authorized import result",
+      "Configuration and role readback",
+      "Published app visibility evidence",
+      "Runtime success, failure, conflict, and replay observations",
+      "Sanitized telemetry samples",
+      "Recorded evidence level without promoting package proof to runtime proof"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Import failure or unresolved dependency",
+      "Unauthorized access or privilege expansion",
+      "Data loss or stale overwrite",
+      "Duplicate acknowledgement side effects",
+      "Telemetry containing excluded payloads",
+      "Critical accessibility or workflow regression"
+    ],
+    "steps": [
+      "Disable the acknowledgement command or remove app access to stop new processing",
+      "Preserve correlation IDs and sanitized diagnostic evidence",
+      "Restore the last approved managed solution version using the authorized ALM process",
+      "Reapply and verify prior environment configuration and role assignments",
+      "Validate existing Service Request rows before reopening access"
+    ],
+    "data_considerations": [
+      "Do not delete service-request rows created before rollback",
+      "Preserve original acknowledgement keys and timestamps for reconciliation",
+      "Identify partially completed operations by correlation ID without copying request content",
+      "Use a separately authorized repair process for any inconsistent row"
+    ],
+    "owner": "Authorized solution owner and deployment operator",
+    "evidence_required": [
+      "Rollback authorization",
+      "Restored solution-version readback",
+      "Role and configuration verification",
+      "Post-rollback data-integrity check",
+      "Sanitized incident and reconciliation record"
+    ]
+  },
+  "next_action": "The product owner must answer OQ-001 by confirming or correcting the proposed internal service-agent persona and the measurable create-and-acknowledge outcome; then this brief can be finalized as Ready for a separately authorized implementation workflow."
+}

@@ -1,0 +1,143 @@
+{
+  "status": "Blocked",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "The request explicitly authorizes solution import, activation, commit, and push.",
+        "basis": "Direct user instruction.",
+        "source_refs": [
+          "current-request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "This package is restricted to reasoning-only build-brief orchestration and prohibits deployment, activation, commit, push, repository inspection, and workflow operations.",
+        "basis": "Power Platform Incremental Delivery package 0.2.0 security and scope contract.",
+        "source_refs": [
+          "SKILL.md sections 1, 5, 8, and 9"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "What observable business outcome, persona, host, and primary journey should the next vertical slice deliver?",
+        "owner": "requester",
+        "blocks_ready": true
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Import, activate, commit, or push through this package.",
+        "reason": "These are prohibited consequential operations outside the package authority.",
+        "reconsider_if": "Resume through separately authorized implementation, deployment, and source-control workflows after an implementation-ready brief exists."
+      }
+    ],
+    "superseded": []
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "approval-required"
+  },
+  "slice": {
+    "outcome": "No delivery slice is defined because the observable business outcome was not supplied.",
+    "entry": "Not defined pending the persona, host, entry point, and initiating event.",
+    "validation": "Not defined pending the business outcome and authoritative implementation.",
+    "persistence_or_action": "No tenant, repository, deployment, activation, commit, or push action is permitted in this invocation.",
+    "feedback": "Return a sanitized stop record without attempting consequential operations.",
+    "telemetry": "No operational telemetry is emitted because no implementation or deployment is executed.",
+    "evidence": "The evidence boundary is limited to the supplied request and package instructions; no repository, package, target, runtime, commit, or push evidence was inspected or produced.",
+    "scope": [
+      "Record the package-authority stop",
+      "Identify the minimum missing delivery-slice inputs"
+    ],
+    "exclusions": [
+      "Repository inspection or modification",
+      "Solution import or activation",
+      "Tenant authentication or administration",
+      "Commit or push",
+      "Implementation and runtime verification"
+    ]
+  },
+  "architecture": {
+    "experience": [],
+    "data": [],
+    "integration": [],
+    "ai": [],
+    "security": [],
+    "operations": [],
+    "alm": []
+  },
+  "delegations": [],
+  "acceptance_criteria": [],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "A reasoning-only build-brief package is asked to import or activate a solution, modify a repository, commit, or push.",
+      "expected_behavior": "Stop before all workflow operations, expose no credentials or environment details, and route execution to separately authorized workflows.",
+      "evidence": "This JSON stop record; no deployment, activation, repository, source-control, or tenant operation was attempted."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "security",
+      "scope": "Verify that prohibited deployment and source-control operations are not attempted.",
+      "expected": "Zero workflow operations and no credential, tenant, or environment-specific material in the response.",
+      "evidence_required": "Operation audit showing no tool invocation.",
+      "status": "passed"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "explicitly-authorized",
+    "target_zone": "organisational-microsoft",
+    "environments": [
+      "Target environment unresolved"
+    ],
+    "prerequisites": [
+      "Use an authorized deployment workflow outside this package",
+      "Identify the exact solution artifact and target environment",
+      "Verify authentication, connection references, environment variables, dependencies, and rollback package"
+    ],
+    "steps": [
+      "Do not deploy through this package",
+      "Create and approve an implementation-ready vertical-slice brief",
+      "Execute import and activation through the authorized deployment workflow"
+    ],
+    "post_deploy_checks": [
+      "Read back import status and component activation",
+      "Run the defined runtime acceptance and failure-path checks"
+    ],
+    "evidence_required": [
+      "Observed import result",
+      "Configuration and activation readback",
+      "Runtime end-to-end evidence"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "Import failure",
+      "Activation failure",
+      "Regression in the defined acceptance journey"
+    ],
+    "steps": [
+      "Stop further promotion",
+      "Use the authorized deployment workflow to restore the approved prior version",
+      "Verify configuration and runtime recovery"
+    ],
+    "data_considerations": [
+      "Do not remove or overwrite target data without a separately reviewed recovery plan"
+    ],
+    "owner": "Authorized deployment owner",
+    "evidence_required": [
+      "Prior-version inventory",
+      "Observed rollback result",
+      "Post-rollback configuration and runtime checks"
+    ]
+  },
+  "next_action": "Provide the observable business outcome, persona, host, and primary journey to produce the implementation-ready brief; then hand that brief to separately authorized implementation, deployment, activation, and source-control workflows."
+}

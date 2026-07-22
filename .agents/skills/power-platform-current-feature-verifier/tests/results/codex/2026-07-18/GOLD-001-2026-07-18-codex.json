@@ -1,0 +1,150 @@
+{
+  "case_id": "GOLD-001",
+  "skill_version": "0.1.0",
+  "runtime_client": "Codex/VS Code",
+  "model": "GPT-5",
+  "reasoning_setting": null,
+  "execution_date": "2026-07-18",
+  "exact_test_input": "Verify the current status and production fit of Plans in Power Apps compared with Power Apps Vibe.",
+  "sources": [
+    {
+      "title": "Overview of plans",
+      "url": "https://learn.microsoft.com/en-us/power-apps/maker/plan-designer/plan-designer",
+      "verified_on": "2026-07-18"
+    },
+    {
+      "title": "Overview of Power Apps Vibe (preview)",
+      "url": "https://learn.microsoft.com/en-us/power-apps/vibe/overview",
+      "verified_on": "2026-07-18"
+    }
+  ],
+  "generated_output": {
+    "recommendation": "Open - Plans is the documented GA production-path candidate; Power Apps Vibe remains preview and must not be a production dependency. Do not approve a specific deployment until its licensing, region, security, and ALM context is verified.",
+    "production_recommendation": false,
+    "evidence_label": "Open",
+    "release_status": "UNKNOWN",
+    "verified_date": "2026-07-18",
+    "license_capacity": [
+      "Plans requires an environment with a Dataverse database; the requested scenario's Power Apps and Dataverse entitlement and capacity were not supplied.",
+      "No current scenario-specific Vibe entitlement or capacity conclusion was established from the provided context."
+    ],
+    "geography_language": [
+      "Plans availability is subject to documented region and eligible-locale availability.",
+      "Vibe is documented for the United States, Australia, Asia, and India and for English; exact environment eligibility wasn't verified."
+    ],
+    "limitations": [
+      "Plans is generally available and enabled by default, subject to its prerequisites and permissions.",
+      "Vibe is explicitly preview and isn't meant for production use.",
+      "The comparison has mixed product statuses, so the aggregate release_status is UNKNOWN rather than upgrading Vibe to GA."
+    ],
+    "security_governance": [
+      "Plans requires documented security roles and privileges; effective access wasn't inspected.",
+      "Vibe requires tenant enablement and may use optional external models; organisational approval and data controls weren't evaluated.",
+      "No tenant authentication or environment access occurred."
+    ],
+    "alm_implications": [
+      "Treat generated Plan artifacts as governed solution assets and validate them through the normal development, test, and production path.",
+      "Keep a preview-exit path for any Vibe experiment and don't make production continuity depend on it."
+    ],
+    "sources": [
+      {
+        "title": "Overview of plans",
+        "url": "https://learn.microsoft.com/en-us/power-apps/maker/plan-designer/plan-designer",
+        "authority_level": "A1",
+        "source_last_updated": "2026-02-24",
+        "verified_on": "2026-07-18",
+        "supported_claims": [
+          "Plans is generally available and enabled by default.",
+          "Plans requires an environment with a Dataverse database and is limited by documented availability and role requirements."
+        ]
+      },
+      {
+        "title": "Overview of Power Apps Vibe (preview)",
+        "url": "https://learn.microsoft.com/en-us/power-apps/vibe/overview",
+        "authority_level": "A1",
+        "source_last_updated": "2026-04-21",
+        "verified_on": "2026-07-18",
+        "supported_claims": [
+          "Power Apps Vibe is a preview feature and isn't meant for production use.",
+          "Vibe requires tenant enablement and has documented regional and English-language availability limits."
+        ]
+      }
+    ],
+    "open_questions": [
+      "What Power Apps and Dataverse licenses and capacity apply to the intended makers and users?",
+      "Is the target environment and language eligible for the selected capability?",
+      "Which security, DLP, data-classification, and solution-promotion controls must be satisfied?"
+    ],
+    "revalidation_date": "2026-08-01"
+  },
+  "schema_validation": {
+    "schema_path": "../../../output-schema.json",
+    "passed": true,
+    "errors": []
+  },
+  "scoring": {
+    "criteria": [
+      {
+        "name": "Independent capability verification",
+        "passed": true,
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The record cites separate A1 Microsoft Learn capability sources for Plans and Power Apps Vibe, both verified on 2026-07-18."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
+      },
+      {
+        "name": "Release-status fidelity",
+        "passed": true,
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The generated limitations preserve Plans as generally available and Power Apps Vibe as preview and not meant for production use."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
+      },
+      {
+        "name": "Decision-dimension separation",
+        "passed": true,
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The generated output separately populates license_capacity, geography_language, limitations, security_governance, and alm_implications."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
+      },
+      {
+        "name": "Preview exit planning",
+        "passed": true,
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The ALM implications require a preview-exit path and prohibit production continuity from depending on Vibe."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
+      },
+      {
+        "name": "Material-gap abstention",
+        "passed": true,
+        "notes": "Case-defined scoring dimension preserved by name during release-candidate administrative remediation.",
+        "score": 100,
+        "evidence": [
+          "The output is labelled Open, production_recommendation is false, and material licensing, region, security, and ALM questions remain explicit."
+        ],
+        "deviation": "None.",
+        "result": "Pass"
+      }
+    ],
+    "score_percent": 100.0
+  },
+  "deviations": [
+    "Automatic project-skill discovery wasn't exercised: current Codex documentation uses .agents/skills, while this lab package is under skills/. The user explicitly invoked the package and SKILL.md was loaded manually."
+  ],
+  "reviewer": "Codex automated evaluation; human expert review pending",
+  "final_result": "Pass"
+}

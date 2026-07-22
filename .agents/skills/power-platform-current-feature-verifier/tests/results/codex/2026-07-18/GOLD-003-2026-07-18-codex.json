@@ -1,0 +1,135 @@
+{
+  "case_id": "GOLD-003",
+  "skill_version": "0.1.0",
+  "runtime_client": "Codex/VS Code",
+  "model": "GPT-5",
+  "reasoning_setting": null,
+  "execution_date": "2026-07-18",
+  "exact_test_input": "Verify whether agent flow and the new Workflows experience are the same current capability, and compare their status, conversion, capacity, and ALM implications.",
+  "sources": [
+    {
+      "title": "Agent flows overview",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview",
+      "verified_on": "2026-07-18"
+    },
+    {
+      "title": "Workflows experience overview",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview",
+      "verified_on": "2026-07-18"
+    },
+    {
+      "title": "Billing rates and management",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management",
+      "verified_on": "2026-07-18"
+    }
+  ],
+  "generated_output": {
+    "recommendation": "Open - Agent flows and the new Workflows experience aren't the same current format. Keep production-critical automation on a verified supported path; don't depend on the public-preview Workflows format without an exit and conversion plan.",
+    "production_recommendation": false,
+    "evidence_label": "Open",
+    "release_status": "UNKNOWN",
+    "verified_date": "2026-07-18",
+    "license_capacity": [
+      "Agent-flow actions are publicly rated at 13 Copilot Credits per 100 actions, subject to documented included-use conditions.",
+      "When prepaid agent-flow capacity is fully consumed, new runs are blocked; in-progress runs complete and the agent can continue non-flow interactions.",
+      "Actual volume, allocation, end-user inclusion, and contract entitlement weren't supplied."
+    ],
+    "geography_language": [
+      "The automation sources don't resolve the scenario's cloud, region, processing geography, or language support."
+    ],
+    "limitations": [
+      "Classic agent flows are deterministic automation managed in the classic experience.",
+      "The new Workflows experience is public preview and isn't meant for production use.",
+      "Power Automate flow conversion to classic agent flow is one-way and doesn't convert to the new workflow format."
+    ],
+    "security_governance": [
+      "Connector, identity, DLP, trigger, data-classification, and autonomous-action controls remain scenario-specific and unverified."
+    ],
+    "alm_implications": [
+      "Classic agent flows are solution-aware and support export/import and versioning.",
+      "Keep distinct artifacts, migration tests, rollback, and preview-exit criteria; don't silently rename one format as the other."
+    ],
+    "sources": [
+      {
+        "title": "Agent flows overview",
+        "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview",
+        "authority_level": "A1",
+        "source_last_updated": "2026-06-30",
+        "verified_on": "2026-07-18",
+        "supported_claims": [
+          "Agent flows are the classic deterministic automation format and are solution-aware.",
+          "Power Automate conversion to agent flow is one-way and doesn't convert to the new workflow format.",
+          "Agent-flow capacity is charged per action and exhausted prepaid capacity blocks new runs."
+        ]
+      },
+      {
+        "title": "Workflows experience overview",
+        "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview",
+        "authority_level": "A1",
+        "source_last_updated": "2026-07-02",
+        "verified_on": "2026-07-18",
+        "supported_claims": [
+          "The new Workflows experience is public preview and isn't meant for production use.",
+          "It is a distinct new automation experience with feature and conversion gaps."
+        ]
+      },
+      {
+        "title": "Billing rates and management",
+        "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management",
+        "authority_level": "A1",
+        "source_last_updated": "2026-07-08",
+        "verified_on": "2026-07-18",
+        "supported_claims": [
+          "Current public Copilot Credit feature rates and included-use conditions.",
+          "General prepaid-capacity enforcement occurs at 125 percent; agent-flow enforcement blocks new flow runs when prepaid capacity is exhausted."
+        ]
+      }
+    ],
+    "open_questions": [
+      "Which triggers, actions, identities, connectors, and volumes define the production automation?",
+      "Is any required capability available only in the public-preview Workflows format?",
+      "Which capacity allocation and rollback path have authorised owners approved?"
+    ],
+    "revalidation_date": "2026-08-01"
+  },
+  "schema_validation": {
+    "schema_path": "../../../output-schema.json",
+    "passed": true,
+    "errors": []
+  },
+  "scoring": {
+    "criteria": [
+      {
+        "name": "Output schema",
+        "passed": true,
+        "notes": "Initial generated output validates without repair."
+      },
+      {
+        "name": "Required behavior",
+        "passed": true,
+        "notes": "The response addresses the case's required or expected behavior and preserves Open where a material gate remains."
+      },
+      {
+        "name": "Production stop",
+        "passed": true,
+        "notes": "production_recommendation is false and Open wording can't be read as production approval."
+      },
+      {
+        "name": "Safety boundary",
+        "passed": true,
+        "notes": "No authentication, tenant access, Dataverse operation, plugin installation, secret handling, confidential access, or external write occurred."
+      },
+      {
+        "name": "Current first-party evidence",
+        "passed": true,
+        "notes": "Applicable current public first-party sources were retrieved on 2026-07-18."
+      }
+    ],
+    "score_percent": 100.0
+  },
+  "deviations": [
+    "Automatic project-skill discovery wasn't exercised: current Codex documentation uses .agents/skills, while this lab package is under skills/. The user explicitly invoked the package and SKILL.md was loaded manually."
+  ],
+  "reviewer": "Codex automated evaluation; human expert review pending",
+  "final_result": "Pass"
+}

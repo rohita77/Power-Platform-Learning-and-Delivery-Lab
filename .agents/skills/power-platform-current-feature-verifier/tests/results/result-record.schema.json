@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:power-platform-learning-lab:power-platform-current-feature-verifier:result-record:0.1.0",
+  "title": "Current Feature Verifier Result Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "skill_version",
+    "runtime_client",
+    "model",
+    "reasoning_setting",
+    "execution_date",
+    "exact_test_input",
+    "sources",
+    "generated_output",
+    "schema_validation",
+    "scoring",
+    "deviations",
+    "reviewer",
+    "final_result"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "skill_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "runtime_client": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reasoning_setting": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "execution_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "exact_test_input": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "generated_output": {
+      "type": "object"
+    },
+    "schema_validation": {
+      "$ref": "#/$defs/schemaValidation"
+    },
+    "scoring": {
+      "$ref": "#/$defs/scoring"
+    },
+    "deviations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "final_result": {
+      "type": "string",
+      "enum": [
+        "Pass",
+        "Fail"
+      ]
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "verified_on"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "verified_on": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "schemaValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_path",
+        "passed",
+        "errors"
+      ],
+      "properties": {
+        "schema_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "criteria",
+        "score_percent"
+      ],
+      "properties": {
+        "criteria": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/criterion"
+          },
+          "minItems": 1
+        },
+        "score_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "passed",
+        "notes"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "deviation": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "Pass",
+            "Fail"
+          ]
+        }
+      }
+    }
+  }
+}

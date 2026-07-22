@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learning-lab.example/schemas/power-platform-current-feature-verifier-output-v0.1.0.json",
+  "title": "Power Platform Current Feature Verification Output",
+  "description": "Machine-readable decision output. Product facts must be retrieved live and are not encoded in this schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "recommendation",
+    "production_recommendation",
+    "evidence_label",
+    "release_status",
+    "verified_date",
+    "license_capacity",
+    "geography_language",
+    "limitations",
+    "security_governance",
+    "alm_implications",
+    "sources",
+    "open_questions",
+    "revalidation_date"
+  ],
+  "properties": {
+    "recommendation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "production_recommendation": {
+      "type": "boolean"
+    },
+    "evidence_label": {
+      "type": "string",
+      "enum": [
+        "Confirmed",
+        "Preview",
+        "Announced",
+        "Inference",
+        "Recommendation",
+        "Assumption",
+        "Open",
+        "Superseded"
+      ]
+    },
+    "release_status": {
+      "type": "string",
+      "enum": [
+        "GA",
+        "PRODUCTION_READY_PREVIEW",
+        "PUBLIC_PREVIEW",
+        "EXPERIMENTAL",
+        "PLANNED",
+        "DEPRECATED",
+        "UNKNOWN"
+      ]
+    },
+    "verified_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "license_capacity": {
+      "$ref": "#/$defs/stringList"
+    },
+    "geography_language": {
+      "$ref": "#/$defs/stringList"
+    },
+    "limitations": {
+      "$ref": "#/$defs/stringList"
+    },
+    "security_governance": {
+      "$ref": "#/$defs/stringList"
+    },
+    "alm_implications": {
+      "$ref": "#/$defs/stringList"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "open_questions": {
+      "$ref": "#/$defs/stringList"
+    },
+    "revalidation_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evidence_label": {
+            "const": "Open"
+          }
+        },
+        "required": [
+          "evidence_label"
+        ]
+      },
+      "then": {
+        "properties": {
+          "recommendation": {
+            "pattern": "^Open\\b"
+          },
+          "production_recommendation": {
+            "const": false
+          },
+          "open_questions": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidence_label": {
+            "const": "Confirmed"
+          }
+        },
+        "required": [
+          "evidence_label"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sources": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "url",
+        "authority_level",
+        "source_last_updated",
+        "verified_on",
+        "supported_claims"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "authority_level": {
+          "type": "string",
+          "enum": [
+            "A1",
+            "A2",
+            "A3",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "source_last_updated": {
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "const": "unknown"
+            }
+          ]
+        },
+        "verified_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "supported_claims": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    }
+  }
+}

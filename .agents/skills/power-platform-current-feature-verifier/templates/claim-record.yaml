@@ -1,0 +1,36 @@
+claim_id: "PP-AREA-0001"
+statement: ""
+decision_affected: ""
+recommendation: "Open - no production recommendation."
+production_recommendation: false
+evidence_label: "Open"
+authority_level: "A1"
+product: ""
+capability: ""
+runtime_client: ""
+installed_or_evaluated: ""
+test_status: "untested"
+data_boundary: "personal-openai"
+release_status: "UNKNOWN"
+source_status_wording: ""
+cloud: ""
+geography: []
+language: []
+license_entitlement: []
+meter_capacity: []
+enforcement_behavior: []
+limitations: []
+security_governance: []
+alm_implications: []
+sources:
+  - title: ""
+    url: ""
+    authority_level: "A1"
+    source_last_updated: "unknown"
+    verified_on: "YYYY-MM-DD"
+    supported_claims: []
+open_questions: []
+verified_date: "YYYY-MM-DD"
+revalidation_date: "YYYY-MM-DD"
+supersedes: []
+notes: ""

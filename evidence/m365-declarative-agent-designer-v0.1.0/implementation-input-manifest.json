@@ -1,0 +1,45 @@
+{
+  "adoption_decision": "Implemented pending runtime evaluation",
+  "classification": "public-or-synthetic",
+  "created_on": "2026-07-22",
+  "cross_zone_transfer": "prohibited",
+  "implementation": "m365-declarative-agent-designer 0.1.0",
+  "inputs": [
+    {
+      "path": "evidence/m365-declarative-agent-designer-verifier.json",
+      "role": "specialist-result",
+      "sha256": "099a47d34d8e8863e5f9852f83f72847fa0d25865c853d3aab7826d9a66f3d69"
+    },
+    {
+      "path": "evidence/m365-declarative-agent-designer-v0.1.0/ready-build-brief.json",
+      "role": "corrected-ready-build-brief",
+      "sha256": "5dfa7806b7b71b5c0875ad4267a9f86985aa791cb332fa2d4c8fa679dbd6331a"
+    },
+    {
+      "path": "evidence/m365-declarative-agent-designer-v0.1.0/answer-schema-validation.json",
+      "role": "independent-answer-schema-validation",
+      "sha256": "a4e6a7d5d2093ce434f0965c9e0b89f84d372d1d8169ea195507a88dbdc612d3"
+    },
+    {
+      "path": "evidence/m365-declarative-agent-designer-v0.1.0/zero-operation-public-boundary.json",
+      "role": "zero-operation-and-boundary-record",
+      "sha256": "85157b5318ad54883b31c5e8e63d02c132b9f746b1a641f211e51e63dd0e6c1b"
+    }
+  ],
+  "manifest_version": "0.1.0",
+  "status": "Ready",
+  "verifier": {
+    "approval_path": "skills/power-platform-current-feature-verifier/tests/results/human-review/GOLD-005-rohit-review-2026-07-18.md",
+    "approval_sha256": "419f06b43beea63479200311666243c78e412cd2b22db1d1a3e233716be0d8c0",
+    "path": "skills/power-platform-current-feature-verifier/SKILL.md",
+    "sha256": "8118c99366fc4a01f56b568641996f924ae904ca84c78b6e7bcf3362919cbe3e",
+    "version_or_pin": "0.1.0"
+  },
+  "version_reconciliation": {
+    "corrected_only_in_implementation_input_copy": true,
+    "implementation_input_value": "0.1.0",
+    "lab_pack_version_confused_with_skill_version": false,
+    "repository_value": "0.1.0"
+  },
+  "zone": "personal-openai"
+}

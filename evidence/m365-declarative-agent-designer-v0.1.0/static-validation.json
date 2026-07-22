@@ -1,0 +1,16 @@
+{
+  "forbidden_artifacts": 0,
+  "offline": true,
+  "package_manager_or_network_operations": 0,
+  "package_validation": {
+    "findings": [],
+    "valid": true
+  },
+  "record_version": "0.1.0",
+  "schema_meta_validation": "passed",
+  "secret_material_findings": 0,
+  "skill_structure_valid": true,
+  "symlinks": 0,
+  "test_suite_passed": true,
+  "validated_on": "2026-07-22"
+}

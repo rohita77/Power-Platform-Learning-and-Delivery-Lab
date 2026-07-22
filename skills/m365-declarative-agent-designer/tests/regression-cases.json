@@ -1,0 +1,117 @@
+[
+  {
+    "base": "GOLD-005.request.json",
+    "expected_code": "DAD-REPLAYED-REQUEST",
+    "id": "REG-001",
+    "kind": "document",
+    "mutation": {
+      "op": "set",
+      "path": "/request_id",
+      "value": "DRQ-PREV"
+    },
+    "target": "request"
+  },
+  {
+    "base": "GOLD-005.request.json",
+    "expected_code": "DAD-STALE-CARRY-FORWARD",
+    "id": "REG-002",
+    "kind": "document",
+    "mutation": {
+      "op": "set",
+      "path": "/continuation/expected_sequence",
+      "value": 0
+    },
+    "target": "request"
+  },
+  {
+    "expected_code": "DAD-STALE-CARRY-FORWARD",
+    "id": "REG-003",
+    "kind": "request-result",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/confirmed_decisions/0/statement",
+      "value": "Reopened without evidence."
+    },
+    "request": "GOLD-005.request.json",
+    "result": "GOLD-005.result.json"
+  },
+  {
+    "expected_code": "DAD-STALE-CARRY-FORWARD",
+    "id": "REG-004",
+    "kind": "request-result",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/superseded_chronology",
+      "value": []
+    },
+    "prepare": "add-superseded",
+    "request": "GOLD-005.request.json",
+    "result": "GOLD-005.result.json"
+  },
+  {
+    "expected_code": "DAD-ADAPTER-DIVERGENCE",
+    "id": "REG-005",
+    "kind": "adapter",
+    "mutation": {
+      "op": "set",
+      "path": "/mapping",
+      "value": "host-specific"
+    }
+  },
+  {
+    "expected_code": "DAD-STALE-CARRY-FORWARD",
+    "id": "REG-006",
+    "kind": "request-result",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/open_items",
+      "value": []
+    },
+    "prepare": "add-prior-failure",
+    "request": "GOLD-005.request.json",
+    "result": "GOLD-005.result.json"
+  },
+  {
+    "expected_code": "DAD-STALE-CARRY-FORWARD",
+    "id": "REG-007",
+    "kind": "forged-reset",
+    "request": "GOLD-005.request.json",
+    "result": "GOLD-005.result.json"
+  },
+  {
+    "base": "GOLD-003.result.json",
+    "expected_code": "DAD-UNRESOLVED-CONTRADICTION",
+    "id": "REG-008",
+    "kind": "document",
+    "mutation": {
+      "op": "set",
+      "path": "/status",
+      "value": "Complete"
+    },
+    "target": "result"
+  },
+  {
+    "base": "GOLD-003.result.json",
+    "expected_code": "DAD-UNRESOLVED-CONTRADICTION",
+    "id": "REG-009",
+    "kind": "document",
+    "mutation": {
+      "op": "set",
+      "path": "/abstentions/0/reason",
+      "value": "unsupported-claim"
+    },
+    "target": "result"
+  },
+  {
+    "expected_code": "",
+    "id": "REG-010",
+    "kind": "accepted-stale",
+    "request": "GOLD-004.request.json",
+    "result": "GOLD-004.result.json"
+  },
+  {
+    "expected_code": "DAD-ADAPTER-DIVERGENCE",
+    "id": "REG-011",
+    "kind": "adapter-both"
+  }
+]

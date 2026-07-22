@@ -1,0 +1,175 @@
+{
+  "abstentions": [
+    {
+      "claim": "The final approval persona is established.",
+      "contradiction_ids": [],
+      "finding_ids": [
+        "FND-001"
+      ],
+      "human_action": "Supply the synthetic approval-owner decision.",
+      "id": "ABS-001",
+      "provenance_ids": [],
+      "reason": "absent-evidence"
+    }
+  ],
+  "carry_forward": {
+    "assumptions": [],
+    "confirmed_decisions": [
+      {
+        "evidence_refs": [
+          "PRV-001"
+        ],
+        "id": "DEC-001",
+        "statement": "Use one agent with five lifecycle modes."
+      }
+    ],
+    "contract_version": "0.1.0",
+    "evidence_refs": [
+      "PRV-001"
+    ],
+    "open_items": [
+      {
+        "evidence_refs": [
+          "PRV-001"
+        ],
+        "id": "OPN-001",
+        "statement": "Which synthetic review persona owns final approval?"
+      }
+    ],
+    "previous_result_id": null,
+    "rejected_decisions": [
+      {
+        "evidence_refs": [
+          "PRV-001"
+        ],
+        "id": "REJ-001",
+        "statement": "Do not generate Microsoft runtime artifacts."
+      }
+    ],
+    "request_ids": [
+      "DRQ-GOLD-002"
+    ],
+    "result_ids": [
+      "DRS-GOLD-002"
+    ],
+    "sequence": 0,
+    "state_id": "STATE-001",
+    "superseded_chronology": []
+  },
+  "contract_version": "0.1.0",
+  "contradictions": [],
+  "disclaimers": {
+    "deployment_approval": false,
+    "microsoft_runtime_artifact": false,
+    "runtime_compatibility_proof": false,
+    "tenant_fitment_evidence": false
+  },
+  "evaluation_metadata": {
+    "adapter_id": "canonical",
+    "contract_version": "0.1.0",
+    "correlation_id": "SYN-DRQ-GOLD-002",
+    "duration_ms": 0,
+    "finding_codes": [],
+    "fixture_id": "DRQ-GOLD-002",
+    "validator_outcome": "passed"
+  },
+  "findings": [
+    {
+      "affected_paths": [
+        "/requirements/scope"
+      ],
+      "category": "requirement",
+      "evidence_label": "Open",
+      "id": "FND-001",
+      "provenance_ids": [
+        "PRV-001"
+      ],
+      "resolution": "open",
+      "severity": "info",
+      "statement": "Use one portable requirements-discovery agent with five explicit lifecycle modes."
+    }
+  ],
+  "generated_on": "2026-07-22",
+  "human_review_required": true,
+  "modes": [
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Discovery",
+      "summary": "The synthetic outcome, actor, evidence, and offline boundary are identified."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Elicitation",
+      "summary": "Scope, exclusions, requirements, and open questions are structured."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Conceptualisation",
+      "summary": "One agent and separate deterministic controls are proposed."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Authoring",
+      "summary": "The canonical DesignResult contract is populated without runtime artifacts."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Assurance",
+      "summary": "Provenance, lineage, boundary, and human-review disclaimers are checked."
+    }
+  ],
+  "provenance": [
+    {
+      "id": "PRV-001",
+      "reference": "synthetic:prv-001",
+      "revalidate_on": "2027-07-22",
+      "source_type": "synthetic-fixture",
+      "status": "current",
+      "title": "Synthetic requirements fixture",
+      "verified_on": "2026-07-22"
+    }
+  ],
+  "request_digest": "ca4e7bc1145c63a5aaac42eea10293e346655e195a61d17f798fc17503186786",
+  "request_id": "DRQ-GOLD-002",
+  "requirements": {
+    "actors": [
+      "Synthetic product owner"
+    ],
+    "data": [
+      "Public or synthetic input only"
+    ],
+    "exclusions": [
+      "Microsoft runtime artifact generation"
+    ],
+    "functional_needs": [
+      "Return one canonical DesignResult"
+    ],
+    "integrations": [
+      "No integrations"
+    ],
+    "nonfunctional_needs": [
+      "Operate offline"
+    ],
+    "open_questions": [
+      "Which synthetic review persona owns final approval?"
+    ],
+    "scope": [
+      "Requirements discovery"
+    ],
+    "security": [
+      "Reject prohibited boundary requests"
+    ]
+  },
+  "result_id": "DRS-GOLD-002",
+  "status": "Open"
+}

@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lab.example/schemas/m365-declarative-agent-designer/design-request-0.1.0.schema.json",
+  "title": "M365 Declarative Agent Designer DesignRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "request_id",
+    "classification",
+    "zone",
+    "cross_zone_transfer",
+    "objective",
+    "personas",
+    "host_candidates",
+    "constraints",
+    "sources",
+    "settled_decisions",
+    "assumptions",
+    "open_questions",
+    "requested_operations"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "0.1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^DRQ-[A-Z0-9._-]{1,60}$"
+    },
+    "classification": {
+      "enum": [
+        "public",
+        "synthetic"
+      ]
+    },
+    "zone": {
+      "const": "personal-openai"
+    },
+    "cross_zone_transfer": {
+      "const": "prohibited"
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 4000
+    },
+    "personas": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "host_candidates": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "codex",
+          "chatgpt-work"
+        ]
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      }
+    },
+    "sources": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "finding-provenance-0.1.0.schema.json#/$defs/provenance"
+      }
+    },
+    "settled_decisions": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "finding-provenance-0.1.0.schema.json#/$defs/positionItem"
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "finding-provenance-0.1.0.schema.json#/$defs/positionItem"
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "finding-provenance-0.1.0.schema.json#/$defs/positionItem"
+      }
+    },
+    "requested_operations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "requirements-discovery",
+          "read-only-design"
+        ]
+      }
+    },
+    "continuation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected_state_id",
+        "expected_sequence"
+      ],
+      "properties": {
+        "expected_state_id": {
+          "type": "string",
+          "pattern": "^STATE-[A-Z0-9._-]{1,60}$"
+        },
+        "expected_sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        }
+      }
+    },
+    "carry_forward": {
+      "$ref": "finding-provenance-0.1.0.schema.json#/$defs/carryForward"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "carry_forward"
+        ]
+      },
+      "then": {
+        "required": [
+          "continuation"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "assumptions": [],
+  "carry_forward": {
+    "assumptions": [],
+    "confirmed_decisions": [
+      {
+        "evidence_refs": [
+          "PRV-001"
+        ],
+        "id": "DEC-001",
+        "statement": "Use one agent with five lifecycle modes."
+      }
+    ],
+    "contract_version": "0.1.0",
+    "evidence_refs": [
+      "PRV-001"
+    ],
+    "open_items": [],
+    "previous_result_id": "DRS-PREV",
+    "rejected_decisions": [
+      {
+        "evidence_refs": [
+          "PRV-001"
+        ],
+        "id": "REJ-001",
+        "statement": "Do not generate Microsoft runtime artifacts."
+      }
+    ],
+    "request_ids": [
+      "DRQ-PREV"
+    ],
+    "result_ids": [
+      "DRS-PREV"
+    ],
+    "sequence": 1,
+    "state_id": "STATE-001",
+    "superseded_chronology": []
+  },
+  "classification": "synthetic",
+  "constraints": [
+    "Offline only",
+    "Human review required"
+  ],
+  "continuation": {
+    "expected_sequence": 1,
+    "expected_state_id": "STATE-001"
+  },
+  "contract_version": "0.1.0",
+  "cross_zone_transfer": "prohibited",
+  "host_candidates": [
+    "codex",
+    "chatgpt-work"
+  ],
+  "objective": "Design a read-only synthetic requirements-discovery capability for an SDLC workbench.",
+  "open_questions": [],
+  "personas": [
+    "Synthetic product owner"
+  ],
+  "request_id": "DRQ-GOLD-005",
+  "requested_operations": [
+    "requirements-discovery",
+    "read-only-design"
+  ],
+  "settled_decisions": [
+    {
+      "evidence_refs": [
+        "PRV-001"
+      ],
+      "id": "DEC-001",
+      "statement": "Use one agent with five lifecycle modes."
+    }
+  ],
+  "sources": [
+    {
+      "id": "PRV-001",
+      "reference": "synthetic:prv-001",
+      "revalidate_on": "2027-07-22",
+      "source_type": "synthetic-fixture",
+      "status": "current",
+      "title": "Synthetic requirements fixture",
+      "verified_on": "2026-07-22"
+    }
+  ],
+  "zone": "personal-openai"
+}

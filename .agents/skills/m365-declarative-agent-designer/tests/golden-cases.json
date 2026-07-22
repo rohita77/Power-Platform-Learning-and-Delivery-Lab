@@ -1,0 +1,27 @@
+[
+  {
+    "id": "GOLD-001",
+    "request": "fixtures/synthetic/GOLD-001.request.json",
+    "result": "fixtures/synthetic/GOLD-001.result.json"
+  },
+  {
+    "id": "GOLD-002",
+    "request": "fixtures/synthetic/GOLD-002.request.json",
+    "result": "fixtures/synthetic/GOLD-002.result.json"
+  },
+  {
+    "id": "GOLD-003",
+    "request": "fixtures/synthetic/GOLD-003.request.json",
+    "result": "fixtures/synthetic/GOLD-003.result.json"
+  },
+  {
+    "id": "GOLD-004",
+    "request": "fixtures/synthetic/GOLD-004.request.json",
+    "result": "fixtures/synthetic/GOLD-004.result.json"
+  },
+  {
+    "id": "GOLD-005",
+    "request": "fixtures/synthetic/GOLD-005.request.json",
+    "result": "fixtures/synthetic/GOLD-005.result.json"
+  }
+]

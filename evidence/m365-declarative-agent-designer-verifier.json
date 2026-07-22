@@ -1,0 +1,315 @@
+{
+  "recommendation": "Open — unblock m365-declarative-agent-designer v0.1.0 only as an offline, user-triggered, read-only, synthetic requirements-discovery methodology. Pin the Microsoft Work IQ repository at commit 801a456d651e7e5c5e7e378baba7a195f51680dd and treat microsoft-365-agents-toolkit plugin version 1.3.1 as a candidate reference, not an approved release: the repository publishes no releases, the marketplace is Public Preview, and the upstream declarative-agent skill can provision after edits. Do not install or invoke the plugin or Microsoft 365 Agents Toolkit in v0.1.0. Reuse schemas and design guidance through a thin, deny-by-default adapter; keep Microsoft 365 app/declarative-agent/plugin artifacts, tenant validation, evaluation execution, packaging, sideloading, deployment, and publication outside this build and subject to separate organisational authorisation.",
+  "production_recommendation": false,
+  "evidence_label": "Open",
+  "release_status": "UNKNOWN",
+  "verified_date": "2026-07-21",
+  "license_capacity": [
+    "[U1][Confirmed] Current names: product Microsoft 365 Agents Toolkit; product repository OfficeDev/microsoft-365-agents-toolkit; upstream marketplace Microsoft Work IQ — Plugin Marketplace at microsoft/work-iq; plugin id microsoft-365-agents-toolkit.",
+    "[U2][Confirmed][PUBLIC_PREVIEW] Exact candidate pin: plugin manifest version 1.3.1 at microsoft/work-iq commit 801a456d651e7e5c5e7e378baba7a195f51680dd, committed 2026-07-16. The repository has no published releases, so there is no release tag that can be called approved from public evidence.",
+    "[U3][Confirmed] Official plugin client documented by microsoft/work-iq: GitHub Copilot CLI, installed with /plugin marketplace add microsoft/work-iq and /plugin install microsoft-365-agents-toolkit@work-iq. The Toolkit product separately supports Visual Studio Code, Visual Studio, and its CLI.",
+    "[U4][Open] Codex is not an officially documented plugin client. A .codex-plugin/plugin.json file is structural evidence only. ChatGPT Work is not named as a supported plugin client. Microsoft 365 Copilot support for OpenAI Apps SDK based MCP apps is a different deployed-host contract and does not establish plugin support in Codex or ChatGPT Work.",
+    "[U5][Confirmed] Static inventory at the pinned commit contains six skills: declarative-agent-developer; install-atk; m365-agent-evaluator; setup-sso-ui-widget; teams-app-developer; ui-widget-developer. The plugin README lists only four, omitting setup-sso-ui-widget and teams-app-developer; this documentation-to-tree mismatch is unresolved.",
+    "[U6][Confirmed] Relevant capability mapping: declarative-agent-developer covers scaffold selection, instructions, manifests, capabilities/knowledge declarations, API actions, MCP plugin guidance, validation and deployment; ui-widget-developer covers MCP servers/apps and response widgets; m365-agent-evaluator covers synthetic evaluation generation plus authenticated execution; install-atk covers CLI/extension acquisition; teams-app-developer covers broader app packaging/testing/deployment; setup-sso-ui-widget covers Entra SSO, validation and sideloading.",
+    "[U7][Confirmed] Upstream commands/dependencies include Node.js 18+ and npm/npx; npx -y --package @microsoft/m365agentstoolkit-cli atk; optional Visual Studio Code extension TeamsDevApp.ms-teams-vscode-extension; Toolkit commands atk doctor/new/add/auth/env/install/provision/deploy/package/validate/publish/preview; evaluation package @microsoft/m365-copilot-eval@latest. The evaluator skill raises its runtime prerequisite to Node.js 24.12.0+.",
+    "[U8][Confirmed] Static inspection of public Markdown, JSON, schemas and scripts requires no Microsoft organisational authentication. Plugin installation, npx dependency acquisition, extension installation, remote schema/package retrieval, dev tunnels and hosted API/MCP debugging use the network. ATK provisioning/install/deploy/publish, connected knowledge, API/MCP runtime tests and evaluation runs cross into organisational or hosted-service execution.",
+    "[U9][Confirmed] Evaluation execution requires a Microsoft 365 Copilot licence, a deployed agent, tenant-admin consent for the WorkIQ Client App, tenant configuration, and an Azure OpenAI in Foundry Models endpoint/key according to the pinned evaluator skill. None is required or authorised for synthetic evaluation-case design only.",
+    "[L1][Open][UNKNOWN] Core declarative agents are current and documented, but the reviewed overview does not attach an explicit GA label. Users can use WebSearch-only agents with a Microsoft 365 subscription subject to limited capabilities; capabilities other than WebSearch require tenant metering or a Microsoft 365 Copilot licence.",
+    "[L2][Confirmed] Toolkit authoring requires a Microsoft 365 subscription with sideloading enabled for target use; Azure is optional for scenarios that need hosting. Agent Builder requires a Microsoft 365 subscription. SharePoint agents require a Microsoft 365 subscription plus site-admin or owner permissions. Copilot Studio authoring requires the applicable per-user/tenant entitlement or Microsoft 365 Copilot entitlement; a trial can author/test but cannot publish.",
+    "[L3][Confirmed] Copilot Studio capacity is Copilot Credits through prepaid capacity, pay-as-you-go Azure billing, or applicable Microsoft 365 Copilot zero-rating. Agent-flow/workflow actions consume capacity; design/test runs described by Microsoft are not billed, while exhausted prepaid capacity blocks new flow runs. Power Automate cloud flows retain Power Automate licensing unless one-way converted to agent flows.",
+    "[L4][Confirmed] AI prompts are model-backed Power Platform assets, not declarative-agent instructions. In Copilot Studio they consume Copilot Credits; in Power Apps/Power Automate they consume prompt-builder or AI Builder capacity. Model release stages and availability vary by region; experimental and preview models must retain those labels.",
+    "[L5][Open] Exact GitHub Copilot CLI entitlement for installing the Work IQ plugin is not stated in the Microsoft repository page reviewed. Confirm it independently before any future installation request.",
+    "[DATES] Verification date 2026-07-21. Earliest volatile-source revalidation date 2026-08-04. Revalidate sooner if the work-iq commit/plugin version, declarative-agent schema, plugin schema, Toolkit release, Copilot Studio preview terminology, licensing, geography or national-cloud documentation changes."
+  ],
+  "geography_language": [
+    "[G1][Confirmed] Microsoft 365 declarative-agent national-cloud overview dated 2026-06-18 says GCC has full support, GCCH supports Toolkit-built pro-code agents and Agent Builder, and DoD has limited Toolkit-only support.",
+    "[G2][Open] Microsoft tool-comparison guidance dated 2026-05-08 says publishing through Microsoft 365 Agents Toolkit is not supported in Microsoft 365 Government tenants. This conflicts with G1; do not claim government-cloud fitment until Microsoft resolves the documentation or an authorised target confirms it.",
+    "[G3][Confirmed] Copilot Studio is available in the US Government Community Cloud plan, but individual models, prompts, connectors, MCP, channels, new-experience features and previews have separate regional availability. No geography fitment is established for this pilot because no target cloud/region was supplied and no tenant check was authorised.",
+    "[G4][Confirmed] Microsoft 365 Copilot interaction content is stored according to applicable Microsoft 365 residency commitments and user/tenant geography. Worldwide LLM processing can use other regions when capacity requires it; EU traffic stays within the EU Data Boundary, while Bing web-search queries have separate treatment.",
+    "[G5][Confirmed] Copilot Studio environments and agents can be deployed by geography, but activity data powered by Microsoft 365 services can follow the end user's Exchange mailbox geography rather than the Copilot Studio environment. Processing-location review therefore belongs to the target design, not merely the source package.",
+    "[G6][Confirmed] The model-driven Power Apps agent-feed experience is Preview, English-only, limited to model-driven apps, and now depends on the Power Apps MCP server for agent-feed tasks. The discontinued canvas custom-Copilot path and other Power Apps/Dynamics experiences are not portability targets for this v0.1.0 brief."
+  ],
+  "limitations": [
+    "[A1][Confirmed] A Microsoft 365 agent is an app package. Minimum package content is manifest.json plus color.png (192x192) and outline.png (32x32); it may also contain declarative-agent, API-plugin and localisation files. Declarative agents and plugins are referenced under copilotAgents. This package is not a Power Platform solution.",
+    "[A2][Confirmed] Current Microsoft 365 app manifest reference is v1.29 (updated 2026-06-29). Current declarative-agent manifest schema is v1.7 (updated 2026-05-14). Current plugin manifest schema is v2.4 (updated 2026-07-01). Generators must bind to explicit schema versions and reject unknown properties; examples on older pages must not silently downgrade those versions.",
+    "[A3][Confirmed] Declarative-agent v1.7 requires version, name, description and instructions; supports capabilities, up to 12 conversation starters, 1-10 actions, behavior overrides, disclaimer, editorial answers, worker_agents and user overrides. Instructions are limited to 8,000 characters. Knowledge is declared through supported capability objects, not by hiding instructions in knowledge sources.",
+    "[A4][Confirmed] Current documented knowledge capability types include WebSearch, OneDriveAndSharePoint, GraphConnectors, GraphicArt, CodeInterpreter, Dataverse, TeamsMessages, Email, People, ScenarioModels, Meetings and EmbeddedKnowledge. EmbeddedKnowledge is explicitly not yet available; sensitivity labels depending on embedded files are not enabled. Organisational knowledge declarations require entitlement, permissions and target authorisation.",
+    "[A5][Confirmed] Plugin schema v2.4 covers OpenAPI and RemoteMCPServer runtimes. API plugin contracts include a plugin manifest and an OpenAPI description. API plugins are actions inside declarative agents, not standalone Microsoft 365 Copilot plugins.",
+    "[A6][Confirmed] API-plugin response UX can use static_template in response_semantics or dynamic templates selected from API responses. Templates combine Adaptive Card schema with Adaptive Cards templating. Host support must be validated; a card shown in one host does not prove another host or connected-agent rendering.",
+    "[A7][Confirmed] Microsoft 365 Copilot MCP apps are interactive widgets returned by remote MCP servers. Current prerequisites include Toolkit 6.12.0+, a remote server, supported OAuth 2.1 or Entra SSO for production, allowed redirect URLs, CSP constraints and host capability fallbacks. Anonymous authentication is development-only. OpenAI Apps SDK compatibility is partial: unsupported window.openai and CSP/meta fields must be detected and degraded safely.",
+    "[A8][Confirmed] Toolkit CLI offers separate package and validate commands. ATK package creates an environment-resolved zip; ATK validate can use schema/rules/test cases. Sideload/install, provision, deploy and publish are separate operations and require target authority. RAI validation occurs during sideload/publication and can block distribution.",
+    "[A9][Confirmed] Toolkit local testing with Microsoft 365 Agents Playground can run without a Microsoft 365 developer tenant. Testing in Microsoft 365 Copilot, API/plugin calls through a dev tunnel, developer mode, sideloading and publication are not offline proof and were not performed.",
+    "[A10][Confirmed] Environment-specific Toolkit configuration uses reviewed .env.<target> inputs, secret-only .env.<target>.user files, manifest variable substitution and distinct app IDs/artifacts. The platform treats different app IDs as separate installations. Secrets must not enter tracked files.",
+    "[H1][Confirmed] Authoring boundaries: Toolkit is pro-code and supports declarative and custom-engine projects; Agent Builder is no-code for personal/group productivity; Copilot Studio is low-code with Power Platform connectors, business logic and Power Platform ALM; SharePoint agents are no-code, SharePoint-grounded declarative agents. A custom-engine agent brings its own orchestration/model/hosting and is not a declarative-agent package.",
+    "[H2][Confirmed] Runtime host boundaries: declarative agents run in Microsoft 365 Copilot UI and Microsoft 365 apps; SharePoint agents run in SharePoint, Teams and Microsoft 365 Copilot; Copilot Studio agents can publish to Teams, Microsoft 365 Copilot, SharePoint, Power Pages and other channels, subject to channel feature differences. Standalone/custom channels use Copilot Studio publication and client contracts, not Toolkit declarative-agent portability.",
+    "[H3][Confirmed] Power Apps and Dynamics experiences are separate host integrations. Current model-driven app agent feed is Preview and Copilot Studio/Power Apps MCP based; Dynamics handoff and embedded experiences have product-specific identity, channel and API contracts. A Microsoft 365 declarative-agent package alone does not establish those hosts.",
+    "[T1][Confirmed] Start with one agent for the pilot. Microsoft recommends splitting only when knowledge/tool complexity or independent ownership/ALM justifies it; multi-agent designs add latency, evaluation, management and governance surface.",
+    "[T2][Preview] Microsoft 365 declarative connected agents use worker_agents title IDs. Copilot Chat brokers selection using connected-agent name, description and conversation starters; users must install every connected agent; only declarative-to-declarative text exchange is supported; binaries/images are not; connected-agent Adaptive Cards are not shown directly. The worker_agents capability is Preview.",
+    "[T3][Preview] Copilot Studio new experience is a production-ready preview; its connected-agents pages are Preview and currently connect only other Copilot Studio agents. Primary orchestration routes by connected name/description, user message/context and primary instructions. Connected agents run their own instructions, knowledge and tools and must be published, in the same environment, and owned by or shared with the primary maker.",
+    "[T4][Confirmed with preview subfeatures] Copilot Studio classic supports child agents in the same solution and separately deployed connected agents. Child agents share the main deployment/auth/settings boundary; connected agents support independent settings, publication and ALM. External Foundry, Fabric and Microsoft 365 Agents SDK connections are Public Preview; A2A is a distinct external contract. Fabric-connected agents have stated host limitations.",
+    "[W1][Confirmed] Declarative-agent actions are model-selected plugin actions declared in the agent manifest. They are not workflows and must retain action confirmation, authentication, API and idempotency controls.",
+    "[W2][Confirmed] Copilot Studio tools are a wider low-code category that can include connectors, prompts, agent flows/workflows, REST APIs, MCP and other agents. Tool availability does not collapse those underlying runtime, billing, identity or ALM contracts.",
+    "[W3][Confirmed] Agent flows are the classic Copilot Studio deterministic automation format, solution-aware and billed through Copilot Studio action consumption. Power Automate cloud flows are general Power Automate automation with Power Automate licensing/ownership features. Conversion from a cloud flow to an agent flow is one-way; conversion to the new workflow format is unsupported.",
+    "[W4][PUBLIC_PREVIEW] The Copilot Studio new Workflows experience is Public Preview. Workflows are deterministic trigger/action automations with AI actions, agent handoffs and node-level testing. They cannot be converted to the classic experience and are not production-recommended by Microsoft while in Public Preview.",
+    "[W5][Confirmed] AI prompts are probabilistic model-backed Power Platform assets with region/model/capacity constraints. They can be invoked by apps, flows or agents but are not deterministic services and are not declarative-agent instruction files.",
+    "[W6][Confirmed] MCP exposes dynamically discovered tools/resources/prompts through a server. In Copilot Studio it requires generative orchestration and is governed through connections/authentication/DLP; in Microsoft 365 plugin schema v2.4 it is a RemoteMCPServer runtime. An MCP contract is not an API plugin, flow, deterministic service or embedded skill merely because each can be invoked as a tool.",
+    "[W7][Recommendation] Use deterministic code/services for strict validation, schema transforms, idempotent writes, fixed branching, security enforcement and repeatable calculations. Use agent instructions/skills for bounded adaptive judgment; use workflows for resumable or side-effecting multi-step processes.",
+    "[P1][Rejected][Confirmed] An OpenAI or Codex Agent Skill cannot be deployed unchanged as a Microsoft 365 declarative agent. Microsoft 365 app manifests now support Agent Skills open-standard SKILL.md folders, and Copilot Studio preview skills also use Markdown/YAML packaging, but a declarative agent still requires the Microsoft 365 app/declarative-agent manifests, icons, host packaging, validation, entitlement and deployment. Script/tool permissions and runtime semantics remain host-specific.",
+    "[P2][Rejected][Confirmed] A Toolkit project does not automatically convert to a Copilot Studio solution. Microsoft explicitly says Toolkit-built agents cannot be reused in low-code tools such as Copilot Studio; Toolkit uses project/app-package ALM while Copilot Studio uses Power Platform solution/pipeline ALM.",
+    "[P3][Rejected][Confirmed] Copilot Studio Skills are not the same runtime contract as OpenAI Agent Skills. There is structural convergence on the Agent Skills open standard and SKILL.md, but Copilot Studio preview orchestration, packaging, tools, identity, environment, sharing and publication remain Microsoft runtime contracts.",
+    "[P4][Rejected][Confirmed] Renaming Copilot Studio or Power Platform artifacts cannot produce a Microsoft 365 declarative-agent package. The package and schemas are explicit and independently validated.",
+    "[P5][Rejected][Confirmed] Structural file compatibility does not prove runtime compatibility. Microsoft documents host-specific unsupported MCP App APIs, connected-agent limitations, authentication, licensing, DLP, geography, packaging and publication gates. Runtime proof requires target installation and behavioural evidence, which was not authorised or performed.",
+    "[C1][Open conflict] Government publishing guidance conflicts between the 2026-06-18 overview and 2026-05-08 tool comparison.",
+    "[C2][Open conflict] The pinned plugin tree exposes six skills while its README documents four.",
+    "[C3][Open conflict] The Work IQ marketplace is Public Preview and has no release tags, while the plugin embeds version 1.3.1; public evidence cannot establish an approved release channel.",
+    "[C4][Open conflict] Toolkit CLI documentation is dated 2025-05-19 while current plugin instructions rely on newer behaviors and unpinned npx packages; exact command behavior must be reverified against a future explicitly approved, pinned CLI before execution."
+  ],
+  "security_governance": [
+    "[S1][Confirmed] Toolkit collects usage data and sends it to Microsoft. The CLI exposes a --telemetry boolean option with default true. Any future adapter must default telemetry off and verify the exact pinned CLI syntax before execution. The Work IQ plugin sets ATK_CLI_SKILL=true to tag skill-originated CLI use; that is telemetry tagging, not opt-out.",
+    "[S2][Open] The pinned plugin does not document a plugin-wide telemetry opt-out for GitHub Copilot CLI, npx, the evaluation CLI or Work IQ. Host and dependency telemetry must be reviewed separately before installation; Visual Studio Code's telemetry setting does not govern every extension.",
+    "[S3][Confirmed] The upstream skills can read/write project files, create appPackage/env/YAML/configuration, install extensions/packages, run shell/PowerShell, start servers/tunnels, register Entra apps, provision resources, validate, package, sideload, deploy and publish. They therefore require workspace write, shell and network permissions and cannot be treated as instruction-only content.",
+    "[S4][Confirmed] Static no-auth boundary: inspect the pinned public repository, Markdown/JSON/PowerShell, official schemas and documentation; perform local text/schema analysis on synthetic data. Organisational boundary: any Microsoft sign-in, tenant discovery, Work IQ, Microsoft 365 data, SharePoint/Graph/Teams/Dataverse knowledge, connector, MCP call, Azure/Entra registration, environment access, target validation, evaluation execution, provisioning, sideloading, deployment or publication.",
+    "[S5][Confirmed] Microsoft 365 declarative agents inherit Microsoft 365 permissions and protection. Users only access authorised data; connected agents must be installed; API/MCP actions retain their own auth/consent. Copilot Studio tools can use author credentials or user authentication; connection identity, Conditional Access and DLP are target design inputs.",
+    "[S6][Confirmed] Copilot Studio data policies can govern connectors, knowledge sources and channels; policy violations can block publication or runtime. External MCP servers and API services remain the customer's responsibility. No connector, MCP server or tenant policy was inspected in this verification.",
+    "[S7][Recommendation] v0.1.0 guardrails: no subprocess execution; no package manager; no extension installation; no network beyond first-party public verification; no generated Microsoft artifact; no real identifiers/URLs/content; synthetic inputs only; explicit host/status/license/geography fields; fail closed on unknown schema/status; no automatic deploy/package/evaluate hooks."
+  ],
+  "alm_implications": [
+    "[R1][reuse through thin adapter] Project scaffolding — borrow pinned upstream discovery and file-role concepts, but remove install, shell, implicit file creation and automatic provision/deploy behavior.",
+    "[R2][project-owned methodology] Instruction generation — own the requirements-to-instruction method; validate against current Microsoft instruction limits/guidance without producing a Microsoft artifact in v0.1.0.",
+    "[R3][project-owned methodology] Conversation starters — own scenario/coverage generation; enforce v1.7 count and dependency constraints through current schema metadata.",
+    "[R4][reuse through thin adapter] Manifest generation — future-only adapter over official Microsoft 365 app v1.29, declarative-agent v1.7 and plugin v2.4 schemas; disabled in v0.1.0.",
+    "[R5][reuse through thin adapter] Knowledge configuration — design synthetic capability declarations and permission questions; organisational sources and IDs are separately authorised execution.",
+    "[R6][reuse through thin adapter] API plugin contracts — reuse official v2.4/OpenAPI requirements; no remote API, action invocation or plugin file generation in v0.1.0.",
+    "[R7][reuse through thin adapter] MCP contracts — reuse RemoteMCPServer and MCP App capability rules; no server connection, discovery or widget execution. Host capability matrices remain project-owned.",
+    "[R8][project-owned methodology] Response UX — own host-profile, accessibility, fallback and read/write-boundary review using Microsoft Adaptive Card and MCP App guidance.",
+    "[R9][reuse through thin adapter] Static validation — use official schemas unchanged as pinned inputs, wrapped by project-owned offline validation and status checks; do not invoke ATK.",
+    "[R10][reuse through thin adapter] Evaluation generation — reuse the upstream synthetic eval-case model, but never run @microsoft/m365-copilot-eval without separate organisational authorisation and pinned dependencies.",
+    "[R11][reuse through thin adapter] Packaging — future local-only package composition may reuse Toolkit conventions, but must be separately approved, pinned, deterministic and kept distinct from install/sideload/deploy. Disabled in v0.1.0.",
+    "[R12][separately authorised organisational execution] Deployment or publication — ATK provision/install/deploy/publish, Copilot Studio publication, Power Platform solution import/export and Partner Center/admin-catalog publication are explicitly out of scope.",
+    "[ALM1][Confirmed] Toolkit ALM is source/app-package/environment-file based. Copilot Studio ALM is environment/solution/Power Platform pipeline based. Connected agents that need independent ownership/settings/reuse should have independent ALM; child agents share the parent boundary.",
+    "[ALM2][Recommendation] Build-time engineering plane output should be a neutral design brief and evidence record. Deployed Microsoft runtime-agent artifacts, if later authorised, must be produced by a separate target adapter and validated at package, import/install, permission and runtime levels."
+  ],
+  "sources": [
+    {
+      "title": "Microsoft Work IQ — Plugin Marketplace repository and current main commit",
+      "url": "https://github.com/microsoft/work-iq/commit/801a456d651e7e5c5e7e378baba7a195f51680dd",
+      "authority_level": "A3",
+      "source_last_updated": "2026-07-16",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["U1", "U2", "U3", "U5", "U7", "U8", "C2", "C3"]
+    },
+    {
+      "title": "Microsoft Work IQ microsoft-365-agents-toolkit Codex plugin manifest",
+      "url": "https://github.com/microsoft/work-iq/blob/801a456d651e7e5c5e7e378baba7a195f51680dd/plugins/microsoft-365-agents-toolkit/.codex-plugin/plugin.json",
+      "authority_level": "A3",
+      "source_last_updated": "2026-07-16",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["U2", "U4"]
+    },
+    {
+      "title": "Microsoft Work IQ microsoft-365-agents-toolkit plugin README",
+      "url": "https://github.com/microsoft/work-iq/blob/801a456d651e7e5c5e7e378baba7a195f51680dd/plugins/microsoft-365-agents-toolkit/README.md",
+      "authority_level": "A3",
+      "source_last_updated": "2026-07-16",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["U3", "U5", "U6", "U9", "C2"]
+    },
+    {
+      "title": "Microsoft 365 Agents Toolkit CLI",
+      "url": "https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/microsoft-365-agents-toolkit-cli",
+      "authority_level": "A1",
+      "source_last_updated": "2025-05-19",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["U7", "A8", "A10", "S1", "C4"]
+    },
+    {
+      "title": "Microsoft 365 Agents Toolkit official repository",
+      "url": "https://github.com/OfficeDev/microsoft-365-agents-toolkit",
+      "authority_level": "A3",
+      "source_last_updated": "2026-07-14",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["U1", "U3", "H1", "S1", "S3"]
+    },
+    {
+      "title": "Microsoft 365 app manifest schema root v1.29",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/extensibility/schema/root?view=m365-app-1.29",
+      "authority_level": "A1",
+      "source_last_updated": "2026-06-29",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["A1", "A2", "P1", "P3", "P4"]
+    },
+    {
+      "title": "Declarative agent schema 1.7 for Microsoft 365 Copilot",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-manifest-1.7",
+      "authority_level": "A1",
+      "source_last_updated": "2026-05-14",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["A2", "A3", "A4", "T2", "L1"]
+    },
+    {
+      "title": "Plugin manifest schema 2.4 for Microsoft 365 Copilot",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/plugin-manifest-2.4",
+      "authority_level": "A1",
+      "source_last_updated": "2026-07-01",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["A2", "A5", "W1", "W6", "R6", "R7"]
+    },
+    {
+      "title": "Microsoft 365 app model for agents",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-are-apps",
+      "authority_level": "A1",
+      "source_last_updated": "2026-06-18",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["A1", "A5", "P2", "P4"]
+    },
+    {
+      "title": "Adaptive Card response templates for API plugins",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/api-plugin-adaptive-cards",
+      "authority_level": "A1",
+      "source_last_updated": "2026-03-06",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["A6", "W1"]
+    },
+    {
+      "title": "Add MCP apps to declarative agents in Microsoft 365 Copilot",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/plugin-mcp-apps",
+      "authority_level": "A1",
+      "source_last_updated": "2026-07-16",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["U4", "A7", "P5", "R7", "R8"]
+    },
+    {
+      "title": "Manage environments and versions for declarative agents",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agents-multi-environment",
+      "authority_level": "A1",
+      "source_last_updated": "2026-07-01",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["A8", "A10", "ALM1"]
+    },
+    {
+      "title": "Publish agents for Microsoft 365 Copilot",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/publish",
+      "authority_level": "A1",
+      "source_last_updated": "2026-05-22",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["A8", "L2", "H2", "R12"]
+    },
+    {
+      "title": "Choose the right tool to build a declarative agent",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-tool-comparison",
+      "authority_level": "A1",
+      "source_last_updated": "2026-05-08",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["L2", "G2", "H1", "H2", "P2", "ALM1"]
+    },
+    {
+      "title": "Declarative agents for Microsoft 365 Copilot",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-declarative-agent",
+      "authority_level": "A1",
+      "source_last_updated": "2026-06-18",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["L1", "G1", "H1", "H2", "S5"]
+    },
+    {
+      "title": "Connect to other agents from a declarative agent",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-connected-agent",
+      "authority_level": "A1",
+      "source_last_updated": "2026-07-02",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["T1", "T2", "S5"]
+    },
+    {
+      "title": "Copilot Studio connected agents overview (preview)",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-add-other-agents",
+      "authority_level": "A1",
+      "source_last_updated": "2026-06-30",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["T1", "T3"]
+    },
+    {
+      "title": "Copilot Studio add other agents overview",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-add-other-agents",
+      "authority_level": "A1",
+      "source_last_updated": "2026-05-15",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["T1", "T4", "ALM1"]
+    },
+    {
+      "title": "Copilot Studio Workflows overview (preview)",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview",
+      "authority_level": "A1",
+      "source_last_updated": "2026-07-02",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["W4", "L3"]
+    },
+    {
+      "title": "Copilot Studio agent flows overview",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview",
+      "authority_level": "A1",
+      "source_last_updated": "2026-06-30",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["W3", "L3", "ALM1"]
+    },
+    {
+      "title": "Extend a Copilot Studio agent with Model Context Protocol",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp",
+      "authority_level": "A1",
+      "source_last_updated": "2026-04-17",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["W2", "W6", "S5", "S6"]
+    },
+    {
+      "title": "Copilot Studio skills overview for agents (preview)",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview",
+      "authority_level": "A1",
+      "source_last_updated": "2026-06-30",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["P1", "P3", "W2"]
+    },
+    {
+      "title": "Copilot Studio licensing",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/billing-licensing",
+      "authority_level": "A1",
+      "source_last_updated": "2026-04-27",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["L2", "L3", "G3"]
+    },
+    {
+      "title": "Copilot Studio prompt model settings",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompt-model-settings",
+      "authority_level": "A1",
+      "source_last_updated": "2026-04-14",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["L4", "W5"]
+    },
+    {
+      "title": "Data residency for Microsoft 365 Copilot and Copilot Chat",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-service-copilot?view=o365-worldwide",
+      "authority_level": "A1",
+      "source_last_updated": "2026-02-19",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["G4", "S5"]
+    },
+    {
+      "title": "Add agents to a Power Apps model-driven app (preview)",
+      "url": "https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/add-agents-to-app",
+      "authority_level": "A1",
+      "source_last_updated": "2026-04-06",
+      "verified_on": "2026-07-21",
+      "supported_claims": ["G6", "H3"]
+    }
+  ],
+  "open_questions": [
+    "Open: Which exact cloud, geography, language, target hosts and licences would a later organisational pilot use? No target fitment can be approved without these inputs.",
+    "Open: Resolve Microsoft's contradictory government-cloud Toolkit publication statements before any government target is designed.",
+    "Open: Obtain an explicit upstream release/tag or lab approval record. Version 1.3.1 at the pinned commit is a candidate only because microsoft/work-iq publishes no releases.",
+    "Open: Ask Microsoft to reconcile the six-skill pinned tree with the four-skill plugin README and identify which skills form the supported plugin surface.",
+    "Open: Confirm official Codex and ChatGPT Work plugin support. A Codex manifest and cross-host MCP App documentation are not behavioural support evidence.",
+    "Open: Before any future installation, verify GitHub Copilot CLI entitlement, plugin/host telemetry and opt-out controls, EULA, transitive npx packages, network endpoints, hooks, file writes, shell commands and rollback.",
+    "Open: Before any future Toolkit execution, select and pin exact CLI, VS Code extension and evaluation CLI versions; verify --telemetry false behavior without relying on @latest; review the automatic provision/deploy rule in the upstream declarative-agent skill.",
+    "Open: Decide whether the designer will emit only a neutral design brief or, in a separately approved later version, host-specific artifact proposals. v0.1.0 must remain brief-only.",
+    "Open: Define the future target validation ladder: schema/static checks; deterministic package integrity; authorised sideload/import and config/role readback; runtime E2E including denial, failure, replay, card fallback and connected-agent selection.",
+    "Open: Revalidate current schemas, preview statuses, licensing, Copilot Credits, geography and upstream commit on 2026-08-04 or immediately before approving the build brief, whichever occurs first."
+  ],
+  "revalidation_date": "2026-08-04"
+}

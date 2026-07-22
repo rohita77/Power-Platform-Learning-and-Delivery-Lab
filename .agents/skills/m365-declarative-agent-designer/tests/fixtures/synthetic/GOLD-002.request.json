@@ -1,0 +1,53 @@
+{
+  "assumptions": [],
+  "classification": "synthetic",
+  "constraints": [
+    "Offline only",
+    "Human review required"
+  ],
+  "contract_version": "0.1.0",
+  "cross_zone_transfer": "prohibited",
+  "host_candidates": [
+    "codex",
+    "chatgpt-work"
+  ],
+  "objective": "Design a read-only synthetic requirements-discovery capability for an SDLC workbench.",
+  "open_questions": [
+    {
+      "evidence_refs": [
+        "PRV-001"
+      ],
+      "id": "OPN-001",
+      "statement": "Which synthetic review persona owns final approval?"
+    }
+  ],
+  "personas": [
+    "Synthetic product owner"
+  ],
+  "request_id": "DRQ-GOLD-002",
+  "requested_operations": [
+    "requirements-discovery",
+    "read-only-design"
+  ],
+  "settled_decisions": [
+    {
+      "evidence_refs": [
+        "PRV-001"
+      ],
+      "id": "DEC-001",
+      "statement": "Use one agent with five lifecycle modes."
+    }
+  ],
+  "sources": [
+    {
+      "id": "PRV-001",
+      "reference": "synthetic:prv-001",
+      "revalidate_on": "2027-07-22",
+      "source_type": "synthetic-fixture",
+      "status": "current",
+      "title": "Synthetic requirements fixture",
+      "verified_on": "2026-07-22"
+    }
+  ],
+  "zone": "personal-openai"
+}

@@ -1,0 +1,12 @@
+{
+  "errors": [],
+  "json_schema_draft": "2020-12",
+  "record_version": "0.1.0",
+  "result_path": "evidence/m365-declarative-agent-designer-verifier.json",
+  "result_sha256": "099a47d34d8e8863e5f9852f83f72847fa0d25865c853d3aab7826d9a66f3d69",
+  "schema_path": "skills/power-platform-current-feature-verifier/tests/output-schema.json",
+  "schema_sha256": "84c3f31da86b5e6a3bec36a5a1f4109f42d6b36449c3a8f26cce6b86cce4db1f",
+  "valid": true,
+  "validated_on": "2026-07-21",
+  "validator": "jsonschema 4.10.3"
+}

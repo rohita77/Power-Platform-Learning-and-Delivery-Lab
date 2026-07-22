@@ -1,0 +1,828 @@
+{
+  "status": "Ready",
+  "current_position": {
+    "confirmed": [
+      {
+        "id": "CP-001",
+        "statement": "v0.1.0 remains a personal-lab-only portable methodology operating in the personal-openai zone.",
+        "basis": "Settled Skill 6 decision preserved by the resumed request.",
+        "source_refs": [
+          "original-skill-6-current-position",
+          "resumption-request"
+        ]
+      },
+      {
+        "id": "CP-002",
+        "statement": "Inputs are restricted to public or synthetic information; the pilot is user-triggered, read-only, and performs no autonomous workflow.",
+        "basis": "Settled boundary and pilot decisions.",
+        "source_refs": [
+          "original-skill-6-build-brief",
+          "EV-CFV-BOUNDARY"
+        ]
+      },
+      {
+        "id": "CP-003",
+        "statement": "The first topology is one agent with discovery, elicitation, conceptualisation, authoring, and assurance lifecycle modes.",
+        "basis": "Settled topology decision retained because the specialist result contains no evidence requiring it to be reopened.",
+        "source_refs": [
+          "original-skill-6-current-position",
+          "EV-CFV-RESULT"
+        ]
+      },
+      {
+        "id": "CP-004",
+        "statement": "Deterministic boundary, contract, provenance, contradiction, and abstention validation remains separate from AI reasoning.",
+        "basis": "Settled architecture decision and specialist recommendation for deterministic validation and bounded adaptive judgment.",
+        "source_refs": [
+          "original-skill-6-build-brief",
+          "EV-CFV-RESULT:W7",
+          "EV-CFV-RESULT:S7"
+        ]
+      },
+      {
+        "id": "CP-005",
+        "statement": "Human review remains required before any DesignResult is treated as an approved Microsoft implementation design.",
+        "basis": "Settled assurance decision; static structure and AI output do not prove runtime compatibility.",
+        "source_refs": [
+          "original-skill-6-current-position",
+          "EV-CFV-RESULT:P5"
+        ]
+      },
+      {
+        "id": "CP-006",
+        "statement": "No automatic conversion is permitted among OpenAI Agent Skills, Microsoft 365 declarative agents, Toolkit projects, Copilot Studio assets, or Power Platform solutions.",
+        "basis": "All five portability claims were rejected by the validated specialist result.",
+        "source_refs": [
+          "EV-CFV-RESULT:P1",
+          "EV-CFV-RESULT:P2",
+          "EV-CFV-RESULT:P3",
+          "EV-CFV-RESULT:P4",
+          "EV-CFV-RESULT:P5"
+        ]
+      },
+      {
+        "id": "CP-007",
+        "statement": "The externally completed power-platform-current-feature-verifier result passed the consumption gate: approved specialist identity, version 0.1.0, public-only classification, personal-openai boundary, preserved relative path, SHA-256 equality, answer-schema validity, current verification dates, zero prohibited specialist operations, and no orchestration or security override attempt.",
+        "basis": "Independent handoff records accompany the preserved result. The verified SHA-256 is 099a47d34d8e8863e5f9852f83f72847fa0d25865c853d3aab7826d9a66f3d69.",
+        "source_refs": [
+          "evidence/m365-declarative-agent-designer-verifier.json",
+          "EV-CFV-SCHEMA-VALIDATION",
+          "EV-CFV-ZERO-OPERATION",
+          "EV-CFV-BOUNDARY"
+        ]
+      },
+      {
+        "id": "CP-008",
+        "statement": "The specialist's overall Open status does not block the portable designer core; it limits Toolkit, Microsoft-runtime, tenant, host, licensing, geography, and deployment claims.",
+        "basis": "The recommendation explicitly permits an offline, user-triggered, read-only, synthetic requirements-discovery methodology while separating later Microsoft-runtime execution.",
+        "source_refs": [
+          "EV-CFV-RESULT:recommendation",
+          "EV-CFV-RESULT:S7",
+          "EV-CFV-RESULT:ALM2"
+        ]
+      },
+      {
+        "id": "CP-009",
+        "statement": "The smallest implementation slice is DesignRequest to deterministic validation to requirements-discovery reasoning to DesignResult to deterministic provenance, contradiction, and abstention validation to carry-forward state.",
+        "basis": "Explicitly reduced scope in the resumption request.",
+        "source_refs": [
+          "resumption-request"
+        ]
+      },
+      {
+        "id": "CP-010",
+        "statement": "Codex and ChatGPT Work are adapter-evaluation targets only; neither is asserted to have official support for the Microsoft Work IQ Toolkit plugin.",
+        "basis": "The specialist found no official client-support evidence for either host.",
+        "source_refs": [
+          "EV-CFV-RESULT:U4",
+          "EV-CFV-RESULT:open-question-codex-chatgpt-work"
+        ]
+      },
+      {
+        "id": "CP-011",
+        "statement": "Toolkit installation or invocation, Microsoft artifact generation, organisational integrations, connected agents, Copilot Studio implementation, and deployment remain outside v0.1.0.",
+        "basis": "Explicit exclusions and validated upstream reuse classification.",
+        "source_refs": [
+          "resumption-request",
+          "EV-CFV-RESULT:R4",
+          "EV-CFV-RESULT:R6",
+          "EV-CFV-RESULT:R7",
+          "EV-CFV-RESULT:R11",
+          "EV-CFV-RESULT:R12"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "AS-001",
+        "statement": "DesignRequest and DesignResult will use a pinned JSON Schema draft supported by the lab's deterministic validator, provisionally JSON Schema 2020-12.",
+        "impact": "Changing the draft may require schema syntax and validator-test updates but does not change the portable architecture.",
+        "validation_required": "Confirm the draft and validator implementation before writing the schemas.",
+        "source_refs": [
+          "resumption-request"
+        ]
+      },
+      {
+        "id": "AS-002",
+        "statement": "Codex and ChatGPT Work adapters will be thin input/output mappings with no Microsoft plugin, tenant, network, connector, MCP, or deployment behavior.",
+        "impact": "Static adapter contracts can be implemented now; active-runtime parity remains untested until separately authorised evaluation exists.",
+        "validation_required": "Run the same synthetic contract suite independently in each available host and retain unavailable hosts as untested.",
+        "source_refs": [
+          "EV-CFV-RESULT:U4",
+          "EV-CFV-RESULT:P5",
+          "original-skill-6-build-brief"
+        ]
+      },
+      {
+        "id": "AS-003",
+        "statement": "Carry-forward state is emitted inside DesignResult and is not automatically persisted by v0.1.0.",
+        "impact": "The user or host controls whether the state is supplied to a later invocation; no hidden memory or feedback store is created.",
+        "validation_required": "Confirm round-trip serialization and explicit user-controlled resubmission in regression tests.",
+        "source_refs": [
+          "resumption-request"
+        ]
+      }
+    ],
+    "open_questions": [
+      {
+        "id": "OQ-001",
+        "question": "Will Microsoft officially support the Work IQ Toolkit plugin in Codex or ChatGPT Work?",
+        "owner": "Microsoft and OpenAI product owners",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-002",
+        "question": "What GitHub Copilot CLI entitlement and plugin-wide telemetry controls apply to a future Toolkit installation?",
+        "owner": "Future Toolkit approval review",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-003",
+        "question": "Which exact Toolkit CLI, extension, evaluation package, and transitive dependency versions could be approved later?",
+        "owner": "Future dependency and security review",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-004",
+        "question": "Which Microsoft 365 schemas, package-generation capability, and host-specific UX validation will be authorised for a post-v0.1.0 adapter?",
+        "owner": "Future Microsoft-runtime workstream",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-005",
+        "question": "Which tenant licences, cloud, geography, language, residency, DLP, identity, and publication route apply to a future organisational pilot?",
+        "owner": "Organisational Microsoft governance owners",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-006",
+        "question": "When will Microsoft's conflicting government-cloud Toolkit publication guidance and the Work IQ plugin's six-skill versus four-skill inventory be reconciled?",
+        "owner": "Microsoft upstream maintainers",
+        "blocks_ready": false
+      },
+      {
+        "id": "OQ-007",
+        "question": "Will connected-agent or Copilot Studio implementation be approved after the single-agent portable methodology is evaluated?",
+        "owner": "Future architecture review",
+        "blocks_ready": false
+      }
+    ],
+    "rejected": [
+      {
+        "id": "RJ-001",
+        "decision": "Deploy an OpenAI or Codex Agent Skill unchanged as a Microsoft 365 declarative agent.",
+        "reason": "The runtime, package, schema, identity, validation, entitlement, and deployment contracts differ.",
+        "reconsider_if": "Never as an unchanged deployment; only a separately designed and validated target adapter may reuse methodology."
+      },
+      {
+        "id": "RJ-002",
+        "decision": "Automatically convert a Toolkit project to a Copilot Studio solution.",
+        "reason": "Toolkit app-package ALM and Copilot Studio Power Platform solution ALM are distinct.",
+        "reconsider_if": "A first-party supported conversion contract is published and independently verified."
+      },
+      {
+        "id": "RJ-003",
+        "decision": "Treat Copilot Studio Skills and OpenAI Agent Skills as the same runtime contract.",
+        "reason": "Structural convergence around SKILL.md does not remove host-specific orchestration, packaging, tools, identity, environment, and publication requirements.",
+        "reconsider_if": "First-party specifications establish complete runtime-contract equivalence."
+      },
+      {
+        "id": "RJ-004",
+        "decision": "Create a Microsoft 365 declarative-agent package by renaming Copilot Studio or Power Platform artifacts.",
+        "reason": "Microsoft 365 packages and schemas are explicit and independently validated.",
+        "reconsider_if": "Never through renaming; only through authorised target-specific generation."
+      },
+      {
+        "id": "RJ-005",
+        "decision": "Treat structural file compatibility as proof of runtime compatibility.",
+        "reason": "Authentication, licensing, DLP, geography, host behavior, packaging, installation, and runtime evidence remain separate.",
+        "reconsider_if": "Target-specific authorised runtime evidence proves the required behavior."
+      },
+      {
+        "id": "RJ-006",
+        "decision": "Include Toolkit execution, Microsoft artifacts, connected agents, Copilot Studio, workflows, feedback persistence, or tenant runtime testing in the first slice.",
+        "reason": "These capabilities exceed the portable offline methodology and current authority.",
+        "reconsider_if": "A later increment receives separate specialist evidence and explicit organisational authorisation."
+      }
+    ],
+    "superseded": [
+      {
+        "id": "SS-001",
+        "statement": "The first implementation slice could include Microsoft 365 manifest or package generation.",
+        "replaced_by": "CP-009 and CP-011",
+        "reason": "The validated product evidence confines v0.1.0 to a neutral design brief and offline validation boundary.",
+        "source_refs": [
+          "EV-CFV-RESULT:R4",
+          "EV-CFV-RESULT:R11",
+          "EV-CFV-RESULT:ALM2"
+        ]
+      },
+      {
+        "id": "SS-002",
+        "statement": "The verifier's overall Open status might block all implementation.",
+        "replaced_by": "CP-008",
+        "reason": "Its recommendation explicitly permits the portable offline methodology while preserving Microsoft-runtime questions as Open.",
+        "source_refs": [
+          "EV-CFV-RESULT:recommendation"
+        ]
+      }
+    ]
+  },
+  "boundary": {
+    "zone": "personal-openai",
+    "data_classification": "synthetic",
+    "cross_zone_transfer": "prohibited"
+  },
+  "slice": {
+    "outcome": "A user supplies a public or synthetic DesignRequest and receives a schema-valid, human-reviewable DesignResult for one agent across discovery, elicitation, conceptualisation, authoring, and assurance modes, including traceable findings, provenance, contradictions, abstentions, and explicit carry-forward state, without invoking Microsoft or organisational services.",
+    "entry": "The user explicitly invokes m365-declarative-agent-designer through a Codex or ChatGPT Work adapter and supplies a DesignRequest containing the desired outcome, personas, candidate hosts, constraints, public or synthetic context, known decisions, open questions, and prior carry-forward state.",
+    "validation": "A deterministic offline boundary gate rejects prohibited classifications, secrets, credentials, tenant identifiers requiring discovery, organisational content, executable instructions, connectors, MCP, deployment requests, unknown contract versions, malformed fields, duplicate identifiers, invalid provenance, and unsupported output modes before reasoning. It returns structured validation findings without attempting repair through external services.",
+    "persistence_or_action": "The only action is generation of a DesignResult response. No tenant, filesystem, connector, MCP, workflow, or external-service write occurs. Carry-forward state is serialized in the result and remains user-controlled. A normalized request digest and explicit request identifier distinguish retries and prevent accidental treatment of stale state as current state.",
+    "feedback": "The result distinguishes success, validation failure, prohibited-boundary refusal, unresolved contradiction, unsupported product claim, insufficient evidence, abstention, and human-review-required outcomes. Every failure identifies the affected contract path and the smallest safe correction without requesting secrets or organisational access.",
+    "telemetry": "v0.1.0 emits no operational telemetry. Test and evaluation records may retain only contract version, fixture identifier, adapter identifier, validator outcome, finding codes, duration, and synthetic correlation identifier; prompts, free-text requirements, provenance content, secrets, tenant identifiers, and organisational payloads are excluded.",
+    "evidence": "Readiness is proved by local schema validation, deterministic validator tests, synthetic trigger/golden/negative/security/regression fixtures, cross-adapter contract comparison, and a human-reviewed test summary. This evidence proves only the portable build-time methodology and never Microsoft packaging, installation, tenant configuration, licensing, deployment, or runtime behavior.",
+    "scope": [
+      "SKILL.md portable methodology",
+      "DesignRequest JSON Schema",
+      "DesignResult JSON Schema",
+      "Shared finding and provenance contract",
+      "Deterministic offline boundary validator",
+      "Deterministic DesignRequest validator",
+      "Deterministic DesignResult validator",
+      "Provenance validator",
+      "Contradiction validator",
+      "Abstention validator",
+      "Carry-forward state validator",
+      "Synthetic fixtures",
+      "Trigger tests",
+      "Golden tests",
+      "Negative tests",
+      "Security tests",
+      "Regression tests",
+      "Codex adapter contract",
+      "ChatGPT Work adapter contract",
+      "Evaluation metadata contract",
+      "Changelog",
+      "Rollback instructions"
+    ],
+    "exclusions": [
+      "Microsoft 365 Agents Toolkit installation or invocation",
+      "GitHub Copilot CLI installation or entitlement assumptions",
+      "Work IQ access",
+      "Microsoft 365 app, declarative-agent, plugin, Adaptive Card, MCP, or package generation",
+      "API plugin generation",
+      "MCP connection, discovery, tool generation, or invocation",
+      "Organisational knowledge, actions, identifiers, or confidential data",
+      "Connected-agent implementation",
+      "Copilot Studio assets or implementation",
+      "Power Automate cloud flows, agent flows, or Copilot Studio Workflows",
+      "Feedback persistence",
+      "Operational telemetry beyond privacy-safe evaluation metadata",
+      "Host-specific Microsoft UX validation",
+      "Tenant licensing, geography, residency, DLP, or identity fitment",
+      "Tenant authentication or discovery",
+      "Provisioning, sideloading, deployment, publication, or runtime testing",
+      "Automatic conversion among OpenAI, Microsoft 365, Toolkit, Copilot Studio, or Power Platform artifacts"
+    ]
+  },
+  "architecture": {
+    "experience": [
+      {
+        "id": "EXP-001",
+        "decision": "SKILL.md owns the portable requirements-discovery methodology and lifecycle-mode transitions, not Microsoft artifact authoring.",
+        "rationale": "This preserves portability and the engineering-plane versus runtime-plane boundary.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "EXP-002",
+        "decision": "Codex and ChatGPT Work adapters accept and return the same canonical contracts and may only map host invocation and rendering details.",
+        "rationale": "Host adapters must not fork methodology, weaken validation, or imply official Microsoft plugin support.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "EXP-003",
+        "decision": "Every DesignResult requires an explicit human-review status and presents findings, contradictions, abstentions, and open items separately.",
+        "rationale": "Reviewers must distinguish supported design content from uncertainty and prohibited runtime claims.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "data": [
+      {
+        "id": "DAT-001",
+        "decision": "DesignRequest is the sole canonical input contract and includes contract version, request identity, classification, objective, personas, host candidates, constraints, supplied evidence, settled decisions, open questions, and optional carry-forward state.",
+        "rationale": "A single typed boundary prevents host-specific implicit context from becoming authoritative input.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-002",
+        "decision": "DesignResult is the sole canonical output contract and includes disposition, lifecycle design, requirements, findings, provenance, contradictions, abstentions, exclusions, human-review gates, and carry-forward state.",
+        "rationale": "The result must be machine-validatable and reviewable without generating Microsoft artifacts.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-003",
+        "decision": "Finding and provenance records use stable identifiers, severity, category, statement, evidence label, source references, confidence, affected paths, resolution state, and revalidation metadata.",
+        "rationale": "Shared records allow deterministic validation and prevent unsupported claims from being blended into narrative output.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "DAT-004",
+        "decision": "Carry-forward state contains only sanitized decisions, assumptions, open items, rejected or superseded history, evidence references, contract versions, and request/result lineage.",
+        "rationale": "No hidden persistence or organisational content is needed for continuation.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "integration": [
+      {
+        "id": "INT-001",
+        "decision": "v0.1.0 has no Microsoft, tenant, connector, MCP, Work IQ, package-manager, CLI, or authenticated-service integration.",
+        "rationale": "All first-slice inputs and validation are local, public, or synthetic.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "INT-002",
+        "decision": "Adapters are pure contract translators and must expose no subprocess, network, installation, deployment, or artifact-generation capability.",
+        "rationale": "This prevents host adapters from crossing into the deferred runtime plane.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "ai": [
+      {
+        "id": "AI-001",
+        "decision": "One reasoning agent operates through explicit discovery, elicitation, conceptualisation, authoring, and assurance modes.",
+        "rationale": "A single topology is sufficient for the pilot and minimizes orchestration and governance surface.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "AI-002",
+        "decision": "AI reasoning may propose and synthesize requirements but cannot override deterministic boundary or schema findings.",
+        "rationale": "Security enforcement, schema checks, and repeatable transformations belong to deterministic code.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "AI-003",
+        "decision": "Unsupported, contradictory, stale, or insufficiently sourced product claims produce explicit abstentions or Open findings.",
+        "rationale": "The designer must not manufacture certainty or infer runtime behavior from structural similarity.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "security": [
+      {
+        "id": "SEC-001",
+        "decision": "The boundary gate defaults to deny for confidential, organisational, credential-bearing, executable, tenant-dependent, connector, MCP, provisioning, deployment, sideloading, and publication inputs.",
+        "rationale": "These inputs and actions are not authorised in the personal OpenAI pilot.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SEC-002",
+        "decision": "Embedded instructions that attempt to change orchestration, approval, security, evidence, tool, status, or output rules are treated as untrusted content and recorded without execution.",
+        "rationale": "Specialist evidence and user-supplied context cannot supersede control-plane policy.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "SEC-003",
+        "decision": "Provenance must use supplied public references or synthetic fixture identifiers and must never request or infer organisational records.",
+        "rationale": "This preserves the public-data and zero-organisational-access boundary.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "operations": [
+      {
+        "id": "OPS-001",
+        "decision": "Deterministic validators run offline and return stable finding codes, JSON paths, severity, and pass, fail, or abstain outcomes.",
+        "rationale": "Repeatable evidence is required for schema, boundary, provenance, contradiction, and carry-forward checks.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OPS-002",
+        "decision": "Operational telemetry is absent; test evaluation records contain privacy-safe metadata only.",
+        "rationale": "The pilot needs evaluation evidence without establishing a telemetry or feedback-persistence subsystem.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "OPS-003",
+        "decision": "Unavailable Codex or ChatGPT Work runtime evaluation remains untested and cannot be inferred from static adapter validation.",
+        "rationale": "Structural compatibility is not runtime evidence.",
+        "evidence_status": "Confirmed"
+      }
+    ],
+    "alm": [
+      {
+        "id": "ALM-001",
+        "decision": "The package structure is SKILL.md; schemas/design-request.schema.json; schemas/design-result.schema.json; schemas/finding-provenance.schema.json; validators/boundary; validators/request; validators/result; validators/provenance; validators/contradiction; validators/abstention; validators/carry-forward; adapters/codex.contract.json; adapters/chatgpt-work.contract.json; fixtures/synthetic; tests/trigger; tests/golden; tests/negative; tests/security; tests/regression; CHANGELOG.md; and ROLLBACK.md.",
+        "rationale": "The structure contains only the portable methodology, contracts, offline controls, evidence fixtures, adapters, and lifecycle documentation requested for the slice.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "ALM-002",
+        "decision": "No appPackage, manifest, plugin, Adaptive Card, MCP, Copilot Studio, solution, environment, connection-reference, or deployment directory is permitted in v0.1.0.",
+        "rationale": "Those artifacts belong to separately authorised target adapters and runtime ALM.",
+        "evidence_status": "Confirmed"
+      },
+      {
+        "id": "ALM-003",
+        "decision": "Contract and behavior changes require versioning, changelog entries, fixture migration notes, regression evidence, and a documented rollback to the last accepted contract set.",
+        "rationale": "A portable methodology needs reversible contract evolution without claiming deployed-runtime rollback.",
+        "evidence_status": "Confirmed"
+      }
+    ]
+  },
+  "delegations": [
+    {
+      "id": "DEL-001",
+      "specialist": "power-platform-current-feature-verifier",
+      "source_type": "lab",
+      "phase": "externally-completed",
+      "registry": {
+        "path": "skills/power-platform-current-feature-verifier/SKILL.md",
+        "entry_status": "current-approved",
+        "version_or_pin": "0.1.0",
+        "verified_on": "2026-07-21"
+      },
+      "request": {
+        "scope": "Verify current first-party public product and upstream claims needed to bound the m365-declarative-agent-designer v0.1.0 build brief.",
+        "data_classification": "public",
+        "zone": "personal-openai",
+        "permitted_tools": [
+          "First-party public-source retrieval",
+          "Offline answer-schema validation"
+        ]
+      },
+      "handoff": {
+        "invocation_mode": "explicit-external",
+        "input_payload": "Use $power-platform-current-feature-verifier to verify the original unchanged m365-declarative-agent-designer v0.1.0 product, artifact, authoring, host, topology, workflow, licensing, geography, portability, and upstream-reuse claims using current first-party public sources only, with no Microsoft organisational access or Toolkit invocation.",
+        "expected_output_schema": "skills/power-platform-current-feature-verifier/tests/output-schema.json",
+        "continuation_instruction": "Preserve the complete first output, independently validate its answer schema and SHA-256, retain zero-operation and public-boundary evidence, then resume Skill 6 with the original orchestration state."
+      },
+      "control": {
+        "enabled": true,
+        "selection_mode": "explicit",
+        "selector": "$power-platform-current-feature-verifier",
+        "client_compatible": true,
+        "prerequisites_satisfied": true,
+        "boundary_permitted": true,
+        "permissions_approved": true
+      },
+      "execution": {
+        "execution_observed": true,
+        "result_schema_valid": true,
+        "invoked": true,
+        "outcome_status": "completed",
+        "result_reference": "evidence/m365-declarative-agent-designer-verifier.json"
+      },
+      "verification": {
+        "specialist_identity_verified": true,
+        "register_verified": true,
+        "input_classification_verified": true,
+        "boundary_verified": true,
+        "result_hash_verified": true,
+        "result_schema_verified": true,
+        "untrusted_input_checked": true,
+        "override_attempted": false,
+        "result_sha256": "099a47d34d8e8863e5f9852f83f72847fa0d25865c853d3aab7826d9a66f3d69",
+        "source_path": "evidence/m365-declarative-agent-designer-verifier.json"
+      },
+      "evidence_refs": [
+        "evidence/m365-declarative-agent-designer-verifier.json",
+        "skills/power-platform-current-feature-verifier/SKILL.md",
+        "skills/power-platform-incremental-delivery/SKILL.md#6-specialist-routing-and-delegation-truth",
+        "EV-CFV-SCHEMA-VALIDATION",
+        "EV-CFV-ZERO-OPERATION",
+        "EV-CFV-BOUNDARY"
+      ],
+      "open_items": [
+        "The Work IQ plugin remains a Public Preview candidate rather than an approved release.",
+        "Official Codex and ChatGPT Work plugin support remains Open.",
+        "Toolkit entitlement, telemetry, dependency, tenant, geography, licensing, packaging, deployment, and runtime matters remain Open or separately authorised."
+      ],
+      "next_action": "Use only the result's portable-methodology boundary, deterministic-control guidance, rejected portability claims, and deferred-runtime classifications; do not consume it as authority to install Toolkit or generate Microsoft artifacts."
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "given": "A schema-valid public or synthetic DesignRequest",
+      "when": "The user explicitly invokes the designer through either adapter",
+      "then": "The methodology returns exactly one DesignResult conforming to the pinned DesignResult schema.",
+      "evidence": "Golden fixture validation record and serialized result."
+    },
+    {
+      "id": "AC-002",
+      "given": "A DesignRequest with an unsupported contract version or malformed required field",
+      "when": "Deterministic request validation runs",
+      "then": "Reasoning does not start and stable findings identify every rejected JSON path.",
+      "evidence": "Negative fixture and deterministic validator output."
+    },
+    {
+      "id": "AC-003",
+      "given": "A request containing confidential, credential-bearing, tenant-dependent, connector, MCP, deployment, sideloading, publication, or organisational content",
+      "when": "Boundary validation runs",
+      "then": "The request is denied without accessing, echoing, persisting, or acting on the prohibited content.",
+      "evidence": "Security fixture, sanitized finding record, and zero-operation assertion."
+    },
+    {
+      "id": "AC-004",
+      "given": "A valid request with incomplete or conflicting requirements",
+      "when": "Requirements-discovery reasoning runs",
+      "then": "The result records discrete questions, contradictions, assumptions, and abstentions without inventing product behavior.",
+      "evidence": "Golden and contradiction fixtures with schema-valid findings."
+    },
+    {
+      "id": "AC-005",
+      "given": "A completed reasoning result",
+      "when": "Deterministic output validation runs",
+      "then": "Every finding, provenance reference, contradiction, abstention, lifecycle mode, exclusion, and carry-forward item satisfies its contract and referential-integrity rules.",
+      "evidence": "DesignResult, provenance, contradiction, abstention, and carry-forward validator records."
+    },
+    {
+      "id": "AC-006",
+      "given": "The same canonical DesignRequest is mapped through Codex and ChatGPT Work adapter contracts",
+      "when": "Static adapter conformance tests run",
+      "then": "Both produce the same canonical request and accept the same canonical result without host-specific methodology fields.",
+      "evidence": "Cross-adapter regression comparison."
+    },
+    {
+      "id": "AC-007",
+      "given": "A DesignResult proposes Microsoft-runtime capabilities",
+      "when": "Assurance mode and result validation run",
+      "then": "The content remains conceptual, identifies release and evidence status, and does not contain generated Microsoft manifests, packages, plugin definitions, MCP contracts, or deployment instructions.",
+      "evidence": "Golden fixture and forbidden-artifact scan."
+    },
+    {
+      "id": "AC-008",
+      "given": "A prior schema-valid carry-forward state",
+      "when": "It is explicitly supplied in a later DesignRequest",
+      "then": "Settled, rejected, superseded, and Open history remains traceable and stale or contradictory updates are surfaced rather than silently overwritten.",
+      "evidence": "Two-invocation carry-forward regression fixture."
+    },
+    {
+      "id": "AC-009",
+      "given": "A repeated request identifier or normalized request digest",
+      "when": "Validation compares it with supplied carry-forward lineage",
+      "then": "The result identifies replay, duplicate, or stale-state conditions without performing an external action.",
+      "evidence": "Reliability fixture and stable duplicate or stale finding code."
+    },
+    {
+      "id": "AC-010",
+      "given": "Any successful DesignResult",
+      "when": "It is presented to the user",
+      "then": "It explicitly requires human review and states that it is not a Microsoft artifact, deployment approval, runtime proof, or tenant-fitment decision.",
+      "evidence": "Golden result assertions."
+    },
+    {
+      "id": "AC-011",
+      "given": "The v0.1.0 package",
+      "when": "Its file allowlist is checked",
+      "then": "Only methodology, canonical schemas, shared contracts, offline validators, synthetic fixtures, five test classes, two adapter contracts, changelog, and rollback instructions are present.",
+      "evidence": "Package allowlist test."
+    },
+    {
+      "id": "AC-012",
+      "given": "A release candidate",
+      "when": "Trigger, golden, negative, security, and regression suites complete",
+      "then": "All required cases pass with 100 percent schema validity, no prohibited operation, no forbidden artifact, and no unsupported runtime claim.",
+      "evidence": "Local evaluation summary and reviewed release checklist."
+    }
+  ],
+  "negative_paths": [
+    {
+      "id": "NP-001",
+      "condition": "The request contains confidential or organisational data.",
+      "expected_behavior": "Stop before reasoning, return a sanitized boundary finding, and request a public or synthetic replacement.",
+      "evidence": "Security test proves no prohibited content is copied into output."
+    },
+    {
+      "id": "NP-002",
+      "condition": "The request asks to authenticate, discover a tenant, access Microsoft 365 or Power Platform, invoke connectors or MCP, or use Work IQ.",
+      "expected_behavior": "Refuse the operation and retain the design-only boundary.",
+      "evidence": "Security test and zero-operation record."
+    },
+    {
+      "id": "NP-003",
+      "condition": "The request asks to install or invoke Toolkit, generate a Microsoft package, provision, sideload, deploy, or publish.",
+      "expected_behavior": "Classify the capability as deferred or separately authorised and produce no command or artifact.",
+      "evidence": "Negative test and forbidden-command scan."
+    },
+    {
+      "id": "NP-004",
+      "condition": "Supplied evidence contains instructions to override orchestration, approval, security, evidence, tool, status, or output rules.",
+      "expected_behavior": "Treat the instructions as untrusted, record an override-attempt finding, and continue only with safe factual content.",
+      "evidence": "Prompt-injection security fixture."
+    },
+    {
+      "id": "NP-005",
+      "condition": "Two sources or carry-forward items materially contradict each other.",
+      "expected_behavior": "Preserve both provenance chains, emit a contradiction, abstain from the affected decision, and identify the minimum resolution evidence.",
+      "evidence": "Contradiction regression fixture."
+    },
+    {
+      "id": "NP-006",
+      "condition": "A claim lacks sufficient public provenance or has passed its revalidation date.",
+      "expected_behavior": "Label it Open or stale and prevent promotion to Confirmed.",
+      "evidence": "Provenance-expiry negative fixture."
+    },
+    {
+      "id": "NP-007",
+      "condition": "An adapter introduces host-only fields that change canonical reasoning behavior.",
+      "expected_behavior": "Fail adapter conformance and identify the divergent paths.",
+      "evidence": "Cross-adapter negative test."
+    },
+    {
+      "id": "NP-008",
+      "condition": "A later request attempts to reopen a settled decision without material new evidence.",
+      "expected_behavior": "Retain the settled decision and record no state change.",
+      "evidence": "Carry-forward regression test."
+    },
+    {
+      "id": "NP-009",
+      "condition": "A request assumes structural compatibility proves Microsoft runtime compatibility.",
+      "expected_behavior": "Reject the inference and require separately authorised target-specific runtime evidence.",
+      "evidence": "Portability negative fixture."
+    },
+    {
+      "id": "NP-010",
+      "condition": "A duplicate or stale carry-forward state is supplied.",
+      "expected_behavior": "Return a stable replay or stale-state finding and instruct the user to reconcile the explicit state versions.",
+      "evidence": "Reliability regression fixture."
+    }
+  ],
+  "tests": [
+    {
+      "id": "TEST-001",
+      "class": "functional",
+      "scope": "Trigger cases distinguish explicit designer requests from general Microsoft product questions, implementation requests, and non-design prompts.",
+      "expected": "Only valid requirements-discovery design requests enter the methodology.",
+      "evidence_required": "Trigger matrix with expected selected or abstained outcomes.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-002",
+      "class": "ai-evaluation",
+      "scope": "Golden cases cover new synthetic design, incomplete requirements, contradictions, abstention, and carry-forward continuation across all five lifecycle modes.",
+      "expected": "Every result is useful, traceable, human-reviewable, schema-valid, and free of Microsoft artifacts.",
+      "evidence_required": "Golden fixtures, results, validator records, and reviewer verdicts.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-003",
+      "class": "functional",
+      "scope": "Negative cases cover malformed contracts, unknown versions, missing required fields, duplicate IDs, broken references, expired provenance, and forbidden output fields.",
+      "expected": "Deterministic validation fails closed with stable finding codes and JSON paths.",
+      "evidence_required": "Mutation fixtures and expected validator outputs.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-004",
+      "class": "security",
+      "scope": "Security cases cover secrets, credentials, tenant URLs, organisational content, prompt injection, Toolkit commands, connectors, MCP, Work IQ, deployment, sideloading, and publication.",
+      "expected": "No prohibited operation or content transfer occurs; output remains sanitized.",
+      "evidence_required": "Security fixture results, forbidden-token scan, and zero-operation assertion.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-005",
+      "class": "reliability",
+      "scope": "Regression cases cover request replay, stale carry-forward state, contradiction preservation, settled-decision retention, schema migration, and deterministic validator stability.",
+      "expected": "Prior accepted behavior and lineage remain stable unless explicitly versioned.",
+      "evidence_required": "Versioned regression corpus and before-after comparison.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-006",
+      "class": "alm",
+      "scope": "Package structure and allowlist validation.",
+      "expected": "No Microsoft manifests, packages, Copilot Studio assets, workflows, deployment files, generated API plugins, or MCP artifacts are present.",
+      "evidence_required": "File inventory and allowlist verdict.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-007",
+      "class": "functional",
+      "scope": "Codex and ChatGPT Work static adapter-contract parity.",
+      "expected": "Both map to identical canonical DesignRequest and DesignResult contracts without changing policy or reasoning semantics.",
+      "evidence_required": "Shared fixture mapping and structural diff.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-008",
+      "class": "accessibility",
+      "scope": "Finding and review feedback semantics.",
+      "expected": "Status, severity, affected path, resolution, contradiction, and abstention are conveyed textually without dependence on color or host-specific cards.",
+      "evidence_required": "Golden-output accessibility review.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-009",
+      "class": "performance",
+      "scope": "Deterministic validation over maximum permitted synthetic request and result sizes.",
+      "expected": "Validation completes within the locally defined budget without network access or unbounded recursion.",
+      "evidence_required": "Offline timing and resource summary with payloads excluded.",
+      "status": "planned"
+    },
+    {
+      "id": "TEST-010",
+      "class": "rollback",
+      "scope": "Rollback from a candidate contract or methodology revision to the last accepted version.",
+      "expected": "The previous schemas, validators, adapters, fixtures, and documentation can be restored together without mixing contract versions.",
+      "evidence_required": "Dry-run rollback checklist and restored-suite result.",
+      "status": "planned"
+    }
+  ],
+  "deployment": {
+    "authorization_status": "not-authorized",
+    "target_zone": "personal-openai",
+    "environments": [
+      "Local personal OpenAI lab evaluation only"
+    ],
+    "prerequisites": [
+      "Approve this Ready build brief for implementation",
+      "Confirm the JSON Schema draft and offline validator runtime",
+      "Retain the validated specialist evidence at its preserved relative path and SHA-256",
+      "Use public or synthetic fixtures only",
+      "Keep Toolkit and Microsoft-runtime capabilities disabled",
+      "Define privacy-safe local evaluation metadata fields"
+    ],
+    "steps": [
+      "Define the canonical shared identifiers, finding, provenance, contradiction, abstention, and carry-forward records",
+      "Author and meta-validate DesignRequest JSON Schema",
+      "Author and meta-validate DesignResult JSON Schema",
+      "Implement deterministic boundary and DesignRequest validation",
+      "Author SKILL.md lifecycle methodology against the canonical input contract",
+      "Implement deterministic DesignResult, provenance, contradiction, abstention, and carry-forward validation",
+      "Create synthetic trigger, golden, negative, security, and regression fixtures",
+      "Define Codex and ChatGPT Work adapter contracts as pure canonical mappings",
+      "Run offline schema, validator, security, regression, package-allowlist, and adapter-parity tests",
+      "Complete human review, changelog, rollback instructions, and release evidence"
+    ],
+    "post_deploy_checks": [
+      "No deployment is performed for v0.1.0",
+      "Verify the local package contains only the approved portable-slice allowlist",
+      "Verify all test results refer only to public or synthetic fixtures",
+      "Verify operational telemetry and feedback persistence are absent",
+      "Verify Microsoft-runtime claims remain explicitly deferred"
+    ],
+    "evidence_required": [
+      "Schema meta-validation records",
+      "Deterministic validator test results",
+      "Synthetic fixture inventory",
+      "Trigger, golden, negative, security, and regression summaries",
+      "Adapter-contract parity record",
+      "Package allowlist result",
+      "Human-review signoff",
+      "Changelog entry",
+      "Rollback dry-run record"
+    ]
+  },
+  "rollback": {
+    "triggers": [
+      "A schema change breaks accepted fixtures or adapter compatibility",
+      "A validator permits prohibited classifications, operations, or artifact types",
+      "AI reasoning can override deterministic validation",
+      "Provenance, contradiction, abstention, or carry-forward integrity fails",
+      "A host adapter changes canonical methodology behavior",
+      "A regression introduces Toolkit, Microsoft-runtime, connector, MCP, tenant, deployment, or telemetry behavior"
+    ],
+    "steps": [
+      "Stop the candidate evaluation and mark the affected version unavailable",
+      "Restore SKILL.md, schemas, validators, adapter contracts, fixtures, changelog, and rollback documentation as one versioned set from the last accepted release",
+      "Discard incompatible carry-forward state or migrate it only through an explicitly versioned deterministic migration",
+      "Rerun the complete offline trigger, golden, negative, security, regression, package-allowlist, and adapter-parity suites",
+      "Require human review before re-entering candidate status"
+    ],
+    "data_considerations": [
+      "No tenant or organisational data exists in the slice",
+      "Synthetic fixtures may be replaced from version control or the accepted release bundle",
+      "DesignResult and carry-forward state are user-controlled outputs and are not centrally persisted",
+      "Never silently reinterpret carry-forward state created under an incompatible contract version"
+    ],
+    "owner": "Personal OpenAI lab maintainer",
+    "evidence_required": [
+      "Last accepted release identifier",
+      "Restored file-manifest comparison",
+      "Schema-version compatibility verdict",
+      "Complete post-rollback test summary",
+      "Human-review approval"
+    ]
+  },
+  "next_action": "Implement only the Ready portable vertical slice in the recorded sequence after explicit implementation approval. Carry forward: personal-openai zone; public or synthetic inputs; no cross-zone transfer; user-triggered read-only one-agent lifecycle methodology; deterministic validation separate from AI reasoning; human review required; validated verifier evidence at evidence/m365-declarative-agent-designer-verifier.json with SHA-256 099a47d34d8e8863e5f9852f83f72847fa0d25865c853d3aab7826d9a66f3d69 and revalidation due 2026-08-04; Codex and ChatGPT Work limited to adapter-contract evaluation; all Toolkit, Microsoft artifact, organisational integration, connected-agent, Copilot Studio, workflow, telemetry, tenant-fitment, sideloading, deployment, publication, and runtime work remains deferred, Open, or separately authorised."
+}

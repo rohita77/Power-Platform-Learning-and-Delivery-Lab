@@ -1,0 +1,17 @@
+{
+  "record_version": "0.1.0",
+  "verified_on": "2026-07-22",
+  "canonical_path": "skills/m365-declarative-agent-designer",
+  "publication_path": ".agents/skills/m365-declarative-agent-designer",
+  "copy_created_after_canonical_validation": true,
+  "canonical_suite_passed": true,
+  "publication_suite_passed": true,
+  "recursive_byte_identical": true,
+  "canonical_file_count": 37,
+  "publication_file_count": 37,
+  "canonical_tree_sha256": "6581197d1d0749b1d134c7c5891a1e27aa7c9c3bca84aed26ad77992f93f7eba",
+  "publication_tree_sha256": "6581197d1d0749b1d134c7c5891a1e27aa7c9c3bca84aed26ad77992f93f7eba",
+  "canonical_symlinks": 0,
+  "publication_symlinks": 0,
+  "publication_copy_modified_independently": false
+}

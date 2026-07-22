@@ -1,0 +1,10 @@
+{
+  "case_id": "ROLLBACK-001",
+  "evaluated_on": "2026-07-22",
+  "mode": "dry-run",
+  "mutations_performed": 0,
+  "passed": true,
+  "record_version": "0.1.0",
+  "result": "The complete versioned package can be restored as one unit without mixing contracts.",
+  "tenant_or_runtime_state": "not-applicable"
+}

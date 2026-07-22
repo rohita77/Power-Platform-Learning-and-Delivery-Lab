@@ -1,0 +1,16 @@
+{
+  "expected_files": [
+    "SKILL.md",
+    "schemas/design-request.schema.json",
+    "schemas/design-result.schema.json",
+    "schemas/finding-provenance.schema.json",
+    "validators/validate.py",
+    "adapters/codex.contract.json",
+    "adapters/chatgpt-work.contract.json",
+    "CHANGELOG.md",
+    "ROLLBACK.md"
+  ],
+  "id": "ROLLBACK-001",
+  "mode": "dry-run",
+  "must_not_mutate": true
+}

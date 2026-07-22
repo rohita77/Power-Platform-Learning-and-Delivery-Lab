@@ -1,0 +1,13 @@
+{
+  "contract_version": "0.1.0",
+  "adapter_id": "chatgpt-work",
+  "input_schema": "../schemas/design-request.schema.json",
+  "output_schema": "../schemas/design-result.schema.json",
+  "invocation": "explicit-user-trigger",
+  "mapping": "identity",
+  "methodology_override": false,
+  "policy_override": false,
+  "network_allowed": false,
+  "official_work_iq_plugin_compatibility": "not-claimed",
+  "runtime_evaluation_status": "untested"
+}

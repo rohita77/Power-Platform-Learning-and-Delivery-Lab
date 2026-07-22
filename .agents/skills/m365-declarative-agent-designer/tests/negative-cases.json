@@ -1,0 +1,123 @@
+[
+  {
+    "base": "GOLD-001.request.json",
+    "expected_code": "DAD-SCHEMA-INVALID",
+    "id": "NEG-001",
+    "mutation": {
+      "op": "replace-document",
+      "value": []
+    },
+    "target": "request"
+  },
+  {
+    "base": "GOLD-001.request.json",
+    "expected_code": "DAD-SCHEMA-VERSION",
+    "id": "NEG-002",
+    "mutation": {
+      "op": "set",
+      "path": "/contract_version",
+      "value": "9.9.9"
+    },
+    "target": "request"
+  },
+  {
+    "base": "GOLD-001.request.json",
+    "expected_code": "DAD-MISSING-FIELD",
+    "id": "NEG-003",
+    "mutation": {
+      "op": "delete",
+      "path": "/objective"
+    },
+    "target": "request"
+  },
+  {
+    "base": "GOLD-001.request.json",
+    "expected_code": "DAD-DUPLICATE-ID",
+    "id": "NEG-004",
+    "mutation": {
+      "op": "append-copy",
+      "path": "/sources",
+      "source": "/sources/0"
+    },
+    "target": "request"
+  },
+  {
+    "base": "GOLD-001.request.json",
+    "expected_code": "DAD-BROKEN-REFERENCE",
+    "id": "NEG-005",
+    "mutation": {
+      "op": "set",
+      "path": "/settled_decisions/0/evidence_refs",
+      "value": [
+        "PRV-MISSING"
+      ]
+    },
+    "target": "request"
+  },
+  {
+    "base": "GOLD-001.result.json",
+    "expected_code": "DAD-EXPIRED-PROVENANCE",
+    "id": "NEG-006",
+    "mutation": {
+      "op": "set",
+      "path": "/provenance/0/revalidate_on",
+      "value": "2026-01-01"
+    },
+    "target": "result"
+  },
+  {
+    "base": "GOLD-001.result.json",
+    "expected_code": "DAD-SCHEMA-INVALID",
+    "id": "NEG-007",
+    "mutation": {
+      "op": "set",
+      "path": "/unexpected",
+      "value": true
+    },
+    "target": "result"
+  },
+  {
+    "base": "GOLD-003.result.json",
+    "expected_code": "DAD-UNRESOLVED-CONTRADICTION",
+    "id": "NEG-008",
+    "mutation": {
+      "op": "set",
+      "path": "/abstentions",
+      "value": []
+    },
+    "target": "result"
+  },
+  {
+    "base": "GOLD-004.result.json",
+    "expected_code": "DAD-INVALID-ABSTENTION",
+    "id": "NEG-009",
+    "mutation": {
+      "op": "set",
+      "path": "/abstentions/0/reason",
+      "value": "contradictory-evidence"
+    },
+    "target": "result"
+  },
+  {
+    "base": "GOLD-005.request.json",
+    "expected_code": "DAD-INCOMPATIBLE-CARRY-FORWARD",
+    "id": "NEG-010",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/contract_version",
+      "value": "9.9.9"
+    },
+    "target": "request"
+  },
+  {
+    "base": "GOLD-001.result.json",
+    "expected_code": "DAD-FORBIDDEN-MICROSOFT-ARTIFACT",
+    "id": "NEG-011",
+    "mutation": {
+      "op": "set",
+      "path": "/findings/0/statement",
+      "value": "Create appPackage/manifest.json as the output."
+    },
+    "target": "result"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "as_of": "2026-07-22",
+  "counts": {
+    "golden": 5,
+    "invalid_fixture_cases": 33,
+    "negative": 11,
+    "package_findings": 0,
+    "regression": 11,
+    "rollback": 1,
+    "security": 11,
+    "should_not_trigger": 3,
+    "should_trigger": 3,
+    "trigger": 6,
+    "trigger_metadata_assertions": 8,
+    "valid_fixture_documents": 10
+  },
+  "failures": [],
+  "offline": true,
+  "passed": true,
+  "suite_version": "0.1.0"
+}

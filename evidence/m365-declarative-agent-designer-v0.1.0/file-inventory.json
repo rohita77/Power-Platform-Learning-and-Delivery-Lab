@@ -1,0 +1,196 @@
+{
+  "canonical_path": "skills/m365-declarative-agent-designer",
+  "file_count": 37,
+  "files": [
+    {
+      "bytes": 690,
+      "path": "CHANGELOG.md",
+      "sha256": "f08e83e166ece10407feae179c1a05a0b6b48edc50da60ec49a5f2d751932d6f"
+    },
+    {
+      "bytes": 1198,
+      "path": "ROLLBACK.md",
+      "sha256": "bc433d4297e3c4694eb0f38df0f2b8494e8182583cc2cea1fe9dbaa97559626a"
+    },
+    {
+      "bytes": 5223,
+      "path": "SKILL.md",
+      "sha256": "4ea5713d791215843551862aeaa7416934710eaa9a70b09dbec4cb6360752601"
+    },
+    {
+      "bytes": 440,
+      "path": "adapters/chatgpt-work.contract.json",
+      "sha256": "1551bf5742f3aeb1ebcac1ecb611e5f3635dbc30a4c58f9201416a41372d0c83"
+    },
+    {
+      "bytes": 433,
+      "path": "adapters/codex.contract.json",
+      "sha256": "ada5a8086d3e62cf4a42130cf09064275e935e95bf340eaf68de5f89f9285775"
+    },
+    {
+      "bytes": 3399,
+      "path": "schemas/design-request.schema.json",
+      "sha256": "0cc9f69760e14347373581656e13ab4f9d244225c08449881ae338cc08975617"
+    },
+    {
+      "bytes": 7496,
+      "path": "schemas/design-result.schema.json",
+      "sha256": "76e2dfc95b596347b9ebaf477aa60460de7fe7ddec43753a90e7910b3235bc87"
+    },
+    {
+      "bytes": 9013,
+      "path": "schemas/finding-provenance.schema.json",
+      "sha256": "04fae7224adb71e08a870f9f551881b9eabfc0c46695606169903b3b0c75678d"
+    },
+    {
+      "bytes": 42,
+      "path": "tests/__init__.py",
+      "sha256": "936b6c21e8847adc9e14006a88fe424c959293ef43e17c08a9cb42840f60ce8a"
+    },
+    {
+      "bytes": 1048,
+      "path": "tests/fixtures/synthetic/GOLD-001.request.json",
+      "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"
+    },
+    {
+      "bytes": 3680,
+      "path": "tests/fixtures/synthetic/GOLD-001.result.json",
+      "sha256": "ac7aee39021efdf8423ab3c41192d2ed8edc88b62de97ebedb13c0b7c3193e7e"
+    },
+    {
+      "bytes": 1211,
+      "path": "tests/fixtures/synthetic/GOLD-002.request.json",
+      "sha256": "ba93ab26726ca94e5228dcb857b4a29a4a251924c05defcc2bc6f1eedca84a98"
+    },
+    {
+      "bytes": 4220,
+      "path": "tests/fixtures/synthetic/GOLD-002.result.json",
+      "sha256": "28c92d1e44b00e6257f14174ef4020c60bd8d085dba1fa1e114d05da6a4cfa92"
+    },
+    {
+      "bytes": 1314,
+      "path": "tests/fixtures/synthetic/GOLD-003.request.json",
+      "sha256": "890f452091781bfd69c19a2e1a3823d0f575d1ee2a15402fe9943221f4c52006"
+    },
+    {
+      "bytes": 4947,
+      "path": "tests/fixtures/synthetic/GOLD-003.result.json",
+      "sha256": "f1e8c3b923f307f948158d51cac3acb05e4c4a1cf207d05284068fe5d4c167f9"
+    },
+    {
+      "bytes": 1048,
+      "path": "tests/fixtures/synthetic/GOLD-004.request.json",
+      "sha256": "75ccd960e4994aa07d8a9d4549d41dc81516d00fe05370bd2b20b494e7214959"
+    },
+    {
+      "bytes": 3988,
+      "path": "tests/fixtures/synthetic/GOLD-004.result.json",
+      "sha256": "ace069753a629e0a501297da395506efb95fa696bb61eece0465fc50a74a4779"
+    },
+    {
+      "bytes": 1896,
+      "path": "tests/fixtures/synthetic/GOLD-005.request.json",
+      "sha256": "66ea011833f091564e7d060942176984a9252dfe4ebf101cadda7917b8f488b4"
+    },
+    {
+      "bytes": 3722,
+      "path": "tests/fixtures/synthetic/GOLD-005.result.json",
+      "sha256": "840e56ded2e1c4605c4f7c819e01227662623a071bfd0edc3495a440432d724f"
+    },
+    {
+      "bytes": 733,
+      "path": "tests/golden-cases.json",
+      "sha256": "e7c83ba5fd6cd37500c1f7aed37e9014bd58c701057a0d4d90dd09cb2c3edf54"
+    },
+    {
+      "bytes": 2699,
+      "path": "tests/negative-cases.json",
+      "sha256": "e7891164142bd1e1e45bbcbdf07cf9a9a5f12f77c6c088fdc5da2d371c17119d"
+    },
+    {
+      "bytes": 2726,
+      "path": "tests/regression-cases.json",
+      "sha256": "e2774344d4c665fac0b185b43c2f0e9271fdd09f4f9d9e7028def48744f16ad5"
+    },
+    {
+      "bytes": 394,
+      "path": "tests/rollback-case.json",
+      "sha256": "44277a7a6947ae0aca5c332c6d012ca009599ce0fb774a9ea591565f8ff21a17"
+    },
+    {
+      "bytes": 9691,
+      "path": "tests/run_tests.py",
+      "sha256": "87cd4ff9b29a6d0f6a11e27f4d702a7a68c3a46a2f5279350aab61b0dcf66c3f"
+    },
+    {
+      "bytes": 3091,
+      "path": "tests/security-cases.json",
+      "sha256": "28147bb61a1d9d84b7e5eb886d785ffe35a1e2142e6fb88931f336270fd14f80"
+    },
+    {
+      "bytes": 851,
+      "path": "tests/trigger-cases.json",
+      "sha256": "c9f500a81e9f551252a4b95f04d7d361e8da034ff74437e43d90c9e002737df6"
+    },
+    {
+      "bytes": 76,
+      "path": "validators/__init__.py",
+      "sha256": "111d4a6e862b2a5c1f2d39b0cc5c472a1015749f773236c4fc38170bac7f1c34"
+    },
+    {
+      "bytes": 2146,
+      "path": "validators/abstentions.py",
+      "sha256": "d6b15b94f9646a258d2548bed56869d50827715796edfd2b8fc710cf224b7211"
+    },
+    {
+      "bytes": 2415,
+      "path": "validators/boundary.py",
+      "sha256": "928048eaedf468f9238395101f45166483f65824c599cab6ed544da317812a4a"
+    },
+    {
+      "bytes": 3169,
+      "path": "validators/carry_forward.py",
+      "sha256": "00ec30492e7482366e15b1d9ca17f3facd661407e8a7a6155f81653a3b1f73f5"
+    },
+    {
+      "bytes": 4581,
+      "path": "validators/common.py",
+      "sha256": "e8974028778cc7ff5b1120b03a60b13b1691bdfec79ce519e2ca79089236dd7c"
+    },
+    {
+      "bytes": 1651,
+      "path": "validators/contradictions.py",
+      "sha256": "ccfff4c9c3233fdb4bd1859eb2c3a87b1df559aaeaa5d3c5294be594f1cc8080"
+    },
+    {
+      "bytes": 4522,
+      "path": "validators/package.py",
+      "sha256": "35ff1b274ca9f23fb63c2ff4ffe780aa882977ee4ad6d1fc01e7b61ab0bc7dd0"
+    },
+    {
+      "bytes": 2189,
+      "path": "validators/provenance.py",
+      "sha256": "0027d82ed019ec7b231d53a74e783b9d92bae24ae072a050b5dda07e4a0e107c"
+    },
+    {
+      "bytes": 1538,
+      "path": "validators/request.py",
+      "sha256": "eac14d02e0a7688c72715e9ef6f8805051d14b40fa451bcfd52380114249f228"
+    },
+    {
+      "bytes": 7594,
+      "path": "validators/result.py",
+      "sha256": "856a2b8831792150bd268e2310f27295c4464bff43c770cdbd928df691ec17ca"
+    },
+    {
+      "bytes": 2469,
+      "path": "validators/validate.py",
+      "sha256": "4d8654514c43e5ce5d94b03e9554b267ddc92be3191818c450646a16a3867d8c"
+    }
+  ],
+  "generated_on": "2026-07-22",
+  "publication_path": ".agents/skills/m365-declarative-agent-designer",
+  "record_version": "0.1.0",
+  "symlinks": 0,
+  "tree_sha256": "6581197d1d0749b1d134c7c5891a1e27aa7c9c3bca84aed26ad77992f93f7eba"
+}

@@ -1,0 +1,167 @@
+{
+  "abstentions": [
+    {
+      "claim": "The unsupported product capability is available.",
+      "contradiction_ids": [],
+      "finding_ids": [
+        "FND-001"
+      ],
+      "human_action": "Obtain current applicable first-party evidence.",
+      "id": "ABS-001",
+      "provenance_ids": [
+        "PRV-001"
+      ],
+      "reason": "unsupported-claim"
+    }
+  ],
+  "carry_forward": {
+    "assumptions": [],
+    "confirmed_decisions": [
+      {
+        "evidence_refs": [
+          "PRV-001"
+        ],
+        "id": "DEC-001",
+        "statement": "Use one agent with five lifecycle modes."
+      }
+    ],
+    "contract_version": "0.1.0",
+    "evidence_refs": [
+      "PRV-001"
+    ],
+    "open_items": [],
+    "previous_result_id": null,
+    "rejected_decisions": [
+      {
+        "evidence_refs": [
+          "PRV-001"
+        ],
+        "id": "REJ-001",
+        "statement": "Do not generate Microsoft runtime artifacts."
+      }
+    ],
+    "request_ids": [
+      "DRQ-GOLD-004"
+    ],
+    "result_ids": [
+      "DRS-GOLD-004"
+    ],
+    "sequence": 0,
+    "state_id": "STATE-001",
+    "superseded_chronology": []
+  },
+  "contract_version": "0.1.0",
+  "contradictions": [],
+  "disclaimers": {
+    "deployment_approval": false,
+    "microsoft_runtime_artifact": false,
+    "runtime_compatibility_proof": false,
+    "tenant_fitment_evidence": false
+  },
+  "evaluation_metadata": {
+    "adapter_id": "canonical",
+    "contract_version": "0.1.0",
+    "correlation_id": "SYN-DRQ-GOLD-004",
+    "duration_ms": 0,
+    "finding_codes": [],
+    "fixture_id": "DRQ-GOLD-004",
+    "validator_outcome": "passed"
+  },
+  "findings": [
+    {
+      "affected_paths": [
+        "/requirements/scope"
+      ],
+      "category": "requirement",
+      "evidence_label": "Open",
+      "id": "FND-001",
+      "provenance_ids": [
+        "PRV-001"
+      ],
+      "resolution": "open",
+      "severity": "info",
+      "statement": "The proposed product capability lacks applicable evidence."
+    }
+  ],
+  "generated_on": "2026-07-22",
+  "human_review_required": true,
+  "modes": [
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Discovery",
+      "summary": "The synthetic outcome, actor, evidence, and offline boundary are identified."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Elicitation",
+      "summary": "Scope, exclusions, requirements, and open questions are structured."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Conceptualisation",
+      "summary": "One agent and separate deterministic controls are proposed."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Authoring",
+      "summary": "The canonical DesignResult contract is populated without runtime artifacts."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Assurance",
+      "summary": "Provenance, lineage, boundary, and human-review disclaimers are checked."
+    }
+  ],
+  "provenance": [
+    {
+      "id": "PRV-001",
+      "reference": "synthetic:prv-001",
+      "revalidate_on": "2027-07-22",
+      "source_type": "synthetic-fixture",
+      "status": "current",
+      "title": "Synthetic requirements fixture",
+      "verified_on": "2026-07-22"
+    }
+  ],
+  "request_digest": "36b42744ab1e9c2d6720f74c1e9bf0e4b4c7fa681fc3209b81c799d48ae36b63",
+  "request_id": "DRQ-GOLD-004",
+  "requirements": {
+    "actors": [
+      "Synthetic product owner"
+    ],
+    "data": [
+      "Public or synthetic input only"
+    ],
+    "exclusions": [
+      "Microsoft runtime artifact generation"
+    ],
+    "functional_needs": [
+      "Return one canonical DesignResult"
+    ],
+    "integrations": [
+      "No integrations"
+    ],
+    "nonfunctional_needs": [
+      "Operate offline"
+    ],
+    "open_questions": [],
+    "scope": [
+      "Requirements discovery"
+    ],
+    "security": [
+      "Reject prohibited boundary requests"
+    ]
+  },
+  "result_id": "DRS-GOLD-004",
+  "status": "Open"
+}

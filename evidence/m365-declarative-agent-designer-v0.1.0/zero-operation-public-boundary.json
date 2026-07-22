@@ -1,0 +1,22 @@
+{
+  "authenticated_service_operations_observed": 0,
+  "connector_operations_observed": 0,
+  "cross_zone_transfer": "prohibited",
+  "data_classification": "public",
+  "deployment_operations_observed": 0,
+  "mcp_operations_observed": 0,
+  "override_attempted": false,
+  "permitted_activity": [
+    "Current first-party public-source verification",
+    "Offline answer-schema validation"
+  ],
+  "prohibited_workflow_operations_observed": 0,
+  "record_version": "0.1.0",
+  "recorded_on": "2026-07-21",
+  "specialist": "power-platform-current-feature-verifier",
+  "specialist_version": "0.1.0",
+  "tenant_operations_observed": 0,
+  "toolkit_operations_observed": 0,
+  "work_iq_operations_observed": 0,
+  "zone": "personal-openai"
+}

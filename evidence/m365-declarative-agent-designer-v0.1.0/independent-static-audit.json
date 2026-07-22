@@ -1,0 +1,25 @@
+{
+  "record_version": "0.1.0",
+  "audited_on": "2026-07-22",
+  "scope": "Independent read-only static audit of the portable skill contracts and fail-closed controls",
+  "result": "Pass",
+  "runtime_parity_assessed": false,
+  "network_or_authenticated_operations": 0,
+  "files_modified_by_audit": 0,
+  "verified": {
+    "golden_pairs": 5,
+    "should_trigger_cases": 3,
+    "should_not_trigger_cases": 3,
+    "negative_security_regression_cases": 33,
+    "suite_failures": 0,
+    "package_validation": "passed",
+    "skill_structure_validation": "passed",
+    "prohibited_result_operations_rejected": true,
+    "secret_bearing_results_rejected": true,
+    "forged_carry_forward_history_rejected": true,
+    "unresolved_complete_contradictions_rejected": true,
+    "misclassified_contradiction_abstentions_rejected": true,
+    "open_stale_evidence_with_abstention_accepted": true,
+    "weakened_adapter_safety_values_rejected": true
+  }
+}

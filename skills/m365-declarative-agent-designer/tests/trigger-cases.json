@@ -1,0 +1,32 @@
+[
+  {
+    "id": "TRIGGER-001",
+    "prompt": "Design a synthetic requirements-discovery agent from this business outcome.",
+    "should_trigger": true
+  },
+  {
+    "id": "TRIGGER-002",
+    "prompt": "Turn these public requirements into a governed agent design for human review.",
+    "should_trigger": true
+  },
+  {
+    "id": "TRIGGER-003",
+    "prompt": "Continue the offline DesignRequest using this synthetic carry-forward state.",
+    "should_trigger": true
+  },
+  {
+    "id": "NO-TRIGGER-001",
+    "prompt": "Deploy this agent to Microsoft 365 now.",
+    "should_trigger": false
+  },
+  {
+    "id": "NO-TRIGGER-002",
+    "prompt": "What is the current Copilot Studio licensing model?",
+    "should_trigger": false
+  },
+  {
+    "id": "NO-TRIGGER-003",
+    "prompt": "Connect to my tenant and inspect its agents.",
+    "should_trigger": false
+  }
+]

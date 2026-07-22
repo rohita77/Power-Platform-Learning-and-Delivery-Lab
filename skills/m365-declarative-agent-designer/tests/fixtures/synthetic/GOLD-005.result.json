@@ -1,0 +1,155 @@
+{
+  "abstentions": [],
+  "carry_forward": {
+    "assumptions": [],
+    "confirmed_decisions": [
+      {
+        "evidence_refs": [
+          "PRV-001"
+        ],
+        "id": "DEC-001",
+        "statement": "Use one agent with five lifecycle modes."
+      }
+    ],
+    "contract_version": "0.1.0",
+    "evidence_refs": [
+      "PRV-001"
+    ],
+    "open_items": [],
+    "previous_result_id": "DRS-PREV",
+    "rejected_decisions": [
+      {
+        "evidence_refs": [
+          "PRV-001"
+        ],
+        "id": "REJ-001",
+        "statement": "Do not generate Microsoft runtime artifacts."
+      }
+    ],
+    "request_ids": [
+      "DRQ-PREV",
+      "DRQ-GOLD-005"
+    ],
+    "result_ids": [
+      "DRS-PREV",
+      "DRS-GOLD-005"
+    ],
+    "sequence": 2,
+    "state_id": "STATE-001",
+    "superseded_chronology": []
+  },
+  "contract_version": "0.1.0",
+  "contradictions": [],
+  "disclaimers": {
+    "deployment_approval": false,
+    "microsoft_runtime_artifact": false,
+    "runtime_compatibility_proof": false,
+    "tenant_fitment_evidence": false
+  },
+  "evaluation_metadata": {
+    "adapter_id": "canonical",
+    "contract_version": "0.1.0",
+    "correlation_id": "SYN-DRQ-GOLD-005",
+    "duration_ms": 0,
+    "finding_codes": [],
+    "fixture_id": "DRQ-GOLD-005",
+    "validator_outcome": "passed"
+  },
+  "findings": [
+    {
+      "affected_paths": [
+        "/requirements/scope"
+      ],
+      "category": "requirement",
+      "evidence_label": "Confirmed",
+      "id": "FND-001",
+      "provenance_ids": [
+        "PRV-001"
+      ],
+      "resolution": "human-review",
+      "severity": "info",
+      "statement": "Use one portable requirements-discovery agent with five explicit lifecycle modes."
+    }
+  ],
+  "generated_on": "2026-07-22",
+  "human_review_required": true,
+  "modes": [
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Discovery",
+      "summary": "The synthetic outcome, actor, evidence, and offline boundary are identified."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Elicitation",
+      "summary": "Scope, exclusions, requirements, and open questions are structured."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Conceptualisation",
+      "summary": "One agent and separate deterministic controls are proposed."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Authoring",
+      "summary": "The canonical DesignResult contract is populated without runtime artifacts."
+    },
+    {
+      "finding_ids": [
+        "FND-001"
+      ],
+      "mode": "Assurance",
+      "summary": "Provenance, lineage, boundary, and human-review disclaimers are checked."
+    }
+  ],
+  "provenance": [
+    {
+      "id": "PRV-001",
+      "reference": "synthetic:prv-001",
+      "revalidate_on": "2027-07-22",
+      "source_type": "synthetic-fixture",
+      "status": "current",
+      "title": "Synthetic requirements fixture",
+      "verified_on": "2026-07-22"
+    }
+  ],
+  "request_digest": "f47ef5cb13a964848697db1d83fb0938c9c9bbf370a12cd8582a5d95de62bbad",
+  "request_id": "DRQ-GOLD-005",
+  "requirements": {
+    "actors": [
+      "Synthetic product owner"
+    ],
+    "data": [
+      "Public or synthetic input only"
+    ],
+    "exclusions": [
+      "Microsoft runtime artifact generation"
+    ],
+    "functional_needs": [
+      "Return one canonical DesignResult"
+    ],
+    "integrations": [
+      "No integrations"
+    ],
+    "nonfunctional_needs": [
+      "Operate offline"
+    ],
+    "open_questions": [],
+    "scope": [
+      "Requirements discovery"
+    ],
+    "security": [
+      "Reject prohibited boundary requests"
+    ]
+  },
+  "result_id": "DRS-GOLD-005",
+  "status": "Complete"
+}

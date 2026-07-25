@@ -1,0 +1,111 @@
+{
+  "evaluation_id": "m365-declarative-agent-designer-codex-v0.1.0-rc2",
+  "evaluated_on": "2026-07-22",
+  "rc1": {
+    "status": "preserved-unchanged",
+    "root_cause": "Codex structured-output transport rejected canonical uniqueItems before inference.",
+    "manifest": "rc1-preservation-manifest.json"
+  },
+  "rc2_profile": {
+    "canonical_schema_submitted_as_response_format": false,
+    "first_output_preserved_before_parsing": true,
+    "offline_canonical_validation": true,
+    "skill_version": "0.1.0",
+    "runtime": "Codex CLI 0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning_level": "high"
+  },
+  "smoke": {
+    "case_id": "GOLD-001",
+    "result": "fail",
+    "failure_class": "workflow-output-contract",
+    "first_output_sha256": "abebd6f1c718cc3b6e86c8cbfcb7fef79db43383380a605331f57d32d92a7a5c",
+    "direct_json_parse": "pass",
+    "offline_canonical_schema": "fail",
+    "deterministic_result_validator": "fail",
+    "record": "cases/GOLD-001/evaluation-record.json"
+  },
+  "full_scorecard": {
+    "started": false,
+    "reason": "RC2 smoke failed canonical schema validation; repair and retry were prohibited.",
+    "trigger": "not-run",
+    "golden": "0-of-5-passed",
+    "negative": "not-run",
+    "security": "not-run",
+    "regression": "not-run"
+  },
+  "totals": {
+    "model_inferences": 1,
+    "first_outputs_preserved": 1,
+    "direct_json_parsing": {
+      "passed": 1,
+      "evaluated": 1
+    },
+    "offline_canonical_schema": {
+      "passed": 0,
+      "evaluated": 1
+    },
+    "deterministic_request_validator": {
+      "passed": 1,
+      "evaluated": 1
+    },
+    "deterministic_result_validator": {
+      "passed": 0,
+      "evaluated": 1,
+      "findings": 16
+    },
+    "specialized_post_schema_validators": {
+      "passed": 0,
+      "evaluated": 0
+    },
+    "workflow_operations": 0,
+    "workflow_prohibited_activities": 0
+  },
+  "behavioral_results": {
+    "five_mode_lifecycle": "fail-canonical-modes-missing",
+    "provenance": "fail-canonical-field-missing",
+    "contradictions": "not-evaluated-after-schema-failure",
+    "abstentions": "fail-canonical-field-missing",
+    "carry_forward": "fail-canonical-field-missing",
+    "replay": "not-evaluated",
+    "security_and_two_zone": "smoke-boundary-text-present-full-suite-not-run",
+    "forbidden_microsoft_artifact": "none-observed-in-smoke-output",
+    "unsupported_runtime_or_portability_claim": "none-observed-in-smoke-output",
+    "official_work_iq_compatibility_claim": "none-observed-in-smoke-output",
+    "human_review": "semantic-text-present-canonical-field-missing"
+  },
+  "evaluator_operations": {
+    "local_read_hash_and_validation": true,
+    "codex_model_inferences": 1,
+    "evidence_preservation": true,
+    "authentication": 0,
+    "tenant_or_organisational_access": 0,
+    "mcp_or_connectors": 0,
+    "toolkit": 0,
+    "deployment_sideload_publication": 0,
+    "commit_or_push": 0
+  },
+  "failures": [
+    {
+      "case_id": "GOLD-001",
+      "type": "canonical-output-contract",
+      "detail": "The direct JSON object omitted fourteen required canonical DesignResult fields and used an invalid status shape."
+    }
+  ],
+  "minimal_patches": [
+    {
+      "owner": "evaluator-profile",
+      "recommendation": "Add a pre-inference proof that explicit skill selection attached SKILL.md and every required referenced schema resource without modifying the exact case input.",
+      "applied": false
+    },
+    {
+      "owner": "future-skill-version-if-resource-attachment-is-proven",
+      "recommendation": "Make the canonical DesignResult field structure available in automatically attached workflow context so a zero-tool invocation can emit the required contract.",
+      "applied": false
+    }
+  ],
+  "package_modified": false,
+  "output_repair_attempted": false,
+  "adoption_decision": "Reject",
+  "decision_reason": "RC2 produced a direct JSON object but failed the canonical DesignResult smoke contract, so no full-suite or release-gate evidence exists."
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lab.example/schemas/m365-declarative-agent-designer/host-validation-attestation-0.2.0.schema.json",
+  "title": "M365 Declarative Agent Designer HostValidationAttestation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attestation_version",
+    "attestation_id",
+    "request_id",
+    "request_digest",
+    "validation_status",
+    "validator_id",
+    "validator_version",
+    "data_classification",
+    "boundary_status",
+    "scope"
+  ],
+  "properties": {
+    "attestation_version": {
+      "const": "0.2.0"
+    },
+    "attestation_id": {
+      "type": "string",
+      "pattern": "^ATT-[A-Z0-9._-]{1,80}$"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^DRQ-[A-Z0-9._-]{1,60}$"
+    },
+    "request_digest": {
+      "allOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "not": {
+            "const": "0000000000000000000000000000000000000000000000000000000000000000"
+          }
+        }
+      ]
+    },
+    "validation_status": {
+      "const": "passed"
+    },
+    "validator_id": {
+      "const": "m365-declarative-agent-designer-request-validator"
+    },
+    "validator_version": {
+      "const": "0.2.0"
+    },
+    "data_classification": {
+      "enum": [
+        "public",
+        "synthetic"
+      ]
+    },
+    "boundary_status": {
+      "const": "permitted"
+    },
+    "scope": {
+      "const": "single-inference"
+    }
+  }
+}

@@ -1,0 +1,377 @@
+{
+"contract_version": "0.1.0",
+"result_id": "DRS-GOLD-001-WORK-SMOKE-003",
+"request_id": "DRQ-GOLD-001",
+"request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+"generated_on": "2026-07-25",
+"status": "Complete",
+"human_review_required": true,
+"disclaimers": {
+"microsoft_runtime_artifact": false,
+"deployment_approval": false,
+"tenant_fitment_evidence": false,
+"runtime_compatibility_proof": false
+},
+"modes": [
+{
+"mode": "Discovery",
+"summary": "The synthetic objective is to design a read-only requirements-discovery capability for an SDLC workbench. The supplied persona is a synthetic product owner. The request is constrained to offline operation, mandatory human review, the personal-openai zone, prohibited cross-zone transfer, and requirements-discovery plus read-only-design operations. The confirmed settled decision is to use one agent with five lifecycle modes.",
+"finding_ids": [
+"FND-GOLD-001-OBJECTIVE",
+"FND-GOLD-001-BOUNDARY",
+"FND-GOLD-001-LIFECYCLE"
+]
+},
+{
+"mode": "Elicitation",
+"summary": "The capability must capture actors, scope, exclusions, functional and nonfunctional needs, data, integrations, security constraints, evidence, assumptions, contradictions, and open questions. It must preserve supplied decisions and evidence while leaving unsupported host suitability and runtime behavior unresolved.",
+"finding_ids": [
+"FND-GOLD-001-REQUIREMENTS",
+"FND-GOLD-001-HUMAN-REVIEW",
+"FND-GOLD-001-HOST-FIT"
+]
+},
+{
+"mode": "Conceptualisation",
+"summary": "Use one read-only agent with the ordered modes Discovery, Elicitation, Conceptualisation, Authoring, and Assurance. Adaptive reasoning may organise synthetic requirements, identify gaps, and propose a conceptual baseline. Deterministic host controls remain responsible for request validation, canonical digest creation, trusted attestation creation, schema validation, lineage verification, and prohibited-operation enforcement.",
+"finding_ids": [
+"FND-GOLD-001-LIFECYCLE",
+"FND-GOLD-001-DETERMINISTIC-CONTROLS"
+]
+},
+{
+"mode": "Authoring",
+"summary": "Produce a canonical structured result containing requirements, provenance-linked findings, contradictions, abstentions, and versioned carry-forward state. Do not emit Microsoft manifests, app packages, plugins, Adaptive Cards, MCP contracts, Copilot Studio assets, Power Platform solutions, workflows, tenant configuration, provisioning steps, sideloading instructions, publication steps, or deployment instructions.",
+"finding_ids": [
+"FND-GOLD-001-REQUIREMENTS",
+"FND-GOLD-001-NO-RUNTIME-ARTIFACTS"
+]
+},
+{
+"mode": "Assurance",
+"summary": "The design preserves the synthetic classification, personal-openai boundary, prohibited cross-zone transfer, settled lifecycle decision, request lineage, source provenance, and mandatory human review. The canonical request digest is copied from the trusted host attestation. The independently verified attestation-file SHA-256 is recorded only against the attestation provenance. No tenant, deployment, Work IQ, Toolkit, Microsoft runtime compatibility, or Power Platform capability claim is made.",
+"finding_ids": [
+"FND-GOLD-001-BOUNDARY",
+"FND-GOLD-001-HUMAN-REVIEW",
+"FND-GOLD-001-NO-RUNTIME-ARTIFACTS",
+"FND-GOLD-001-ATTESTATION-LINEAGE",
+"FND-GOLD-001-HOST-FIT"
+]
+}
+],
+"requirements": {
+"actors": [
+"Synthetic product owner",
+"Human reviewer"
+],
+"scope": [
+"Read-only discovery and structuring of synthetic SDLC workbench requirements.",
+"One agent operating through five ordered lifecycle modes.",
+"Explicit preservation of evidence, decisions, findings, abstentions, and carry-forward state."
+],
+"exclusions": [
+"Microsoft 365 or Power Platform access.",
+"Tenant discovery, authentication, provisioning, sideloading, publication, or deployment.",
+"Web search, applications, connectors, MCP, external APIs, code execution, shell commands, package installation, network operations, or another skill.",
+"Generation of Microsoft runtime artifacts.",
+"Automatic or unapproved cross-zone transfer.",
+"Claims that Codex or ChatGPT Work host candidacy proves runtime compatibility or production suitability."
+],
+"functional_needs": [
+"Restate the supplied objective, persona, constraints, decisions, evidence, and missing context.",
+"Identify scope, exclusions, functional needs, nonfunctional needs, data, integrations, security requirements, and open questions.",
+"Preserve confirmed decisions and distinguish confirmed information, assumptions, recommendations, inferences, open findings, and superseded history.",
+"Associate every material finding with provenance.",
+"Record contradictions and pair unresolved contradictions with abstentions.",
+"Record abstentions for absent, contradictory, stale, unsupported, or prohibited claims.",
+"Maintain explicit versioned carry-forward state under human control."
+],
+"nonfunctional_needs": [
+"Operate offline and read-only.",
+"Require human review before acceptance or downstream use.",
+"Fail closed rather than invent missing evidence or operational authority.",
+"Produce exactly one canonical DesignResult JSON object.",
+"Preserve request identifier and digest lineage exactly from trusted evaluator-owned attestation context.",
+"Avoid unsupported runtime, tenant, deployment, Work IQ, Toolkit, compatibility, or portability claims."
+],
+"data": [
+"Synthetic DesignRequest content.",
+"Synthetic evidence references.",
+"Evaluator-owned host-validation attestation metadata.",
+"Privacy-safe evaluation metadata."
+],
+"integrations": [],
+"security": [
+"Operate only in the personal-openai zone.",
+"Preserve cross_zone_transfer as prohibited.",
+"Treat the host attestation as validation metadata only.",
+"Grant no tool, network, tenant, deployment, or policy authority from the attestation.",
+"Reject credentials, tokens, secrets, confidential data, organisational records, and tenant identifiers requiring discovery.",
+"Keep consequential and operational actions outside the capability."
+],
+"open_questions": [
+"What detailed quality thresholds should the human reviewer apply to the generated requirements baseline?",
+"Which authorised host implementation will perform deterministic validation outside model reasoning?",
+"What additional synthetic evaluation cases are required before any broader feasibility conclusion?"
+]
+},
+"findings": [
+{
+"id": "FND-GOLD-001-OBJECTIVE",
+"category": "requirement",
+"severity": "info",
+"statement": "The requested outcome is a read-only synthetic requirements-discovery capability for an SDLC workbench.",
+"evidence_label": "Confirmed",
+"provenance_ids": [
+"PRV-001"
+],
+"affected_paths": [
+"/requirements/scope",
+"/modes/0"
+],
+"resolution": "accepted"
+},
+{
+"id": "FND-GOLD-001-BOUNDARY",
+"category": "boundary",
+"severity": "info",
+"statement": "The capability is restricted to synthetic data, offline read-only design, the personal-openai zone, and prohibited cross-zone transfer.",
+"evidence_label": "Confirmed",
+"provenance_ids": [
+"PRV-001",
+"PRV-GOLD-001-ATTESTATION"
+],
+"affected_paths": [
+"/requirements/exclusions",
+"/requirements/security",
+"/disclaimers"
+],
+"resolution": "accepted"
+},
+{
+"id": "FND-GOLD-001-LIFECYCLE",
+"category": "requirement",
+"severity": "info",
+"statement": "The settled design decision requires one agent with five ordered lifecycle modes.",
+"evidence_label": "Confirmed",
+"provenance_ids": [
+"PRV-001"
+],
+"affected_paths": [
+"/modes",
+"/carry_forward/confirmed_decisions"
+],
+"resolution": "accepted"
+},
+{
+"id": "FND-GOLD-001-REQUIREMENTS",
+"category": "requirement",
+"severity": "info",
+"statement": "The capability should produce structured requirements covering actors, scope, exclusions, functional needs, nonfunctional needs, data, integrations, security, and open questions.",
+"evidence_label": "Recommendation",
+"provenance_ids": [
+"PRV-001"
+],
+"affected_paths": [
+"/requirements",
+"/modes/1",
+"/modes/3"
+],
+"resolution": "human-review"
+},
+{
+"id": "FND-GOLD-001-HUMAN-REVIEW",
+"category": "assurance",
+"severity": "info",
+"statement": "Human review is mandatory before the design is accepted, baselined, or used downstream.",
+"evidence_label": "Confirmed",
+"provenance_ids": [
+"PRV-001"
+],
+"affected_paths": [
+"/human_review_required",
+"/modes/1",
+"/modes/4"
+],
+"resolution": "accepted"
+},
+{
+"id": "FND-GOLD-001-DETERMINISTIC-CONTROLS",
+"category": "assurance",
+"severity": "info",
+"statement": "Request validation, digest creation, attestation creation, schema enforcement, lineage checks, and forbidden-operation checks remain deterministic host responsibilities outside adaptive reasoning.",
+"evidence_label": "Recommendation",
+"provenance_ids": [
+"PRV-GOLD-001-ATTESTATION"
+],
+"affected_paths": [
+"/modes/2",
+"/requirements/nonfunctional_needs"
+],
+"resolution": "human-review"
+},
+{
+"id": "FND-GOLD-001-NO-RUNTIME-ARTIFACTS",
+"category": "portability",
+"severity": "info",
+"statement": "The output is a conceptual design result only and is not a Microsoft runtime artifact, deployment approval, tenant-fitment result, or runtime compatibility proof.",
+"evidence_label": "Confirmed",
+"provenance_ids": [
+"PRV-001",
+"PRV-GOLD-001-ATTESTATION"
+],
+"affected_paths": [
+"/disclaimers",
+"/modes/3",
+"/modes/4"
+],
+"resolution": "accepted"
+},
+{
+"id": "FND-GOLD-001-ATTESTATION-LINEAGE",
+"category": "lineage",
+"severity": "info",
+"statement": "The request identifier and canonical request digest are copied from the trusted host attestation, while the independently verified attestation-file SHA-256 is used only for the attestation provenance record.",
+"evidence_label": "Confirmed",
+"provenance_ids": [
+"PRV-GOLD-001-ATTESTATION"
+],
+"affected_paths": [
+"/request_id",
+"/request_digest",
+"/provenance/1/sha256"
+],
+"resolution": "accepted"
+},
+{
+"id": "FND-GOLD-001-HOST-FIT",
+"category": "abstention",
+"severity": "warning",
+"statement": "The supplied Codex and ChatGPT Work host candidates do not by themselves establish runtime compatibility, production suitability, or equivalent behavior.",
+"evidence_label": "Open",
+"provenance_ids": [
+"PRV-001"
+],
+"affected_paths": [
+"/disclaimers/runtime_compatibility_proof",
+"/requirements/exclusions",
+"/abstentions"
+],
+"resolution": "open"
+}
+],
+"provenance": [
+{
+"id": "PRV-001",
+"source_type": "synthetic-fixture",
+"title": "Synthetic requirements fixture",
+"reference": "synthetic:prv-001",
+"status": "current",
+"verified_on": "2026-07-22",
+"revalidate_on": "2027-07-22"
+},
+{
+"id": "PRV-GOLD-001-ATTESTATION",
+"source_type": "preserved-evidence",
+"title": "GOLD-001 host-validation attestation",
+"reference": "GOLD-001.host-attestation.json",
+"status": "current",
+"verified_on": "2026-07-25",
+"revalidate_on": "2026-07-25",
+"sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5"
+}
+],
+"contradictions": [],
+"abstentions": [
+{
+"id": "ABS-GOLD-001-HOST-FIT",
+"claim": "The supplied host candidates prove runtime compatibility, equivalent behavior, or production suitability.",
+"reason": "absent-evidence",
+"finding_ids": [
+"FND-GOLD-001-HOST-FIT"
+],
+"provenance_ids": [
+"PRV-001"
+],
+"contradiction_ids": [],
+"human_action": "Run separately authorised host-specific evaluations before making any runtime compatibility, parity, or production suitability claim."
+}
+],
+"carry_forward": {
+"contract_version": "0.1.0",
+"state_id": "STATE-GOLD-001-WORK-SMOKE-003",
+"sequence": 1,
+"previous_result_id": null,
+"request_ids": [
+"DRQ-GOLD-001"
+],
+"result_ids": [
+"DRS-GOLD-001-WORK-SMOKE-003"
+],
+"confirmed_decisions": [
+{
+"id": "DEC-001",
+"statement": "Use one agent with five lifecycle modes.",
+"evidence_refs": [
+"PRV-001"
+]
+},
+{
+"id": "DEC-GOLD-001-READ-ONLY",
+"statement": "Keep the capability offline, read-only, synthetic, human-reviewed, and within the personal-openai zone.",
+"evidence_refs": [
+"PRV-001",
+"PRV-GOLD-001-ATTESTATION"
+]
+}
+],
+"assumptions": [],
+"open_items": [
+{
+"id": "OPN-GOLD-001-QUALITY-THRESHOLDS",
+"statement": "Detailed human review criteria and acceptance thresholds remain to be defined.",
+"evidence_refs": [
+"PRV-001"
+]
+},
+{
+"id": "OPN-GOLD-001-HOST-EVIDENCE",
+"statement": "Host-specific runtime compatibility and production suitability remain unproven.",
+"evidence_refs": [
+"PRV-001"
+]
+}
+],
+"rejected_decisions": [
+{
+"id": "REJ-GOLD-001-RUNTIME-GENERATION",
+"statement": "Do not generate or claim Microsoft runtime artifacts, tenant configuration, deployment approval, Work IQ compatibility, Toolkit execution, or Power Platform runtime behavior.",
+"evidence_refs": [
+"PRV-001",
+"PRV-GOLD-001-ATTESTATION"
+]
+}
+],
+"superseded_chronology": [],
+"evidence_refs": [
+"PRV-001",
+"PRV-GOLD-001-ATTESTATION"
+]
+},
+"evaluation_metadata": {
+"contract_version": "0.1.0",
+"fixture_id": "GOLD-001",
+"adapter_id": "chatgpt-work",
+"validator_outcome": "passed",
+"finding_codes": [
+"DAD-GOLD-001-DESIGN-COMPLETE",
+"DAD-ATTESTATION-LINEAGE-PRESERVED",
+"DAD-BOUNDARY-PRESERVED",
+"DAD-HOST-FIT-ABSTAINED",
+"DAD-HUMAN-REVIEW-REQUIRED",
+"DAD-NO-RUNTIME-ARTIFACTS"
+],
+"duration_ms": 0,
+"correlation_id": "SYN-GOLD-001-WORK-SMOKE-003"
+}
+}

@@ -164,11 +164,7 @@
           ]
         },
         "validator_outcome": {
-          "enum": [
-            "passed",
-            "failed",
-            "abstained"
-          ]
+          "const": "pending-external-validation"
         },
         "finding_codes": {
           "type": "array",
@@ -180,9 +176,7 @@
           }
         },
         "duration_ms": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 3600000
+          "const": 0
         },
         "correlation_id": {
           "type": "string",
@@ -190,6 +184,103 @@
         }
       }
     }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Complete"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "abstentions": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "carry_forward": {
+            "properties": {
+              "sequence": {
+                "const": 0
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "required": [
+          "carry_forward"
+        ]
+      },
+      "then": {
+        "properties": {
+          "carry_forward": {
+            "properties": {
+              "previous_result_id": {
+                "type": "null"
+              },
+              "request_ids": {
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "result_ids": {
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "carry_forward": {
+            "properties": {
+              "sequence": {
+                "minimum": 1
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "required": [
+          "carry_forward"
+        ]
+      },
+      "then": {
+        "properties": {
+          "carry_forward": {
+            "properties": {
+              "previous_result_id": {
+                "type": "string"
+              },
+              "request_ids": {
+                "minItems": 2
+              },
+              "result_ids": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
   },
   "$defs": {
     "modeBase": {

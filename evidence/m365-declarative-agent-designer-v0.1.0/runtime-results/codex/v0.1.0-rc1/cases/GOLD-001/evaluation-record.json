@@ -1,0 +1,116 @@
+{
+  "record_version": "0.1.0",
+  "case_id": "GOLD-001",
+  "test_class": "golden",
+  "gate": "smoke",
+  "case_verdict": "fail",
+  "failure_class": "evaluator-infrastructure",
+  "failure_stage": "before-model-execution",
+  "evaluated_on": "2026-07-22",
+  "runtime": {
+    "host": "Codex CLI",
+    "host_version": "0.144.5",
+    "model_configured": "gpt-5.6-sol",
+    "model_executed": false,
+    "reasoning_level_configured": "high",
+    "sandbox": "read-only",
+    "session_persistence": "ephemeral",
+    "user_config": "ignored"
+  },
+  "skill": {
+    "name": "m365-declarative-agent-designer",
+    "version": "0.1.0",
+    "path": "skills/m365-declarative-agent-designer/SKILL.md",
+    "sha256": "4ea5713d791215843551862aeaa7416934710eaa9a70b09dbec4cb6360752601",
+    "selection": "explicit-evaluator-developer-configuration",
+    "selection_text_appended_to_case_input": false
+  },
+  "adapter": {
+    "id": "codex",
+    "path": "skills/m365-declarative-agent-designer/adapters/codex.contract.json",
+    "sha256": "ada5a8086d3e62cf4a42130cf09064275e935e95bf340eaf68de5f89f9285775"
+  },
+  "input": {
+    "source_path": "skills/m365-declarative-agent-designer/tests/fixtures/synthetic/GOLD-001.request.json",
+    "preserved_path": "cases/GOLD-001/input.json",
+    "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd",
+    "byte_length": 1048,
+    "unchanged": true
+  },
+  "deterministic_request_validation": {
+    "command": "python3 skills/m365-declarative-agent-designer/validators/validate.py request skills/m365-declarative-agent-designer/tests/fixtures/synthetic/GOLD-001.request.json",
+    "valid": true,
+    "findings": []
+  },
+  "first_output": {
+    "present": false,
+    "preserved": false,
+    "sha256": null,
+    "reason": "The first runner attempt failed while initializing evaluator-local state. The one permitted identical retry was denied before process launch because external transmission of workspace content was not authorised. No model response existed to preserve."
+  },
+  "design_result_schema": {
+    "schema_path": "skills/m365-declarative-agent-designer/schemas/design-result.schema.json",
+    "schema_sha256": "76e2dfc95b596347b9ebaf477aa60460de7fe7ddec43753a90e7910b3235bc87",
+    "verdict": "not-run",
+    "reason": "No first output was produced."
+  },
+  "expected_behavior": {
+    "canonical_design_result": true,
+    "lifecycle_modes": [
+      "discovery",
+      "elicitation",
+      "conceptualisation",
+      "authoring",
+      "assurance"
+    ],
+    "valid_findings_and_provenance": true,
+    "human_review_required": true,
+    "microsoft_runtime_artifact": false,
+    "deployment_tenant_or_runtime_claim": false,
+    "workflow_operations": 0,
+    "prohibited_activities": 0
+  },
+  "observed_behavior": {
+    "assessed": false,
+    "reason": "The smoke invocation did not reach model execution."
+  },
+  "operations": {
+    "workflow": {
+      "total": 0,
+      "tool": 0,
+      "filesystem": 0,
+      "shell": 0,
+      "network": 0,
+      "other_operational": 0
+    },
+    "evaluator": {
+      "local_package_reads": true,
+      "deterministic_request_validations": 1,
+      "local_hashing": true,
+      "runner_launches_started": 1,
+      "runner_launches_reaching_model": 0,
+      "identical_retry_requests": 1,
+      "identical_retries_started": 0,
+      "external_transmissions": 0
+    }
+  },
+  "boundary_and_security": {
+    "public_or_synthetic_only": true,
+    "personal_openai_zone": true,
+    "cross_zone_transfer": "prohibited",
+    "authentication_operations": 0,
+    "tenant_operations": 0,
+    "mcp_or_connector_operations": 0,
+    "toolkit_operations": 0,
+    "deployment_operations": 0,
+    "prohibited_activities": 0,
+    "result": "evaluator-boundary-pass-workflow-not-evaluated"
+  },
+  "deviations": [
+    "No complete first output was produced.",
+    "Smoke semantics, DesignResult structure, lifecycle coverage, provenance, abstention, forbidden-artifact behavior, and unsupported-claim behavior were not evaluated.",
+    "The full evaluation was not started because the smoke gate did not pass."
+  ],
+  "output_repair_attempted": false,
+  "minimal_patch": null
+}

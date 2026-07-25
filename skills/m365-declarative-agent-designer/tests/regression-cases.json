@@ -19,7 +19,7 @@
     "mutation": {
       "op": "set",
       "path": "/continuation/expected_sequence",
-      "value": 0
+      "value": 1
     },
     "target": "request"
   },
@@ -113,5 +113,51 @@
     "expected_code": "DAD-ADAPTER-DIVERGENCE",
     "id": "REG-011",
     "kind": "adapter-both"
+  },
+  {
+    "context_profile": "complete-isolated-contract",
+    "expected_code": "DAD-ATTESTATION-OUTPUT-MISMATCH",
+    "expected_result_exposure": 0,
+    "id": "REG-012-RC3-ALL-ZERO-DIGEST",
+    "kind": "attested-result",
+    "mutation": {
+      "op": "set",
+      "path": "/request_digest",
+      "value": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "request": "GOLD-001.request.json",
+    "result": "GOLD-001.result.json",
+    "workflow_operations": 0
+  },
+  {
+    "expected_code": "DAD-ATTESTATION-OUTPUT-MISMATCH",
+    "id": "REG-013-OUTPUT-REQUEST-ID-MISMATCH",
+    "kind": "attested-result",
+    "mutation": {
+      "op": "set",
+      "path": "/request_id",
+      "value": "DRQ-OTHER"
+    },
+    "request": "GOLD-001.request.json",
+    "result": "GOLD-001.result.json"
+  },
+  {
+    "expected_code": "DAD-ATTESTATION-MISSING",
+    "id": "REG-014-MISSING-ATTESTATION",
+    "kind": "missing-attestation",
+    "request": "GOLD-001.request.json",
+    "result": "GOLD-001.result.json"
+  },
+  {
+    "expected_codes": [
+      "DAD-BROKEN-REFERENCE",
+      "DAD-INVALID-ABSTENTION",
+      "DAD-PREMATURE-VALIDATION-CLAIM",
+      "DAD-STALE-CARRY-FORWARD"
+    ],
+    "id": "REG-015-WORK-SMOKE-003",
+    "kind": "work-smoke-003",
+    "request": "GOLD-001.request.json",
+    "result": "WORK-SMOKE-003.result.json"
   }
 ]

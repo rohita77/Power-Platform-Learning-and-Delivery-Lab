@@ -1,0 +1,103 @@
+[
+  {
+    "id": "ATT-VALID-001",
+    "fixture": "GOLD-001.attestation.json",
+    "expected_code": null
+  },
+  {
+    "id": "ATT-INVALID-001",
+    "fixture": "INVALID-ATT-ALL-ZERO.attestation.json",
+    "expected_code": "DAD-ATTESTATION-PLACEHOLDER-DIGEST"
+  },
+  {
+    "id": "ATT-INVALID-002",
+    "fixture": "INVALID-ATT-STATUS.attestation.json",
+    "expected_code": "DAD-ATTESTATION-VALIDATION"
+  },
+  {
+    "id": "ATT-INVALID-003",
+    "fixture": "INVALID-ATT-AUTHORITY.attestation.json",
+    "expected_code": "DAD-ATTESTATION-AUTHORITY"
+  },
+  {
+    "id": "ATT-INVALID-004",
+    "missing": true,
+    "expected_code": "DAD-ATTESTATION-MISSING"
+  },
+  {
+    "id": "ATT-INVALID-005",
+    "fixture": "GOLD-001.attestation.json",
+    "mutation": {
+      "op": "set",
+      "path": "/attestation_version",
+      "value": "0.1.0"
+    },
+    "expected_code": "DAD-ATTESTATION-VERSION"
+  },
+  {
+    "id": "ATT-INVALID-006",
+    "fixture": "GOLD-001.attestation.json",
+    "mutation": {
+      "op": "set",
+      "path": "/request_id",
+      "value": "DRQ-OTHER"
+    },
+    "expected_code": "DAD-ATTESTATION-REQUEST-ID"
+  },
+  {
+    "id": "ATT-INVALID-007",
+    "fixture": "GOLD-001.attestation.json",
+    "mutation": {
+      "op": "set",
+      "path": "/request_digest",
+      "value": "not-a-digest"
+    },
+    "expected_code": "DAD-ATTESTATION-DIGEST"
+  },
+  {
+    "id": "ATT-INVALID-008",
+    "fixture": "GOLD-001.attestation.json",
+    "mutation": {
+      "op": "set",
+      "path": "/request_digest",
+      "value": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "expected_code": "DAD-ATTESTATION-DIGEST-MISMATCH"
+  },
+  {
+    "id": "ATT-INVALID-009",
+    "fixture": "GOLD-001.attestation.json",
+    "mutation": {
+      "op": "set",
+      "path": "/data_classification",
+      "value": "confidential"
+    },
+    "expected_code": "DAD-ATTESTATION-CLASSIFICATION"
+  },
+  {
+    "id": "ATT-INVALID-010",
+    "fixture": "GOLD-001.attestation.json",
+    "mutation": {
+      "op": "set",
+      "path": "/boundary_status",
+      "value": "denied"
+    },
+    "expected_code": "DAD-ATTESTATION-BOUNDARY"
+  },
+  {
+    "id": "ATT-INVALID-011",
+    "fixture": "GOLD-001.attestation.json",
+    "mutation": {
+      "op": "set",
+      "path": "/scope",
+      "value": "reusable"
+    },
+    "expected_code": "DAD-ATTESTATION-SCOPE"
+  },
+  {
+    "id": "ATT-INVALID-012",
+    "fixture": "GOLD-001.attestation.json",
+    "used": true,
+    "expected_code": "DAD-ATTESTATION-REPLAY"
+  }
+]

@@ -15,6 +15,7 @@ FIXTURE_ROOT = Path(__file__).resolve().parent / "fixtures/synthetic"
 sys.path.insert(0, str(PACKAGE_ROOT))
 
 from validators.common import canonical_digest, load_json
+from validators.attestation import create_attestation, validate_attestation
 from validators.package import compare_adapter_contracts, validate_package
 from validators.request import validate_request
 from validators.result import validate_result
@@ -90,6 +91,32 @@ def run_document_case(case: dict[str, Any]) -> tuple[bool, str]:
     return case["expected_code"] in codes(observed), ",".join(sorted(codes(observed)))
 
 
+def run_attestation_case(case: dict[str, Any]) -> tuple[bool, str]:
+    request = load_json(FIXTURE_ROOT / "GOLD-001.request.json")
+    document = None if case.get("missing") else load_json(FIXTURE_ROOT / case["fixture"])
+    if document is not None and case.get("mutation"):
+        document = mutate(document, case["mutation"])
+    used = {document.get("attestation_id")} if isinstance(document, dict) and case.get("used") else set()
+    observed = validate_attestation(document, request, AS_OF, used)
+    expected = case.get("expected_code")
+    if expected is None:
+        generated = create_attestation(request, document["attestation_id"])
+        return not observed and generated == document, ",".join(sorted(codes(observed)))
+    return expected in codes(observed), ",".join(sorted(codes(observed)))
+
+
+def run_result_invariant_case(case: dict[str, Any]) -> tuple[bool, str]:
+    request = load_json(FIXTURE_ROOT / case["request"])
+    result = mutate(load_json(FIXTURE_ROOT / case["base"]), case["mutation"])
+    attestation = create_attestation(request, f"ATT-{case['id']}")
+    observed = validate_result(result, AS_OF, request, attestation)
+    observed_codes = codes(observed)
+    if case.get("expected_valid"):
+        return not observed, ",".join(sorted(observed_codes))
+    expected_codes = set(case["expected_codes"])
+    return expected_codes.issubset(observed_codes), ",".join(sorted(observed_codes))
+
+
 def run_regression_case(case: dict[str, Any]) -> tuple[bool, str]:
     if case["kind"] == "document":
         return run_document_case(case)
@@ -106,20 +133,35 @@ def run_regression_case(case: dict[str, Any]) -> tuple[bool, str]:
         work["network_allowed"] = True
         observed = compare_adapter_contracts([codex, work])
         return case["expected_code"] in codes(observed), ",".join(sorted(codes(observed)))
+    if case["kind"] == "work-smoke-003":
+        request = load_json(FIXTURE_ROOT / case["request"])
+        result = load_json(FIXTURE_ROOT / case["result"])
+        attestation = create_attestation(request, f"ATT-{case['id']}")
+        observed = validate_result(result, AS_OF, request, attestation)
+        observed_codes = codes(observed)
+        return set(case["expected_codes"]).issubset(observed_codes), ",".join(sorted(observed_codes))
     request = load_json(FIXTURE_ROOT / case["request"])
     result = load_json(FIXTURE_ROOT / case["result"])
+    attestation = create_attestation(request, f"ATT-{case['id']}")
+    if case["kind"] == "missing-attestation":
+        observed = validate_result(result, AS_OF, request, None)
+        return case["expected_code"] in codes(observed), ",".join(sorted(codes(observed)))
+    if case["kind"] == "attested-result":
+        result = mutate(result, case["mutation"])
+        observed = validate_result(result, AS_OF, request, attestation)
+        return case["expected_code"] in codes(observed), ",".join(sorted(codes(observed)))
     if case["kind"] == "forged-reset":
         result["carry_forward"]["sequence"] = 0
         result["carry_forward"]["previous_result_id"] = None
         result["carry_forward"]["request_ids"] = [result["request_id"]]
         result["carry_forward"]["result_ids"] = [result["result_id"]]
-        observed = validate_result(result, AS_OF, request)
+        observed = validate_result(result, AS_OF, request, attestation)
         return case["expected_code"] in codes(observed), ",".join(sorted(codes(observed)))
     if case["kind"] == "accepted-stale":
         result["provenance"][0]["status"] = "expired"
         result["provenance"][0]["revalidate_on"] = "2026-01-01"
         result["abstentions"][0]["reason"] = "stale-evidence"
-        observed = validate_result(result, AS_OF, request)
+        observed = validate_result(result, AS_OF, request, attestation)
         return not observed, ",".join(sorted(codes(observed)))
     if case.get("prepare") == "add-superseded":
         item = {"id": "SUP-001", "statement": "Prior synthetic design was superseded.", "evidence_refs": ["PRV-001"]}
@@ -131,7 +173,8 @@ def run_regression_case(case: dict[str, Any]) -> tuple[bool, str]:
         result["carry_forward"]["open_items"].append(copy.deepcopy(item))
     result = mutate(result, case["mutation"])
     result["request_digest"] = canonical_digest(request)
-    observed = validate_result(result, AS_OF, request)
+    attestation = create_attestation(request, f"ATT-{case['id']}")
+    observed = validate_result(result, AS_OF, request, attestation)
     return case["expected_code"] in codes(observed), ",".join(sorted(codes(observed)))
 
 
@@ -164,10 +207,21 @@ def main() -> int:
     for case in golden_cases:
         request = load_json(Path(__file__).parent / case["request"])
         result = load_json(Path(__file__).parent / case["result"])
+        attestation = create_attestation(request, f"ATT-{case['id']}")
         observed = validate_request(request, AS_OF)
-        observed.extend(validate_result(result, AS_OF, request))
+        observed.extend(validate_attestation(attestation, request, AS_OF))
+        observed.extend(validate_result(result, AS_OF, request, attestation))
         if observed:
             failures.append({"id": case["id"], "observed": ",".join(sorted(codes(observed)))})
+
+    attestation_cases = load_json(Path(__file__).with_name("attestation-cases.json"))
+    counts["attestation"] = len(attestation_cases)
+    counts["valid_attestation"] = sum(1 for item in attestation_cases if item.get("expected_code") is None)
+    counts["invalid_attestation"] = len(attestation_cases) - counts["valid_attestation"]
+    for case in attestation_cases:
+        passed, observed = run_attestation_case(case)
+        if not passed:
+            failures.append({"id": case["id"], "observed": observed or "attestation expectation not met"})
 
     for category in ("negative", "security"):
         cases = load_json(Path(__file__).with_name(f"{category}-cases.json"))
@@ -177,6 +231,15 @@ def main() -> int:
             if not passed:
                 failures.append({"id": case["id"], "observed": observed or "accepted invalid fixture"})
 
+    invariant_cases = load_json(Path(__file__).with_name("result-invariant-cases.json"))
+    counts["result_invariants"] = len(invariant_cases)
+    counts["valid_result_invariants"] = sum(1 for item in invariant_cases if item.get("expected_valid"))
+    counts["invalid_result_invariants"] = len(invariant_cases) - counts["valid_result_invariants"]
+    for case in invariant_cases:
+        passed, observed = run_result_invariant_case(case)
+        if not passed:
+            failures.append({"id": case["id"], "observed": observed or "result invariant expectation not met"})
+
     regression_cases = load_json(Path(__file__).with_name("regression-cases.json"))
     counts["regression"] = len(regression_cases)
     for case in regression_cases:
@@ -184,7 +247,13 @@ def main() -> int:
         if not passed:
             failures.append({"id": case["id"], "observed": observed or "regression not detected"})
 
-    counts["invalid_fixture_cases"] = counts["negative"] + counts["security"] + counts["regression"]
+    counts["invalid_fixture_cases"] = (
+        counts["negative"]
+        + counts["security"]
+        + counts["regression"]
+        + counts["invalid_attestation"]
+        + counts["invalid_result_invariants"]
+    )
 
     package_findings = validate_package(PACKAGE_ROOT)
     counts["package_findings"] = len(package_findings)
@@ -200,7 +269,7 @@ def main() -> int:
         failures.append({"id": rollback["id"], "observed": "rollback dry-run failed"})
 
     payload = {
-        "suite_version": "0.1.0",
+        "suite_version": "0.2.0-rc2",
         "as_of": AS_OF.isoformat(),
         "offline": True,
         "passed": not failures,

@@ -1,0 +1,160 @@
+[
+  {
+    "base": "GOLD-001.result.json",
+    "expected_valid": true,
+    "id": "INV-INITIAL-SEQUENCE-ZERO",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/sequence",
+      "value": 0
+    },
+    "request": "GOLD-001.request.json"
+  },
+  {
+    "base": "GOLD-001.result.json",
+    "expected_valid": true,
+    "id": "INV-INITIAL-PREVIOUS-NULL",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/previous_result_id",
+      "value": null
+    },
+    "request": "GOLD-001.request.json"
+  },
+  {
+    "base": "GOLD-001.result.json",
+    "expected_codes": [
+      "DAD-STALE-CARRY-FORWARD"
+    ],
+    "id": "INV-INITIAL-SEQUENCE-ONE-REJECTED",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/sequence",
+      "value": 1
+    },
+    "request": "GOLD-001.request.json"
+  },
+  {
+    "base": "GOLD-001.result.json",
+    "expected_codes": [
+      "DAD-STALE-CARRY-FORWARD"
+    ],
+    "id": "INV-INITIAL-INVENTED-PREVIOUS-REJECTED",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/previous_result_id",
+      "value": "DRS-INVENTED"
+    },
+    "request": "GOLD-001.request.json"
+  },
+  {
+    "base": "GOLD-005.result.json",
+    "expected_valid": true,
+    "id": "INV-CONTINUATION-SEQUENCE-INCREMENT",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/sequence",
+      "value": 1
+    },
+    "request": "GOLD-005.request.json"
+  },
+  {
+    "base": "GOLD-005.result.json",
+    "expected_valid": true,
+    "id": "INV-CONTINUATION-PRIOR-REFERENCE",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/previous_result_id",
+      "value": "DRS-PREV"
+    },
+    "request": "GOLD-005.request.json"
+  },
+  {
+    "base": "GOLD-005.result.json",
+    "expected_codes": [
+      "DAD-BROKEN-REFERENCE",
+      "DAD-STALE-CARRY-FORWARD"
+    ],
+    "id": "INV-CONTINUATION-UNRESOLVED-PREVIOUS",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/previous_result_id",
+      "value": "DRS-MISSING"
+    },
+    "request": "GOLD-005.request.json"
+  },
+  {
+    "base": "GOLD-005.result.json",
+    "expected_codes": [
+      "DAD-STALE-CARRY-FORWARD"
+    ],
+    "id": "INV-CONTINUATION-STALE-SEQUENCE",
+    "mutation": {
+      "op": "set",
+      "path": "/carry_forward/sequence",
+      "value": 2
+    },
+    "request": "GOLD-005.request.json"
+  },
+  {
+    "base": "GOLD-001.result.json",
+    "expected_valid": true,
+    "id": "INV-COMPLETE-EMPTY-ABSTENTIONS",
+    "mutation": {
+      "op": "set",
+      "path": "/status",
+      "value": "Complete"
+    },
+    "request": "GOLD-001.request.json"
+  },
+  {
+    "base": "GOLD-002.result.json",
+    "expected_codes": [
+      "DAD-INVALID-ABSTENTION",
+      "DAD-SCHEMA-INVALID"
+    ],
+    "id": "INV-COMPLETE-NONEMPTY-ABSTENTIONS-REJECTED",
+    "mutation": {
+      "op": "set",
+      "path": "/status",
+      "value": "Complete"
+    },
+    "request": "GOLD-002.request.json"
+  },
+  {
+    "base": "GOLD-002.result.json",
+    "expected_valid": true,
+    "id": "INV-OPEN-NONEMPTY-ABSTENTIONS",
+    "mutation": {
+      "op": "set",
+      "path": "/status",
+      "value": "Open"
+    },
+    "request": "GOLD-002.request.json"
+  },
+  {
+    "base": "GOLD-001.result.json",
+    "expected_valid": true,
+    "id": "INV-METADATA-PENDING",
+    "mutation": {
+      "op": "set",
+      "path": "/evaluation_metadata/validator_outcome",
+      "value": "pending-external-validation"
+    },
+    "request": "GOLD-001.request.json"
+  },
+  {
+    "base": "GOLD-001.result.json",
+    "expected_codes": [
+      "DAD-PREMATURE-VALIDATION-CLAIM",
+      "DAD-SCHEMA-INVALID"
+    ],
+    "id": "INV-METADATA-PASSED-REJECTED",
+    "mutation": {
+      "op": "set",
+      "path": "/evaluation_metadata/validator_outcome",
+      "value": "passed"
+    },
+    "request": "GOLD-001.request.json"
+  }
+]

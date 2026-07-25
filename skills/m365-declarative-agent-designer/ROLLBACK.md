@@ -1,6 +1,6 @@
 # Rollback
 
-Rollback is local and package-level only. v0.1.0 has no tenant, runtime,
+Rollback is local and package-level only. This candidate has no tenant, runtime,
 deployment, or persisted organisational state to reverse.
 
 ## Triggers
@@ -8,6 +8,7 @@ deployment, or persisted organisational state to reverse.
 - a schema or validator accepts prohibited input or output;
 - canonical and adapter contracts diverge;
 - provenance, contradiction, abstention, or lineage integrity fails;
+- model-authored output claims external validation success;
 - a forbidden Microsoft artifact or operation enters the package; or
 - a behavior change breaks an accepted synthetic fixture.
 

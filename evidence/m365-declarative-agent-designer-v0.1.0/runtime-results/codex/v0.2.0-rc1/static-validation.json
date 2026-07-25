@@ -1,0 +1,30 @@
+{
+  "candidate_version": "0.2.0-rc1",
+  "canonical_deterministic_suite": {
+    "sha256": "683b536ce817c3404e77aacd1f0c7a7124829307250e039df48517a0f1f4e646",
+    "status": "pass"
+  },
+  "canonical_package_validation": "pass",
+  "canonical_publication_diff": "pass-byte-identical",
+  "git_diff_check": "pass",
+  "new_external_dependencies": 0,
+  "publication_deterministic_suite": {
+    "sha256": "683b536ce817c3404e77aacd1f0c7a7124829307250e039df48517a0f1f4e646",
+    "status": "pass"
+  },
+  "publication_package_validation": "pass",
+  "rc3_all_zero_digest_regression_retained": true,
+  "skill_creator_quick_validation": "pass",
+  "suite_counts": {
+    "attestation": 13,
+    "failures": 0,
+    "golden": 5,
+    "invalid_attestation": 12,
+    "invalid_fixture_cases": 48,
+    "negative": 11,
+    "package_findings": 0,
+    "regression": 14,
+    "security": 11,
+    "valid_attestation": 1
+  }
+}

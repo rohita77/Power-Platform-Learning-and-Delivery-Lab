@@ -5,6 +5,7 @@ from datetime import date
 from typing import Any
 
 from .abstentions import validate_abstentions
+from .attestation import validate_attestation
 from .carry_forward import validate_result_carry_forward
 from .common import canonical_digest, duplicate_id_findings, finding, normalize, schema_findings, walk
 from .contradictions import validate_contradictions
@@ -38,8 +39,15 @@ PORTABILITY_PATTERNS = [
 ]
 
 
-def validate_result(document: Any, as_of: date, request: dict[str, Any] | None = None) -> list[dict[str, str]]:
+def validate_result(
+    document: Any,
+    as_of: date,
+    request: dict[str, Any] | None = None,
+    attestation: dict[str, Any] | None = None,
+) -> list[dict[str, str]]:
     findings = schema_findings(document, "design-result")
+    if request is not None or attestation is not None:
+        findings.extend(validate_attestation(attestation, request, as_of))
     if not isinstance(document, dict):
         return normalize(findings)
     groups = [
@@ -62,6 +70,15 @@ def validate_result(document: Any, as_of: date, request: dict[str, Any] | None =
     findings.extend(validate_contradictions(document))
     findings.extend(validate_abstentions(document))
     findings.extend(validate_result_carry_forward(document))
+    metadata = document.get("evaluation_metadata")
+    if isinstance(metadata, dict) and metadata.get("validator_outcome") != "pending-external-validation":
+        findings.append(
+            finding(
+                "DAD-PREMATURE-VALIDATION-CLAIM",
+                "/evaluation_metadata/validator_outcome",
+                "Model-authored output must remain pending external validation.",
+            )
+        )
     for path, value in walk(document):
         if not isinstance(value, str):
             continue
@@ -121,4 +138,13 @@ def validate_result(document: Any, as_of: date, request: dict[str, Any] | None =
                 findings.append(finding("DAD-STALE-CARRY-FORWARD", "/carry_forward", "Initial carry-forward state is inconsistent."))
             if current.get("request_ids") != [request.get("request_id")] or current.get("result_ids") != [document.get("result_id")]:
                 findings.append(finding("DAD-STALE-CARRY-FORWARD", "/carry_forward", "Initial lineage must contain only the current request and result."))
+    if isinstance(attestation, dict):
+        if document.get("request_id") != attestation.get("request_id"):
+            findings.append(
+                finding("DAD-ATTESTATION-OUTPUT-MISMATCH", "/request_id", "The output request ID does not match the host attestation.")
+            )
+        if document.get("request_digest") != attestation.get("request_digest"):
+            findings.append(
+                finding("DAD-ATTESTATION-OUTPUT-MISMATCH", "/request_digest", "The output request digest does not match the host attestation.")
+            )
     return normalize(findings)

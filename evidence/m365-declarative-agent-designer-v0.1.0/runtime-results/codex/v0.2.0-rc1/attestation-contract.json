@@ -1,0 +1,25 @@
+{
+  "additional_properties": false,
+  "attestation_sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5",
+  "attestation_validation": "pass",
+  "authority_grants": "none",
+  "draft": "2020-12",
+  "request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+  "request_digest_algorithm": "existing canonical DesignRequest SHA-256",
+  "request_validation": "pass",
+  "required_fields": [
+    "attestation_version",
+    "attestation_id",
+    "request_id",
+    "request_digest",
+    "validation_status",
+    "validator_id",
+    "validator_version",
+    "data_classification",
+    "boundary_status",
+    "scope"
+  ],
+  "schema": "schemas/host-validation-attestation.schema.json",
+  "schema_sha256": "46a6a17fc31b3951798e7f8a175e538f1ad916253c128fb6f5f4b27a15c88db3",
+  "scope": "single-inference"
+}

@@ -1,0 +1,29 @@
+{
+  "evaluator": {
+    "attestation_validations": 1,
+    "attestations_generated": 1,
+    "authentication_operations": 0,
+    "commit_or_push_operations": 0,
+    "connector_or_mcp_operations": 0,
+    "deployment_operations": 0,
+    "deterministic_suite_runs": 4,
+    "external_model_inferences": 0,
+    "full_model_suite_runs": 0,
+    "local_no-inference_request_captures": 4,
+    "package_validations": 4,
+    "request_validations": 1,
+    "skill_quick_validations": 1,
+    "tenant_operations": 0,
+    "toolkit_or_work_iq_operations": 0
+  },
+  "workflow": {
+    "external_model_inferences": 0,
+    "filesystem_operations": 0,
+    "network_or_web_operations": 0,
+    "other_operations": 0,
+    "output_repairs": 0,
+    "prohibited_activities": 0,
+    "shell_operations": 0,
+    "tool_calls": 0
+  }
+}

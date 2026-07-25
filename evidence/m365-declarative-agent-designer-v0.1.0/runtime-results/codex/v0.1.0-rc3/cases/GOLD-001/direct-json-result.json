@@ -1,0 +1,11 @@
+{
+  "raw_output_sha256": "5536d8181c8c46f0eb3a3bc02d7439cf76571fc3c1ff251fda8e8d1c160bfca5",
+  "raw_output_bytes": 5321,
+  "direct_json_parse": "pass",
+  "top_level_type": "object",
+  "exactly_one_top_level_value": true,
+  "code_fence_removed": false,
+  "prose_removed": false,
+  "normalization_applied": false,
+  "repair_attempted": false
+}

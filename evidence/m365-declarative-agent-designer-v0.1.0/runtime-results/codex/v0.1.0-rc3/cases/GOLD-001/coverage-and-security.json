@@ -1,0 +1,48 @@
+{
+  "root_fields": {
+    "required": 16,
+    "present": 16,
+    "missing": [],
+    "fields": [
+      "contract_version",
+      "result_id",
+      "request_id",
+      "request_digest",
+      "generated_on",
+      "status",
+      "human_review_required",
+      "disclaimers",
+      "modes",
+      "requirements",
+      "findings",
+      "provenance",
+      "contradictions",
+      "abstentions",
+      "carry_forward",
+      "evaluation_metadata"
+    ]
+  },
+  "modes": {
+    "required": 5,
+    "present": 5,
+    "in_required_order": true,
+    "values": [
+      "Discovery",
+      "Elicitation",
+      "Conceptualisation",
+      "Authoring",
+      "Assurance"
+    ]
+  },
+  "human_review_required": true,
+  "disclaimers": {
+    "microsoft_runtime_artifact": false,
+    "deployment_approval": false,
+    "tenant_fitment_evidence": false,
+    "runtime_compatibility_proof": false
+  },
+  "forbidden_microsoft_artifact": false,
+  "tenant_fitment_deployment_or_runtime_proof_claim": false,
+  "official_work_iq_or_toolkit_compatibility_claim": false,
+  "prohibited_activity": 0
+}

@@ -1,0 +1,184 @@
+{
+  "contract_version": "0.1.0",
+  "result_id": "DRS-GOLD-001-REJECTED",
+  "request_id": "DRQ-GOLD-001",
+  "request_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "generated_on": "2026-07-22",
+  "status": "Rejected",
+  "human_review_required": true,
+  "disclaimers": {
+    "microsoft_runtime_artifact": false,
+    "deployment_approval": false,
+    "tenant_fitment_evidence": false,
+    "runtime_compatibility_proof": false
+  },
+  "modes": [
+    {
+      "mode": "Discovery",
+      "summary": "Not executed because the required deterministic offline request and boundary validators were unavailable in the supplied package context.",
+      "finding_ids": [
+        "FND-HOST-VALIDATION"
+      ]
+    },
+    {
+      "mode": "Elicitation",
+      "summary": "Not executed because request validation was not established.",
+      "finding_ids": [
+        "FND-HOST-VALIDATION"
+      ]
+    },
+    {
+      "mode": "Conceptualisation",
+      "summary": "Not executed; no lifecycle behavior was inferred.",
+      "finding_ids": [
+        "FND-HOST-VALIDATION"
+      ]
+    },
+    {
+      "mode": "Authoring",
+      "summary": "No design was authored. Supplied request facts are preserved only for human-controlled carry-forward.",
+      "finding_ids": [
+        "FND-HOST-VALIDATION"
+      ]
+    },
+    {
+      "mode": "Assurance",
+      "summary": "Fail-closed assurance rejected the invocation because mandatory pre-reasoning and post-reasoning validation could not be run.",
+      "finding_ids": [
+        "FND-HOST-VALIDATION"
+      ]
+    }
+  ],
+  "requirements": {
+    "actors": [
+      "Synthetic product owner"
+    ],
+    "scope": [
+      "Design a read-only synthetic requirements-discovery capability for an SDLC workbench."
+    ],
+    "exclusions": [
+      "Cross-zone transfer"
+    ],
+    "functional_needs": [
+      "Requirements discovery",
+      "Read-only design"
+    ],
+    "nonfunctional_needs": [
+      "Offline only",
+      "Human review required"
+    ],
+    "data": [
+      "Synthetic input only"
+    ],
+    "integrations": [],
+    "security": [
+      "Operate in the personal-openai zone",
+      "Cross-zone transfer prohibited"
+    ],
+    "open_questions": [
+      "Can the authorized host provide successful deterministic request, boundary, result, provenance, contradiction, abstention, carry-forward, portability, and forbidden-artifact validation?"
+    ]
+  },
+  "findings": [
+    {
+      "id": "FND-HOST-VALIDATION",
+      "category": "assurance",
+      "severity": "error",
+      "statement": "Mandatory deterministic validation was not run because the validator and request schema were not included in the supplied package context; the invocation is rejected without design reasoning.",
+      "evidence_label": "Open",
+      "provenance_ids": [
+        "PRV-VALIDATION-STATE"
+      ],
+      "affected_paths": [
+        "/status",
+        "/modes",
+        "/evaluation_metadata/validator_outcome"
+      ],
+      "resolution": "rejected"
+    }
+  ],
+  "provenance": [
+    {
+      "id": "PRV-001",
+      "source_type": "synthetic-fixture",
+      "title": "Synthetic requirements fixture",
+      "reference": "synthetic:prv-001",
+      "status": "current",
+      "verified_on": "2026-07-22",
+      "revalidate_on": "2027-07-22"
+    },
+    {
+      "id": "PRV-VALIDATION-STATE",
+      "source_type": "synthetic-fixture",
+      "title": "Invocation validation availability",
+      "reference": "synthetic:host-validator-unavailable",
+      "status": "current",
+      "verified_on": "2026-07-22",
+      "revalidate_on": "2026-07-22"
+    }
+  ],
+  "contradictions": [],
+  "abstentions": [
+    {
+      "id": "ABS-DESIGN-REASONING",
+      "claim": "A validated requirements-discovery agent design can be produced from this invocation.",
+      "reason": "absent-evidence",
+      "finding_ids": [
+        "FND-HOST-VALIDATION"
+      ],
+      "provenance_ids": [
+        "PRV-VALIDATION-STATE"
+      ],
+      "contradiction_ids": [],
+      "human_action": "Run the required deterministic offline validators in an authorized host, then resubmit the unchanged DesignRequest if validation passes."
+    }
+  ],
+  "carry_forward": {
+    "contract_version": "0.1.0",
+    "state_id": "STATE-GOLD-001",
+    "sequence": 0,
+    "previous_result_id": null,
+    "request_ids": [
+      "DRQ-GOLD-001"
+    ],
+    "result_ids": [
+      "DRS-GOLD-001-REJECTED"
+    ],
+    "confirmed_decisions": [
+      {
+        "id": "DEC-001",
+        "statement": "Use one agent with five lifecycle modes.",
+        "evidence_refs": [
+          "PRV-001"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "open_items": [
+      {
+        "id": "OPN-HOST-VALIDATION",
+        "statement": "Complete mandatory deterministic validation before design reasoning.",
+        "evidence_refs": [
+          "synthetic:host-validator-unavailable"
+        ]
+      }
+    ],
+    "rejected_decisions": [],
+    "superseded_chronology": [],
+    "evidence_refs": [
+      "PRV-001",
+      "synthetic:host-validator-unavailable"
+    ]
+  },
+  "evaluation_metadata": {
+    "contract_version": "0.1.0",
+    "fixture_id": "DRQ-GOLD-001",
+    "adapter_id": "codex",
+    "validator_outcome": "abstained",
+    "finding_codes": [
+      "DAD-HOST-VALIDATION-NOT-RUN"
+    ],
+    "duration_ms": 0,
+    "correlation_id": "SYN-GOLD-001-REJECTED"
+  }
+}

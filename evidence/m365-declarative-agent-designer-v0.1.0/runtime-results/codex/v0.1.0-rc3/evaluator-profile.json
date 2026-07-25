@@ -1,0 +1,35 @@
+{
+  "profile_id": "m365-declarative-agent-designer-codex-v0.1.0-rc3",
+  "profile_version": "0.1.0-rc3",
+  "evaluated_on": "2026-07-22",
+  "host": {
+    "name": "Codex CLI",
+    "version": "0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning_level": "high",
+    "sandbox": "read-only",
+    "session_persistence": "ephemeral",
+    "user_config": "ignored"
+  },
+  "invocation": {
+    "skill_selection": "$m365-declarative-agent-designer",
+    "skill_selection_channel": "evaluator-developer-configuration",
+    "case_input_channel": "stdin",
+    "case_input_appended_or_modified": false,
+    "response_format_used": false,
+    "model_inferences": 1
+  },
+  "enforcement": {
+    "default_tools_enabled": false,
+    "shell_enabled": false,
+    "filesystem_tools_enabled": false,
+    "web_enabled": false,
+    "network_tools_enabled": false,
+    "apps_or_connectors_enabled": false,
+    "mcp_enabled": false,
+    "multi_agent_enabled": false,
+    "parallel_tool_calls": false,
+    "preflight_request_capture": "local-mock-no-inference",
+    "preflight_request_sha256": "2da45256b6efb595243b6b5db3cf8e41e8a4ffb5b9e8e224235b5ead76b2ab1a"
+  }
+}

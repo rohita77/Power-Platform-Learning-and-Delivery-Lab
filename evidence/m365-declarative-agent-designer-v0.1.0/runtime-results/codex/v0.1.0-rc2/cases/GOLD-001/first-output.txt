@@ -1,0 +1,53 @@
+{
+  "workflow": "requirements-discovery",
+  "request_id": "DRQ-GOLD-001",
+  "status": "ready-for-human-review",
+  "discovery_brief": {
+    "outcome": "Define a read-only, synthetic requirements-discovery capability for an SDLC workbench.",
+    "primary_persona": "Synthetic product owner",
+    "host_candidates": [
+      "codex",
+      "chatgpt-work"
+    ],
+    "accepted_scope": [
+      "Offline requirements discovery",
+      "Read-only design",
+      "Synthetic inputs and outputs",
+      "One agent operating through five lifecycle modes",
+      "Human review before downstream use"
+    ],
+    "excluded_scope": [
+      "Tenant or organisational-data access",
+      "Cross-zone transfer",
+      "Runtime artifact generation",
+      "Deployment",
+      "Writes or external side effects"
+    ],
+    "acceptance_criteria": [
+      "The capability captures objectives, personas, constraints, assumptions, decisions, sources, risks, acceptance criteria, and open questions.",
+      "Every output remains traceable to synthetic evidence or is explicitly labelled as an assumption.",
+      "The capability performs no writes, deployments, connector calls, tenant operations, or cross-zone transfers.",
+      "Lifecycle mode transitions are explicit and preserve one-agent ownership.",
+      "Outputs are portable, deterministic, and marked for human review."
+    ],
+    "settled_decisions": [
+      {
+        "id": "DEC-001",
+        "statement": "Use one agent with five lifecycle modes.",
+        "evidence_refs": [
+          "PRV-001"
+        ]
+      }
+    ],
+    "open_questions": [],
+    "evidence_boundary": {
+      "classification": "synthetic",
+      "zone": "personal-openai",
+      "cross_zone_transfer": "prohibited",
+      "highest_proof_level": "source inspection or static design validation",
+      "source_refs": [
+        "PRV-001"
+      ]
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "enforcement_result": {
+    "additional_callable_tools": 4,
+    "additional_tool_names": [
+      "exec",
+      "wait",
+      "request_user_input",
+      "collaboration"
+    ],
+    "context_isolation": "not-technically-enforced",
+    "failure_class": "EVALUATOR_INFRASTRUCTURE_FAILURE",
+    "parallel_tool_calls": false,
+    "response_format_present": false,
+    "root_tools": 0,
+    "stop_before_external_inference": true,
+    "tool_choice": "auto"
+  },
+  "evaluated_on": "2026-07-22",
+  "host": {
+    "cwd": "/tmp",
+    "model": "gpt-5.6-sol",
+    "name": "Codex CLI",
+    "reasoning_level": "high",
+    "sandbox": "read-only",
+    "session_persistence": "ephemeral",
+    "user_config": "ignored",
+    "version": "0.144.5"
+  },
+  "invocation": {
+    "approved_external_model_inferences": 1,
+    "case_input_appended_or_modified": false,
+    "case_input_channel": "stdin",
+    "external_model_inferences_used": 0,
+    "response_format_used": false,
+    "skill_selection": "$m365-declarative-agent-designer",
+    "skill_selection_channel": "evaluator-developer-configuration"
+  },
+  "profile_id": "m365-declarative-agent-designer-codex-v0.2.0-rc1",
+  "profile_version": "0.2.0-rc1",
+  "requested_enforcement": {
+    "all_model_tools_disabled": true,
+    "apps_connectors_mcp_disabled": true,
+    "exactly_one_external_model_inference": true,
+    "filesystem_tools_disabled": true,
+    "network_and_web_disabled": true,
+    "response_format_disabled": true,
+    "shell_disabled": true
+  }
+}

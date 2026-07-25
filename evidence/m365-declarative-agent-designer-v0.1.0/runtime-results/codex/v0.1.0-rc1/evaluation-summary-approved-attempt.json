@@ -1,0 +1,58 @@
+{
+  "evaluation_id": "m365-declarative-agent-designer-codex-v0.1.0-rc1-approved-attempt",
+  "evaluated_on": "2026-07-22",
+  "supersedes_prior_summary": false,
+  "prior_summary": "evaluation-summary.json",
+  "new_attempt_record": "attempts/approved-smoke-structured-output-rejection.json",
+  "smoke_result": {
+    "case_id": "GOLD-001",
+    "verdict": "fail",
+    "failure_class": "evaluator-infrastructure",
+    "failure_reason": "The Codex structured-output endpoint rejected the unchanged canonical DesignResult schema before model inference because uniqueItems is outside the supported response-format schema subset.",
+    "first_output_present": false,
+    "design_result_schema_verdict": "not-run",
+    "five_mode_lifecycle": "not-evaluated",
+    "provenance_contradiction_abstention": "not-evaluated",
+    "human_review_requirement": "not-evaluated",
+    "forbidden_artifacts": "not-evaluated",
+    "unsupported_claims": "not-evaluated"
+  },
+  "full_scorecard": {
+    "started": false,
+    "reason": "The smoke gate did not pass and no first output existed.",
+    "trigger": "not-run",
+    "golden": "0-of-5-runtime-cases-evaluated",
+    "negative": "not-run",
+    "security": "not-run",
+    "regression": "not-run",
+    "design_result_schema_total": "0-of-0",
+    "carry_forward_and_replay": "not-evaluated",
+    "adapter_policy_invariants": "not-evaluated",
+    "security_and_two_zone": "evaluator-boundary-pass-workflow-not-evaluated"
+  },
+  "operation_totals": {
+    "workflow_operations": 0,
+    "workflow_tool_calls": 0,
+    "workflow_prohibited_activities": 0,
+    "evaluator_codex_api_requests_after_approval": 1,
+    "evaluator_model_inferences": 0,
+    "evaluator_authentication_operations": 0,
+    "evaluator_tenant_operations": 0,
+    "evaluator_connector_or_mcp_operations": 0,
+    "evaluator_toolkit_operations": 0,
+    "evaluator_deployment_operations": 0
+  },
+  "minimal_patches": [
+    {
+      "owner": "evaluator-configuration",
+      "package_change_required": false,
+      "recommendation": "For a new evaluation candidate, do not submit the canonical schema directly as the Codex response_format schema. Preserve the exact first output, then validate it offline against the unchanged canonical schema, or use a separately reviewed Codex-compatible response-format projection followed by canonical offline validation.",
+      "applied": false,
+      "reason_not_applied": "Changing configuration would violate the current smoke attempt's identical-configuration retry boundary."
+    }
+  ],
+  "package_modified": false,
+  "output_repair_attempted": false,
+  "adoption_decision": "Reference only",
+  "decision_reason": "No Codex model output or behavioral release-gate evidence exists for RC1."
+}

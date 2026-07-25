@@ -1,0 +1,15 @@
+{
+  "adoption_decision": "Implemented pending runtime evaluation",
+  "attestation_validation": "pass",
+  "candidate_version": "0.2.0-rc1",
+  "context_allowlist_preflight": "pass",
+  "implementation": "complete",
+  "prior_evidence_preserved": true,
+  "remaining_evaluation_blocker": "A Codex host capable of omitting all callable tools from the outbound request is required.",
+  "remaining_package_defects": [],
+  "request_validation": "pass",
+  "smoke": "not-run",
+  "smoke_verdict": "EVALUATOR_INFRASTRUCTURE_FAILURE",
+  "static_and_regression_validation": "pass",
+  "zero_tool_enforcement": "fail"
+}

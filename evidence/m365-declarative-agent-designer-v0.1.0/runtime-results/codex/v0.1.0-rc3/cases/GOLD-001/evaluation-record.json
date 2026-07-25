@@ -1,0 +1,43 @@
+{
+  "record_version": "0.1.0",
+  "evaluation_profile": "v0.1.0-rc3",
+  "case_id": "GOLD-001",
+  "test_class": "golden",
+  "gate": "smoke",
+  "case_verdict": "fail",
+  "failure_class": "deterministic-result-lineage",
+  "failure_stage": "deterministic-result-validation",
+  "evaluated_on": "2026-07-22",
+  "context_isolation": "enforced",
+  "expected_result_exposure": 0,
+  "input": {
+    "path": "input.json",
+    "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd",
+    "byte_identical": true,
+    "request_validation": "pass"
+  },
+  "first_output": {
+    "path": "first-output.txt",
+    "sha256": "5536d8181c8c46f0eb3a3bc02d7439cf76571fc3c1ff251fda8e8d1c160bfca5",
+    "byte_length": 5321,
+    "preserved_before_parsing": true,
+    "repair_attempted": false
+  },
+  "results": {
+    "direct_json_parse": "pass",
+    "canonical_schema": "pass",
+    "provenance": "pass",
+    "contradictions": "pass",
+    "abstentions": "pass",
+    "carry_forward": "pass",
+    "deterministic_result_validator": "fail-request-digest",
+    "sixteen_root_fields": "pass",
+    "five_modes": "pass",
+    "human_review_required": "pass",
+    "security_and_forbidden_artifacts": "pass",
+    "workflow_operations_zero": "pass"
+  },
+  "retry_attempted": false,
+  "full_suite_started": false,
+  "package_modified": false
+}

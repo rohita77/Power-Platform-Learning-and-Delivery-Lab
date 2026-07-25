@@ -1,0 +1,12 @@
+{
+  "attestation_version": "0.2.0",
+  "attestation_id": "ATT-INVALID-STATUS",
+  "request_id": "DRQ-GOLD-001",
+  "request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+  "validation_status": "failed",
+  "validator_id": "m365-declarative-agent-designer-request-validator",
+  "validator_version": "0.2.0",
+  "data_classification": "synthetic",
+  "boundary_status": "permitted",
+  "scope": "single-inference"
+}

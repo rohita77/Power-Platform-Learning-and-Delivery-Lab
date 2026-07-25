@@ -1,0 +1,85 @@
+{
+  "findings": [
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/abstentions"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/carry_forward"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/contract_version"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/contradictions"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/disclaimers"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/evaluation_metadata"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/findings"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/generated_on"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/human_review_required"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/modes"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/provenance"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/request_digest"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/requirements"
+    },
+    {
+      "code": "DAD-MISSING-FIELD",
+      "message": "A required field is missing.",
+      "path": "/result_id"
+    },
+    {
+      "code": "DAD-SCHEMA-INVALID",
+      "message": "The value does not conform to the canonical contract.",
+      "path": "/"
+    },
+    {
+      "code": "DAD-SCHEMA-INVALID",
+      "message": "The value does not conform to the canonical contract.",
+      "path": "/status"
+    }
+  ],
+  "valid": false
+}

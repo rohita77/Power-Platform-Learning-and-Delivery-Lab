@@ -1,0 +1,59 @@
+{
+  "attempt_id": "approved-smoke-structured-output-rejection",
+  "case_id": "GOLD-001",
+  "attempted_on": "2026-07-22",
+  "user_external_transmission_approval": true,
+  "runtime": {
+    "host": "Codex CLI",
+    "host_version": "0.144.5",
+    "model_configured": "gpt-5.6-sol",
+    "reasoning_level_configured": "high",
+    "model_inference_started": false,
+    "sandbox": "read-only",
+    "session_persistence": "ephemeral",
+    "user_config": "ignored"
+  },
+  "configuration": {
+    "skill_selection": "$m365-declarative-agent-designer",
+    "skill_selection_channel": "developer-instructions",
+    "case_input_channel": "stdin",
+    "case_input_appended_or_modified": false,
+    "action_tools_disabled": true,
+    "response_schema_path": "skills/m365-declarative-agent-designer/schemas/design-result.schema.json"
+  },
+  "input": {
+    "source_path": "skills/m365-declarative-agent-designer/tests/fixtures/synthetic/GOLD-001.request.json",
+    "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd",
+    "byte_length": 1048,
+    "unchanged": true
+  },
+  "result": {
+    "status": "infrastructure-failure",
+    "stage": "response-schema-acceptance-before-inference",
+    "api_status": 400,
+    "api_error_type": "invalid_request_error",
+    "api_error_code": "invalid_json_schema",
+    "api_error_message": "Invalid schema for response_format 'codex_output_schema': In context=('properties', 'finding_ids'), 'uniqueItems' is not permitted.",
+    "first_output_present": false,
+    "first_output_hash": null,
+    "workflow_tool_calls": 0,
+    "workflow_operations": 0,
+    "prohibited_activities": 0,
+    "output_repair_attempted": false
+  },
+  "local_evaluator_artifacts": {
+    "events_sha256": "5d4c4e2b53892e8fc8e31d23e0523eb6882d9e556a193b1d4b0814c534f4b1d0",
+    "events_byte_length": 867,
+    "stderr_sha256": "29c074a7ca253a7d3a2253e36d9db8c3e4375034a69ac9e6eb84b1be23673e13",
+    "stderr_byte_length": 753,
+    "raw_logs_preserved_in_repository": false,
+    "raw_logs_reason": "Raw evaluator logs contain local runtime paths; this record preserves the material error and hashes without duplicating machine-specific paths."
+  },
+  "canonical_schema_observation": {
+    "design_result_schema_sha256": "76e2dfc95b596347b9ebaf477aa60460de7fe7ddec43753a90e7910b3235bc87",
+    "unique_items_occurrences_in_design_result_schema": 3,
+    "unique_items_occurrences_in_referenced_finding_provenance_schema": 10,
+    "canonical_json_schema_validity_reassessed": false,
+    "finding": "The failure demonstrates incompatibility between the canonical schema and the Codex structured-output response-format subset; it does not demonstrate that the canonical schema is invalid for offline validation."
+  }
+}

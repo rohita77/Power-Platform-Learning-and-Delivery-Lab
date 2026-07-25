@@ -16,7 +16,7 @@
       "PRV-001"
     ],
     "open_items": [],
-    "previous_result_id": "DRS-PREV",
+    "previous_result_id": null,
     "rejected_decisions": [
       {
         "evidence_refs": [
@@ -32,7 +32,7 @@
     "result_ids": [
       "DRS-PREV"
     ],
-    "sequence": 1,
+    "sequence": 0,
     "state_id": "STATE-001",
     "superseded_chronology": []
   },
@@ -42,7 +42,7 @@
     "Human review required"
   ],
   "continuation": {
-    "expected_sequence": 1,
+    "expected_sequence": 0,
     "expected_state_id": "STATE-001"
   },
   "contract_version": "0.1.0",

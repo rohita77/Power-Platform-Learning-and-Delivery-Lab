@@ -1,0 +1,12 @@
+{
+  "validator": "existing deterministic result validator with GOLD-001 request",
+  "as_of": "2026-07-22",
+  "valid": false,
+  "findings": [
+    {
+      "code": "DAD-BROKEN-REFERENCE",
+      "message": "The request digest does not match the canonical request.",
+      "path": "/request_digest"
+    }
+  ]
+}

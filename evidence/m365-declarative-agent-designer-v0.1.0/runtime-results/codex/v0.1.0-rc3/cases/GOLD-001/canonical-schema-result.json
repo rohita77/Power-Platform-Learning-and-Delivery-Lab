@@ -1,0 +1,7 @@
+{
+  "schema_path": ".agents/skills/m365-declarative-agent-designer/schemas/design-result.schema.json",
+  "schema_sha256": "76e2dfc95b596347b9ebaf477aa60460de7fe7ddec43753a90e7910b3235bc87",
+  "offline": true,
+  "valid": true,
+  "findings": []
+}

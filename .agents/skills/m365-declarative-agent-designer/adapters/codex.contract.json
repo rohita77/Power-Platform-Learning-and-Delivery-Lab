@@ -1,13 +1,45 @@
 {
-  "contract_version": "0.1.0",
+  "contract_version": "0.2.0",
+  "candidate_version": "0.2.0-rc2",
   "adapter_id": "codex",
   "input_schema": "../schemas/design-request.schema.json",
+  "host_validation_attestation_schema": "../schemas/host-validation-attestation.schema.json",
   "output_schema": "../schemas/design-result.schema.json",
   "invocation": "explicit-user-trigger",
   "mapping": "identity",
+  "attestation_channel": "host-context-separate-from-user-input",
+  "attestation_required_before_inference": true,
+  "request_digest_source": "validated-host-attestation",
+  "single_inference_scope": true,
+  "result_invariants": {
+    "initial_sequence": 0,
+    "initial_previous_result_id": null,
+    "continuation_sequence": "prior-plus-one",
+    "continuation_previous_result_id": "supplied-prior-result-id",
+    "non_empty_abstentions_status": "Open",
+    "model_validator_outcome": "pending-external-validation",
+    "model_duration_ms": 0
+  },
+  "workflow": [
+    "validate-exact-design-request",
+    "compute-canonical-request-digest",
+    "create-and-validate-host-attestation",
+    "attach-attestation-as-separate-host-context",
+    "run-model-with-portable-contract-and-attestation",
+    "preserve-first-output-unchanged",
+    "validate-canonical-design-result",
+    "verify-output-request-id-and-digest-against-attestation"
+  ],
+  "authority_grants": {
+    "tools": false,
+    "network": false,
+    "tenant": false,
+    "deployment": false,
+    "policy_override": false
+  },
   "methodology_override": false,
   "policy_override": false,
   "network_allowed": false,
   "official_work_iq_plugin_compatibility": "not-claimed",
-  "runtime_evaluation_status": "untested"
+  "runtime_evaluation_status": "v0.2.0-rc2-untested"
 }

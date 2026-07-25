@@ -1,0 +1,46 @@
+{
+  "context_isolation_enforced": true,
+  "preflight": {
+    "outbound_tools_key_present": false,
+    "outbound_tool_count": 0,
+    "parallel_tool_calls": false,
+    "response_format_present": false,
+    "exact_case_input_match_count": 1,
+    "target_repository_absolute_path_mentions": 0
+  },
+  "allowed_files": [
+    {
+      "path": ".agents/skills/m365-declarative-agent-designer/SKILL.md",
+      "sha256": "4ea5713d791215843551862aeaa7416934710eaa9a70b09dbec4cb6360752601",
+      "attached_byte_identical": true
+    },
+    {
+      "path": ".agents/skills/m365-declarative-agent-designer/schemas/design-result.schema.json",
+      "sha256": "76e2dfc95b596347b9ebaf477aa60460de7fe7ddec43753a90e7910b3235bc87",
+      "attached_byte_identical": true
+    },
+    {
+      "path": ".agents/skills/m365-declarative-agent-designer/schemas/finding-provenance.schema.json",
+      "sha256": "04fae7224adb71e08a870f9f551881b9eabfc0c46695606169903b3b0c75678d",
+      "attached_byte_identical": true
+    },
+    {
+      "path": ".agents/skills/m365-declarative-agent-designer/adapters/codex.contract.json",
+      "sha256": "ada5a8086d3e62cf4a42130cf09064275e935e95bf340eaf68de5f89f9285775",
+      "attached_byte_identical": true
+    }
+  ],
+  "excluded_paths": [
+    ".agents/skills/m365-declarative-agent-designer/tests/**",
+    ".agents/skills/m365-declarative-agent-designer/validators/**",
+    "evidence/**",
+    "**/runtime-results/**",
+    "all other repository files"
+  ],
+  "expected_result_exposure": {
+    "count": 0,
+    "gold_result_content_visible": false,
+    "assessment": "pass"
+  },
+  "boundary_note": "Approved SKILL.md text contains relative references to evaluator-owned tests and validators, but no such file content or expected result was attached and the model had no tools with which to access them."
+}

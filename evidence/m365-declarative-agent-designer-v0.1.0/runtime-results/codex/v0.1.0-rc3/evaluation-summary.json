@@ -1,0 +1,41 @@
+{
+  "evaluation_id": "m365-declarative-agent-designer-codex-v0.1.0-rc3",
+  "evaluated_on": "2026-07-22",
+  "prior_evidence": {
+    "rc1_preserved_unchanged": true,
+    "rc2_preserved_unchanged": true,
+    "contaminated_diagnostic_preserved": true,
+    "contaminated_diagnostic_counted_as_independent_runtime_evidence": false
+  },
+  "profile": {
+    "context_isolation": "technically-enforced",
+    "model_visible_file_count": 4,
+    "expected_result_exposure": 0,
+    "model_tool_count": 0,
+    "response_format_used": false,
+    "model_inferences": 1
+  },
+  "smoke": {
+    "case_id": "GOLD-001",
+    "verdict": "fail",
+    "failure_class": "deterministic-result-lineage",
+    "failure_detail": "The canonical request_digest field did not match the unchanged GOLD-001 request.",
+    "direct_json_parse": "pass",
+    "canonical_schema": "pass",
+    "specialised_validators": "pass",
+    "deterministic_result_validator": "fail",
+    "root_field_coverage": "16-of-16",
+    "mode_coverage": "5-of-5",
+    "workflow_operations": 0,
+    "prohibited_activities": 0,
+    "output_repair": 0
+  },
+  "full_suite": {
+    "started": false,
+    "reason": "RC3 smoke failed and the profile requires an immediate stop."
+  },
+  "package_modified": false,
+  "package_change_justified": true,
+  "package_change_rationale": "The skill requires trusted host pre-validation before reasoning, but the adapter defines no model-visible, deterministic host-attestation contract. Under the strict four-file profile the model failed closed and emitted an invalid placeholder request digest.",
+  "recommended_next_action": "Define a minimal trusted host-validation attestation in the Codex adapter contract, version the package, then run one new isolated GOLD-001 smoke without exposing validator source or expected results."
+}

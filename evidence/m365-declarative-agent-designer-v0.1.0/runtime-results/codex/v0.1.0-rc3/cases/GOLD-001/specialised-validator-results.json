@@ -1,0 +1,19 @@
+{
+  "offline": true,
+  "provenance": {
+    "valid": true,
+    "findings": []
+  },
+  "contradictions": {
+    "valid": true,
+    "findings": []
+  },
+  "abstentions": {
+    "valid": true,
+    "findings": []
+  },
+  "carry_forward": {
+    "valid": true,
+    "findings": []
+  }
+}

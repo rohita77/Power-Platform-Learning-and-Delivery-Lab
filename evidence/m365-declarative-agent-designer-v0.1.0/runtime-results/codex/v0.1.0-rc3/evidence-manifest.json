@@ -1,0 +1,23 @@
+{
+  "profile": "v0.1.0-rc3",
+  "created_on": "2026-07-22",
+  "immutable": true,
+  "files": [
+    {"path": "cases/GOLD-001/canonical-schema-result.json", "sha256": "74a0e87c8377ddfd9b10459691776436b0a2b1791a8646deb89b5fee57b95bb9"},
+    {"path": "cases/GOLD-001/coverage-and-security.json", "sha256": "5289b6aaacff482266c324fb43b95a80ba0a4ce3d88018d660123871e2f598a7"},
+    {"path": "cases/GOLD-001/deterministic-result-validator.json", "sha256": "142e1cbdccfe45b80561def0ca8fa245749b77b3abe0340ca224e8489a7d0152"},
+    {"path": "cases/GOLD-001/direct-json-result.json", "sha256": "6d4bc907304b5385ae8342656e89773a37c5f0a2072ee6555b07bb66ad54e1f9"},
+    {"path": "cases/GOLD-001/evaluation-record.json", "sha256": "0d240a7621c90335c03ea4354889dd386511c0ba08caf51cf50a083c920509c3"},
+    {"path": "cases/GOLD-001/first-output.txt", "sha256": "5536d8181c8c46f0eb3a3bc02d7439cf76571fc3c1ff251fda8e8d1c160bfca5"},
+    {"path": "cases/GOLD-001/input.json", "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"},
+    {"path": "cases/GOLD-001/request-validator-result.json", "sha256": "715dde0aa300c3ee9c205074c1813c008c62d96eaa39d741d18b76315e8aed62"},
+    {"path": "cases/GOLD-001/specialised-validator-results.json", "sha256": "c47ce6e7e0af639ecef1bfd8d28c2562a93d3f6386389ff0cc45f85af49a95d6"},
+    {"path": "contamination-assessment.json", "sha256": "459708100416fda43053fe40547fda92ee50540ffecc9ab177482e046c28cc64"},
+    {"path": "evaluation-summary.json", "sha256": "19ff42a3a1883684bfac5d58e65958ac1253be2684b6628645a2abb1c78a957f"},
+    {"path": "evaluator-profile.json", "sha256": "63d8158737ece6b297c14d3bb8a74fe3e8207aeb77dd83eb3bba470ca2b06115"},
+    {"path": "model-visible-context.json", "sha256": "28c94764a9736f28567122cbc0263a852793cfcc6ad0153ef376aa954370ba3c"},
+    {"path": "operations.json", "sha256": "659d9475a2f62b7450d2e925e18107eb4811049827f360d5f0c230bc76f05496"},
+    {"path": "prior-context-diagnostic/first-output.txt", "sha256": "7b18b9d011ed030a4caef3255b48ededcb6c2900fa84e430c8d73d544111e98d"},
+    {"path": "prior-evidence-preservation-manifest.json", "sha256": "320f906323924cf635ec860af9dd42d1d578d5e47da28947c58edd23fd6d2dd9"}
+  ]
+}

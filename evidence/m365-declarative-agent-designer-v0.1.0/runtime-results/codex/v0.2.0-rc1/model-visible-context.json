@@ -1,0 +1,53 @@
+{
+  "case_input": {
+    "byte_identical": true,
+    "channel": "separate user input via stdin",
+    "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"
+  },
+  "excluded_content": {
+    "evidence": true,
+    "expected_results": true,
+    "fixture_content_other_than_exact_case_input": true,
+    "other_repository_files": true,
+    "runtime_results": true,
+    "tests": true,
+    "validators": true
+  },
+  "expected_output_exposure": 0,
+  "external_inference_started": false,
+  "preflight_attachment_count": 5,
+  "preflight_model_visible_file_allowlist": [
+    {
+      "byte_identical_to_source": true,
+      "path": ".agents/skills/m365-declarative-agent-designer/SKILL.md",
+      "sha256": "76733339ae8207b9a25c4ee9ef27510ed72fa207de960561b93c985cebd7373d"
+    },
+    {
+      "byte_identical_to_source": true,
+      "path": ".agents/skills/m365-declarative-agent-designer/schemas/design-result.schema.json",
+      "sha256": "76e2dfc95b596347b9ebaf477aa60460de7fe7ddec43753a90e7910b3235bc87"
+    },
+    {
+      "byte_identical_to_source": true,
+      "path": ".agents/skills/m365-declarative-agent-designer/schemas/finding-provenance.schema.json",
+      "sha256": "04fae7224adb71e08a870f9f551881b9eabfc0c46695606169903b3b0c75678d"
+    },
+    {
+      "byte_identical_to_source": true,
+      "path": ".agents/skills/m365-declarative-agent-designer/adapters/codex.contract.json",
+      "sha256": "1b8c3c8cc097c5f6a5a4b496b6a4ef8b7479e26d30e22ebcfd58b00e0c53d986"
+    },
+    {
+      "byte_identical_to_source": true,
+      "path": "host-validation-attestation.json",
+      "sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5"
+    }
+  ],
+  "preflight_model_visible_repository_files": [
+    ".agents/skills/m365-declarative-agent-designer/SKILL.md",
+    ".agents/skills/m365-declarative-agent-designer/schemas/design-result.schema.json",
+    ".agents/skills/m365-declarative-agent-designer/schemas/finding-provenance.schema.json",
+    ".agents/skills/m365-declarative-agent-designer/adapters/codex.contract.json"
+  ],
+  "validated_attestation_attached_as_separate_host_context": true
+}

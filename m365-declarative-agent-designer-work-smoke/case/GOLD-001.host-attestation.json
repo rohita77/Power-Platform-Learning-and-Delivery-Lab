@@ -1,0 +1,12 @@
+{
+  "attestation_id": "ATT-GOLD-001-V020-RC1",
+  "attestation_version": "0.2.0",
+  "boundary_status": "permitted",
+  "data_classification": "synthetic",
+  "request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+  "request_id": "DRQ-GOLD-001",
+  "scope": "single-inference",
+  "validation_status": "passed",
+  "validator_id": "m365-declarative-agent-designer-request-validator",
+  "validator_version": "0.2.0"
+}

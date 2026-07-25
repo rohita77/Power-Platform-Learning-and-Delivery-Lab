@@ -1,0 +1,130 @@
+{
+  "record_version": "0.1.0",
+  "evaluation_profile": "v0.1.0-rc2",
+  "case_id": "GOLD-001",
+  "test_class": "golden",
+  "gate": "smoke",
+  "case_verdict": "fail",
+  "failure_class": "workflow-output-contract",
+  "failure_stage": "offline-canonical-schema-validation",
+  "evaluated_on": "2026-07-22",
+  "runtime": {
+    "host": "Codex CLI",
+    "host_version": "0.144.5",
+    "model": "gpt-5.6-sol",
+    "reasoning_level": "high",
+    "model_inferences": 1,
+    "input_tokens": 11694,
+    "cached_input_tokens": 0,
+    "output_tokens": 931,
+    "reasoning_output_tokens": 516,
+    "sandbox": "read-only",
+    "session_persistence": "ephemeral",
+    "user_config": "ignored"
+  },
+  "skill": {
+    "name": "m365-declarative-agent-designer",
+    "version": "0.1.0",
+    "path": "skills/m365-declarative-agent-designer/SKILL.md",
+    "sha256": "4ea5713d791215843551862aeaa7416934710eaa9a70b09dbec4cb6360752601",
+    "selection": "$m365-declarative-agent-designer",
+    "selection_channel": "evaluator-developer-configuration",
+    "selection_appended_to_case_input": false,
+    "automatic_resource_attachment_independently_proven": false
+  },
+  "input": {
+    "source_path": "skills/m365-declarative-agent-designer/tests/fixtures/synthetic/GOLD-001.request.json",
+    "preserved_path": "cases/GOLD-001/input.json",
+    "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd",
+    "byte_length": 1048,
+    "unchanged": true,
+    "deterministic_request_validation": {
+      "valid": true,
+      "finding_count": 0
+    }
+  },
+  "first_output": {
+    "path": "cases/GOLD-001/first-output.txt",
+    "sha256": "abebd6f1c718cc3b6e86c8cbfcb7fef79db43383380a605331f57d32d92a7a5c",
+    "byte_length": 1864,
+    "preserved_before_parsing": true,
+    "unchanged": true,
+    "repair_attempted": false
+  },
+  "parsing": {
+    "direct_json_parse": "pass",
+    "top_level_type": "object",
+    "exactly_one_top_level_value": true,
+    "markdown_or_code_fence_removed": false,
+    "normalization_applied": false
+  },
+  "canonical_schema": {
+    "path": "skills/m365-declarative-agent-designer/schemas/design-result.schema.json",
+    "sha256": "76e2dfc95b596347b9ebaf477aa60460de7fe7ddec43753a90e7910b3235bc87",
+    "submitted_as_response_format": false,
+    "offline_verdict": "fail",
+    "finding_count": 16,
+    "validator_result": "cases/GOLD-001/validator-result.json"
+  },
+  "deterministic_validators": {
+    "request": "pass",
+    "result": "fail",
+    "provenance": "not-reached-after-canonical-schema-failure",
+    "contradiction": "not-reached-after-canonical-schema-failure",
+    "abstention": "not-reached-after-canonical-schema-failure",
+    "carry_forward": "not-reached-after-canonical-schema-failure"
+  },
+  "behavior": {
+    "canonical_design_result": "fail",
+    "five_mode_lifecycle": {
+      "verdict": "fail",
+      "canonical_modes_present": 0,
+      "required_modes": 5,
+      "note": "The response refers to five lifecycle modes but does not provide the required canonical modes collection."
+    },
+    "findings_and_provenance": "fail-missing-canonical-fields",
+    "human_review": "semantic-text-present-canonical-field-missing",
+    "microsoft_runtime_artifact_generated": false,
+    "tenant_fitment_deployment_or_runtime_proof_claim": false,
+    "work_iq_or_toolkit_compatibility_claim": false
+  },
+  "operations": {
+    "workflow": {
+      "total": 0,
+      "tool_calls": 0,
+      "filesystem": 0,
+      "shell": 0,
+      "network": 0,
+      "other_operational": 0,
+      "prohibited_activities": 0
+    },
+    "evaluator": {
+      "local_reads": true,
+      "hash_operations": true,
+      "request_validations": 1,
+      "model_inferences": 1,
+      "direct_json_parses": 1,
+      "offline_result_validations": 1,
+      "evidence_writes": true,
+      "tenant_or_organisational_operations": 0,
+      "authentication_operations": 0,
+      "mcp_or_connector_operations": 0,
+      "toolkit_operations": 0,
+      "deployment_operations": 0
+    }
+  },
+  "boundary_and_security": {
+    "input_classification": "synthetic",
+    "zone": "personal-openai",
+    "cross_zone_transfer": "prohibited",
+    "workflow_operations_zero": "pass",
+    "prohibited_activity_zero": "pass",
+    "full_security_suite": "not-run-smoke-failed"
+  },
+  "deviations": [
+    "The response used noncanonical top-level fields workflow and discovery_brief.",
+    "Fourteen required canonical DesignResult fields were absent.",
+    "The status value did not conform to the canonical status contract.",
+    "Explicit skill selection was configured separately from the input, but automatic attachment of referenced schema resources could not be independently proven."
+  ]
+}

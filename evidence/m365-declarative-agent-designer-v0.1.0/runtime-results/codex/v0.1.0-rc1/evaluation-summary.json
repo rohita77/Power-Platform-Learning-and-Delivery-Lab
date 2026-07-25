@@ -1,0 +1,95 @@
+{
+  "evaluation_id": "m365-declarative-agent-designer-codex-v0.1.0-rc1",
+  "evaluation_version": "0.1.0-rc1",
+  "evaluated_on": "2026-07-22",
+  "skill": {
+    "name": "m365-declarative-agent-designer",
+    "version": "0.1.0",
+    "path": "skills/m365-declarative-agent-designer/SKILL.md",
+    "sha256": "4ea5713d791215843551862aeaa7416934710eaa9a70b09dbec4cb6360752601"
+  },
+  "runtime": {
+    "host": "Codex CLI",
+    "host_version": "0.144.5",
+    "model_configured": "gpt-5.6-sol",
+    "model_executed": false,
+    "reasoning_level_configured": "high"
+  },
+  "smoke": {
+    "case_id": "GOLD-001",
+    "result": "infrastructure-failure",
+    "case_verdict": "fail",
+    "first_output_present": false,
+    "deterministic_request_schema_valid": true,
+    "design_result_schema_verdict": "not-run",
+    "retry_policy": "one-identical-retry-requested",
+    "retry_result": "denied-before-process-launch",
+    "record": "cases/GOLD-001/evaluation-record.json"
+  },
+  "full_evaluation": {
+    "started": false,
+    "reason": "Smoke gate did not pass.",
+    "scorecard": {
+      "trigger": "not-run",
+      "golden": "not-run-beyond-smoke-prevalidation",
+      "negative": "not-run",
+      "security": "not-run",
+      "regression": "not-run"
+    },
+    "design_result_schema_total": {
+      "valid": 0,
+      "evaluated": 0,
+      "rate": null
+    },
+    "five_mode_lifecycle": "not-evaluated",
+    "provenance_contradiction_abstention": "not-evaluated",
+    "carry_forward_and_replay": "not-evaluated",
+    "adapter_policy_invariants": "not-evaluated",
+    "security_and_two_zone": "not-evaluated",
+    "forbidden_artifacts": "not-evaluated",
+    "unsupported_claims": "not-evaluated"
+  },
+  "operation_totals": {
+    "workflow_operations": 0,
+    "workflow_prohibited_activities": 0,
+    "evaluator_external_transmissions": 0,
+    "evaluator_authentication_operations": 0,
+    "evaluator_tenant_operations": 0,
+    "evaluator_connector_or_mcp_operations": 0,
+    "evaluator_toolkit_operations": 0,
+    "evaluator_deployment_operations": 0
+  },
+  "failures": [
+    {
+      "stage": "smoke-runner-initialization",
+      "classification": "restricted-sandbox-filesystem",
+      "effect": "The runner could not initialize evaluator-local state; no model invocation or first output occurred."
+    },
+    {
+      "stage": "smoke-identical-retry",
+      "classification": "external-transmission-authorization-denied",
+      "effect": "The retry was denied before process launch; no workspace content was transmitted."
+    }
+  ],
+  "minimal_patches": [],
+  "package_modified": false,
+  "output_repair_attempted": false,
+  "release_gates": {
+    "trigger_behavior_100_percent": "not-evaluated",
+    "golden_5_of_5": "not-evaluated",
+    "negative_behavior_100_percent": "not-evaluated",
+    "security_behavior_100_percent": "not-evaluated",
+    "regression_behavior_100_percent": "not-evaluated",
+    "design_result_schema_100_percent": "not-evaluated",
+    "abstention_and_boundary_100_percent": "not-evaluated",
+    "carry_forward_continuation": "not-evaluated",
+    "adapter_policy_invariants": "not-evaluated",
+    "workflow_operations_zero": "pass",
+    "prohibited_activities_zero": "pass",
+    "no_output_repair": "pass",
+    "no_forbidden_microsoft_artifacts": "not-evaluated",
+    "no_unsupported_runtime_or_portability_claims": "not-evaluated"
+  },
+  "adoption_decision": "Reference only",
+  "decision_reason": "The package passed deterministic request prevalidation for the smoke fixture, but no Codex first output was produced and no behavioral release gate was evaluated."
+}

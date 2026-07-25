@@ -1,0 +1,82 @@
+{
+  "candidate_version": "0.2.0-rc1",
+  "file_count_excluding_manifest": 19,
+  "files": [
+    {
+      "path": "attestation-contract.json",
+      "sha256": "90c98f3e56b423a890039278a9a5a8a0ab56ae2041b3a3ec5685f5355ffd9140"
+    },
+    {
+      "path": "cases/GOLD-001/attestation-validator-result.json",
+      "sha256": "36d609331f6461cbb5173466202aca319a3a7b26b216ab91fc5b9d6721990e61"
+    },
+    {
+      "path": "cases/GOLD-001/host-validation-attestation.json",
+      "sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5"
+    },
+    {
+      "path": "cases/GOLD-001/input.json",
+      "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"
+    },
+    {
+      "path": "cases/GOLD-001/request-validator-result.json",
+      "sha256": "36d609331f6461cbb5173466202aca319a3a7b26b216ab91fc5b9d6721990e61"
+    },
+    {
+      "path": "changed-files.json",
+      "sha256": "b1d58f0c49c59603c1d6415bda4fea5579d4114e1b305a9138768bf591e7b4f4"
+    },
+    {
+      "path": "deterministic-suite-canonical.json",
+      "sha256": "683b536ce817c3404e77aacd1f0c7a7124829307250e039df48517a0f1f4e646"
+    },
+    {
+      "path": "deterministic-suite-publication.json",
+      "sha256": "683b536ce817c3404e77aacd1f0c7a7124829307250e039df48517a0f1f4e646"
+    },
+    {
+      "path": "evaluation-summary.json",
+      "sha256": "cac7524becc220add9ea398b6a5573980ab6e632169f8efa1a5ece66b8cb1bcc"
+    },
+    {
+      "path": "evaluator-profile.json",
+      "sha256": "78617330856b22d62c57ade8362c23cfdf811ba8c81e3cc904bc199687dd0d71"
+    },
+    {
+      "path": "model-visible-context.json",
+      "sha256": "d20c82b42f201b7f33c287bd9db23897cf5594c638ad1eba91e39af4ce9e6a7f"
+    },
+    {
+      "path": "operations.json",
+      "sha256": "982c0aaf3cff527fb78ec69e9dd4d7f3194f5aa27f65fa6f71273d639dd46f35"
+    },
+    {
+      "path": "package-validation-canonical.json",
+      "sha256": "36d609331f6461cbb5173466202aca319a3a7b26b216ab91fc5b9d6721990e61"
+    },
+    {
+      "path": "package-validation-publication.json",
+      "sha256": "36d609331f6461cbb5173466202aca319a3a7b26b216ab91fc5b9d6721990e61"
+    },
+    {
+      "path": "preflight-envelope-assessment.json",
+      "sha256": "8bb819cee4d4c8097f49d7c55fc2036eb6127e392574f41a21be10a59fa79c80"
+    },
+    {
+      "path": "prior-evidence-preservation-manifest.json",
+      "sha256": "0124d1c52a3654f110e1a5d6b1adc202698612c5fd1bfe051f2ea1f7b4eef095"
+    },
+    {
+      "path": "skill-quick-validation.txt",
+      "sha256": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0"
+    },
+    {
+      "path": "smoke-result.json",
+      "sha256": "7c107b254a8f24df05a2f07e27b98acb1d1ab79f76130ebc676d045d07a0137d"
+    },
+    {
+      "path": "static-validation.json",
+      "sha256": "751ddf2f5a70b51b475531aefa90cae8f36b882a2175be17826d73299d77caab"
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "attestation_file": {
+    "match": true,
+    "matching_provenance_entries": 1,
+    "output_provenance_sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5",
+    "path": "GOLD-001.host-attestation.json",
+    "sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5"
+  },
+  "canonical_schema": {
+    "findings": [],
+    "name": "design-result.schema.json",
+    "valid": true
+  },
+  "case_id": "GOLD-001",
+  "coverage": {
+    "actual_modes": [
+      "Discovery",
+      "Elicitation",
+      "Conceptualisation",
+      "Authoring",
+      "Assurance"
+    ],
+    "expected_modes": [
+      "Discovery",
+      "Elicitation",
+      "Conceptualisation",
+      "Authoring",
+      "Assurance"
+    ],
+    "extra_root_fields": [],
+    "five_modes_ordered_once": true,
+    "human_review_required": true,
+    "missing_root_fields": [],
+    "present_root_fields": 16,
+    "required_root_fields": 16,
+    "root_fields_pass": true
+  },
+  "deterministic_validators": {
+    "abstentions": {
+      "findings": [
+        {
+          "code": "DAD-INVALID-ABSTENTION",
+          "message": "A Complete result cannot contain abstentions.",
+          "path": "/status"
+        }
+      ],
+      "name": "abstentions",
+      "valid": false
+    },
+    "attestation": {
+      "findings": [],
+      "name": "host-attestation",
+      "valid": true
+    },
+    "carry_forward": {
+      "findings": [
+        {
+          "code": "DAD-BROKEN-REFERENCE",
+          "message": "Previous result does not resolve in lineage.",
+          "path": "/carry_forward/previous_result_id"
+        }
+      ],
+      "name": "carry-forward",
+      "valid": false
+    },
+    "contradictions": {
+      "findings": [],
+      "name": "contradictions",
+      "valid": true
+    },
+    "end_to_end_design_result": {
+      "findings": [
+        {
+          "code": "DAD-BROKEN-REFERENCE",
+          "message": "Previous result does not resolve in lineage.",
+          "path": "/carry_forward/previous_result_id"
+        },
+        {
+          "code": "DAD-INVALID-ABSTENTION",
+          "message": "A Complete result cannot contain abstentions.",
+          "path": "/status"
+        },
+        {
+          "code": "DAD-STALE-CARRY-FORWARD",
+          "message": "Initial carry-forward state is inconsistent.",
+          "path": "/carry_forward"
+        }
+      ],
+      "name": "end-to-end-design-result",
+      "valid": false
+    },
+    "provenance": {
+      "findings": [],
+      "name": "provenance",
+      "valid": true
+    },
+    "request": {
+      "findings": [],
+      "name": "request",
+      "valid": true
+    }
+  },
+  "direct_json": {
+    "code_fence_stripped": false,
+    "exactly_one_top_level_object": true,
+    "prose_removed": false,
+    "valid": true
+  },
+  "evaluated_on": "2026-07-25",
+  "findings": [
+    {
+      "code": "DAD-BROKEN-REFERENCE",
+      "message": "Previous result does not resolve in lineage.",
+      "path": "/carry_forward/previous_result_id"
+    },
+    {
+      "code": "DAD-INVALID-ABSTENTION",
+      "message": "A Complete result cannot contain abstentions.",
+      "path": "/status"
+    },
+    {
+      "code": "DAD-STALE-CARRY-FORWARD",
+      "message": "Initial carry-forward state is inconsistent.",
+      "path": "/carry_forward"
+    }
+  ],
+  "first_output": {
+    "byte_length": 12920,
+    "modified_after_preservation": false,
+    "normalization_attempted": false,
+    "path": "first-output.json",
+    "preserved_before_parsing": true,
+    "repair_attempted": false,
+    "retry_attempted": false,
+    "sha256": "a2cc08f4a187011fcc15078c7d418f878f62685c500a9766950b7d37de97264e"
+  },
+  "identity": {
+    "attestation_request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+    "attestation_request_id": "DRQ-GOLD-001",
+    "expected_request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+    "expected_request_id": "DRQ-GOLD-001",
+    "output_request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+    "output_request_id": "DRQ-GOLD-001",
+    "request_digest_match": true,
+    "request_id_match": true
+  },
+  "model_authored_evaluation_metadata": {
+    "duration_ms": 0,
+    "treated_as_measured_evaluator_duration": false
+  },
+  "profile": "chatgpt-work-v0.2.0-rc1-offline-acceptance",
+  "record_version": "0.2.0",
+  "referential_integrity": {
+    "findings": [
+      {
+        "code": "DAD-BROKEN-REFERENCE",
+        "message": "Previous result does not resolve in lineage.",
+        "path": "/carry_forward/previous_result_id"
+      }
+    ],
+    "valid": false
+  },
+  "security_and_boundary": {
+    "all_disclaimers_false": true,
+    "disclaimers": {
+      "deployment_approval": false,
+      "microsoft_runtime_artifact": false,
+      "runtime_compatibility_proof": false,
+      "tenant_fitment_evidence": false
+    },
+    "forbidden_artifact_or_operation_findings": [],
+    "forbidden_artifacts_pass": true,
+    "output_preserves_prohibited_cross_zone_statement": true,
+    "prohibited_activity_findings": [],
+    "request_cross_zone_transfer": "prohibited",
+    "unsupported_runtime_or_portability_claim_findings": []
+  },
+  "verdict": "WORK-OUTPUT-CONTRACT-FAIL",
+  "workflow_operations": {
+    "host_event_trace_supplied": false,
+    "note": "Zero operations are recorded for the supplied inference-only Work smoke, but the preserved first-output file is not an independent host event trace.",
+    "prohibited_activities_reported_count": 0,
+    "reported_count": 0
+  }
+}

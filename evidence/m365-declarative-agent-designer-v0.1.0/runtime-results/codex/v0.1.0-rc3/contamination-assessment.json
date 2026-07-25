@@ -1,0 +1,16 @@
+{
+  "rc3": {
+    "expected_result_exposure": 0,
+    "tests_or_fixture_content_exposure": 0,
+    "validator_source_exposure": 0,
+    "evidence_or_runtime_result_exposure": 0,
+    "other_repository_file_content_exposure": 0,
+    "assessment": "uncontaminated"
+  },
+  "prior_context_diagnostic": {
+    "independent_runtime_evidence": false,
+    "reason": "The model loaded the GOLD-001 expected result and ran the full suite before producing a schema-valid response.",
+    "first_output_preserved_path": "prior-context-diagnostic/first-output.txt",
+    "first_output_sha256": "7b18b9d011ed030a4caef3255b48ededcb6c2900fa84e430c8d73d544111e98d"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "checked_on": "2026-07-22",
+  "rc1_path": "evidence/m365-declarative-agent-designer-v0.1.0/runtime-results/codex/v0.1.0-rc1",
+  "preserved_unchanged_during_rc2": true,
+  "root_cause": "The RC1 evaluator submitted the canonical DesignResult schema as the Codex structured-output response_format. Codex rejected uniqueItems before inference because that keyword is outside its response-format schema subset.",
+  "files": [
+    {
+      "path": "attempts/approved-smoke-structured-output-rejection.json",
+      "sha256": "fabc427ba917808bd1f9e56a65899a4ac5908b0a5df4b8f91ca77b99c18aa727"
+    },
+    {
+      "path": "cases/GOLD-001/evaluation-record.json",
+      "sha256": "e512ac0f00f70c10f945e4d2aa239bbce6bfd4965fddc9e324e8516c08e628d8"
+    },
+    {
+      "path": "cases/GOLD-001/input.json",
+      "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"
+    },
+    {
+      "path": "evaluation-summary-approved-attempt.json",
+      "sha256": "6377291d1c385a0374fc71fd7cd3f9dae10cdbc1caa1663198f3b3e254407be2"
+    },
+    {
+      "path": "evaluation-summary.json",
+      "sha256": "e851cf5a0ad194f76fefc6eedb9d0cc1b03a15542a41992dce1467497ec6b900"
+    }
+  ]
+}

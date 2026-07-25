@@ -1,0 +1,20 @@
+{
+  "approved_inference_consumed": false,
+  "canonical_schema_validation": "not-run",
+  "case_id": "GOLD-001",
+  "deterministic_result_validation": "not-run",
+  "direct_json_parse": "not-run",
+  "external_model_inferences": 0,
+  "first_output_produced": false,
+  "first_output_sha256": null,
+  "mode_coverage": "not-run",
+  "reason": "Strict zero-tool isolation could not be technically enforced.",
+  "repairs": 0,
+  "request_digest_match": "not-run",
+  "request_id_match": "not-run",
+  "retries": 0,
+  "root_field_coverage": "not-run",
+  "specialised_validators": "not-run",
+  "status": "not-run",
+  "verdict": "EVALUATOR_INFRASTRUCTURE_FAILURE"
+}

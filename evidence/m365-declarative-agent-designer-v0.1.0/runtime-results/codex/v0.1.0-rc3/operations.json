@@ -1,0 +1,35 @@
+{
+  "workflow": {
+    "model_inferences": 1,
+    "tool_calls": 0,
+    "shell_operations": 0,
+    "filesystem_operations": 0,
+    "network_or_web_operations": 0,
+    "other_operations": 0,
+    "prohibited_activities": 0
+  },
+  "evaluator": {
+    "request_validations": 1,
+    "local_no-inference_request_captures": 2,
+    "model_inferences": 1,
+    "first_outputs_preserved": 1,
+    "direct_json_parses": 1,
+    "canonical_schema_validations": 1,
+    "specialised_validator_groups": 4,
+    "deterministic_result_validations": 1,
+    "hash_and_preservation_operations": true,
+    "full_suite_runs": 0,
+    "authentication_operations": 0,
+    "tenant_operations": 0,
+    "connector_or_mcp_operations": 0,
+    "toolkit_operations": 0,
+    "deployment_operations": 0,
+    "commit_or_push_operations": 0
+  },
+  "runtime_usage": {
+    "input_tokens": 18509,
+    "cached_input_tokens": 0,
+    "output_tokens": 3101,
+    "reasoning_output_tokens": 1706
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "validator": "existing deterministic request validator",
+  "as_of": "2026-07-22",
+  "input_sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd",
+  "input_unchanged": true,
+  "valid": true,
+  "findings": []
+}

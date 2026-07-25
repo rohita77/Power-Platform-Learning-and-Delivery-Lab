@@ -11,6 +11,7 @@ from jsonschema import Draft202012Validator, FormatChecker, RefResolver
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_ROOT = PACKAGE_ROOT / "schemas"
 CONTRACT_VERSION = "0.1.0"
+PACKAGE_VERSION = "0.2.0-rc2"
 
 
 def finding(code: str, path: str, message: str) -> dict[str, str]:
@@ -34,6 +35,7 @@ def load_schemas() -> dict[str, dict[str, Any]]:
         "finding-provenance": load_json(SCHEMA_ROOT / "finding-provenance.schema.json"),
         "design-request": load_json(SCHEMA_ROOT / "design-request.schema.json"),
         "design-result": load_json(SCHEMA_ROOT / "design-result.schema.json"),
+        "host-validation-attestation": load_json(SCHEMA_ROOT / "host-validation-attestation.schema.json"),
     }
     return schemas
 

@@ -34,7 +34,7 @@
       "DRS-PREV",
       "DRS-GOLD-005"
     ],
-    "sequence": 2,
+    "sequence": 1,
     "state_id": "STATE-001",
     "superseded_chronology": []
   },
@@ -53,7 +53,7 @@
     "duration_ms": 0,
     "finding_codes": [],
     "fixture_id": "DRQ-GOLD-005",
-    "validator_outcome": "passed"
+    "validator_outcome": "pending-external-validation"
   },
   "findings": [
     {
@@ -121,7 +121,7 @@
       "verified_on": "2026-07-22"
     }
   ],
-  "request_digest": "f47ef5cb13a964848697db1d83fb0938c9c9bbf370a12cd8582a5d95de62bbad",
+  "request_digest": "753253fdb4e198dcac0b994f56c2d6eeacd37b7b6f96673a5b4485f34d7e117c",
   "request_id": "DRQ-GOLD-005",
   "requirements": {
     "actors": [

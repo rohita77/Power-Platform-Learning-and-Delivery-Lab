@@ -1,0 +1,160 @@
+{
+  "excluded_new_evidence_root": "runtime-results/codex/v0.2.0-rc1",
+  "file_count": 38,
+  "files": [
+    {
+      "path": "answer-schema-validation.json",
+      "sha256": "a4e6a7d5d2093ce434f0965c9e0b89f84d372d1d8169ea195507a88dbdc612d3"
+    },
+    {
+      "path": "file-inventory.json",
+      "sha256": "674beb69a56930360baafb09bfdf8f2f9e90a52722479358303d459402a000e9"
+    },
+    {
+      "path": "implementation-input-manifest.json",
+      "sha256": "558368b48f3e05605eea615d2eee498ec780f33b917aeead75e7e23159f6b2fc"
+    },
+    {
+      "path": "independent-static-audit.json",
+      "sha256": "fa49d266721ea7f74bddbb032a374816eb371ce861c50a0bf49a170209ca6185"
+    },
+    {
+      "path": "publication-copy-evidence.json",
+      "sha256": "663e0e87e454fc699f7cd5ceaa58217b9ad02c9687893ee1d8cc9e0a37ebf0fe"
+    },
+    {
+      "path": "ready-build-brief.json",
+      "sha256": "5dfa7806b7b71b5c0875ad4267a9f86985aa791cb332fa2d4c8fa679dbd6331a"
+    },
+    {
+      "path": "rollback-result.json",
+      "sha256": "c51390e925c0d47442db2603e13858696fcf196f799551722e4ed3f2837fee95"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc1/attempts/approved-smoke-structured-output-rejection.json",
+      "sha256": "fabc427ba917808bd1f9e56a65899a4ac5908b0a5df4b8f91ca77b99c18aa727"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc1/cases/GOLD-001/evaluation-record.json",
+      "sha256": "e512ac0f00f70c10f945e4d2aa239bbce6bfd4965fddc9e324e8516c08e628d8"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc1/cases/GOLD-001/input.json",
+      "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc1/evaluation-summary-approved-attempt.json",
+      "sha256": "6377291d1c385a0374fc71fd7cd3f9dae10cdbc1caa1663198f3b3e254407be2"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc1/evaluation-summary.json",
+      "sha256": "e851cf5a0ad194f76fefc6eedb9d0cc1b03a15542a41992dce1467497ec6b900"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc2/cases/GOLD-001/evaluation-record.json",
+      "sha256": "25d94d62bd3947622819f5a1845dc841b23d28d86cb6115f5e20a0c1a37fab9a"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc2/cases/GOLD-001/first-output.txt",
+      "sha256": "abebd6f1c718cc3b6e86c8cbfcb7fef79db43383380a605331f57d32d92a7a5c"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc2/cases/GOLD-001/input.json",
+      "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc2/cases/GOLD-001/validator-result.json",
+      "sha256": "950606c374b945882069130cbc8cf7c30b5075eb2463e6c9bd77e89e9d1ec7bb"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc2/evaluation-summary.json",
+      "sha256": "3a4869d6468e38299ef4e0bae214edbe97f48e31341c56677314a72dccad2231"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc2/rc1-preservation-manifest.json",
+      "sha256": "779a52167d3342ba0631533bdaf75fcf7118555992c758e697a79d418f2f3672"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/cases/GOLD-001/canonical-schema-result.json",
+      "sha256": "74a0e87c8377ddfd9b10459691776436b0a2b1791a8646deb89b5fee57b95bb9"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/cases/GOLD-001/coverage-and-security.json",
+      "sha256": "5289b6aaacff482266c324fb43b95a80ba0a4ce3d88018d660123871e2f598a7"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/cases/GOLD-001/deterministic-result-validator.json",
+      "sha256": "142e1cbdccfe45b80561def0ca8fa245749b77b3abe0340ca224e8489a7d0152"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/cases/GOLD-001/direct-json-result.json",
+      "sha256": "6d4bc907304b5385ae8342656e89773a37c5f0a2072ee6555b07bb66ad54e1f9"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/cases/GOLD-001/evaluation-record.json",
+      "sha256": "0d240a7621c90335c03ea4354889dd386511c0ba08caf51cf50a083c920509c3"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/cases/GOLD-001/first-output.txt",
+      "sha256": "5536d8181c8c46f0eb3a3bc02d7439cf76571fc3c1ff251fda8e8d1c160bfca5"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/cases/GOLD-001/input.json",
+      "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/cases/GOLD-001/request-validator-result.json",
+      "sha256": "715dde0aa300c3ee9c205074c1813c008c62d96eaa39d741d18b76315e8aed62"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/cases/GOLD-001/specialised-validator-results.json",
+      "sha256": "c47ce6e7e0af639ecef1bfd8d28c2562a93d3f6386389ff0cc45f85af49a95d6"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/contamination-assessment.json",
+      "sha256": "459708100416fda43053fe40547fda92ee50540ffecc9ab177482e046c28cc64"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/evaluation-summary.json",
+      "sha256": "19ff42a3a1883684bfac5d58e65958ac1253be2684b6628645a2abb1c78a957f"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/evaluator-profile.json",
+      "sha256": "63d8158737ece6b297c14d3bb8a74fe3e8207aeb77dd83eb3bba470ca2b06115"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/evidence-manifest.json",
+      "sha256": "c2de4e72dcbc5ca4c1843e8bf73ad85750629eb524a866e9c962933e10196f58"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/model-visible-context.json",
+      "sha256": "28c94764a9736f28567122cbc0263a852793cfcc6ad0153ef376aa954370ba3c"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/operations.json",
+      "sha256": "659d9475a2f62b7450d2e925e18107eb4811049827f360d5f0c230bc76f05496"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/prior-context-diagnostic/first-output.txt",
+      "sha256": "7b18b9d011ed030a4caef3255b48ededcb6c2900fa84e430c8d73d544111e98d"
+    },
+    {
+      "path": "runtime-results/codex/v0.1.0-rc3/prior-evidence-preservation-manifest.json",
+      "sha256": "320f906323924cf635ec860af9dd42d1d578d5e47da28947c58edd23fd6d2dd9"
+    },
+    {
+      "path": "static-validation.json",
+      "sha256": "4411e546236f1fa0932d3cbce63189da1e5a434c7482930395df0e7184d2fd76"
+    },
+    {
+      "path": "test-results.json",
+      "sha256": "8629222d8d069637571146091630be882604705cc6a89253dfa0d1e85758aaa7"
+    },
+    {
+      "path": "zero-operation-public-boundary.json",
+      "sha256": "85157b5318ad54883b31c5e8e63d02c132b9f746b1a641f211e51e63dd0e6c1b"
+    }
+  ],
+  "root": "evidence/m365-declarative-agent-designer-v0.1.0",
+  "status": "captured-before-new-evidence-copy"
+}

@@ -1,0 +1,73 @@
+{
+  "additional_work_cases_started": false,
+  "attestation": {
+    "output_identity_match": true,
+    "output_provenance_hash_match": true,
+    "path": "m365-declarative-agent-designer-work-smoke/case/GOLD-001.host-attestation.json",
+    "sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5",
+    "validation": "pass"
+  },
+  "case_id": "GOLD-001",
+  "case_verdict": "fail",
+  "commit_or_push_performed": false,
+  "evaluated_on": "2026-07-25",
+  "evaluation_profile": "chatgpt-work-v0.2.0-rc1-offline-acceptance",
+  "failure_class": "work-output-behavior-and-referential-integrity",
+  "failure_stage": "deterministic-result-validation",
+  "final_verdict": "WORK-OUTPUT-CONTRACT-FAIL",
+  "findings": [
+    {
+      "code": "DAD-BROKEN-REFERENCE",
+      "message": "Previous result does not resolve in lineage.",
+      "path": "/carry_forward/previous_result_id"
+    },
+    {
+      "code": "DAD-INVALID-ABSTENTION",
+      "message": "A Complete result cannot contain abstentions.",
+      "path": "/status"
+    },
+    {
+      "code": "DAD-STALE-CARRY-FORWARD",
+      "message": "Initial carry-forward state is inconsistent.",
+      "path": "/carry_forward"
+    }
+  ],
+  "first_output": {
+    "byte_length": 12920,
+    "path": "first-output.json",
+    "preserved_before_parsing": true,
+    "repair_attempted": false,
+    "sha256": "a2cc08f4a187011fcc15078c7d418f878f62685c500a9766950b7d37de97264e"
+  },
+  "full_suite_started": false,
+  "gate": "feasibility-smoke",
+  "input": {
+    "path": "m365-declarative-agent-designer-work-smoke/case/GOLD-001.input.json",
+    "request_validation": "pass",
+    "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"
+  },
+  "model_inference_performed_by_offline_evaluator": false,
+  "package_modified": false,
+  "record_version": "0.2.0",
+  "results": {
+    "abstentions": "fail",
+    "attestation_file_hash": "pass",
+    "canonical_schema": "pass",
+    "carry_forward": "fail",
+    "contradictions": "pass",
+    "cross_zone_transfer_prohibited": "pass",
+    "deterministic_result_validator": "fail",
+    "direct_json_parse": "pass",
+    "exactly_one_top_level_object": "pass",
+    "five_modes": "pass",
+    "human_review_required": "pass",
+    "provenance": "pass",
+    "referential_integrity": "fail",
+    "request_identity_and_digest": "pass",
+    "security_and_forbidden_artifacts": "pass",
+    "sixteen_root_fields": "pass",
+    "workflow_operations_zero": "reported-pass-not-host-trace-verified"
+  },
+  "retry_attempted": false,
+  "test_class": "golden"
+}

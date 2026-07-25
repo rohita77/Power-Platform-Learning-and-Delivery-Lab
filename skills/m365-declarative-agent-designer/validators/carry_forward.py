@@ -49,6 +49,7 @@ def validate_result_carry_forward(result: dict[str, Any]) -> list[dict[str, str]
         )
     request_ids = carry.get("request_ids", [])
     result_ids = carry.get("result_ids", [])
+    sequence = carry.get("sequence")
     if not request_ids or request_ids[-1] != result.get("request_id"):
         findings.append(
             finding("DAD-BROKEN-REFERENCE", "/carry_forward/request_ids", "Carry-forward lineage must end with the current request.")
@@ -57,13 +58,25 @@ def validate_result_carry_forward(result: dict[str, Any]) -> list[dict[str, str]
         findings.append(
             finding("DAD-BROKEN-REFERENCE", "/carry_forward/result_ids", "Carry-forward lineage must end with the current result.")
         )
-    if carry.get("sequence", 0) == 0 and carry.get("previous_result_id") is not None:
+    if sequence == 0 and carry.get("previous_result_id") is not None:
         findings.append(
             finding("DAD-STALE-CARRY-FORWARD", "/carry_forward/previous_result_id", "Initial state cannot name a previous result.")
         )
-    if carry.get("sequence", 0) > 0 and carry.get("previous_result_id") not in result_ids[:-1]:
+    if sequence == 0 and (len(request_ids) != 1 or len(result_ids) != 1):
         findings.append(
-            finding("DAD-BROKEN-REFERENCE", "/carry_forward/previous_result_id", "Previous result does not resolve in lineage.")
+            finding("DAD-STALE-CARRY-FORWARD", "/carry_forward", "Initial lineage must contain exactly one request and one result.")
+        )
+    if isinstance(sequence, int) and sequence > 0 and (
+        len(result_ids) < 2 or carry.get("previous_result_id") != result_ids[-2]
+    ):
+        findings.append(
+            finding("DAD-BROKEN-REFERENCE", "/carry_forward/previous_result_id", "Previous result must resolve as the immediately prior result in lineage.")
+        )
+    if isinstance(sequence, int) and (
+        len(request_ids) != len(result_ids) or sequence != len(result_ids) - 1
+    ):
+        findings.append(
+            finding("DAD-STALE-CARRY-FORWARD", "/carry_forward/sequence", "Sequence and chronological lineage lengths are inconsistent.")
         )
     findings.extend(
         duplicate_id_findings((f"/carry_forward/{key}", carry.get(key, [])) for key in POSITION_KEYS)

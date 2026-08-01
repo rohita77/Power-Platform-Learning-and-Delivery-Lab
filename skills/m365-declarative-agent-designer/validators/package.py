@@ -48,6 +48,10 @@ def compare_adapter_contracts(contracts: list[dict]) -> list[dict[str, str]]:
         "attestation_required_before_inference",
         "request_digest_source",
         "single_inference_scope",
+        "automatic_schema_resource_loading_assumed",
+        "minimum_generation_contract_source",
+        "supporting_schemas_role",
+        "alternative_narrative_output_format",
         "result_invariants",
         "workflow",
         "authority_grants",
@@ -63,7 +67,7 @@ def compare_adapter_contracts(contracts: list[dict]) -> list[dict[str, str]]:
         )
     required_values = {
         "contract_version": "0.2.0",
-        "candidate_version": "0.2.0-rc2",
+        "candidate_version": "0.2.0-rc4",
         "input_schema": "../schemas/design-request.schema.json",
         "host_validation_attestation_schema": "../schemas/host-validation-attestation.schema.json",
         "output_schema": "../schemas/design-result.schema.json",
@@ -73,6 +77,10 @@ def compare_adapter_contracts(contracts: list[dict]) -> list[dict[str, str]]:
         "attestation_required_before_inference": True,
         "request_digest_source": "validated-host-attestation",
         "single_inference_scope": True,
+        "automatic_schema_resource_loading_assumed": False,
+        "minimum_generation_contract_source": "SKILL.md",
+        "supporting_schemas_role": "deterministic-validation-authority",
+        "alternative_narrative_output_format": "prohibited",
         "result_invariants": {
             "initial_sequence": 0,
             "initial_previous_result_id": None,
@@ -103,7 +111,7 @@ def compare_adapter_contracts(contracts: list[dict]) -> list[dict[str, str]]:
         "policy_override": False,
         "network_allowed": False,
         "official_work_iq_plugin_compatibility": "not-claimed",
-        "runtime_evaluation_status": "v0.2.0-rc2-untested",
+        "runtime_evaluation_status": "v0.2.0-rc4-implemented-pending-runtime-evaluation",
     }
     for index, contract in enumerate(contracts):
         if any(contract.get(key) != value for key, value in required_values.items()):

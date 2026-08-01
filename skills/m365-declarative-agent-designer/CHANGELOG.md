@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.2.0-rc4 — 2026-08-01
+
+- Made copying a complete schema-valid DesignResult skeleton the dominant
+  model-visible generation instruction while preserving contract version
+  0.1.0.
+- Exposed every canonical nested object shape, enum boundary, lineage rule,
+  evaluation-metadata field, and neutral free-text safety rule directly in
+  `SKILL.md`.
+- Preserved the unique installed-skill Work RC3 first output byte-for-byte and
+  require deterministic rejection with all 88 previously observed findings.
+- Added focused structural mutation coverage and an independently validated,
+  neutral synthetic skeleton fixture with no GOLD-001 business answer.
+
+## 0.2.0-rc3 — 2026-08-01
+
+- Added the complete minimum 16-property DesignResult generation contract and
+  canonical nested shapes directly to model-visible `SKILL.md` instructions.
+- Prohibited narrative alternative root shapes, nested `lifecycle_modes`, and
+  non-canonical mode synonyms while retaining the unchanged 0.1.0 schemas as
+  deterministic validation authority.
+- Declared that installed ChatGPT Skills cannot assume automatic schema
+  resource loading and kept Codex and ChatGPT Work adapter methodology
+  equivalent.
+- Preserved the installed Work RC2 GOLD-001 first output byte-for-byte as an
+  immutable regression fixture and added focused root-key and mode-shape
+  coverage.
+
 ## 0.2.0-rc2 — 2026-07-25
 
 - Made initial and continuation carry-forward lineage rules directly

@@ -1,0 +1,129 @@
+{
+  "contract_version": "0.1.0",
+  "result_id": "DRS-TEMPLATE-001",
+  "request_id": "DRQ-TEMPLATE-001",
+  "request_digest": "7c712dba36963a179dcd332404ba02628223db4ae5a9b6f71fcb86c9ef2d6f43",
+  "generated_on": "2026-08-01",
+  "status": "Open",
+  "human_review_required": true,
+  "disclaimers": {
+    "microsoft_runtime_artifact": false,
+    "deployment_approval": false,
+    "tenant_fitment_evidence": false,
+    "runtime_compatibility_proof": false
+  },
+  "modes": [
+    {
+      "mode": "Discovery",
+      "summary": "The neutral synthetic request and boundary are identified.",
+      "finding_ids": ["FND-TEMPLATE-001"]
+    },
+    {
+      "mode": "Elicitation",
+      "summary": "The canonical requirement categories are represented.",
+      "finding_ids": ["FND-TEMPLATE-001"]
+    },
+    {
+      "mode": "Conceptualisation",
+      "summary": "A neutral conflict illustrates the contradiction contract.",
+      "finding_ids": ["FND-TEMPLATE-002"]
+    },
+    {
+      "mode": "Authoring",
+      "summary": "Every canonical root and nested property is populated.",
+      "finding_ids": ["FND-TEMPLATE-001", "FND-TEMPLATE-002"]
+    },
+    {
+      "mode": "Assurance",
+      "summary": "References, abstention, lineage, and metadata are represented.",
+      "finding_ids": ["FND-TEMPLATE-002"]
+    }
+  ],
+  "requirements": {
+    "actors": ["Synthetic reviewer"],
+    "scope": ["Canonical structural illustration"],
+    "exclusions": ["Operational execution is outside the design."],
+    "functional_needs": ["Represent the supplied synthetic objective."],
+    "nonfunctional_needs": ["Keep references internally consistent."],
+    "data": ["Synthetic fixture content only."],
+    "integrations": [],
+    "security": ["The personal and synthetic boundary remains fixed."],
+    "open_questions": ["Human review resolves the illustrative conflict."]
+  },
+  "findings": [
+    {
+      "id": "FND-TEMPLATE-001",
+      "category": "requirement",
+      "severity": "warning",
+      "statement": "The neutral fixture represents a canonical requirement finding.",
+      "evidence_label": "Open",
+      "provenance_ids": ["PRV-TEMPLATE-001"],
+      "affected_paths": ["/requirements"],
+      "resolution": "open"
+    },
+    {
+      "id": "FND-TEMPLATE-002",
+      "category": "contradiction",
+      "severity": "warning",
+      "statement": "A second neutral finding illustrates an unresolved conflict.",
+      "evidence_label": "Open",
+      "provenance_ids": ["PRV-TEMPLATE-001"],
+      "affected_paths": ["/contradictions/0"],
+      "resolution": "open"
+    }
+  ],
+  "provenance": [
+    {
+      "id": "PRV-TEMPLATE-001",
+      "source_type": "synthetic-fixture",
+      "title": "Neutral structural validation fixture",
+      "reference": "synthetic:canonical-design-result-skeleton",
+      "status": "current",
+      "verified_on": "2026-08-01",
+      "revalidate_on": "2027-08-01"
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CON-TEMPLATE-001",
+      "statement": "The two neutral findings are intentionally inconsistent for structural validation.",
+      "finding_ids": ["FND-TEMPLATE-001", "FND-TEMPLATE-002"],
+      "status": "unresolved",
+      "resolution": ""
+    }
+  ],
+  "abstentions": [
+    {
+      "id": "ABS-TEMPLATE-001",
+      "claim": "The illustrative conflict is not resolved.",
+      "reason": "contradictory-evidence",
+      "finding_ids": ["FND-TEMPLATE-001", "FND-TEMPLATE-002"],
+      "provenance_ids": ["PRV-TEMPLATE-001"],
+      "contradiction_ids": ["CON-TEMPLATE-001"],
+      "human_action": "Human review should resolve the illustrative conflict."
+    }
+  ],
+  "carry_forward": {
+    "contract_version": "0.1.0",
+    "state_id": "STATE-TEMPLATE-001",
+    "sequence": 0,
+    "previous_result_id": null,
+    "request_ids": ["DRQ-TEMPLATE-001"],
+    "result_ids": ["DRS-TEMPLATE-001"],
+    "confirmed_decisions": [],
+    "assumptions": [],
+    "open_items": [],
+    "rejected_decisions": [],
+    "superseded_chronology": [],
+    "evidence_refs": ["PRV-TEMPLATE-001"]
+  },
+  "evaluation_metadata": {
+    "contract_version": "0.1.0",
+    "fixture_id": "CANONICAL-DESIGN-RESULT-SKELETON",
+    "adapter_id": "chatgpt-work",
+    "validator_outcome": "pending-external-validation",
+    "finding_codes": [],
+    "duration_ms": 0,
+    "correlation_id": "SYN-CANONICAL-SKELETON"
+  }
+}

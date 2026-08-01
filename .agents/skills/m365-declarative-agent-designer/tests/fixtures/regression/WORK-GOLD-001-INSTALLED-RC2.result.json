@@ -1,0 +1,393 @@
+{
+"contract_version": "0.1.0",
+"result_id": "DSR-GOLD-001-001",
+"request_id": "DRQ-GOLD-001",
+"request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+"status": "Complete",
+"summary": {
+"name": "SDLC Requirements Discovery Agent",
+"outcome": "A governed, portable, read-only conceptual design for discovering, eliciting, confirming, authoring, and assuring synthetic SDLC requirements.",
+"recommended_pattern": "One agent with five lifecycle modes",
+"human_review_required": true,
+"deployment_ready": false
+},
+"design": {
+"agent": {
+"name": "SDLC Requirements Discovery Agent",
+"purpose": "Help a synthetic product owner progressively develop a reviewable requirements baseline without changing source material, invoking external systems, or performing operational actions.",
+"personas": [
+"Synthetic product owner"
+],
+"hosts": [
+"codex",
+"chatgpt-work"
+],
+"interaction_model": "User-triggered, offline, single-agent interaction with explicit lifecycle-mode selection or mode recommendation subject to user confirmation.",
+"lifecycle_modes": [
+{
+"id": "MODE-01",
+"name": "Discover",
+"objective": "Establish the business outcome, problem statement, stakeholders, scope, exclusions, constraints, success measures, and available evidence.",
+"inputs": [
+"User-provided synthetic outcome",
+"User-provided synthetic source material",
+"Confirmed constraints and settled decisions"
+],
+"activities": [
+"Identify stated and implied requirement areas",
+"Separate evidence-backed facts from assumptions",
+"Record gaps and candidate questions",
+"Preserve settled decisions"
+],
+"outputs": [
+"Discovery summary",
+"Scope and exclusion register",
+"Stakeholder and evidence inventory",
+"Initial gap register"
+],
+"exit_criteria": [
+"Outcome and scope are reviewable",
+"Known evidence is traceable",
+"Material gaps are explicit"
+]
+},
+{
+"id": "MODE-02",
+"name": "Elicit",
+"objective": "Ask bounded questions that close material requirements gaps.",
+"inputs": [
+"Discovery summary",
+"Gap register",
+"Current confirmed decisions"
+],
+"activities": [
+"Prioritise questions by delivery and assurance impact",
+"Elicit functional and non-functional requirements",
+"Elicit actors, data, interfaces, security, compliance, reliability, telemetry, and acceptance needs",
+"Record unanswered questions without inventing answers"
+],
+"outputs": [
+"Question set",
+"Captured responses",
+"Updated assumptions and open-question register"
+],
+"exit_criteria": [
+"Blocking questions are answered or explicitly deferred",
+"Each response is classified as confirmed, assumed, or unresolved"
+]
+},
+{
+"id": "MODE-03",
+"name": "Confirm",
+"objective": "Obtain human confirmation of the interpreted requirements and decisions before authoring.",
+"inputs": [
+"Captured requirements",
+"Assumptions",
+"Open questions",
+"Decision register"
+],
+"activities": [
+"Present concise confirmation batches",
+"Highlight conflicts, ambiguity, and unsupported conclusions",
+"Request explicit approval, correction, or deferral",
+"Freeze confirmed items as the current baseline"
+],
+"outputs": [
+"Confirmed requirement baseline",
+"Updated decision register",
+"Explicitly deferred items"
+],
+"exit_criteria": [
+"Human reviewer has confirmed or rejected each material item",
+"Unresolved items remain visibly unresolved"
+]
+},
+{
+"id": "MODE-04",
+"name": "Author",
+"objective": "Transform the confirmed baseline into a structured, portable requirements-design artifact.",
+"inputs": [
+"Confirmed requirement baseline",
+"Approved decisions",
+"Traceable source references"
+],
+"activities": [
+"Organise requirements by outcome, actor, capability, data, interface, control, and quality attribute",
+"Attach acceptance criteria and provenance",
+"Preserve exclusions, assumptions, and unresolved questions",
+"Avoid generating deployable Microsoft runtime artifacts"
+],
+"outputs": [
+"Structured requirements-design draft",
+"Traceability matrix",
+"Review checklist"
+],
+"exit_criteria": [
+"Every authored requirement traces to confirmed input or is clearly marked as an assumption",
+"The draft is ready for human review"
+]
+},
+{
+"id": "MODE-05",
+"name": "Assure",
+"objective": "Evaluate completeness, consistency, traceability, boundary compliance, and review readiness.",
+"inputs": [
+"Structured requirements-design draft",
+"Decision register",
+"Source inventory",
+"Constraints"
+],
+"activities": [
+"Check coverage of functional and non-functional requirements",
+"Check contradictions and untraceable assertions",
+"Check security, identity, data, DLP, reliability, telemetry, and acceptance coverage",
+"Check offline, read-only, synthetic-data, and cross-zone boundaries",
+"Produce findings without modifying the approved baseline"
+],
+"outputs": [
+"Assurance findings",
+"Coverage assessment",
+"Human-review recommendation"
+],
+"exit_criteria": [
+"Material findings are explicit and traceable",
+"Final acceptance remains a human decision"
+]
+}
+]
+},
+"information_model": {
+"entities": [
+"Outcome",
+"Scope item",
+"Exclusion",
+"Persona",
+"Requirement",
+"Non-functional requirement",
+"Acceptance criterion",
+"Assumption",
+"Open question",
+"Decision",
+"Source",
+"Finding"
+],
+"requirement_states": [
+"Candidate",
+"Elicited",
+"Confirmed",
+"Deferred",
+"Rejected"
+],
+"traceability_rule": "Every confirmed requirement must reference at least one source, confirmed user response, or settled decision. Unsupported content must remain an assumption or open question."
+},
+"instruction_architecture": {
+"global_rules": [
+"Operate only on synthetic or public user-supplied information within the permitted boundary.",
+"Remain offline and read-only.",
+"Do not invoke tools, connectors, APIs, tenants, organisational records, authentication, deployment, or operational actions.",
+"Preserve confirmed decisions and label conflicts instead of silently replacing them.",
+"Distinguish evidence, confirmed statements, assumptions, recommendations, and unresolved questions.",
+"Require human review before treating any artifact as accepted."
+],
+"mode_transition_rules": [
+"Do not advance from Discover to Elicit until the initial scope and gaps are visible.",
+"Do not advance from Elicit to Confirm while undisclosed blocking gaps remain.",
+"Do not advance from Confirm to Author without explicit human confirmation.",
+"Do not treat Author output as accepted until Assure findings receive human review.",
+"Permit backward movement whenever a reviewer changes scope, evidence, or a settled decision."
+],
+"conflict_rule": "If new input conflicts with DEC-001, preserve DEC-001 and surface the conflict for human resolution."
+},
+"knowledge_strategy": {
+"allowed": [
+"The exact synthetic DesignRequest",
+"Synthetic fixture PRV-001",
+"User responses supplied during the interaction",
+"Artifacts derived solely from those inputs"
+],
+"disallowed": [
+"Organisational records",
+"Tenant content",
+"Unapproved external knowledge",
+"Connector or API retrieval",
+"Cross-zone content"
+],
+"source_revalidation": [
+{
+"source_id": "PRV-001",
+"status": "current",
+"verified_on": "2026-07-22",
+"revalidate_on": "2027-07-22"
+}
+]
+},
+"actions_and_integrations": {
+"actions": [],
+"connectors": [],
+"external_apis": [],
+"authentication": "None",
+"write_operations": "Prohibited",
+"runtime_artifacts": "Not generated"
+},
+"security_and_governance": {
+"data_classification": "synthetic",
+"zone": "personal-openai",
+"cross_zone_transfer": "prohibited",
+"least_privilege": "No external permissions or data access required",
+"human_oversight": [
+"Confirm interpreted requirements",
+"Approve lifecycle-mode transitions when a baseline is frozen",
+"Review assurance findings",
+"Accept or reject the final artifact"
+],
+"prohibited_behaviors": [
+"Accessing Microsoft 365, Power Platform, or organisational systems",
+"Moving information across zones",
+"Performing create, update, delete, send, publish, or deploy operations",
+"Representing conceptual output as a deployed or production-suitable agent"
+]
+},
+"evaluation_plan": {
+"scenarios": [
+{
+"id": "EV-01",
+"scenario": "A product owner supplies an incomplete synthetic outcome.",
+"expected": "The agent identifies gaps and asks bounded questions without inventing requirements."
+},
+{
+"id": "EV-02",
+"scenario": "New input conflicts with the one-agent, five-mode decision.",
+"expected": "The agent preserves DEC-001 and requests human resolution."
+},
+{
+"id": "EV-03",
+"scenario": "A user asks the agent to retrieve organisational records.",
+"expected": "The agent refuses the operation and continues only with permitted synthetic input."
+},
+{
+"id": "EV-04",
+"scenario": "The Author mode receives unconfirmed requirements.",
+"expected": "The agent keeps them marked as assumptions or unresolved and does not present them as confirmed."
+},
+{
+"id": "EV-05",
+"scenario": "The draft omits security or acceptance criteria.",
+"expected": "Assure mode reports explicit coverage findings for human review."
+}
+],
+"acceptance_criteria": [
+"All five modes have defined inputs, activities, outputs, and exit criteria.",
+"DEC-001 is preserved.",
+"No external action, connector, tenant, or write capability is designed.",
+"Every confirmed requirement is traceable.",
+"Cross-zone transfer remains prohibited.",
+"Human review gates confirmation and acceptance."
+]
+}
+},
+"decisions": [
+{
+"id": "DEC-001",
+"statement": "Use one agent with five lifecycle modes.",
+"disposition": "preserved",
+"implemented_by": [
+"MODE-01",
+"MODE-02",
+"MODE-03",
+"MODE-04",
+"MODE-05"
+],
+"evidence_refs": [
+"PRV-001"
+]
+},
+{
+"id": "DEC-002",
+"statement": "Use a user-triggered, offline, read-only interaction model with no external integrations.",
+"disposition": "derived-from-request-constraints",
+"evidence_refs": [
+"DRQ-GOLD-001"
+]
+},
+{
+"id": "DEC-003",
+"statement": "Require explicit human confirmation before authoring a baseline and human acceptance after assurance.",
+"disposition": "derived-from-request-constraints",
+"evidence_refs": [
+"DRQ-GOLD-001"
+]
+}
+],
+"assumptions": [],
+"open_questions": [],
+"abstentions": [],
+"findings": [
+{
+"id": "FND-001",
+"severity": "informational",
+"statement": "The requested capability can be designed without external integrations because its permitted operations are requirements discovery and read-only design over synthetic input.",
+"provenance_refs": [
+"PROV-REQ-001"
+]
+},
+{
+"id": "FND-002",
+"severity": "informational",
+"statement": "The settled one-agent, five-mode decision is preserved in the conceptual architecture.",
+"provenance_refs": [
+"PROV-DEC-001"
+]
+}
+],
+"provenance": [
+{
+"id": "PROV-REQ-001",
+"kind": "design-request",
+"reference": "DRQ-GOLD-001",
+"request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+"supports": [
+"FND-001",
+"DEC-002",
+"DEC-003"
+]
+},
+{
+"id": "PROV-DEC-001",
+"kind": "synthetic-fixture",
+"reference": "synthetic:prv-001",
+"source_id": "PRV-001",
+"verified_on": "2026-07-22",
+"revalidate_on": "2027-07-22",
+"supports": [
+"FND-002",
+"DEC-001"
+]
+},
+{
+"id": "PROV-ATT-001",
+"kind": "host-validation-attestation-file",
+"reference": "GOLD-001.host-attestation.json",
+"sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5",
+"attestation_id": "ATT-GOLD-001-V020-RC1",
+"validation_status": "passed",
+"boundary_status": "permitted",
+"supports": [
+"host-validation"
+]
+}
+],
+"carry_forward": {
+"sequence": 0,
+"previous_result_id": null,
+"request_ids": [
+"DRQ-GOLD-001"
+],
+"result_ids": [
+"DSR-GOLD-001-001"
+]
+},
+"evaluation_metadata": {
+"validator_outcome": "pending-external-validation",
+"duration_ms": 0
+}
+}

@@ -1,0 +1,222 @@
+{
+  "suite_version": "0.2.0-rc4",
+  "exact_root_properties": [
+    "contract_version",
+    "result_id",
+    "request_id",
+    "request_digest",
+    "generated_on",
+    "status",
+    "human_review_required",
+    "disclaimers",
+    "modes",
+    "requirements",
+    "findings",
+    "provenance",
+    "contradictions",
+    "abstentions",
+    "carry_forward",
+    "evaluation_metadata"
+  ],
+  "prohibited_root_properties": [
+    "summary",
+    "design",
+    "decisions",
+    "assumptions",
+    "open_questions",
+    "agent",
+    "lifecycle_modes",
+    "evaluation_plan"
+  ],
+  "exact_modes": [
+    "Discovery",
+    "Elicitation",
+    "Conceptualisation",
+    "Authoring",
+    "Assurance"
+  ],
+  "schema_first_directives": [
+    "Copy the supplied canonical JSON skeleton exactly.",
+    "Replace placeholder values only.",
+    "Do not rename, move, add, or remove any property.",
+    "Do not convert objects into arrays or arrays into objects.",
+    "Do not introduce a friendlier narrative or agent-design schema.",
+    "The canonical JSON Schema remains the validation authority."
+  ],
+  "nested_contract_phrases": [
+    "Always emit `\"contract_version\": \"0.1.0\"`.",
+    "Never emit disclaimers as an array of strings.",
+    "Each mode object contains exactly `mode`, `summary`, and `finding_ids`.",
+    "Never emit requirements as a list of requirement objects.",
+    "Do not use alternative names such as",
+    "Do not omit empty required collections.",
+    "Do not add `evaluation_marker`, `execution_type`, `case_id`, or any other property.",
+    "Do not include commands or operational steps.",
+    "Use neutral conceptual wording."
+  ],
+  "model_visible_nested_properties": [
+    "microsoft_runtime_artifact",
+    "deployment_approval",
+    "tenant_fitment_evidence",
+    "runtime_compatibility_proof",
+    "mode",
+    "summary",
+    "finding_ids",
+    "actors",
+    "scope",
+    "exclusions",
+    "functional_needs",
+    "nonfunctional_needs",
+    "data",
+    "integrations",
+    "security",
+    "open_questions",
+    "category",
+    "severity",
+    "statement",
+    "evidence_label",
+    "provenance_ids",
+    "affected_paths",
+    "resolution",
+    "source_type",
+    "title",
+    "reference",
+    "verified_on",
+    "revalidate_on",
+    "sha256",
+    "claim",
+    "reason",
+    "contradiction_ids",
+    "human_action",
+    "state_id",
+    "sequence",
+    "previous_result_id",
+    "request_ids",
+    "result_ids",
+    "confirmed_decisions",
+    "open_items",
+    "rejected_decisions",
+    "superseded_chronology",
+    "evidence_refs",
+    "fixture_id",
+    "adapter_id",
+    "validator_outcome",
+    "finding_codes",
+    "duration_ms",
+    "correlation_id"
+  ],
+  "cases": [
+    {
+      "id": "GEN-SHAPE-VALID-001",
+      "kind": "valid",
+      "fixture": "fixtures/synthetic/GENERATION-SHAPE-VALID.result.json",
+      "request": "GOLD-001.request.json"
+    },
+    {
+      "id": "GEN-SKELETON-VALID-001",
+      "kind": "skeleton-valid",
+      "fixture": "fixtures/synthetic/CANONICAL-DESIGN-RESULT-SKELETON.result.json",
+      "request": "CANONICAL-DESIGN-RESULT-SKELETON.request.json"
+    },
+    {
+      "id": "GEN-SHAPE-INVALID-ROOT-001",
+      "kind": "prohibited-root",
+      "fixture": "fixtures/synthetic/GENERATION-SHAPE-INVALID-ROOT.result.json",
+      "request": "GOLD-001.request.json",
+      "expected_extra_root_properties": [
+        "summary"
+      ],
+      "expected_codes": [
+        "DAD-SCHEMA-INVALID"
+      ]
+    },
+    {
+      "id": "GEN-SHAPE-INVALID-MODES-001",
+      "kind": "invalid-modes",
+      "fixture": "fixtures/synthetic/GENERATION-SHAPE-INVALID-MODES.result.json",
+      "request": "GOLD-001.request.json",
+      "expected_mode_names": [
+        "Discover",
+        "Elicit",
+        "Confirm",
+        "Author",
+        "Assure"
+      ],
+      "expected_codes": [
+        "DAD-SCHEMA-INVALID"
+      ]
+    },
+    {
+      "id": "GEN-RC2-WORK-INSTALLED-GOLD-001",
+      "kind": "rc2-work-output",
+      "fixture": "fixtures/regression/WORK-GOLD-001-INSTALLED-RC2.result.json",
+      "request": "GOLD-001.request.json",
+      "sha256": "6eb1726d079e40c169024f799d138653d08a76868e2b695df6cd620a511a6266",
+      "expected_findings_count": 56,
+      "expected_findings_sha256": "df4e237cb35a191c05c8d0566ee152cbde06bd2b707422d64c5df89c3ff8d5c2",
+      "expected_codes": [
+        "DAD-INCOMPATIBLE-CARRY-FORWARD",
+        "DAD-MISSING-FIELD",
+        "DAD-SCHEMA-INVALID"
+      ],
+      "expected_missing_root_properties": [
+        "contradictions",
+        "disclaimers",
+        "generated_on",
+        "human_review_required",
+        "modes",
+        "requirements"
+      ],
+      "expected_prohibited_root_properties": [
+        "assumptions",
+        "decisions",
+        "design",
+        "open_questions",
+        "summary"
+      ],
+      "expected_nested_mode_names": [
+        "Discover",
+        "Elicit",
+        "Confirm",
+        "Author",
+        "Assure"
+      ],
+      "expected_incompatible_path_prefixes": [
+        "/findings",
+        "/provenance"
+      ]
+    },
+    {
+      "id": "GEN-RC3-WORK-UNIQUE-INSTALLED-GOLD-001",
+      "kind": "rc3-work-output",
+      "fixture": "fixtures/regression/WORK-GOLD-001-UNIQUE-INSTALLED-RC3.result.json",
+      "request": "GOLD-001.request.json",
+      "sha256": "3c072ac89c0fc0b62415c4445701ab8a0c9d9afb21f5f5027863e853c2057810",
+      "expected_findings_count": 88,
+      "expected_findings_sha256": "71ffc9479d1d151ba59c2553496b4032ce6c18d38d921a92b489d81553d3024d",
+      "expected_codes": [
+        "DAD-INCOMPATIBLE-CARRY-FORWARD",
+        "DAD-MISSING-FIELD",
+        "DAD-PROHIBITED-OPERATION",
+        "DAD-SCHEMA-INVALID",
+        "DAD-SCHEMA-VERSION"
+      ],
+      "expected_code_counts": {
+        "DAD-INCOMPATIBLE-CARRY-FORWARD": 1,
+        "DAD-MISSING-FIELD": 60,
+        "DAD-PROHIBITED-OPERATION": 2,
+        "DAD-SCHEMA-INVALID": 24,
+        "DAD-SCHEMA-VERSION": 1
+      },
+      "expected_canonical_mode_names": [null, null, null, null, null],
+      "expected_alternative_mode_names": [
+        "Discovery",
+        "Elicitation",
+        "Conceptualisation",
+        "Authoring",
+        "Assurance"
+      ]
+    }
+  ],
+  "focused_fixture": "fixtures/synthetic/GENERATION-CONTRACT-FOCUSED-CASES.json"
+}

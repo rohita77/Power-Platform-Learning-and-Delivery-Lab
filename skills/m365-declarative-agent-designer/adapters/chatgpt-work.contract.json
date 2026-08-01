@@ -1,6 +1,6 @@
 {
   "contract_version": "0.2.0",
-  "candidate_version": "0.2.0-rc2",
+  "candidate_version": "0.2.0-rc4",
   "adapter_id": "chatgpt-work",
   "input_schema": "../schemas/design-request.schema.json",
   "host_validation_attestation_schema": "../schemas/host-validation-attestation.schema.json",
@@ -11,6 +11,10 @@
   "attestation_required_before_inference": true,
   "request_digest_source": "validated-host-attestation",
   "single_inference_scope": true,
+  "automatic_schema_resource_loading_assumed": false,
+  "minimum_generation_contract_source": "SKILL.md",
+  "supporting_schemas_role": "deterministic-validation-authority",
+  "alternative_narrative_output_format": "prohibited",
   "result_invariants": {
     "initial_sequence": 0,
     "initial_previous_result_id": null,
@@ -41,5 +45,5 @@
   "policy_override": false,
   "network_allowed": false,
   "official_work_iq_plugin_compatibility": "not-claimed",
-  "runtime_evaluation_status": "v0.2.0-rc2-untested"
+  "runtime_evaluation_status": "v0.2.0-rc4-implemented-pending-runtime-evaluation"
 }

@@ -1,0 +1,318 @@
+{
+"contract_version": "0.3.0",
+"result_id": "DSR-GOLD-001-RC3-001",
+"request_id": "DRQ-GOLD-001",
+"request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+"generated_on": "2026-08-01",
+"status": "Complete",
+"human_review_required": true,
+"disclaimers": [
+"This result is an offline conceptual design based only on the supplied synthetic DesignRequest and trusted host-validation attestation.",
+"This result does not grant operational authority and does not access, generate, configure, deploy, or modify Microsoft 365, Power Platform, tenant resources, organisational records, connectors, or external services.",
+"Human review is required before adoption or implementation."
+],
+"modes": [
+{
+"name": "Discovery",
+"purpose": "Establish the synthetic problem, scope, personas, constraints, evidence, and settled decisions.",
+"inputs": [
+"DesignRequest",
+"PRV-001",
+"DEC-001"
+],
+"activities": [
+"Confirm the requirements-discovery objective.",
+"Register the Synthetic product owner persona.",
+"Preserve offline-only, read-only, personal-openai, and prohibited cross-zone-transfer boundaries.",
+"Identify gaps without accessing external or organisational information."
+],
+"outputs": [
+"Scoped discovery record",
+"Evidence register",
+"Constraint register",
+"Gap register"
+],
+"exit_criteria": [
+"Objective, persona, constraints, evidence, and settled decisions are traceable.",
+"No prohibited operation or cross-zone transfer is proposed."
+]
+},
+{
+"name": "Elicitation",
+"purpose": "Structure requirements questions and candidate requirements for human confirmation.",
+"inputs": [
+"Scoped discovery record",
+"Gap register"
+],
+"activities": [
+"Organise elicitation across functional, non-functional, security, privacy, governance, accessibility, reliability, and assurance concerns.",
+"Record answers as proposed requirements without silently treating unconfirmed content as settled.",
+"Maintain source and decision traceability."
+],
+"outputs": [
+"Candidate requirement set",
+"Human-confirmation record",
+"Unresolved-question register"
+],
+"exit_criteria": [
+"Each candidate requirement has a disposition and provenance.",
+"Unconfirmed matters remain explicitly unresolved."
+]
+},
+{
+"name": "Conceptualisation",
+"purpose": "Convert confirmed requirements into a read-only conceptual capability design.",
+"inputs": [
+"Confirmed requirement set",
+"DEC-001"
+],
+"activities": [
+"Define one agent operating through five lifecycle modes.",
+"Define mode transitions, information boundaries, traceability, and human review gates.",
+"Exclude tenant integration, deployment, write operations, authentication, and organisational data access."
+],
+"outputs": [
+"Conceptual agent design",
+"Mode-transition rules",
+"Boundary controls",
+"Traceability model"
+],
+"exit_criteria": [
+"The design preserves DEC-001.",
+"The design is read-only, offline, synthetic, and compatible with the prohibited cross-zone-transfer constraint."
+]
+},
+{
+"name": "Authoring",
+"purpose": "Produce reviewable requirements and design artefacts from confirmed content.",
+"inputs": [
+"Conceptual agent design",
+"Confirmed requirement set",
+"Traceability model"
+],
+"activities": [
+"Author structured draft artefacts.",
+"Label confirmed, proposed, unresolved, and contradicted content.",
+"Attach evidence and decision references.",
+"Prevent publication or operational use without human approval."
+],
+"outputs": [
+"Draft requirements artefact",
+"Draft conceptual-design artefact",
+"Traceability matrix",
+"Review checklist"
+],
+"exit_criteria": [
+"Every material statement is attributable or identified as model-authored.",
+"Drafts are clearly marked for human review."
+]
+},
+{
+"name": "Assurance",
+"purpose": "Check completeness, consistency, provenance, boundaries, and readiness for human review.",
+"inputs": [
+"Draft artefacts",
+"Traceability matrix",
+"Constraint register"
+],
+"activities": [
+"Check coverage of functional and non-functional requirements.",
+"Check preservation of settled decisions.",
+"Check contradictions, abstentions, provenance, and unresolved matters.",
+"Verify that no prohibited cross-zone transfer or operational authority is implied."
+],
+"outputs": [
+"Assurance findings",
+"Coverage assessment",
+"Human-review package"
+],
+"exit_criteria": [
+"Material findings are recorded.",
+"Boundary and traceability checks pass.",
+"The result is explicitly routed to human review."
+]
+}
+],
+"requirements": [
+{
+"id": "REQ-001",
+"type": "functional",
+"statement": "The capability shall support synthetic requirements discovery through one agent using the five ordered lifecycle modes Discovery, Elicitation, Conceptualisation, Authoring, and Assurance.",
+"priority": "must",
+"evidence_refs": [
+"DEC-001",
+"PRV-001"
+],
+"acceptance_criteria": [
+"Only one conceptual agent is defined.",
+"All five required mode names appear once and in the prescribed order."
+]
+},
+{
+"id": "REQ-002",
+"type": "functional",
+"statement": "The capability shall preserve traceability among requirements, supplied evidence, settled decisions, findings, and authored artefacts.",
+"priority": "must",
+"evidence_refs": [
+"PRV-001"
+],
+"acceptance_criteria": [
+"Each material requirement and finding carries an evidence or decision reference.",
+"Unsupported content is labelled as model-authored or unresolved."
+]
+},
+{
+"id": "REQ-003",
+"type": "boundary",
+"statement": "The capability shall operate offline and read-only without tools, network access, tenant access, authentication, connectors, external APIs, deployment, or modification of external resources.",
+"priority": "must",
+"evidence_refs": [
+"DRQ-GOLD-001"
+],
+"acceptance_criteria": [
+"No operational integration or write path is included.",
+"All outputs remain conceptual and reviewable."
+]
+},
+{
+"id": "REQ-004",
+"type": "data-governance",
+"statement": "The capability shall process only the supplied synthetic information within the personal-openai zone and shall prohibit cross-zone transfer.",
+"priority": "must",
+"evidence_refs": [
+"DRQ-GOLD-001"
+],
+"acceptance_criteria": [
+"No organisational record or Microsoft tenant data is required.",
+"No output flow crosses the declared zone boundary."
+]
+},
+{
+"id": "REQ-005",
+"type": "governance",
+"statement": "The capability shall require human review of requirements, conceptual designs, authored artefacts, and assurance findings before adoption.",
+"priority": "must",
+"evidence_refs": [
+"DRQ-GOLD-001"
+],
+"acceptance_criteria": [
+"Human review is identified as mandatory.",
+"No model-authored output is represented as automatically approved."
+]
+},
+{
+"id": "REQ-006",
+"type": "assurance",
+"statement": "The capability shall distinguish confirmed decisions, proposed requirements, unresolved questions, contradictions, and abstentions.",
+"priority": "must",
+"evidence_refs": [
+"DEC-001",
+"PRV-001"
+],
+"acceptance_criteria": [
+"Each category has an explicit representation in the review package.",
+"Abstentions prevent a Complete status."
+]
+}
+],
+"findings": [
+{
+"id": "FND-001",
+"type": "feasibility",
+"severity": "informational",
+"statement": "The requested capability is conceptually feasible within the supplied offline, read-only, synthetic, and human-reviewed boundaries.",
+"evidence_refs": [
+"PRV-001",
+"DEC-001"
+],
+"requirement_refs": [
+"REQ-001",
+"REQ-003",
+"REQ-004",
+"REQ-005"
+]
+},
+{
+"id": "FND-002",
+"type": "architecture",
+"severity": "informational",
+"statement": "The settled decision to use one agent with five lifecycle modes is internally consistent with the objective and requested operations.",
+"evidence_refs": [
+"DEC-001"
+],
+"requirement_refs": [
+"REQ-001"
+]
+},
+{
+"id": "FND-003",
+"type": "boundary",
+"severity": "informational",
+"statement": "A requirements-discovery design can remain useful without tenant or external access when it preserves provenance, separates confirmed from proposed content, and routes outputs to human review.",
+"evidence_refs": [
+"PRV-001"
+],
+"requirement_refs": [
+"REQ-002",
+"REQ-003",
+"REQ-005",
+"REQ-006"
+]
+}
+],
+"provenance": [
+{
+"id": "PROV-001",
+"kind": "design-request",
+"reference": "DRQ-GOLD-001",
+"digest_algorithm": "SHA-256",
+"digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6"
+},
+{
+"id": "PROV-002",
+"kind": "host-validation-attestation-file",
+"reference": "GOLD-001.host-attestation.json",
+"attestation_id": "ATT-GOLD-001-V020-RC1",
+"validation_status": "passed",
+"boundary_status": "permitted",
+"digest_algorithm": "SHA-256",
+"digest": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5"
+},
+{
+"id": "PROV-003",
+"kind": "synthetic-source",
+"reference": "synthetic:prv-001",
+"source_id": "PRV-001",
+"status": "current",
+"verified_on": "2026-07-22",
+"revalidate_on": "2027-07-22"
+},
+{
+"id": "PROV-004",
+"kind": "settled-decision",
+"reference": "DEC-001",
+"evidence_refs": [
+"PRV-001"
+]
+}
+],
+"contradictions": [],
+"abstentions": [],
+"carry_forward": {
+"sequence": 0,
+"previous_result_id": null,
+"request_ids": [
+"DRQ-GOLD-001"
+],
+"result_ids": [
+"DSR-GOLD-001-RC3-001"
+]
+},
+"evaluation_metadata": {
+"evaluation_marker": "RC3-EVAL-16-ROOT-CONTRACT",
+"case_id": "GOLD-001",
+"execution_type": "isolated-feasibility-smoke",
+"validator_outcome": "pending-external-validation",
+"duration_ms": 0
+}
+}

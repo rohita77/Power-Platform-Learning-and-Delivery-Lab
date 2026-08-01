@@ -1,0 +1,2168 @@
+{
+  "another_case_run": false,
+  "authority": {
+    "canonical_skill_root": "skills/m365-declarative-agent-designer",
+    "files": {
+      "schemas/design-request.schema.json": "0cc9f69760e14347373581656e13ab4f9d244225c08449881ae338cc08975617",
+      "schemas/design-result.schema.json": "264b4357c05e2db6a04498316e1221313fe2c3bc8a016a135223b9e57f036591",
+      "schemas/finding-provenance.schema.json": "04fae7224adb71e08a870f9f551881b9eabfc0c46695606169903b3b0c75678d",
+      "schemas/host-validation-attestation.schema.json": "46a6a17fc31b3951798e7f8a175e538f1ad916253c128fb6f5f4b27a15c88db3",
+      "validators/abstentions.py": "d6b15b94f9646a258d2548bed56869d50827715796edfd2b8fc710cf224b7211",
+      "validators/attestation.py": "609e0c0ca9c1408ee664ed0829e8da9b56f43ebdc81e4bcb58d0132d5d5750ec",
+      "validators/carry_forward.py": "5a4cb29824106e62fef099d479b3bfbd3759fee94b9b549d5c8d086185e54151",
+      "validators/common.py": "8a39b765a34fd4189d5b1a88e16279d23ac43c4c00120b1a994d8d8e2ac1aed7",
+      "validators/contradictions.py": "ccfff4c9c3233fdb4bd1859eb2c3a87b1df559aaeaa5d3c5294be594f1cc8080",
+      "validators/provenance.py": "0027d82ed019ec7b231d53a74e783b9d92bae24ae072a050b5dda07e4a0e107c",
+      "validators/request.py": "eac14d02e0a7688c72715e9ef6f8805051d14b40fa451bcfd52380114249f228",
+      "validators/result.py": "000f47141354aacf0275ca685e0625982256f46d54c723a6bcc9049e8b71d4e1"
+    },
+    "schemas_modified_for_evaluation": false,
+    "validators_modified_for_evaluation": false
+  },
+  "case_id": "GOLD-001-unique-installed-skill",
+  "contract_checks": {
+    "evaluation_metadata_contract": {
+      "extra_keys": [
+        "case_id",
+        "evaluation_marker",
+        "execution_type"
+      ],
+      "findings": [
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/adapter_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/contract_version"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/correlation_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/finding_codes"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/fixture_id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/evaluation_metadata"
+        }
+      ],
+      "is_object": true,
+      "missing_keys": [
+        "adapter_id",
+        "contract_version",
+        "correlation_id",
+        "finding_codes",
+        "fixture_id"
+      ],
+      "observed_keys": [
+        "evaluation_marker",
+        "case_id",
+        "execution_type",
+        "validator_outcome",
+        "duration_ms"
+      ],
+      "pass": false
+    },
+    "exact_16_root_keys": {
+      "expected": [
+        "contract_version",
+        "result_id",
+        "request_id",
+        "request_digest",
+        "generated_on",
+        "status",
+        "human_review_required",
+        "disclaimers",
+        "modes",
+        "requirements",
+        "findings",
+        "provenance",
+        "contradictions",
+        "abstentions",
+        "carry_forward",
+        "evaluation_metadata"
+      ],
+      "extra": [],
+      "missing": [],
+      "observed": [
+        "contract_version",
+        "result_id",
+        "request_id",
+        "request_digest",
+        "generated_on",
+        "status",
+        "human_review_required",
+        "disclaimers",
+        "modes",
+        "requirements",
+        "findings",
+        "provenance",
+        "contradictions",
+        "abstentions",
+        "carry_forward",
+        "evaluation_metadata"
+      ],
+      "pass": true
+    },
+    "finding_contract": {
+      "findings": [
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/affected_paths"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/category"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/evidence_label"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/provenance_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/resolution"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/affected_paths"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/category"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/evidence_label"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/provenance_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/resolution"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/affected_paths"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/category"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/evidence_label"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/provenance_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/resolution"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/0/severity"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/1"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/1/severity"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/2"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/2/severity"
+        }
+      ],
+      "items": [
+        {
+          "extra_keys": [
+            "evidence_refs",
+            "requirement_refs",
+            "type"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "affected_paths",
+            "category",
+            "evidence_label",
+            "provenance_ids",
+            "resolution"
+          ],
+          "observed_keys": [
+            "id",
+            "type",
+            "severity",
+            "statement",
+            "evidence_refs",
+            "requirement_refs"
+          ],
+          "pass": false
+        },
+        {
+          "extra_keys": [
+            "evidence_refs",
+            "requirement_refs",
+            "type"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "affected_paths",
+            "category",
+            "evidence_label",
+            "provenance_ids",
+            "resolution"
+          ],
+          "observed_keys": [
+            "id",
+            "type",
+            "severity",
+            "statement",
+            "evidence_refs",
+            "requirement_refs"
+          ],
+          "pass": false
+        },
+        {
+          "extra_keys": [
+            "evidence_refs",
+            "requirement_refs",
+            "type"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "affected_paths",
+            "category",
+            "evidence_label",
+            "provenance_ids",
+            "resolution"
+          ],
+          "observed_keys": [
+            "id",
+            "type",
+            "severity",
+            "statement",
+            "evidence_refs",
+            "requirement_refs"
+          ],
+          "pass": false
+        }
+      ],
+      "minimum_count": 1,
+      "observed_count": 3,
+      "pass": false
+    },
+    "five_mode_names_and_ordering": {
+      "alternative_name_values": [
+        "Discovery",
+        "Elicitation",
+        "Conceptualisation",
+        "Authoring",
+        "Assurance"
+      ],
+      "expected": [
+        "Discovery",
+        "Elicitation",
+        "Conceptualisation",
+        "Authoring",
+        "Assurance"
+      ],
+      "observed": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "pass": false
+    },
+    "nested_mode_contract": {
+      "exact_count": true,
+      "findings": [
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/0/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/0/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/0/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/1/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/1/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/1/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/2/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/2/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/2/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/3/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/3/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/3/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/4/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/4/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/4/summary"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/1"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/2"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/3"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/4"
+        }
+      ],
+      "items": [
+        {
+          "extra_keys": [
+            "activities",
+            "exit_criteria",
+            "inputs",
+            "name",
+            "outputs",
+            "purpose"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "finding_ids",
+            "mode",
+            "summary"
+          ],
+          "observed_keys": [
+            "name",
+            "purpose",
+            "inputs",
+            "activities",
+            "outputs",
+            "exit_criteria"
+          ],
+          "pass": false
+        },
+        {
+          "extra_keys": [
+            "activities",
+            "exit_criteria",
+            "inputs",
+            "name",
+            "outputs",
+            "purpose"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "finding_ids",
+            "mode",
+            "summary"
+          ],
+          "observed_keys": [
+            "name",
+            "purpose",
+            "inputs",
+            "activities",
+            "outputs",
+            "exit_criteria"
+          ],
+          "pass": false
+        },
+        {
+          "extra_keys": [
+            "activities",
+            "exit_criteria",
+            "inputs",
+            "name",
+            "outputs",
+            "purpose"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "finding_ids",
+            "mode",
+            "summary"
+          ],
+          "observed_keys": [
+            "name",
+            "purpose",
+            "inputs",
+            "activities",
+            "outputs",
+            "exit_criteria"
+          ],
+          "pass": false
+        },
+        {
+          "extra_keys": [
+            "activities",
+            "exit_criteria",
+            "inputs",
+            "name",
+            "outputs",
+            "purpose"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "finding_ids",
+            "mode",
+            "summary"
+          ],
+          "observed_keys": [
+            "name",
+            "purpose",
+            "inputs",
+            "activities",
+            "outputs",
+            "exit_criteria"
+          ],
+          "pass": false
+        },
+        {
+          "extra_keys": [
+            "activities",
+            "exit_criteria",
+            "inputs",
+            "name",
+            "outputs",
+            "purpose"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "finding_ids",
+            "mode",
+            "summary"
+          ],
+          "observed_keys": [
+            "name",
+            "purpose",
+            "inputs",
+            "activities",
+            "outputs",
+            "exit_criteria"
+          ],
+          "pass": false
+        }
+      ],
+      "minimum_count": 5,
+      "observed_count": 5,
+      "pass": false
+    },
+    "prohibited_alternative_root_keys": {
+      "observed": [],
+      "pass": true,
+      "prohibited": [
+        "summary",
+        "design",
+        "decisions",
+        "assumptions",
+        "open_questions",
+        "agent",
+        "lifecycle_modes",
+        "evaluation_plan"
+      ]
+    },
+    "provenance_contract": {
+      "findings": [
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/revalidate_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/status"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/verified_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/revalidate_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/status"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/verified_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/2/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/2/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/revalidate_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/status"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/verified_on"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/0/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/1"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/1/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/2"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/2/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/3"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/3/id"
+        }
+      ],
+      "items": [
+        {
+          "extra_keys": [
+            "digest",
+            "digest_algorithm",
+            "kind"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "revalidate_on",
+            "source_type",
+            "status",
+            "title",
+            "verified_on"
+          ],
+          "observed_keys": [
+            "id",
+            "kind",
+            "reference",
+            "digest_algorithm",
+            "digest"
+          ],
+          "pass": false
+        },
+        {
+          "extra_keys": [
+            "attestation_id",
+            "boundary_status",
+            "digest",
+            "digest_algorithm",
+            "kind",
+            "validation_status"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "revalidate_on",
+            "source_type",
+            "status",
+            "title",
+            "verified_on"
+          ],
+          "observed_keys": [
+            "id",
+            "kind",
+            "reference",
+            "attestation_id",
+            "validation_status",
+            "boundary_status",
+            "digest_algorithm",
+            "digest"
+          ],
+          "pass": false
+        },
+        {
+          "extra_keys": [
+            "kind",
+            "source_id"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "source_type",
+            "title"
+          ],
+          "observed_keys": [
+            "id",
+            "kind",
+            "reference",
+            "source_id",
+            "status",
+            "verified_on",
+            "revalidate_on"
+          ],
+          "pass": false
+        },
+        {
+          "extra_keys": [
+            "evidence_refs",
+            "kind"
+          ],
+          "is_object": true,
+          "missing_keys": [
+            "revalidate_on",
+            "source_type",
+            "status",
+            "title",
+            "verified_on"
+          ],
+          "observed_keys": [
+            "id",
+            "kind",
+            "reference",
+            "evidence_refs"
+          ],
+          "pass": false
+        }
+      ],
+      "minimum_count": 1,
+      "observed_count": 4,
+      "pass": false
+    },
+    "requirements_contract": {
+      "arrays": {},
+      "extra_keys": [],
+      "findings": [
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/requirements"
+        }
+      ],
+      "is_object": false,
+      "missing_keys": [
+        "actors",
+        "data",
+        "exclusions",
+        "functional_needs",
+        "integrations",
+        "nonfunctional_needs",
+        "open_questions",
+        "scope",
+        "security"
+      ],
+      "observed_keys": [],
+      "pass": false
+    }
+  },
+  "created_at_utc": "2026-08-01T09:26:29+00:00",
+  "deterministic_validators": {
+    "abstentions": {
+      "findings": [],
+      "pass": true
+    },
+    "carry_forward": {
+      "findings": [
+        {
+          "code": "DAD-INCOMPATIBLE-CARRY-FORWARD",
+          "message": "The carry-forward contract version is incompatible.",
+          "path": "/carry_forward/contract_version"
+        }
+      ],
+      "pass": false
+    },
+    "contradictions": {
+      "findings": [],
+      "pass": true
+    },
+    "design_result_schema": {
+      "findings": [
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/assumptions"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/confirmed_decisions"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/contract_version"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/evidence_refs"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/open_items"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/rejected_decisions"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/state_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/superseded_chronology"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/adapter_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/contract_version"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/correlation_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/finding_codes"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/fixture_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/affected_paths"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/category"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/evidence_label"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/provenance_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/resolution"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/affected_paths"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/category"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/evidence_label"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/provenance_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/resolution"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/affected_paths"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/category"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/evidence_label"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/provenance_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/resolution"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/0/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/0/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/0/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/1/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/1/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/1/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/2/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/2/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/2/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/3/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/3/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/3/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/4/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/4/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/4/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/revalidate_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/status"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/verified_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/revalidate_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/status"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/verified_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/2/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/2/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/revalidate_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/status"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/verified_on"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/carry_forward/result_ids/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/disclaimers"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/evaluation_metadata"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/0/severity"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/1"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/1/severity"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/2"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/2/severity"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/1"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/2"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/3"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/4"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/0/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/1"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/1/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/2"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/2/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/3"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/3/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/requirements"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/result_id"
+        },
+        {
+          "code": "DAD-SCHEMA-VERSION",
+          "message": "The contract version is unsupported.",
+          "path": "/contract_version"
+        }
+      ],
+      "pass": false
+    },
+    "end_to_end_design_result": {
+      "findings": [
+        {
+          "code": "DAD-INCOMPATIBLE-CARRY-FORWARD",
+          "message": "The carry-forward contract version is incompatible.",
+          "path": "/carry_forward/contract_version"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/assumptions"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/confirmed_decisions"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/contract_version"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/evidence_refs"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/open_items"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/rejected_decisions"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/state_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/carry_forward/superseded_chronology"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/adapter_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/contract_version"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/correlation_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/finding_codes"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/evaluation_metadata/fixture_id"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/affected_paths"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/category"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/evidence_label"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/provenance_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/0/resolution"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/affected_paths"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/category"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/evidence_label"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/provenance_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/1/resolution"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/affected_paths"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/category"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/evidence_label"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/provenance_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/findings/2/resolution"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/0/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/0/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/0/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/1/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/1/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/1/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/2/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/2/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/2/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/3/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/3/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/3/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/4/finding_ids"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/4/mode"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/modes/4/summary"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/revalidate_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/status"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/0/verified_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/revalidate_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/status"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/1/verified_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/2/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/2/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/revalidate_on"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/source_type"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/status"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/title"
+        },
+        {
+          "code": "DAD-MISSING-FIELD",
+          "message": "A required field is missing.",
+          "path": "/provenance/3/verified_on"
+        },
+        {
+          "code": "DAD-PROHIBITED-OPERATION",
+          "message": "The result contains prohibited operational or secret-bearing content.",
+          "path": "/disclaimers/1"
+        },
+        {
+          "code": "DAD-PROHIBITED-OPERATION",
+          "message": "The result contains prohibited operational or secret-bearing content.",
+          "path": "/requirements/2/statement"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/carry_forward/result_ids/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/disclaimers"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/evaluation_metadata"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/0/severity"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/1"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/1/severity"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/2"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/findings/2/severity"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/1"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/2"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/3"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/modes/4"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/0"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/0/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/1"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/1/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/2"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/2/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/3"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/provenance/3/id"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/requirements"
+        },
+        {
+          "code": "DAD-SCHEMA-INVALID",
+          "message": "The value does not conform to the canonical contract.",
+          "path": "/result_id"
+        },
+        {
+          "code": "DAD-SCHEMA-VERSION",
+          "message": "The contract version is unsupported.",
+          "path": "/contract_version"
+        }
+      ],
+      "pass": false
+    },
+    "forbidden_artifacts_and_unsupported_claims": {
+      "findings": [
+        {
+          "code": "DAD-PROHIBITED-OPERATION",
+          "message": "The result contains prohibited operational or secret-bearing content.",
+          "path": "/disclaimers/1"
+        },
+        {
+          "code": "DAD-PROHIBITED-OPERATION",
+          "message": "The result contains prohibited operational or secret-bearing content.",
+          "path": "/requirements/2/statement"
+        }
+      ],
+      "pass": false
+    },
+    "provenance": {
+      "findings": [],
+      "pass": true
+    },
+    "referential_integrity": {
+      "findings": [],
+      "pass": true
+    }
+  },
+  "direct_json": {
+    "exactly_one_top_level_object": true,
+    "pass": true
+  },
+  "evaluated_on": "2026-08-01",
+  "finding_summary": {
+    "by_code": {
+      "DAD-INCOMPATIBLE-CARRY-FORWARD": 1,
+      "DAD-MISSING-FIELD": 60,
+      "DAD-PROHIBITED-OPERATION": 2,
+      "DAD-SCHEMA-INVALID": 24,
+      "DAD-SCHEMA-VERSION": 1
+    },
+    "count": 88,
+    "path_code_pairs": [
+      {
+        "code": "DAD-INCOMPATIBLE-CARRY-FORWARD",
+        "path": "/carry_forward/contract_version"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/carry_forward/assumptions"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/carry_forward/confirmed_decisions"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/carry_forward/contract_version"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/carry_forward/evidence_refs"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/carry_forward/open_items"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/carry_forward/rejected_decisions"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/carry_forward/state_id"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/carry_forward/superseded_chronology"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/evaluation_metadata/adapter_id"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/evaluation_metadata/contract_version"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/evaluation_metadata/correlation_id"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/evaluation_metadata/finding_codes"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/evaluation_metadata/fixture_id"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/0/affected_paths"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/0/category"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/0/evidence_label"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/0/provenance_ids"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/0/resolution"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/1/affected_paths"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/1/category"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/1/evidence_label"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/1/provenance_ids"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/1/resolution"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/2/affected_paths"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/2/category"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/2/evidence_label"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/2/provenance_ids"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/findings/2/resolution"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/0/finding_ids"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/0/mode"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/0/summary"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/1/finding_ids"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/1/mode"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/1/summary"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/2/finding_ids"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/2/mode"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/2/summary"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/3/finding_ids"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/3/mode"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/3/summary"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/4/finding_ids"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/4/mode"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/modes/4/summary"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/0/revalidate_on"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/0/source_type"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/0/status"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/0/title"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/0/verified_on"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/1/revalidate_on"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/1/source_type"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/1/status"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/1/title"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/1/verified_on"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/2/source_type"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/2/title"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/3/revalidate_on"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/3/source_type"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/3/status"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/3/title"
+      },
+      {
+        "code": "DAD-MISSING-FIELD",
+        "path": "/provenance/3/verified_on"
+      },
+      {
+        "code": "DAD-PROHIBITED-OPERATION",
+        "path": "/disclaimers/1"
+      },
+      {
+        "code": "DAD-PROHIBITED-OPERATION",
+        "path": "/requirements/2/statement"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/carry_forward/result_ids/0"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/disclaimers"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/evaluation_metadata"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/findings/0"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/findings/0/severity"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/findings/1"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/findings/1/severity"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/findings/2"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/findings/2/severity"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/modes/0"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/modes/1"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/modes/2"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/modes/3"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/modes/4"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/provenance/0"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/provenance/0/id"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/provenance/1"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/provenance/1/id"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/provenance/2"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/provenance/2/id"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/provenance/3"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/provenance/3/id"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/requirements"
+      },
+      {
+        "code": "DAD-SCHEMA-INVALID",
+        "path": "/result_id"
+      },
+      {
+        "code": "DAD-SCHEMA-VERSION",
+        "path": "/contract_version"
+      }
+    ]
+  },
+  "first_output": {
+    "bytes": 9154,
+    "modified": false,
+    "normalization_attempted": false,
+    "path": "evidence/m365-declarative-agent-designer-v0.1.0/runtime-results/chatgpt-work/v0.2.0-rc3/cases/GOLD-001-unique-installed-skill/first-output.json",
+    "preserved_before_validation": true,
+    "repair_attempted": false,
+    "sha256": "3c072ac89c0fc0b62415c4445701ab8a0c9d9afb21f5f5027863e853c2057810"
+  },
+  "identity": {
+    "attestation_validator": {
+      "findings": [],
+      "pass": true
+    },
+    "pass": true,
+    "request_digest": {
+      "attestation": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+      "output": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+      "pass": true
+    },
+    "request_id": {
+      "attestation": "DRQ-GOLD-001",
+      "output": "DRQ-GOLD-001",
+      "pass": true,
+      "request": "DRQ-GOLD-001"
+    },
+    "request_validator": {
+      "findings": [],
+      "pass": true
+    },
+    "result_findings": []
+  },
+  "inputs": {
+    "attestation": {
+      "path": "m365-declarative-agent-designer-work-smoke-rc2/case/GOLD-001.host-attestation.json",
+      "sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5"
+    },
+    "request": {
+      "path": "m365-declarative-agent-designer-work-smoke-rc2/case/GOLD-001.input.json",
+      "sha256": "f2e73f81911fc08d5a7711bfcd3823e5dc5c88f438613c2462bfd921620bd1dd"
+    }
+  },
+  "model_inference_performed": false,
+  "profile": "chatgpt-work-v0.2.0-rc3-offline-acceptance",
+  "record_version": "0.2.0-rc3",
+  "verdict": "WORK-OUTPUT-CONTRACT-FAIL",
+  "workflow_operations": 0
+}

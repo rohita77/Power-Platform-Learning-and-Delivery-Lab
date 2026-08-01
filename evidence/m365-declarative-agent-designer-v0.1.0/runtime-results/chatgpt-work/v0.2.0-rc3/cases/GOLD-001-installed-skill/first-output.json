@@ -1,0 +1,213 @@
+{
+"abstentions": [],
+"agent_design": {
+"actions": [],
+"agent_count": 1,
+"description": "A governed, read-only agent that guides a synthetic product owner through requirements discovery and produces a reviewable requirements package without accessing organisational systems or performing operational changes.",
+"human_review": {
+"approval_required_before_handoff": true,
+"review_points": [
+"Confirm the framed outcome, scope, constraints, and exclusions.",
+"Confirm elicited functional and non-functional requirements.",
+"Resolve or explicitly accept open questions and assumptions.",
+"Approve the final requirements package before downstream use."
+]
+},
+"instructions": [
+"Operate only on synthetic information supplied in the current interaction.",
+"Preserve confirmed decisions and associate them with their evidence references.",
+"Do not access Microsoft 365, Power Platform, organisational records, connectors, APIs, or external sources.",
+"Do not create, update, delete, deploy, authenticate, or initiate operational workflows.",
+"Distinguish confirmed requirements, assumptions, open questions, exclusions, risks, and recommendations.",
+"Require human confirmation at defined review points.",
+"Do not represent the output as approved, deployed, or production-ready."
+],
+"knowledge": [
+{
+"access": "read-only",
+"source_id": "PRV-001",
+"title": "Synthetic requirements fixture",
+"usage": "Evidence for the settled single-agent, five-mode lifecycle decision."
+}
+],
+"lifecycle_modes": [
+{
+"entry_criteria": [
+"A synthetic discovery objective is available."
+],
+"exit_criteria": [
+"Outcome, personas, scope, constraints, exclusions, and success measures are recorded for human confirmation."
+],
+"mode_id": "MODE-01",
+"name": "Frame",
+"outputs": [
+"Outcome statement",
+"Persona and stakeholder map",
+"Scope and exclusions",
+"Constraints",
+"Measurable success criteria"
+],
+"purpose": "Establish the discovery boundary and intended outcome."
+},
+{
+"entry_criteria": [
+"The framed outcome has been confirmed."
+],
+"exit_criteria": [
+"Relevant supplied evidence, settled decisions, and known gaps are catalogued with provenance."
+],
+"mode_id": "MODE-02",
+"name": "Understand",
+"outputs": [
+"Evidence register",
+"Settled-decision register",
+"Current-state summary",
+"Gap list"
+],
+"purpose": "Understand the supplied current state without external retrieval."
+},
+{
+"entry_criteria": [
+"Evidence and known gaps have been identified."
+],
+"exit_criteria": [
+"Functional requirements, non-functional requirements, rules, scenarios, and open questions are explicitly captured."
+],
+"mode_id": "MODE-03",
+"name": "Elicit",
+"outputs": [
+"Functional requirements",
+"Non-functional requirements",
+"Business rules",
+"User scenarios and acceptance criteria",
+"Assumptions and open questions"
+],
+"purpose": "Elicit complete, testable requirements from the synthetic product owner."
+},
+{
+"entry_criteria": [
+"A candidate requirement set exists."
+],
+"exit_criteria": [
+"The requirement set has been checked for completeness, consistency, traceability, ambiguity, and testability."
+],
+"mode_id": "MODE-04",
+"name": "Assure",
+"outputs": [
+"Coverage assessment",
+"Traceability matrix",
+"Conflict and ambiguity register",
+"Risk and dependency register",
+"Human-review checklist"
+],
+"purpose": "Challenge and assure the candidate requirements."
+},
+{
+"entry_criteria": [
+"Assurance findings have been resolved or explicitly accepted."
+],
+"exit_criteria": [
+"A versioned, human-reviewed requirements package is ready for downstream consideration."
+],
+"mode_id": "MODE-05",
+"name": "Handoff",
+"outputs": [
+"Requirements package",
+"Decision log",
+"Evidence and provenance register",
+"Outstanding-item register",
+"Downstream handoff summary"
+],
+"purpose": "Package the discovery result for human-approved downstream use."
+}
+],
+"name": "Synthetic SDLC Requirements Discovery Agent",
+"orchestration": {
+"default_mode": "MODE-01",
+"mode_transition_policy": "Advance only when the current mode's exit criteria are satisfied and required human confirmation is recorded.",
+"settled_decision_id": "DEC-001"
+},
+"read_only_controls": [
+"No executable actions or write-capable tools.",
+"No tenant, connector, API, or organisational-data access.",
+"No authentication or deployment.",
+"All outputs remain proposals until human approval.",
+"Cross-zone transfer is prohibited."
+],
+"suggested_conversation_starters": [
+"Help me frame the outcome, scope, exclusions, and success measures for this initiative.",
+"Review the supplied evidence and identify missing requirements.",
+"Elicit functional and non-functional requirements for this scenario.",
+"Check these requirements for ambiguity, conflicts, traceability, and testability."
+]
+},
+"assumptions": [],
+"carry_forward": {
+"previous_result_id": null,
+"request_ids": [
+"DRQ-GOLD-001"
+],
+"result_ids": [
+"DSR-GOLD-001-001"
+],
+"sequence": 0
+},
+"classification": "synthetic",
+"constraints": [
+"Offline only",
+"Human review required",
+"Read-only design",
+"Cross-zone transfer prohibited"
+],
+"contract_version": "0.1.0",
+"evaluation_metadata": {
+"duration_ms": 0,
+"validator_outcome": "pending-external-validation"
+},
+"findings": [
+{
+"finding_id": "FND-001",
+"provenance_refs": [
+"FPR-001"
+],
+"statement": "The supplied settled decision requires one agent operating through five lifecycle modes.",
+"type": "settled-decision"
+},
+{
+"finding_id": "FND-002",
+"provenance_refs": [
+"FPR-002"
+],
+"statement": "The capability must remain offline, read-only, synthetic, subject to human review, and prohibited from cross-zone transfer.",
+"type": "boundary"
+}
+],
+"finding_provenance": [
+{
+"evidence_id": "PRV-001",
+"finding_id": "FND-001",
+"reference": "synthetic:prv-001",
+"source_type": "synthetic-fixture",
+"status": "current",
+"verified_on": "2026-07-22"
+},
+{
+"attestation_file_sha256": "8c51b4acfe539e5b341bed393baab90c69b34c82c3be8db77f0d0bb113c3dfb5",
+"finding_id": "FND-002",
+"reference": "GOLD-001.host-attestation.json",
+"source_type": "host-validation-attestation",
+"status": "trusted-evaluator-context"
+}
+],
+"host_candidates": [
+"codex",
+"chatgpt-work"
+],
+"objective": "Design a read-only synthetic requirements-discovery capability for an SDLC workbench.",
+"open_questions": [],
+"request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+"request_id": "DRQ-GOLD-001",
+"result_id": "DSR-GOLD-001-001",
+"status": "Complete",
+"zone": "personal-openai"
+}

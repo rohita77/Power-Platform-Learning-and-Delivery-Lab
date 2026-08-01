@@ -11,7 +11,7 @@ from jsonschema import Draft202012Validator, FormatChecker, RefResolver
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_ROOT = PACKAGE_ROOT / "schemas"
 CONTRACT_VERSION = "0.1.0"
-PACKAGE_VERSION = "0.2.0-rc2"
+PACKAGE_VERSION = "0.2.0-rc4"
 
 
 def finding(code: str, path: str, message: str) -> dict[str, str]:

@@ -1,0 +1,141 @@
+{
+  "suite_version": "0.2.0-rc4",
+  "base": "CANONICAL-DESIGN-RESULT-SKELETON.result.json",
+  "request": "CANONICAL-DESIGN-RESULT-SKELETON.request.json",
+  "cases": [
+    {
+      "id": "GEN-CONTRACT-VERSION-001",
+      "focus": "exact-contract-version",
+      "mutation": {
+        "op": "set",
+        "path": "/contract_version",
+        "value": "0.2.0-rc4"
+      },
+      "expected_path_code_pairs": [
+        {"path": "/contract_version", "code": "DAD-SCHEMA-VERSION"}
+      ]
+    },
+    {
+      "id": "GEN-DISCLAIMERS-OBJECT-001",
+      "focus": "disclaimers-object-versus-array",
+      "mutation": {
+        "op": "set",
+        "path": "/disclaimers",
+        "value": ["Narrative boundary statement."]
+      },
+      "expected_path_code_pairs": [
+        {"path": "/disclaimers", "code": "DAD-SCHEMA-INVALID"}
+      ]
+    },
+    {
+      "id": "GEN-MODE-SHAPE-001",
+      "focus": "canonical-mode-shape",
+      "mutation": {
+        "op": "set",
+        "path": "/modes/0",
+        "value": {
+          "name": "Discovery",
+          "purpose": "Alternative mode object."
+        }
+      },
+      "expected_path_code_pairs": [
+        {"path": "/modes/0", "code": "DAD-SCHEMA-INVALID"},
+        {"path": "/modes/0/finding_ids", "code": "DAD-MISSING-FIELD"},
+        {"path": "/modes/0/mode", "code": "DAD-MISSING-FIELD"},
+        {"path": "/modes/0/summary", "code": "DAD-MISSING-FIELD"}
+      ]
+    },
+    {
+      "id": "GEN-REQUIREMENTS-OBJECT-001",
+      "focus": "canonical-requirements-object",
+      "mutation": {
+        "op": "set",
+        "path": "/requirements",
+        "value": []
+      },
+      "expected_path_code_pairs": [
+        {"path": "/requirements", "code": "DAD-SCHEMA-INVALID"}
+      ]
+    },
+    {
+      "id": "GEN-FINDING-SHAPE-001",
+      "focus": "canonical-finding-shape",
+      "mutation": {
+        "op": "set",
+        "path": "/findings/0",
+        "value": {
+          "id": "FND-TEMPLATE-001",
+          "type": "requirement",
+          "severity": "warning",
+          "statement": "Alternative finding object.",
+          "evidence_refs": ["PRV-TEMPLATE-001"]
+        }
+      },
+      "expected_path_code_pairs": [
+        {"path": "/findings/0", "code": "DAD-SCHEMA-INVALID"},
+        {"path": "/findings/0/affected_paths", "code": "DAD-MISSING-FIELD"},
+        {"path": "/findings/0/category", "code": "DAD-MISSING-FIELD"},
+        {"path": "/findings/0/evidence_label", "code": "DAD-MISSING-FIELD"},
+        {"path": "/findings/0/provenance_ids", "code": "DAD-MISSING-FIELD"},
+        {"path": "/findings/0/resolution", "code": "DAD-MISSING-FIELD"}
+      ]
+    },
+    {
+      "id": "GEN-PROVENANCE-SHAPE-001",
+      "focus": "canonical-provenance-shape",
+      "mutation": {
+        "op": "set",
+        "path": "/provenance/0",
+        "value": {
+          "id": "PRV-TEMPLATE-001",
+          "kind": "synthetic-fixture",
+          "reference": "synthetic:canonical-design-result-skeleton",
+          "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      },
+      "expected_path_code_pairs": [
+        {"path": "/provenance/0", "code": "DAD-SCHEMA-INVALID"},
+        {"path": "/provenance/0/revalidate_on", "code": "DAD-MISSING-FIELD"},
+        {"path": "/provenance/0/source_type", "code": "DAD-MISSING-FIELD"},
+        {"path": "/provenance/0/status", "code": "DAD-MISSING-FIELD"},
+        {"path": "/provenance/0/title", "code": "DAD-MISSING-FIELD"},
+        {"path": "/provenance/0/verified_on", "code": "DAD-MISSING-FIELD"}
+      ]
+    },
+    {
+      "id": "GEN-CARRY-FORWARD-SHAPE-001",
+      "focus": "complete-carry-forward-shape",
+      "mutation": {
+        "op": "delete",
+        "path": "/carry_forward/confirmed_decisions"
+      },
+      "expected_path_code_pairs": [
+        {"path": "/carry_forward/confirmed_decisions", "code": "DAD-MISSING-FIELD"}
+      ]
+    },
+    {
+      "id": "GEN-EVALUATION-METADATA-SHAPE-001",
+      "focus": "complete-evaluation-metadata",
+      "mutation": {
+        "op": "set",
+        "path": "/evaluation_metadata/evaluation_marker",
+        "value": "alternative"
+      },
+      "expected_path_code_pairs": [
+        {"path": "/evaluation_metadata", "code": "DAD-SCHEMA-INVALID"}
+      ]
+    },
+    {
+      "id": "GEN-PROHIBITED-FREE-TEXT-001",
+      "focus": "prohibited-free-text-wording",
+      "mutation": {
+        "op": "set",
+        "path": "/requirements/security/0",
+        "value": "Deploy the agent to a Microsoft 365 tenant."
+      },
+      "expected_path_code_pairs": [
+        {"path": "/requirements/security/0", "code": "DAD-PROHIBITED-OPERATION"}
+      ]
+    }
+  ]
+}

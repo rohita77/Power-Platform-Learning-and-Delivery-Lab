@@ -1,0 +1,36 @@
+{
+  "assumptions": [],
+  "classification": "synthetic",
+  "constraints": [
+    "Structural validation only",
+    "Human review required"
+  ],
+  "contract_version": "0.1.0",
+  "cross_zone_transfer": "prohibited",
+  "host_candidates": [
+    "chatgpt-work"
+  ],
+  "objective": "Validate the canonical DesignResult structure with neutral synthetic content.",
+  "open_questions": [],
+  "personas": [
+    "Synthetic reviewer"
+  ],
+  "request_id": "DRQ-TEMPLATE-001",
+  "requested_operations": [
+    "requirements-discovery",
+    "read-only-design"
+  ],
+  "settled_decisions": [],
+  "sources": [
+    {
+      "id": "PRV-TEMPLATE-001",
+      "reference": "synthetic:canonical-design-result-skeleton",
+      "revalidate_on": "2027-08-01",
+      "source_type": "synthetic-fixture",
+      "status": "current",
+      "title": "Neutral structural validation fixture",
+      "verified_on": "2026-08-01"
+    }
+  ],
+  "zone": "personal-openai"
+}

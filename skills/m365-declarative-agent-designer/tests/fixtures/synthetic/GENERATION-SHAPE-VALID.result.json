@@ -1,0 +1,113 @@
+{
+  "contract_version": "0.1.0",
+  "result_id": "DRS-GENERATION-SHAPE-001",
+  "request_id": "DRQ-GOLD-001",
+  "request_digest": "30acb68ccd1cd7521d07e7b57a93973dd5243d43c5f23ccaa52785cb8c9fb6d6",
+  "generated_on": "2026-07-22",
+  "status": "Complete",
+  "human_review_required": true,
+  "disclaimers": {
+    "microsoft_runtime_artifact": false,
+    "deployment_approval": false,
+    "tenant_fitment_evidence": false,
+    "runtime_compatibility_proof": false
+  },
+  "modes": [
+    {
+      "mode": "Discovery",
+      "summary": "The synthetic request shape and boundary are identified.",
+      "finding_ids": []
+    },
+    {
+      "mode": "Elicitation",
+      "summary": "The canonical requirement categories are represented.",
+      "finding_ids": []
+    },
+    {
+      "mode": "Conceptualisation",
+      "summary": "The canonical result structure is selected.",
+      "finding_ids": []
+    },
+    {
+      "mode": "Authoring",
+      "summary": "The exact canonical root and nested properties are populated.",
+      "finding_ids": []
+    },
+    {
+      "mode": "Assurance",
+      "summary": "The generation shape is checked against synthetic provenance.",
+      "finding_ids": [
+        "FND-GENERATION-SHAPE-001"
+      ]
+    }
+  ],
+  "requirements": {
+    "actors": [],
+    "scope": [],
+    "exclusions": [],
+    "functional_needs": [],
+    "nonfunctional_needs": [],
+    "data": [],
+    "integrations": [],
+    "security": [],
+    "open_questions": []
+  },
+  "findings": [
+    {
+      "id": "FND-GENERATION-SHAPE-001",
+      "category": "assurance",
+      "severity": "info",
+      "statement": "The synthetic fixture uses the canonical DesignResult generation shape.",
+      "evidence_label": "Confirmed",
+      "provenance_ids": [
+        "PRV-GENERATION-SHAPE-001"
+      ],
+      "affected_paths": [
+        "/"
+      ],
+      "resolution": "accepted"
+    }
+  ],
+  "provenance": [
+    {
+      "id": "PRV-GENERATION-SHAPE-001",
+      "source_type": "synthetic-fixture",
+      "title": "Synthetic generation-shape fixture",
+      "reference": "synthetic:generation-shape-valid",
+      "status": "current",
+      "verified_on": "2026-07-22",
+      "revalidate_on": "2027-07-22"
+    }
+  ],
+  "contradictions": [],
+  "abstentions": [],
+  "carry_forward": {
+    "contract_version": "0.1.0",
+    "state_id": "STATE-GENERATION-SHAPE-001",
+    "sequence": 0,
+    "previous_result_id": null,
+    "request_ids": [
+      "DRQ-GOLD-001"
+    ],
+    "result_ids": [
+      "DRS-GENERATION-SHAPE-001"
+    ],
+    "confirmed_decisions": [],
+    "assumptions": [],
+    "open_items": [],
+    "rejected_decisions": [],
+    "superseded_chronology": [],
+    "evidence_refs": [
+      "PRV-GENERATION-SHAPE-001"
+    ]
+  },
+  "evaluation_metadata": {
+    "contract_version": "0.1.0",
+    "fixture_id": "GENERATION-SHAPE-VALID",
+    "adapter_id": "canonical",
+    "validator_outcome": "pending-external-validation",
+    "finding_codes": [],
+    "duration_ms": 0,
+    "correlation_id": "SYN-GENERATION-SHAPE-VALID"
+  }
+}

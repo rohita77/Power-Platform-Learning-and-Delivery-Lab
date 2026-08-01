@@ -6,7 +6,7 @@ description: >-
   requirements discovery, elicitation, conceptual design, structured
   authoring, and assurance when no tenant, Toolkit, connector, MCP, deployment,
   or organisational-data operation is permitted. Do not use to generate or
-  deploy Microsoft runtime artifacts.
+  deploy Microsoft runtime artifacts. RC4-EVAL-CANONICAL-NESTED-CONTRACT.
 ---
 
 # M365 Declarative Agent Designer
@@ -44,6 +44,274 @@ Return exactly one DesignResult conforming to
 `schemas/design-result.schema.json`. The first and entire workflow output must
 be the JSON object: no Markdown wrapper, code fence, heading, preamble, or
 epilogue.
+
+## Model-visible generation contract
+
+Follow this schema-first sequence before any design reasoning. It is the
+dominant generation instruction:
+
+1. Copy the supplied canonical JSON skeleton exactly.
+2. Replace placeholder values only.
+3. Do not rename, move, add, or remove any property.
+4. Do not convert objects into arrays or arrays into objects.
+5. Do not introduce a friendlier narrative or agent-design schema.
+6. The canonical JSON Schema remains the validation authority.
+
+Generate exactly one JSON object with exactly these 16 root properties and no
+others:
+
+1. `contract_version`
+2. `result_id`
+3. `request_id`
+4. `request_digest`
+5. `generated_on`
+6. `status`
+7. `human_review_required`
+8. `disclaimers`
+9. `modes`
+10. `requirements`
+11. `findings`
+12. `provenance`
+13. `contradictions`
+14. `abstentions`
+15. `carry_forward`
+16. `evaluation_metadata`
+
+Do not emit alternative root properties such as `summary`, `design`,
+`decisions`, `assumptions`, `open_questions`, `agent`, `lifecycle_modes`, or
+`evaluation_plan`. Map their semantic content into the canonical properties.
+Do not nest `modes` below `design`, `agent`, or any other property.
+
+Use this complete minimum schema-valid structural skeleton. Its synthetic
+scalar and array contents are placeholders, not an expected answer. Replace
+only those values with exact validated runtime values and request-derived
+content while preserving every property name, location, and value type. In
+particular, replace the template request ID and 64-hex digest with the exact
+attested values; never reuse, calculate, guess, normalize, substitute, or
+zero-fill them.
+
+<!-- CANONICAL-DESIGN-RESULT-SKELETON:START -->
+```json
+{
+  "contract_version": "0.1.0",
+  "result_id": "DRS-TEMPLATE-001",
+  "request_id": "DRQ-TEMPLATE-001",
+  "request_digest": "7c712dba36963a179dcd332404ba02628223db4ae5a9b6f71fcb86c9ef2d6f43",
+  "generated_on": "2026-08-01",
+  "status": "Open",
+  "human_review_required": true,
+  "disclaimers": {
+    "microsoft_runtime_artifact": false,
+    "deployment_approval": false,
+    "tenant_fitment_evidence": false,
+    "runtime_compatibility_proof": false
+  },
+  "modes": [
+    {
+      "mode": "Discovery",
+      "summary": "The neutral synthetic request and boundary are identified.",
+      "finding_ids": ["FND-TEMPLATE-001"]
+    },
+    {
+      "mode": "Elicitation",
+      "summary": "The canonical requirement categories are represented.",
+      "finding_ids": ["FND-TEMPLATE-001"]
+    },
+    {
+      "mode": "Conceptualisation",
+      "summary": "A neutral conflict illustrates the contradiction contract.",
+      "finding_ids": ["FND-TEMPLATE-002"]
+    },
+    {
+      "mode": "Authoring",
+      "summary": "Every canonical root and nested property is populated.",
+      "finding_ids": ["FND-TEMPLATE-001", "FND-TEMPLATE-002"]
+    },
+    {
+      "mode": "Assurance",
+      "summary": "References, abstention, lineage, and metadata are represented.",
+      "finding_ids": ["FND-TEMPLATE-002"]
+    }
+  ],
+  "requirements": {
+    "actors": ["Synthetic reviewer"],
+    "scope": ["Canonical structural illustration"],
+    "exclusions": ["Operational execution is outside the design."],
+    "functional_needs": ["Represent the supplied synthetic objective."],
+    "nonfunctional_needs": ["Keep references internally consistent."],
+    "data": ["Synthetic fixture content only."],
+    "integrations": [],
+    "security": ["The personal and synthetic boundary remains fixed."],
+    "open_questions": ["Human review resolves the illustrative conflict."]
+  },
+  "findings": [
+    {
+      "id": "FND-TEMPLATE-001",
+      "category": "requirement",
+      "severity": "warning",
+      "statement": "The neutral fixture represents a canonical requirement finding.",
+      "evidence_label": "Open",
+      "provenance_ids": ["PRV-TEMPLATE-001"],
+      "affected_paths": ["/requirements"],
+      "resolution": "open"
+    },
+    {
+      "id": "FND-TEMPLATE-002",
+      "category": "contradiction",
+      "severity": "warning",
+      "statement": "A second neutral finding illustrates an unresolved conflict.",
+      "evidence_label": "Open",
+      "provenance_ids": ["PRV-TEMPLATE-001"],
+      "affected_paths": ["/contradictions/0"],
+      "resolution": "open"
+    }
+  ],
+  "provenance": [
+    {
+      "id": "PRV-TEMPLATE-001",
+      "source_type": "synthetic-fixture",
+      "title": "Neutral structural validation fixture",
+      "reference": "synthetic:canonical-design-result-skeleton",
+      "status": "current",
+      "verified_on": "2026-08-01",
+      "revalidate_on": "2027-08-01"
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CON-TEMPLATE-001",
+      "statement": "The two neutral findings are intentionally inconsistent for structural validation.",
+      "finding_ids": ["FND-TEMPLATE-001", "FND-TEMPLATE-002"],
+      "status": "unresolved",
+      "resolution": ""
+    }
+  ],
+  "abstentions": [
+    {
+      "id": "ABS-TEMPLATE-001",
+      "claim": "The illustrative conflict is not resolved.",
+      "reason": "contradictory-evidence",
+      "finding_ids": ["FND-TEMPLATE-001", "FND-TEMPLATE-002"],
+      "provenance_ids": ["PRV-TEMPLATE-001"],
+      "contradiction_ids": ["CON-TEMPLATE-001"],
+      "human_action": "Human review should resolve the illustrative conflict."
+    }
+  ],
+  "carry_forward": {
+    "contract_version": "0.1.0",
+    "state_id": "STATE-TEMPLATE-001",
+    "sequence": 0,
+    "previous_result_id": null,
+    "request_ids": ["DRQ-TEMPLATE-001"],
+    "result_ids": ["DRS-TEMPLATE-001"],
+    "confirmed_decisions": [],
+    "assumptions": [],
+    "open_items": [],
+    "rejected_decisions": [],
+    "superseded_chronology": [],
+    "evidence_refs": ["PRV-TEMPLATE-001"]
+  },
+  "evaluation_metadata": {
+    "contract_version": "0.1.0",
+    "fixture_id": "CANONICAL-DESIGN-RESULT-SKELETON",
+    "adapter_id": "chatgpt-work",
+    "validator_outcome": "pending-external-validation",
+    "finding_codes": [],
+    "duration_ms": 0,
+    "correlation_id": "SYN-CANONICAL-SKELETON"
+  }
+}
+```
+<!-- CANONICAL-DESIGN-RESULT-SKELETON:END -->
+
+Every nested object has `additionalProperties: false`. Apply these exact rules
+immediately after copying the skeleton.
+
+### Contract version
+
+Always emit `"contract_version": "0.1.0"`. The skill candidate version must
+never be copied into this field.
+
+### Disclaimers
+
+Use the exact canonical object with only `microsoft_runtime_artifact`,
+`deployment_approval`, `tenant_fitment_evidence`, and
+`runtime_compatibility_proof`; every value is `false`.
+Never emit disclaimers as an array of strings.
+
+### Modes
+
+Each mode object contains exactly `mode`, `summary`, and `finding_ids`. Emit
+exactly once each, in order: `Discovery`, `Elicitation`, `Conceptualisation`,
+`Authoring`, `Assurance`. A finding ID must resolve in `findings`.
+
+### Requirements
+
+Use the exact canonical requirements object with only the required arrays:
+`actors`, `scope`, `exclusions`, `functional_needs`, `nonfunctional_needs`,
+`data`, `integrations`, `security`, and `open_questions`.
+Never emit requirements as a list of requirement objects.
+
+### Findings
+
+Each finding contains exactly `id`, `category`, `severity`, `statement`,
+`evidence_label`, `provenance_ids`, `affected_paths`, and `resolution`. Use
+only schema-defined enums. Both reference arrays are non-empty and resolve.
+
+### Provenance
+
+Each provenance item contains exactly `id`, `source_type`, `title`,
+`reference`, `status`, `verified_on`, and `revalidate_on`, plus optional
+`sha256`. Use only schema-defined enums. Do not use alternative names such as
+`kind`, `digest`, `evidence_refs`, or `supports`.
+
+### Contradictions and abstentions
+
+Each contradiction contains exactly `id`, `statement`, `finding_ids`,
+`status`, and `resolution`. Each abstention contains exactly `id`, `claim`,
+`reason`, `finding_ids`, `provenance_ids`, `contradiction_ids`, and
+`human_action`. Use only schema-defined enums and resolved references.
+
+### Carry-forward shape
+
+For an initial result, populate the complete canonical object with
+`contract_version: 0.1.0`, a valid `state_id`, `sequence: 0`,
+`previous_result_id: null`, current-only `request_ids` and `result_ids`, and
+all five position arrays plus `evidence_refs`.
+Do not omit empty required collections.
+Each position item contains exactly `id`, `statement`, and
+`evidence_refs` with the matching `DEC-`, `ASM-`, `OPN-`, `REJ-`, or `SUP-`
+prefix.
+
+### Evaluation metadata
+
+Populate exactly `contract_version`, `fixture_id`, `adapter_id`,
+`validator_outcome`, `finding_codes`, `duration_ms`, and `correlation_id`. For
+the Work smoke use `contract_version: 0.1.0`, `adapter_id: chatgpt-work`,
+`validator_outcome: pending-external-validation`, and `duration_ms: 0`.
+Do not add `evaluation_marker`, `execution_type`, `case_id`, or any other property.
+
+`findings` and `provenance` each require at least one entry. Resolve every
+finding provenance reference, contradiction finding reference, abstention
+reference, and mode finding reference. An unresolved contradiction requires
+`Open` plus a `contradictory-evidence` abstention. Expired provenance cannot
+support a `Confirmed` finding and requires an Open finding plus a
+`stale-evidence` abstention.
+
+Use the independently supplied attestation-file SHA-256 only as `sha256` on
+provenance that refers to that exact attestation file. Do not calculate,
+substitute, guess, or normalize the request digest or attestation-file hash.
+The canonical schemas remain the deterministic validation authority.
+
+### Free-text safety
+
+Express boundaries through the structured disclaimers, exclusions, security
+requirements, and findings. Avoid imperative or procedural language that
+describes authentication, deployment, tenant access, external calls, file
+modification, or tool use. Do not include commands or operational steps.
+Use neutral conceptual wording.
+Do not weaken or reinterpret the deterministic
+prohibited-operation scanner.
 
 ### Carry-forward
 
@@ -98,6 +366,11 @@ Execute these modes in order and preserve their names exactly:
    Copilot Studio assets, workflows, or deployment instructions.
 5. **Assurance** — check provenance, contradictions, abstentions, portability,
    boundary, lineage, and human-review disclaimers before returning the result.
+
+Emit each mode exactly once. Do not use `Discover`, `Elicit`, `Confirm`,
+`Author`, or `Assure`, and do not create a separate Confirm mode. Place human
+confirmation inside Elicitation, Authoring, Assurance, human review, findings,
+and carry-forward state.
 
 Unsupported, stale, contradictory, or insufficiently sourced product claims
 must remain `Open` findings or explicit abstentions. Never infer runtime
@@ -157,5 +430,5 @@ outcome, finding codes, duration, and a synthetic correlation ID. Exclude
 prompt text, free-text requirements, provenance content, secrets, tenant
 identifiers, URLs, and organisational payloads.
 
-Package candidate version: **0.2.0-rc2**. DesignRequest and DesignResult remain
+Package candidate version: **0.2.0-rc4**. DesignRequest and DesignResult remain
 backward-compatible at contract version **0.1.0**.

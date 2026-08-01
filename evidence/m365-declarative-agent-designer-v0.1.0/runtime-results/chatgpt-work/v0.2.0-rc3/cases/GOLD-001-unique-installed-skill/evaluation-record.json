@@ -1,0 +1,72 @@
+{
+  "case_id": "GOLD-001-unique-installed-skill",
+  "contract_results": {
+    "evaluation_metadata_contract": false,
+    "exact_16_root_keys": true,
+    "finding_contract": false,
+    "five_mode_names_and_ordering": false,
+    "nested_mode_contract": false,
+    "prohibited_alternative_root_keys": true,
+    "provenance_contract": false,
+    "requirements_contract": false
+  },
+  "deviations": [],
+  "evaluated_on": "2026-08-01",
+  "evaluation_runtime": "codex-offline-host",
+  "evaluator_operations": [
+    "read-preserved-first-output",
+    "read-canonical-request-and-attestation",
+    "load-unchanged-canonical-schemas-and-validators",
+    "run-single-case-offline-validation",
+    "write-immutable-offline-validation-and-evaluation-records"
+  ],
+  "explicit_skill_invocation_during_validation": false,
+  "finding_codes": [
+    "DAD-INCOMPATIBLE-CARRY-FORWARD",
+    "DAD-MISSING-FIELD",
+    "DAD-PROHIBITED-OPERATION",
+    "DAD-SCHEMA-INVALID",
+    "DAD-SCHEMA-VERSION"
+  ],
+  "finding_count": 88,
+  "first_output": {
+    "bytes": 9154,
+    "modified": false,
+    "normalization_attempted": false,
+    "path": "evidence/m365-declarative-agent-designer-v0.1.0/runtime-results/chatgpt-work/v0.2.0-rc3/cases/GOLD-001-unique-installed-skill/first-output.json",
+    "preserved_before_validation": true,
+    "repair_attempted": false,
+    "sha256": "3c072ac89c0fc0b62415c4445701ab8a0c9d9afb21f5f5027863e853c2057810"
+  },
+  "identity_pass": true,
+  "model_inference_performed_during_validation": false,
+  "pass": false,
+  "prohibited_activity": {
+    "additional_cases": 0,
+    "authentication": 0,
+    "commits": 0,
+    "deployment_operations": 0,
+    "mcp_calls": 0,
+    "model_inferences": 0,
+    "network_calls": 0,
+    "output_normalizations": 0,
+    "output_repairs": 0,
+    "pushes": 0,
+    "skill_invocations": 0,
+    "tenant_access": 0
+  },
+  "record_version": "0.2.0-rc3",
+  "records": {
+    "evaluation_record": {
+      "path": "evidence/m365-declarative-agent-designer-v0.1.0/runtime-results/chatgpt-work/v0.2.0-rc3/cases/GOLD-001-unique-installed-skill/evaluation-record.json"
+    },
+    "offline_validation": {
+      "path": "evidence/m365-declarative-agent-designer-v0.1.0/runtime-results/chatgpt-work/v0.2.0-rc3/cases/GOLD-001-unique-installed-skill/offline-validation.json",
+      "sha256": "3b18c9079d5fcc47b6d54dbcc76a65acabc90a9ec07ea23448af1954f0a5d4b2"
+    }
+  },
+  "runtime_under_evaluation": "chatgpt-work-installed-skill",
+  "skill_candidate": "m365-declarative-agent-designer-v0.2.0-rc3",
+  "verdict": "WORK-OUTPUT-CONTRACT-FAIL",
+  "workflow_operations": 0
+}
